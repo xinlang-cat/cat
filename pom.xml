@@ -17,6 +17,7 @@
     <modules>
         <module>cat-eureka</module>
         <module>cat-configuration</module>
+        <module>Test-demo</module>
     </modules>
 
     <properties>
