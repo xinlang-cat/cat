@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.xinlang.zly-xyx  </groupId>
+    <artifactId>cat</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <modules>
+        <module>cat-eureka</module>
+        <module>cat-configuration</module>
+    </modules>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <spring.cloud>Finchley.RELEASE</spring.cloud>
+        <mybatis>1.3.2</mybatis>
+        <jwt>0.9.0</jwt>
+        <fastjson>1.2.47</fastjson>
+        <commons-collection4>4.1</commons-collection4>
+        <nonitor>2.0.2</nonitor>
+        <swagger>2.8.0</swagger>
+        <aliyun-sdk-oss>2.8.2</aliyun-sdk-oss>
+        <aliyun-sdk-core>3.2.8</aliyun-sdk-core>
+        <aliyun-sdk-dysmsapi>1.1.0</aliyun-sdk-dysmsapi>
+        <elasticsearch>6.2.3</elasticsearch>
+        <security-o2uth2>2.3.3.RELEASE</security-o2uth2>
+        <docker-img-prefix>springbpoot</docker-img-prefix>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collection4}</version>
+        </dependency>
+    </dependencies>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
