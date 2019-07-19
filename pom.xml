@@ -18,6 +18,8 @@
         <module>cat-eureka</module>
         <module>cat-configuration</module>
         <module>cat-common</module>
+        <module>cat-log</module>
+        <module>cat-api</module>
     </modules>
 
     <properties>
