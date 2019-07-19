@@ -20,9 +20,12 @@
         <module>cat-common</module>
         <module>cat-log</module>
         <module>cat-api</module>
+        <module>cat-file-server</module>
     </modules>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring.cloud>Finchley.RELEASE</spring.cloud>
         <mybatis>1.3.2</mybatis>
@@ -36,7 +39,7 @@
         <aliyun-sdk-dysmsapi>1.1.0</aliyun-sdk-dysmsapi>
         <elasticsearch>6.2.3</elasticsearch>
         <security-o2uth2>2.3.3.RELEASE</security-o2uth2>
-        <docker-img-prefix>springbpoot</docker-img-prefix>
+        <docker-img-prefix>springboot</docker-img-prefix>
     </properties>
 
     <dependencies>
