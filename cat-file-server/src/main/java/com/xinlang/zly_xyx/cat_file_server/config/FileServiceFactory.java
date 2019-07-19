@@ -45,8 +45,10 @@ public class FileServiceFactory {
             return localFileService;
         }
         IFileService fileService = map.get(FileSource.valueOf(source));
-
-        return null;
+        if(fileService == null){
+            throw new IllegalArgumentException("FileServiceFactory.init方法初始化失败");
+        }
+        return fileService;
     }
 
 }

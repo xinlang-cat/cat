@@ -71,6 +71,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.xinlang.zly-xyx</groupId>
+            <artifactId>cat-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xinlang.zly-xyx</groupId>
+            <artifactId>cat-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
