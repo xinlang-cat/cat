@@ -21,6 +21,8 @@
         <module>cat-log</module>
         <module>cat-api</module>
         <module>cat-file-server</module>
+        <module>cat-auth</module>
+        <module>cat-user</module>
     </modules>
 
     <properties>

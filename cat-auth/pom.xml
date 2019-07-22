@@ -8,9 +8,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
 
-    <artifactId>cat-file-server</artifactId>
+    <artifactId>cat-auth</artifactId>
 
     <properties>
         <java.version>1.8</java.version>
@@ -29,22 +28,38 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
-        <!-- Mybatis -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-        </dependency>
-        <!-- Mysql -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
         <!-- oauth2 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
-        <!-- swagger2 -->
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <!-- feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -60,17 +75,12 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger}</version>
         </dependency>
-        <!-- aliyun-sdk-oss -->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>${aliyun-sdk-oss}</version>
-        </dependency>
         <!-- zipkin -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
+        <!-- cat-common -->
         <dependency>
             <groupId>com.xinlang.zly-xyx</groupId>
             <artifactId>cat-common</artifactId>
@@ -79,7 +89,6 @@
     </dependencies>
 
     <build>
-        <!-- 打jar包去掉版本号 -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
@@ -88,4 +97,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

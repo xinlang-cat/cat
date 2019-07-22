@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class log {
+public class Log {
     private Long id;
     private String username;
     //模块名
