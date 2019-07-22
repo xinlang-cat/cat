@@ -27,6 +27,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.xinlang.zly-xyx</groupId>
+            <artifactId>cat-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -39,12 +45,4 @@
         </plugins>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.xinlang.zly-xyx</groupId>
-            <artifactId>cat-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-    </dependencies>
 </project>
