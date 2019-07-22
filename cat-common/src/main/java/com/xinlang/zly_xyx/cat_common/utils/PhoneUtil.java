@@ -16,7 +16,6 @@ public class PhoneUtil {
           if (phone == null || phone.length() != 11) {
                return Boolean.FALSE;
           }
-
           Matcher m = P.matcher(phone);
           return m.matches();
      }

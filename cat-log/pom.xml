@@ -22,7 +22,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -31,6 +30,11 @@
             <groupId>com.xinlang.zly-xyx</groupId>
             <artifactId>cat-common</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <!-- amqp -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
     </dependencies>
 
