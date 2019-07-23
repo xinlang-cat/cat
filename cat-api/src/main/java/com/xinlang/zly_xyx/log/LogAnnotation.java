@@ -5,12 +5,29 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.METHOD})
+/**
+ * 日志注解
+ * 
+ * @author 小威老师
+ *
+ */
+@Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogAnnotation {
-    /**
-     * 记录普通参数的类型和序列化的对象
-     * @return
-     */
-   boolean recordParam() default  true;
+
+	/**
+	 * 日志模块
+	 *
+	 * @return
+	 * @see com.cloud.model.log.constants.LogModule
+	 */
+	String module();
+
+	/**
+	 * 记录参数<br>
+	 * 尽量记录普通参数类型的方法，和能序列化的对象
+	 * 
+	 * @return
+	 */
+	boolean recordParam() default true;
 }

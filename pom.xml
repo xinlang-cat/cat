@@ -23,6 +23,7 @@
         <module>cat-file-server</module>
         <module>cat-auth</module>
         <module>cat-user</module>
+        <module>cat-log-operate</module>
     </modules>
 
     <properties>
@@ -39,8 +40,8 @@
         <aliyun-sdk-oss>2.8.2</aliyun-sdk-oss>
         <aliyun-sdk-core>3.2.8</aliyun-sdk-core>
         <aliyun-sdk-dysmsapi>1.1.0</aliyun-sdk-dysmsapi>
-        <elasticsearch>6.2.3</elasticsearch>
-        <security-o2uth2>2.3.3.RELEASE</security-o2uth2>
+        <elasticsearch.version>6.2.3</elasticsearch.version>
+        <security-o2uth2.version>2.3.3.RELEASE</security-o2uth2.version>
         <docker-img-prefix>springboot</docker-img-prefix>
     </properties>
 
