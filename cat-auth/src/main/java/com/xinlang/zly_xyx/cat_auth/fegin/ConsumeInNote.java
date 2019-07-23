@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author 张龙毅 18777811286@163.com
  * 2019/7/22
  */
-@FeignClient("cat-inform")
-public interface ConsumeInform {
-    @GetMapping(value = "/inform-anon/internal/phone",params = {"key","code"})
+@FeignClient("cat-note")
+public interface ConsumeInNote {
+    @GetMapping(value = "/note-anon/internal/phone",params = {"key","code"})
     String matcheCodeAndGetPhone(@RequestParam("key") String kry,@RequestParam("code") String code,
                                  @RequestParam(value = "delete",required = false)Boolean delete,
                                  @RequestParam(value = "second",required = false)Integer second);

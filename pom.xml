@@ -40,7 +40,7 @@
         <aliyun-sdk-core>3.2.8</aliyun-sdk-core>
         <aliyun-sdk-dysmsapi>1.1.0</aliyun-sdk-dysmsapi>
         <elasticsearch>6.2.3</elasticsearch>
-        <security-o2uth2>2.3.3.RELEASE</security-o2uth2>
+        <security-oauth2>2.3.3.RELEASE</security-oauth2>
         <docker-img-prefix>springboot</docker-img-prefix>
     </properties>
 
@@ -70,6 +70,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collection4}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

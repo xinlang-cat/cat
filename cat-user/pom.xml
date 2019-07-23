@@ -89,7 +89,15 @@
             <artifactId>cat-log</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
+
+
 0.    <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>

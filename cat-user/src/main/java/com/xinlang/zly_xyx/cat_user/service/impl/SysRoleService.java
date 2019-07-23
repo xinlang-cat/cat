@@ -1,6 +1,7 @@
 package com.xinlang.zly_xyx.cat_user.service.impl;
 
 import com.google.common.collect.Sets;
+import com.xinlang.zly_xyx.cat_common.utils.PageUtil;
 import com.xinlang.zly_xyx.cat_user.mapper.RolePermissionMapper;
 import com.xinlang.zly_xyx.cat_user.mapper.SysRoleMapper;
 import com.xinlang.zly_xyx.cat_user.mapper.UserRoleMapper;
@@ -16,10 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -100,21 +98,49 @@ public class SysRoleService implements ISysRoleService {
         if(!CollectionUtils.isEmpty(addPermissionIds)){
             addPermissionIds.forEach(permissionId ->rolePermissionMapper.saveRolePermission(id,permissionId));
         }
-        Collection<Long> delPermsissionIds = org.apache.commons.collections4.CollectionUtils.subtract(oldPermissionIds,permissionIds);
+        Collection<Long> delPermissionIds = org.apache.commons.collections4.CollectionUtils.subtract(oldPermissionIds,permissionIds);
+        if(!CollectionUtils.isEmpty(delPermissionIds)){
+            delPermissionIds.forEach(delPermissionId->{
+                rolePermissionMapper.deleteRolePermission(id,delPermissionId);
+            });
+        }
+        log.info("给角色id:{},分配权限{}",id,permissionIds);
      }
 
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
     @Override
     public SysRole findById(Long id) {
-        return null;
+        return sysRoleMapper.findById(id);
     }
 
+    /**
+     * 分页查询
+     * @param params
+     * @return
+     */
     @Override
     public Page<SysRole> findRoles(Map<String, Object> params) {
-        return null;
+        int total = sysRoleMapper.count(params);
+        @SuppressWarnings("")
+        List<SysRole> sysRoles = Collections.emptyList();
+        if(total>0){
+            PageUtil.pageParamConver(params,false);
+            sysRoles = sysRoleMapper.findData(params);
+        }
+        return new Page<>(total,sysRoles);
     }
 
+    /**
+     * 根据角色获取权限列表
+     * @param roleId
+     * @return
+     */
     @Override
     public Set<SysPermission> findPermissionsByRoleId(Long roleId) {
-        return null;
+        return rolePermissionMapper.findPermissionsByRoleIds(Sets.newHashSet(roleId));
     }
 }
