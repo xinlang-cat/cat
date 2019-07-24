@@ -86,7 +86,7 @@ public class SysPermissionService implements ISysPermissionService {
      * @return
      */
     @Override
-    public Page<SysPermission> findPersissions(Map<String, Object> params) {
+    public Page<SysPermission> findPermissions(Map<String, Object> params) {
         int total = sysPermissionMapper.count(params);
         List<SysPermission>  permissions = Collections.emptyList();
         if(total>0){

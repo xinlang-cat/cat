@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 2019/7/23
  */
 @FeignClient("cat-note")
-public interface ConsumeInNote {
+public interface ConsumeNote {
     @GetMapping(value = "/note-anon/internal/phone",params = {"key","code"})
     String matcheCodeAndGetPhone(@RequestParam("key") String kry, @RequestParam("code") String code,
                                  @RequestParam(value = "delete", required = false) Boolean delete,

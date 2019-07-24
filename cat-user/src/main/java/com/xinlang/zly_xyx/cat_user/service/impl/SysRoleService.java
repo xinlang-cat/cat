@@ -36,7 +36,7 @@ public class SysRoleService implements ISysRoleService {
     @Autowired
     private RolePermissionMapper rolePermissionMapper;
     @Autowired
-    private AmqpTemplate amqpTemaple;
+    private AmqpTemplate amqpTemplate;
 
     /**
      * 添加
@@ -77,7 +77,7 @@ public class SysRoleService implements ISysRoleService {
         sysRoleMapper.delete(id);
         rolePermissionMapper.deleteRolePermission(null,id);
         userRoleMapper.deleteUserRole(null,id);
-        amqpTemaple.convertAndSend(UserCenterMq.MQ_EXCHANGE_USER,UserCenterMq.ROUTING_KEY_ROLE_DELETE,id);
+        amqpTemplate.convertAndSend(UserCenterMq.MQ_EXCHANGE_USER,UserCenterMq.ROUTING_KEY_ROLE_DELETE,id);
         log.info("删除角色:{}",sysRole.getCode()  );
     }
 

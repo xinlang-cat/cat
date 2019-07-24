@@ -20,5 +20,5 @@ public interface ISysPermissionService {
 
     void del(Long id);
 
-    Page<SysPermission> findPersissions(Map<String,Object> params);
+    Page<SysPermission> findPermissions(Map<String,Object> params);
 }

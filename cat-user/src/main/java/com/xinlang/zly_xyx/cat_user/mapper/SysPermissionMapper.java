@@ -12,7 +12,6 @@ import java.util.Map;
  * 2019/7/22
  */
 @Mapper
-@Repository("sysPermissionMapper")
 public interface SysPermissionMapper {
 
 	@Options(useGeneratedKeys = true, keyProperty = "id")

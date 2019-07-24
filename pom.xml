@@ -24,6 +24,9 @@
         <module>cat-auth</module>
         <module>cat-user</module>
         <module>cat-log-operate</module>
+        <module>cat-gateway-zuul</module>
+        <module>cat-manage-backend</module>
+        <module>cat-gateway</module>
     </modules>
 
     <properties>

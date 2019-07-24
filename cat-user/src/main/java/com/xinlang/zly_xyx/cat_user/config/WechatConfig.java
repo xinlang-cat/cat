@@ -18,7 +18,7 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties( prefix = "wechat")
 @Component
-public class WecahtConfig {
-    private String admin;
+public class WechatConfig {
+    private String domain;
     private Map<String, WechatInfo> infos;
 }

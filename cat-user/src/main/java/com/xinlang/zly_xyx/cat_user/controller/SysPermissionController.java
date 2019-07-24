@@ -72,7 +72,7 @@ public class SysPermissionController {
     @PreAuthorize("hasAnyAuthority('back:permission:query')")
     @GetMapping
     public Page<SysPermission>  findPermissions(@RequestParam Map<String,Object> params){
-        return sysPermissionService.findPersissions(params);
+        return sysPermissionService.findPermissions(params);
     }
 
 }

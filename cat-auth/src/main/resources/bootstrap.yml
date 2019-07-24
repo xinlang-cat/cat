@@ -1,0 +1,25 @@
+#用户中心
+server:
+  port: 8080
+
+spring:
+  application:
+    name: cat-auth
+
+eureka:
+  instance:
+    hostname: cat-auth
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+  client:
+    service-url:
+      defaultZone: http://cat:cat@cat-eureka:8761/eureka/
+    registry-fetch-interval-seconds: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+

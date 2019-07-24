@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.cat_common.utils;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
