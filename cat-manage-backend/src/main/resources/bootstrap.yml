@@ -1,0 +1,9 @@
+server:
+  port: 8763
+spring:
+  application:
+    name: cat-manage-backend
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://cat:cat@cat-eureka:8761/eureka/
