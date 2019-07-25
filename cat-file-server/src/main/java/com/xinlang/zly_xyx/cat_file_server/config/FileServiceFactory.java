@@ -3,7 +3,6 @@ package com.xinlang.zly_xyx.cat_file_server.config;
 import com.xinlang.zly_xyx.cat_file_server.bean.File;
 import com.xinlang.zly_xyx.cat_file_server.bean.FileSource;
 import com.xinlang.zly_xyx.cat_file_server.service.IFileService;
-import com.xinlang.zly_xyx.cat_file_server.service.impl.AliyunFileService;
 import com.xinlang.zly_xyx.cat_file_server.service.impl.LocalFileService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ import java.util.Map;
 @Configuration
 public class FileServiceFactory {
 
-    @Autowired
-    private AliyunFileService aliyunFileService;
+//    @Autowired
+//    private AliyunFileService aliyunFileService;
     @Autowired
     private LocalFileService localFileService;
 
@@ -31,7 +30,7 @@ public class FileServiceFactory {
 
     @PostConstruct
     public void init(){
-        map.put(FileSource.ALIYUN,aliyunFileService);
+        //map.put(FileSource.ALIYUN,aliyunFileService);
         map.put(FileSource.LOCAL,localFileService);
     }
 

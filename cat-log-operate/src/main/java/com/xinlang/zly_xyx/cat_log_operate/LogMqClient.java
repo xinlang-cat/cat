@@ -20,8 +20,8 @@ public class LogMqClient {
 
     private AmqpTemplate amqpTemplate;
 
-    public LogMqClient(AmqpTemplate amqpTemplate){
-        this.amqpTemplate =amqpTemplate;
+    LogMqClient(AmqpTemplate amqpTemplate){
+        this.amqpTemplate = amqpTemplate;
     }
     public void sendLogMsg(String module, String username, String params, String remark, boolean flag) {
         CompletableFuture.runAsync(() -> {

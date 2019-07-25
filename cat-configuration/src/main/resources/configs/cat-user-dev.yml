@@ -10,7 +10,7 @@ spring:
       connection-test-query: SELECT 1
   rabbitmq:
     host: localhost
-    port: 5672
+    port: 15672
     username: pig
     password: pig
     virtual-host: /

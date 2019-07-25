@@ -3,6 +3,7 @@ package com.xinlang.zly_xyx.cat_file_server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -10,6 +11,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableEurekaClient
 public class CatFileServerApplication {
 
     public static void main(String[] args){

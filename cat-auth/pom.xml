@@ -83,7 +83,7 @@
         <!-- cat-common -->
         <dependency>
             <groupId>com.xinlang.zly-xyx</groupId>
-            <artifactId>cat-common</artifactId>
+            <artifactId>cat-log-operate</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

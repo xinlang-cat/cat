@@ -4,8 +4,11 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
     hostname: ${spring.application.name}
   client:
+    registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://cat:cat@cat-eureka:8761/eureka/
 
@@ -22,3 +25,12 @@ spring:
         discovery:
           enabled: true
           service-id: cat-configuration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

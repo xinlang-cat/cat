@@ -38,6 +38,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <!-- oauth2 -->
         <dependency>
@@ -75,6 +76,10 @@
             <groupId>com.xinlang.zly-xyx</groupId>
             <artifactId>cat-log-operate</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
     </dependencies>
 
