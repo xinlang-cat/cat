@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.cat_auth.service.impl;
 
-import com.xinlang.zly_xyx.cat_auth.fegin.ConsumeNote;
+import com.xinlang.zly_xyx.cat_auth.fegin.ConsumeInform;
 import com.xinlang.zly_xyx.cat_auth.fegin.ConsumeUser;
 import com.xinlang.zly_xyx.user.LoginAppUser;
 import com.xinlang.zly_xyx.user.constants.CredentialType;
@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
-    private ConsumeNote consumeNote;
+    private ConsumeInform consumeInform;
 
 
     /**
@@ -74,7 +74,7 @@ public class UserDetailsServiceImpl implements org.springframework.security.core
         if(!DigestUtils.md5Hex(key+code).equals(md5)){
             throw new IllegalArgumentException("非法请求");
         }
-        String value = consumeNote.matcheCodeAndGetPhone(key,code,false,30);
+        String value = consumeInform.matcheCodeAndGetPhone(key,code,false,30);
         if(StringUtils.equals(phone,value)){
             throw new IllegalArgumentException("验证码错误");
         }

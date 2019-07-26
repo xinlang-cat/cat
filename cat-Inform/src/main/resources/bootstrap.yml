@@ -1,5 +1,5 @@
 server:
-  port: 8794
+  port: 8666
 
 eureka:
   instance:
@@ -14,17 +14,17 @@ eureka:
 
 spring:
   application:
-    name: cat-file
+    name: cat-inform
   profiles:
-    active: dev
+      active: dev
   cloud:
-    config:
-      fail-fast: true
-      name: ${spring.application.name}
-      profile: ${spring.profiles.active}
-      discovery:
-        enabled: true
-        service-id: cat-configuration
+      config:
+        fail-fast: true
+        name: ${spring.application.name}
+        profile: ${spring.profiles.active}
+        discovery:
+          enabled: true
+          service-id: cat-configuration
 
 management:
   endpoints:
@@ -34,4 +34,3 @@ management:
   endpoint:
     health:
       show-details: always
-

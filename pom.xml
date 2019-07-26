@@ -26,7 +26,7 @@
         <module>cat-log-operate</module>
         <module>cat-gateway-zuul</module>
         <module>cat-manage-backend</module>
-        <module>cat-gateway</module>
+        <module>cat-Inform</module>
     </modules>
 
     <properties>
