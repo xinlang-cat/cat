@@ -1,5 +1,9 @@
 server:
-  port: 8790
+  port: 8999
+
+spring:
+  application:
+    name: cat-monitor-center
 
 eureka:
   instance:
@@ -12,20 +16,6 @@ eureka:
     service-url:
       defaultZone: http://cat:cat@cat-eureka:8761/eureka/
 
-spring:
-  application:
-    name: cat-user
-  profiles:
-      active: dev
-  cloud:
-      config:
-        fail-fast: true
-        name: ${spring.application.name}
-        profile: ${spring.profiles.active}
-        discovery:
-          enabled: true
-          service-id: cat-configuration
-
 management:
   endpoints:
     web:
@@ -34,3 +24,13 @@ management:
   endpoint:
     health:
       show-details: always
+
+logging:
+  level:
+    root: info
+  file: logs/${spring.application.name}.log
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com

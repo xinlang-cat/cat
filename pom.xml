@@ -27,6 +27,7 @@
         <module>cat-gateway-zuul</module>
         <module>cat-manage-backend</module>
         <module>cat-Inform</module>
+        <module>cat-monitor-center</module>
     </modules>
 
     <properties>
@@ -38,7 +39,7 @@
         <jwt>0.9.0</jwt>
         <fastjson>1.2.47</fastjson>
         <commons-collection4>4.1</commons-collection4>
-        <nonitor>2.0.2</nonitor>
+        <monitor>2.0.2</monitor>
         <swagger>2.8.0</swagger>
         <aliyun-sdk-oss>2.8.2</aliyun-sdk-oss>
         <aliyun-sdk-core>3.2.8</aliyun-sdk-core>

@@ -7,14 +7,14 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/cat-log?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
-    password: root
+    password: 123456
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
       connection-test-query: SELECT 1
   rabbitmq:
     host: localhost
-    port: 15672
+    port: 5672
     username: pig
     password: pig
     virtual-host: /
@@ -34,7 +34,7 @@ spring:
       type: web
 mybatis:
   type-aliases-package: com.xinlang.zly_xyx.log
-  mapper-locations: classpath:/mybatis-mappers/*
+  mapper-locations: classpath:/mapper/*
   configuration:
     mapUnderscoreToCamelCase: true
 security:
@@ -45,3 +45,8 @@ security:
 elasticsearch:
   clusterName: elasticsearch
   clusterNodes: 127.0.0.1:9300
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com
