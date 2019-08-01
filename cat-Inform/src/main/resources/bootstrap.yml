@@ -27,7 +27,7 @@ spring:
         service-id: cat-configuration
   sleuth:
     sampler:
-      probability: 1
+      probability: 1.0
 management:
   endpoints:
     web:

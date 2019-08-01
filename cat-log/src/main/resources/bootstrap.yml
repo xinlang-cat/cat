@@ -25,6 +25,9 @@ spring:
         discovery:
           enabled: true
           service-id: cat-configuration
+  sleuth:
+    sampler:
+      probability: 1.0
 
 management:
   endpoints:
