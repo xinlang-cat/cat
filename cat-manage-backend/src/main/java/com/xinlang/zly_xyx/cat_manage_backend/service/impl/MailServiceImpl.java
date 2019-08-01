@@ -7,8 +7,8 @@ import com.xinlang.zly_xyx.cat_manage_backend.dao.MailDao;
 import com.xinlang.zly_xyx.cat_manage_backend.service.MailService;
 import com.xinlang.zly_xyx.cat_manage_backend.service.SendMailService;
 import com.xinlang.zly_xyx.common.Page;
-import com.xinlang.zly_xyx.mail.Mail;
-import com.xinlang.zly_xyx.mail.constants.MailStatus;
+import com.xinlang.zly_xyx.email.Email;
+import com.xinlang.zly_xyx.email.constants.MailStatus;
 import com.xinlang.zly_xyx.user.AppUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -37,7 +37,7 @@ public class MailServiceImpl implements MailService {
      * @param mail
      */
     @Transactional
-    public void saveMail(Mail mail) {
+    public void saveMail(Email mail) {
         if (mail.getUserId() == null || StringUtils.isBlank(mail.getUsername())) {
             AppUser appUser = AppUserUtil.getLoginAppUser();
             if (appUser != null) {
@@ -66,8 +66,8 @@ public class MailServiceImpl implements MailService {
      * @param mail
      */
     @Transactional
-    public void updateMail(Mail mail) {
-        Mail oldMail = mailDao.findById(mail.getId());
+    public void updateMail(Email mail) {
+        Email oldMail = mailDao.findById(mail.getId());
         if (oldMail.getStatus() == MailStatus.SUCCESS) {
             throw new IllegalArgumentException("已发送的邮件不能编辑");
         }
@@ -85,7 +85,7 @@ public class MailServiceImpl implements MailService {
      */
 
     @Async
-    public void sendMail(Mail mail) {
+    public void sendMail(Email mail) {
         boolean flag = sendMailService.sendMail(mail.getToEmail(), mail.getSubject(), mail.getContent());
         mail.setSendTime(new Date());
         mail.setStatus(flag ? MailStatus.SUCCESS : MailStatus.ERROR); // 邮件发送结果
@@ -94,14 +94,14 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public Mail findById(Long id) {
+    public Email findById(Long id) {
         return mailDao.findById(id);
     }
 
     @Override
-    public Page<Mail> findMails(Map<String, Object> params) {
+    public Page<Email> findMails(Map<String, Object> params) {
         int total = mailDao.count(params);
-        List<Mail> list = Collections.emptyList();
+        List<Email> list = Collections.emptyList();
         if (total > 0) {
             PageUtil.pageParamConver(params, true);
 

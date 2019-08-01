@@ -48,6 +48,7 @@
         <security-oauth2>2.3.3.RELEASE</security-oauth2>
         <docker-img-prefix>springboot</docker-img-prefix>
         <spring-security-oauth2>2.2.1.RELEASE</spring-security-oauth2>
+        <zipkin></zipkin>
     </properties>
 
     <dependencies>

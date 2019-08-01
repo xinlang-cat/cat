@@ -1,5 +1,5 @@
 server:
-  port: 8794
+  port: 8801
 
 eureka:
   instance:

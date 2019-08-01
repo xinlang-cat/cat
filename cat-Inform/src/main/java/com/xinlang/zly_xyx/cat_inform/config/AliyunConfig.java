@@ -29,7 +29,6 @@ public class AliyunConfig {
         final String domain = "dysmsapi.aliyuncs.com";
         IClientProfile iClientProfile = DefaultProfile.getProfile("cn-hangzhou",accessKeyId,accessKeySecret);
         DefaultProfile.addEndpoint("cn-hangzhou","cn-hangzhou",product,domain);
-        IAcsClient iAcsClient = new DefaultAcsClient(iClientProfile);
-        return iAcsClient;
+        return new DefaultAcsClient(iClientProfile);
     }
 }

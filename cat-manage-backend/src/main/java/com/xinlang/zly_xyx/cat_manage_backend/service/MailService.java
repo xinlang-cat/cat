@@ -2,19 +2,19 @@ package com.xinlang.zly_xyx.cat_manage_backend.service;
 
 
 import com.xinlang.zly_xyx.common.Page;
-import com.xinlang.zly_xyx.mail.Mail;
+import com.xinlang.zly_xyx.email.Email;
 
 import java.util.Map;
 
 public interface MailService {
 
-    void saveMail(Mail mail);
+    void saveMail(Email mail);
 
-    void updateMail(Mail mail);
+    void updateMail(Email mail);
 
-    void sendMail(Mail mail);
+    void sendMail(Email mail);
 
-    Mail findById(Long id);
+    Email findById(Long id);
 
-    Page<Mail> findMails(Map<String, Object> params);
+    Page<Email> findMails(Map<String, Object> params);
 }

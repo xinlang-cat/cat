@@ -3,7 +3,7 @@ package com.xinlang.zly_xyx.cat_manage_backend.controller;
 
 import com.xinlang.zly_xyx.cat_manage_backend.service.MailService;
 import com.xinlang.zly_xyx.common.Page;
-import com.xinlang.zly_xyx.mail.Mail;
+import com.xinlang.zly_xyx.email.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +19,13 @@ public class MailController {
 
     @PreAuthorize("hasAuthority('mail:query')")
     @GetMapping("/{id}")
-    public Mail findById(@PathVariable Long id) {
+    public Email findById(@PathVariable Long id) {
         return mailService.findById(id);
     }
 
     @PreAuthorize("hasAuthority('mail:query')")
     @GetMapping
-    public Page<Mail> findMails(@RequestParam Map<String, Object> params) {
+    public Page<Email> findMails(@RequestParam Map<String, Object> params) {
         return mailService.findMails(params);
     }
 
@@ -39,7 +39,7 @@ public class MailController {
     //@LogAnnotation(module = "保存邮件")
     @PreAuthorize("hasAuthority('mail:save')")
     @PostMapping
-    public Mail save(@RequestBody Mail mail, Boolean send) {
+    public Email save(@RequestBody Email mail, Boolean send) {
         mailService.saveMail(mail);
         if (Boolean.TRUE == send) {
             mailService.sendMail(mail);
@@ -58,7 +58,7 @@ public class MailController {
   //  @LogAnnotation(module = "修改邮件")
     @PreAuthorize("hasAuthority('mail:update')")
     @PutMapping
-    public Mail update(@RequestBody Mail mail, Boolean send) {
+    public Email update(@RequestBody Email mail, Boolean send) {
         mailService.updateMail(mail);
         if (Boolean.TRUE == send) {
             mailService.sendMail(mail);

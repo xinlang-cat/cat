@@ -33,7 +33,7 @@ public class SmsController {
      * @param phone
      * @return
      */
-    @PostMapping(value = "/notification-anon/codes", params = { "phone" })
+    @PostMapping(value = "/inform-anon/codes", params = { "phone" })
     public VerificationCode sendSmsVerificationCode(String phone) {
         if (!PhoneUtil.checkPhone(phone)) {
             throw new IllegalArgumentException("手机号格式不正确");
@@ -55,7 +55,7 @@ public class SmsController {
      *            不删除时，可重置过期时间（秒）
      * @return
      */
-    @GetMapping(value = "/notification-anon/internal/phone", params = { "key", "code" })
+    @GetMapping(value = "/inform-anon/internal/phone", params = { "key", "code" })
     public String matcheCodeAndGetPhone(String key, String code, Boolean delete, Integer second) {
         return verificationCodeService.matcheCodeAndGetPhone(key, code, delete, second);
     }

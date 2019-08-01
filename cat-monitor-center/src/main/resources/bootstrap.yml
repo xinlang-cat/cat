@@ -1,5 +1,5 @@
 server:
-  port: 8999
+  port: 9001
 
 spring:
   application:
@@ -8,11 +8,7 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
-    lease-expiration-duration-in-seconds: 15
-    lease-renewal-interval-in-seconds: 5
-    hostname: ${spring.application.name}
   client:
-    registry-fetch-interval-seconds: 5
     service-url:
       defaultZone: http://cat:cat@cat-eureka:8761/eureka/
 
@@ -25,12 +21,3 @@ management:
     health:
       show-details: always
 
-logging:
-  level:
-    root: info
-  file: logs/${spring.application.name}.log
-
-info:
-  company: 鑫朗通信技术有限公司
-  phone: 18777811286
-  email: 516281013@qq.com

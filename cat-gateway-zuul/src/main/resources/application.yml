@@ -1,5 +1,5 @@
 server:
-  port: 8782
+  port: 8811
 
 spring:
   application:
@@ -14,8 +14,6 @@ spring:
       discovery:
         enabled: true
         service-id: cat-gateway-zuul
-  main:
-    allow-bean-definition-overriding: true
 
 eureka:
   instance:
