@@ -12,7 +12,8 @@ import java.util.Date;
  * @author 张龙毅 18777811286@163.com
  * 2019/7/19
  */
-public class FileUtil {
+public class
+FileUtil {
 
     public static File getFile(MultipartFile multipartFile) throws Exception{
         String md5 = fileMd5(multipartFile.getInputStream());

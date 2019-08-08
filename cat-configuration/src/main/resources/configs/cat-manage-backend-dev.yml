@@ -3,20 +3,9 @@ logging:
     root: info
   file: logs/${spring.application.name}.log
 spring:
-  redis:
-    host: localhost
-    port: 6379
-    password:
-    timeout: 10s
-    lettuce:
-      pool:
-        min-idle: 0
-        max-idle: 8
-        max-active: 8
-        max-wait: -1ms
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/cat-inform?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://local.mysql.com:3306/cat-manage-backend?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: 123456
     hikari:
@@ -24,11 +13,20 @@ spring:
       maximum-pool-size: 20
       connection-test-query: SELECT 1
   rabbitmq:
-    host: localhost
+    host: local.rabbitmq.com
     port: 5672
     username: pig
     password: pig
     virtual-host: /
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    username:
+    password:
+    protocol: smtp
+    test-connection: false
+#    properties:
+#      mail.smtp.auth: true
   mvc:
     servlet:
       load-on-startup: 1
@@ -40,7 +38,7 @@ spring:
     sender:
       type: web
 mybatis:
-  type-aliases-package: com.xinlang.zly_xyx.cat_inform.bean
+  type-aliases-package: com.xinlang.zly_xyx.cat_manage_backend.model,com.xinlang.zly_xyx.email
   mapper-locations: classpath:/mapper/*
   configuration:
     mapUnderscoreToCamelCase: true
@@ -49,16 +47,6 @@ security:
     resource:
       user-info-uri: http://local.gateway.com:8080/api-o/user-me
       prefer-token-info: false
-aliyun:
-  accessKeyId: xxx
-  accessKeySecret: xxx
-  sign:
-    name1: xxx
-  template:
-    code1: xxx
-sms:
-  expire-minute: 15
-  day-count: 30
 info:
   company: 鑫朗通信技术有限公司
   phone: 18777811286

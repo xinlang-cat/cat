@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-@Transactional
 public class SysRoleService implements ISysRoleService {
 
     @Autowired
@@ -42,6 +41,7 @@ public class SysRoleService implements ISysRoleService {
      * 添加
      * @param sysRole
      */
+    @Transactional
     @Override
     public void save(SysRole sysRole) {
         SysRole sr = sysRoleMapper.findByCode(sysRole.getCode());
@@ -57,6 +57,7 @@ public class SysRoleService implements ISysRoleService {
      * 修改
      * @param sysRole
      */
+    @Transactional
     @Override
     public void update(SysRole sysRole) {
         sysRole.setUpdateTime(new Date());
@@ -68,6 +69,7 @@ public class SysRoleService implements ISysRoleService {
      * 删除角色
      * @param id
      */
+    @Transactional
     @Override
     public void deleteRole(Long id) {
         SysRole sysRole = sysRoleMapper.findById(id);
@@ -86,6 +88,7 @@ public class SysRoleService implements ISysRoleService {
      * @param id
      * @param permissionIds
      */
+    @Transactional
     @Override
     public void setPermissionToRole(Long id, Set<Long> permissionIds) {
         SysRole sysRole  = sysRoleMapper.findById(id);

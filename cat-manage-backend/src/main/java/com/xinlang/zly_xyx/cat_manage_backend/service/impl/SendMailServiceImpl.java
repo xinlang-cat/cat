@@ -28,7 +28,7 @@ public class SendMailServiceImpl implements SendMailService {
 	 * 发件人的邮箱地址<br>
 	 * 即我们配置的邮件服务的邮箱
 	 */
-	@Value("${spring.email.username}")
+	@Value("${spring.mail.username}")
 	private String serverMail;
 
 	/**

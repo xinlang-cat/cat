@@ -21,7 +21,7 @@ zuul:
       serviceId: cat-auth
     api-u:
       path: /api-u/**
-      serviceId: cat-auth
+      serviceId: cat-user
     backend:
       path: /api-b/**
       serviceId: cat-manage-backend
@@ -30,10 +30,10 @@ zuul:
       serviceId: cat-log
     file:
       path: /api-f/**
-      serviceId: file-center
+      serviceId: cat-file
     sms:
       path: /api-n/**
-      serviceId: notification-center
+      serviceId: cat-inform
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
@@ -53,3 +53,8 @@ hystrix:
             timeoutInMilliseconds: 60000
 cron:
   black-ip: 0 0/5 * * * ?
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com

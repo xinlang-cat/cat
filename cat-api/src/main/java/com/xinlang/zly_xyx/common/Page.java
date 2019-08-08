@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class Page<T> implements Serializable {
 
-    private static final long serialVersionUID = -7119897356039947422L;
 
+    private static final long serialVersionUID = 2749882542068799324L;
     private int total;
     private List<T> data;
 

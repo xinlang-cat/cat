@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @FeignClient("cat-log")
 public interface ConsumeLog {
-    @PostMapping("logs-anon/internal")
+    @PostMapping("/logs-anon/internal")
     void save(@RequestBody Log log);
 }

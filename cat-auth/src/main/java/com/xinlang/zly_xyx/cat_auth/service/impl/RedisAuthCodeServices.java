@@ -25,15 +25,6 @@ public class RedisAuthCodeServices extends RandomValueAuthorizationCodeServices 
     @Autowired
     private RedisTemplate<Object,Object> redisTemplate;
 
-
-    /**
-     * 存储code到redis，并设置过期时间，10分钟<br>
-     * value为OAuth2Authentication序列化后的字节<br>
-     * 因为OAuth2Authentication没有无参构造函数<br>
-     * redisTemplate.opsForValue().set(key, value, timeout, unit);
-     * 这种方式直接存储的话，redisTemplate.opsForValue().get(key)的时候有些问题，
-     * 所以这里采用最底层的方式存储，get的时候也用最底层的方式获取
-     */
     @Override
     protected void store(String code, OAuth2Authentication oAuth2Authentication) {
         redisTemplate.execute(new RedisCallback<Long>() {

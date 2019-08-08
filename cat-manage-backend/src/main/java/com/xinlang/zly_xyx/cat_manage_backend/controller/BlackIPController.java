@@ -4,6 +4,7 @@ package com.xinlang.zly_xyx.cat_manage_backend.controller;
 import com.xinlang.zly_xyx.cat_manage_backend.model.BlackIP;
 import com.xinlang.zly_xyx.cat_manage_backend.service.BlackIPService;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,7 @@ public class BlackIPController {
 	 * 添加黑名单ip
 	 * 
 	 */
-	//@LogAnnotation(module = "添加黑名单")
+	@LogAnnotation(module = "添加黑名单")
 	@PreAuthorize("hasAuthority('ip:black:save')")
 	@PostMapping("/blackIPs")
 	public void save(@RequestBody BlackIP blackIP) {
@@ -37,7 +38,7 @@ public class BlackIPController {
 	 * 删除黑名单ip
 	 * 
 	 */
-	//@LogAnnotation(module = "删除黑名单")
+	@LogAnnotation(module = "删除黑名单")
 	@PreAuthorize("hasAuthority('ip:black:delete')")
 	@DeleteMapping("/blackIPs")
 	public void delete(String ip) {

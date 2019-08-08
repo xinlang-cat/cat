@@ -34,7 +34,6 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @Service
-@Transactional
 public class WechatService implements IWechatService {
 
     @Autowired
@@ -74,6 +73,7 @@ public class WechatService implements IWechatService {
         return String.format(WECHAT_OAUTH_URL,wechatInfo.getAppid(),redirect_uri,state);
     }
 
+    @Transactional
     @Override
     public WechatUserInfo getWechatUserInfo(String app, HttpServletRequest request, String code, String state) {
         checkState(state,request);
@@ -104,6 +104,7 @@ public class WechatService implements IWechatService {
         return stringBuilder.toString();
     }
 
+    @Transactional
     @Override
     public void bindingUser(AppUser appUser, String tempCode, String openid) {
         WechatUserInfo wechatUserInfo = checkAndGetWechatUserInfo(tempCode,openid);
@@ -197,7 +198,7 @@ public class WechatService implements IWechatService {
         WechatUserInfo wechatUserInfo = getWechatUserInfo(wechatAccess);
         // 多公众号支持
         String uuid = wechatUserInfo.getUnionid();
-        if(!StringUtils.isBlank(uuid)){
+        if(StringUtils.isNoneBlank(uuid)){
             Set<WechatUserInfo> set = wechatMapper.findByUniond(uuid);
             if(CollectionUtils.isNotEmpty(set)){
                 WechatUserInfo wui = set.parallelStream().filter(w->w.getUserId() != null).findFirst().orElse(null);

@@ -50,7 +50,6 @@ public class ElasticSearchConfig {
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-
 		return client;
 	}
 }

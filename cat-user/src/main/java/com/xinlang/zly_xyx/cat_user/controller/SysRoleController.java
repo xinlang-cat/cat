@@ -2,6 +2,7 @@ package com.xinlang.zly_xyx.cat_user.controller;
 
 import com.xinlang.zly_xyx.cat_user.service.ISysRoleService;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.SysPermission;
 import com.xinlang.zly_xyx.user.SysRole;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +29,7 @@ public class SysRoleController {
      * @param sysRole
      * @return
      */
+    @LogAnnotation(module = "添加角色")
     @PreAuthorize("hasAnyAuthority('back:role:save')")
     @PostMapping("/roles")
     public SysRole save(@RequestBody SysRole  sysRole){
@@ -46,6 +48,7 @@ public class SysRoleController {
      * @param sysRole
      * @return
      */
+    @LogAnnotation(module = "修改角色")
     @PreAuthorize("hasAnyAuthority('back:role:update')")
     @PutMapping("/roles")
     public SysRole update(@RequestBody SysRole  sysRole){
@@ -63,6 +66,7 @@ public class SysRoleController {
      * @param id
      * @return
      */
+    @LogAnnotation(module = "删除角色")
     @PreAuthorize("hasAnyAuthority('back:role:delete')")
     @DeleteMapping("/roles/{id}")
     public void delete(@PathVariable Long id){
@@ -103,7 +107,7 @@ public class SysRoleController {
     }
 
     @PreAuthorize("hasAnyAuthority('back:role:query')")
-    @GetMapping("/riles")
+    @GetMapping("/roles")
     public Page<SysRole> findRoles(@RequestParam Map<String,Object> params){
         return sysRoleService.findRoles(params);
     }

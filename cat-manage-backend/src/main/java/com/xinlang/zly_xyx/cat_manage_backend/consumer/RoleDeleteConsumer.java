@@ -27,7 +27,7 @@ public class RoleDeleteConsumer {
 	/**
 	 * 接收到删除角色的消息<br>
 	 * 删除角色和菜单关系
-	 * 
+	 *
 	 * @param roleId
 	 */
 	@RabbitHandler

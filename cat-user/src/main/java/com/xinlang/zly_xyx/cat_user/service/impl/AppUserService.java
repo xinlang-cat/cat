@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-@Transactional
 public class AppUserService implements IAppUserService {
 
     @Autowired
@@ -46,6 +45,7 @@ public class AppUserService implements IAppUserService {
      * 添加用户
      * @param appUser
      */
+    @Transactional
     @Override
     public void addAppUser(AppUser appUser) {
         String username = appUser.getUsername();
@@ -84,6 +84,7 @@ public class AppUserService implements IAppUserService {
      * 修改用户
      * @param appUser
      */
+    @Transactional
     @Override
     public void updateAppUser(AppUser appUser) {
         appUser.setUpdateTime(new Date());
@@ -96,6 +97,7 @@ public class AppUserService implements IAppUserService {
      * @param username
      * @return
      */
+    @Transactional
     @Override
     public LoginAppUser findByUsername(String username) {
         AppUser appUser = userCredentialsMapper.findUserByUsername(username);
@@ -117,6 +119,8 @@ public class AppUserService implements IAppUserService {
         return loginAppUser;
     }
 
+
+    @Transactional
     @Override
     public AppUser findById(Long id) {
         return appUserMapper.findById(id);
@@ -127,6 +131,7 @@ public class AppUserService implements IAppUserService {
      * @param id
      * @param roleIds
      */
+    @Transactional
     @Override
     public void setRoleToUser(Long id, Set<Long> roleIds) {
         AppUser appUser = appUserMapper.findById(id);
@@ -148,6 +153,7 @@ public class AppUserService implements IAppUserService {
      * @param oldPassword
      * @param newPassword
      */
+    @Transactional
     @Override
     public void updatePassword(Long id, String oldPassword, String newPassword) {
         AppUser appUser = appUserMapper.findById(id);
@@ -190,6 +196,7 @@ public class AppUserService implements IAppUserService {
      * @param userId
      * @param phone
      */
+    @Transactional
     @Override
     public void bindingPhone(Long userId, String phone) {
         UserCredential userCredential = userCredentialsMapper.findByUsername(phone);

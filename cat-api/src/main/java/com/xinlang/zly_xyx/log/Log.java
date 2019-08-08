@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Log implements Serializable {
 
-	private static final long serialVersionUID = -5398795297842978376L;
 
+	private static final long serialVersionUID = -6010917436407585631L;
 	private Long id;
 	/** 用户名 */
 	private String username;

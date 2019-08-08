@@ -12,8 +12,8 @@ import java.util.Date;
 @Data
 public class Email implements Serializable {
 
-    private static final long serialVersionUID = 4885093464493499448L;
 
+    private static final long serialVersionUID = 302047918252702655L;
     private Long id;
     private Long userId;
     /**

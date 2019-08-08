@@ -2,6 +2,7 @@ package com.xinlang.zly_xyx.cat_user.controller;
 
 import com.xinlang.zly_xyx.cat_user.service.ISysPermissionService;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.SysPermission;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class SysPermissionController {
      * @param sysPermission
      * @return
      */
+    @LogAnnotation(module = "添加权限")
     @PreAuthorize("hasAnyAuthority('back:permission:save')")
     @PostMapping("/permissions")
     public SysPermission save(@RequestBody SysPermission sysPermission){
@@ -44,6 +46,7 @@ public class SysPermissionController {
      * @param sysPermission
      * @return
      */
+    @LogAnnotation(module = "修改权限")
     @PreAuthorize("hasAnyAuthority('back:permission:update')")
     @PutMapping("/permissions")
     public SysPermission update(@RequestBody SysPermission sysPermission){
@@ -58,6 +61,7 @@ public class SysPermissionController {
      * 删除
      * @param id
      */
+    @LogAnnotation(module = "删除权限")
     @PreAuthorize("hasAnyAuthority('back:permission:delete')")
     @GetMapping("/permissions/{id}")
     public void delete(@PathVariable Long id){
@@ -69,8 +73,9 @@ public class SysPermissionController {
      * @param params
      * @return
      */
+
     @PreAuthorize("hasAnyAuthority('back:permission:query')")
-    @GetMapping
+    @GetMapping("/permissions")
     public Page<SysPermission>  findPermissions(@RequestParam Map<String,Object> params){
         return sysPermissionService.findPermissions(params);
     }

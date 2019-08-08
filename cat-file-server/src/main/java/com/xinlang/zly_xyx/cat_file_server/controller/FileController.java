@@ -6,6 +6,7 @@ import com.xinlang.zly_xyx.cat_file_server.config.FileServiceFactory;
 import com.xinlang.zly_xyx.cat_file_server.mapper.FileMapper;
 import com.xinlang.zly_xyx.cat_file_server.service.IFileService;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,8 @@ public class FileController {
      * @ return
      * @ throws the Exception
      */
+    @LogAnnotation(module = "文件上传", recordParam = false)
+    @PostMapping
     public File upload(@RequestParam("file") MultipartFile multipartFile, String source) throws Exception{
         IFileService fileService = fileServiceFactory.getFileService(source);
         return fileService.upload(multipartFile);
@@ -54,6 +57,7 @@ public class FileController {
      * @ return
      * @ throws the Exception
      */
+    @LogAnnotation(module = "文件上传", recordParam = false)
     @PostMapping("/layui")
     public Map<String,Object> uploadLayui(@RequestParam("file")MultipartFile multipartFile,String source) throws Exception{
         File file = upload(multipartFile,source);
@@ -69,6 +73,7 @@ public class FileController {
      * delete file
      * @param id
      */
+    @LogAnnotation(module = "文件删除")
     @PreAuthorize("hasAnyAuthority('file:del')")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id){

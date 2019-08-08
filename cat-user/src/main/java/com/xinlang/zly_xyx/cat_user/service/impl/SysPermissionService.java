@@ -18,7 +18,6 @@ import java.util.*;
  * 2019/7/22
  */
 @Slf4j
-@Transactional
 @Service
 public class SysPermissionService implements ISysPermissionService {
 
@@ -41,6 +40,7 @@ public class SysPermissionService implements ISysPermissionService {
      * 添加
      * @param sysPermission
      */
+    @Transactional
     @Override
     public void save(SysPermission sysPermission) {
         SysPermission permission = sysPermissionMapper.findByPermission(sysPermission.getPermission());
@@ -57,6 +57,7 @@ public class SysPermissionService implements ISysPermissionService {
      * 修改
      * @param sysPermission
      */
+    @Transactional
     @Override
     public void update(SysPermission sysPermission) {
         sysPermission.setUpdateTime(new Date());
@@ -69,6 +70,7 @@ public class SysPermissionService implements ISysPermissionService {
      * 删除
      * @param id
      */
+    @Transactional
     @Override
     public void del(Long id) {
         SysPermission sysPermission = sysPermissionMapper.findById(id);

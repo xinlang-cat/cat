@@ -15,7 +15,7 @@ public class LogAutoConfiguration {
      * @return
      */
     @Bean
-    public Queue logqueue(){
+    public Queue logQueue(){
         return new Queue(LogQueue.LOG_QUEUE);
     }
     @Autowired

@@ -12,8 +12,6 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * rabbitmq配置
- *
- *
  */
 @Configuration
 public class RabbitmqConfig {

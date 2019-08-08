@@ -16,8 +16,8 @@ import java.io.Serializable;
 @ToString
 public class WechatAccess implements Serializable {
 
-    private static final long serialVersionUID = 6571363417369764704L;
 
+    private static final long serialVersionUID = -3763415435358112818L;
     private String access_token;
     private int expires_in;
     private String refresh_token;

@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class SysRole implements Serializable {
 
-	private static final long serialVersionUID = -2054359538140713354L;
+	private static final long serialVersionUID = 6974660101528818052L;
 
 	private Long id;
 	private String code;

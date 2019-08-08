@@ -17,8 +17,8 @@ import java.util.Date;
 @ToString
 public class WechatUserInfo implements Serializable {
 
-    private static final long serialVersionUID = 6750304307961875043L;
 
+    private static final long serialVersionUID = -567973157993859793L;
     private Long id;
     private String openid;
     private String unionid;

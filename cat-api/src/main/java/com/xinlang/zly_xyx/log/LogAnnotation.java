@@ -7,9 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * 日志注解
- * 
- * @author 小威老师
- *
  */
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
@@ -19,7 +16,6 @@ public @interface LogAnnotation {
 	 * 日志模块
 	 *
 	 * @return
-	 * @see com.cloud.model.log.constants.LogModule
 	 */
 	String module();
 

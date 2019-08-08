@@ -11,7 +11,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableEurekaClient
 public class CatFileServerApplication {
 
     public static void main(String[] args){

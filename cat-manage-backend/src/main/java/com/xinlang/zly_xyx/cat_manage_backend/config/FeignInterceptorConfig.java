@@ -17,7 +17,6 @@ public class FeignInterceptorConfig {
 	@Bean
 	public RequestInterceptor requestInterceptor() {
 		RequestInterceptor requestInterceptor = new RequestInterceptor() {
-
 			@Override
 			public void apply(RequestTemplate template) {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -25,15 +24,12 @@ public class FeignInterceptorConfig {
 					if (authentication instanceof OAuth2Authentication) {
 						OAuth2AuthenticationDetails details = (OAuth2AuthenticationDetails) authentication.getDetails();
 						String access_token = details.getTokenValue();
-
 						template.header("Authorization", OAuth2AccessToken.BEARER_TYPE + " " + access_token);
 //						template.query(OAuth2AccessToken.ACCESS_TOKEN, access_token);
 					}
-
 				}
 			}
 		};
-
 		return requestInterceptor;
 	}
 }

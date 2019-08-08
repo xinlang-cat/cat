@@ -4,6 +4,7 @@ package com.xinlang.zly_xyx.cat_manage_backend.controller;
 import com.xinlang.zly_xyx.cat_manage_backend.service.MailService;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.email.Email;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class MailController {
      * @param send 是否发送邮件
      * @return
      */
-    //@LogAnnotation(module = "保存邮件")
+    @LogAnnotation(module = "保存邮件")
     @PreAuthorize("hasAuthority('mail:save')")
     @PostMapping
     public Email save(@RequestBody Email mail, Boolean send) {
@@ -55,7 +56,7 @@ public class MailController {
      * @param send 是否发送
      * @return
      */
-  //  @LogAnnotation(module = "修改邮件")
+    @LogAnnotation(module = "修改邮件")
     @PreAuthorize("hasAuthority('mail:update')")
     @PutMapping
     public Email update(@RequestBody Email mail, Boolean send) {
@@ -63,7 +64,6 @@ public class MailController {
         if (Boolean.TRUE == send) {
             mailService.sendMail(mail);
         }
-
         return mail;
     }
 

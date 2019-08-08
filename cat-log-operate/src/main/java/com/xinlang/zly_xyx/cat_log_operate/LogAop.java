@@ -30,10 +30,7 @@ public class LogAop {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
-    /**
-     * 环绕带注解 @LogAnnotation的方法做aop
-     */
-    @Around(value = "@annotation(com.cloud.model.log.LogAnnotation)")
+    @Around(value = "@annotation(com.xinlang.zly_xyx.log.LogAnnotation)")
     public Object logSave(ProceedingJoinPoint joinPoint) throws Throwable {
         Log log = new Log();
         log.setCreateTime(new Date());

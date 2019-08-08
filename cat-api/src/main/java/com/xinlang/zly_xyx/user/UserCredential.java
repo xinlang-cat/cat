@@ -16,8 +16,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UserCredential implements Serializable {
 
-	private static final long serialVersionUID = -958701617717204974L;
 
+	private static final long serialVersionUID = 6913908773164767286L;
 	private String username;
 	/**
 	 * @see com.xinlang.zly_xyx.user.constants.CredentialType

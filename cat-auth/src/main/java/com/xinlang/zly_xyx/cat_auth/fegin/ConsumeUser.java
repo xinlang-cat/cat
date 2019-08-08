@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient("cat-user")
 public interface ConsumeUser {
 
-    @GetMapping(value = "/cat-user/internal",params = "username")
+    @GetMapping(value = "/users-anon/internal",params = "username")
     LoginAppUser findByUsername(@RequestParam("username")String username);
 
     @GetMapping("/wechat/login-check")

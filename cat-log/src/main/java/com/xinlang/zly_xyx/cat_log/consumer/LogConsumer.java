@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * 从mq队列消费日志数据
- *
  */
 @Component
 @RabbitListener(queues = LogQueue.LOG_QUEUE) // 监听队列

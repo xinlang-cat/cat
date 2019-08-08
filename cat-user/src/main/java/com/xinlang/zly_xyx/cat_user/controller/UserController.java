@@ -4,6 +4,7 @@ import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_user.feign.ConsumeInform;
 import com.xinlang.zly_xyx.cat_user.service.IAppUserService;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.AppUser;
 import com.xinlang.zly_xyx.user.LoginAppUser;
 import com.xinlang.zly_xyx.user.SysRole;
@@ -112,7 +113,7 @@ public class UserController {
      * @param id          用户id
      * @param newPassword 新密码
      */
-
+    @LogAnnotation(module = "重置密码")
     @PreAuthorize("hasAuthority('back:user:password')")
     @PutMapping(value = "/users/{id}/password", params = {"newPassword"})
     public void resetPassword(@PathVariable Long id, String newPassword) {
@@ -124,7 +125,7 @@ public class UserController {
      *
      * @param appUser
      */
-
+    @LogAnnotation(module = "修改用户")
     @PreAuthorize("hasAuthority('back:user:update')")
     @PutMapping("/users")
     public void updateAppUser(@RequestBody AppUser appUser) {
@@ -137,7 +138,7 @@ public class UserController {
      * @param id      用户id
      * @param roleIds 角色ids
      */
-
+    @LogAnnotation(module = "分配角色")
     @PreAuthorize("hasAuthority('back:user:role:set')")
     @PostMapping("/users/{id}/roles")
     public void setRoleToUser(@PathVariable Long id, @RequestBody Set<Long> roleIds) {

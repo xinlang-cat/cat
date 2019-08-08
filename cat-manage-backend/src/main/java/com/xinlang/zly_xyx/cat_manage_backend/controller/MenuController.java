@@ -4,6 +4,7 @@ package com.xinlang.zly_xyx.cat_manage_backend.controller;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_manage_backend.model.Menu;
 import com.xinlang.zly_xyx.cat_manage_backend.service.MenuService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.LoginAppUser;
 import com.xinlang.zly_xyx.user.SysRole;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +68,7 @@ public class MenuController {
 	 * @param roleId  角色id
 	 * @param menuIds 菜单ids
 	 */
-//	@LogAnnotation(module = "分配菜单")
+	@LogAnnotation(module = "分配菜单")
 	@PreAuthorize("hasAuthority('back:menu:set2role')")
 	@PostMapping("/toRole")
 	public void setMenuToRole(Long roleId, @RequestBody Set<Long> menuIds) {
@@ -121,7 +122,7 @@ public class MenuController {
 	 * 
 	 * @param menu
 	 */
-	//@LogAnnotation(module = "添加菜单")
+	@LogAnnotation(module = "添加菜单")
 	@PreAuthorize("hasAuthority('back:menu:save')")
 	@PostMapping
 	public Menu save(@RequestBody Menu menu) {
@@ -135,7 +136,7 @@ public class MenuController {
 	 * 
 	 * @param menu
 	 */
-	//@LogAnnotation(module = "修改菜单")
+	@LogAnnotation(module = "修改菜单")
 	@PreAuthorize("hasAuthority('back:menu:update')")
 	@PutMapping
 	public Menu update(@RequestBody Menu menu) {
@@ -149,7 +150,7 @@ public class MenuController {
 	 * 
 	 * @param id
 	 */
-//	@LogAnnotation(module = "删除菜单")
+	@LogAnnotation(module = "删除菜单")
 	@PreAuthorize("hasAuthority('back:menu:delete')")
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {

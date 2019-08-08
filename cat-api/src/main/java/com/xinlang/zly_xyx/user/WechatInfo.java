@@ -16,8 +16,8 @@ import java.io.Serializable;
 @ToString
 public class WechatInfo implements Serializable {
 
-    private static final long serialVersionUID = 3511834512371404079L;
 
+    private static final long serialVersionUID = -5833632736189955094L;
     private String appid;
     private String secret;
 }

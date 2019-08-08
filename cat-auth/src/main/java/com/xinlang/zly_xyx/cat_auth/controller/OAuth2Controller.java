@@ -23,8 +23,8 @@ public class OAuth2Controller {
 
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
-//    @Autowired
-//    private LogMqClient logMqClient;
+    @Autowired
+    private LogMqClient logMqClient;
 
     /**
      * 登录
@@ -56,7 +56,7 @@ public class OAuth2Controller {
      */
     private void saveLogOutLog(String username){
         log.info("{}退出");
-       // logMqClient.sendLogMsg("退出",username,null,null,true);
+        logMqClient.sendLogMsg("退出",username,null,null,true);
     }
 
 }

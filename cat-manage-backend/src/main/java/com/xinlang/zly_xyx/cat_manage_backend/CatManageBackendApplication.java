@@ -10,8 +10,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * 后台管理
  */
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@EnableEurekaClient
+@SpringBootApplication
+@EnableDiscoveryClient
 public class CatManageBackendApplication {
     public static void main(String[] args) {
         SpringApplication.run(CatManageBackendApplication.class,args);

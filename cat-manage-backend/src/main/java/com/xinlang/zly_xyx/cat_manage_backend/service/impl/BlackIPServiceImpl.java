@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public abstract class BlackIPServiceImpl implements BlackIPService {
+public class BlackIPServiceImpl implements BlackIPService {
 
 	@Autowired
 	private BlackIPDao blackIPDao;

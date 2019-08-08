@@ -11,8 +11,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * swagger文档
- *
- *
  */
 @Configuration
 @EnableSwagger2
@@ -20,9 +18,9 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket docket() {
-		return new Docket(DocumentationType.SWAGGER_2).groupName("日志中心swagger接口文档")
-				.apiInfo(new ApiInfoBuilder().title("日志中心swagger接口文档")
-						.contact(new Contact("小威老师", "", "xiaoweijiagou@163.com")).version("1.0").build())
+		return new Docket(DocumentationType.SWAGGER_2).groupName("日志中心XXXXXX接口文档")
+				.apiInfo(new ApiInfoBuilder().title("日志中心XXXXX接口文档")
+						.contact(new Contact("XXXX", "", "xxxxxxxxxx@163.com")).version("1.0").build())
 				.select().paths(PathSelectors.any()).build();
 	}
 }

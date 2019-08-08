@@ -3,6 +3,7 @@ package com.xinlang.zly_xyx.cat_auth.controller;
 import com.xinlang.zly_xyx.auth.SystemClientInfo;
 import com.xinlang.zly_xyx.cat_auth.service.impl.RedisClientDetailsService;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +35,7 @@ public class ClientController {
      * 添加
      * @param baseClientDetails
      */
+    @LogAnnotation(module = "保存client")
     @PreAuthorize("hasAuthority('client:save')")
     @PostMapping
     public void save(@RequestBody BaseClientDetails baseClientDetails){
@@ -50,6 +52,7 @@ public class ClientController {
      * 修改
      * @param baseClientDetails
      */
+    @LogAnnotation(module = "修改client")
     @PreAuthorize("hasAuthority('client:update')")
     @PutMapping
     public void update(@RequestBody BaseClientDetails baseClientDetails){
@@ -63,6 +66,7 @@ public class ClientController {
      * @param clientId
      * @param secret
      */
+    @LogAnnotation(module = "修改密码")
     @PreAuthorize("hasAuthority('client:update')")
     @PutMapping(value = "/{clientId}",params = {"secret"})
     public void updateSecret(@PathVariable String clientId,String secret){
@@ -100,8 +104,9 @@ public class ClientController {
      * 根据ID删除
      * @param clientId
      */
+    @LogAnnotation(module = "删除client")
     @PreAuthorize("hasAuthority('client:del')")
-    @DeleteMapping
+    @DeleteMapping("/{clientId}")
     public void delete(@PathVariable String clientId){
         getAndCheckClient(clientId,true);
         checkSystemClient(clientId);

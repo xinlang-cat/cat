@@ -13,8 +13,8 @@ import java.util.Date;
 @Data
 public class SysPermission implements Serializable {
 
-	private static final long serialVersionUID = 280565233032255804L;
 
+	private static final long serialVersionUID = 3728200727363637255L;
 	private Long id;
 	private String permission;
 	private String name;
