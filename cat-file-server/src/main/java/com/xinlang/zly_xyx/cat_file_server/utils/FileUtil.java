@@ -20,7 +20,7 @@ FileUtil {
         File file =  new File();
         file.setId(md5);
         file.setContentType(multipartFile.getContentType());
-        file.setName(multipartFile.getName());
+        file.setName(multipartFile.getOriginalFilename());
         file.setIsImg(multipartFile.getContentType().startsWith("image/"));
         file.setSize(multipartFile.getSize());
         file.setCreateTime(new Date());

@@ -18,10 +18,10 @@ import java.util.Map;
 @Repository(value = "fileMapper")
 public interface FileMapper {
 
-    @Select("select * from file t where t.id = #{id}")
+    @Select("select * from file_info t where t.id = #{id}")
     File getById(String id);
 
-    @Insert("insert into file(id, name, isImg, contentType, size, path, url, source, createTime) "
+    @Insert("insert into file_info(id, name, isImg, contentType, size, path, url, source, createTime) "
             + "values(#{id}, #{name}, #{isImg}, #{contentType}, #{size}, #{path}, #{url}, #{source}, #{createTime})")
     int save(File fileInfo);
 

@@ -45,8 +45,13 @@ public class FileController {
     @LogAnnotation(module = "文件上传", recordParam = false)
     @PostMapping
     public File upload(@RequestParam("file") MultipartFile multipartFile, String source) throws Exception{
-        IFileService fileService = fileServiceFactory.getFileService(source);
-        return fileService.upload(multipartFile);
+       try{
+           IFileService fileService = fileServiceFactory.getFileService(source);
+           return fileService.upload(multipartFile);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
+       return null;
     }
 
     /**
