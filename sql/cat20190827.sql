@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-08-08 10:46:43
+Date: 2019-08-27 09:08:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,8 +38,8 @@ CREATE TABLE `app_user` (
 -- ----------------------------
 -- Records of app_user
 -- ----------------------------
-INSERT INTO `app_user` VALUES ('1', 'admin', '$2a$10$3uOoX1ps14CxuotogUoDreW8zXJOZB9XeGdrC/xDV36hhaE8Rn9HO', '测试1', 'http://api.gateway.com:8080/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif', '', '1', '1', 'APP', '2018-01-17 16:57:01', '2019-07-30 10:50:48');
-INSERT INTO `app_user` VALUES ('2', 'superadmin', '$2a$10$.gLkG0j2kM0stWoOvPBvqu0H9uSD0HUlpErI.PTKyZQkSUZIV2wFq', '超级管理员', null, null, '1', '1', 'BACKEND', '2018-01-19 20:30:11', '2018-01-19 20:30:11');
+INSERT INTO `app_user` VALUES ('1', 'admin', '$2a$10$3uOoX1ps14CxuotogUoDreW8zXJOZB9XeGdrC/xDV36hhaE8Rn9HO', '测试1', 'http://api.gateway.com:8080/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif', '', '1', '1', 'APP', '2019-07-17 16:57:01', '2019-07-30 10:50:48');
+INSERT INTO `app_user` VALUES ('2', 'superadmin', '$2a$10$.gLkG0j2kM0stWoOvPBvqu0H9uSD0HUlpErI.PTKyZQkSUZIV2wFq', '超级管理员', null, null, '1', '1', 'BACKEND', '2019-07-19 20:30:11', '2019-07-19 20:30:11');
 
 -- ----------------------------
 -- Table structure for black_ip
@@ -76,7 +76,7 @@ CREATE TABLE `file_info` (
 -- ----------------------------
 -- Records of file_info
 -- ----------------------------
-INSERT INTO `file_info` VALUES ('6e16e2156e8f4c3f17ea43f7008890bd', '3.gif', '1', 'image/gif', '1995381', 'd:/localFile/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif', 'http://api.gateway.com:8080/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif', 'LOCAL', '2019-07-30 10:50:48');
+INSERT INTO `file_info` VALUES ('a93593a8e2e9712acb6e9d42fe0ca5e5', '77563674744981254.jpg', '1', 'image/jpeg', '735244', 'F:/localFile/2019/08/26/a93593a8e2e9712acb6e9d42fe0ca5e5.jpg', '${file.local.urlPrefix/2019/08/26/a93593a8e2e9712acb6e9d42fe0ca5e5.jpg', 'LOCAL', '2019-08-26 17:33:28');
 
 -- ----------------------------
 -- Table structure for menu
@@ -97,20 +97,20 @@ CREATE TABLE `menu` (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES ('1', '0', '系统设置', '', 'fa-gears', '1', '2018-01-23 10:20:30', '2018-01-23 10:20:31');
-INSERT INTO `menu` VALUES ('2', '1', '菜单', 'pages/menu/menuList.html', 'fa-windows', '2', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('3', '1', '角色', 'pages/role/roleList.html', 'fa-cubes', '3', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('4', '1', '权限', 'pages/permission/permissionList.html', 'fa-align-justify', '4', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('5', '0', '用户管理', '', 'fa-user', '4', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('6', '5', '用户查询', 'pages/user/userList.html', 'fa-user', '4', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('7', '0', '文件查询', 'pages/file/fileList.html', 'fa-folder-open', '5', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('8', '0', '邮件管理', 'pages/mail/mailList.html', 'fa-envelope', '6', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('10', '0', '监控中心', 'http://local.monitor.com:9001', 'fa-spinner', '8', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('11', '0', 'swagger文档', 'pages/swagger/api-doc.html', 'fa-file-pdf-o', '8', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('12', '0', '黑名单ip', 'pages/blackIP/blackIPList.html', 'fa-child', '9', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('13', '0', '日志查询', 'pages/log/logList.html', 'fa-reorder', '10', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('14', '0', '短信历史查询', 'pages/sms/smsList.html', 'fa-reorder', '11', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
-INSERT INTO `menu` VALUES ('15', '1', 'client管理', 'pages/client/clientList.html', 'fa-tachometer', '13', '2018-01-23 14:04:40', '2018-01-23 14:04:43');
+INSERT INTO `menu` VALUES ('1', '0', '系统设置', '', 'fa-gears', '1', '2019-07-19 10:20:30', '2019-07-19 10:20:31');
+INSERT INTO `menu` VALUES ('2', '1', '菜单', 'pages/menu/menuList.html', 'fa-windows', '2', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('3', '1', '角色', 'pages/role/roleList.html', 'fa-cubes', '3', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('4', '1', '权限', 'pages/permission/permissionList.html', 'fa-align-justify', '4', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('5', '0', '用户管理', '', 'fa-user', '4', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('6', '5', '用户查询', 'pages/user/userList.html', 'fa-user', '4', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('7', '0', '文件查询', 'pages/file/fileList.html', 'fa-folder-open', '5', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('8', '0', '邮件管理', 'pages/mail/mailList.html', 'fa-envelope', '6', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('10', '0', '监控中心', 'http://local.monitor.com:9001', 'fa-spinner', '8', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('11', '0', 'swagger文档', 'pages/swagger/api-doc.html', 'fa-file-pdf-o', '8', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('12', '0', '黑名单ip', 'pages/blackIP/blackIPList.html', 'fa-child', '9', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('13', '0', '日志查询', 'pages/log/logList.html', 'fa-reorder', '10', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('14', '0', '短信历史查询', 'pages/sms/smsList.html', 'fa-reorder', '11', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
+INSERT INTO `menu` VALUES ('15', '1', 'client管理', 'pages/client/clientList.html', 'fa-tachometer', '13', '2019-07-19 14:04:40', '2019-07-19 14:04:43');
 
 -- ----------------------------
 -- Table structure for oauth_client_details
@@ -195,41 +195,41 @@ CREATE TABLE `sys_permission` (
 -- ----------------------------
 -- Records of sys_permission
 -- ----------------------------
-INSERT INTO `sys_permission` VALUES ('1', 'back:permission:save', '保存权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('2', 'back:permission:update', '修改权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('3', 'back:permission:delete', '删除权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('4', 'back:permission:query', '查询权限标识', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('5', 'back:role:save', '添加角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('6', 'back:role:update', '修改角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('7', 'back:role:delete', '删除角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('8', 'back:role:permission:set', '给角色分配权限', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('9', 'back:user:query', '用户查询', '2018-01-18 17:12:00', '2018-01-18 17:12:05');
-INSERT INTO `sys_permission` VALUES ('10', 'back:user:update', '修改用户', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('11', 'back:user:role:set', '给用户分配角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('12', 'back:user:password', '用户重置密码', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('13', 'back:menu:save', '添加菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('14', 'back:menu:update', '修改菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('15', 'back:menu:delete', '删除菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('16', 'back:menu:query', '查询菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('17', 'back:menu:set2role', '给角色分配菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('18', 'back:role:query', '查询角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('19', 'user:role:byuid', '获取用户的角色', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('20', 'role:permission:byroleid', '获取角色的权限', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('21', 'menu:byroleid', '获取角色的菜单', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('22', 'ip:black:query', '查询黑名单ip', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('23', 'ip:black:save', '添加黑名单ip', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('24', 'ip:black:delete', '删除黑名单ip', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('25', 'log:query', '日志查询', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('26', 'file:query', '文件查询', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('27', 'file:del', '文件删除', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('28', 'mail:save', '保存邮件', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('29', 'mail:update', '修改邮件', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('30', 'mail:query', '邮件查询', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('31', 'sms:query', '短信发送记录查询', '2018-01-18 17:06:39', '2018-01-18 17:06:42');
-INSERT INTO `sys_permission` VALUES ('32', 'client:save', '保存client', '2018-06-28 17:06:39', '2018-06-28 17:06:39');
-INSERT INTO `sys_permission` VALUES ('33', 'client:update', '修改client', '2018-06-28 17:06:39', '2018-06-28 17:06:39');
-INSERT INTO `sys_permission` VALUES ('34', 'client:query', '查询client', '2018-06-28 17:06:39', '2018-06-28 17:06:39');
-INSERT INTO `sys_permission` VALUES ('35', 'client:del', '删除client', '2018-06-28 17:06:39', '2018-06-28 17:06:39');
+INSERT INTO `sys_permission` VALUES ('1', 'back:permission:save', '保存权限标识', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('2', 'back:permission:update', '修改权限标识', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('3', 'back:permission:delete', '删除权限标识', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('4', 'back:permission:query', '查询权限标识', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('5', 'back:role:save', '添加角色', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('6', 'back:role:update', '修改角色', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('7', 'back:role:delete', '删除角色', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('8', 'back:role:permission:set', '给角色分配权限', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('9', 'back:user:query', '用户查询', '2019-07-18 17:12:00', '2019-07-18 17:12:05');
+INSERT INTO `sys_permission` VALUES ('10', 'back:user:update', '修改用户', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('11', 'back:user:role:set', '给用户分配角色', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('12', 'back:user:password', '用户重置密码', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('13', 'back:menu:save', '添加菜单', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('14', 'back:menu:update', '修改菜单', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('15', 'back:menu:delete', '删除菜单', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('16', 'back:menu:query', '查询菜单', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('17', 'back:menu:set2role', '给角色分配菜单', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('18', 'back:role:query', '查询角色', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('19', 'user:role:byuid', '获取用户的角色', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('20', 'role:permission:byroleid', '获取角色的权限', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('21', 'menu:byroleid', '获取角色的菜单', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('22', 'ip:black:query', '查询黑名单ip', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('23', 'ip:black:save', '添加黑名单ip', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('24', 'ip:black:delete', '删除黑名单ip', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('25', 'log:query', '日志查询', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('26', 'file:query', '文件查询', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('27', 'file:del', '文件删除', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('28', 'mail:save', '保存邮件', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('29', 'mail:update', '修改邮件', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('30', 'mail:query', '邮件查询', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('31', 'sms:query', '短信发送记录查询', '2019-07-18 17:06:39', '2019-07-18 17:06:42');
+INSERT INTO `sys_permission` VALUES ('32', 'client:save', '保存client', '2019-07-28 17:06:39', '2019-07-28 17:06:39');
+INSERT INTO `sys_permission` VALUES ('33', 'client:update', '修改client', '2019-07-28 17:06:39', '2019-07-28 17:06:39');
+INSERT INTO `sys_permission` VALUES ('34', 'client:query', '查询client', '2019-07-28 17:06:39', '2019-07-28 17:06:39');
+INSERT INTO `sys_permission` VALUES ('35', 'client:del', '删除client', '2019-07-28 17:06:39', '2019-07-28 17:06:39');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -248,7 +248,7 @@ CREATE TABLE `sys_role` (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', 'SUPER_ADMIN', '超级管理员', '2018-01-19 20:32:16', '2018-01-19 20:32:18');
+INSERT INTO `sys_role` VALUES ('1', 'SUPER_ADMIN', '超级管理员', '2019-07-19 20:32:16', '2019-07-19 20:32:18');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -330,7 +330,7 @@ CREATE TABLE `t_log` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`),
   KEY `createTime` (`createTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COMMENT='日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='日志表';
 
 -- ----------------------------
 -- Records of t_log
@@ -348,6 +348,7 @@ INSERT INTO `t_log` VALUES ('10', 'admin', '登陆', null, '用户名密码登�
 INSERT INTO `t_log` VALUES ('11', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-08-08 10:29:57');
 INSERT INTO `t_log` VALUES ('12', 'admin', '退出', null, null, '1', '2019-08-08 10:35:34');
 INSERT INTO `t_log` VALUES ('13', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-08-08 10:35:41');
+INSERT INTO `t_log` VALUES ('14', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-08-26 14:37:03');
 
 -- ----------------------------
 -- Table structure for t_mail
@@ -367,11 +368,12 @@ CREATE TABLE `t_mail` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`),
   KEY `updateTime` (`updateTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='邮件发送记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='邮件发送记录表';
 
 -- ----------------------------
 -- Records of t_mail
 -- ----------------------------
+INSERT INTO `t_mail` VALUES ('1', '1', 'admin', '1112@qq.com', '测试', '<p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>', '0', null, '2019-08-26 15:03:42', '2019-08-26 15:03:42');
 
 -- ----------------------------
 -- Table structure for t_sms
