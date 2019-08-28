@@ -13,7 +13,7 @@ spring:
       maximum-pool-size: 20
       connection-test-query: SELECT 1
   rabbitmq:
-    host: local.rabbitmq.com
+    host: localhost
     port: 5672
     username: pig
     password: pig
