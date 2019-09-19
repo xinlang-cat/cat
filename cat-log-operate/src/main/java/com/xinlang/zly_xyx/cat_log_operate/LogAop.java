@@ -8,6 +8,7 @@ import com.xinlang.zly_xyx.log.constants.LogQueue;
 import com.xinlang.zly_xyx.user.LoginAppUser;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
  * aop实现日志
  * @author
  */
+@Aspect
 public class LogAop {
 
     private static final Logger logger = LoggerFactory.getLogger(LogAop.class);

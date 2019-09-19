@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>com.xinlang.zly-xyx</groupId>
-            <artifactId>cat-log</artifactId>
+            <artifactId>cat-log-operate</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

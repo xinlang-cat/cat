@@ -24,7 +24,7 @@ public class LocalFileService extends AbstractFileService{
     @Autowired
     private FileMapper fileMapper;
 
-    @Value("${file.local.urlPrefix")
+    @Value("${file.local.urlPrefix}")
     private String urlPrefix;
     /**
      * The upload file is stored in the local root path

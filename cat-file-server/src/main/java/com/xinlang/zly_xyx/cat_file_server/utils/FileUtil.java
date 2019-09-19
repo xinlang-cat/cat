@@ -37,7 +37,7 @@ FileUtil {
             if(file.exists()){
                 return path;
             }
-            if(! file.getParentFile().exists()){
+            if(!file.getParentFile().exists()){
                 file.getParentFile().mkdirs();
             }
             multipartFile.transferTo(file);

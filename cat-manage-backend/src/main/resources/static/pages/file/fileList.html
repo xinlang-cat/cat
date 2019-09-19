@@ -24,7 +24,7 @@
 											<input type="text" class="form-control" placeholder="开始时间" id="beginTime">
 											<input type="text" class="form-control" placeholder="结束时间" id="endTime">
 										</div>
-                                        <button id="searchBt" class="layui-btn layui-btn-sm" permission="fileInfo:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                        <button id="searchBt" class="layui-btn layui-btn-sm" permission="file:query"><i class="layui-icon">&#xe615;</i>搜索</button>
 									</form>
                                 </td>
                                 <td align="right">
@@ -178,7 +178,7 @@ layui.use(['layer','util', 'laydate'], function(){
                     	"orderable":false,
                     	"render": function (data, type, row) {
                     		var id = row['id'];
-                            var del = buttonDel(id, "fileInfo:del", pers);
+                            var del = buttonDel(id, "file:del", pers);
                             return del;
                       	}
                     },
@@ -215,7 +215,7 @@ layui.use('upload', function(){
 	
 	upload.render({
 	    elem: '#test1' //绑定元素
-	    ,accept: 'fileInfo' //允许上传的文件类型
+	    ,accept: 'file' //允许上传的文件类型
 	    ,url: domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val()
 	    ,done: function(res, index, upload){
 	    	layer.msg("上传成功");

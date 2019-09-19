@@ -28,6 +28,7 @@
         <module>cat-manage-backend</module>
         <module>cat-Inform</module>
         <module>cat-monitor-center</module>
+        <module>cat-project-system</module>
     </modules>
 
     <properties>

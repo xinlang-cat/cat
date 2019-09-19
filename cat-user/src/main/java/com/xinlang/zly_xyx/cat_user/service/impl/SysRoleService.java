@@ -50,6 +50,7 @@ public class SysRoleService implements ISysRoleService {
         }
         sysRole.setCreateTime(new Date());
         sysRole.setUpdateTime(sysRole.getCreateTime());
+        sysRoleMapper.save(sysRole);
         log.info("添加角色:{}",sysRole);
     }
 
