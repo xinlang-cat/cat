@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 import java.util.Set;
 
-@FeignClient("manage-backend")
+@FeignClient("cat-manage-backend")
 public interface BackendClient {
 
     @GetMapping("/backend-anon/internal/blackIPs")

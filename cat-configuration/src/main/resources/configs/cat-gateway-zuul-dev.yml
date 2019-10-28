@@ -34,6 +34,9 @@ zuul:
     sms:
       path: /api-n/**
       serviceId: cat-inform
+    compamy:
+      path: /api-c/**
+      serviceId: project-system-company
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
@@ -52,7 +55,7 @@ hystrix:
           thread:
             timeoutInMilliseconds: 60000
 cron:
-  black-ip: 0 0/5 * * * ?
+  black-ip: 0/5 * * * * ?
 
 info:
   company: 鑫朗通信技术有限公司

@@ -23,14 +23,11 @@ public class AppUserUtil {
                 if (principal instanceof LoginAppUser) {
                     return (LoginAppUser) principal;
                 }
-
                 Map map = (Map) authenticationToken.getDetails();
                 map = (Map) map.get("principal");
-
                 return JSONObject.parseObject(JSONObject.toJSONString(map), LoginAppUser.class);
             }
         }
-
         return null;
     }
-    }
+}

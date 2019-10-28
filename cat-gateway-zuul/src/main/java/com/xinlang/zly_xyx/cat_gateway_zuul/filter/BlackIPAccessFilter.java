@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.netflix.zuul.exception.ZuulException;
 import com.xinlang.zly_xyx.cat_gateway_zuul.feign.BackendClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,6 +22,7 @@ import com.netflix.zuul.context.RequestContext;
 /**
  * 黑名单拦截
  */
+@Component
 public class BlackIPAccessFilter extends ZuulFilter {
 
     private Set<String> blackIPs = new HashSet<>();
@@ -37,8 +39,12 @@ public class BlackIPAccessFilter extends ZuulFilter {
         return 0;
     }
 
+    @Value("${cron.black-ip}")
+    private String corn;
+
     @Override
     public boolean shouldFilter() {
+
         if (blackIPs.isEmpty()){
             return false;
         }
@@ -77,8 +83,21 @@ public class BlackIPAccessFilter extends ZuulFilter {
     public Object run() {
         RequestContext requestContext = RequestContext.getCurrentContext();
         requestContext.setResponseStatusCode(HttpStatus.FORBIDDEN.value());
-        requestContext.setResponseBody("black ip");
+        requestContext.setResponseBody("this is b1ack ip");
         requestContext.setSendZuulResponse(false);
         return null;
+    }
+
+
+    /**
+     *  定时同步黑名单
+     */
+    @Scheduled(cron = "${cron.black-ip}")
+    public void syncBlackIPList(){
+        try{
+            Set<String> list = backendClient.findAllBlackIPs(Collections.emptyMap());
+            blackIPs = list;
+        }catch (Exception e){
+        }
     }
 }
