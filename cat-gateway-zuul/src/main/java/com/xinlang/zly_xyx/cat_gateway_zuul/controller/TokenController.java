@@ -53,7 +53,7 @@ public class TokenController {
         parameters.put("username", username + "|" + CredentialType.USERNAME.name());
         parameters.put("password", password);
 
-        Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+        Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);;
         saveLoginLog(username, "用户名密码登陆");
 
         return tokenInfo;

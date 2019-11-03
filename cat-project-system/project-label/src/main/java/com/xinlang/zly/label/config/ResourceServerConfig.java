@@ -1,4 +1,4 @@
-package com.xinlang.zly_xyx.cat_file_server.config;
+package com.xinlang.zly.label.config;
 
 import com.xinlang.zly_xyx.cat_common.constant.PermitAllUrl;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
-import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -21,18 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    /**
-     * prefix
-     */
-    @Value("${file.local.prefix}")
-    private String localFilePrefix;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling()
                 .authenticationEntryPoint((request,response,authException)->response.sendError(HttpServletResponse.SC_ACCEPTED))
                 .and().authorizeRequests()
-                .antMatchers(PermitAllUrl.permitAllUrl("/flies-anon/**",localFilePrefix+"/**")).permitAll()
+                .antMatchers(PermitAllUrl.permitAllUrl("/label-anon/**")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 }

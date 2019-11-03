@@ -98,7 +98,6 @@ public class MenuController {
 		all.forEach(menu -> {
 			if (parentId.equals(menu.getParentId())) {
 				list.add(menu);
-
 				List<Menu> child = new ArrayList<>();
 				menu.setChild(child);
 				setMenuTree(menu.getId(), all, child);

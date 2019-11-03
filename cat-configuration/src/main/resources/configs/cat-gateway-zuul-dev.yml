@@ -36,7 +36,10 @@ zuul:
       serviceId: cat-inform
     compamy:
       path: /api-c/**
-      serviceId: project-system-company
+      serviceId: project-company
+    label:
+      path: /api-label/**
+      serviceId: project-label
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
