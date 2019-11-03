@@ -10,6 +10,9 @@ import java.util.List;
  */
 public interface ICompanyService {
 
-    int save(Company company);
-    List<Company> getAll();
+    void save(Company company);
+    void update(Company company);
+    void delete(String DeptCode);
+    Company findByDeptCode(String DeptCode);
+    List<Company> findAll();
 }
