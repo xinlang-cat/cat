@@ -29,6 +29,7 @@
         <module>cat-Inform</module>
         <module>cat-monitor-center</module>
         <module>cat-project-system</module>
+        <module>cat-map-server</module>
     </modules>
 
     <properties>
@@ -48,6 +49,7 @@
         <elasticsearch.version>6.2.3</elasticsearch.version>
         <security-oauth2>2.3.3.RELEASE</security-oauth2>
         <docker-img-prefix>springboot</docker-img-prefix>
+        <tk.mybatis>2.0.3</tk.mybatis>
     </properties>
 
     <dependencies>
