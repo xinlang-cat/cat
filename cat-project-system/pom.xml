@@ -12,9 +12,8 @@
     <artifactId>cat-project-system</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>project-system</module>
         <module>project-company</module>
-        <module>project-system-company</module>
+        <module>project-label</module>
     </modules>
 
 
