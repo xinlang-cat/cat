@@ -26,6 +26,11 @@ public class Label implements Serializable {
     private Integer enabled;//0不启用，1启用，默认启用
     @Transient
     private List<Label> child;//子集
+    private String unit;//计量单位
+    /**
+     * 保留字段，暂时不用
+     */
+    private Integer type;//0：标签，1：字典，2：计量单位
     private Date createTime;
     private Date updateTime;
 }
