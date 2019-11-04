@@ -58,7 +58,7 @@ public class ProvinceController {
 
 
     /**
-     * 根据代码获取省份
+     * 根据下级代码获取省份
      * @param childCode
      * @param
      * @return
