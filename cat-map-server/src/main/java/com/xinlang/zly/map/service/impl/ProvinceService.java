@@ -25,6 +25,7 @@ public class ProvinceService  implements IProvinceService {
 	public Province findByProvinceCode(String provinceCode) {
 		Example example = new Example(Province.class);
 		example.createCriteria().andEqualTo("provinceCode",provinceCode);
-		return provinceMapper.selectByExample(example).get(0);
+		List<Province> list =  provinceMapper.selectByExample(example);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }

@@ -26,6 +26,7 @@ public class CityService implements ICityService {
 	public City findByCityCode(String cityCode) {
 		Example example = new Example(City.class);
 		example.createCriteria().andEqualTo("cityCode",cityCode);
-		return cityMapper.selectByExample(example).get(0);
+		List<City> list = cityMapper.selectByExample(example);
+		return list.isEmpty() ? null :list.get(0);
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,6 +28,7 @@ public class StreetService implements IStreetService {
 	public Street findByStreetCode(String streetCode) {
 		Example example = new Example(Street.class);
 		example.createCriteria().andEqualTo("streetCode",streetCode);
-		return streetMapper.selectByExample(example).get(0);
+		List<Street>  list = streetMapper.selectByExample(example);
+		return  list.isEmpty() ? null : list.get(0);
 	}
 }

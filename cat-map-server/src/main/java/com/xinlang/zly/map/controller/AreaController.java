@@ -31,6 +31,7 @@ public class AreaController {
     /***
      * 根据城市代码获取区县
      * @param cityCode
+     *
      * @return
      */
     @GetMapping("/all/{cityCode}")

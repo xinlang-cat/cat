@@ -51,7 +51,7 @@ public class ProvinceController {
      * 根据代码获取省份
      * @return
      */
-    @GetMapping("/one/${provinceCode}")
+    @GetMapping("/one/{provinceCode}")
     public Province findByProvinceCode(@PathVariable String provinceCode){
         return provinceService.findByProvinceCode(provinceCode);
     }
@@ -63,7 +63,7 @@ public class ProvinceController {
      * @param
      * @return
      */
-    @GetMapping("/tree/${childCode}")
+    @GetMapping("/tree/{childCode}")
     public Map<String,Object> findProvinceByChildCode(@PathVariable String childCode){
         Map<String,Object> map = new HashMap<>();
         Street street = streetService.findByStreetCode(childCode);

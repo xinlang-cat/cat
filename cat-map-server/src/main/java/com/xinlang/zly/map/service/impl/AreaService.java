@@ -25,6 +25,7 @@ public class AreaService implements IAreaService {
 	public Area findByAreaCode(String areaCode) {
 		Example example = new Example(Area.class);
 		example.createCriteria().andEqualTo("areaCode",areaCode);
-		return areaMapper.selectByExample(example).get(0);
+		List<Area> list = areaMapper.selectByExample(example);
+		return list.isEmpty() ? null : list.get(0);
 	}
 }
