@@ -23,6 +23,11 @@ public class CompanyUserService implements ICompanyUserService {
 
     @Override
     public void save(CompanyUser companyUser) {
+        Example example = new Example(CompanyUser.class);
+        example.createCriteria().andEqualTo("userId",companyUser.getUserId()).andEqualTo("deptCode",companyUser.getDeptCode());
+        if(companyUserMapper.selectByExample(example) == null){
+            throw new IllegalArgumentException("该用户已绑定其他组织!");
+        }
        companyUserMapper.insert(companyUser);
     }
 
