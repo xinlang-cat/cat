@@ -50,6 +50,9 @@
         <security-oauth2>2.3.3.RELEASE</security-oauth2>
         <docker-img-prefix>springboot</docker-img-prefix>
         <tk.mybatis>2.0.3</tk.mybatis>
+
+        <mapper.starter.version>2.0.2</mapper.starter.version>
+        <pageHelper.starter.version>1.2.3</pageHelper.starter.version>
     </properties>
 
     <dependencies>

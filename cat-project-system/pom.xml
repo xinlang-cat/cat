@@ -15,6 +15,7 @@
         <module>project-company</module>
         <module>project-label</module>
         <module>project-user</module>
+        <module>project-item</module>
     </modules>
 
 
