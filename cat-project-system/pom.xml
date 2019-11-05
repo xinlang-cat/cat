@@ -14,7 +14,7 @@
     <modules>
         <module>project-company</module>
         <module>project-label</module>
-        <module>project-expert</module>
+        <module>project-user</module>
     </modules>
 
 

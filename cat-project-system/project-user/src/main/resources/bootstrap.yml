@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8001
 
 eureka:
   instance:
@@ -14,7 +14,7 @@ eureka:
 
 spring:
   application:
-    name: project-expert
+    name: project-user
   profiles:
     active: dev
   cloud:
