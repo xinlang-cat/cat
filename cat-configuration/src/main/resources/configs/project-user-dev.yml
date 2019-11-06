@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/map_server?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/cat?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: 123456
     hikari:
@@ -36,7 +36,7 @@ spring:
     sender:
       type: web
 mybatis:
-  type-aliases-package: com.xinlang.zly.map.bean
+  type-aliases-package: com.xinlang.zly.project_user.bean
   mapper-locations: classpath:/mapper-mybatis/*
   configuration:
     mapUnderscoreToCamelCase: true
@@ -61,10 +61,6 @@ logging:
   level:
     root: info
   file: logs/${spring.application.name}.log
-
-baidu:
-  map:
-    ak: 1RCUrYA1VEnxozLjRGIL84uBBZT48GtS
 
 info:
   company: 鑫朗通信技术有限公司

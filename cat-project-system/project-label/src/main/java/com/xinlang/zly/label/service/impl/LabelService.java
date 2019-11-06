@@ -25,17 +25,27 @@ public class LabelService implements ILabelService {
 
     @Override
     public void save(Label label){
+        findDuplicate(label);
+        labelMapper.insert(label);
+    }
+
+    /**
+     * 查重
+     * @param label
+     */
+    private void findDuplicate(Label label){
         Example example = new Example(Label.class);
         example.createCriteria().andEqualTo("sign",label.getSign());
         List<Label> list = labelMapper.selectByExample(example);
-        if(list.size()>0){
+        if(!list.isEmpty()){
             throw new IllegalArgumentException();
         }
-        labelMapper.insert(label);
     }
 
     @Override
     public void update(Label label) {
+        //不允许客户端修改标识
+        label.setSign(null);
         Example example = new Example(Label.class);
         example.createCriteria().andEqualTo("id",label.getId());
         labelMapper.updateByExampleSelective(label,example);

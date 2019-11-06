@@ -1,6 +1,6 @@
-package com.xinlang.zly.expert.service;
+package com.xinlang.zly.project_user.service;
 
-import com.xinlang.zly.expert.bean.ProjectUserClassify;
+import com.xinlang.zly.project_user.bean.ProjectUserClassify;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ public interface IProjectUserClassifyService {
     void save(ProjectUserClassify projectUserClassify);
     void update(ProjectUserClassify projectUserClassify);
     List<ProjectUserClassify> findAllGroup();
+    List<ProjectUserClassify> findGroupByTechnicalExpertise(String technicalExpertise);
+    List<ProjectUserClassify> findByUserId(Integer userId);
     ProjectUserClassify findById(Integer id);
     void deleteById(Integer id);
 }

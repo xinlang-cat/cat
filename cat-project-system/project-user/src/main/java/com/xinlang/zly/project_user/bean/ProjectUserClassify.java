@@ -1,4 +1,4 @@
-package com.xinlang.zly.expert.bean;
+package com.xinlang.zly.project_user.bean;
 
 import lombok.Data;
 
@@ -20,6 +20,7 @@ public class ProjectUserClassify implements Serializable {
     private Integer id;
     private String classifyName;//组名
     private String technicalExpertise;//服务的产业或领域
+    private Integer userId;//系统用户表id
     private String idCard;//身份证
     private Integer pid;//组id
     @Transient

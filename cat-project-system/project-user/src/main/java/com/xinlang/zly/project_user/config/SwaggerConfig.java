@@ -1,4 +1,4 @@
-package com.xinlang.zly.expert.config;
+package com.xinlang.zly.project_user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,8 @@ public class SwaggerConfig {
 
     @Bean
     public Docket docket(){
-        return new Docket(DocumentationType.SWAGGER_2).groupName("expert swagger interface document")
-                .apiInfo(new ApiInfoBuilder().title("expert swagger interface document")
+        return new Docket(DocumentationType.SWAGGER_2).groupName("project_user swagger interface document")
+                .apiInfo(new ApiInfoBuilder().title("project_user swagger interface document")
                         .contact(new Contact("zhanglongyi","","18777811286@163.com")).version("1.0")
                 .build()).select().paths(PathSelectors.any()).build();
     }

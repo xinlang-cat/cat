@@ -1,8 +1,10 @@
-package com.xinlang.zly.expert.service.impl;
+package com.xinlang.zly.project_user.service.impl;
 
-import com.xinlang.zly.expert.bean.ProjectUser;
-import com.xinlang.zly.expert.mapper.ProjectUserMapper;
-import com.xinlang.zly.expert.service.IProjectUserService;
+import com.xinlang.zly.project_user.bean.ProjectUser;
+import com.xinlang.zly.project_user.bean.ProjectUserClassify;
+import com.xinlang.zly.project_user.mapper.ProjectUserClassifyMapper;
+import com.xinlang.zly.project_user.mapper.ProjectUserMapper;
+import com.xinlang.zly.project_user.service.IProjectUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,8 @@ public class ProjectUserService implements IProjectUserService {
 
     @Autowired
     private ProjectUserMapper projectUserMapper;
+    @Autowired
+    private ProjectUserClassifyMapper projectUserClassifyMapper;
 
     @Override
     public void save(ProjectUser projectUser) {
@@ -61,5 +65,9 @@ public class ProjectUserService implements IProjectUserService {
         Example example = new Example(ProjectUser.class);
         example.createCriteria().andEqualTo("userId",userId);
         projectUserMapper.deleteByExample(example);
+        //删除专家用户分组信息
+        Example example1 = new Example(ProjectUserClassify.class);
+        example1.createCriteria().andEqualTo("userId",userId);
+        projectUserClassifyMapper.deleteByExample(example1);
     }
 }

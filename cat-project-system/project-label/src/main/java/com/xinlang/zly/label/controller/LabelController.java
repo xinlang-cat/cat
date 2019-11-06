@@ -102,6 +102,13 @@ public class LabelController {
         setLabelTree(all,list);
         return  list;
     }
+
+
+    @LogAnnotation(module = "获取所有标签")
+    @GetMapping("/all")
+    public List<Label> findAll() {
+        return  labelService.findAll();
+    }
     /**
      * 所有标签树
      *

@@ -3,11 +3,13 @@ package com.xinlang.zly.map.bean;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 @Data
 @Table(name = "bs_street")
-public class Street {
+public class Street implements Serializable {
+    private static final long serialVersionUID = 6564721458565463490L;
     /**
      * 自增列
      */
