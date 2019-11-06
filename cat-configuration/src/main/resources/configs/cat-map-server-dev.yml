@@ -62,6 +62,10 @@ logging:
     root: info
   file: logs/${spring.application.name}.log
 
+baidu:
+  map:
+    ak: 1RCUrYA1VEnxozLjRGIL84uBBZT48GtS
+
 info:
   company: 鑫朗通信技术有限公司
   phone: 18777811286
