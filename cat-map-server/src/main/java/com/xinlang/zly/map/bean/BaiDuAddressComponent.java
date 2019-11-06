@@ -2,9 +2,12 @@ package com.xinlang.zly.map.bean;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class BaiDuAddressComponent {
-	
+public class BaiDuAddressComponent implements Serializable {
+
+	private static final long serialVersionUID = -511658382118719818L;
 	private String country;
 	private Integer country_code;
 	private String country_code_iso;

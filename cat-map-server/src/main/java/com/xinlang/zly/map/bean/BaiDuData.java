@@ -3,9 +3,12 @@ package com.xinlang.zly.map.bean;
 
 import lombok.Data;
 
-@Data
-public class BaiDuData {
+import java.io.Serializable;
 
+@Data
+public class BaiDuData implements Serializable {
+
+	private static final long serialVersionUID = 5220799671604233344L;
 	private BaiDuLocation location;
 	private String formatted_address;
 	private String business;
