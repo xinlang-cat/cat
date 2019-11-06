@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xinlang.cat_project.item.enums.ExceptionEnum;
 import com.xinlang.cat_project.item.exception.ItemException;
+import com.xinlang.cat_project.item.fegin.ConsumeUser;
 import com.xinlang.cat_project.item.mapper.ItemBasicMapper;
 import com.xinlang.cat_project.item.pojo.ItemBasic;
 import com.xinlang.cat_project.item.pojo.PageResult;
@@ -32,6 +33,9 @@ public class ItemBasicService implements IItemBasicService {
 
     @Autowired
     private ItemBasicMapper itemBasicMapper;
+
+    @Autowired
+    private ConsumeUser consumeUser;
 
     @Override
     public PageResult<ItemBasic> queryList(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params) throws ItemException{
@@ -72,7 +76,8 @@ public class ItemBasicService implements IItemBasicService {
     public void saveItem(ItemBasic basic) {
 
         //获取当前用户
-        LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
+        LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
+        //LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
         //SET 创建人id、创建时间、状态
         basic.setEdit_userid(loginAppUser.getId().intValue());
         basic.setEdit_date(new Date());
