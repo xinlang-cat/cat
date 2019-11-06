@@ -40,6 +40,9 @@ zuul:
     label:
       path: /api-label/**
       serviceId: project-label
+    item:
+      path: /project-item/**
+      serviceId: cat-project-item
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
