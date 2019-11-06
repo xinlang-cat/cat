@@ -43,6 +43,9 @@ zuul:
     item:
       path: /project-item/**
       serviceId: cat-project-item
+    projectUser:
+      path: /project-user/**
+      serviceId: project-user
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000

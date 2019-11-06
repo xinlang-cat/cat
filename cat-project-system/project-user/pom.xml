@@ -100,6 +100,12 @@
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>${tk.mybatis}</version>
         </dependency>
+        <!--通用实体-->
+        <dependency>
+            <groupId>com.xinlang.zly-xyx</groupId>
+            <artifactId>project-common-entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

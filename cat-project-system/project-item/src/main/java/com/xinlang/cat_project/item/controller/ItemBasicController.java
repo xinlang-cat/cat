@@ -32,7 +32,7 @@ public class ItemBasicController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<PageResult<ItemBasic>> gteItemAll(@RequestParam(value = "start", defaultValue = "1") Integer page,
+    public ResponseEntity<PageResult<ItemBasic>> getItemAll(@RequestParam(value = "start", defaultValue = "1") Integer page,
                                                             @RequestParam(value = "length", defaultValue = "10") Integer rows,
                                                             @RequestParam(value = "sortBy", required = false) String sortBy,
                                                             @RequestParam(value = "desc", defaultValue = "false") Boolean desc,

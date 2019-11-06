@@ -28,7 +28,7 @@ public class ItemBudgetController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ItemBudget> gatBudgetById(@PathVariable Integer id){
+    public ResponseEntity<ItemBudget> getBudgetById(@PathVariable Integer id){
 
         ItemBudget itemBudget = itemBudgetService.queryBudgetById(id);
         return ResponseEntity.ok(itemBudget);
@@ -40,7 +40,7 @@ public class ItemBudgetController {
      * @return
      */
     @GetMapping("/all/{Fid}")
-    public ResponseEntity<List<ItemBudget>> gatBudgetByFid(@PathVariable Integer Fid){
+    public ResponseEntity<List<ItemBudget>> getBudgetByFid(@PathVariable Integer Fid){
 
         List<ItemBudget> itemBudgets = itemBudgetService.queryBudgetByFid(Fid);
         return ResponseEntity.ok(itemBudgets);

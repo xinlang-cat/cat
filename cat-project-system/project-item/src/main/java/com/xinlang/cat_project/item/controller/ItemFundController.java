@@ -29,7 +29,7 @@ public class ItemFundController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ItemFund> gatqueryFundById(@PathVariable Integer id){
+    public ResponseEntity<ItemFund> getFundById(@PathVariable Integer id){
 
         ItemFund itemFund = itemFundService.queryFundById(id);
         return ResponseEntity.ok(itemFund);
@@ -41,7 +41,7 @@ public class ItemFundController {
      * @return
      */
     @GetMapping("/all/{Iid}")
-    public ResponseEntity<List<ItemFund>> gatqueryFundByIId(@PathVariable Integer Iid){
+    public ResponseEntity<List<ItemFund>> getFundByIId(@PathVariable Integer Iid){
 
         List<ItemFund> itemFund = itemFundService.queryFundByIId(Iid);
         return ResponseEntity.ok(itemFund);

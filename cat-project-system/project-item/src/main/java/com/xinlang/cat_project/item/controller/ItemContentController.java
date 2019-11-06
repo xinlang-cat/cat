@@ -37,7 +37,7 @@ public class ItemContentController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ItemContent> gatPlanById(@PathVariable Integer id){
+    public ResponseEntity<ItemContent> getPlanById(@PathVariable Integer id){
 
         ItemContent itemContent = planService.queryPlanById(id);
         return ResponseEntity.ok(itemContent);
@@ -49,7 +49,7 @@ public class ItemContentController {
      * @return
      */
     @GetMapping("/all/{Tid}")
-    public ResponseEntity<List<ItemContent>> gatPlanByTid(@PathVariable Integer Tid){
+    public ResponseEntity<List<ItemContent>> getPlanByTid(@PathVariable Integer Tid){
 
         List<ItemContent> itemContent = planService.queryPlanByTId(Tid);
         return ResponseEntity.ok(itemContent);

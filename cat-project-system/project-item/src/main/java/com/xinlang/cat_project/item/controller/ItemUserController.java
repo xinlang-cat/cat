@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 项目组人员
  */
@@ -31,26 +34,26 @@ public class ItemUserController {
     }
 
     /**
-     * 获取单条项目成员数据（搁置）
+     * 获取单条项目成员数据
      * @param id
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ItemUserInfo> getItemUserInfoById(@PathVariable Integer id){
+    public ResponseEntity<Map<String,Object>> getItemUserInfoById(@PathVariable Integer id){
 
-        ItemUserInfo itemUserInfo = itemUserService.queryItemUserInfoById(id);
+        Map<String,Object> itemUserInfo = itemUserService.queryItemUserInfoById(id);
         return ResponseEntity.ok(itemUserInfo);
     }
 
     /**
-     * 获取当前项目的所有成员数据（搁置）
+     * 获取当前项目的所有成员数据
      * @param Iid 项目id
      * @return
      */
-    @GetMapping("/{Iid}")
-    public ResponseEntity<ItemUserInfo> getItemUserInfoAllByIId(@PathVariable Integer Iid){
+    @GetMapping("all/{Iid}")
+    public ResponseEntity<List<Map<String,Object>>> getItemUserInfoAllByIId(@PathVariable Integer Iid){
 
-        ItemUserInfo itemUserInfo = itemUserService.queryItemUserInfoById(Iid);
+        List<Map<String,Object>> itemUserInfo = itemUserService.queryItemUserInfoAllByIid(Iid);
         return ResponseEntity.ok(itemUserInfo);
     }
 

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 /**
  * 项目人员详情
  */
@@ -18,7 +20,7 @@ public class ItemUserInfo {
     public ItemUser itemUser;
     public String name;
     public String gender;
-    public Integer age;
+    public Date birth_date;
     public String identityCard;
     public String jobTitle;
     public String professional;

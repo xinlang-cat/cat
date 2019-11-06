@@ -130,11 +130,13 @@ public class ItemTargetService implements IItemTargetService {
     }
 
     @Override
+    @Transactional
     public void deleteTarget(Integer id) {
         int i = itemTargetMapper.deleteByPrimaryKey(id);
         if(i != 1){
             throw new ItemException(ExceptionEnum.TARGET_UPDATE_ERROR);
         }
+        itemTargetMapper.updateItemUser2(id);
     }
 
 }

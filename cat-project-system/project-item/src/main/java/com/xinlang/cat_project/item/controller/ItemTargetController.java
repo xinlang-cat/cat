@@ -38,7 +38,7 @@ public class ItemTargetController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<ItemTarget> gatTargetById(@PathVariable Integer id){
+    public ResponseEntity<ItemTarget> getTargetById(@PathVariable Integer id){
 
         ItemTarget target = targetService.queryTargetById(id);
         return ResponseEntity.ok(target);
@@ -50,7 +50,7 @@ public class ItemTargetController {
      * @return
      */
     @GetMapping("/info/{id}")
-    public ResponseEntity<TargetInfo> gatTargetInfoById(@PathVariable Integer id){
+    public ResponseEntity<TargetInfo> getTargetInfoById(@PathVariable Integer id){
 
         TargetInfo targetInfo = targetService.queryTargetInfoById(id);
         return ResponseEntity.ok(targetInfo);
@@ -62,7 +62,7 @@ public class ItemTargetController {
      * @return
      */
     @GetMapping("/all/{Cid}")
-    public ResponseEntity<List<ItemTarget>> gatTargetByCid(@PathVariable Integer Cid){
+    public ResponseEntity<List<ItemTarget>> getTargetByCid(@PathVariable Integer Cid){
 
         List<ItemTarget> target = targetService.queryTargetByCId(Cid);
         return ResponseEntity.ok(target);
@@ -74,7 +74,7 @@ public class ItemTargetController {
      * @return
      */
     @GetMapping("/info/all/{Tid}")
-    public ResponseEntity<List<TargetInfoAll>> gatTargetInfoAllByCid(@PathVariable Integer Tid){
+    public ResponseEntity<List<TargetInfoAll>> getTargetInfoAllByCid(@PathVariable Integer Tid){
 
         List<TargetInfoAll> targetInfoAll = targetService.queryTargetInfoAllByCId(Tid);
         return ResponseEntity.ok(targetInfoAll);

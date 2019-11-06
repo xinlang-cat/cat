@@ -16,7 +16,17 @@
         <module>project-label</module>
         <module>project-user</module>
         <module>project-item</module>
+        <module>project-common-entity</module>
     </modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper.starter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
