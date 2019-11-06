@@ -1,10 +1,10 @@
-package com.xinlang.zly.expert.service.impl;
+package com.xinlang.zly.project_user.service.impl;
 
-import com.xinlang.zly.expert.bean.ProjectUser;
-import com.xinlang.zly.expert.bean.ProjectUserClassify;
-import com.xinlang.zly.expert.mapper.ProjectUserClassifyMapper;
-import com.xinlang.zly.expert.mapper.ProjectUserMapper;
-import com.xinlang.zly.expert.service.IProjectUserClassifyService;
+import com.xinlang.zly.project_user.bean.ProjectUser;
+import com.xinlang.zly.project_user.bean.ProjectUserClassify;
+import com.xinlang.zly.project_user.mapper.ProjectUserClassifyMapper;
+import com.xinlang.zly.project_user.mapper.ProjectUserMapper;
+import com.xinlang.zly.project_user.service.IProjectUserClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +43,20 @@ public class ProjectUserClassifyService implements IProjectUserClassifyService {
     public List<ProjectUserClassify> findAllGroup() {
         Example example = new Example(ProjectUserClassify.class);
         example.createCriteria().andEqualTo("pid",0);
+        return projectUserClassifyMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ProjectUserClassify> findGroupByTechnicalExpertise(String technicalExpertise) {
+        Example example = new Example(ProjectUserClassify.class);
+        example.createCriteria().andEqualTo("technicalExpertise",technicalExpertise).andEqualTo("pid",0);
+        return projectUserClassifyMapper.selectByExample(example);
+    }
+
+    @Override
+    public List<ProjectUserClassify> findByUserId(Integer userId) {
+        Example example = new Example(ProjectUserClassify.class);
+        example.createCriteria().andEqualTo("userId",userId);
         return projectUserClassifyMapper.selectByExample(example);
     }
 

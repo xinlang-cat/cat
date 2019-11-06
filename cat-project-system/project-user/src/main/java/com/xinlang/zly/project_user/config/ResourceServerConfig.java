@@ -1,4 +1,4 @@
-package com.xinlang.zly.expert.config;
+package com.xinlang.zly.project_user.config;
 
 import com.xinlang.zly_xyx.cat_common.constant.PermitAllUrl;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -25,7 +25,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.csrf().disable().exceptionHandling()
                 .authenticationEntryPoint((request,response,authException)->response.sendError(HttpServletResponse.SC_ACCEPTED))
                 .and().authorizeRequests()
-                .antMatchers(PermitAllUrl.permitAllUrl("/expert-anon/**")).permitAll()
+                .antMatchers(PermitAllUrl.permitAllUrl("/*-anon/**")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 }

@@ -1,6 +1,6 @@
-package com.xinlang.zly.expert.service;
+package com.xinlang.zly.project_user.service;
 
-import com.xinlang.zly.expert.bean.ProjectUser;
+import com.xinlang.zly.project_user.bean.ProjectUser;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.xinlang.zly.expert.config;
+package com.xinlang.zly.project_user.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

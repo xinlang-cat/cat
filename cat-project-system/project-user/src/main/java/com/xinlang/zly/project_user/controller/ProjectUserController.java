@@ -1,9 +1,9 @@
-package com.xinlang.zly.expert.controller;
+package com.xinlang.zly.project_user.controller;
 
-import com.xinlang.zly.expert.bean.ProjectUser;
+import com.xinlang.zly.project_user.bean.ProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.xinlang.zly.expert.service.IProjectUserService;
+import com.xinlang.zly.project_user.service.IProjectUserService;
 
 import java.util.List;
 
@@ -30,22 +30,36 @@ public class ProjectUserController {
         return projectUser;
     }
 
+    /**
+     * @return 所有的实体
+     */
     @GetMapping("/all")
     public List<ProjectUser> findAll(){
         return projectUserService.findAll();
     }
 
+    /**
+     * @param userType 根据类型查询，例如专家，监理，等类型
+     * @return 所有该类型的实体
+     */
     @GetMapping("/type/{userType}")
     public List<ProjectUser> findByUserType(@PathVariable String userType){
         return projectUserService.findByUserType(userType);
     }
 
-    @GetMapping("/{id}")
+    /**
+     * @param userId 根据系统用户表id查询
+     * @return 单个实体
+     */
+    @GetMapping("/{userId}")
     public ProjectUser findByUserId(@PathVariable Integer userId){
         return projectUserService.findByUserId(userId);
     }
 
-    @DeleteMapping("/{id}")
+    /**
+     * @param userId 根据系统用户表id删除
+     */
+    @DeleteMapping("/{userId}")
     public void deleteByUserId(@PathVariable Integer userId){
         projectUserService.deleteByUserId(userId);
     }
