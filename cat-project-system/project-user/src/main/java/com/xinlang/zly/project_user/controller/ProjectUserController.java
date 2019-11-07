@@ -1,6 +1,6 @@
 package com.xinlang.zly.project_user.controller;
 
-import com.xinlang.zly.project_user.bean.ProjectUser;
+import com.xinlang.bean.project_user.ProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.xinlang.zly.project_user.service.IProjectUserService;

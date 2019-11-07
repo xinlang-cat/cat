@@ -1,6 +1,6 @@
 package com.xinlang.zly.project_user.mapper;
 
-import com.xinlang.zly.project_user.bean.ProjectUserClassify;
+import com.xinlang.bean.project_user.ProjectUserClassify;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

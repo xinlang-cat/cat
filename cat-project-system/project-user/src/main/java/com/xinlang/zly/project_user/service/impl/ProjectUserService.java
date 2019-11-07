@@ -1,7 +1,7 @@
 package com.xinlang.zly.project_user.service.impl;
 
-import com.xinlang.zly.project_user.bean.ProjectUser;
-import com.xinlang.zly.project_user.bean.ProjectUserClassify;
+import com.xinlang.bean.project_user.ProjectUser;
+import com.xinlang.bean.project_user.ProjectUserClassify;
 import com.xinlang.zly.project_user.mapper.ProjectUserClassifyMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserMapper;
 import com.xinlang.zly.project_user.service.IProjectUserService;
