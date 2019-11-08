@@ -41,8 +41,8 @@ public interface ILabelService {
 
     /**
      * 根据标识查询
-     * @param sign
+     * @param signs
      * @return
      */
-    List<Label> findTreeBySign(String sign);
+    List<Label> findTreeBySign(Set<String> signs);
 }

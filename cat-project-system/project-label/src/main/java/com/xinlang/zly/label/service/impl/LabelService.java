@@ -73,9 +73,9 @@ public class LabelService implements ILabelService {
     }
 
     @Override
-    public List<Label> findTreeBySign(String sign) {
+    public List<Label> findTreeBySign(Set<String> signs) {
       Example example = new Example(Label.class);
-      example.createCriteria().andEqualTo("sign",sign);
+      example.createCriteria().andIn("sign",signs);
       List<Label> all = labelMapper.selectByExample(example);
         findChild(all);
       return all;
