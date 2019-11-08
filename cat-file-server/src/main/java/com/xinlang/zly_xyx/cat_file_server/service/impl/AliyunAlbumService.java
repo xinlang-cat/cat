@@ -41,7 +41,7 @@ public class AliyunAlbumService extends AbstractAlbumService  {
     }
 
     @Override
-    protected void uploadAlbum(MultipartFile multipartFile, Album album) throws Exception {
+    protected void uploadAlbum(MultipartFile multipartFile, Album album,String address) throws Exception {
         ossClient.putObject(bucketName,album.getName(),multipartFile.getInputStream());
         album.setUrl(domain+"/"+album.getName());
     }

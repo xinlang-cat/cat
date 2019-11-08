@@ -25,7 +25,7 @@ public abstract class AbstractAlbumService implements IAlbumService {
 
     protected abstract Source source();
 
-    protected abstract void uploadAlbum(MultipartFile multipartFile,Album album )throws Exception;
+    protected abstract void uploadAlbum(MultipartFile multipartFile,Album album,String address )throws Exception;
 
     protected abstract boolean delAlbum(Album album);
 
@@ -48,7 +48,7 @@ public abstract class AbstractAlbumService implements IAlbumService {
             if(!album.getName().contains(".")){
                 throw new IllegalArgumentException("缺少后缀名" );
             }
-            uploadAlbum(multipartFile,album);
+            uploadAlbum(multipartFile,album,address);
             //设置文件来源
             album.setSource(source().name());
             //将文件信息保存到数据库
@@ -56,6 +56,7 @@ public abstract class AbstractAlbumService implements IAlbumService {
             log.info("上传文件:{}",album);
             return album;
         }catch (Exception e){
+            e.printStackTrace();
             throw new IllegalArgumentException(e.getMessage().length()>50?"图片上传失败!":e.getMessage());
         }
     }

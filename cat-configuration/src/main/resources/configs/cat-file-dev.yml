@@ -59,6 +59,12 @@ album:
     path: F:/localFile
     prefix: /statics
     urlPrefix: http://local.gateway.com:8080/api-f${album.local.prefix}
+    mini: #缩略图宽
+      width:  108
+      height: 144
+    folder:
+      maxImg: MAX
+      miniImg: MINI
   aliyun:
     endpoint: xxx
     accessKeyId: xxx

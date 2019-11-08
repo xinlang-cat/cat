@@ -56,6 +56,8 @@ public class LocalFileService extends AbstractFileService{
 
     @Override
     protected boolean delFile(File file) {
+        java.io.File file1 = new java.io.File(file.getPath());
+        file1.delete();
         return false;
     }
 }
