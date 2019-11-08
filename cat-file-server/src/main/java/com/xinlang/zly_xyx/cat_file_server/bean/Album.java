@@ -9,17 +9,18 @@ import java.util.Date;
  * 2019/7/19
  */
 @Data
-public class File  {
+public class Album {
 
     private String id;
     private String name;
-    private Boolean isImg;
+    private Integer userId;
     private String contentType;
+    private Boolean isWeChat;
     private long size;
     private String path;
     private String url;
     /**
-     * 文件来源
+     * 照片来源
      * @see Source
      */
     private String source;

@@ -1,7 +1,7 @@
 package com.xinlang.zly_xyx.cat_file_server.service.impl;
 
 import com.xinlang.zly_xyx.cat_file_server.bean.File;
-import com.xinlang.zly_xyx.cat_file_server.bean.FileSource;
+import com.xinlang.zly_xyx.cat_file_server.bean.Source;
 import com.xinlang.zly_xyx.cat_file_server.mapper.FileMapper;
 import com.xinlang.zly_xyx.cat_file_server.service.IFileService;
 import com.xinlang.zly_xyx.cat_file_server.utils.FileUtil;
@@ -17,7 +17,7 @@ public abstract class AbstractFileService  implements IFileService {
 
     protected abstract FileMapper getFileMapper();
 
-    protected abstract FileSource source();
+    protected abstract Source source();
 
     protected abstract void uploadFile(MultipartFile multipartFile,File file)throws Exception;
 

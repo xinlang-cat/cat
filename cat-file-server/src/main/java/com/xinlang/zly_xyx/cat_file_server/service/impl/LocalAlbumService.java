@@ -1,9 +1,10 @@
 package com.xinlang.zly_xyx.cat_file_server.service.impl;
 
-import com.xinlang.zly_xyx.cat_file_server.bean.File;
+import com.xinlang.zly_xyx.cat_file_server.bean.Album;
 import com.xinlang.zly_xyx.cat_file_server.bean.Source;
-import com.xinlang.zly_xyx.cat_file_server.mapper.FileMapper;
+import com.xinlang.zly_xyx.cat_file_server.mapper.AlbumMapper;
 import com.xinlang.zly_xyx.cat_file_server.utils.FileUtil;
+import com.xinlang.zly_xyx.cat_file_server.utils.ImgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,11 @@ import java.time.LocalDate;
  * @author 张龙毅 18777811286@163.com
  * 2019/7/19
  */
-@Service("localFileService")
-public class LocalFileService extends AbstractFileService{
+@Service("localAlbumService")
+public class LocalAlbumService extends AbstractAlbumService{
 
     @Autowired
-    private FileMapper fileMapper;
+    private AlbumMapper albumMapper;
 
     @Value("${file.local.urlPrefix}")
     private String urlPrefix;
@@ -30,11 +31,11 @@ public class LocalFileService extends AbstractFileService{
      * The upload file is stored in the local root path
      */
     @Value("${file.local.path}")
-    private String localFilePath;
+    private String localAlbumPath;
 
     @Override
-    protected FileMapper getFileMapper() {
-        return fileMapper;
+    protected AlbumMapper getAlbumMapper() {
+        return albumMapper;
     }
 
     @Override
@@ -43,19 +44,20 @@ public class LocalFileService extends AbstractFileService{
     }
 
     @Override
-    protected void uploadFile(MultipartFile multipartFile, File file) throws Exception {
-        int index = file.getName().lastIndexOf(".");
-        String fileSuffix = file.getName().substring(index);
-        String suffix = "/"+ LocalDate.now().toString().replace("-","/")+"/"+file.getId()+fileSuffix;
-        String path = localFilePath+suffix;
+    protected void uploadAlbum(MultipartFile multipartFile, Album album) throws Exception {
+        int index = album.getName().lastIndexOf(".");
+        String albumSuffix = album.getName().substring(index);
+        ImgUtil.checkImgSuffix(albumSuffix);
+        String suffix = "/"+ LocalDate.now().toString().replace("-","/")+"/"+album.getId()+albumSuffix;
+        String path = localAlbumPath+suffix;
         String url = urlPrefix+suffix;
-        file.setPath(path);
-        file.setUrl(url);
+        album.setPath(path);
+        album.setUrl(url);
         FileUtil.saveFile(multipartFile,path);
     }
 
     @Override
-    protected boolean delFile(File file) {
+    protected boolean delAlbum(Album album) {
         return false;
     }
 }

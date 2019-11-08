@@ -1,8 +1,10 @@
 package com.xinlang.zly_xyx.cat_file_server.service.impl;
 
 import com.aliyun.oss.OSSClient;
+import com.xinlang.zly_xyx.cat_file_server.bean.Album;
 import com.xinlang.zly_xyx.cat_file_server.bean.File;
 import com.xinlang.zly_xyx.cat_file_server.bean.Source;
+import com.xinlang.zly_xyx.cat_file_server.mapper.AlbumMapper;
 import com.xinlang.zly_xyx.cat_file_server.mapper.FileMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,11 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @author 张龙毅 18777811286@163.com
  * 2019/7/19
  */
-@Service("aliyunFileService")
-public class AliyunFileService extends AbstractFileService  {
+@Service("aliyunAlbumService")
+public class AliyunAlbumService extends AbstractAlbumService  {
 
     @Autowired
-    private FileMapper fileMapper;
+    private AlbumMapper albumMapper;
     @Autowired
     private OSSClient ossClient;
 
@@ -29,8 +31,8 @@ public class AliyunFileService extends AbstractFileService  {
     private String domain;
 
     @Override
-    protected FileMapper getFileMapper() {
-        return fileMapper;
+    protected AlbumMapper getAlbumMapper() {
+        return albumMapper;
     }
 
     @Override
@@ -39,14 +41,14 @@ public class AliyunFileService extends AbstractFileService  {
     }
 
     @Override
-    protected void uploadFile(MultipartFile multipartFile, File file) throws Exception {
-        ossClient.putObject(bucketName,file.getName(),multipartFile.getInputStream());
-        file.setUrl(domain+"/"+file.getName());
+    protected void uploadAlbum(MultipartFile multipartFile, Album album) throws Exception {
+        ossClient.putObject(bucketName,album.getName(),multipartFile.getInputStream());
+        album.setUrl(domain+"/"+album.getName());
     }
 
     @Override
-    protected boolean delFile(File file) {
-        ossClient.deleteObject(bucketName,file.getName());
+    protected boolean delAlbum(Album album) {
+        ossClient.deleteObject(bucketName,album.getName());
         return true;
     }
 

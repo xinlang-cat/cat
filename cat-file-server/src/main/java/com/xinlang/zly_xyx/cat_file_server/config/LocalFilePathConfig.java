@@ -17,16 +17,16 @@ import java.io.File;
 @Configuration
 public class LocalFilePathConfig {
 
-    /**
-     * The upload file is stored in the local root path
-     */
+
     @Value("${file.local.path}")
     private String localFilePath;
-    /**
-     * url prefix
-     */
     @Value("${file.local.prefix}")
     private String localFilePrefix;
+
+    @Value("${album.local.path}")
+    private String localAlbumPath;
+    @Value("${album.local.prefix}")
+    private String localAlbumPrefix;
 
     @Bean
     public WebMvcConfigurer webMvcConfigurerAdapter(){
@@ -36,8 +36,8 @@ public class LocalFilePathConfig {
              */
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
-                registry.addResourceHandler(localFilePrefix+"/**")
-                        .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+localFilePath+ File.separator);
+                registry.addResourceHandler(localFilePrefix+"/**",localAlbumPrefix+"/**")
+                        .addResourceLocations(ResourceUtils.FILE_URL_PREFIX+localFilePath+ File.separator,ResourceUtils.FILE_URL_PREFIX+localAlbumPath+File.separator);
             }
         };
     }
