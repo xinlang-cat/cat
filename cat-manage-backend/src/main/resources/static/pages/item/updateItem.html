@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -18,9 +19,8 @@
                 </div>
                 <label class="col-md-1 control-label">计划类别</label>
                 <div class="col-md-3">
-                    <select class="form-control input-sm" name="plan_category" id="plan_category">
-                        <option value="1">男</option>
-                        <option value="0">女</option>
+                    <select class="form-control input-sm" name="plan_category" id="planCategory">
+                        <option value=''>- 请选择 -</option>
                     </select>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="col-md-3">
                     <input class="form-control" placeholder="承担单位" type="text" name="undertaker" maxlength="50" id="undertaker"
                            data-bv-notempty="true"
-                           data-bv-notempty-message="委托单位 不能为空">
+                           data-bv-notempty-message="承担单位 不能为空">
                 </div>
             </div>
             <div class="form-group">
@@ -65,35 +65,39 @@
                 <div class="col-md-3">
                     <input class="form-control" placeholder="管理代表" type="text" name="supervisor" maxlength="50" id="supervisor"
                            data-bv-notempty="true"
-                           data-bv-notempty-message="委托单位 不能为空">
+                           data-bv-notempty-message="管理代表 不能为空">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">实施地点</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="实施地点" type="text" name="district" maxlength="50" id="district"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="实施地点 不能为空">
+                    <select class="form-control input-sm" lay-skin="primary" id="map">
+                    </select>
+                    <input type="hidden" name="district" id="district">
+                    <button type="button" class="layui-btn layui-btn-xs" onclick="refresh();"
+                            style="position: absolute;right: 16px;top: 4px;background-color: #e1e1e1;">
+                        <i class="layui-icon">&#xe669;</i>
+                    </button>
                 </div>
                 <label class="col-md-1 control-label">合同文件</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="合同文件" type="text" name="contract_file" maxlength="50" id="contract_file"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="委托单位 不能为空">
-                    <!--<input type="hidden" name="contract_file" value="">-->
+                    <input class="form-control layui-btn" placeholder="合同文件" type="text" id="file" maxlength="50"
+                           style="height: 32px;color: #555;border: 1px solid #ccc;background-color: #fff;line-height: 32;
+                           text-align: left;padding: 6px 12px;">
+                    <input type="hidden" name="contract_file" id="contract">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">开始时间</label>
                 <div class="col-md-3">
                     <input class="form-control" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
-                           id="start" data-bv-notempty="true"
+                           id="start_date" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空">
                 </div>
                 <label class="col-md-1 control-label">结束时间</label>
                 <div class="col-md-3">
                     <input class="form-control" placeholder="结束时间" type="text" name="end_dateStr" maxlength="50"
-                           id="end" data-bv-notempty="true"
+                           id="end_date" data-bv-notempty="true"
                            data-bv-notempty-message="结束时间 不能为空">
                 </div>
             </div>
@@ -128,14 +132,12 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/project/initData.js"></script>
 <script type="text/javascript">
     layui.use(['layer', 'laydate'], function () {
-        var layer = layui.layer, laydate = layui.laydate;
+        var layer = layui.layer,
+            laydate = layui.laydate;
 
-        laydate.render({
-            elem: '#item_date'
-            , format: 'yyyy年MM月dd日'
-        });
         laydate.render({
             elem: '#start_date'
             , format: 'yyyy年MM月dd日'
@@ -146,7 +148,9 @@
         });
     });
 
+    initplanCategorySelect();
     initData();
+    //getprovince();
 
     function initData() {
         var id = getUrlParam("id");
@@ -156,9 +160,10 @@
                 url: domainName + '/project-item/item/' + id,
                 async: false,
                 success: function (data) {
+                    getsuperior(data.district);
                     $("#id").val(data.id);
                     $("#contract_number").val(data.contract_number);
-                    $("#plan_category").val(data.plan_category);
+                    $("#planCategory").val(data.plan_category);
                     $("#item_name").val(data.item_name);
 
                     $("#batch").val(data.batch);
@@ -178,7 +183,42 @@
         }
     }
 
+    var code = '',
+        text = '';
+    $("#map").change(function () {
+        code = $("#map option:selected").val();
+        text += $("#map option:selected").text()+'-';
+        $("#district").val(code);
+        $("#map").empty();
+        $("#map").append("<option value='"+ code +"'>" +text+"</option>");
+        var texts = text.split('-');
+        if(texts.length==2){
+            getCity(code);
+        }else if(texts.length==3){
+            getArea(code);
+        }else if(texts.length==4){
+            getStreet(code);
+        }
+    });
+
+    function refresh() {
+        $("#map").empty();
+        $("#map").append("<option value=''>- 请选择 -</option>");
+        getprovince();
+        code = '';
+        text = '';
+        $("#district").val(code);
+    }
+
     function update() {
+        if ($("#planCategory").val()=='') {
+            layer.msg("请选择计划类别");
+            return;
+        }
+        if ($("#district").val()=='') {
+            layer.msg("请选择实施地点");
+            return;
+        }
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();

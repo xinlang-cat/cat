@@ -76,8 +76,8 @@ public class ItemBasicService implements IItemBasicService {
     public void saveItem(ItemBasic basic) {
 
         //获取当前用户
-        LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
-        //LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
+        //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
+        LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
         //SET 创建人id、创建时间、状态
         basic.setEdit_userid(loginAppUser.getId().intValue());
         basic.setEdit_date(new Date());

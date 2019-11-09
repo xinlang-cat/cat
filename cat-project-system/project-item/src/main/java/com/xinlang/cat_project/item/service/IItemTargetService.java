@@ -1,10 +1,9 @@
 package com.xinlang.cat_project.item.service;
 
-import com.xinlang.cat_project.item.VO.TargetInfo;
-import com.xinlang.cat_project.item.VO.TargetInfoAll;
 import com.xinlang.cat_project.item.pojo.ItemTarget;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IItemTargetService {
 
@@ -12,11 +11,7 @@ public interface IItemTargetService {
 
     ItemTarget queryTargetById(Integer id);
 
-    TargetInfo queryTargetInfoById(Integer id);
-
-    List<ItemTarget> queryTargetByCId(Integer Cid);
-
-    List<TargetInfoAll> queryTargetInfoAllByCId(Integer Cid);
+    List<Map<String, Object>> queryTargetByCId(Integer Cid);
 
     void updateTarget(ItemTarget target);
 

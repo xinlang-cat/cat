@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 指标
@@ -45,39 +46,15 @@ public class ItemTargetController {
     }
 
     /**
-     * 获取单条指标明细
-     * @param id
-     * @return
-     */
-    @GetMapping("/info/{id}")
-    public ResponseEntity<TargetInfo> getTargetInfoById(@PathVariable Integer id){
-
-        TargetInfo targetInfo = targetService.queryTargetInfoById(id);
-        return ResponseEntity.ok(targetInfo);
-    }
-
-    /**
-     * 获取当前内容全部指标
+     * 获取当前内容全部指标以及实施人员
      * @param Cid 内容id
      * @return
      */
     @GetMapping("/all/{Cid}")
-    public ResponseEntity<List<ItemTarget>> getTargetByCid(@PathVariable Integer Cid){
+    public ResponseEntity<List<Map<String, Object>>> getTargetByCid(@PathVariable Integer Cid){
 
-        List<ItemTarget> target = targetService.queryTargetByCId(Cid);
+        List<Map<String, Object>> target = targetService.queryTargetByCId(Cid);
         return ResponseEntity.ok(target);
-    }
-
-    /**
-     * 获取当前项目全部指标明细
-     * @param Tid 项目id
-     * @return
-     */
-    @GetMapping("/info/all/{Tid}")
-    public ResponseEntity<List<TargetInfoAll>> getTargetInfoAllByCid(@PathVariable Integer Tid){
-
-        List<TargetInfoAll> targetInfoAll = targetService.queryTargetInfoAllByCId(Tid);
-        return ResponseEntity.ok(targetInfoAll);
     }
 
     /**
