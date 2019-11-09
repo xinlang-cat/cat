@@ -109,4 +109,16 @@ public class FileController {
         }
         return new Page<>(total, list);
     }
+
+    /**
+     * query file
+     *
+     * @param
+     * @return
+     */
+    @PreAuthorize("hasAuthority('file:query')")
+    @GetMapping("/{id}")
+    public File findById(@PathVariable String id) {
+        return fileMapper.getById(id);
+    }
 }

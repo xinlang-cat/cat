@@ -54,7 +54,7 @@ public class ProjectUserSkillController {
      * @param userType
      * @return
      */
-    @GetMapping(value = "/skill/label_sign/user_type",params = {"labelSign", "userType"})
+    @GetMapping(value = "/skill/label-sign/user_type",params = {"labelSign", "userType"})
     public List<ProjectUserSkill> findByLabelSign(String labelSign,String userType) {
         return projectUserSkillService.findByLabelSign(labelSign,userType);
     }

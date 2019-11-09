@@ -53,7 +53,7 @@ public class ProjectUserDomainController {
      * @param userType
      * @return
      */
-    @GetMapping(value = "/domain/label_sign/user_type",params = {"labelSign", "userType"})
+    @GetMapping(value = "/domain/label-sign/user_type",params = {"labelSign", "userType"})
     public List<ProjectUserDomain> findByLabelSign(String labelSign,String userType) {
         return projectUserDomainService.findByLabelSign(labelSign,userType);
     }
