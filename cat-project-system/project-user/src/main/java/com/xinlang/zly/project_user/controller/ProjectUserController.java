@@ -12,19 +12,18 @@ import java.util.List;
  * 2019-11-05
  */
 @RestController
-@RequestMapping("/projectUser")
 public class ProjectUserController {
 
     @Autowired
     private IProjectUserService projectUserService;
 
-    @PostMapping
+    @PostMapping("/projectUser")
     public ProjectUser save(@RequestBody ProjectUser projectUser){
         projectUserService.save(projectUser);
         return projectUser;
     }
 
-    @PutMapping
+    @PutMapping("/projectUser")
     public ProjectUser update(@RequestBody ProjectUser projectUser){
         projectUserService.update(projectUser);
         return projectUser;
@@ -33,7 +32,7 @@ public class ProjectUserController {
     /**
      * @return 所有的实体
      */
-    @GetMapping("/all")
+    @GetMapping("/projectUser/all")
     public List<ProjectUser> findAll(){
         return projectUserService.findAll();
     }
@@ -42,7 +41,7 @@ public class ProjectUserController {
      * @param userType 根据类型查询，例如专家，监理，等类型
      * @return 所有该类型的实体
      */
-    @GetMapping("/type/{userType}")
+    @GetMapping("/projectUser/type/{userType}")
     public List<ProjectUser> findByUserType(@PathVariable String userType){
         return projectUserService.findByUserType(userType);
     }
@@ -51,7 +50,7 @@ public class ProjectUserController {
      * @param userId 根据系统用户表id查询
      * @return 单个实体
      */
-    @GetMapping("/{userId}")
+    @GetMapping("/projectUser-anon/{userId}")
     public ProjectUser findByUserId(@PathVariable Integer userId){
         return projectUserService.findByUserId(userId);
     }
@@ -59,7 +58,7 @@ public class ProjectUserController {
     /**
      * @param userId 根据系统用户表id删除
      */
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/projectUser/{userId}")
     public void deleteByUserId(@PathVariable Integer userId){
         projectUserService.deleteByUserId(userId);
     }
