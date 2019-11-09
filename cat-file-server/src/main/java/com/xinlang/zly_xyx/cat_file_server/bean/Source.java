@@ -5,7 +5,7 @@ package com.xinlang.zly_xyx.cat_file_server.bean;
  * 2019/7/19
  * 枚举
  */
-public enum  FileSource {
+public enum Source {
 
     /**
      * localhost

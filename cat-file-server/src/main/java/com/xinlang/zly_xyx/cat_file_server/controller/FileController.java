@@ -37,7 +37,7 @@ public class FileController {
      *
      * @ param file
      * @ param fileSource
-     * FileSource
+     * Source
      *
      * @ return
      * @ throws the Exception
@@ -108,5 +108,17 @@ public class FileController {
             list = fileMapper.findData(params);
         }
         return new Page<>(total, list);
+    }
+
+    /**
+     * query file
+     *
+     * @param
+     * @return
+     */
+    @PreAuthorize("hasAuthority('file:query')")
+    @GetMapping("/{id}")
+    public File findById(@PathVariable String id) {
+        return fileMapper.getById(id);
     }
 }

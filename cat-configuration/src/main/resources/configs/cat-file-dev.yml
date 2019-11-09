@@ -54,6 +54,23 @@ file:
     accessKeySecret: xxx
     bucketName: xxx
     domain: https://xxx
+album:
+  local:
+    path: F:/localFile
+    prefix: /statics
+    urlPrefix: http://local.gateway.com:8080/api-f${album.local.prefix}
+    mini: #缩略图宽
+      width:  108
+      height: 144
+    folder:
+      maxImg: MAX
+      miniImg: MINI
+  aliyun:
+    endpoint: xxx
+    accessKeyId: xxx
+    accessKeySecret: xxx
+    bucketName: xxx
+    domain: https://xxx
 info:
   company: 鑫朗通信技术有限公司
   phone: 18777811286

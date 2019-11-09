@@ -26,13 +26,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
      */
     @Value("${file.local.prefix}")
     private String localFilePrefix;
+    @Value("${album.local.prefix}")
+    private String localAlbumPrefix;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling()
                 .authenticationEntryPoint((request,response,authException)->response.sendError(HttpServletResponse.SC_ACCEPTED))
                 .and().authorizeRequests()
-                .antMatchers(PermitAllUrl.permitAllUrl("/flies-anon/**",localFilePrefix+"/**")).permitAll()
+                .antMatchers(PermitAllUrl.permitAllUrl("/flies-anon/**",localFilePrefix+"/**","/albums-anon/**",localAlbumPrefix+"/**")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 }

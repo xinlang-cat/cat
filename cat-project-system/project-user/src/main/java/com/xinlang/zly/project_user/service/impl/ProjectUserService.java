@@ -1,9 +1,9 @@
 package com.xinlang.zly.project_user.service.impl;
 
 import com.xinlang.bean.project_user.ProjectUser;
-import com.xinlang.bean.project_user.ProjectUserClassify;
-import com.xinlang.zly.project_user.mapper.ProjectUserClassifyMapper;
+import com.xinlang.zly.project_user.mapper.ProjectUserDomainMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserMapper;
+import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,7 @@ public class ProjectUserService implements IProjectUserService {
 
     @Autowired
     private ProjectUserMapper projectUserMapper;
-    @Autowired
-    private ProjectUserClassifyMapper projectUserClassifyMapper;
+
 
     @Override
     public void save(ProjectUser projectUser) {
@@ -48,26 +47,28 @@ public class ProjectUserService implements IProjectUserService {
     @Override
     public List<ProjectUser> findByUserType(String userType) {
         Example example = new Example(ProjectUser.class);
-        example.createCriteria().andEqualTo("userType",userType);
-        return projectUserMapper.selectByExample(example);
+        example.createCriteria().andEqualTo("userType",userType).andEqualTo("enable",true);
+        List<ProjectUser> list = projectUserMapper.selectByExample(example);
+        return list;
     }
 
+
     @Override
-    public ProjectUser findByUserId(Integer userId) {
+    public List<ProjectUser> findByUserId(Integer userId) {
         Example example = new Example(ProjectUser.class);
         example.createCriteria().andEqualTo("userId",userId);
         List<ProjectUser> list = projectUserMapper.selectByExample(example);
-        return list.isEmpty() ? null : list.get(0);
+        return list;
     }
 
     @Override
     public void deleteByUserId(Integer userId) {
-        Example example = new Example(ProjectUser.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        projectUserMapper.deleteByExample(example);
-        //删除专家用户分组信息
-        Example example1 = new Example(ProjectUserClassify.class);
-        example1.createCriteria().andEqualTo("userId",userId);
-        projectUserClassifyMapper.deleteByExample(example1);
+        List<ProjectUser> list = findByUserId(userId);
+        list.forEach(projectUser -> {
+            projectUser.setEnable(false);
+            Example example = new Example(ProjectUser.class);
+            example.createCriteria().andEqualTo("userId",userId);
+            projectUserMapper.updateByExample(projectUser,example);
+        });
     }
 }

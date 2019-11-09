@@ -4,9 +4,14 @@ import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 用户信息
+ */
 @Data
 @Table(name = "project_user")
 public class ProjectUser implements Serializable {
@@ -184,7 +189,8 @@ public class ProjectUser implements Serializable {
     /**
      * 服务的产业或领域
      */
-    private String serverDomain;
+    @Transient
+    private List<ProjectUserDomain> domains;
 
     /**
      * 邮政编码
@@ -194,7 +200,8 @@ public class ProjectUser implements Serializable {
     /**
      * 技术专长及提供的服务
      */
-    private String technicalExpertise;
+    @Transient
+    private List<ProjectUserSkill> skills;
 
     /**
      * 承担的科技项目
@@ -218,11 +225,10 @@ public class ProjectUser implements Serializable {
     /**
      * 是否可用/0不可用/1可用
      */
-    private Long enable;
+    private Boolean enable;
 
     /**
      * 用户类型
      */
     private String userType;
-
 }

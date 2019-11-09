@@ -1,7 +1,7 @@
 package com.xinlang.zly_xyx.cat_file_server.service.impl;
 
 import com.xinlang.zly_xyx.cat_file_server.bean.File;
-import com.xinlang.zly_xyx.cat_file_server.bean.FileSource;
+import com.xinlang.zly_xyx.cat_file_server.bean.Source;
 import com.xinlang.zly_xyx.cat_file_server.mapper.FileMapper;
 import com.xinlang.zly_xyx.cat_file_server.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,8 @@ public class LocalFileService extends AbstractFileService{
     }
 
     @Override
-    protected FileSource source() {
-        return FileSource.LOCAL;
+    protected Source source() {
+        return Source.LOCAL;
     }
 
     @Override
@@ -56,6 +56,8 @@ public class LocalFileService extends AbstractFileService{
 
     @Override
     protected boolean delFile(File file) {
+        java.io.File file1 = new java.io.File(file.getPath());
+        file1.delete();
         return false;
     }
 }
