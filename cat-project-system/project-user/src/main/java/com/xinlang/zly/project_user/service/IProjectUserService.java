@@ -13,6 +13,6 @@ public interface IProjectUserService {
     void update(ProjectUser projectUser);
     List<ProjectUser> findAll();
     List<ProjectUser> findByUserType(String userType);
-    ProjectUser findByUserId(Integer userId);
+    List<ProjectUser> findByUserId(Integer userId);
     void deleteByUserId(Integer userId);
 }
