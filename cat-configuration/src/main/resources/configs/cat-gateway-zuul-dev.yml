@@ -46,6 +46,9 @@ zuul:
     projectUser:
       path: /project-user/**
       serviceId: project-user
+    map:
+      path: /map/**
+      serviceId: cat-map-server
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
