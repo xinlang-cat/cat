@@ -41,6 +41,10 @@ public enum  ExceptionEnum {
     BUDGET_SAVE_ERROR(500,"新增预算失败"),
     BUDGET_UPDATE_ERROR(500,"更改预算失败"),
     BUDGET_DELETE_ERROR(500,"删除预算失败"),
+
+    SAVE_ERROR(500,"保存失败"),
+    UPDATE_ERROR(500,"更改失败"),
+    DELETE_ERROR(500,"删除失败"),
     ;
     private int code;
     private String msg;

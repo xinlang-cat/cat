@@ -1,14 +1,15 @@
 package com.xinlang.cat_project.item.service.impl;
 
-import com.xinlang.cat_project.item.VO.TargetInfo;
-import com.xinlang.cat_project.item.VO.TargetInfoAll;
+import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.cat_project.item.enums.ExceptionEnum;
 import com.xinlang.cat_project.item.exception.ItemException;
+import com.xinlang.cat_project.item.fegin.ConsumeProjectUser;
 import com.xinlang.cat_project.item.mapper.ItemContentMapper;
 import com.xinlang.cat_project.item.mapper.ItemTargetMapper;
 import com.xinlang.cat_project.item.mapper.ItemUserMapper;
 import com.xinlang.cat_project.item.pojo.ItemContent;
 import com.xinlang.cat_project.item.pojo.ItemTarget;;
+import com.xinlang.cat_project.item.pojo.ItemUser;
 import com.xinlang.cat_project.item.service.IItemTargetService;
 import com.xinlang.zly_xyx.cat_common.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -28,6 +33,12 @@ public class ItemTargetService implements IItemTargetService {
 
     @Autowired
     private ItemContentMapper itemContentMapper;
+
+    @Autowired
+    private ItemUserMapper itemUserMapper;
+
+    @Autowired
+    private ConsumeProjectUser consumeProjectUser;
 
     @Override
     @Transactional
@@ -72,30 +83,39 @@ public class ItemTargetService implements IItemTargetService {
     }
 
     @Override
-    public TargetInfo queryTargetInfoById(Integer id) {
-        TargetInfo targetInfo = itemTargetMapper.selectTargetInfoById(id);
-        return targetInfo;
-    }
+    public List<Map<String, Object>> queryTargetByCId(Integer Cid) {
+        //存放结果数据
+        List<Map<String, Object>> targetInfos = new ArrayList<>();
 
-    @Override
-    public List<ItemTarget> queryTargetByCId(Integer Cid) {
+        //查找所有指标
         ItemTarget target = new ItemTarget();
         target.setContent_id(Cid);
         List<ItemTarget> list = itemTargetMapper.select(target);
-        if(CollectionUtils.isEmpty(list)){
-            throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
+        //循环查找所有相关成员
+        ItemUser itemUser = new ItemUser(); //关系数据
         for (ItemTarget t : list) {
+            Map<String, Object> itemTarget = new HashMap<>();
             t.setStart_dateStr(DateUtils.dateToString(t.getStart_date(), "yyyy年MM月dd日"));
             t.setEnd_dateStr(DateUtils.dateToString(t.getEnd_date(), "yyyy年MM月dd日"));
-        }
-        return list;
-    }
+            //先存指标
+            itemTarget.put("itemTarget",t);
 
-    @Override
-    public List<TargetInfoAll> queryTargetInfoAllByCId(Integer Cid) {
-        List<TargetInfoAll> targetInfoAll = itemTargetMapper.selectTargetInfoAllById(Cid);
-        return targetInfoAll;
+            //通过target_id查找相关成员
+            itemUser.setTarget_id(t.getId());
+            List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
+            //循环查找成员信息
+            ProjectUser projectUser;
+            List<ProjectUser> PU = new ArrayList<>();
+            for (ItemUser u : itemUsers) {
+                projectUser = consumeProjectUser.findByUserId(u.getUser_id());
+                PU.add(projectUser);
+            }
+            //存成员信息
+            itemTarget.put("projectUser",PU);
+
+            targetInfos.add(itemTarget); //添加进list
+        }
+        return targetInfos;
     }
 
     @Override
@@ -112,7 +132,7 @@ public class ItemTargetService implements IItemTargetService {
         if(i != 1){
             throw new ItemException(ExceptionEnum.TARGET_UPDATE_ERROR);
         }
-        //修改实施人员
+       /* //修改实施人员
         List<Integer> userIds = target.getUserIds();
         if(!CollectionUtils.isEmpty(userIds)){
             //查询实施人员id,先查询当前指标的详细信息
@@ -126,7 +146,7 @@ public class ItemTargetService implements IItemTargetService {
                     throw new ItemException(ExceptionEnum.TARGET_UPDATE_ERROR);
                 }
             }
-        }
+        }*/
     }
 
     @Override
@@ -136,6 +156,7 @@ public class ItemTargetService implements IItemTargetService {
         if(i != 1){
             throw new ItemException(ExceptionEnum.TARGET_UPDATE_ERROR);
         }
+        //删除成员与指标的关系
         itemTargetMapper.updateItemUser2(id);
     }
 

@@ -4,6 +4,7 @@ import com.xinlang.bean.project_user.ProjectUser;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface ConsumeProjectUser {
      * @param userId 根据系统用户表id查询
      * @return 单个实体
      */
-    @GetMapping("/{userId}")
+    @GetMapping("/projectUser/internal/{userId}")
     ProjectUser findByUserId(@PathVariable Integer userId);
 
     /**

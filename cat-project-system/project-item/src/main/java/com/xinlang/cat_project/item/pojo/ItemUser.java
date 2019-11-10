@@ -22,6 +22,7 @@ public class ItemUser {
     private Integer pid;
     private Integer user_id;
     private Integer item_id;
+    private Integer target_id;
     private String responsible;
     private Integer type;
 }
