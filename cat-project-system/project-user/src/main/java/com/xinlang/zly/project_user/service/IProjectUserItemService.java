@@ -10,8 +10,7 @@ import java.util.List;
  */
 public interface IProjectUserItemService {
     void save(ProjectUserItem projectUserItem);
-    Integer countByUserId(Integer userId);
+    List<ProjectUserItem> findByUserIdAndUserType(Integer userId,String userType);
     List<ProjectUserItem> findByItemIdAndUserType(Integer itemId,String userType);
-    List<ProjectUserItem> findByUserId(Integer userId);
     List<ProjectUserItem> findByLabelSign(String labelSign,String userType);
 }

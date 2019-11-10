@@ -4,8 +4,10 @@ import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 项目用户关系
@@ -21,9 +23,11 @@ public class ProjectUserItem implements Serializable {
     private Integer userId;
     private String userType;//用户类型
     private Integer itemId;//项目id
-    private Integer itemStatus;//项目状态
     private String labelSign;//项目类型标签中的一个
     private Date createTime;
     private Date updateTime;
+    @Transient
+    private List<ProjectUser> experts;
+
 
 }

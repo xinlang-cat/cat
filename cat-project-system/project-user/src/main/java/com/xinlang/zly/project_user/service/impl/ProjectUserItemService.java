@@ -24,11 +24,14 @@ public class ProjectUserItemService implements IProjectUserItemService {
     }
 
     @Override
-    public Integer countByUserId(Integer userId) {
+    public List<ProjectUserItem> findByUserIdAndUserType(Integer userId, String userType) {
         Example example = new Example(ProjectUserItem.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        return projectUserItemMapper.selectCountByExample(example);
+        example.createCriteria().andEqualTo("userId",userId)
+                .andEqualTo("userType",userType);
+        example.orderBy("createTime").asc();
+        return projectUserItemMapper.selectByExample(example);
     }
+
 
     @Override
     public List<ProjectUserItem> findByItemIdAndUserType(Integer itemId,String userType) {
@@ -37,12 +40,6 @@ public class ProjectUserItemService implements IProjectUserItemService {
         return projectUserItemMapper.selectByExample(example);
     }
 
-    @Override
-    public List<ProjectUserItem> findByUserId(Integer userId) {
-        Example example = new Example(ProjectUserItem.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        return projectUserItemMapper.selectByExample(example);
-    }
 
     @Override
     public List<ProjectUserItem> findByLabelSign(String labelSign, String userType) {

@@ -231,4 +231,17 @@ public class ProjectUser implements Serializable {
      * 用户类型
      */
     private String userType;
+
+    /**
+     * 选中次数
+     */
+    @Transient
+    private Integer time;
+    /**
+     * 最后一次服务时间
+     */
+    @Transient
+    private Date endServerTime;
+
+
 }

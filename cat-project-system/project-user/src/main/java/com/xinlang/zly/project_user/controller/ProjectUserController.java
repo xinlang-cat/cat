@@ -81,6 +81,8 @@ public class ProjectUserController {
     }
 
 
+
+
     private void setDomainAndSkill(List<ProjectUser> list){
         list.forEach(pu->{
             List<ProjectUserDomain> domains = projectUserDomainService.findByUserId(pu.getUserId());

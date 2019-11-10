@@ -12,6 +12,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -56,7 +57,15 @@ public class ProjectUserService implements IProjectUserService {
     @Override
     public List<ProjectUser> findByUserId(Integer userId) {
         Example example = new Example(ProjectUser.class);
-        example.createCriteria().andEqualTo("userId",userId);
+        example.createCriteria().andEqualTo("userId",userId).andEqualTo("enable",true);
+        List<ProjectUser> list = projectUserMapper.selectByExample(example);
+        return list;
+    }
+
+    @Override
+    public List<ProjectUser> findByUserIds(Set<Integer> userIds) {
+        Example example = new Example(ProjectUser.class);
+        example.createCriteria().andIn("userId",userIds).andEqualTo("enable",true);
         List<ProjectUser> list = projectUserMapper.selectByExample(example);
         return list;
     }

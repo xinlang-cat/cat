@@ -24,13 +24,19 @@ public class ProjectUserDomainService implements IProjectUserDomainService {
     @Override
     public void save(ProjectUserDomain projectUserDomain) {
         Example example = new Example(ProjectUserDomain.class);
-        example.createCriteria().andEqualTo("userId",projectUserDomain.getUserId());
+        Example.Criteria criteria  = example.createCriteria();
+        criteria.andEqualTo("userId",projectUserDomain.getUserId());
         int count = projectUserDomainMapper.selectCountByExample(example);
         //每个人不超过3个
         if(count > 3){
             throw new IllegalArgumentException("标签数量已超");
         }
-        projectUserDomainMapper.insert(projectUserDomain);
+        criteria.andEqualTo("labelSign",projectUserDomain.getLabelSign());
+        criteria.andEqualTo("userType",projectUserDomain.getUserType());
+        int count1 = projectUserDomainMapper.selectCountByExample(example);
+        if(count1<1){
+            projectUserDomainMapper.insert(projectUserDomain);
+        }
     }
 
     @Override
