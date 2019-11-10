@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-11-05 20:29:09
+Date: 2019-11-10 17:45:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,19 +54,13 @@ CREATE TABLE `project_user` (
   `phone` varchar(18) DEFAULT NULL COMMENT '手机号码',
   `main_domain` varchar(50) DEFAULT NULL COMMENT '主要研究领域',
   `fax` varchar(20) DEFAULT NULL COMMENT '传真',
-  `server_domain` varchar(50) DEFAULT NULL COMMENT '服务的产业或领域',
   `postcode` varchar(10) DEFAULT NULL COMMENT '邮政编码',
-  `technical_expertise` varchar(50) DEFAULT NULL COMMENT '技术专长及提供的服务',
   `projects` varchar(255) DEFAULT NULL COMMENT '承担的科技项目',
   `achievement` varchar(500) DEFAULT NULL COMMENT '获得的科技成果，奖励，荣誉',
   `accomplishment` varchar(2000) DEFAULT NULL COMMENT '工作成就案例',
   `create_time` datetime DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
   `enable` bigint(1) NOT NULL DEFAULT '1' COMMENT '是否可用/0不可用/1可用',
-  `user_type` varchar(50) DEFAULT NULL COMMENT '用户类型',
+  `user_type` varchar(10) DEFAULT NULL COMMENT '用户类型',
   PRIMARY KEY (`id`,`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Records of project_user
--- ----------------------------
