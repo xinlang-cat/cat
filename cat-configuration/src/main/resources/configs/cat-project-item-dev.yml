@@ -14,17 +14,6 @@ spring:
     username: pig
     password: pig
     virtual-host: /
-  redis:
-    host: localhost
-    port: 6379
-    password:
-    timeout: 10s
-    lettuce:
-      pool:
-        min-idle: 0
-        max-idle: 8
-        max-active: 8
-        max-wait: -1ms
   mvc:
     servlet:
       load-on-startup: 1

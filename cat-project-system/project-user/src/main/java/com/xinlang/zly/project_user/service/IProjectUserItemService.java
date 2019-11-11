@@ -13,4 +13,6 @@ public interface IProjectUserItemService {
     List<ProjectUserItem> findByUserIdAndUserType(Integer userId,String userType);
     List<ProjectUserItem> findByItemIdAndUserType(Integer itemId,String userType);
     List<ProjectUserItem> findByLabelSign(String labelSign,String userType);
+    void delete(Integer id);
+    void randomDelete(Integer itemId,String labelSign,String userType);
 }

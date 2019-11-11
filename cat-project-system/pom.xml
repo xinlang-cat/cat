@@ -17,6 +17,7 @@
         <module>project-user</module>
         <module>project-item</module>
         <module>project-common-entity</module>
+        <module>project-summary</module>
     </modules>
 
     <dependencyManagement>

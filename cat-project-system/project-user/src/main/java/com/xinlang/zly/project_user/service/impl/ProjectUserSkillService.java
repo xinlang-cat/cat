@@ -25,20 +25,35 @@ public class ProjectUserSkillService implements IProjectUserSkillService {
     @Override
     public void save(ProjectUserSkill projectUserSkill) {
         Example example = new Example(ProjectUserSkill.class);
-        example.createCriteria().andEqualTo("userId",projectUserSkill.getUserId());
+        Example.Criteria  criteria= example.createCriteria();
+        criteria.andEqualTo("userId",projectUserSkill.getUserId());
         int count = projectUserSkillMapper.selectCountByExample(example);
         //每个人不超过3个
         if(count > 3){
             throw new IllegalArgumentException("标签数量已超");
         }
-        projectUserSkillMapper.insert(projectUserSkill);
+        criteria.andEqualTo("labelSign",projectUserSkill.getLabelSign());
+        criteria.andEqualTo("userType",projectUserSkill.getUserType());
+        int count1 = projectUserSkillMapper.selectCountByExample(example);
+        if(count1<1){
+            projectUserSkillMapper.insert(projectUserSkill);
+        }
     }
 
     @Override
     public void update(ProjectUserSkill projectUserSkill) {
         Example example = new Example(ProjectUserSkill.class);
-        example.createCriteria().andNotEqualTo("id",projectUserSkill.getId());
-        projectUserSkillMapper.updateByExample(projectUserSkill,example);
+        Example.Criteria  criteria = example.createCriteria();
+        criteria.andEqualTo("userId",projectUserSkill.getUserId());
+        criteria.andEqualTo("labelSign",projectUserSkill.getLabelSign());
+        ProjectUserSkill pus = projectUserSkillMapper.selectOneByExample(example);
+        if(pus != null){
+            projectUserSkill = pus;
+        }else{
+            example.clear();
+            example.createCriteria().andNotEqualTo("id",projectUserSkill.getId());
+            projectUserSkillMapper.updateByExample(projectUserSkill,example);
+        }
     }
 
     @Override

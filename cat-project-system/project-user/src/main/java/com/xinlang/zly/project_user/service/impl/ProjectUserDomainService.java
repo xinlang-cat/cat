@@ -42,8 +42,17 @@ public class ProjectUserDomainService implements IProjectUserDomainService {
     @Override
     public void update(ProjectUserDomain projectUserDomain) {
         Example example = new Example(ProjectUserDomain.class);
-        example.createCriteria().andNotEqualTo("id",projectUserDomain.getId());
-        projectUserDomainMapper.updateByExample(projectUserDomain,example);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("userId",projectUserDomain.getUserId());
+        criteria.andEqualTo("labelSign",projectUserDomain.getLabelSign());
+        ProjectUserDomain pud = projectUserDomainMapper.selectOneByExample(example);
+        if(pud != null){
+            projectUserDomain = pud;
+        }else {
+            example.clear();
+            example.createCriteria().andNotEqualTo("id",projectUserDomain.getId());
+            projectUserDomainMapper.updateByExample(projectUserDomain,example);
+        }
     }
 
     @Override

@@ -8,6 +8,8 @@ import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserItemService;
 import com.xinlang.zly.project_user.service.IProjectUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -96,4 +98,16 @@ public class ProjectUserItemController {
         return item;
     }
 
+    @DeleteMapping("/item/{id}")
+    public void delete(@PathVariable Integer id){
+        projectUserItemService.delete(id);
+    }
+
+    @DeleteMapping(value = "/item",params = {"itemId","labelSign","userType"})
+    public void randomDelete(Integer itemId,String labelSign,String userType){
+        if(userType == null || "".equals(userType)){
+            userType = ProjectUserType.EXPERT.name();
+        }
+        projectUserItemService.randomDelete(itemId,labelSign,userType);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -47,4 +48,24 @@ public class ProjectUserItemService implements IProjectUserItemService {
         example.createCriteria().andEqualTo("labelSign",labelSign).andEqualTo("userType",userType);
         return projectUserItemMapper.selectByExample(example);
     }
+
+    @Override
+    public void delete(Integer id) {
+        Example example = new Example(ProjectUserItem.class);
+        example.createCriteria().andEqualTo("id", id);
+        projectUserItemMapper.deleteByExample(example);
+    }
+
+    @Override
+    public void randomDelete(Integer itemId, String labelSign, String userType) {
+        Example example = new Example(ProjectUserItem.class);
+        example.createCriteria().andEqualTo("itemId").andEqualTo("labelSign",labelSign).andEqualTo("userType",userType);
+        List<ProjectUserItem> list = projectUserItemMapper.selectByExample(example);
+        Random random = new Random();
+        int index = random.nextInt(list.size());
+        example.clear();
+        example.createCriteria().andEqualTo("id",list.get(index).getId());
+        projectUserItemMapper.deleteByExample(example);
+    }
+
 }

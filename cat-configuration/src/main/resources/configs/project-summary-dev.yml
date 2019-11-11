@@ -25,7 +25,7 @@ spring:
     sender:
       type: web
 mybatis:
-  type-aliases-package: com.xinlang.zly.project_user.bean
+  type-aliases-package: com.xinlang.zly.summary.bean
   mapper-locations: classpath:/mapper-mybatis/*
   configuration:
     mapUnderscoreToCamelCase: true
