@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改成员</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+        <div style="background-color: #009688; height: 30px; width: 100%;" class="layui-row">
+                <p style="text-align: center;line-height:30px;color: #FFF;">修改成员</p>
+            </div>
+
+        <div style="margin-top: 10px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <form class="form-horizontal" onsubmit="return false" id="form">
+                    <fieldset>
+
+                            <div class="form-group">
+                                    <label class="col-md-2 control-label">姓名</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" placeholder="请输入姓名" type="text" name="username" maxlength="50"
+                                            data-bv-notempty="true"
+                                            data-bv-notempty-message="用户名 不能为空">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                        <label class="col-md-2 control-label">性别</label>
+                                        <div class="col-md-10" style="width: 100px">
+                                            <select class="form-control input-sm" name="sex" id="sex">
+                                                <option value="1">男</option>
+                                                <option value="0">女</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="col-md-2 control-label">年龄</label>
+                                            <div class="col-md-9">
+                                                <input class="form-control" placeholder="请输入年龄" type="text" name="username" maxlength="50"
+                                                    data-bv-notempty="true"
+                                                    data-bv-notempty-message="用户名 不能为空">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="col-md-2 control-label">证件类型/证件号码</label>
+                                                <div class="col-md-9">
+                                                    <input class="form-control" placeholder="请输入证件号" type="text" name="username" maxlength="50"
+                                                        data-bv-notempty="true"
+                                                        data-bv-notempty-message="用户名 不能为空">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <label class="col-md-2 control-label">职称</label>
+                                                    <div class="col-md-9">
+                                                        <input class="form-control" placeholder="请输入职称" type="text" name="username" maxlength="50"
+                                                            data-bv-notempty="true"
+                                                            data-bv-notempty-message="用户名 不能为空">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label class="col-md-2 control-label">从事专业</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" placeholder="请输入专业" type="text" name="username" maxlength="50"
+                                                                data-bv-notempty="true"
+                                                                data-bv-notempty-message="用户名 不能为空">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <label class="col-md-2 control-label">工作单位</label>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" placeholder="请输入工作单位" type="text" name="username" maxlength="50"
+                                                                    data-bv-notempty="true"
+                                                                    data-bv-notempty-message="用户名 不能为空">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <label class="col-md-2 control-label">研究开发中的责任分工</label>
+                                                                <div class="col-md-9">
+                                                                    <input class="form-control" placeholder="请输入责任分工" type="text" name="username" maxlength="50"
+                                                                        data-bv-notempty="true"
+                                                                        data-bv-notempty-message="用户名 不能为空">
+                                                                </div>
+                                                            </div>
+
+
+
+                                                            <div  class="form-actions">
+                                                                    <div  class="row" align="center">
+                                                                        <div  class="col-md-12">
+                                                                            <button  class="btn btn-primary" onclick="location.href='userList.html'">返回</button>
+                                                                            <button   class="btn btn-primary" type="submit" onclick="add()">
+                                                                                <i class="fa fa-save"></i> 保存
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                        </fieldset>
+                    </form>
+                </div>
+            
+       
+
+            <script src="../../js/constant.js"></script>
+  <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="../../js/jq.js"></script>
+  <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../layui/layui.js"></script>
+  <script type="text/javascript" src="../../js/my/permission.js"></script>
+    
+</body>
+</html>
