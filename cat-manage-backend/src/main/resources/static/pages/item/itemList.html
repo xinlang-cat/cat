@@ -170,6 +170,10 @@
                                 var href = "updateItem.html?id=" + id;
                                 var edit = buttonEdit(href, "back:user:update", pers);
                                 var del = buttonDel(id, "back:permission:delete", pers);
+                                var detailsHref ="../project/details.html?id="+id;
+                                var details = "";
+                                var btn = $("<a  href="+detailsHref+" class=\"layui-btn\"> 详情</a>");
+                                details = btn.prop("outerHTML");
 
                                 /*//重置密码
                                 var resetPassword = "";
@@ -186,7 +190,7 @@
                                     btn.attr("onclick", 'setRoles(' +id+')');
                                     setRoles = btn.prop("outerHTML");
                                 }*/
-                                return edit + del;
+                                return edit +details+ del;
                             }
                         },
                     ],
