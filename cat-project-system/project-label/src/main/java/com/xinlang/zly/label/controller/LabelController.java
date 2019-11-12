@@ -30,7 +30,7 @@ public class LabelController {
     @LogAnnotation(module = "添加标签")
     @PostMapping
     public Label save(@RequestBody Label label){
-        label.setCreateTime(new Date());
+
         labelService.save(label);
         return label;
     }
@@ -43,8 +43,6 @@ public class LabelController {
     @LogAnnotation(module = "修改标签")
     @PutMapping
     public Label update(@RequestBody Label label) {
-        label.setUpdateTime(new Date());
-        label.setEnabled(1);
         labelService.update(label);
         return label;
     }

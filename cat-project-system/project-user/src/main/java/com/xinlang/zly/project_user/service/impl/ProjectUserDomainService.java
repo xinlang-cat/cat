@@ -35,7 +35,7 @@ public class ProjectUserDomainService implements IProjectUserDomainService {
         criteria.andEqualTo("userType",projectUserDomain.getUserType());
         int count1 = projectUserDomainMapper.selectCountByExample(example);
         if(count1<1){
-            projectUserDomainMapper.insert(projectUserDomain);
+            projectUserDomainMapper.insertSelective(projectUserDomain);
         }
     }
 
@@ -49,9 +49,7 @@ public class ProjectUserDomainService implements IProjectUserDomainService {
         if(pud != null){
             projectUserDomain = pud;
         }else {
-            example.clear();
-            example.createCriteria().andNotEqualTo("id",projectUserDomain.getId());
-            projectUserDomainMapper.updateByExample(projectUserDomain,example);
+            projectUserDomainMapper.updateByPrimaryKeySelective(projectUserDomain);
         }
     }
 
@@ -71,8 +69,6 @@ public class ProjectUserDomainService implements IProjectUserDomainService {
 
     @Override
     public void delete(Integer id) {
-        Example example = new Example(ProjectUserDomain.class);
-        example.createCriteria().andNotEqualTo("id",id);
-        projectUserDomainMapper.deleteByExample(example);
+        projectUserDomainMapper.deleteByPrimaryKey(id);
     }
 }

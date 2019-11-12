@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -21,7 +22,8 @@ public class ProjectUserItemService implements IProjectUserItemService {
     private ProjectUserItemMapper projectUserItemMapper;
     @Override
     public void save(ProjectUserItem projectUserItem) {
-        projectUserItemMapper.insert(projectUserItem);
+        projectUserItem.setCreateTime(new Date());
+        projectUserItemMapper.insertSelective(projectUserItem);
     }
 
     @Override
@@ -51,9 +53,7 @@ public class ProjectUserItemService implements IProjectUserItemService {
 
     @Override
     public void delete(Integer id) {
-        Example example = new Example(ProjectUserItem.class);
-        example.createCriteria().andEqualTo("id", id);
-        projectUserItemMapper.deleteByExample(example);
+        projectUserItemMapper.deleteByPrimaryKey(id);
     }
 
     @Override
@@ -63,9 +63,7 @@ public class ProjectUserItemService implements IProjectUserItemService {
         List<ProjectUserItem> list = projectUserItemMapper.selectByExample(example);
         Random random = new Random();
         int index = random.nextInt(list.size());
-        example.clear();
-        example.createCriteria().andEqualTo("id",list.get(index).getId());
-        projectUserItemMapper.deleteByExample(example);
+        projectUserItemMapper.deleteByPrimaryKey(list.get(index).getId());
     }
 
 }

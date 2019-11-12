@@ -3,6 +3,7 @@ package com.xinlang.zly_xyx.company.bean;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -15,6 +16,7 @@ import java.io.Serializable;
 public class CompanyUser implements Serializable {
     private static final long serialVersionUID = 3594392707554059829L;
 
+    @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer userId;//用户id

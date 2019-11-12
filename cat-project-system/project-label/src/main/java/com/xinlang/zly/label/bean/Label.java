@@ -3,6 +3,7 @@ package com.xinlang.zly.label.bean;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import java.util.List;
 @Table(name = "project_label")
 public class Label implements Serializable {
     private static final long serialVersionUID = 1511493084535163722L;
+    @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer pid;//父级ID
