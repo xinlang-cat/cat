@@ -27,7 +27,7 @@ public class CompanyService implements ICompanyService {
 
     @Override
     public void save(Company company){
-        companyMapper.insert(company);
+        companyMapper.insertSelective(company);
     }
 
     @Override

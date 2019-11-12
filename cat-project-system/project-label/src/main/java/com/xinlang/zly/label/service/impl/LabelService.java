@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -25,8 +26,9 @@ public class LabelService implements ILabelService {
 
     @Override
     public void save(Label label){
+        label.setCreateTime(new Date());
         findDuplicate(label);
-        labelMapper.insert(label);
+        labelMapper.insertSelective(label);
     }
 
     /**
@@ -46,9 +48,8 @@ public class LabelService implements ILabelService {
     public void update(Label label) {
         //不允许客户端修改标识
         label.setSign(null);
-        Example example = new Example(Label.class);
-        example.createCriteria().andEqualTo("id",label.getId());
-        labelMapper.updateByExampleSelective(label,example);
+        label.setUpdateTime(new Date());
+        labelMapper.updateByPrimaryKeySelective(label);
     }
 
     @Override

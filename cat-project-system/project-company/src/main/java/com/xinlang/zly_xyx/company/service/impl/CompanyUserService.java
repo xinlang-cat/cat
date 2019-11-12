@@ -28,7 +28,7 @@ public class CompanyUserService implements ICompanyUserService {
         if(companyUserMapper.selectByExample(example) == null){
             throw new IllegalArgumentException("该用户已绑定其他组织!");
         }
-       companyUserMapper.insert(companyUser);
+       companyUserMapper.insertSelective(companyUser);
     }
 
     @Override

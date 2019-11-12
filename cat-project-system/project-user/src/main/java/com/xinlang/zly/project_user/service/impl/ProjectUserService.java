@@ -29,15 +29,13 @@ public class ProjectUserService implements IProjectUserService {
     @Override
     public void save(ProjectUser projectUser) {
         projectUser.setCreateTime(new Date());
-        projectUserMapper.insert(projectUser);
+        projectUserMapper.insertSelective(projectUser);
     }
 
     @Override
     public void update(ProjectUser projectUser) {
         projectUser.setUpdateTime(new Date());
-        Example example = new Example(ProjectUser.class);
-        example.createCriteria().andEqualTo("id",projectUser.getId());
-        projectUserMapper.updateByExample(projectUser,example);
+        projectUserMapper.updateByPrimaryKeySelective(projectUser);
     }
 
     @Override
@@ -49,8 +47,7 @@ public class ProjectUserService implements IProjectUserService {
     public List<ProjectUser> findByUserType(String userType) {
         Example example = new Example(ProjectUser.class);
         example.createCriteria().andEqualTo("userType",userType).andEqualTo("enable",true);
-        List<ProjectUser> list = projectUserMapper.selectByExample(example);
-        return list;
+        return projectUserMapper.selectByExample(example);
     }
 
 
@@ -58,26 +55,18 @@ public class ProjectUserService implements IProjectUserService {
     public List<ProjectUser> findByUserId(Integer userId) {
         Example example = new Example(ProjectUser.class);
         example.createCriteria().andEqualTo("userId",userId).andEqualTo("enable",true);
-        List<ProjectUser> list = projectUserMapper.selectByExample(example);
-        return list;
+        return projectUserMapper.selectByExample(example);
     }
 
     @Override
     public List<ProjectUser> findByUserIds(Set<Integer> userIds) {
         Example example = new Example(ProjectUser.class);
         example.createCriteria().andIn("userId",userIds).andEqualTo("enable",true);
-        List<ProjectUser> list = projectUserMapper.selectByExample(example);
-        return list;
+        return projectUserMapper.selectByExample(example);
     }
 
     @Override
-    public void deleteByUserId(Integer userId) {
-        List<ProjectUser> list = findByUserId(userId);
-        list.forEach(projectUser -> {
-            projectUser.setEnable(false);
-            Example example = new Example(ProjectUser.class);
-            example.createCriteria().andEqualTo("userId",userId);
-            projectUserMapper.updateByExample(projectUser,example);
-        });
+    public void delete(Integer id) {
+        projectUserMapper.deleteByPrimaryKey(id);
     }
 }

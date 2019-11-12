@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +37,8 @@ public class ProjectUserSkillService implements IProjectUserSkillService {
         criteria.andEqualTo("userType",projectUserSkill.getUserType());
         int count1 = projectUserSkillMapper.selectCountByExample(example);
         if(count1<1){
-            projectUserSkillMapper.insert(projectUserSkill);
+            projectUserSkill.setCreateTime(new Date());
+            projectUserSkillMapper.insertSelective(projectUserSkill);
         }
     }
 
@@ -50,9 +52,8 @@ public class ProjectUserSkillService implements IProjectUserSkillService {
         if(pus != null){
             projectUserSkill = pus;
         }else{
-            example.clear();
-            example.createCriteria().andNotEqualTo("id",projectUserSkill.getId());
-            projectUserSkillMapper.updateByExample(projectUserSkill,example);
+            projectUserSkill.setUpdateTime(new Date());
+            projectUserSkillMapper.updateByPrimaryKeySelective(projectUserSkill);
         }
     }
 
@@ -72,8 +73,6 @@ public class ProjectUserSkillService implements IProjectUserSkillService {
 
     @Override
     public void delete(Integer id) {
-        Example example = new Example(ProjectUserSkill.class);
-        example.createCriteria().andNotEqualTo("id",id);
-        projectUserSkillMapper.deleteByExample(example);
+        projectUserSkillMapper.deleteByPrimaryKey(id);
     }
 }

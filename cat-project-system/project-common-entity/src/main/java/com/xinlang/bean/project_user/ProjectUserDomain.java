@@ -3,6 +3,7 @@ package com.xinlang.bean.project_user;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +19,7 @@ public class ProjectUserDomain implements Serializable {
 
     private static final long serialVersionUID = 5444507844212690899L;
 
+    @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer userId;
