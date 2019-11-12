@@ -20,8 +20,8 @@
                 <label class="col-md-1 control-label">计划类别</label>
                 <div class="col-md-3">
                     <select class="form-control input-sm" name="plan_category" id="planCategory">
-                        <option value=''>- 请选择 -</option>
-                    </select>
+                    <option value=''>- 请选择 -</option>
+                </select>
                 </div>
             </div>
 
@@ -104,9 +104,10 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">总体目标</label>
                 <div class="col-md-7">
-                    <textarea name="overall_objective" id="overall_objective" rows="6" cols="110" data-bv-notempty="true"
-                              data-bv-notempty-message=" 内容不能为空">
-                    </textarea>
+                    <textarea class="layui-textarea" name="overall_objective" id="overall_objective"
+                              style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
                 </div>
             </div>
 
@@ -134,9 +135,10 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/project/initData.js"></script>
 <script type="text/javascript">
-    layui.use(['layer', 'laydate'], function () {
-        var layer = layui.layer,
-            laydate = layui.laydate;
+    layui.use(['layer', 'laydate','upload'], function () {
+        var layer = layui.layer
+            ,upload = layui.upload
+            ,laydate = layui.laydate;
 
         laydate.render({
             elem: '#start_date'
@@ -145,6 +147,22 @@
         laydate.render({
             elem: '#end_date'
             , format: 'yyyy年MM月dd日'
+        });
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#file' //绑定元素
+            ,accept: 'file'
+            ,url: domainName+'/zuul/api-f/files' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                var id = res.id,
+                    name = res.name;
+                $("#contract").val(id);
+                $("#file").val(name);
+            }
+            ,error: function(){
+                //请求异常回调
+            }
         });
     });
 
@@ -161,6 +179,7 @@
                 async: false,
                 success: function (data) {
                     getsuperior(data.district);
+                    getContractFile(data.contract_file);
                     $("#id").val(data.id);
                     $("#contract_number").val(data.contract_number);
                     $("#planCategory").val(data.plan_category);
@@ -174,7 +193,7 @@
 
                     $("#overall_objective").val(data.overall_objective);
                     $("#district").val(data.district);
-                    $("#contract_file").val(data.contract_file);
+                    //$("#contract_file").val(data.contract_file);
 
                     $("#start_date").val(data.start_dateStr);
                     $("#end_date").val(data.end_dateStr);

@@ -46,6 +46,17 @@ public class ItemBudgetService implements IItemBudgetService {
     }
 
     @Override
+    public List<ItemBudget> queryBudgetByIid(Integer Iid) {
+        ItemBudget itemBudget = new ItemBudget();
+        itemBudget.setItem_id(Iid);
+        List<ItemBudget> list = itemBudgetMapper.select(itemBudget);
+        if(CollectionUtils.isEmpty(list)){
+            throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
+        }
+        return list;
+    }
+
+    @Override
     public void updateBudget(ItemBudget itemBudget) {
         int i = itemBudgetMapper.updateByPrimaryKeySelective(itemBudget);
         if(i != 1){

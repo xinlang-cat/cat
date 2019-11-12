@@ -115,8 +115,8 @@ function getContractFile(id){
         success : function(data) {
             var id = data.id,
                 name = data.name;
-            $("#file").val(id);
-            $("#contract").val(name);
+            $("#file").val(name);
+            $("#contract").val(id);
         }
     });
 }

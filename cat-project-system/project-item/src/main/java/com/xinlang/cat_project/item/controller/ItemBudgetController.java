@@ -35,14 +35,26 @@ public class ItemBudgetController {
     }
 
     /**
-     * 获取资金的所有越算
+     * 获取资金的所有预算
      * @param Fid 资金id
      * @return
      */
-    @GetMapping("/all/{Fid}")
-    public ResponseEntity<List<ItemBudget>> getBudgetByFid(@PathVariable Integer Fid){
+    @GetMapping("/group/{Fid}")
+    public ResponseEntity<List<ItemBudget>> getBudgetGroupByFid(@PathVariable Integer Fid){
 
         List<ItemBudget> itemBudgets = itemBudgetService.queryBudgetByFid(Fid);
+        return ResponseEntity.ok(itemBudgets);
+    }
+
+    /**
+     * 获取项目的所有预算
+     * @param Iid 项目id
+     * @return
+     */
+    @GetMapping("/all/{Iid}")
+    public ResponseEntity<List<ItemBudget>> getBudgetAllByIid(@PathVariable Integer Iid){
+
+        List<ItemBudget> itemBudgets = itemBudgetService.queryBudgetByIid(Iid);
         return ResponseEntity.ok(itemBudgets);
     }
 

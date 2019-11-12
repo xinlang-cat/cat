@@ -19,6 +19,7 @@ public class ItemBudget {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer fund_id;
+    private Integer item_id;
     private String subject;
     private Float money;
     private String content;

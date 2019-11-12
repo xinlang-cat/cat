@@ -104,11 +104,11 @@ public class ItemTargetService implements IItemTargetService {
             itemUser.setTarget_id(t.getId());
             List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
             //循环查找成员信息
-            ProjectUser projectUser;
+            List<ProjectUser> projectUser;
             List<ProjectUser> PU = new ArrayList<>();
             for (ItemUser u : itemUsers) {
                 projectUser = consumeProjectUser.findByUserId(u.getUser_id());
-                PU.add(projectUser);
+                PU.add(projectUser.get(0));
             }
             //存成员信息
             itemTarget.put("projectUser",PU);
