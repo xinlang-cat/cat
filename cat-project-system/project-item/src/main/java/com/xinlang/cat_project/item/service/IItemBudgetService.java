@@ -11,6 +11,8 @@ public interface IItemBudgetService {
 
     List<ItemBudget> queryBudgetByFid(Integer Fid);
 
+    List<ItemBudget> queryBudgetByIid(Integer iid);
+
     void updateBudget(ItemBudget itemBudget);
 
     void deleteBudget(Integer id);

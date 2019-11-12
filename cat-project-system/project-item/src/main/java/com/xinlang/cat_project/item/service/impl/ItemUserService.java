@@ -36,9 +36,9 @@ public class ItemUserService implements IItemUserService {
 
         Map<String, Object> ItemUserInfo = new HashMap<>();
         ItemUser itemUser = itemUserMapper.selectByPrimaryKey(id);
-        ProjectUser projectUser = consumeProjectUser.findByUserId(itemUser.getUser_id());
+        List<ProjectUser> projectUser = consumeProjectUser.findByUserId(itemUser.getUser_id());
         ItemUserInfo.put("itemUser",itemUser);
-        ItemUserInfo.put("projectUser",projectUser);
+        ItemUserInfo.put("projectUser",projectUser.get(0));
         return ItemUserInfo;
     }
 
@@ -49,7 +49,7 @@ public class ItemUserService implements IItemUserService {
         ItemUser itemUser = new ItemUser();
         itemUser.setItem_id(Iid);
         List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
-        ProjectUser projectUser;
+        List<ProjectUser> projectUser;
         for (ItemUser u : itemUsers) {
             Map<String, Object> ItemUserInfo = new HashMap<>();
             projectUser = consumeProjectUser.findByUserId(u.getUser_id());

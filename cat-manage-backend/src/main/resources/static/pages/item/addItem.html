@@ -90,13 +90,13 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">开始时间</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
+                    <input class="form-control date" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
                            id="start" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空">
                 </div>
                 <label class="col-md-1 control-label">结束时间</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="结束时间" type="text" name="end_dateStr" maxlength="50"
+                    <input class="form-control date" placeholder="结束时间" type="text" name="end_dateStr" maxlength="50"
                            id="end" data-bv-notempty="true"
                            data-bv-notempty-message="结束时间 不能为空">
                 </div>
@@ -104,9 +104,10 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">总体目标</label>
                 <div class="col-md-7">
-                    <textarea name="overall_objective" rows="6" cols="110" data-bv-notempty="true"
-                              data-bv-notempty-message=" 内容不能为空">
-                    </textarea>
+                    <textarea class="layui-textarea" name="overall_objective"
+                              style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
                 </div>
             </div>
 
@@ -138,17 +139,12 @@
             ,upload = layui.upload
             , laydate = layui.laydate;
 
-        laydate.render({
-            elem: '#approval'
-            , format: 'yyyy年MM月dd日'
-        });
-        laydate.render({
-            elem: '#start'
-            , format: 'yyyy年MM月dd日'
-        });
-        laydate.render({
-            elem: '#end'
-            , format: 'yyyy年MM月dd日'
+        lay('.date').each(function(){
+            laydate.render({
+                elem: this
+                ,format:'yyyy年MM月dd日'
+                ,trigger: 'click'
+            });
         });
         //文件上传
         var uploadInst = upload.render({
