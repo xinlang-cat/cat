@@ -73,11 +73,11 @@ public class ProjectUserController {
     }
 
     /**
-     * @param userId 根据系统用户表id删除
+     * @param id 根据id删除
      */
-    @DeleteMapping("/user/{userId}")
-    public void deleteByUserId(@PathVariable Integer userId){
-        projectUserService.deleteByUserId(userId);
+    @DeleteMapping("/user/{id}")
+    public void deleteByUserId(@PathVariable Integer id){
+        projectUserService.delete(id);
     }
 
 
