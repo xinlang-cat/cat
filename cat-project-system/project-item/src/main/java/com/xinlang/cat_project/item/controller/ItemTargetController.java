@@ -4,9 +4,12 @@ import com.xinlang.cat_project.item.VO.TargetInfo;
 import com.xinlang.cat_project.item.VO.TargetInfoAll;
 import com.xinlang.cat_project.item.pojo.ItemTarget;
 import com.xinlang.cat_project.item.service.IItemTargetService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +30,9 @@ public class ItemTargetController {
      * @param target
      * @return
      */
+    @ApiOperation(value = "添加指标信息")
+    @LogAnnotation(module = "添加指标信息")
+    @PreAuthorize("hasAnyAuthority('project:target:save')")
     @PostMapping
     public ResponseEntity<Void> saveTarget(@RequestBody ItemTarget target){
         targetService.saveTarget(target);
@@ -38,6 +44,8 @@ public class ItemTargetController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "获取一条指标信息")
+    @LogAnnotation(module = "获取一条指标信息")
     @GetMapping("/{id}")
     public ResponseEntity<ItemTarget> getTargetById(@PathVariable Integer id){
 
@@ -50,10 +58,26 @@ public class ItemTargetController {
      * @param Cid 内容id
      * @return
      */
-    @GetMapping("/all/{Cid}")
+    @ApiOperation(value = "获取主要研究内容的所有指标信息及实施人员")
+    @LogAnnotation(module = "获取主要研究内容的所有指标信息")
+    @GetMapping("/group/{Cid}")
     public ResponseEntity<List<Map<String, Object>>> getTargetByCid(@PathVariable Integer Cid){
 
         List<Map<String, Object>> target = targetService.queryTargetByCId(Cid);
+        return ResponseEntity.ok(target);
+    }
+
+    /**
+     * 获取项目全部指标以及实施人员
+     * @param itemId 项目id
+     * @return
+     */
+    @ApiOperation(value = "获取项目所有指标信息及实施人员")
+    @LogAnnotation(module = "获取项目所有指标信息")
+    @GetMapping("/all/{Cid}")
+    public ResponseEntity<List<Map<String, Object>>> getTargetByItemId(@PathVariable Integer itemId){
+
+        List<Map<String, Object>> target = targetService.queryTargetByItemId(itemId);
         return ResponseEntity.ok(target);
     }
 
@@ -62,6 +86,9 @@ public class ItemTargetController {
      * @param target
      * @return
      */
+    @ApiOperation(value = "修改指标信息，id必填")
+    @LogAnnotation(module = "修改指标信息")
+    @PreAuthorize("hasAnyAuthority('project:target:update')")
     @PutMapping
     public ResponseEntity<Void> updateTarget(@RequestBody ItemTarget target){
         targetService.updateTarget(target);
@@ -73,6 +100,9 @@ public class ItemTargetController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "删除指标信息，id必填")
+    @LogAnnotation(module = "删除指标信息")
+    @PreAuthorize("hasAnyAuthority('project:target:delete')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTarget(@PathVariable Integer id){
         targetService.deleteTarget(id);
