@@ -109,14 +109,14 @@ function getProjectFund(id){
                     + ' <th style="text-align: center;">' + this.money + '</th>'
                     + ' <th>' + this.remark + '</th>'
                     + ' <th>'
-                    + ' <div style="width: 100%;height: 20px;align-self: center;">'
+
+                    + '</th>'  + ' <div style="width: 100%;height: 20px;align-self: center;">'
                     + '<button onclick="updat_fund('+this.id+')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
                     + '<p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe642;</i></p>'
                     + '</button>'
                     + '<button onclick="delete_fund('+this.id+')" style="height: 20px;width: 30px;align-self: center;"   class="layui-btn layui-btn-sm">  <p style="line-height: 20px;margin-left: -3px;"><i  class="layui-icon">&#xe640;</i></p>'
                     + '</button>'
                     + '</div>'
-                    + '</th>'
                     + '</tr>';
             });
             $("#summation").text(count);

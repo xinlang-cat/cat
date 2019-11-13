@@ -7,7 +7,7 @@
 <body>
 
 <div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
-    <p style="text-align: center;line-height:30px;color: #FFF;">添加项目预算</p>
+    <p style="text-align: center;line-height:30px;color: #FFF;">添加使用资金</p>
 
 </div>
 <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -93,12 +93,12 @@
 
         $.ajax({
             type: 'get',
-            url: domainName + '/project-item/item/content/all/' + id,
+            url: domainName + '/project-item/item/fund/all/' + id,
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 var str = '';
                 $(res).each(function () {
-                    str += '    <option value="' + this.id + '">' + this.headline + '</option>';
+                    str += '    <option value="' + this.id + '">' + this.source + '</option>';
                 });
                 $("#option").append(str);
 
@@ -111,7 +111,7 @@
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: domainName + '/project-item/item/target',
+            url: domainName + '/project-item/item/budget',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
