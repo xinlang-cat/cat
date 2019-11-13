@@ -16,5 +16,5 @@ public interface IProjectUserService {
     List<ProjectUser> findByUserType(String userType);
     List<ProjectUser> findByUserId(Integer userId);
     List<ProjectUser> findByUserIds(Set<Integer> userIds);
-    void delete(Integer idd);
+    void delete(Integer id);
 }

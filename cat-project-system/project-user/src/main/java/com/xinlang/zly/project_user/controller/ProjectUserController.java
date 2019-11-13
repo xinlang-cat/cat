@@ -7,7 +7,9 @@ import com.xinlang.zly.project_user.mapper.ProjectUserDomainMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserSkillService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.xinlang.zly.project_user.service.IProjectUserService;
 
@@ -27,13 +29,16 @@ public class ProjectUserController {
     @Autowired
     private IProjectUserDomainService projectUserDomainService;
 
+    @LogAnnotation(module = "添加用户信息")
+    @PreAuthorize("hasAnyAuthority('project:user:save')")
     @PostMapping("/user")
-
     public ProjectUser save(@RequestBody ProjectUser projectUser){
         projectUserService.save(projectUser);
         return projectUser;
     }
 
+    @LogAnnotation(module = "修改用户信息")
+    @PreAuthorize("hasAnyAuthority('project:user:update')")
     @PutMapping("/user")
     public ProjectUser update(@RequestBody ProjectUser projectUser){
         projectUserService.update(projectUser);
@@ -43,6 +48,8 @@ public class ProjectUserController {
     /**
      * @return 所有的实体
      */
+    @LogAnnotation(module = "查询所有用户信息")
+    @PreAuthorize("hasAnyAuthority('project:user:query:all')")
     @GetMapping("/user/all")
     public List<ProjectUser> findAll(){
         List<ProjectUser> list =  projectUserService.findAll();
@@ -54,6 +61,8 @@ public class ProjectUserController {
      * @param userType 根据类型查询，例如专家，监理，等类型
      * @return 所有该类型的实体
      */
+    @LogAnnotation(module = "根据用户类型查询用户信息")
+    @PreAuthorize("hasAnyAuthority('project:user:query:by_type')")
     @GetMapping("/user/type/{userType}")
     public List<ProjectUser> findByUserType(@PathVariable String userType){
         List<ProjectUser> list =  projectUserService.findByUserType(userType);
@@ -73,11 +82,11 @@ public class ProjectUserController {
     }
 
     /**
-     * @param userId 根据系统用户表id删除
+     * @param id 根据id删除
      */
-    @DeleteMapping("/user/{userId}")
-    public void deleteByUserId(@PathVariable Integer userId){
-        projectUserService.deleteByUserId(userId);
+    @DeleteMapping("/user/{id}")
+    public void deleteByUserId(@PathVariable Integer id){
+        projectUserService.delete(id);
     }
 
 
