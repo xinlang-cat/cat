@@ -7,6 +7,7 @@ import com.xinlang.zly_xyx.cat_file_server.config.AlbumServiceFactory;
 import com.xinlang.zly_xyx.cat_file_server.mapper.AlbumMapper;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class AlbumController {
 
 
     @LogAnnotation(module = "上传照片到相册", recordParam = false)
+    @ApiOperation(value = "上传照片到相册")
     @PostMapping
     public Album upload(HttpServletRequest request ,@RequestParam("file") MultipartFile multipartFile, String source,String address ){
         IAlbumService fileService = albumServiceFactory.getAlbumService(source);
@@ -42,6 +44,7 @@ public class AlbumController {
 
 
     @LogAnnotation(module = "上传照片到相册", recordParam = false)
+    @ApiOperation(value = "上传照片到相册")
     @PostMapping("/layui")
     public Map<String,Object> uploadLayui(HttpServletRequest request,@RequestParam("file")MultipartFile multipartFile, String source,String address) throws Exception{
         Album album = upload(request,multipartFile,source,address);
@@ -54,8 +57,8 @@ public class AlbumController {
     }
 
 
-    @LogAnnotation(module = "文件删除")
-    @PreAuthorize("hasAnyAuthority('album:del')")
+    @LogAnnotation(module = "删除照片")
+    @ApiOperation(value = "删除照片")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable String id){
         Album album = albumMapper.getById(id);
@@ -67,9 +70,9 @@ public class AlbumController {
     }
 
 
-
-    @PreAuthorize("hasAuthority('album:query')")
     @GetMapping
+    @LogAnnotation(module = "查询相册")
+    @ApiOperation(value = "查询相册")
     public Page<Album> findFiles(@RequestParam Map<String, Object> params) {
         int total = albumMapper.count(params);
         List<Album> list = Collections.emptyList();

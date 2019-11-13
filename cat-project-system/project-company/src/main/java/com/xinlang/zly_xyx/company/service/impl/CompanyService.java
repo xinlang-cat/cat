@@ -59,6 +59,19 @@ public class CompanyService implements ICompanyService {
     }
 
     @Override
+    public Company findByUserId(Integer userId) {
+        Example example = new Example(CompanyUser.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        CompanyUser companyUser  = companyUserMapper.selectOneByExample(example);
+        if(companyUser != null){
+            Example example1 = new Example(Company.class);
+            example.createCriteria().andEqualTo("deptCode",companyUser.getDeptCode());
+            return companyMapper.selectOneByExample(example);
+        }
+        return null;
+    }
+
+    @Override
     public List<Company> findAll(){
         return companyMapper.selectAll();
     }

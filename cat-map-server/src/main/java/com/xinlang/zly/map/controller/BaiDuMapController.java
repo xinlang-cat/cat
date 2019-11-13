@@ -1,6 +1,8 @@
 package com.xinlang.zly.map.controller;
 
 import com.xinlang.zly.map.bean.BaiDuData;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONObject;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,7 +29,6 @@ import java.util.Map;
  * 2019-11-06
  */
 @RestController
-@RequestMapping("/baiDuMap")
 public class BaiDuMapController {
 
 
@@ -40,7 +41,9 @@ public class BaiDuMapController {
      * @param lng 百度地图通过经纬度来获取地址,传入参数纬度lat、经度lng该方法数据解析并未完善，BaiDuRoads实体需要添加属性
      * @return 地址
      */
-    @GetMapping(value = "/address",params = {"lat","lng"})
+    @GetMapping(value = "/baiDuMap/address",params = {"lat","lng"})
+    @ApiOperation(value = "根据经纬度获取地址")
+    @LogAnnotation(module = "根据经纬度获取地址")
     public BaiDuData getLocationInfo(String lat, String lng) {
         // String url =
         // "http://api.map.baidu.com/geocoder?ak=1RCUrYA1VEnxozLjRGIL84uBBZT48GtS"
@@ -55,12 +58,9 @@ public class BaiDuMapController {
         return baiduDATA;
     }
 
-    /**
-     * 百度地图通过地址来获取经纬度，传入参数address
-     * @param address 地址
-     * @return 经纬度
-     */
-    @GetMapping("/lng_lat/{address}")
+    @GetMapping("/baiDuMap/lng_lat/{address}")
+    @ApiOperation(value = "百度地图通过地址来获取经纬度，传入参数address")
+    @LogAnnotation(module = "百度地图通过地址来获取经纬度")
     public Map<String, Double> findLngAndLat(@PathVariable String address) {
         Map<String, Double> map = new HashMap<>();
         String url = "http://api.map.baidu.com/geocoder/v2/?address=" + address + "&output=json&ak="+baiDuMapAK;

@@ -8,6 +8,8 @@ import com.xinlang.zly.map.service.IAreaService;
 import com.xinlang.zly.map.service.ICityService;
 import com.xinlang.zly.map.service.IProvinceService;
 import com.xinlang.zly.map.service.IStreetService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,28 +23,21 @@ import java.util.List;
  * 2019-11-01
  */
 @RestController
-@RequestMapping("/street")
 public class StreetController {
 
     @Autowired
     private IStreetService streetService;
 
-    /**
-     * 根据区县代码获取街道、镇
-     * @param areaCode
-     * @return
-     */
-    @GetMapping("/all/{areaCode}")
+    @GetMapping("/street/all/{areaCode}")
+    @ApiOperation(value = "根据省份编码获取省份")
+    @LogAnnotation(module = "根据省份编码码获取省份")
     public List<Street> findAllByAreaCode(@PathVariable String areaCode){
         return streetService.findByAreaCode(areaCode);
     }
 
-    /**
-     * 根据代码获取街道、镇
-     * @param streetCode
-     * @return
-     */
-    @GetMapping("/one/{streetCode}")
+    @GetMapping("/street/one/{streetCode}")
+    @ApiOperation(value = "根据街道编码获取街道、镇")
+    @LogAnnotation(module = "根据街道编码获取街道、镇")
     public Street findByStreetCode(@PathVariable String streetCode){
         return streetService.findByStreetCode(streetCode);
     }

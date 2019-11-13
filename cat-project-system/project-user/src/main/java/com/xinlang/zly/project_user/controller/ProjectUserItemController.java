@@ -7,7 +7,10 @@ import com.xinlang.bean.project_user.ProjectUserType;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserItemService;
 import com.xinlang.zly.project_user.service.IProjectUserService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,24 +32,19 @@ public class ProjectUserItemController {
     private IProjectUserDomainService projectUserDomainService;
     @Autowired
     private IProjectUserService projectUserService;
-    /**
-     * 全参不包括id
-     * @param projectUserItem
-     * @return ProjectUserItem
-     */
+
     @PostMapping("/item")
+    @ApiOperation(value = "全参不包括id")
+    @LogAnnotation(module = "添加用户与项目关系")
     public ProjectUserItem save(ProjectUserItem projectUserItem) {
         projectUserItemService.save(projectUserItem);
         return projectUserItem;
     }
 
-    /**
-     * 匹配专家
-     * @param labelSign
-     * @param population
-     * @return
-     */
     @PostMapping(value = "/item/match/expert",params = {"labelSign","population","itemId"})
+    @ApiOperation(value = "匹配专家")
+    @LogAnnotation(module = "匹配专家")
+    @PreAuthorize("hasAnyAuthority('project:item:match:expert')")
     public ProjectUserItem matchExpert(String labelSign,Integer population,Integer itemId){
         //找到所有拥有{labelSign}标签的专家
        List<ProjectUserDomain> domains = projectUserDomainService.findByLabelSign(labelSign, ProjectUserType.EXPERT.name());
@@ -99,11 +97,17 @@ public class ProjectUserItemController {
     }
 
     @DeleteMapping("/item/{id}")
+    @ApiOperation(value = "删除用户与项目关系")
+    @LogAnnotation(module = "删除用户与项目关系")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
     public void delete(@PathVariable Integer id){
         projectUserItemService.delete(id);
     }
 
     @DeleteMapping(value = "/item",params = {"itemId","labelSign","userType"})
+    @ApiOperation(value = "随机移除一位专家,仅限匹配时")
+    @LogAnnotation(module = "随机移除一位专家,")
+    @PreAuthorize("hasAnyAuthority('project:item:random:delete')")
     public void randomDelete(Integer itemId,String labelSign,String userType){
         if(userType == null || "".equals(userType)){
             userType = ProjectUserType.EXPERT.name();

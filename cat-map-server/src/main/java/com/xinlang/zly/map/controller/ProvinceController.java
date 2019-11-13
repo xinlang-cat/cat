@@ -8,6 +8,8 @@ import com.xinlang.zly.map.service.IAreaService;
 import com.xinlang.zly.map.service.ICityService;
 import com.xinlang.zly.map.service.IProvinceService;
 import com.xinlang.zly.map.service.IStreetService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +25,6 @@ import java.util.Map;
  * 2019-11-01
  */
 @RestController
-@RequestMapping("/province")
 public class ProvinceController {
 
     @Autowired
@@ -35,35 +36,23 @@ public class ProvinceController {
     @Autowired
     private IStreetService streetService;
 
-
-
-    /**
-     * 获取省份
-     * @return
-     */
-    @GetMapping("/all")
+    @GetMapping("/province/all")
+    @ApiOperation(value = "获取所有省份")
+    @LogAnnotation(module = "根获取所有省份")
     public List<Province> findAll(){
         return provinceService.findAll();
     }
 
-
-    /**
-     * 根据代码获取省份
-     * @return
-     */
-    @GetMapping("/one/{provinceCode}")
+    @GetMapping("/province/one/{provinceCode}")
+    @ApiOperation(value = "根据省份编码获取省份")
+    @LogAnnotation(module = "根据省份编码码获取省份")
     public Province findByProvinceCode(@PathVariable String provinceCode){
         return provinceService.findByProvinceCode(provinceCode);
     }
 
-
-    /**
-     * 根据下级代码获取省份
-     * @param childCode
-     * @param
-     * @return
-     */
-    @GetMapping("/tree/{childCode}")
+    @GetMapping("/province/tree/{childCode}")
+    @ApiOperation(value = "根据下级代码获取省份")
+    @LogAnnotation(module = "根据下级代码获取省份")
     public Map<String,Object> findProvinceByChildCode(@PathVariable String childCode){
         Map<String,Object> map = new HashMap<>();
         Street street = streetService.findByStreetCode(childCode);
