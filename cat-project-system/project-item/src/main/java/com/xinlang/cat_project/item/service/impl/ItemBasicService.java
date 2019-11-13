@@ -2,8 +2,10 @@ package com.xinlang.cat_project.item.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xinlang.bean.company.Company;
 import com.xinlang.cat_project.item.enums.ExceptionEnum;
 import com.xinlang.cat_project.item.exception.ItemException;
+import com.xinlang.cat_project.item.fegin.ConsumeCompany;
 import com.xinlang.cat_project.item.fegin.ConsumeUser;
 import com.xinlang.cat_project.item.mapper.ItemBasicMapper;
 import com.xinlang.cat_project.item.pojo.ItemBasic;
@@ -36,6 +38,9 @@ public class ItemBasicService implements IItemBasicService {
 
     @Autowired
     private ConsumeUser consumeUser;
+
+    @Autowired
+    private ConsumeCompany consumeCompany;
 
     @Override
     public PageResult<ItemBasic> queryList(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params) throws ItemException{
@@ -78,9 +83,12 @@ public class ItemBasicService implements IItemBasicService {
         //获取当前用户
         //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
         LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
+        //通过当前用户获取公司
+        Company company = consumeCompany.findByUserId(loginAppUser.getId().intValue());
         //SET 创建人id、创建时间、状态
         basic.setEdit_userid(loginAppUser.getId().intValue());
         basic.setEdit_date(new Date());
+        basic.setDept_code(company.getDeptCode());
         try {
             basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), "yyyy年MM月dd日"));
             basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), "yyyy年MM月dd日"));

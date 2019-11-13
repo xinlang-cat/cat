@@ -43,6 +43,7 @@ public class ItemBasic implements Serializable {
     private Date end_date;
     private Date edit_date;
     private Integer edit_userid;
+    private String dept_code;
     private Integer status;
 
     @Transient

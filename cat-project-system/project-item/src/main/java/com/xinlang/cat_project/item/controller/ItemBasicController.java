@@ -3,9 +3,12 @@ package com.xinlang.cat_project.item.controller;
 import com.xinlang.cat_project.item.pojo.ItemBasic;
 import com.xinlang.cat_project.item.pojo.PageResult;
 import com.xinlang.cat_project.item.service.IItemBasicService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -31,6 +34,7 @@ public class ItemBasicController {
      * @param params 参数
      * @return
      */
+    @LogAnnotation(module = "获取项目列表")
     @GetMapping
     public ResponseEntity<PageResult<ItemBasic>> getItemAll(@RequestParam(value = "start", defaultValue = "1") Integer page,
                                                             @RequestParam(value = "length", defaultValue = "10") Integer rows,
@@ -53,6 +57,9 @@ public class ItemBasicController {
      * @param basic
      * @return
      */
+    @ApiOperation(value = "添加项目基础信息")
+    @LogAnnotation(module = "添加项目基础信息")
+    @PreAuthorize("hasAnyAuthority('project:basic:save')")
     @PostMapping
     public ResponseEntity<Void> saveItem(@RequestBody ItemBasic basic) {
 
@@ -65,6 +72,8 @@ public class ItemBasicController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "查询一条项目基础信息")
+    @LogAnnotation(module = "查询一条项目基础信息")
     @GetMapping("/{id}")
     public ResponseEntity<ItemBasic> getItemById(@PathVariable Integer id){
 
@@ -78,6 +87,9 @@ public class ItemBasicController {
      * @param basic
      * @return
      */
+    @ApiOperation(value = "修改项目基础信息，id必填")
+    @LogAnnotation(module = "修改项目基础信息")
+    @PreAuthorize("hasAnyAuthority('project:basic:update')")
     @PutMapping
     public ResponseEntity<Void> updateItem(@RequestBody ItemBasic basic){
         itemService.updateItem(basic);
@@ -89,6 +101,9 @@ public class ItemBasicController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "删除项目基础信息，id必填")
+    @LogAnnotation(module = "删除项目基础信息")
+    @PreAuthorize("hasAnyAuthority('project:basic:delete')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteItem(@PathVariable Integer id){
         itemService.deleteItem(id);
@@ -100,6 +115,9 @@ public class ItemBasicController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "废弃项目，id必填")
+    @LogAnnotation(module = "废弃项目")
+    @PreAuthorize("hasAnyAuthority('project:basic:discard')")
     @PutMapping("/discard/{id}")
     public ResponseEntity<Void> discardItem(@PathVariable Integer id){
         itemService.discardItem(id);

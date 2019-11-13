@@ -65,8 +65,8 @@ public class CompanyService implements ICompanyService {
         CompanyUser companyUser  = companyUserMapper.selectOneByExample(example);
         if(companyUser != null){
             Example example1 = new Example(Company.class);
-            example.createCriteria().andEqualTo("deptCode",companyUser.getDeptCode());
-            return companyMapper.selectOneByExample(example);
+            example1.createCriteria().andEqualTo("deptCode",companyUser.getDeptCode());
+            return companyMapper.selectOneByExample(example1);
         }
         return null;
     }

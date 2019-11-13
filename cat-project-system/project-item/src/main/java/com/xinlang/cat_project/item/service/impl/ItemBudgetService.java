@@ -39,9 +39,9 @@ public class ItemBudgetService implements IItemBudgetService {
         ItemBudget itemBudget = new ItemBudget();
         itemBudget.setFund_id(Fid);
         List<ItemBudget> list = itemBudgetMapper.select(itemBudget);
-        if(CollectionUtils.isEmpty(list)){
+        /*if(CollectionUtils.isEmpty(list)){
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
+        }*/
         return list;
     }
 
@@ -50,9 +50,9 @@ public class ItemBudgetService implements IItemBudgetService {
         ItemBudget itemBudget = new ItemBudget();
         itemBudget.setItem_id(Iid);
         List<ItemBudget> list = itemBudgetMapper.select(itemBudget);
-        if(CollectionUtils.isEmpty(list)){
+        /*if(CollectionUtils.isEmpty(list)){
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
+        }*/
         return list;
     }
 
