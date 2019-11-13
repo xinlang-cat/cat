@@ -17,7 +17,6 @@ import java.util.List;
  * 2019-11-03
  */
 @RestController
-@RequestMapping
 public class CompanyUserController {
     @Autowired
     private CompanyUserService companyUserService;

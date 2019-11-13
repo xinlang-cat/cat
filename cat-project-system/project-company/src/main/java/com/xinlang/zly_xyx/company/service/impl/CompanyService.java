@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
-import com.xinlang.zly_xyx.company.bean.Company;
+import com.xinlang.bean.company.Company;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyMapper;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;

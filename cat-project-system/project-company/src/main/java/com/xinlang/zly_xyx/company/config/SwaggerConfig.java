@@ -18,8 +18,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
     @Bean
     public Docket docket(){
-        return new Docket(DocumentationType.SWAGGER_2).groupName("project system company swagger interface document")
-                .apiInfo(new ApiInfoBuilder().title("project system company interface document")
+        return new Docket(DocumentationType.SWAGGER_2).groupName("project company swagger interface document")
+                .apiInfo(new ApiInfoBuilder().title("project company interface document")
                         .contact(new Contact("zhanglongyi","","18777811286@163.com")).version("1.0")
                         .build()).select().paths(PathSelectors.any()).build();
     }

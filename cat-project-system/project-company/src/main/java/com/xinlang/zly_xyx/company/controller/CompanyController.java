@@ -1,13 +1,10 @@
 package com.xinlang.zly_xyx.company.controller;
 
-import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
-import com.xinlang.zly_xyx.company.bean.Company;
+import com.xinlang.bean.company.Company;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
-import com.xinlang.zly_xyx.user.LoginAppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -18,7 +15,6 @@ import java.util.List;
  * 2019-09-25
  */
 @RestController
-@RequestMapping
 public class CompanyController {
 
     @Autowired
