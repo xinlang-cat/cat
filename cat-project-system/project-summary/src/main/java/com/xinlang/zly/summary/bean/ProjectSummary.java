@@ -16,22 +16,16 @@ import java.util.Date;
  */
 @Data
 @Table(name = "project_summary")
-@ApiModel(value = "项目总结对象",description = "项目总结ProjectSummary对象")
 public class ProjectSummary implements Serializable {
     private static final long serialVersionUID = 1340653261208252531L;
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    @ApiModelProperty(value="系统用户表id",name="userId",required=true)
-    private Integer userId;
-    @ApiModelProperty(value="用户类型",name="userType",required=true)
-    private Integer userType;
-    @ApiModelProperty(value="用户姓名",name="name",required=true)
-    private String name;
-    @ApiModelProperty(value="项目表id",name="itemId",required=true)
-    private Integer itemId;
-    @ApiModelProperty(value="内容",name="content",required=true)
-    private String content;
+    private Integer userId;//系统用户表id
+    private Integer userType;//用户类型
+    private String name;//用户姓名
+    private Integer itemId;//项目表id
+    private String content;//内容
     private Date createTime;
     private Date updateTime;
 }

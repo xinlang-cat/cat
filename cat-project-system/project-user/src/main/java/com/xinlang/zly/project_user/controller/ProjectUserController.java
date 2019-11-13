@@ -8,7 +8,9 @@ import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserSkillService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.xinlang.zly.project_user.service.IProjectUserService;
@@ -29,6 +31,7 @@ public class ProjectUserController {
     @Autowired
     private IProjectUserDomainService projectUserDomainService;
 
+    @ApiOperation(value = "添加用户信息,全参不包含id")
     @LogAnnotation(module = "添加用户信息")
     @PreAuthorize("hasAnyAuthority('project:user:save')")
     @PostMapping("/user")
@@ -37,6 +40,7 @@ public class ProjectUserController {
         return projectUser;
     }
 
+    @ApiOperation(value = "修改用户信息，id必填")
     @LogAnnotation(module = "修改用户信息")
     @PreAuthorize("hasAnyAuthority('project:user:update')")
     @PutMapping("/user")
@@ -45,11 +49,9 @@ public class ProjectUserController {
         return projectUser;
     }
 
-    /**
-     * @return 所有的实体
-     */
+    @ApiOperation(value = "查询所有用户信息")
     @LogAnnotation(module = "查询所有用户信息")
-    @PreAuthorize("hasAnyAuthority('project:user:query:all')")
+    @PreAuthorize("hasAnyAuthority('project:user:query')")
     @GetMapping("/user/all")
     public List<ProjectUser> findAll(){
         List<ProjectUser> list =  projectUserService.findAll();
@@ -57,12 +59,9 @@ public class ProjectUserController {
         return list;
     }
 
-    /**
-     * @param userType 根据类型查询，例如专家，监理，等类型
-     * @return 所有该类型的实体
-     */
+    @ApiOperation(value = "根据用户类型查询用户信息")
     @LogAnnotation(module = "根据用户类型查询用户信息")
-    @PreAuthorize("hasAnyAuthority('project:user:query:by_type')")
+    @PreAuthorize("hasAnyAuthority('project:user:query')")
     @GetMapping("/user/type/{userType}")
     public List<ProjectUser> findByUserType(@PathVariable String userType){
         List<ProjectUser> list =  projectUserService.findByUserType(userType);
@@ -70,10 +69,8 @@ public class ProjectUserController {
         return list;
     }
 
-    /**
-     * @param userId 根据系统用户表id查询
-     * @return 单个实体
-     */
+    @ApiOperation(value =  "根据系统用户表id查询用户信息")
+    @LogAnnotation(module = "根据系统用户表id查询用户信息")
     @GetMapping("/user-anon/{userId}")
     public List<ProjectUser> findByUserId(@PathVariable Integer userId){
         List<ProjectUser> list =   projectUserService.findByUserId(userId);
@@ -81,9 +78,9 @@ public class ProjectUserController {
         return list;
     }
 
-    /**
-     * @param id 根据id删除
-     */
+    @ApiOperation(value = "根据id删除用户信息")
+    @LogAnnotation(module = "根据id删除用户信息")
+    @PreAuthorize("hasAnyAuthority('project:user:delete')")
     @DeleteMapping("/user/{id}")
     public void deleteByUserId(@PathVariable Integer id){
         projectUserService.delete(id);

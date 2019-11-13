@@ -14,5 +14,6 @@ public interface ICompanyService {
     void update(Company company);
     void delete(String DeptCode);
     Company findByDeptCode(String DeptCode);
+    Company findByUserId(Integer userId);
     List<Company> findAll();
 }
