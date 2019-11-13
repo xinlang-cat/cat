@@ -7,51 +7,27 @@
 <body>
 
 <div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
-    <p style="text-align: center;line-height:30px;color: #FFF;">添加项目预算</p>
+    <p style="text-align: center;line-height:30px;color: #FFF;">添加研究内容</p>
 
 </div>
 <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
 
         <fieldset>
+
+
             <div class="form-group">
-                <label class="col-md-3 control-label">来源</label>
-                <input type="hidden" value="" id="item_id" name="item_id">
+                <label class="col-md-3 control-label">标题</label>
+                <input type="hidden" value="" name="item_id" id="item_id" />
                 <div class="col-md-7">
-                    <select class="form-control input-sm" id="option" value="" name="fund_id">
-                        <!--  <option value="1">男</option>
-                          <option value="0">女</option>-->
-                    </select>
+                    <input class="form-control" placeholder="标题" type="text" name="headline" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="标题 不能为空">
                 </div>
             </div>
 
             <div class="form-group">
-                <!--   <input type="hidden" name="fund_id" value="" id="fund_id">-->
-                <label class="col-md-3 control-label">科目</label>
-                <div class="col-md-7">
-                    <input class="form-control" placeholder="科目" type="text" name="subject" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="科目 不能为空">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-3 control-label">金额</label>
-                <div class="col-md-7">
-                    <input class="form-control" placeholder="金额" type="text" name="money" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="金额 不能为空">
-                </div>
-            </div>
-            <!-- <div class="form-group">
-                 <label class="col-md-3 control-label">开支内容</label>
-                 <div class="col-md-7">
-                     <input class="form-control" placeholder="开支内容" type="text" name="content" maxlength="50"
-                            data-bv-notempty="true"
-                            data-bv-notempty-message="开支内容 不能为空">
-                 </div>
-             </div>-->
-            <div class="form-group">
-                <label class="col-md-3 control-label">备注</label>
+                <label class="col-md-3 control-label">内容</label>
                 <div class="col-md-7">
                     <textarea placeholder="请输入内容" class="layui-textarea" name="content" data-bv-notempty="true"
                               data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
@@ -62,7 +38,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add_budget()">
+                        <button class="btn btn-primary" type="submit" onclick="add_content()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -89,29 +65,13 @@
         var layer = layui.layer;
     });
 
-    $(function () {
 
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/content/all/' + id,
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                var str = '';
-                $(res).each(function () {
-                    str += '    <option value="' + this.id + '">' + this.headline + '</option>';
-                });
-                $("#option").append(str);
-
-            }
-        })
-    })
-
-    function add_budget() {
+    function add_content() {
 
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: domainName + '/project-item/item/target',
+            url: domainName + '/project-item/item/content',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
