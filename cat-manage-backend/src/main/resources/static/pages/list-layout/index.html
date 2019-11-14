@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jQuery和CSS3网格和列表布局切换动画特效</title>
-	<link rel="stylesheet" type="text/css" href="assets/css/demo.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery和CSS3网格和列表布局切换动画特效</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/demo.css"/>
 </head>
 <body>
-	<!-- coidea:loader START -->
-    <div class="loader">
-      <div class="lds-ripple">
+<!-- coidea:loader START -->
+<div class="loader">
+    <div class="lds-ripple">
         <div></div>
         <div></div>
-      </div>
     </div>
-    <!-- coidea:loader END -->
+</div>
+<!-- coidea:loader END -->
 
-    <!-- coidea:sidebar START -->
-    <aside class="sidebar">
-      <div class="logo">
+<!-- coidea:sidebar START -->
+<!--<aside class="sidebar">
+    <div class="logo">
         <a href="http://www.17sucai.com/">+</a>
-      </div>
-    </aside>
-    <!-- coidea:sidebar END -->
+    </div>
+</aside>-->
+<!-- coidea:sidebar END -->
 
-    <!-- coidea:header START -->
-    <header>
-      <div class="header-inner"> 
+<!-- coidea:header START -->
+<header>
+    <div class="header-inner">
         <h1>Data Sources</h1>
-      </div>
-    </header>
-    <!-- coidea:header END -->
+    </div>
+</header>
+<!-- coidea:header END -->
 
-    <!-- coidea:grid-list START -->
-    <section class="grid-holder">
+<!-- coidea:grid-list START -->
+<section class="grid-holder">
 
-      <!-- coidea:grid-list:navigation+switcher START -->
-      <div class="grid-list-layout">
+    <!-- coidea:grid-list:navigation+switcher START -->
+    <div class="grid-list-layout">
         <nav class="navigation">
-          <li><a href="#"><span>Article</span></a></li>
-          <li><a href="#"><span>Github</span></a></li>
-          <li><a href="#"><span>Home</span></a></li>
+            <li><a href="#"><span>Article</span></a></li>
+            <li><a href="#"><span>Github</span></a></li>
+            <li><a href="#"><span>Home</span></a></li>
         </nav>
-        
+
         <div class="grid-list-holder">
           <span class="grid-layout active">
-          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-      viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+               x="0px" y="0px"
+               viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
           <g>
             <g>
               <path d="M176.792,0H59.208C26.561,0,0,26.561,0,59.208v117.584C0,209.439,26.561,236,59.208,236h117.584
@@ -81,9 +82,10 @@
           <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g> <g></g>
           </svg>
         </span>
-          <span class="list-layout">
-          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-      viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <span class="list-layout">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+               x="0px" y="0px"
+               viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
     <g>
       <g>
         <path d="M100.923,0C64.276,0,34.462,29.814,34.462,66.462s29.814,66.462,66.462,66.462c36.647,0,66.462-29.814,66.462-66.462
@@ -130,347 +132,100 @@
           </svg>
         </span>
         </div>
-      </div>
-      <!-- coidea:grid-list:navigation+switcher END -->
+    </div>
+    <!-- coidea:grid-list:navigation+switcher END -->
 
-      <!-- coidea:grid-list:main-section START -->
-      <div class="grid masonry">
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2019</h2>
-              <p class="date"><span>Updated</span> MARCH 16, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
+    <!-- coidea:grid-list:main-section START -->
+    <div class="grid masonry" id="list">
+
         <!--<div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Secret Dataset</h2>
-              <p class="date"><span>Updated</span> MARCH 14, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Public Dataset</h2>
-              <p class="date"><span>Updated</span> MARCH 11, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Android Sheet</h2>
-              <p class="date"><span>Updated</span> MARCH 06, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>iOS Sheet</h2>
-              <p class="date"><span>Updated</span> MARCH 02, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Private Dataset</h2>
-              <p class="date"><span>Updated</span> FEBRUARY 16, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Lorem Sheet</h2>
-              <p class="date"><span>Updated</span> FEBRUARY 15, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Ipsum Dataset</h2>
-              <p class="date"><span>Updated</span> FEBRUARY 12, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Android Sit</h2>
-              <p class="date"><span>Updated</span> FEBRUARY 10, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>iOS Dolor</h2>
-              <p class="date"><span>Updated</span> FEBRUARY 06, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
+            <figure>
+                <figcaption class="content">
+                    <h2>Cycling 2019</h2>
+                    <p class="date"><span>Updated</span> MARCH 16, 2019</p>
+                    <ul class="tags">
+                        <li><a href="#!">VARIABLE</a></li>
+                        <li><a href="#!">PROPERTY</a></li>
+                        <li><a href="#!">SPEED</a></li>
+                        <li><a href="#!">LOREM</a></li>
+                        <li><a href="#!">IPSUM</a></li>
+                        <li><a href="#!">SIT</a></li>
+                        <li><a href="#!" class="more" data-click-state="1">+</a></li>
+                    </ul>
+                </figcaption>
             </figure>
         </div>
-        
         <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2018</h2>
-              <p class="date"><span>Updated</span> FEBRUARY 02, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2017</h2>
-              <p class="date"><span>Updated</span> JANUARY 16, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2016</h2>
-              <p class="date"><span>Updated</span> JANUARY 15, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2015</h2>
-              <p class="date"><span>Updated</span> JANUARY 13, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2014</h2>
-              <p class="date"><span>Updated</span> JANUARY 10, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2013</h2>
-              <p class="date"><span>Updated</span> JANUARY 04, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2012</h2>
-              <p class="date"><span>Updated</span> JANUARY 03, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
-        </div>
-        
-        <div class="masonry__item">
-          <figure>
-            <figcaption class="content">
-              <h2>Cycling 2011</h2>
-              <p class="date"><span>Updated</span> JANUARY 02, 2019</p>
-              <ul class="tags">
-                <li><a href="#!">VARIABLE</a></li>
-                <li><a href="#!">PROPERTY</a></li>
-                <li><a href="#!">SPEED</a></li>
-                <li><a href="#!">LOREM</a></li>
-                <li><a href="#!">IPSUM</a></li>
-                <li><a href="#!">SIT</a></li>
-                <li><a href="#!" class="more" data-click-state="1">+</a></li>
-              </ul>
-            </figcaption>
-          </figure>
+            <figure>
+                <figcaption class="content">
+                    <h2>Cycling 2019</h2>
+                    <p class="date"><span>Updated</span> MARCH 16, 2019</p>
+                    <ul class="tags">
+                        <li><a href="#!">VARIABLE</a></li>
+                        <li><a href="#!">PROPERTY</a></li>
+                        <li><a href="#!">SPEED</a></li>
+                        <li><a href="#!">LOREM</a></li>
+                        <li><a href="#!">IPSUM</a></li>
+                        <li><a href="#!">SIT</a></li>
+                        <li><a href="#!" class="more" data-click-state="1">+</a></li>
+                    </ul>
+                </figcaption>
+            </figure>
         </div>-->
-        
-      </div>
-      <!-- coidea:grid-list:main-section END -->
 
-    </section>
-    <!-- coidea:grid-list END -->
-	
-	<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
-	<script src="assets/js/TweenMax.min.js"></script>
-    <script src="assets/js/ScrollToPlugin.min.js"></script>
-    <script src="assets/js/masonry.pkgd.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/demo.js"></script>
+    </div>
+    <!-- coidea:grid-list:main-section END -->
+
+</section>
+<!-- coidea:grid-list END -->
+
+<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/ScrollToPlugin.min.js"></script>
+<script src="assets/js/masonry.pkgd.js"></script>
+<script src="assets/js/imagesloaded.pkgd.min.js"></script>
+
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
 </body>
+<script>
+
+    initData();
+
+    function initData() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/company',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                var str = '';
+                $(data).each(function(){
+                    str += '<div class="masonry__item">\n' +
+                        '            <figure>\n' +
+                        '                <figcaption class="content">\n' +
+                        '                    <h2 style="max-width: 400px;">'+this.item_name+'</h2>\n' +
+                        '                    <p class="date" style="max-width: 400px;">' +
+                        '                       <span style="margin-right: 10px;">开始时间：'+this.start_dateStr+'</span>' +
+                        '                       <span>结束时间：'+this.end_dateStr+'</span></p>\n' +
+                        '                    <ul class="tags">\n' +
+                        '                        <li><a href="../project/details.html?id='+this.id+'">基本信息</a></li>\n' +
+                        '                        <li><a href="#!">实施日志</a></li>\n' +
+                        '                        <li><a href="#!">阶段总结</a></li>\n' +
+                        '                        <li><a href="#!">经费使用</a></li>\n' +
+                        '                        <li><a href="#!">结题总结</a></li>\n' +
+                        '                        <li><a href="#!">结题申请</a></li>\n' +
+                        '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
+                        '                    </ul>\n' +
+                        '                </figcaption>\n' +
+                        '            </figure>\n' +
+                        '        </div>';
+                })
+                $("#list").append(str);
+            }
+        });
+    }
+</script>
+<script src="assets/js/demo.js"></script>
 </html>

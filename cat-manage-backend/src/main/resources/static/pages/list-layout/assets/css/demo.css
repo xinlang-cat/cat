@@ -270,7 +270,8 @@
     pointer-events: none;
   }
   section.grid-holder .grid-list-layout .grid-list-holder span.active svg {
-    fill: #057ef5;
+    /*fill: #057ef5;*/
+    fill: #1aa094;
   }
   section.grid-holder .masonry {
     width: 100%;
