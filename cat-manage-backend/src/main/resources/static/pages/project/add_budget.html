@@ -88,9 +88,7 @@
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
-
     $(function () {
-
         $.ajax({
             type: 'get',
             url: domainName + '/project-item/item/content/all/' + id,
@@ -101,12 +99,17 @@
                     str += '    <option value="' + this.id + '">' + this.headline + '</option>';
                 });
                 $("#option").append(str);
-
             }
         })
     })
 
     function add_budget() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
 
         var formdata = $("#form").serializeObject();
         $.ajax({
