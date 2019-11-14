@@ -47,7 +47,8 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">开支内容</label>
                 <div class="col-md-9">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="content" id="content"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="content" id="content" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空"></textarea>
                 </div>
             </div>
 
@@ -98,6 +99,14 @@
         })
     })
     function  updata_budget(){
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
         var formdata  = $("#form").serializeObject();
         $.ajax({
             type: 'put',

@@ -108,6 +108,14 @@
 
     function add_budget() {
 
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',

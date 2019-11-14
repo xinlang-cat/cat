@@ -82,4 +82,9 @@ public class AlbumController {
         }
         return new Page<>(total, list);
     }
+
+    @GetMapping("/{id}")
+    public Album findById(@PathVariable String id) {
+        return albumMapper.getById(id);
+    }
 }

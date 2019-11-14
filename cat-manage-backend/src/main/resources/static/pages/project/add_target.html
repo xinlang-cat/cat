@@ -242,9 +242,6 @@
     var id = getUrlParam("id");
     $("#item_id_jishu").val(id);
     $("#item_id_feijishu").val(id);
-
-
-
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
@@ -269,6 +266,12 @@
 
 
     function add_target_jishu() {
+        $('#form_jishu').bootstrapValidator();
+        var bootstrapValidator = $("#form_jishu").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         var formdata = $("#form_jishu").serializeObject();
         $.ajax({
             type: 'post',
@@ -283,6 +286,14 @@
         });
     }
     function add_target_feijishu() {
+
+
+        $('#form_feijishu').bootstrapValidator();
+        var bootstrapValidator = $("#form_feijishu").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         var formdata = $("#form_feijishu").serializeObject();
         $.ajax({
             type: 'post',
