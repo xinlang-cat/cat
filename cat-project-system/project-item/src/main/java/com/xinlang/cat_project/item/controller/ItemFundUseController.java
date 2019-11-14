@@ -3,9 +3,12 @@ package com.xinlang.cat_project.item.controller;
 import com.xinlang.cat_project.item.fegin.ConsumeUser;
 import com.xinlang.cat_project.item.pojo.ItemFundUse;
 import com.xinlang.cat_project.item.service.IItemFundUseService;
+import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +24,9 @@ public class ItemFundUseController {
     @Autowired
     private ConsumeUser consumeUser;
 
+    @ApiOperation(value = "添加资金使用信息")
+    @LogAnnotation(module = "添加资金使用信息")
+    @PreAuthorize("hasAnyAuthority('project:fundUse:save')")
     @PostMapping
     public ResponseEntity<Void> saveFundUse(@RequestBody ItemFundUse itemFundUse) {
         itemFundUseService.saveFundUse(itemFundUse);
@@ -32,6 +38,8 @@ public class ItemFundUseController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "获取一条资金使用信息，id 必填")
+    @LogAnnotation(module = "获取一条资金使用信息")
     @GetMapping("/{id}")
     public ResponseEntity<ItemFundUse> getFundById(@PathVariable Integer id){
 
@@ -44,6 +52,8 @@ public class ItemFundUseController {
      * @param Bid 预算id
      * @return
      */
+    @ApiOperation(value = "获取预算的所有资金使用信息")
+    @LogAnnotation(module = "获取预算的所有资金使用信息")
     @GetMapping("/info/{Bid}")
     public ResponseEntity<List<ItemFundUse>> getFundUseByBId(@PathVariable Integer Bid){
 
@@ -56,6 +66,8 @@ public class ItemFundUseController {
      * @param
      * @return
      */
+    @ApiOperation(value = "获取当前用户所保存的所有资金使用信息")
+    @LogAnnotation(module = "获取当前用户所保存的所有资金使用信息")
     @GetMapping("/my/{Iid}")
     public ResponseEntity<List<ItemFundUse>> getFundUseByItemIdAndUserId(@PathVariable Integer Iid){
 
@@ -69,6 +81,9 @@ public class ItemFundUseController {
      * @param itemFundUse
      * @return
      */
+    @ApiOperation(value = "更改资金使用信息,id必填")
+    @LogAnnotation(module = "更改资金使用信息")
+    @PreAuthorize("hasAnyAuthority('project:fundUse:update')")
     @PutMapping
     public ResponseEntity<Void> updateFund(@RequestBody ItemFundUse itemFundUse){
         itemFundUseService.updateFundUse(itemFundUse);
@@ -80,6 +95,9 @@ public class ItemFundUseController {
      * @param id
      * @return
      */
+    @ApiOperation(value = "删除资金使用信息")
+    @LogAnnotation(module = "删除资金使用信息")
+    @PreAuthorize("hasAnyAuthority('project:fundUse:delete')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFundUse(@PathVariable Integer id){
         itemFundUseService.deleteFundUse(id);

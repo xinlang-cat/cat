@@ -9,7 +9,7 @@ function initplanCategorySelect(){
             var ds = data[0].child;
             for(var i=0; i<ds.length; i++){
                 var d = ds[i];
-                var sign = d['id'];
+                var sign = d['sign'];
                 var name = d['content'];
 
                 select.append("<option value='"+ sign +"'>" +name+"</option>");
@@ -97,12 +97,32 @@ function getsuperior(code){
         async : false,
         success : function(data) {
             var select = $("#map"),
-                provinceName = data.province.provinceName,
-                city = data.city.cityName,
-                area = data.area.areaName,
+                provinceName,
+                city,
+                area,
+                street;
+            var str;
+            if(data.street != undefined){
+                provinceName = data.province.provinceName;
+                city = data.city.cityName;
+                area = data.area.areaName;
                 street = data.street.streetName;
-            var str = provinceName+'-'+city+'-'+area+'-'+street+'-';
-            select.append("<option value='"+ code +"'>" +str+"</option>");
+                str = provinceName+'-'+city+'-'+area+'-'+street+'-';
+            }else if(data.area != undefined){
+                provinceName = data.province.provinceName;
+                city = data.city.cityName;
+                area = data.area.areaName;
+                str = provinceName+'-'+city+'-'+area+'-';
+            }else if(data.city != undefined){
+                provinceName = data.province.provinceName;
+                city = data.city.cityName;
+                str = provinceName+'-'+city+'-';
+            }else if(data.province != undefined){
+                provinceName = data.province.provinceName;
+                str = provinceName+'-';
+            }
+
+             select.append("<option value='"+ code +"'>" +str+"</option>");
         }
     });
 }

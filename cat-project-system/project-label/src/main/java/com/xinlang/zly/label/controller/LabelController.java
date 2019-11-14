@@ -3,7 +3,9 @@ package com.xinlang.zly.label.controller;
 import com.xinlang.zly.label.bean.Label;
 import com.xinlang.zly.label.service.ILabelService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,7 +18,6 @@ import java.util.Set;
  * 2019-10-31
  */
 @RestController
-@RequestMapping("/label")
 public class LabelController {
 
     @Autowired
@@ -27,8 +28,10 @@ public class LabelController {
      * @param label
      * @return
      */
+    @ApiOperation(value="添加标签，全参")
     @LogAnnotation(module = "添加标签")
-    @PostMapping
+    @PostMapping("/label")
+    @PreAuthorize("hasAnyAuthority('project:label:save')")
     public Label save(@RequestBody Label label){
 
         labelService.save(label);
@@ -40,8 +43,10 @@ public class LabelController {
      * @param label
      * @return
      */
+    @ApiOperation(value="根据id修改标签，sign不可以修改")
     @LogAnnotation(module = "修改标签")
-    @PutMapping
+    @PutMapping("/label")
+    @PreAuthorize("hasAnyAuthority('project:label:update')")
     public Label update(@RequestBody Label label) {
         labelService.update(label);
         return label;
@@ -52,8 +57,9 @@ public class LabelController {
      * @param ids
      * @return
      */
+    @ApiOperation(value="根据ids查询标签")
     @LogAnnotation(module = "根据ids查询标签")
-    @GetMapping("/{ids}")
+    @GetMapping("/label/{ids}")
     public List<Label> findByIds(@PathVariable Set<Integer> ids){
         return labelService.findByIds(ids);
     }
@@ -62,8 +68,10 @@ public class LabelController {
      * 删除标签
      * @param id
      */
+    @ApiOperation(value="根据id删除标签")
     @LogAnnotation(module = "删除标签")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/label/{id}")
+    @PreAuthorize("hasAnyAuthority('project:label:delete')")
     public void delete(@PathVariable Integer id) {
         labelService.delete(id);
     }
@@ -73,8 +81,9 @@ public class LabelController {
      * @param signs
      * @return
      */
-    @LogAnnotation(module = "根据标识获取标签树")
-    @GetMapping("/tree/{signs}")
+    @ApiOperation(value="根据sign获取标签树")
+    @LogAnnotation(module = "根据sign获取标签树")
+    @GetMapping("/label/tree/{signs}")
     public List<Label> findTreeBySign(@PathVariable Set<String> signs) {
         List<Label>  list =  labelService.findTreeBySign(signs);
         if(list.size()>1){
@@ -87,8 +96,9 @@ public class LabelController {
      * 获取所有标签树
      * @return
      */
+    @ApiOperation(value="获取所有标签树")
     @LogAnnotation(module = "获取所有标签树")
-    @GetMapping("/tree/all")
+    @GetMapping("/label/tree/all")
     public List<Label> findTreeAll() {
         List<Label> all =  labelService.findAll();
         List<Label> list = new ArrayList<>();
@@ -101,15 +111,18 @@ public class LabelController {
         return  list;
     }
 
-
+    /**
+     * @return
+     */
+    @ApiOperation(value="获取所有标签")
     @LogAnnotation(module = "获取所有标签")
-    @GetMapping("/all")
+    @GetMapping("/label/all")
     public List<Label> findAll() {
         return  labelService.findAll();
     }
+
     /**
      * 所有标签树
-     *
      * @param all
      * @param list
      */
@@ -125,7 +138,4 @@ public class LabelController {
             setLabelTree(all,childs);
         });
     }
-
-
-
 }

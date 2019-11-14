@@ -44,9 +44,9 @@ public class ItemContentService implements IItemContentService {
         ItemContent itemContent = new ItemContent();
         itemContent.setItem_id(tid);
         List<ItemContent> list = itemContentMapper.select(itemContent);
-        if(CollectionUtils.isEmpty(list)){
+        /*if(CollectionUtils.isEmpty(list)){
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
+        }*/
         return list;
     }
 

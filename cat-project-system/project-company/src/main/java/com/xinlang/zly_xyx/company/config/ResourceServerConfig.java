@@ -23,7 +23,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.csrf().disable().exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) ->response.sendError(HttpServletResponse.SC_UNAUTHORIZED) )
                 .and().authorizeRequests()
-                .antMatchers(PermitAllUrl.permitAllUrl("/company-anon/**")).permitAll()
+                .antMatchers(PermitAllUrl.permitAllUrl("/company-anon/**","/user-anon/**")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 

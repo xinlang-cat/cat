@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
-import com.xinlang.zly_xyx.company.bean.Company;
+import com.xinlang.bean.company.Company;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyMapper;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;
@@ -54,6 +54,19 @@ public class CompanyService implements ICompanyService {
         List<Company> list = companyMapper.selectByExample(example);
         if(list != null){
             return list.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Company findByUserId(Integer userId) {
+        Example example = new Example(CompanyUser.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        CompanyUser companyUser  = companyUserMapper.selectOneByExample(example);
+        if(companyUser != null){
+            Example example1 = new Example(Company.class);
+            example1.createCriteria().andEqualTo("deptCode",companyUser.getDeptCode());
+            return companyMapper.selectOneByExample(example1);
         }
         return null;
     }

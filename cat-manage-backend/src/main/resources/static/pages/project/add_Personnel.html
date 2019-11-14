@@ -18,12 +18,11 @@
 <div style="margin-top: 10px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
-
+            <input type="hidden" value="" id="item_id" name="item_id">
             <div class="form-group">
                 <label class="col-md-3 control-label">姓名</label>
-                <input type="hidden" value="" i name="item_id">
                 <div class="col-md-7">
-                    <select class="form-control input-sm"  value="" name="fund_id">
+                    <select class="form-control input-sm"  value="" name="user_id" id="userSelect">
                         <!--  <option value="1">男</option>
                           <option value="0">女</option>-->
                     </select>
@@ -31,12 +30,11 @@
             </div>
             <div class="form-group">
                 <label class="col-md-3 control-label">研究开发的责任分工</label>
-                <input type="hidden" value="" id="item_id" name="item_id">
                 <div class="col-md-7">
-                    <select class="form-control input-sm" id="option" value="" name="fund_id">
-                        <!--  <option value="1">男</option>
-                          <option value="0">女</option>-->
-                    </select>
+                    <textarea class="layui-textarea" name="responsible"
+                              style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
                 </div>
             </div>
             <div class="form-actions">
@@ -67,9 +65,27 @@
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
+
     var id = getUrlParam("id");
     $("#item_id").val(id);
 
+    initUserSelect();
+    function initUserSelect() {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-user/user/all',
+            async : false,
+            success : function(data) {
+                var select = $("#userSelect");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var userId = d.userId;
+                    var name = d.name;
+                    select.append("<option value='"+ userId +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
 
     function add_personnel() {
         var formdata = $("#form").serializeObject();
@@ -80,14 +96,14 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "details.html?id=" + itemId;
+                    location.href = "details.html?id="+ id;
                 });
             }
         });
     }
 
     $("#updata_return").click(function () {
-        $(location).attr("href", "details.html?id=" + itemId);
+        $(location).attr("href", "details.html?id="+id);
     })
 </script>
 </html>

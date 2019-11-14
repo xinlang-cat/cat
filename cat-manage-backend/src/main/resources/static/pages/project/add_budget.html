@@ -93,12 +93,12 @@
 
         $.ajax({
             type: 'get',
-            url: domainName + '/project-item/item/fund/all/' + id,
+            url: domainName + '/project-item/item/content/all/' + id,
             contentType: "application/json; charset=utf-8",
             success: function (res) {
                 var str = '';
                 $(res).each(function () {
-                    str += '    <option value="' + this.id + '">' + this.source + '</option>';
+                    str += '    <option value="' + this.id + '">' + this.headline + '</option>';
                 });
                 $("#option").append(str);
 
@@ -111,7 +111,7 @@
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: domainName + '/project-item/item/budget',
+            url: domainName + '/project-item/item/target',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {

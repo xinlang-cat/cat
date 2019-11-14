@@ -46,9 +46,9 @@ public class ItemFundService implements IItemFundService {
 
         itemFund.setItem_id(Iid);
         List<ItemFund> list = itemFundMapper.select(itemFund);
-        if(CollectionUtils.isEmpty(list)){
+        /*if(CollectionUtils.isEmpty(list)){
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
+        }*/
         return list;
     }
 

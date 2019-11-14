@@ -1,4 +1,4 @@
-package com.xinlang.zly_xyx.company.bean;
+package com.xinlang.bean.company;
 
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;

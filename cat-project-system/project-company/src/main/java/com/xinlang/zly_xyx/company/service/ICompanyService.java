@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.company.service;
 
-import com.xinlang.zly_xyx.company.bean.Company;
+import com.xinlang.bean.company.Company;
 
 import java.util.List;
 
@@ -14,5 +14,6 @@ public interface ICompanyService {
     void update(Company company);
     void delete(String DeptCode);
     Company findByDeptCode(String DeptCode);
+    Company findByUserId(Integer userId);
     List<Company> findAll();
 }
