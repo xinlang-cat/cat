@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.company.service;
 
-import com.xinlang.zly_xyx.company.bean.Company;
+import com.xinlang.bean.company.Company;
 
 import java.util.List;
 

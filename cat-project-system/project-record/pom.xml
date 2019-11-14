@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>project-company</artifactId>
+    <artifactId>project-record</artifactId>
 
     <properties>
         <java.version>1.8</java.version>
@@ -75,6 +75,11 @@
             <artifactId>cat-log-operate</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.xinlang.zly-xyx</groupId>
+            <artifactId>cat-file-server</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- feign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -85,12 +90,6 @@
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>${tk.mybatis}</version>
-        </dependency>
-        <!-- project-common-entity -->
-        <dependency>
-            <groupId>com.xinlang.zly-xyx</groupId>
-            <artifactId>project-common-entity</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
@@ -103,6 +102,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

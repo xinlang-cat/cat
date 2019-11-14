@@ -1,4 +1,4 @@
-package com.xinlang.zly_xyx.company;
+package com.xinlang.yx.project_report;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,15 +6,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * @author 张龙毅 18777811286@163.com
- * 2019-09-23
+ * @author 杨珣
+ * @date 2019-11-13
  */
 @EnableFeignClients
 @SpringBootApplication
 @EnableDiscoveryClient
-public class CatProjectSystemCompanyApplication {
-
-    public static void main(String[] args){
-        SpringApplication.run(CatProjectSystemCompanyApplication.class,args);
+public class projectReportApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(projectReportApplication.class,args);
     }
 }

@@ -18,6 +18,9 @@
         <module>project-item</module>
         <module>project-common-entity</module>
         <module>project-summary</module>
+        <module>project-record</module>
+        <module>project-report</module>
+        <module>project-report</module>
     </modules>
 
     <dependencyManagement>

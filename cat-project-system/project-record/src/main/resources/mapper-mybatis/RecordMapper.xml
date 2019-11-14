@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xinlang.yx.project_record.mapper.RecordMapper">
+
+	<resultMap id="BaseResultMap" type="com.xinlang.yx.project_record.bean.Record">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="targetId" jdbcType="INTEGER" property="target_id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="createTime" jdbcType="TIMESTAMP" property="create_time" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="workingDay" jdbcType="TIMESTAMP" property="working_day" />
+		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+	</resultMap>
+
+	<resultMap id="VOResultMap" type="com.xinlang.yx.project_record.VO.RecordVO">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="targetId" jdbcType="INTEGER" property="target_id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="createTime" jdbcType="TIMESTAMP" property="create_time" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="workingDay" jdbcType="TIMESTAMP" property="working_day" />
+		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+
+		<collection property="recordFiles" ofType="com.xinlang.yx.project_record.bean.RecordFile">
+			<id column="fid" jdbcType="INTEGER" property="id"/>
+			<result column="url" jdbcType="INTEGER" property="url"/>
+		</collection>
+	</resultMap>
+
+
+	<insert id="addFile">
+		INSERT INTO jour_relevance_file ( journal_id, journal_file_id)
+                       VALUES
+                       ( ${id}, ${fileId})
+	</insert>
+
+	<delete id="delFile">
+		DELETE FROM jour_relevance_file WHERE journal_id =${journalId} AND journal_file_id = ${fileId}
+
+	</delete>
+
+
+	<select id="findVO" parameterType="int" resultMap="VOResultMap">
+		select
+			j.*,f.id as fid,f.url
+		from
+			project_journal as j
+		left join
+			jour_relevance_file as m
+		on
+			j.id = m.journal_id
+		left join
+			album as f
+		on
+			m.journal_file_id = f.id
+		and
+			j.id=${targetId}
+
+	</select>
+
+	<select id="findVOS" resultMap="VOResultMap">
+		select
+			j.*,f.id as fid,f,url
+		from
+			project_journal as j
+		left join
+			jour_relevance_file as m
+		on
+			j.id = m.journal_id
+		left join
+			journal_file as f
+		on
+			m.journal_file_id = f.id
+		and
+			j.target_id=${targetId}
+		and
+			j.status = ${status}
+	</select>
+
+
+
+
+</mapper>
