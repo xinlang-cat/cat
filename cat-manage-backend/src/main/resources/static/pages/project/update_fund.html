@@ -48,7 +48,8 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">备注</label>
                 <div class="col-md-9">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="remark" id="remark"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="remark" id="remark"  data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空"></textarea>
                 </div>
             </div>
 
@@ -101,6 +102,14 @@
        })
    })
     function  updata_fund(){
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
         var formdata  = $("#form").serializeObject();
         $.ajax({
             type: 'put',
@@ -116,7 +125,6 @@
     }
     $("#updata_return").click(function () {
         $(location).attr("href", "details.html?id=" + itemId);
-
     })
 
 </script>
