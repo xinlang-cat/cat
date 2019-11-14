@@ -71,7 +71,7 @@ public class RecordController {
 
 
     @LogAnnotation(module = "提交实施日志")
-    @PutMapping("/record/submit")
+    @PutMapping("/record/submit/{id}")
     public void submit(@PathVariable Integer id){
          recordService.check(id,constant.ConstantStatus.CHECK_IN);
 

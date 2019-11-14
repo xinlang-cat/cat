@@ -2,6 +2,7 @@ package com.xinlang.yx.project_record.VO;
 
 import com.xinlang.yx.project_record.bean.RecordFile;
 import com.xinlang.zly_xyx.cat_file_server.bean.Album;
+import lombok.Data;
 
 
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author 杨珣
  * @date 2019-11-13
  */
+@Data
 public class RecordVO {
     private Integer id;
 

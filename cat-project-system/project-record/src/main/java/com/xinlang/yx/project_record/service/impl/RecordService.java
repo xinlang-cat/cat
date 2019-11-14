@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class RecordService implements IRecordService {
         Long id = AppUserUtil.getLoginAppUser().getId();
         record.setCreateUserId(id);
         record.setStatus(constant.ConstantStatus.UN_SUBMIT);
+        record.setCreateTime(new Date());
         recordMapper.insert(record);
 
     }
@@ -58,18 +60,18 @@ public class RecordService implements IRecordService {
     public List<Record> findByTarIdAUID(Integer targetId) {
         Long userId = AppUserUtil.getLoginAppUser().getId();
         Example example = new Example(Record.class);
-        example.createCriteria().andEqualTo("target_id",targetId);
-        example.createCriteria().andEqualTo("create_user_id",userId);
+        example.createCriteria().andEqualTo("targetId",targetId);
+        example.createCriteria().andEqualTo("createUserId",userId);
         return recordMapper.selectByExample(example);
     }
 
     @Override
     public List<Record> findByTarIdAUIDASTU(Integer targetId, Integer unSubmit) {
-        /*Long userId = AppUserUtil.getLoginAppUser().getId();*/
+        Long userId = AppUserUtil.getLoginAppUser().getId();
         Example example = new Example(Record.class);
-        example.createCriteria().andEqualTo("target_id",targetId);
-       /* example.createCriteria().andEqualTo("create_user_id",userId);*/
-       /* example.createCriteria().andEqualTo("status",status);*/
+        example.createCriteria().andEqualTo("targetId",targetId);
+        example.createCriteria().andEqualTo("createUserId",userId);
+        example.createCriteria().andEqualTo("status",unSubmit);
         return recordMapper.selectByExample(example);
     }
 

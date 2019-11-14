@@ -25,7 +25,7 @@ public interface IRecordService {
 
     List<RecordVO> findByTarIdAUIDASTUVO(Integer targetId, Integer checkPass);
 
-   RecordVO findVOById(Integer id);
+    RecordVO findVOById(Integer id);
 
     void addFile(List<Integer> fileIds,Integer id);
 

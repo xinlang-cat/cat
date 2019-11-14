@@ -27,9 +27,17 @@
 		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
 		<result column="status" jdbcType="INTEGER" property="status" />
 
-		<collection property="recordFiles" ofType="com.xinlang.yx.project_record.bean.RecordFile">
-			<id column="fid" jdbcType="INTEGER" property="id"/>
-			<result column="url" jdbcType="INTEGER" property="url"/>
+		<collection property="files" ofType="com.xinlang.zly_xyx.cat_file_server.bean.Album">
+			<result column="fid" jdbcType="VARCHAR" property="id"/>
+			<result column="name" jdbcType="VARCHAR" property="name" />
+			<result column="userId" jdbcType="INTEGER" property="userId" />
+			<result column="contentType" jdbcType="VARCHAR" property="contentType" />
+			<result column="isWeChat" jdbcType="BOOLEAN" property="isWeChat" />
+			<result column="size" jdbcType="INTEGER" property="size" />
+			<result column="path" jdbcType="VARCHAR" property="path" />
+			<result column="source" jdbcType="VARCHAR" property="source" />
+			<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+
 		</collection>
 	</resultMap>
 
@@ -46,9 +54,9 @@
 	</delete>
 
 
-	<select id="findVO" parameterType="int" resultMap="VOResultMap">
+	<select id="findVO" resultMap="VOResultMap">
 		select
-			j.*,f.id as fid,f.url
+			j.*,f.id as fid,f.*
 		from
 			project_journal as j
 		left join
@@ -60,13 +68,13 @@
 		on
 			m.journal_file_id = f.id
 		and
-			j.id=${targetId}
+			j.id=${id}
 
 	</select>
 
-	<select id="findVOS" resultMap="VOResultMap">
+	<select id="findByTarIdAUIDASTUVO" resultMap="VOResultMap">
 		select
-			j.*,f.id as fid,f,url
+			j.*,f.id as fid,f.*
 		from
 			project_journal as j
 		left join
