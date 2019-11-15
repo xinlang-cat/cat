@@ -92,7 +92,6 @@ function getContractFile(id){
         }
     });
 }
-
 /*获取资金构成*/
 function getProjectFund(id){
     $.ajax({
@@ -105,18 +104,18 @@ function getProjectFund(id){
             $(data).each(function () {
                 count+=this.money;
                 str += '<tr>'
-                    + '<th>' + this.source + '</th>'
+                    + '<th style="text-align: center;">' + this.source + '</th>'
                     + ' <th style="text-align: center;">' + this.money + '</th>'
-                    + ' <th>' + this.remark + '</th>'
+                    + ' <th style="text-align: center;">' + this.remark + '</th>'
                     + ' <th>'
-
-                    + '</th>'  + ' <div style="width: 100%;height: 20px;align-self: center;">'
+                    + ' <div style="width: 100%;height: 20px;align-self: center;">'
                     + '<button onclick="updat_fund('+this.id+')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
                     + '<p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe642;</i></p>'
                     + '</button>'
                     + '<button onclick="delete_fund('+this.id+')" style="height: 20px;width: 30px;align-self: center;"   class="layui-btn layui-btn-sm">  <p style="line-height: 20px;margin-left: -3px;"><i  class="layui-icon">&#xe640;</i></p>'
                     + '</button>'
                     + '</div>'
+                    + '</th>'
                     + '</tr>';
             });
             $("#summation").text(count);
@@ -136,10 +135,10 @@ function getFundBudget(id){
             $(data).each(function () {
                 count+=this.money;
                 str += '<tr>'
-                    + '<th>' + this.subject + '</th>'
+                    + '<th style="text-align: center;">' + this.subject + '</th>'
                     + ' <th style="text-align: center;">' + this.money + '</th>'
                     + '<th></th>'
-                    + ' <th>' + this.content + '</th>'
+                    + ' <th style="text-align: center;">' + this.content + '</th>'
                     + ' <th>'
                     + ' <div style="width: 100%;height: 20px;align-self: center;">'
                     + '<button onclick="updat_budget('+this.id+')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
@@ -156,7 +155,6 @@ function getFundBudget(id){
         }
     });
 }
-
 /*获取项目成员*/
 function getProjectUser(id){
     $.ajax({

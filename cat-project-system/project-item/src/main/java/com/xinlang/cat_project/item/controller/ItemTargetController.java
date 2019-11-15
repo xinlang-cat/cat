@@ -74,7 +74,7 @@ public class ItemTargetController {
      */
     @ApiOperation(value = "获取项目所有指标信息及实施人员")
     @LogAnnotation(module = "获取项目所有指标信息")
-    @GetMapping("/all/{Cid}")
+    @GetMapping("/all/{itemId}")
     public ResponseEntity<List<Map<String, Object>>> getTargetByItemId(@PathVariable Integer itemId){
 
         List<Map<String, Object>> target = targetService.queryTargetByItemId(itemId);
