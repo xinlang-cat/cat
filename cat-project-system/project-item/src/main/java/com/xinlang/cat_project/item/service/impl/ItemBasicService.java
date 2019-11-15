@@ -19,8 +19,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -85,6 +87,9 @@ public class ItemBasicService implements IItemBasicService {
         LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
         //通过当前用户获取公司
         Company company = consumeCompany.findByUserId(loginAppUser.getId().intValue());
+        if(company == null){
+            throw new ItemException(ExceptionEnum.USER_INFO_NOT_PERFECT);
+        }
         //SET 创建人id、创建时间、状态
         basic.setEdit_userid(loginAppUser.getId().intValue());
         basic.setEdit_date(new Date());
@@ -113,6 +118,27 @@ public class ItemBasicService implements IItemBasicService {
         basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), "yyyy年MM月dd日"));
         basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), "yyyy年MM月dd日"));
         return basic;
+    }
+
+    @Override
+    public List<ItemBasic> queryCompanyItem() {
+        //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
+        LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
+        Company company = consumeCompany.findByUserId(loginAppUser.getId().intValue());
+        ItemBasic itemBasic = new ItemBasic();
+        List<ItemBasic> list = new ArrayList<>();
+        if(company!=null){
+            itemBasic.setDept_code(company.getDeptCode());
+            list = itemBasicMapper.select(itemBasic);
+        }
+        if(!CollectionUtils.isEmpty(list)){
+            for (ItemBasic basic : list) {
+                basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), "yyyy年MM月dd日"));
+                basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), "yyyy年MM月dd日"));
+                basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), "yyyy年MM月dd日"));
+            }
+        }
+        return list;
     }
 
     @Override
@@ -148,4 +174,5 @@ public class ItemBasicService implements IItemBasicService {
             throw new ItemException(ExceptionEnum.ITEM_DELETE_ERROR);
         }
     }
+
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -78,7 +79,19 @@ public class ItemBasicController {
     public ResponseEntity<ItemBasic> getItemById(@PathVariable Integer id){
 
         ItemBasic basic = itemService.queryItemById(id);
-        System.err.println(basic);
+        return ResponseEntity.ok(basic);
+    }
+
+    /**
+     * 获取当前用户的公司项目数据
+     * @return
+     */
+    @ApiOperation(value = "查询一条项目基础信息")
+    @LogAnnotation(module = "查询一条项目基础信息")
+    @GetMapping("/company")
+    public ResponseEntity<List<ItemBasic>> getCompanyItem(){
+
+        List<ItemBasic> basic = itemService.queryCompanyItem();
         return ResponseEntity.ok(basic);
     }
 

@@ -82,7 +82,7 @@
 		on
 			j.id = m.journal_id
 		left join
-			journal_file as f
+			album as f
 		on
 			m.journal_file_id = f.id
 		and

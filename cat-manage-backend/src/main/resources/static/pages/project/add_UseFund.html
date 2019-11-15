@@ -1,45 +1,57 @@
 <!DOCTYPE html>
-<html lang="en-us" id="extr-page">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>添加资金使用情况</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <style>
+        .layui-table td, .layui-table th{
+            border-color:  #009688;
+        }
+    </style>
 </head>
+
+
 <body>
 
-<div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
-    <p style="text-align: center;line-height:30px;color: #FFF;">添加使用资金</p>
-
+<div style="background-color: #009688; height: 30px; width: 100%;" class="layui-row">
+    <p style="text-align: center;line-height:30px;color: #FFF;">添加资金使用情况</p>
 </div>
+
 <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
 
         <fieldset>
+
             <div class="form-group">
-                <label class="col-md-3 control-label">来源</label>
-                <input type="hidden" value="" id="item_id" name="item_id">
+                <label class="col-md-3 control-label">科目</label>
+                <input type="hidden" value="26" id="item_id" name="item_id">
                 <div class="col-md-7">
-                    <select class="form-control input-sm" id="option" value="" name="fund_id">
+                    <select class="form-control input-sm" id="option_subject" value="" name="budget_id">
                         <!--  <option value="1">男</option>
                           <option value="0">女</option>-->
                     </select>
                 </div>
             </div>
 
-            <div class="form-group">
-                <!--   <input type="hidden" name="fund_id" value="" id="fund_id">-->
-                <label class="col-md-3 control-label">科目</label>
-                <div class="col-md-7">
-                    <input class="form-control" placeholder="科目" type="text" name="subject" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="科目 不能为空">
-                </div>
-            </div>
+
+
             <div class="form-group">
                 <label class="col-md-3 control-label">金额</label>
                 <div class="col-md-7">
-                    <input class="form-control" placeholder="金额" type="text" name="money" maxlength="50"
+                    <input class="form-control" placeholder="金额"  type="text" name="expenditure" maxlength="50"
                            data-bv-notempty="true"
-                           data-bv-notempty-message="金额 不能为空">
+                           data-bv-notempty-message="金额 不能为空"  />
+                    <p   style="position: absolute;margin-top:-26px;margin-left:200px;color:black;" >还剩：<span  id="res_money"></span></p>
                 </div>
             </div>
             <!-- <div class="form-group">
@@ -53,16 +65,25 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">备注</label>
                 <div class="col-md-7">
-                    <textarea placeholder="请输入内容" class="layui-textarea" name="content" data-bv-notempty="true"
-                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                                <textarea placeholder="请输入内容" class="layui-textarea" name="remark" data-bv-notempty="true"
+                                          data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
                 </div>
+            </div>
+
+
+
+            <div class="form-group">
+            <label class="col-md-3 control-label">  <button  id="file" type="button" class="layui-btn" id="test2">图片上传</button> </label>
+            <div class="col-md-7">
+                <div   style="float: left; width: 790px;" id="demo2"></div>
+            </div>
             </div>
 
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add_budget()">
+                        <button class="btn btn-primary" type="submit" onclick="add();">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -73,53 +94,83 @@
     </form>
 </div>
 
+
+
+
+</body>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
-
-
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
 <script>
-    var id = getUrlParam("id");
 
-    $("#item_id").val(id);
-    layui.use(['layer'], function () {
-        var layer = layui.layer;
-    });
+    layui.use(['layer', 'laydate','upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
 
-    $(function () {
-
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/fund/all/' + id,
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                var str = '';
-                $(res).each(function () {
-                    str += '    <option value="' + this.id + '">' + this.source + '</option>';
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#file' //绑定元素
+            , accept: 'file'
+            , url: domainName + '/zuul/api-f/files' //上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').append('<img style="width: 250px;margin-left: 10px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
                 });
-                $("#option").append(str);
-
+            }
+            , done: function (res) {
+                //上传完毕回调
+                var id = res.id,
+                    name = res.name;
+                $("#contract").val(id);
+                $("#file").val(name);
+            }
+            , error: function () {
+                //请求异常回调
             }
         })
     })
 
-    function add_budget() {
-
-        $('#form').bootstrapValidator();
+    var res_money=0;
+    var money_budget=0;
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url : domainName + '/project-item/item/budget/all/26',
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += ' <option value="' + this.id+ '">' + this.subject + '</option>';
+                });
+                $("#option_subject").append(str);
+            }
+        })
+    })
+    function add() {
+        $("#form").bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
         if (!bootstrapValidator.isValid()) {
             return;
         }
-
-
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: domainName + '/project-item/item/budget',
+            url: domainName + '/project-item/item/fund/use',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
@@ -132,12 +183,13 @@
     }
 
 
+
+
     $("#btn_return").click(function () {
-
         $(location).attr("href", "details.html?id=" + id + "");
-
     })
 
+
 </script>
-</body>
+
 </html>

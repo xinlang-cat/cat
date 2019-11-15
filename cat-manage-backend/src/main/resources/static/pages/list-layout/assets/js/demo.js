@@ -162,7 +162,7 @@
 
 
   // EXTRAS - SMOOTH SCROLL
-  /*$(function(){
+  $(function(){
     
     var $window = $(window);
     
@@ -186,4 +186,4 @@
             
     });
     
-  });*/
+  });

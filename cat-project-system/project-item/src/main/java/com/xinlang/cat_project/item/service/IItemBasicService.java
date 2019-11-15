@@ -3,6 +3,7 @@ package com.xinlang.cat_project.item.service;
 import com.xinlang.cat_project.item.pojo.ItemBasic;
 import com.xinlang.cat_project.item.pojo.PageResult;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +35,8 @@ public interface IItemBasicService {
      * @return
      */
     ItemBasic queryItemById(Integer id);
+
+    List<ItemBasic> queryCompanyItem();
 
     /**
      * 更改项目数据
