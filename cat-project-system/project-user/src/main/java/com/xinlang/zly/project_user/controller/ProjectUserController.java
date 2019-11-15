@@ -61,7 +61,6 @@ public class ProjectUserController {
 
     @ApiOperation(value = "根据用户类型查询用户信息")
     @LogAnnotation(module = "根据用户类型查询用户信息")
-    @PreAuthorize("hasAnyAuthority('project:user:query')")
     @GetMapping("/user/type/{userType}")
     public List<ProjectUser> findByUserType(@PathVariable String userType){
         List<ProjectUser> list =  projectUserService.findByUserType(userType);
