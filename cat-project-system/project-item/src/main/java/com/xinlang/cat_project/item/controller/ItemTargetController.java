@@ -54,16 +54,16 @@ public class ItemTargetController {
     }
 
     /**
-     * 获取当前内容全部指标以及实施人员
+     * 获取当前内容全部指标
      * @param Cid 内容id
      * @return
      */
-    @ApiOperation(value = "获取主要研究内容的所有指标信息及实施人员")
+    @ApiOperation(value = "获取主要研究内容的所有指标信息")
     @LogAnnotation(module = "获取主要研究内容的所有指标信息")
     @GetMapping("/group/{Cid}")
-    public ResponseEntity<List<Map<String, Object>>> getTargetByCid(@PathVariable Integer Cid){
+    public ResponseEntity<List<ItemTarget>> getTargetByCid(@PathVariable Integer Cid){
 
-        List<Map<String, Object>> target = targetService.queryTargetByCId(Cid);
+        List<ItemTarget> target = targetService.queryTargetByCId(Cid);
         return ResponseEntity.ok(target);
     }
 

@@ -2,7 +2,7 @@
 <html lang="en-us" id="extr-page">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
 </head>
 <body>
 
@@ -61,8 +61,8 @@
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add_budget()">
+                        <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="addBudget();">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -73,21 +73,22 @@
     </form>
 </div>
 
-<script src="../../js/constant.js"></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
 
 
 <script>
-    var id = getUrlParam("id");
-
-    $("#item_id").val(id);
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
+
+    var id = getUrlParam("id");
+    $("#item_id").val(id);
+
     $(function () {
         $.ajax({
             type: 'get',
@@ -103,7 +104,7 @@
         })
     })
 
-    function add_budget() {
+    function addBudget() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -125,14 +126,6 @@
         });
 
     }
-
-
-    $("#btn_return").click(function () {
-
-        $(location).attr("href", "details.html?id=" + id + "");
-
-    })
-
 </script>
 </body>
 </html>

@@ -9,23 +9,22 @@
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
-        <input type="hidden" name="type" value="0">
-        <input type="hidden" name="status" value="0">
+        <input type="hidden" value="" id="id" name="id">
         <fieldset>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="col-md-3 control-label">研究内容</label>
-                <input type="hidden" value="" id="item_id" name="item_id">
+                <input type="hidden" value="" id="id" name="id">
                 <div class="col-md-7">
-                    <select class="form-control input-sm" id="optionu" value="" name="content_id">
+                    <select class="form-control input-sm" id="content" value="" name="content_id">
 
                     </select>
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label class="col-md-3 control-label">考核指标</label>
                 <div class="col-md-7">
                     <input class="form-control" placeholder="考核指标" type="text" name="target" maxlength="50"
-                           id="target_jishu"
+                           id="target"
                            data-bv-notempty="true"
                            data-bv-notempty-message="考核指标 不能为空">
                 </div>
@@ -34,7 +33,7 @@
                 <label class="col-md-3 control-label">数量</label>
                 <div class="col-md-7">
                     <input class="form-control" placeholder="数量" type="text" name="count" maxlength="50"
-                           id="count_jishu"
+                           id="count"
                            data-bv-notempty="true"
                            data-bv-notempty-message="数量 不能为空">
                 </div>
@@ -88,7 +87,7 @@
                 <div class="col-md-3">
                     <div class="col-md-20">
                         <button class="btn btn-primary" id="return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add();">
+                        <button class="btn btn-primary" type="submit" onclick="update();">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -103,7 +102,6 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/project/initData.js"></script>
 <script type="text/javascript" src="../../js/project/initData.js"></script>
 
 <script>
@@ -122,10 +120,32 @@
     });
 
     var id = getUrlParam("id");
-    $("#item_id").val(id);
+    $("#id").val(id);
 
+    var itemId;
     getprovince();
+
     initUserSelect();
+    //gatContentSelect();
+    initData(id);
+    //回填
+    function initData(id) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/target/'+id,
+            async : false,
+            success : function(data) {
+                itemId = data.item_id;
+                $("#content").val(data.content_id);
+                $("#target").val(data.target);
+                $("#count").val(data.count);
+                $("#unit").val(data.unit);
+                $("#map").val(data.district);
+                $("#start").val(data.start_dateStr);
+                $("#end").val(data.end_dateStr);
+            }
+        });
+    }
 
     //监听地点选择
     var code = '',
@@ -154,22 +174,21 @@
         text = '';
         $("#district").val(code);
     }
-    //获取主要内容
-    $(function () {
+    /*//获取主要内容
+    function gatContentSelect() {
         $.ajax({
             type: 'get',
-            url: domainName + '/project-item/item/content/all/' + id,
-            contentType: "application/json; charset=utf-8",
+            url: domainName + '/project-item/item/content/all/' + itemId,
+            async : false,
             success: function (res) {
                 var str = '';
                 $(res).each(function () {
                     str += '    <option value="' + this.id + '">' + this.headline + '</option>';
                 });
-                $("#optionu").append(str);
-
+                $("#content").append(str);
             }
         })
-    })
+    }*/
     //显示所有人员
     function initUserSelect() {
         $.ajax({
@@ -188,7 +207,7 @@
         });
     }
     //保存
-    function add() {
+    function update() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -197,20 +216,20 @@
         }
         var formdata = $("#form").serializeObject();
         $.ajax({
-            type: 'post',
-            url: domainName + '/project-item/item/target/',
+            type: 'put',
+            url: domainName + '/project-item/item/target',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "details.html?id=" + id;
+                    location.href = "details.html?id=" + itemId;
                 });
             }
         });
     }
     //返回
     $("#return").click(function () {
-        $(location).attr("href", "details.html?id=" + id + "");
+        $(location).attr("href", "details.html?id=" + itemId);
     })
 </script>
 </body>

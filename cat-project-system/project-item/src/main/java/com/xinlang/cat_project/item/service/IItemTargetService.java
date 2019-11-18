@@ -11,7 +11,7 @@ public interface IItemTargetService {
 
     ItemTarget queryTargetById(Integer id);
 
-    List<Map<String, Object>> queryTargetByCId(Integer Cid);
+    List<ItemTarget> queryTargetByCId(Integer Cid);
 
     List<Map<String, Object>> queryTargetByItemId(Integer itemId);
 
