@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS `company_user`;
 CREATE TABLE `company_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL DEFAULT '0' COMMENT '用户id',
+  `name` varchar(50) NOT NULL COMMENT '姓名',
   `dept_code` varchar(18) NOT NULL COMMENT '公司代码',
   `branch_id` varchar(30) DEFAULT NULL COMMENT '部门id',
   PRIMARY KEY (`id`,`user_id`,`dept_code`)

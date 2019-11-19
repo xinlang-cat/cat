@@ -20,6 +20,7 @@ public class CompanyUser implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer userId;//用户id
+    private String name;//用户姓名
     private String deptCode;//公司代码
     /**
      * 暂时不用

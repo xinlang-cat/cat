@@ -83,39 +83,17 @@ public class ItemTargetService implements IItemTargetService {
     }
 
     @Override
-    public List<Map<String, Object>> queryTargetByCId(Integer Cid) {
-        //存放结果数据
-        List<Map<String, Object>> targetInfos = new ArrayList<>();
+    public List<ItemTarget> queryTargetByCId(Integer Cid) {
 
         //查找所有指标
         ItemTarget target = new ItemTarget();
         target.setContent_id(Cid);
         List<ItemTarget> list = itemTargetMapper.select(target);
-        //循环查找所有相关成员
-        ItemUser itemUser = new ItemUser(); //关系数据
         for (ItemTarget t : list) {
-            Map<String, Object> itemTarget = new HashMap<>();
             t.setStart_dateStr(DateUtils.dateToString(t.getStart_date(), "yyyy年MM月dd日"));
             t.setEnd_dateStr(DateUtils.dateToString(t.getEnd_date(), "yyyy年MM月dd日"));
-            //先存指标
-            itemTarget.put("itemTarget",t);
-
-            //通过target_id查找相关成员
-            itemUser.setTarget_id(t.getId());
-            List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
-            //循环查找成员信息
-            List<ProjectUser> projectUser;
-            List<ProjectUser> PU = new ArrayList<>();
-            for (ItemUser u : itemUsers) {
-                projectUser = consumeProjectUser.findByUserId(u.getUser_id());
-                PU.add(projectUser.get(0));
             }
-            //存成员信息
-            itemTarget.put("projectUser",PU);
-
-            targetInfos.add(itemTarget); //添加进list
-        }
-        return targetInfos;
+        return list;
     }
 
     @Override
@@ -139,12 +117,14 @@ public class ItemTargetService implements IItemTargetService {
             //通过target_id查找相关成员
             itemUser.setTarget_id(t.getId());
             List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
-            //循环查找成员信息
             List<ProjectUser> projectUser;
             List<ProjectUser> PU = new ArrayList<>();
-            for (ItemUser u : itemUsers) {
-                projectUser = consumeProjectUser.findByUserId(u.getUser_id());
-                PU.add(projectUser.get(0));
+            if(!CollectionUtils.isEmpty(itemUsers)){
+                //循环查找成员信息
+                for (ItemUser u : itemUsers) {
+                    projectUser = consumeProjectUser.findByUserId(u.getUser_id());
+                    PU.add(projectUser.get(0));
+                }
             }
             //存成员信息
             itemTarget.put("projectUser",PU);

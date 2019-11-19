@@ -2,7 +2,7 @@
 <html lang="en-us" id="extr-page">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
 </head>
 <body>
 
@@ -14,9 +14,8 @@
     <form class="form-horizontal" onsubmit="return false" id="form">
 
         <fieldset>
-
             <div class="form-group">
-                <label class="col-md-3 control-label">指标</label>
+                <label class="col-md-3 control-label">来源</label>
                 <input type="hidden" value="" id="item_id" name="item_id">
                 <div class="col-md-7">
                     <select class="form-control input-sm" id="option" value="" name="fund_id">
@@ -26,51 +25,44 @@
                 </div>
             </div>
 
-            <input type="hidden" id=""/>
             <div class="form-group">
-                <input type="hidden" name="projectId" value="" id="projectId">
-                <label class="col-md-3 control-label">标题</label>
+                <!--   <input type="hidden" name="fund_id" value="" id="fund_id">-->
+                <label class="col-md-3 control-label">科目</label>
                 <div class="col-md-7">
-                    <input class="form-control" placeholder="标题" type="text"  name="title"
-                           maxlength="50" data-bv-notempty="true" data-bv-notempty-message="标题 不能为空">
+                    <input class="form-control" placeholder="科目" type="text" name="subject" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="科目 不能为空">
                 </div>
             </div>
-
             <div class="form-group">
-                <label class="col-md-3 control-label">开始时间</label>
+                <label class="col-md-3 control-label">金额</label>
                 <div class="col-md-7">
-                    <input class="form-control date" placeholder="开始时间" type="text" name="createTime" maxlength="50"
-                           id="start" data-bv-notempty="true"
-                           data-bv-notempty-message="开始时间 不能为空">
+                    <input class="form-control" placeholder="金额" type="text" name="money" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="金额 不能为空">
                 </div>
             </div>
-
+            <!-- <div class="form-group">
+                 <label class="col-md-3 control-label">开支内容</label>
+                 <div class="col-md-7">
+                     <input class="form-control" placeholder="开支内容" type="text" name="content" maxlength="50"
+                            data-bv-notempty="true"
+                            data-bv-notempty-message="开支内容 不能为空">
+                 </div>
+             </div>-->
             <div class="form-group">
-                <label class="col-md-3 control-label">内容</label>
+                <label class="col-md-3 control-label">备注</label>
                 <div class="col-md-7">
-                        <textarea placeholder="请输入内容" class="layui-textarea" id="content" name="content"
-                                  data-bv-notempty="true" data-bv-notempty-message="内容 不能为空"
-                                  style="width: 100%;height: 100px;"></textarea>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <label class="col-md-3 control-label">
-                    <button id="file" type="button" class="layui-btn " id="test2">图片上传</button>
-                </label>
-                <div class="col-md-7">
-                    <div data-bv-notempty="true"
-                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 900px;"
-                         id="demo2"></div>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="content" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
                 </div>
             </div>
 
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add()">
+                        <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="addBudget();">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -81,21 +73,22 @@
     </form>
 </div>
 
-<script src="../../js/constant.js"></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
 
 
 <script>
-    var id = getUrlParam("id");
-
-    $("#item_id").val(id);
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
+
+    var id = getUrlParam("id");
+    $("#item_id").val(id);
+
     $(function () {
         $.ajax({
             type: 'get',
@@ -111,7 +104,7 @@
         })
     })
 
-    function add_budget() {
+    function addBudget() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -133,14 +126,6 @@
         });
 
     }
-
-
-    $("#btn_return").click(function () {
-
-        $(location).attr("href", "details.html?id=" + id + "");
-
-    })
-
 </script>
 </body>
 </html>
