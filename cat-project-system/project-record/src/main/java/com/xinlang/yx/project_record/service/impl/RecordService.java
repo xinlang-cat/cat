@@ -104,5 +104,15 @@ public class RecordService implements IRecordService {
         }
     }
 
+    @Override
+    public List<Record> findByproId(Integer proId,Integer status,Integer wetherUser) {
+        Long userId = null;
+        if(null!=wetherUser){
+            userId = AppUserUtil.getLoginAppUser().getId();
+        }
+        return recordMapper.findByproId(proId,status,userId);
+
+    }
+
 
 }

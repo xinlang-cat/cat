@@ -1,31 +1,12 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en-us" id="extr-page">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <title>添加资金使用情况</title>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
-    <style>
-        .layui-table td, .layui-table th{
-            border-color:  #009688;
-        }
-    </style>
 </head>
-
-
 <body>
 
-<div style="background-color: #009688; height: 30px; width: 100%;" class="layui-row">
-    <p style="text-align: center;line-height:30px;color: #FFF;">添加资金使用情况</p>
-</div>
 
 <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
@@ -34,9 +15,9 @@
 
             <div class="form-group">
                 <label class="col-md-3 control-label">科目</label>
-                <input type="hidden" value="26" id="item_id" name="item_id">
+                <input type="hidden" value="" id="item_id" name="item_id"/>
                 <div class="col-md-7">
-                    <select class="form-control input-sm" id="option_subject" value="" name="budget_id">
+                    <select class="form-control input-sm" id="option" value="" name="budget_id">
                         <!--  <option value="1">男</option>
                           <option value="0">女</option>-->
                     </select>
@@ -44,46 +25,37 @@
             </div>
 
 
-
             <div class="form-group">
                 <label class="col-md-3 control-label">金额</label>
                 <div class="col-md-7">
-                    <input class="form-control" placeholder="金额"  type="text" name="expenditure" maxlength="50"
+                    <input class="form-control" placeholder="金额" type="text" name="expenditure" maxlength="50"
                            data-bv-notempty="true"
-                           data-bv-notempty-message="金额 不能为空"  />
-                    <p   style="position: absolute;margin-top:-26px;margin-left:200px;color:black;" >还剩：<span  id="res_money"></span></p>
+                           data-bv-notempty-message="金额 不能为空">
                 </div>
             </div>
-            <!-- <div class="form-group">
-                 <label class="col-md-3 control-label">开支内容</label>
-                 <div class="col-md-7">
-                     <input class="form-control" placeholder="开支内容" type="text" name="content" maxlength="50"
-                            data-bv-notempty="true"
-                            data-bv-notempty-message="开支内容 不能为空">
-                 </div>
-             </div>-->
+
             <div class="form-group">
                 <label class="col-md-3 control-label">备注</label>
                 <div class="col-md-7">
-                                <textarea placeholder="请输入内容" class="layui-textarea" name="remark" data-bv-notempty="true"
-                                          data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="remark" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
                 </div>
             </div>
-
-
-
             <div class="form-group">
-            <label class="col-md-3 control-label">  <button  id="file" type="button" class="layui-btn" id="test2">图片上传</button> </label>
-            <div class="col-md-7">
-                <div   style="float: left; width: 790px;" id="demo2"></div>
+                <label class="col-md-3 control-label">
+                    <button id="file" type="button" class="layui-btn " id="test2">图片上传</button>
+                </label>
+                <div class="col-md-7">
+                    <div data-bv-notempty="true"
+                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 750px;"
+                         id="demo2"></div>
+                </div>
             </div>
-            </div>
-
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add();">
+                        <button class="btn btn-primary" type="submit" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -94,21 +66,38 @@
     </form>
 </div>
 
-
-
-
-</body>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
-<script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
 
-    layui.use(['layer', 'laydate','upload'], function () {
+
+<script>
+    var id = getUrlParam("id");
+    $("#item_id").val(id);
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/budget/all/' + id,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += ' <option value="' + this.id + '">' + this.subject + '</option>';
+                });
+                $("#option").append(str);
+            }
+        })
+    })
+
+    var urls=[];
+
+    layui.use(['layer', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload
             , laydate = layui.laydate;
@@ -120,10 +109,11 @@
                 , trigger: 'click'
             });
         });
+
         //文件上传
         var uploadInst = upload.render({
             elem: '#file' //绑定元素
-            , accept: 'file'
+            , accept: 'images'
             , url: domainName + '/zuul/api-f/files' //上传接口
             , before: function (obj) {
                 //预读本地文件示例，不支持ie8
@@ -133,41 +123,29 @@
             }
             , done: function (res) {
                 //上传完毕回调
-                var id = res.id,
-                    name = res.name;
-                $("#contract").val(id);
-                $("#file").val(name);
+                urls.push(res.url);
             }
             , error: function () {
+
+                alert("失败");
                 //请求异常回调
             }
         })
+
+
     })
 
-    var res_money=0;
-    var money_budget=0;
-    $(function () {
-        $.ajax({
-            type: 'get',
-            url : domainName + '/project-item/item/budget/all/26',
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                var str = '';
-                $(res).each(function () {
-                    str += ' <option value="' + this.id+ '">' + this.subject + '</option>';
-                });
-                $("#option_subject").append(str);
-            }
-        })
-    })
+
     function add() {
-        $("#form").bootstrapValidator();
+        $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
         if (!bootstrapValidator.isValid()) {
             return;
         }
+
         var formdata = $("#form").serializeObject();
+        formdata.bill_url=urls;
         $.ajax({
             type: 'post',
             url: domainName + '/project-item/item/fund/use',
@@ -175,7 +153,7 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "details.html?id=" + id;
+                    location.href = "UseOfFunding.html?id=" + id;
                 });
             }
         });
@@ -183,13 +161,12 @@
     }
 
 
-
-
     $("#btn_return").click(function () {
-        $(location).attr("href", "details.html?id=" + id + "");
+
+        $(location).attr("href", "UseOfFunding.html?id=" + id + "");
+
     })
 
-
 </script>
-
+</body>
 </html>

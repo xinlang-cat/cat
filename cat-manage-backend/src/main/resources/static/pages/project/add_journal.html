@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" id="extr-page">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
+
 <body>
 
-<div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
-    <p style="text-align: center;line-height:30px;color: #FFF;">添加项目预算</p>
 
-</div>
 <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
 
         <fieldset>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label">指标</label>
-                <input type="hidden" value="" id="item_id" name="item_id">
-                <div class="col-md-7">
-                    <select class="form-control input-sm" id="option" value="" name="fund_id">
-                        <!--  <option value="1">男</option>
-                          <option value="0">女</option>-->
-                    </select>
-                </div>
-            </div>
 
             <input type="hidden" id=""/>
             <div class="form-group">
@@ -61,7 +50,7 @@
                 </label>
                 <div class="col-md-7">
                     <div data-bv-notempty="true"
-                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 900px;"
+                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 750px;"
                          id="demo2"></div>
                 </div>
             </div>
@@ -80,7 +69,6 @@
         </fieldset>
     </form>
 </div>
-
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
@@ -89,58 +77,95 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 
 
+</body>
 <script>
+
     var id = getUrlParam("id");
 
-    $("#item_id").val(id);
-    layui.use(['layer'], function () {
-        var layer = layui.layer;
-    });
-    $(function () {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/fund/all/' + id,
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                var str = '';
-                $(res).each(function () {
-                    str += '    <option value="' + this.id + '">' + this.headline + '</option>';
-                });
-                $("#option").append(str);
-            }
-        })
+
+
+    layui.use(['layer', 'laydate','upload'], function () {
+        var layer = layui.layer
+            ,upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function(){
+            laydate.render({
+                elem: this
+                ,format:'yyyy年MM月dd日'
+                ,trigger: 'click'
+            });
+        });
     })
 
-    function add_budget() {
+
+
+
+
+    function add() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
         if (!bootstrapValidator.isValid()) {
             return;
         }
-
         var formdata = $("#form").serializeObject();
         $.ajax({
             type: 'post',
-            url: domainName + '/project-item/item/target',
+            url: domainName + '/project-record/record/',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "details.html?id=" + id;
+                    location.href = "report.html?id=" + id;
                 });
             }
         });
-
     }
 
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
 
-    $("#btn_return").click(function () {
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
 
-        $(location).attr("href", "details.html?id=" + id + "");
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#file' //绑定元素
+            , accept: 'images'
+            , url: domainName + '/zuul/api-f/files' //上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').append('<img style="width: 250px;margin-left: 10px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                });
+            }
+            , done: function (res) {
+                //上传完毕回调
+                urls.push(res.url);
+            }
+            , error: function () {
+
+                alert("失败");
+                //请求异常回调
+            }
+        })
+
 
     })
 
+
+
+
+
 </script>
-</body>
+
+
 </html>

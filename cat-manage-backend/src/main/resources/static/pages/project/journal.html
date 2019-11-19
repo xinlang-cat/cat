@@ -34,7 +34,7 @@
     <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
 layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
         <p class="title">使用资金</p>
-        <button id="add_UseFund" style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+        <button id="add_journal" style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
                 class="layui-btn layui-btn-sm"  id="add_budget">
             <p style="line-height: 20px;margin-left: -3px;"> <i class="layui-icon">&#xe608;</i></p>
         </button>
@@ -93,79 +93,12 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
     });
 
 
-    $("#add_UseFund").click(function () {
-        $(location).attr("href", "add_UseFund.html?id=" + id + "");
+
+
+    $("#add_journal").click(function () {
+        var id = getUrlParam("id");
+        $(location).attr("href", "add_journal.html?id=" + id);
     })
-      var money=0;
-    var subjectName;
-    $(function(){
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/fund/use/my/'+id,
-            async:false,
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                var str = '';
-                $(res).each(function () {
-                    money+=this.expenditure;
-                    getbudegetname(this.budget_id);
-                    str += '<tr>'
-                        + '<th style="text-align: center;">'+subjectName+'</th>'
-                        + '<th style="text-align: center;">' + this.expenditure + '</th>'
-                        +'<th style="text-align: center;">'+this.remark+' </th>'
-                        +'<th  style="text-align: center;"><a href="userfundimg.html?id='+this.id+'">详情</a></th>'
-                        + '<th>'
-                        + ' <div style="width: 100%;height: 20px;align-self: center;">'
-                        + '<button onclick="update_useFund('+this.id+')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
-                        + '<p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe642;</i></p>'
-                        + '</button>'
-                        + '<button onclick="delete_userFund('+this.id+');" style="height: 20px;width: 30px;align-self: center;"   class="layui-btn layui-btn-sm">  <p style="line-height: 20px;margin-left: -3px;"><i  class="layui-icon">&#xe640;</i></p>'
-                        + '</button>'
-                        + '</div>'
-                        + '</th>';
-                })
-                 $("#res_money").text(money);
-                $("#report_content").append(str);
-            }
-        })
-    })
-
-    function getbudegetname(bid){
-
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/budget/' + bid,
-            async:false,
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                subjectName=res.subject;
-            }
-        })
-    }
-
-    function update_useFund(id){
-        $(location).attr("href", "updata_UserFund.html?id=" + id + "");
-    }
-
-    function delete_userFund(uid){
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
-        }, function () {
-            $.ajax({
-                type: 'delete',
-                url: domainName + '/project-item/item/fund/use/'+uid,
-                success: function (data) {
-                    window.location.reload();
-                    layer.msg("删除成功");
-                }
-            });
-            layer.close(1);
-        });
-    }
-
-
-
-
 
 </script>
 </html>

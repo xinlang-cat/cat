@@ -120,6 +120,13 @@ public class RecordController {
         return recordService.findVOById(id);
     }
 
+    @LogAnnotation(module = "获取自己所有的实施日志")
+    @GetMapping("/findByproId/{proId}")
+    public List<Record> findByproId(@PathVariable Integer proId,@PathVariable Integer status,@PathVariable Integer wetherUser){
+
+        return recordService.findByproId(proId,status,wetherUser);//所有的
+    }
+
 
 
 

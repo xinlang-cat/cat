@@ -30,4 +30,6 @@ public interface IRecordService {
     void addFile(List<Integer> fileIds,Integer id);
 
     void delFile(List<Integer> fileIds, Integer id);
+
+    List<Record> findByproId(Integer proId,Integer status,Integer wetherUser);
 }

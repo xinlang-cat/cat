@@ -23,4 +23,6 @@ public interface RecordMapper extends tk.mybatis.mapper.common.Mapper<Record> {
     void addFile(@Param("id") Integer id, @Param("fileId") Integer fileId);
 
     void delFile(@Param("id") Integer id, @Param("fileId") Integer fileId);
+
+    List<Record> findByproId(@Param("proId") Integer proId, @Param("status") Integer status, @Param("userId") Long userId);
 }

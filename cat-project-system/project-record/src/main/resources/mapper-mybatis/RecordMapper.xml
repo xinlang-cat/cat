@@ -91,6 +91,32 @@
 			j.status = ${status}
 	</select>
 
+	<select id="findByproId" resultMap="BaseResultMap">
+		select
+			p.*
+		from
+			project_journal as p
+		LEFT JOIN
+			item_target
+		AS i on
+			p.target_id = i.id
+		AND
+			i.item_id = ${proId};
+		<if test="null!=status">
+		AND
+			p.`status` = ${status}
+		</if>
+		<if test="null!=userId">
+		AND
+			p.create_user_id = ${userId}
+		</if>
+
+
+
+
+
+	</select>
+
 
 
 
