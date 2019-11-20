@@ -24,17 +24,25 @@ function target(id) {
     })
 }
 
+var typeCount = 0;
+function count(t) {
+    $(targets).each(function () {
+        if(this.type==t){
+            typeCount++;
+        }
+    })
+}
+
 function content_target(id) {
     var str1;
     var str2 = '';
     var str3;
-    var str4;
     researchContents(id);
     $(content).each(function () {
         var content = this;
         str1 = '<thead>\n' +
             '       <tr>\n' +
-            '           <th>研究内容</th>\n' +
+            '           <th>研究主题</th>\n' +
             '           <th>考核指标</th>\n' +
             '           <th>描述</th>\n' +
             '           <th>数量</th>\n' +
@@ -50,89 +58,190 @@ function content_target(id) {
                 '       <td>/</td>\n' +
                 '       <td>/</td>\n' +
                 '       <td>/</td>\n' +
-                '       <td>/</td>\n' +
+                '       <td>' +
+                '           <a>更多</a>' +
+                '           <div class="operation">\n' +
+                '               <div class="layui-btn-group">\n' +
+                '                   <a href="updateContent.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                '                       <i class="layui-icon">&#xe642;</i>\n' +
+                '                   </a>\n' +
+                '                   <a class="layui-btn layui-btn-sm" onclick="deleteContent('+this.id+');">\n' +
+                '                       <i class="layui-icon">&#xe640;</i>\n' +
+                '                   </a>\n' +
+                '              </div>\n' +
+                '           </div>' +
+                '       </td>\n' +
                 '   </tr>';
         }
+        var count1 = 0; //记录类型0的个数
+        var count2 = 0; //记录类型1的个数
+        var str4 = '';
+        var str5 = '';
+        var str6 = '';
         $(targets).each(function (index) {
             var target = this;
+            count(target.type);
             if(target.type==0){
                 if(index==0){
-                    str2 += '<tr>\n' +
+                    str4 += '<tr>\n' +
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
-                        '       <td>经济指标</td>\n' +
+                        '       <td rowspan="'+typeCount+'">技术指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>'+target.count+target.unit+'</td>\n' +
-                        '       <td>更多</td>\n' +
+                        '       <td>' +
+                        '           <a>更多</a>' +
+                        '           <div class="operation">\n' +
+                        '               <div class="layui-btn-group">\n' +
+                        '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                        '                       <i class="layui-icon">&#xe642;</i>\n' +
+                        '                   </a>\n' +
+                        '                   <a class="layui-btn layui-btn-sm" onclick="deleteTaregt('+this.id+');">\n' +
+                        '                       <i class="layui-icon">&#xe640;</i>\n' +
+                        '                   </a>\n' +
+                        '              </div>\n' +
+                        '           </div>' +
+                        '       </td>\n' +
                         '   </tr>';
-                }else {
-                    str2 += '<tr>\n' +
-                        '       <td>经济指标</td>\n' +
+                }else if(count1==0) {
+                    str5 += '<tr>\n' +
+                        '       <td rowspan="'+typeCount+'">技术指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>1'+target.count+target.unit+'</td>\n' +
-                        '       <td>更多</td>\n' +
+                        '       <td>' +
+                        '           <a>更多</a>' +
+                        '           <div class="operation">\n' +
+                        '               <div class="layui-btn-group">\n' +
+                        '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                        '                       <i class="layui-icon">&#xe642;</i>\n' +
+                        '                   </a>\n' +
+                        '                   <a class="layui-btn layui-btn-sm" onclick="deleteTaregt('+this.id+');">\n' +
+                        '                       <i class="layui-icon">&#xe640;</i>\n' +
+                        '                   </a>\n' +
+                        '              </div>\n' +
+                        '           </div>' +
+                        '       </td>\n' +
+                        '    </tr>';
+                }else {
+                    str5 += '<tr>\n' +
+                        '       <td>'+target.target+'</td>\n' +
+                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>' +
+                        '           <a>更多</a>' +
+                        '           <div class="operation">\n' +
+                        '               <div class="layui-btn-group">\n' +
+                        '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                        '                       <i class="layui-icon">&#xe642;</i>\n' +
+                        '                   </a>\n' +
+                        '                   <a class="layui-btn layui-btn-sm" onclick="deleteTaregt('+this.id+');">\n' +
+                        '                       <i class="layui-icon">&#xe640;</i>\n' +
+                        '                   </a>\n' +
+                        '              </div>\n' +
+                        '           </div>' +
+                        '       </td>\n' +
                         '    </tr>';
                 }
+                count1++;
+                typeCount = 0;
             }else {
                 if(index==0){
-                    str2 += '<tr>\n' +
+                    str4 += '<tr>\n' +
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
-                        '       <td>数量指标</td>\n' +
+                        '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>'+target.count+target.unit+'</td>\n' +
-                        '       <td>更多</td>\n' +
+                        '       <td>' +
+                        '           <a>更多</a>' +
+                        '           <div class="operation">\n' +
+                        '               <div class="layui-btn-group">\n' +
+                        '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                        '                       <i class="layui-icon">&#xe642;</i>\n' +
+                        '                   </a>\n' +
+                        '                   <a class="layui-btn layui-btn-sm" onclick="deleteTaregt('+this.id+');">\n' +
+                        '                       <i class="layui-icon">&#xe640;</i>\n' +
+                        '                   </a>\n' +
+                        '              </div>\n' +
+                        '           </div>' +
+                        '       </td>\n' +
                         '   </tr>';
-                }else {
-                    str2 += '<tr>\n' +
-                        '       <td>数量指标</td>\n' +
+                }else if(count2==0){
+                    str6 += '<tr>\n' +
+                        '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>1'+target.count+target.unit+'</td>\n' +
-                        '       <td>更多</td>\n' +
+                        '       <td>' +
+                        '           <a>更多</a>' +
+                        '           <div class="operation">\n' +
+                        '               <div class="layui-btn-group">\n' +
+                        '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                        '                       <i class="layui-icon">&#xe642;</i>\n' +
+                        '                   </a>\n' +
+                        '                   <a class="layui-btn layui-btn-sm" onclick="deleteTaregt('+this.id+');">\n' +
+                        '                       <i class="layui-icon">&#xe640;</i>\n' +
+                        '                   </a>\n' +
+                        '              </div>\n' +
+                        '           </div>' +
+                        '       </td>\n' +
+                        '    </tr>';
+                }else {
+                    str6 += '<tr>\n' +
+                        '       <td>'+target.target+'</td>\n' +
+                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>' +
+                        '           <a>更多</a>' +
+                        '           <div class="operation">\n' +
+                        '               <div class="layui-btn-group">\n' +
+                        '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
+                        '                       <i class="layui-icon">&#xe642;</i>\n' +
+                        '                   </a>\n' +
+                        '                   <a class="layui-btn layui-btn-sm" onclick="deleteTaregt('+this.id+');">\n' +
+                        '                       <i class="layui-icon">&#xe640;</i>\n' +
+                        '                   </a>\n' +
+                        '              </div>\n' +
+                        '           </div>' +
+                        '       </td>\n' +
                         '    </tr>';
                 }
+                count2++;
+                typeCount = 0;
             }
 
         })
+        str2 += str4 + str5 + str6;
     })
     $('#content').append(str1);
     $('#content').append(str2);
     $('#content').append(str3);
 }
+/*删除指标*/
+function deleteTaregt(id) {
+    layer.confirm('确定要删除吗？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            type: 'delete',
+            url: domainName + '/project-item/item/target/' + id,
+            success: function (data) {
+                window.location.reload();
+                layer.msg("删除成功");
+            }
+        });
+        layer.close(1);
+    });
+}
 
-function targetGroup(index,tsrget,str2) {
-    if(target.type==0){
-        if(index==0){
-            str2 += '<tr>\n' +
-                '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
-                '       <td>经济指标</td>\n' +
-                '       <td>'+target.target+'</td>\n' +
-                '       <td>'+target.count+target.unit+'</td>\n' +
-                '       <td>更多</td>\n' +
-                '   </tr>';
-        }else {
-            str2 += '<tr>\n' +
-                '       <td>经济指标</td>\n' +
-                '       <td>'+target.target+'</td>\n' +
-                '       <td>1'+target.count+target.unit+'</td>\n' +
-                '       <td>更多</td>\n' +
-                '    </tr>';
-        }
-    }else {
-        if(index==0){
-            str2 += '<tr>\n' +
-                '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
-                '       <td>数量指标</td>\n' +
-                '       <td>'+target.target+'</td>\n' +
-                '       <td>'+target.count+target.unit+'</td>\n' +
-                '       <td>更多</td>\n' +
-                '   </tr>';
-        }else {
-            str2 += '<tr>\n' +
-                '       <td>数量指标</td>\n' +
-                '       <td>'+target.target+'</td>\n' +
-                '       <td>1'+target.count+target.unit+'</td>\n' +
-                '       <td>更多</td>\n' +
-                '    </tr>';
-        }
-    }
-    return str2;
+/*删除内容*/
+function deleteContent(id) {
+    layer.confirm('确定要删除吗？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            type: 'delete',
+            url: domainName + '/project-item/item/content/' + id,
+            success: function (data) {
+                window.location.reload();
+                layer.msg("删除成功");
+            }
+        });
+        layer.close(1);
+    });
 }

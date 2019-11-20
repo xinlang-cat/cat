@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <input type="hidden" value="" id="id" name="id">
+        <fieldset>
+            <!--<div class="form-group">
+                <label class="col-md-3 control-label">研究内容</label>
+                <input type="hidden" value="" id="id" name="id">
+                <div class="col-md-7">
+                    <select class="form-control input-sm" id="content" value="" name="content_id">
+
+                    </select>
+                </div>
+            </div>-->
+            <div class="form-group">
+                <label class="col-md-3 control-label">考核指标</label>
+                <div class="col-md-7">
+                    <select class="form-control input-sm" id="type" name="type">
+                        <option value=''>- 请选择 -</option>
+                        <option value='0'>- 技术指标 -</option>
+                        <option value='1'>- 经济指标 -</option>
+                        <option value='2'>- 其他指标 -</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">考核主题</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="考核主题" type="text" name="target" maxlength="50"
+                           id="target"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="考核主题 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">考核内容</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="考核内容" type="text" name="remark" maxlength="50"
+                           id="remark"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="考核指标 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">数量</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="数量" type="text" name="count" maxlength="50"
+                           id="count"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="数量 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">单位</label>
+                <div class="col-md-7">
+                    <select class="form-control input-sm" id="unit" name="unit">
+                        <option value=''>- 请选择 -</option>
+                        <option value='0'>个</option>
+                        <option value='1'>项-</option>
+                        <option value='2'>亩</option>
+                        <option value='2'>棵</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">实施地点</label>
+                <div class="col-md-7">
+                    <select class="form-control input-sm" lay-skin="primary" id="map">
+                        <option value="">- 请选择 -</option>
+                    </select>
+                    <input type="hidden" name="district" id="district">
+                    <button type="button" class="layui-btn layui-btn-xs" onclick="refresh();"
+                            style="position: absolute;right: 16px;top: 4px;background-color: #e1e1e1;">
+                        <i class="layui-icon">&#xe669;</i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">开始时间</label>
+                <div class="col-md-7">
+                    <input class="form-control date" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
+                           id="start" data-bv-notempty="true"
+                           data-bv-notempty-message="开始时间 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">结束时间</label>
+                <div class="col-md-7">
+                    <input class="form-control date" placeholder="结束时间" type="text" name="end_dateStr" maxlength="50"
+                           id="end" data-bv-notempty="true"
+                           data-bv-notempty-message="结束时间 不能为空">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-md-3 control-label">实施人员</label>
+                <div class="col-md-7 layui-form">
+                    <div class="layui-input-block" id="users">
+                    </div>
+                </div>
+            </div>-->
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="update()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/project/initData.js"></script>
+
+<script>
+    layui.use(['layer', 'laydate','form'], function () {
+        var layer = layui.layer
+            ,form = layui.form
+            , laydate = layui.laydate;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+    });
+
+    var id = getUrlParam("id");
+    $("#id").val(id);
+
+    var itemId;
+    getprovince();
+
+    //initUserSelect();
+    //gatContentSelect();
+    initData(id);
+    //回填
+    function initData(id) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/target/'+id,
+            async : false,
+            success : function(data) {
+                itemId = data.item_id;
+                $("#content").val(data.content_id);
+                $("#type").val(data.type);
+                $("#target").val(data.target);
+                $("#remark").val(data.remark);
+                $("#count").val(data.count);
+                $("#unit").val(data.unit);
+                $("#map").val(data.district);
+                $("#start").val(data.start_dateStr);
+                $("#end").val(data.end_dateStr);
+            }
+        });
+    }
+
+    //监听地点选择
+    var code = '',
+        text = '';
+    $("#map").change(function () {
+        code = $("#map option:selected").val();
+        text += $("#map option:selected").text() + '-';
+        $("#district").val(code);
+        $("#map").empty();
+        $("#map").append("<option value='" + code + "'>" + text + "</option>");
+        var texts = text.split('-');
+        if (texts.length == 2) {
+            getCity(code);
+        } else if (texts.length == 3) {
+            getArea(code);
+        } else if (texts.length == 4) {
+            getStreet(code);
+        }
+    });
+    //刷新
+    function refresh() {
+        $("#map").empty();
+        $("#map").append("<option value=''>- 请选择 -</option>");
+        getprovince();
+        code = '';
+        text = '';
+        $("#district").val(code);
+    }
+    /*//获取主要内容
+    function gatContentSelect() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/content/all/' + itemId,
+            async : false,
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += '    <option value="' + this.id + '">' + this.headline + '</option>';
+                });
+                $("#content").append(str);
+            }
+        })
+    }*/
+    //显示所有人员
+    /*function initUserSelect() {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-user/user/all',
+            async : false,
+            success : function(data) {
+                var checkbox = $('#users');
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var userId = d.userId;
+                    var name = d.name;
+                    checkbox.append('<input type="checkbox" name="userIds" value="'+userId+'" title="'+name+'">');
+                }
+            }
+        });
+    }*/
+    //保存
+    function update() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/target',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "details.html?id=" + itemId;
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

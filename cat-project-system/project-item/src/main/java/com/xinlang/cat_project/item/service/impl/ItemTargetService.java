@@ -55,7 +55,7 @@ public class ItemTargetService implements IItemTargetService {
             throw new ItemException(ExceptionEnum.TARGET_SAVE_ERROR);
         }
         //添加实施人员
-        List<Integer> userIds = target.getUserIds();
+        /*List<Integer> userIds = target.getUserIds();
         if(!CollectionUtils.isEmpty(userIds)){
             //通过content_id查询研发内容，从而获得项目id
             ItemContent itemContent = new ItemContent();
@@ -68,7 +68,7 @@ public class ItemTargetService implements IItemTargetService {
                     throw new ItemException(ExceptionEnum.TARGET_UPDATE_ERROR);
                 }
             }
-        }
+        }*/
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ItemTargetService implements IItemTargetService {
         for (ItemTarget t : list) {
             t.setStart_dateStr(DateUtils.dateToString(t.getStart_date(), "yyyy年MM月dd日"));
             t.setEnd_dateStr(DateUtils.dateToString(t.getEnd_date(), "yyyy年MM月dd日"));
-            }
+        }
         return list;
     }
 

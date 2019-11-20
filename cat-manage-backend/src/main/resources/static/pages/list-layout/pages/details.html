@@ -380,9 +380,11 @@
     var id = getUrlParam("id");
 
     //$("#addBasic").attr("href","addBasic.html?id="+id);
+    $("#addContent").attr("href","addContent.html?id="+id);
+    $("#addTarget").attr("href","addTarget.html?id="+id);
     $("#addFund").attr("href","addFund.html?id="+id);
-    $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
     $("#addBudget").attr("href","addBudget.html?id="+id);
+    $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
 
     /*基本信息*/
     getBasic(id);
