@@ -43,8 +43,7 @@ public class WechatController {
      * @return
      */
     @GetMapping(value = "/{app}/back", params = {"code", "state"})
-    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state,
-                                   @RequestParam String toUrl) {
+    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state) {
         if (StringUtils.isBlank(code)) {
             throw new IllegalArgumentException("code不能为空");
         }
@@ -52,7 +51,7 @@ public class WechatController {
         if (StringUtils.isBlank(state)) {
             throw new IllegalArgumentException("state不能为空");
         }
-
+        String toUrl = "http://xinlangxfpt.mynatapp.cc/api-b/pages/wechat/index.html";
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
 
         toUrl = wechatService.getToUrl(toUrl, wechatUserInfo);

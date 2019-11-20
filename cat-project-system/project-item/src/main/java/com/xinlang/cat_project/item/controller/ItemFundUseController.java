@@ -3,7 +3,9 @@ package com.xinlang.cat_project.item.controller;
 import com.xinlang.cat_project.item.fegin.ConsumeUser;
 import com.xinlang.cat_project.item.pojo.ItemFundUse;
 import com.xinlang.cat_project.item.service.IItemFundUseService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.LoginAppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,7 +73,8 @@ public class ItemFundUseController {
     @GetMapping("/my/{Iid}")
     public ResponseEntity<List<ItemFundUse>> getFundUseByItemIdAndUserId(@PathVariable Integer Iid){
 
-        int UserTd = consumeUser.getLoginAppUser().getId().intValue();
+        //int UserTd = consumeUser.getLoginAppUser().getId().intValue();
+        int UserTd = AppUserUtil.getLoginAppUser().getId().intValue();
         List<ItemFundUse> itemFundUses = itemFundUseService.queryFundUseByItemIdAndUserId(Iid,UserTd);
         return ResponseEntity.ok(itemFundUses);
     }

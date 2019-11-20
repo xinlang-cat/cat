@@ -56,7 +56,9 @@ public class ItemFundUseService implements IItemFundUseService {
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
         }
         itemFundUse.setEdit_dateStr(DateUtils.dateToString(itemFundUse.getEdit_date(), "yyyy年MM月dd日"));
-        itemFundUse.setCheck_dateStr(DateUtils.dateToString(itemFundUse.getCheck_date(), "yyyy年MM月dd日"));
+        if(itemFundUse.getCheck_date()!=null){
+            itemFundUse.setCheck_dateStr(DateUtils.dateToString(itemFundUse.getCheck_date(), "yyyy年MM月dd日"));
+        }
         //查询相关图片
         List<Integer> urls = itemFundUseMapper.selectUseBill(itemFundUse.getId());
         itemFundUse.setBill_url(urls);
@@ -97,10 +99,11 @@ public class ItemFundUseService implements IItemFundUseService {
     @Transactional
     public void updateFundUse(ItemFundUse itemFundUse) {
         //设置编辑信息并添加
-        LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
-        itemFundUse.setEdit_userid(loginAppUser.getId().intValue());
+        //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
+        int userTd = AppUserUtil.getLoginAppUser().getId().intValue();
+        itemFundUse.setEdit_userid(userTd);
         itemFundUse.setEdit_date(new Date());
-        int i = itemFundUseMapper.updateByPrimaryKey(itemFundUse);
+        int i = itemFundUseMapper.updateByPrimaryKeySelective(itemFundUse);
         if(i != 1){
             throw new ItemException(ExceptionEnum.UPDATE_ERROR);
         }
@@ -123,10 +126,6 @@ public class ItemFundUseService implements IItemFundUseService {
         if(i != 1){
             throw new ItemException(ExceptionEnum.DELETE_ERROR);
         }
-
         int j =itemFundUseMapper.deleteUseBill(id);
-        if(j != 1){
-            throw new ItemException(ExceptionEnum.DELETE_ERROR);
-        }
     }
 }

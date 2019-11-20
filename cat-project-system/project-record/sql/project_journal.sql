@@ -11,7 +11,7 @@
  Target Server Version : 50559
  File Encoding         : 65001
 
- Date: 13/11/2019 23:25:25
+ Date: 14/11/2019 21:30:57
 */
 
 SET NAMES utf8mb4;
@@ -27,12 +27,12 @@ CREATE TABLE `project_journal`  (
   `title` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '报告标题',
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '报告内容',
   `create_time` datetime NOT NULL COMMENT '创建时间',
-  `check_user_id` int(11) NOT NULL COMMENT '审核人id',
+  `check_user_id` int(11) NULL DEFAULT NULL COMMENT '审核人id',
   `status` int(11) NOT NULL COMMENT '状态',
-  `working_day` datetime NOT NULL COMMENT '工作时间',
+  `working_day` datetime NULL DEFAULT NULL COMMENT '工作时间',
   `create_user_id` int(11) NULL DEFAULT NULL COMMENT '审核人id',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;

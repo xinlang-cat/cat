@@ -71,7 +71,7 @@ public class RecordController {
 
 
     @LogAnnotation(module = "提交实施日志")
-    @PutMapping("/record/submit")
+    @PutMapping("/record/submit/{id}")
     public void submit(@PathVariable Integer id){
          recordService.check(id,constant.ConstantStatus.CHECK_IN);
 
@@ -118,6 +118,13 @@ public class RecordController {
     @GetMapping("/record/getRecordVOById/{id}")
     public RecordVO getPassRecordVOById(@PathVariable Integer id){
         return recordService.findVOById(id);
+    }
+
+    @LogAnnotation(module = "获取自己所有的实施日志")
+    @GetMapping("/findByproId/{proId}")
+    public List<Record> findByproId(@PathVariable Integer proId,@PathVariable Integer status,@PathVariable Integer wetherUser){
+
+        return recordService.findByproId(proId,status,wetherUser);//所有的
     }
 
 

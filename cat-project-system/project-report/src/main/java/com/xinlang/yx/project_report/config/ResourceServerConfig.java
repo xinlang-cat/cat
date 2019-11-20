@@ -1,4 +1,4 @@
-package com.xinlang.yx.project_record.config;
+package com.xinlang.yx.project_report.config;
 
 import com.xinlang.zly_xyx.cat_common.constant.PermitAllUrl;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

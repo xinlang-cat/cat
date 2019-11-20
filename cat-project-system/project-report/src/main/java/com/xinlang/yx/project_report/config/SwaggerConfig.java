@@ -1,4 +1,4 @@
-package com.xinlang.yx.project_record.config;
+package com.xinlang.yx.project_report.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

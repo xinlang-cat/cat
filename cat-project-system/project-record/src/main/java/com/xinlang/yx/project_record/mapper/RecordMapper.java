@@ -18,9 +18,11 @@ public interface RecordMapper extends tk.mybatis.mapper.common.Mapper<Record> {
 
     List<RecordVO> findByTarIdAUIDASTUVO(@Param("targetId") Integer targetId, @Param("status") Integer status);
 
-    RecordVO findVO(Integer id);
+    RecordVO findVO(@Param("id") Integer id);
 
     void addFile(@Param("id") Integer id, @Param("fileId") Integer fileId);
 
     void delFile(@Param("id") Integer id, @Param("fileId") Integer fileId);
+
+    List<Record> findByproId(@Param("proId") Integer proId, @Param("status") Integer status, @Param("userId") Long userId);
 }

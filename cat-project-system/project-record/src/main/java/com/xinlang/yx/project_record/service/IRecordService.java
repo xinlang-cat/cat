@@ -25,9 +25,11 @@ public interface IRecordService {
 
     List<RecordVO> findByTarIdAUIDASTUVO(Integer targetId, Integer checkPass);
 
-   RecordVO findVOById(Integer id);
+    RecordVO findVOById(Integer id);
 
     void addFile(List<Integer> fileIds,Integer id);
 
     void delFile(List<Integer> fileIds, Integer id);
+
+    List<Record> findByproId(Integer proId,Integer status,Integer wetherUser);
 }
