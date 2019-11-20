@@ -50,36 +50,29 @@
                          id="demo2"></div>
                 </div>
             </div>
-
-
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" id="btn_return">返回</button>
+                        <button class="btn btn-primary" onclick="history.back(-1);">返回</button>
                         <button class="btn btn-primary" type="submit" onclick="updata()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
                 </div>
             </div>
-
-
         </fieldset>
     </form>
 </div>
-
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
-
-
 <script>
     var id = getUrlParam("id");
     $("#id").val(id);
-    alert(id);
+
    var subject_id;
    var itemId;
     var urls=[];
@@ -96,17 +89,21 @@
                 itemId=res.item_id;
                 var str = '';
                 $(res.bill_url).each(function (index) {
-                    $('#demo2').append('<div><button  onclick="deleteImg('+index+',this);" style="position: absolute;margin-left: 180px;" type="button" class="layui-btn layui-btn-primary">删除</button>  <img  style="width: 250px;margin-left: 10px;height: 150px;" src="' + this + '" alt="' + file.name + '" class="layui-upload-img"></img></div>');
+                    $('#demo2').append('<div><button  onclick="deleteImg('+index+',this);" style="position: absolute;" type="button" class="layui-btn layui-btn-primary">删除</button>  <img  style="width: 250px;margin-left: 10px;height: 150px;" src="' + this + '" alt="' + file.name + '" class="layui-upload-img"></img></div>');
                     urls.push(this);
-                    alert($("img").attr("src"));
+
                 })
             }
         })
     })
     function deleteImg(index,e) {
-
         $(e).parent().remove();
-        urls.splice($.inArray(index,urls),1);
+        urls.length = 0;
+        var url;
+        $("img").each(function(){
+            url = $(this).attr("src");
+            urls.push(url);
+        });
     }
     $(function () {
         $.ajax({
@@ -194,9 +191,7 @@
             }
         });
     }
-    $("#btn_return").click(function () {
-        $(location).attr("href", "UseOfFunding.html?id=" + itemId + "");
-    })
+
     /*  $("#item_id").val(id);
       layui.use(['layer'], function () {
           var layer = layui.layer;

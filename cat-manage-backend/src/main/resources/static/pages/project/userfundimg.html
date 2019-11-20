@@ -28,6 +28,15 @@
     </li>
 </ul>
 
+<div class="form-group">
+    <label class="col-md-3 control-label"></label>
+    <div class="col-md-7">
+        <div class="col-md-20">
+            <button class="btn btn-primary" id="return" onclick="history.back(-1);">返回</button>
+        </div>
+    </div>
+</div>
+
 <!--<div class="form-group">
     <label class="col-md-3 control-label">
         <button id="file" type="button" class="layui-btn " id="test2">图片上传</button>
@@ -51,7 +60,9 @@
 
 
 </body>
-<script>var id = getUrlParam("id");
+<script>
+
+    var id = getUrlParam("id");
 
 $(function () {
     $.ajax({
@@ -69,6 +80,10 @@ $(function () {
         }
     })
 })
+
+
+
+
 </script>
 
 

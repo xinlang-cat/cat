@@ -131,11 +131,7 @@
                 //请求异常回调
             }
         })
-
-
     })
-
-
     function add() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
@@ -143,7 +139,6 @@
         if (!bootstrapValidator.isValid()) {
             return;
         }
-
         var formdata = $("#form").serializeObject();
         formdata.bill_url=urls;
         $.ajax({
@@ -153,17 +148,14 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "UseOfFunding.html?id=" + id;
+                    location.href = "new_usefund.html?id=" + id;
                 });
             }
         });
-
     }
-
-
     $("#btn_return").click(function () {
 
-        $(location).attr("href", "UseOfFunding.html?id=" + id + "");
+        $(location).attr("href", "new_usefund.html?id=" + id + "");
 
     })
 
