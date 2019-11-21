@@ -72,11 +72,14 @@ public class ItemTargetService implements IItemTargetService {
     }
 
     @Override
+    @Transactional
     public ItemTarget queryTargetById(Integer id) {
         ItemTarget target = itemTargetMapper.selectByPrimaryKey(id);
         if(target==null){
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
         }
+        List<Integer> list = itemTargetMapper.selectTargetUserByTargetId(target.getItem_id(), id);
+        target.setUserIds(list);
         target.setStart_dateStr(DateUtils.dateToString(target.getStart_date(), "yyyy年MM月dd日"));
         target.setEnd_dateStr(DateUtils.dateToString(target.getEnd_date(), "yyyy年MM月dd日"));
         return target;
@@ -97,41 +100,17 @@ public class ItemTargetService implements IItemTargetService {
     }
 
     @Override
-    public List<Map<String, Object>> queryTargetByItemId(Integer itemId) {
-        //存放结果数据
-        List<Map<String, Object>> targetInfos = new ArrayList<>();
+    public List<ItemTarget> queryTargetByItemId(Integer itemId) {
 
         //查找所有指标
         ItemTarget target = new ItemTarget();
         target.setItem_id(itemId);
         List<ItemTarget> list = itemTargetMapper.select(target);
-        //循环查找所有相关成员
-        ItemUser itemUser = new ItemUser(); //关系数据
         for (ItemTarget t : list) {
-            Map<String, Object> itemTarget = new HashMap<>();
             t.setStart_dateStr(DateUtils.dateToString(t.getStart_date(), "yyyy年MM月dd日"));
             t.setEnd_dateStr(DateUtils.dateToString(t.getEnd_date(), "yyyy年MM月dd日"));
-            //先存指标
-            itemTarget.put("itemTarget",t);
-
-            //通过target_id查找相关成员
-            itemUser.setTarget_id(t.getId());
-            List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
-            List<ProjectUser> projectUser;
-            List<ProjectUser> PU = new ArrayList<>();
-            if(!CollectionUtils.isEmpty(itemUsers)){
-                //循环查找成员信息
-                for (ItemUser u : itemUsers) {
-                    projectUser = consumeProjectUser.findByUserId(u.getUser_id());
-                    PU.add(projectUser.get(0));
-                }
-            }
-            //存成员信息
-            itemTarget.put("projectUser",PU);
-
-            targetInfos.add(itemTarget); //添加进list
         }
-        return targetInfos;
+        return list;
     }
 
     @Override
@@ -173,7 +152,7 @@ public class ItemTargetService implements IItemTargetService {
             throw new ItemException(ExceptionEnum.TARGET_UPDATE_ERROR);
         }
         //删除成员与指标的关系
-        itemTargetMapper.updateItemUser2(id);
+        itemTargetMapper.DeleteTargetUserByUserId(id);
     }
 
 }

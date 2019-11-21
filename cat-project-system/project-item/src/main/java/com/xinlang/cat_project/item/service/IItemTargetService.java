@@ -13,7 +13,7 @@ public interface IItemTargetService {
 
     List<ItemTarget> queryTargetByCId(Integer Cid);
 
-    List<Map<String, Object>> queryTargetByItemId(Integer itemId);
+    List<ItemTarget> queryTargetByItemId(Integer itemId);
 
     void updateTarget(ItemTarget target);
 

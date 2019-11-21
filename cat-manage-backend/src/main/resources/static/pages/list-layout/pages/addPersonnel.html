@@ -29,6 +29,13 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-3 control-label">所负责的指标</label>
+                <div class="col-md-7 layui-form">
+                    <div class="layui-input-block" id="target">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-3 control-label">研究开发的责任分工</label>
                 <div class="col-md-7">
                     <textarea class="layui-textarea" name="responsible"
@@ -62,18 +69,45 @@
 
 
 <script>
-    layui.use(['layer'], function () {
-        var layer = layui.layer;
+    layui.use(['layer','form'], function () {
+        var layer = layui.layer
+            ,form = layui.form;
     });
 
     var id = getUrlParam("id");
     $("#item_id").val(id);
 
-    initUserSelect();
-    function initUserSelect() {
+    queryDeptCode(id);
+    var deptCode;
+    function queryDeptCode(id) {
         $.ajax({
             type : 'get',
-            url : domainName + '/project-user/user/all',
+            url : domainName + '/project-item/item/'+id,
+            async : false,
+            success : function(data) {
+                deptCode = data.dept_code;
+            }
+        });
+    }
+    queryTarget(id);
+    function queryTarget(id) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/target/all/'+id,
+            async : false,
+            success : function(data) {
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    $("#target").append('<input type="checkbox" name="targetIds" value="'+d.id+'" title="'+d.target+'"> ');
+                }
+            }
+        });
+    }
+    initUserSelect(deptCode);
+    function initUserSelect(deptCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/api-c/user/dept/'+deptCode,
             async : false,
             success : function(data) {
                 var select = $("#userSelect");
@@ -109,8 +143,5 @@
         });
     }
 
-/*    $("#updata_return").click(function () {
-        $(location).attr("href", "details.html?id="+id);
-    })*/
 </script>
 </html>

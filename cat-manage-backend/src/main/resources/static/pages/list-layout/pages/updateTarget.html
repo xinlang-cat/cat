@@ -146,7 +146,7 @@
     $("#id").val(id);
 
     var itemId;
-    getprovince();
+    //getprovince();
 
     //initUserSelect();
     //gatContentSelect();
@@ -159,6 +159,7 @@
             async : false,
             success : function(data) {
                 itemId = data.item_id;
+                getsuperior(data.district);
                 $("#content").val(data.content_id);
                 $("#type").val(data.type);
                 $("#target").val(data.target);
