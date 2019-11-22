@@ -81,7 +81,7 @@ public class Company implements Serializable {
     /**
      * 企业类型
      */
-    private Boolean type;
+    private String type;
 
     /**
      * 组织机构代码

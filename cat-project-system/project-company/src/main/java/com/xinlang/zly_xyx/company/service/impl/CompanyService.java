@@ -75,4 +75,9 @@ public class CompanyService implements ICompanyService {
     public List<Company> findAll(){
         return companyMapper.selectAll();
     }
+
+    @Override
+    public List<Company> findByParams(Company company) {
+        return companyMapper.select(company);
+    }
 }

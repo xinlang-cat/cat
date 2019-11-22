@@ -27,6 +27,7 @@ public class CompanyController {
     public Company save(@RequestBody Company company){
         company.setCreateTime(new Date());
         company.setEnabled(true);
+
         companyService.save(company);
         return company;
     }
@@ -61,13 +62,18 @@ public class CompanyController {
         return companyService.findByUserId(userId);
     }
 
+    @GetMapping("/company")
+    @LogAnnotation(module = "根据实体中的属性查询公司、机构")
+    @ApiOperation(value = "根据实体中的属性查询")
+    public List<Company> findByParams(@RequestBody Company company){
+        return companyService.findByParams(company);
+    }
+
     @DeleteMapping("/company/{deptCode}")
     @LogAnnotation(module = "删除公司及公司用户中间表信息")
     @ApiOperation(value = "删除公司及公司用户中间表信息")
     public void delete(@PathVariable String deptCode){
         companyService.delete(deptCode);
     }
-
-
 
 }

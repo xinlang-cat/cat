@@ -16,4 +16,5 @@ public interface ICompanyService {
     Company findByDeptCode(String DeptCode);
     Company findByUserId(Integer userId);
     List<Company> findAll();
+    List<Company> findByParams(Company company);
 }

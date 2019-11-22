@@ -18,23 +18,20 @@
                                 <td>
                                 	<form class="form-inline" onsubmit="return false">
 										<div class="form-group">
-											文件名：
-											<input id="name" type="text" class="form-control" placeholder="文件名">
-											时间：
-											<input type="text" class="form-control" placeholder="开始时间" id="beginTime">
-											<input type="text" class="form-control" placeholder="结束时间" id="endTime">
+                                            公司/机构名称：
+											<input id="name" type="text" class="form-control" placeholder="公司/机构名称">
+                                            公司/机构代码：
+                                            <input id="deptCode" type="text" class="form-control" placeholder="公司/机构名称">
+                                            类型：
+                                            <select class="form-control input-sm" id="type">
+                                                <option value=""></option>
+                                                <option value="0">乙方</option>
+                                                <option value="1">丙方</option>
+                                                <option value="2">丁方</option>
+                                            </select>
 										</div>
                                         <button id="searchBt" class="layui-btn layui-btn-sm" permission="file:query"><i class="layui-icon">&#xe615;</i>搜索</button>
 									</form>
-                                </td>
-                                <td align="right">
-                                	<select class="input-sm" id="fileSource">
-                                		<option value="LOCAL">本地上传</option>
-                                		<option value="ALIYUN">阿里云上传</option>
-                                	</select>
-                                    <button type="button" class="layui-btn" id="test1">
-                                        <i class="layui-icon">&#xe67c;</i>上传文件
-                                    </button>
                                 </td>
                             </tr> 
                         </table>
@@ -48,12 +45,12 @@
                                 <tr>
                                 </tr>                       
                                 <tr>
-                                    <th>文件名</th>
-                                    <th>url</th>
-                                    <th>存储位置</th>
-                                    <th>path</th>
-                                    <th>contentType</th>
-                                    <th>上传时间</th>
+                                    <th>名称</th>
+                                    <th>编码</th>
+                                    <th>营业执照</th>
+                                    <th>负责人</th>
+                                    <th>类型</th>
+                                    <th>状态</th>
                                     <th>管理</th>
                                 </tr>
                             </thead>
@@ -102,7 +99,7 @@ layui.use(['layer','util', 'laydate'], function(){
                     "url": "../../js/plugin/datatables/Chinese.lang"
                 },
             	"ajax": {
-            		"url" : domainName + "/api-c/user",
+            		"url" : domainName + "/api-c/company",
             		"type":"get",
             		"data":function(d){
         				d.name = $('#name').val();
