@@ -10,7 +10,7 @@
 <body>
 
 
-<a id="return_item" style="position: fixed;margin-left: 5px;"  class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe65c;</i></a>
+<a  onclick="history.back(-1);" style="position: fixed;margin-left: 5px;"  class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe65c;</i></a>
 <button style="width: 30px;height: 20px;float: right;margin-top: 30px;margin-right: 4%;"
         class="layui-btn layui-btn-sm" id="add_report">
     <p style="line-height: 20px;margin-left: -3px;"> <i class="layui-icon">&#xe608;</i></p>
@@ -61,16 +61,10 @@
 
 <script>
     var id = getUrlParam("id");
-
-
-
     $("#add_report").click(function () {
         $(location).attr("href", "add_report.html?id=" + id);
     })
 
-    $("#return_item").click(function () {
-        $(location).attr("href", "../list-layout/index.html?id=" + id);
-    })
 
 
 

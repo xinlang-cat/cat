@@ -13,10 +13,10 @@ public interface ItemFundUseMapper extends Mapper<ItemFundUse> {
      * @param bill_url
      */
     @Insert("INSERT INTO item_fund_use_bill (fund_use_id, bill_url) VALUES (#{fund_use_id},#{bill_url})")
-    int insertUseBill(@Param("fund_use_id") Integer fund_use_id, @Param("bill_url") String bill_url);
+    int insertUseBill(@Param("fund_use_id") Integer fund_use_id, @Param("bill_url") Integer bill_url);
 
     @Select("SELECT bill_url FROM item_fund_use_bill WHERE fund_use_id=#{id}")
-    List<String> selectUseBill(Integer id);
+    List<Integer> selectUseBill(Integer id);
 
     @Delete("DELETE FROM item_fund_use_bill WHERE fund_use_id = #{fundUseId}")
     int deleteUseBill(Integer fundUseId);

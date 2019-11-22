@@ -39,8 +39,8 @@ public class ItemFundUseService implements IItemFundUseService {
             throw new ItemException(ExceptionEnum.SAVE_ERROR);
         }
         //保存相关图片信息
-        List<String> urls = itemFundUse.getBill_url();
-        for (String url : urls) {
+        List<Integer> urls = itemFundUse.getBill_url();
+        for (Integer url : urls) {
             int j = itemFundUseMapper.insertUseBill(itemFundUse.getId(),url);
             if(j != 1){
                 throw new ItemException(ExceptionEnum.SAVE_ERROR);
@@ -60,7 +60,7 @@ public class ItemFundUseService implements IItemFundUseService {
             itemFundUse.setCheck_dateStr(DateUtils.dateToString(itemFundUse.getCheck_date(), "yyyy年MM月dd日"));
         }
         //查询相关图片
-        List<String> urls = itemFundUseMapper.selectUseBill(itemFundUse.getId());
+        List<Integer> urls = itemFundUseMapper.selectUseBill(itemFundUse.getId());
         itemFundUse.setBill_url(urls);
         return itemFundUse;
     }
@@ -73,7 +73,7 @@ public class ItemFundUseService implements IItemFundUseService {
         List<ItemFundUse> itemFundUses = itemFundUseMapper.select(itemFundUse);
         //查询相关图片
         for (ItemFundUse fundUs : itemFundUses) {
-            List<String> urls = itemFundUseMapper.selectUseBill(fundUs.getId());
+            List<Integer> urls = itemFundUseMapper.selectUseBill(fundUs.getId());
             fundUs.setBill_url(urls);
         }
         return itemFundUses;
@@ -89,7 +89,7 @@ public class ItemFundUseService implements IItemFundUseService {
         List<ItemFundUse> itemFundUses = itemFundUseMapper.select(itemFundUse);
         //查询相关图片
         for (ItemFundUse fundUs : itemFundUses) {
-            List<String> urls = itemFundUseMapper.selectUseBill(fundUs.getId());
+            List<Integer> urls = itemFundUseMapper.selectUseBill(fundUs.getId());
             fundUs.setBill_url(urls);
         }
         return itemFundUses;
@@ -110,8 +110,8 @@ public class ItemFundUseService implements IItemFundUseService {
         //先删除相关图片信息
         itemFundUseMapper.deleteUseBill(itemFundUse.getId());
         //重新添加
-        List<String> urls = itemFundUse.getBill_url();
-        for (String url : urls) {
+        List<Integer> urls = itemFundUse.getBill_url();
+        for (Integer url : urls) {
             int j = itemFundUseMapper.insertUseBill(itemFundUse.getId(),url);
             if(j != 1){
                 throw new ItemException(ExceptionEnum.UPDATE_ERROR);

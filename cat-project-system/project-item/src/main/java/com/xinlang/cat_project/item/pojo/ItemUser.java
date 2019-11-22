@@ -8,6 +8,8 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 @Data
 @ToString
@@ -22,7 +24,9 @@ public class ItemUser {
     private Integer pid;
     private Integer user_id;
     private Integer item_id;
-    private Integer target_id;
     private String responsible;
     private Integer type;
+
+    @Transient
+    private List<Integer> targetIds;
 }
