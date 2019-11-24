@@ -1,8 +1,10 @@
 package com.xinlang.zly_xyx.company.service;
 
 import com.xinlang.bean.company.Company;
+import com.xinlang.zly_xyx.common.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -16,5 +18,5 @@ public interface ICompanyService {
     Company findByDeptCode(String DeptCode);
     Company findByUserId(Integer userId);
     List<Company> findAll();
-    List<Company> findByParams(Company company);
+    Page<Company> findByParams(Map<String,Object> params);
 }

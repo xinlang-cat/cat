@@ -1,6 +1,7 @@
 package com.xinlang.zly_xyx.company.controller;
 
 import com.xinlang.bean.company.Company;
+import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -65,8 +67,8 @@ public class CompanyController {
     @GetMapping("/company")
     @LogAnnotation(module = "根据实体中的属性查询公司、机构")
     @ApiOperation(value = "根据实体中的属性查询")
-    public List<Company> findByParams(@RequestBody Company company){
-        return companyService.findByParams(company);
+    public Page<Company> findByParams(@RequestParam Map<String,Object> params){
+        return companyService.findByParams(params);
     }
 
     @DeleteMapping("/company/{deptCode}")

@@ -1,16 +1,22 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
 import com.xinlang.bean.company.Company;
+import com.xinlang.bean.utils.RowBoundsUtil;
+import com.xinlang.zly_xyx.cat_common.utils.BeanUtils;
+import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyMapper;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -77,7 +83,14 @@ public class CompanyService implements ICompanyService {
     }
 
     @Override
-    public List<Company> findByParams(Company company) {
-        return companyMapper.select(company);
+    public Page<Company> findByParams(Map<String,Object> params) {
+        Company company = BeanUtils.toBean(params,Company.class);
+        List<Company> companys = Collections.emptyList();
+        int total = companyMapper.selectCount(company);
+        if(total>0){
+            RowBounds rowBounds = RowBoundsUtil.getRowBounds(params);
+            companys = companyMapper.selectByRowBounds(company,rowBounds);
+        }
+        return new Page<>(total,companys);
     }
 }
