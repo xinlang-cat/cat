@@ -5,6 +5,7 @@ import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -64,7 +65,7 @@ public class CompanyController {
         return companyService.findByUserId(userId);
     }
 
-    @GetMapping("/company")
+    @GetMapping("/companys")
     @LogAnnotation(module = "根据实体中的属性查询公司、机构")
     @ApiOperation(value = "根据实体中的属性查询")
     public Page<Company> findByParams(@RequestParam Map<String,Object> params){

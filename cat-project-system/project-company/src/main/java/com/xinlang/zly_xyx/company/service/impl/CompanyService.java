@@ -1,8 +1,9 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
 import com.xinlang.bean.company.Company;
+import com.xinlang.bean.utils.ExampleUtil;
 import com.xinlang.bean.utils.RowBoundsUtil;
-import com.xinlang.zly_xyx.cat_common.utils.BeanUtils;
+import com.xinlang.bean.utils.BeanUtils;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyMapper;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -93,4 +93,19 @@ public class CompanyService implements ICompanyService {
         }
         return new Page<>(total,companys);
     }
+    @Override
+    public Page<Company> link(Map<String,Object> params){
+        Example example = ExampleUtil.getLinkExample(params,Company.class,"%","%");
+       // example.orderBy("id").asc();//排序
+        List<Company> companys = Collections.emptyList();
+        int total = companyMapper.selectCountByExample(example);
+        if(total>0){
+            //RowBounds和setOrderByClause使用一种即可，RowBounds性能更佳
+            //example.setOrderByClause("id limit " + params.get("start") + "," + params.get("length"));
+            RowBounds rowBounds = RowBoundsUtil.getRowBounds(params);
+            companys = companyMapper.selectByExampleAndRowBounds(example,rowBounds);
+        }
+        return new Page<>(total,companys);
+    }
+
 }

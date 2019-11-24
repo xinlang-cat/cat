@@ -1,4 +1,4 @@
-package com.xinlang.zly_xyx.cat_common.utils;
+package com.xinlang.bean.utils;
 
 import org.springframework.cglib.beans.BeanMap;
 

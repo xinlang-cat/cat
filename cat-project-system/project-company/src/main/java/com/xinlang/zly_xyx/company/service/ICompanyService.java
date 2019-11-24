@@ -19,4 +19,5 @@ public interface ICompanyService {
     Company findByUserId(Integer userId);
     List<Company> findAll();
     Page<Company> findByParams(Map<String,Object> params);
+    Page<Company> link(Map<String,Object> params);
 }
