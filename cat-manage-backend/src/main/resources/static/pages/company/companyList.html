@@ -17,16 +17,23 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    权限名：
-                                    <input id="name" type="text" class="form-control" placeholder="权限名">
-                                    权限标识：
-                                    <input id="permission" type="text" class="form-control" placeholder="权限标识">
+                                    公司名称：
+                                    <input id="signName" type="text" class="form-control" placeholder="公司名称">
+                                    公司类型：
+                                    <select class="form-control input-sm" id="type">
+                                        <option value="">全部</option>
+                                        <option value="PARTY_A">甲方</option>
+                                        <option value="PARTY_B">乙方</option>
+                                        <option value="PARTY_C">监理</option>
+                                        <option value="PARTY_D">验收</option>
+                                        <option value="EXPERT">专家</option>
+                                    </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:permission:query"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 </div>
                             </form>
                         </td>
                         <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="location.href='addPermission.html'" permission="back:permission:save">
+                            <button class="layui-btn layui-btn-sm" onclick="location.href='addCompany.html'" ><!--permission="back:permission:save"-->
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
                         </td>
@@ -42,10 +49,14 @@
                     <tr>
                     </tr>
                     <tr>
-                        <th>id</th>
-                        <th>权限名</th>
-                        <th>权限标识</th>
-                        <th>修改时间</th>
+                        <th>公司名称</th>
+                        <th>所在地址</th>
+                        <th>负 责 人</th>
+                        <th>移动号码</th>
+                        <th>固定电话</th>
+                        <th>公司代码</th>
+                        <th>创建时间</th>
+                        <th>类别</th>
                         <th>操作</th>
                     </tr>
                     </thead>
@@ -85,11 +96,11 @@
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url" : domainName + "/api-u/permissions",
+                        "url" : domainName + "/api-c/companys",
                         "type":"get",
                         "data":function(d){
-                            d.name = $('#name').val();
-                            d.permission = $('#permission').val();
+                            d.signjName = $('#signName').val();
+                            d.typ7e = $('#type').val();
                         },
                         "dataSrc": function (json) {
                             json.recordsTotal=json.total;
@@ -118,29 +129,42 @@
                     },
                     "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                     "columns": [
-                        { "data": "id", "defaultContent": ""},
-                        { "data": "name", "defaultContent": ""},
-                        { "data": "permission", "defaultContent": ""},
+                        { "data": "signName", "defaultContent": ""},
+                        { "data": "address", "defaultContent": ""},
+                        { "data": "principal", "defaultContent": ""},
+                        { "data": "legalPersonPhone", "defaultContent": ""},
+                        { "data": "telephone", "defaultContent": ""},
+                        { "data": "deptCode", "defaultContent": ""},
                         {
-                            "data": "updateTime",
+                            "data": "createTime",
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 return util.toDateString(data);
                             }
                         },
+                        {   "data": "deptCode",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                if(data == "PARTY_A") { return "甲方"}
+                                if(data == "PARTY_B") { return "乙方"}
+                                if(data == "PARTY_C") { return "监理"}
+                                if(data == "PARTY_D") { return "验收"}
+                                if(data == "EXPERT") { return "专家"}
+                            }
+                        },
                         {
                             "data": "",
                             "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var id = row['id'];
-                                var permission = encodeURIComponent(row['permission']);
-                                var name = encodeURIComponent(row['name']);
-                                var href = "updatePermission.html?id=" + id+"&permission="+permission+"&name="+name;
-                                var edit = buttonEdit(href, "back:permission:update", pers);
-                                var del = buttonDel(id, "back:permission:delete", pers);
-
-                                return edit + del;
-                            }
+                            // "render": function (data, type, row) {
+                            //     var id = row['id'];
+                            //     var permission = encodeURIComponent(row['permission']);
+                            //     var name = encodeURIComponent(row['name']);
+                            //     var href = "updatePermission.html?id=" + id+"&permission="+permission+"&name="+name;
+                            //     var edit = buttonEdit(href, "back:permission:update", pers);
+                            //     var del = buttonDel(id, "back:permission:delete", pers);
+                            //
+                            //     return edit + del;
+                            // }
                         },
                     ],
                 } );
