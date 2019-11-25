@@ -1,5 +1,6 @@
 package com.xinlang.bean.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.cglib.beans.BeanMap;
 
 import java.beans.PropertyDescriptor;
@@ -71,10 +72,10 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
             }
             if (beanMap.containsKey(properName)) {
                 Method writeMethod = propertyDescriptor.getWriteMethod();
-                if (null == writeMethod) {
+                Object value = beanMap.get(properName);
+                if (null == writeMethod || StringUtils.isBlank(value.toString())) {
                     continue;
                 }
-                Object value = beanMap.get(properName);
                 if (!writeMethod.isAccessible()) {
                     writeMethod.setAccessible(true);
                 }
