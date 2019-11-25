@@ -23,6 +23,11 @@ public class Company implements Serializable {
      */
     private String signName;
 
+    private String provinceCode;
+    private String cityCode;
+    private String areaCode;
+    private String streetCode;
+
     /**
      * 详细地址
      */
@@ -33,9 +38,7 @@ public class Company implements Serializable {
      */
     private Date registerDate;
 
-    /**
-     * 负责人号码
-     */
+    /**。
     private String principalPhone;
 
     /**
