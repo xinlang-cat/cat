@@ -80,6 +80,7 @@ function content_target(id) {
         var str6 = '';
         $(targets).each(function (index) {
             var target = this;
+            analysisUnit(target.unit);
             count(target.type);
             if(target.type==0){
                 if(index==0){
@@ -87,7 +88,7 @@ function content_target(id) {
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
                         '       <td rowspan="'+typeCount+'">技术指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
                         '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
@@ -106,7 +107,7 @@ function content_target(id) {
                     str5 += '<tr>\n' +
                         '       <td rowspan="'+typeCount+'">技术指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
                         '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
@@ -124,7 +125,7 @@ function content_target(id) {
                 }else {
                     str5 += '<tr>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
                         '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
@@ -141,14 +142,13 @@ function content_target(id) {
                         '    </tr>';
                 }
                 count1++;
-                typeCount = 0;
             }else {
                 if(index==0){
                     str4 += '<tr>\n' +
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
                         '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
                         '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
@@ -167,7 +167,7 @@ function content_target(id) {
                     str6 += '<tr>\n' +
                         '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
                         '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
@@ -185,7 +185,7 @@ function content_target(id) {
                 }else {
                     str6 += '<tr>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
                         '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
@@ -202,15 +202,27 @@ function content_target(id) {
                         '    </tr>';
                 }
                 count2++;
-                typeCount = 0;
             }
-
+            typeCount = 0;
+            unit = '';
         })
         str2 += str4 + str5 + str6;
     })
     $('#content').append(str1);
     $('#content').append(str2);
     $('#content').append(str3);
+}
+/*解析单位*/
+var unit = '';
+function analysisUnit(sign) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-label/label/tree/' + sign,
+        async: false,
+        success: function (data) {
+            unit = data[0].content;
+        }
+    });
 }
 
 function viewInfo2(id){
