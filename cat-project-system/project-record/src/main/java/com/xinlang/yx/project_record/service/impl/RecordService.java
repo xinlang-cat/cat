@@ -1,9 +1,7 @@
 package com.xinlang.yx.project_record.service.impl;
 
-import com.xinlang.cat_project.item.mapper.ItemTargetMapper;
+
 import com.xinlang.yx.project_record.VO.RecordVO;
-import com.xinlang.cat_project.item.service.IItemTargetService;
-import com.xinlang.cat_project.item.pojo.ItemTarget;
 import com.xinlang.yx.project_record.bean.Record;
 import com.xinlang.yx.project_record.bean.RecordResult;
 import com.xinlang.yx.project_record.mapper.RecordMapper;
@@ -31,9 +29,6 @@ public class RecordService implements IRecordService {
     @Autowired
     private RecordMapper recordMapper;
 
-    private ItemTargetMapper itemTargetMapper;
-
-    private IItemTargetService iItemTargetService;
 
     @Override
     public void insert(Record record) {
@@ -136,7 +131,13 @@ public class RecordService implements IRecordService {
         return result;
     }
 
-
+    @Override
+    public List<RecordResult> findPass(Integer proId) {
+        int status =constant.ConstantStatus.CHECK_PASS;
+        Long userId=  AppUserUtil.getLoginAppUser().getId();
+        List<RecordResult> result = recordMapper.find(proId,status,userId);
+        return result;
+    }
 
 
 }

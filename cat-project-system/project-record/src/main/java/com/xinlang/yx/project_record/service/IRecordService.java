@@ -39,4 +39,5 @@ public interface IRecordService {
 
     List<RecordResult> find(Integer proId, Integer status, Integer weatherUser);
 
+    List<RecordResult> findPass(Integer proId);
 }

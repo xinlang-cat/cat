@@ -58,6 +58,7 @@ public class ItemBasicService implements IItemBasicService {
             }else if(params.get("status") != ""){
                 example.createCriteria().andEqualTo("status", params.get("status"));
             }
+            example.createCriteria().andGreaterThanOrEqualTo("status", 1);
         }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序

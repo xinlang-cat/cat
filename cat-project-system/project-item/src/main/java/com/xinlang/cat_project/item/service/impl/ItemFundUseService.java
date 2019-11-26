@@ -41,10 +41,12 @@ public class ItemFundUseService implements IItemFundUseService {
         //保存相关图片信息
         List<String> urls = itemFundUse.getBill_url();
         for (String url : urls) {
-                int j = itemFundUseMapper.insertUseBill(itemFundUse.getId(),url);
-                if(j != 1){
-                    throw new ItemException(ExceptionEnum.SAVE_ERROR);
-                }
+
+            int j = itemFundUseMapper.insertUseBill(itemFundUse.getId(),url);
+            if(j != 1){
+                throw new ItemException(ExceptionEnum.SAVE_ERROR);
+            }
+
         }
     }
 
@@ -73,6 +75,12 @@ public class ItemFundUseService implements IItemFundUseService {
         List<ItemFundUse> itemFundUses = itemFundUseMapper.select(itemFundUse);
         //查询相关图片
         for (ItemFundUse fundUs : itemFundUses) {
+
+            fundUs.setEdit_dateStr(DateUtils.dateToString(fundUs.getEdit_date(), "yyyy年MM月dd日"));
+            if(itemFundUse.getCheck_date()!=null){
+                fundUs.setCheck_dateStr(DateUtils.dateToString(fundUs.getCheck_date(), "yyyy年MM月dd日"));
+            }
+
             List<String> urls = itemFundUseMapper.selectUseBill(fundUs.getId());
             fundUs.setBill_url(urls);
         }

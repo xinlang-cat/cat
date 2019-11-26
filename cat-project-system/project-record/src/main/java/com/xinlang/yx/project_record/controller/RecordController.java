@@ -26,6 +26,7 @@ public class RecordController {
     @LogAnnotation(module = "添加实施日志")
     @PostMapping("/record")
     public Record save(@RequestBody Record Record){
+        System.out.println(Record);
         recordService.insert(Record);
         return Record;
     }
@@ -141,6 +142,15 @@ public class RecordController {
         Integer weatherUser = Integer.valueOf ((String) params.get("type"));
 
         return recordService.find(proId,status,weatherUser);//所有的
+
+    }
+
+    @LogAnnotation(module = "获取通过的实施日志")
+    @GetMapping("/record/findPass/{proId}")
+
+    public List<RecordResult> findPass(@PathVariable Integer proId){
+
+        return recordService.findPass(proId);//所有的
 
     }
 

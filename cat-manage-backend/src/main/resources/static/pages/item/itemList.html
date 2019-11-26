@@ -26,15 +26,16 @@
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
-                                        <option value="0">新建</option>
-                                        <option value="0">进行中</option>
+                                        <!--<option value="0">就绪</option>-->
+                                        <option value="1">进行中</option>
+                                        <option value="2">结题中</option>
+                                        <option value="3">已结题</option>
                                         <option value="-1">废弃</option>
                                     </select>
                                     类型：
                                     <select class="form-control input-sm" id="type">
                                         <option value="">全部</option>
-                                        <option value="BACKEND">后端管理用户</option>
-                                        <option value="APP">前端app用户</option>
+                                        <option value="APP">农业</option>
                                     </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 </div>
@@ -145,9 +146,11 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 if(data =="BACKEND"){
-                                    return "后端管理用户";
+                                    return "科技类";
+                                }else {
+                                    return "农产类";
                                 }
-                                return "前端app用户";
+                                return "园林";
                             }
                         },
                         {
@@ -155,9 +158,13 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 if(data==0){
-                                    return "新建";
+                                    return "就绪";
                                 }else if(data==1){
                                     return "进行中";
+                                }else if(data==2){
+                                    return "结题中";
+                                }else if(data==3){
+                                    return "已结题";
                                 }
                                 return "废弃";
                             }
@@ -170,7 +177,7 @@
                                 var href = "updateItem.html?id=" + id;
                                 var edit = buttonEdit(href, "back:user:update", pers);
                                 var del = buttonDel(id, "back:permission:delete", pers);
-                                var detailsHref ="../project/details.html?id="+id;
+                                var detailsHref ="../list-layout/pages/details.html?id="+id;
                                 var details = "";
                                 var btn = $("<a  href="+detailsHref+" class=\"layui-btn layui-btn-xs\"> 详情</a>");
                                 details = btn.prop("outerHTML");

@@ -1,136 +1,94 @@
-<!--
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>jQuery animate滑动收缩展开时间轴大事记发展历程</title>
-
-
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+    <link rel="stylesheet" href="timer-shaft/css/screen.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="timer-shaft/css/responsive.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="timer-shaft/inc/colorbox.css" type="text/css" media="screen">
     <style>
-        *{margin:0;padding:0;list-style-type:none;}
-        a,img{border:0;}
-        body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
-
-        .demo{width:960px;margin:60px auto 0 auto;}
-        /*history*/
-        .history{background:url(../../img/time/line04.gif) repeat-y 187px 0;overflow:hidden;position:relative;}
-        .history-date{overflow:hidden;position:relative;}
-        .history-date h2{background:#fff url(../../img/time/icon06.gif) no-repeat 158px 0;height:59px;font-size:25px;font-family:微软雅黑;font-weight:normal;padding-left:45px;margin-bottom:74px; }
-        .history-date h2.first{position:absolute;left:0;top:0;width:935px;z-index:99;}
-        .history-date h2 a{color:black;display:inline-block;*display:inline;zoom:1;background:url(../../img/time/icon08.gif) no-repeat right 50%;padding-right:17px;margin:21px 97px 0 0;}
-        .history-date h2 a:hover{text-decoration:none;}
-        .history-date h2 img{vertical-align:-5px;}
-        .history-date h2.date02{background:none;}
-        .history-date ul li{background:url(../../img/time/icon07.gif) no-repeat 180px 0;padding-bottom:50px;zoom:1;}
-        .history-date ul li.last{padding-bottom:0;}
-        .history-date ul li:after{content:" ";display:block;height:0;clear:both;visibility:hidden;}
-        .history-date ul li h3{float:left;width:168px;text-align:right;padding-right:19px;color:#c3c3c3;font:normal 18px/16px Arial;}
-        .history-date ul li h3 span{display:block;color:#d0d0d0;font-size:12px;}
-        .history-date ul li dl{float:left;padding-left:41px;margin-top:-5px;font-family:微软雅黑;}
-        .history-date ul li dl dt{font:20px/22px 微软雅黑;color:#737373;}
-        .history-date ul li dl dt span{display:block;color:#787878;font-size:12px;}
-        .history-date ul li.green h3{color:#1db702;}
-        .history-date ul li.green h3 span{color:#a8dda3;}
-        .history-date ul li.green dl{margin-top:-8px;}
-        .history-date ul li.green dl dt{font-size:30px;line-height:28px;}
-        .history-date ul li.green dl dt a{display:inline-block;*display:inline;zoom:1;overflow:hidden;vertical-align:middle;margin-left:12px;}
-        .history-date ul li.green dl dd{padding-top:20px;display:none;}
-        .history-date ul li.green dl dd img{float:left;}
-        .history-date ul li.green dl dd p{overflow:hidden;zoom:1;line-height:21px;color:#787878;}
-        .history-date h2.first .more-history{font-size:16px;background:transparent;margin-left:30px;}
-        .history-date h2.first .more-history:hover{text-decoration:underline;}
-        *body .history-date ul li dl dt{_font-size:12px!important;_font-weight:bold;}
-        *body .history-date ul li dl dt span{_font-weight:normal!important;}
-        *body .history-date ul li.green dl dt a{_background:transparent!important;*background:transparent!important;*font-size:12px!important;_font-weight:normal!important;}
-
+        .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
     </style>
 </head>
 <body>
-<script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        systole();
-    });
-    function systole(){
-        if(!$(".history").length){
-            return;
-        }
-        var $warpEle = $(".history-date"),
-            $targetA = $warpEle.find("h2 a,ul li dl dt a"),
-            parentH,
-            eleTop = [];
-
-        parentH = $warpEle.parent().height();
-        $warpEle.parent().css({"height":59});
-
-        setTimeout(function(){
-
-            $warpEle.find("ul").children(":not('h2:first')").each(function(idx){
-                eleTop.push($(this).position().top);
-                $(this).css({"margin-top":-eleTop[idx]}).children().hide();
-            }).animate({"margin-top":0}, 1600).children().fadeIn();
-
-            $warpEle.parent().animate({"height":parentH}, 2600);
-
-            $warpEle.find("ul").children(":not('h2:first')").addClass("bounceInDown").css({"-webkit-animation-duration":"2s","-webkit-animation-delay":"0","-webkit-animation-timing-function":"ease","-webkit-animation-fill-mode":"both"}).end().children("h2").css({"position":"relative"});
-
-        }, 600);
-
-        $targetA.click(function(){
-            $(this).parent().css({"position":"relative"});
-            $(this).parent().siblings().slideToggle();
-            $warpEle.parent().removeAttr("style");
-            return false;
-        });
-    };
-</script>
-
-<div class="demo">
-    <div class="history">
-        <div class="history-date">
-            <ul>
-                &lt;!&ndash;<h2 class="first">
-                    <a href="#nogo">2012年</a><img src="../../img/time/img05.gif" alt="360极速浏览器历程" />
-
-                </h2>&ndash;&gt;
-                <li class="green">
-                    <h3>10.08<span>2012</span></h3>
-                    <dl>
-                        <dt>发布全新的极速浏览器6.0版本<span>升级极速内核到21.0；全新默认界面；新增小窗口播放功能</span></dt>
-                    </dl>
-                </li>
-                <li>
-                    <h3>07.19<span>2012</span></h3>
-                    <dl>
-                        <dt>升级极速内核到20.0<span>HTML5支持度全球最好，达到469分，测试页面： </span></dt>
-                        <A href="http://html5test.com/" target="_blank">http://html5test.com/</A>
-                    </dl>
-                </li>
-                <li>
-                    <h3>07.02<span>2012</span></h3>
-                    <dl>
-                        <dt>升级极速内核到19.0<span>支持网络摄像头，浏览器可直接访问摄像头</span></dt>
-                    </dl>
-                </li>
-                <li class="green">
-                    <h3>06.27<span>2012</span></h3>
-                    <dl>
-                        <dt>发布国内首个HTML5实验室<span>大力推广HTML5</span></dt>
-                    </dl>
-                </li>
-                <li>
-                    <h3>06.15<span>2012</span></h3>
-                    <dl>
-                        <dt>新增了下载文件前扫描下载链接安全性的功能</dt>
-                    </dl>
-                </li>
-            </ul>
+<div class="container">
+    <div id="timelineContainer" class="timelineContainer">
+        <div class="timelineToggle"><p><a class="expandAll">全部展开</a></p></div>
+        <br class="clear">
+        <div class="timelineMajor">
+            <!--<dl class="timelineMinor">
+                <dt id="19540517"><a>布朗诉教育委员会</a></dt>
+                <dd class="timelineEvent" id="19540517EX" style="display:none;">
+                    <h3>1954年5月17日</h3>
+                    <p>美国最高法院相传一致9-0决定在布朗诉托皮卡教育局案，打开大门，民权运动最终种族融合在美国社会的各个方面。推翻Plessy v. Ferguson（1896），法院裁定“隔离的教育设施是不平等的。</p>
+                    <br class="clear">
+                </dd>&lt;!&ndash; /.timelineEvent &ndash;&gt;
+            </dl>&lt;!&ndash; /.timelineMinor &ndash;&gt;
+            <dl class="timelineMinor">
+                <dt id="1"><a>布朗诉教育委员会</a></dt>
+                <dd class="timelineEvent" id="1EX" style="display:none;">
+                    <h3>1954年5月17日</h3>
+                    <p>美国最高法院相传一致9-0决定在布朗诉托皮卡教育局案，打开大门，民权运动最终种族融合在美国社会的各个方面。推翻Plessy v. Ferguson（1896），法院裁定“隔离的教育设施是不平等的。</p>
+                    <br class="clear">
+                </dd>&lt;!&ndash; /.timelineEvent &ndash;&gt;
+            </dl>&lt;!&ndash; /.timelineMinor &ndash;&gt;-->
         </div>
+        <br class="clear">
+    </div><!-- /#timelineContainer -->
+</div><!-- /.container -->
 
+<!-- GLOBAL CORE SCRIPTS -->
+<script type="text/javascript" src="timer-shaft/js/jquery.min.js"></script>
+<script type="text/javascript" src="timer-shaft/inc/colorbox.js"></script>
+<script type="text/javascript" src="timer-shaft/js/timeliner.min.js"></script>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script>
+    $(document).ready(function() {
+        $.timeliner({
+            startOpen:['#19550828EX', '#19630828EX']
+        });
+        $.timeliner({
+            timelineContainer: '#timelineContainer_2'
+        });
+        // Colorbox Modal
+        $(".CBmodal").colorbox({inline:true, initialWidth:100, maxWidth:682, initialHeight:100, transition:"elastic",speed:750});
+    });
 
-    </div>
-</div>
-
+    var proId = getUrlParam("id");
+    fundBudgetAll(proId);
+    function fundBudgetAll(proId){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-record/record/findPass/'+proId,
+            async : false,
+            success : function(data) {
+                var str = '';
+                $(data).each(function () {
+                    var imgs = '';
+                    $(this.bill_url).each(function () {
+                        imgs += '<img src="'+ this +'" class="layui-upload-img">';
+                    })
+                    str += '<dl class="timelineMinor">\n' +
+                        '<dt id="'+this.id+'"><a>'+this.createTime+'</a></dt>\n' +
+                        '<dd class="timelineEvent" id="'+this.id+'EX" style="display:none;">\n' +
+                        '<h3>标题：'+this.title+'</h3>\n' +
+                        '<p>内容：'+this.content+'</p>\n' +
+                        '<div class="layui-upload">\n' +
+                        '  <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">\n' +
+                        '    <div class="layui-upload-list" id="demo2">'+imgs+'</div>\n' +
+                        ' </blockquote>\n' +
+                        '</div>' +
+                        '<br class="clear">\n' +
+                        '</dd>\n' +
+                        '</dl>';
+                });
+                $(".timelineMajor").append(str);
+            }
+        });
+    }
+</script>
 </body>
 </html>
--->

@@ -1,9 +1,8 @@
 package com.xinlang.cat_project.item.controller;
 
-import com.xinlang.cat_project.item.VO.TargetInfo;
-import com.xinlang.cat_project.item.VO.TargetInfoAll;
 import com.xinlang.cat_project.item.pojo.ItemTarget;
 import com.xinlang.cat_project.item.service.IItemTargetService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,16 +67,29 @@ public class ItemTargetController {
     }
 
     /**
-     * 获取项目全部指标以及实施人员
+     * 获取项目全部指标
      * @param itemId 项目id
      * @return
      */
-    @ApiOperation(value = "获取项目所有指标信息及实施人员")
+    @ApiOperation(value = "获取项目所有指标信息")
     @LogAnnotation(module = "获取项目所有指标信息")
     @GetMapping("/all/{itemId}")
-    public ResponseEntity<List<Map<String, Object>>> getTargetByItemId(@PathVariable Integer itemId){
+    public ResponseEntity<List<ItemTarget>> getTargetByItemId(@PathVariable Integer itemId){
 
-        List<Map<String, Object>> target = targetService.queryTargetByItemId(itemId);
+        List<ItemTarget> target = targetService.queryTargetByItemId(itemId);
+        return ResponseEntity.ok(target);
+    }
+
+    /**
+     * 获取当前用户相关指标
+     * @return
+     */
+    @ApiOperation(value = "获取当前用户相关指标")
+    @LogAnnotation(module = "获取当前用户相关指标")
+    @GetMapping("/my/{itemId}")
+    public ResponseEntity<List<ItemTarget>> getTargetByUserId(@PathVariable Integer itemId){
+
+        List<ItemTarget> target = targetService.queryTargetByUserId(itemId);
         return ResponseEntity.ok(target);
     }
 
@@ -108,4 +120,5 @@ public class ItemTargetController {
         targetService.deleteTarget(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 }
