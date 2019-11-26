@@ -18,8 +18,6 @@
                             <td>
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        文件名：
-                                        <input id="name" type="text" class="form-control" placeholder="文件名">
                                         时间：
                                         <input type="text" class="form-control" placeholder="开始时间" id="beginTime">
                                         <input type="text" class="form-control" placeholder="结束时间" id="endTime">
@@ -33,7 +31,7 @@
                                     <option value="ALIYUN">阿里云上传</option>
                                 </select>
                                 <button type="button" class="layui-btn" id="test1">
-                                    <i class="layui-icon">&#xe67c;</i>上传文件
+                                    <i class="layui-icon">&#xe67c;</i>上传照片
                                 </button>
                             </td>
                         </tr>
@@ -48,7 +46,7 @@
                         <tr>
                         </tr>
                         <tr>
-                            <th>文件名</th>
+                            <th>图片名</th>
                             <th>url</th>
                             <th>存储位置</th>
                             <th>path</th>
@@ -211,7 +209,7 @@
 
         upload.render({
             elem: '#test1' //绑定元素
-            ,accept: 'file' //允许上传的文件类型
+            ,accept: 'image' //允许上传的文件类型
             ,url: domainName + '/zuul/api-f/albums?fileSource=' + $("#fileSource").val()
             ,done: function(res, index, upload){
                 layer.msg("上传成功");

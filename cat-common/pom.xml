@@ -28,6 +28,11 @@
             <artifactId>spring-security-oauth2</artifactId>
             <version>${security-oauth2}</version>
         </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>6.2.3</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,14 +1,17 @@
 package com.xinlang.zly_xyx.company.controller;
 
 import com.xinlang.bean.company.Company;
+import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -27,6 +30,7 @@ public class CompanyController {
     public Company save(@RequestBody Company company){
         company.setCreateTime(new Date());
         company.setEnabled(true);
+
         companyService.save(company);
         return company;
     }
@@ -61,13 +65,18 @@ public class CompanyController {
         return companyService.findByUserId(userId);
     }
 
+    @GetMapping("/companys")
+    @LogAnnotation(module = "根据实体中的属性查询公司、机构")
+    @ApiOperation(value = "根据实体中的属性查询")
+    public Page<Company> findByParams(@RequestParam Map<String,Object> params){
+        return companyService.findByParams(params);
+    }
+
     @DeleteMapping("/company/{deptCode}")
     @LogAnnotation(module = "删除公司及公司用户中间表信息")
     @ApiOperation(value = "删除公司及公司用户中间表信息")
     public void delete(@PathVariable String deptCode){
         companyService.delete(deptCode);
     }
-
-
 
 }
