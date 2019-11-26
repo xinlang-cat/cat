@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
 </head>
 <body>
 <div>
@@ -17,25 +17,12 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    项目名称：
-                                    <input id="username" type="text" class="form-control" placeholder="项目名">
-                                    开始时间：
-                                    <input id="startDate" type="text" class="form-control" placeholder="开始时间">
-                                    结束时间：
-                                    <input id="endDate" type="text" class="form-control" placeholder="结束时间">
-                                    状态：
-                                    <select class="form-control input-sm" id="status">
-                                        <option value="">全部</option>
-                                        <!--<option value="0">就绪</option>-->
-                                        <option value="1">进行中</option>
-                                        <option value="2">结题中</option>
-                                        <option value="3">已结题</option>
-                                        <option value="-1">废弃</option>
-                                    </select>
+                                    姓名：
+                                    <input id="username" type="text" class="form-control" placeholder=" 人员姓名">
                                     类型：
                                     <select class="form-control input-sm" id="type">
                                         <option value="">全部</option>
-                                        <option value="APP">农业</option>
+                                        <option value="BACKEND">我的</option>
                                     </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 </div>
@@ -58,15 +45,22 @@
                     <tr>
                     </tr>
                     <tr>
-                        <th>项目名称</th>
+                        <th>人员姓名</th>
+                        <th>标题</th>
                         <th>开始时间</th>
-                        <th>结束时间</th>
                         <th>类型</th>
                         <th>状态</th>
-                        <th>操作</th>
+                    
                     </tr>
                     </thead>
                     <tbody>
+                            <tr>
+                                    <th>覃世杰</th>
+                                    <th>我的故乡</th>
+                                    <th>2019-11-22</th>
+                                    <th>我的文档</th>
+                                    <th>结题</th>
+                                </tr>
                     </tbody>
                 </table>
             </div>
@@ -76,14 +70,14 @@
 </body>
 
 
-<script src="../../js/constant.js"></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/my/permission.js"></script>
-<script type="text/javascript">
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/my/permission.js"></script>
+<!-- <script type="text/javascript">
     var pers = checkPermission();
     var example;
 
@@ -146,11 +140,9 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 if(data =="BACKEND"){
-                                    return "科技类";
-                                }else {
-                                    return "农产类";
+                                    return "后端管理用户";
                                 }
-                                return "园林";
+                                return "前端app用户";
                             }
                         },
                         {
@@ -158,13 +150,9 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 if(data==0){
-                                    return "就绪";
+                                    return "新建";
                                 }else if(data==1){
                                     return "进行中";
-                                }else if(data==2){
-                                    return "结题中";
-                                }else if(data==3){
-                                    return "已结题";
                                 }
                                 return "废弃";
                             }
@@ -177,7 +165,7 @@
                                 var href = "updateItem.html?id=" + id;
                                 var edit = buttonEdit(href, "back:user:update", pers);
                                 var del = buttonDel(id, "back:permission:delete", pers);
-                                var detailsHref ="../list-layout/pages/details.html?id="+id;
+                                var detailsHref ="../project/details.html?id="+id;
                                 var details = "";
                                 var btn = $("<a  href="+detailsHref+" class=\"layui-btn layui-btn-xs\"> 详情</a>");
                                 details = btn.prop("outerHTML");
@@ -258,5 +246,5 @@
     $("#searchBt").click(function(){
         example.ajax.reload();
     });
-</script>
+</script> -->
 </html>

@@ -46,7 +46,7 @@ function content_target(id) {
             '           <th>考核指标</th>\n' +
             '           <th>描述</th>\n' +
             '           <th>数量</th>\n' +
-            '           <th>操作</th>\n' +
+            '           <th>详情</th>\n' +
             '       </tr>\n' +
             '   </thead>\n' +
             '   <tbody>';
@@ -59,7 +59,7 @@ function content_target(id) {
                 '       <td>/</td>\n' +
                 '       <td>/</td>\n' +
                 '       <td>' +
-                '           <a class="layui-btn layui-btn-sm" onclick="viewInfo1('+this.id+')">更多</a>' +
+                '           <a class="layui-btn layui-btn-xs" onclick="viewInfo1('+this.id+')">更多</a>' +
                 '           <div class="operation">\n' +
                 '               <div class="layui-btn-group">\n' +
                 '                   <a href="updateContent.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -89,7 +89,7 @@ function content_target(id) {
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>'+target.count+target.unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -108,7 +108,7 @@ function content_target(id) {
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>1'+target.count+target.unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -126,7 +126,7 @@ function content_target(id) {
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>1'+target.count+target.unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -150,7 +150,7 @@ function content_target(id) {
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>'+target.count+target.unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -169,7 +169,7 @@ function content_target(id) {
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>1'+target.count+target.unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -187,7 +187,7 @@ function content_target(id) {
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>1'+target.count+target.unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -226,7 +226,7 @@ function viewInfo2(id){
 }
 function viewInfo1(id){
     layer.open({
-        title:"指标详情",
+        title:"内容详情",
         type: 2,
         area: ['800px', '400px'],
         maxmin: true,
