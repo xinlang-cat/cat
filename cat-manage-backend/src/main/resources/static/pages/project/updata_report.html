@@ -69,6 +69,47 @@
             });
         });
     });
+ var item=0;
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-report/report/getReport/' + id,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                $("#title").val(res.title);
+                $("#content").val(res.content);
+                item=res.projectId;
+            }
+        })
+    })
+    function updata_report() {
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-report/report/',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "report.html?id=" + item;
+                });
+            }
+        });
+
+    }
+    $("#btn_return").click(function () {
+        $(location).attr("href", "report.html?id=" + item);
+    })
+
+
+
 
 
     /*  var id = getUrlParam("id");
@@ -117,51 +158,6 @@
           $(location).attr("href", "report.html?id=" + id);
       })*/
 
- var item=0;
-    $(function () {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-report/report/getReport/' + id,
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-                $("#title").val(res.title);
-                $("#content").val(res.content);
-                item=res.projectId;
-            }
-        })
-    })
-
-
-
-
-    function updata_report() {
-
-        $('#form').bootstrapValidator();
-        var bootstrapValidator = $("#form").data('bootstrapValidator');
-        bootstrapValidator.validate();
-        if (!bootstrapValidator.isValid()) {
-            return;
-        }
-        var formdata = $("#form").serializeObject();
-        $.ajax({
-            type: 'put',
-            url: domainName + '/project-report/report/',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
-            success: function (data) {
-                layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "report.html?id=" + item;
-                });
-            }
-        });
-
-    }
-
-
-
-    $("#btn_return").click(function () {
-        $(location).attr("href", "report.html?id=" + item);
-    })
 </script>
 
 </body>

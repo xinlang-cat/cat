@@ -58,7 +58,6 @@ public class ItemFundUseController {
     @LogAnnotation(module = "获取预算的所有资金使用信息")
     @GetMapping("/info/{Bid}")
     public ResponseEntity<List<ItemFundUse>> getFundUseByBId(@PathVariable Integer Bid){
-
         List<ItemFundUse> itemFundUses = itemFundUseService.queryFundUseByBId(Bid);
         return ResponseEntity.ok(itemFundUses);
     }

@@ -2,13 +2,16 @@ package com.xinlang.yx.project_record.controller;
 
 import com.xinlang.yx.project_record.VO.RecordVO;
 import com.xinlang.yx.project_record.bean.Record;
+import com.xinlang.yx.project_record.bean.RecordResult;
 import com.xinlang.yx.project_record.service.IRecordService;
 import com.xinlang.yx.project_record.utils.constant;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -102,9 +105,10 @@ public class RecordController {
 
     @LogAnnotation(module = "获取过审的实施日志")
     @GetMapping("/record/getPassRecord/{targetId}")
-    public List<Record> getPassRecord(@PathVariable Integer targetId){
-
-        return recordService.findByTarIdAUIDASTU(targetId,constant.ConstantStatus.CHECK_PASS);
+    public ResponseEntity<List<Record>> getPassRecord(@PathVariable Integer targetId){
+        System.out.println("targetId="+targetId);
+        List<Record> records=recordService.findByTarIdAUIDASTU(targetId,constant.ConstantStatus.CHECK_PASS);
+        return ResponseEntity.ok(records);
     }
 
     @LogAnnotation(module = "获取过审的实施日志以及文件")
@@ -125,6 +129,19 @@ public class RecordController {
     public List<Record> findByproId(@PathVariable Integer proId,@PathVariable Integer status,@PathVariable Integer wetherUser){
 
         return recordService.findByproId(proId,status,wetherUser);//所有的
+    }
+
+    @LogAnnotation(module = "获取所有的实施日志")
+    @GetMapping("/record")
+    public List<RecordResult> find(@RequestParam Map<String, Object> params){
+
+
+        Integer status = Integer.valueOf ((String) params.get("status"));
+        Integer proId = Integer.valueOf ((String) params.get("proId"));
+        Integer weatherUser = Integer.valueOf ((String) params.get("type"));
+
+        return recordService.find(proId,status,weatherUser);//所有的
+
     }
 
 

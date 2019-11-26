@@ -6,6 +6,7 @@
 
 	<resultMap id="BaseResultMap" type="com.xinlang.yx.project_record.bean.Record">
 		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="projectId" jdbcType="INTEGER" property="project_id" />
 		<result column="targetId" jdbcType="INTEGER" property="target_id" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="content" jdbcType="VARCHAR" property="content" />
@@ -13,11 +14,28 @@
 		<result column="remark" jdbcType="VARCHAR" property="remark" />
 		<result column="workingDay" jdbcType="TIMESTAMP" property="working_day" />
 		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
+		<result column="checkUserId" jdbcType="INTEGER" property="check_user_id" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+	</resultMap>
+
+	<resultMap id="ResultMapTwo" type="com.xinlang.yx.project_record.bean.RecordResult">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="projectId" jdbcType="INTEGER" property="project_id" />
+		<result column="targetId" jdbcType="INTEGER" property="target_id" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="createTime" jdbcType="TIMESTAMP" property="create_time" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="createUser" jdbcType="VARCHAR" property="createUser" />
+		<result column="checkUser" jdbcType="VARCHAR" property="checkUser" />
+		<result column="workingDay" jdbcType="TIMESTAMP" property="working_day" />
+		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
 		<result column="status" jdbcType="INTEGER" property="status" />
 	</resultMap>
 
 	<resultMap id="VOResultMap" type="com.xinlang.yx.project_record.VO.RecordVO">
 		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="projectId" jdbcType="INTEGER" property="project_id" />
 		<result column="targetId" jdbcType="INTEGER" property="target_id" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="content" jdbcType="VARCHAR" property="content" />
@@ -117,6 +135,31 @@
 
 	</select>
 
+	<select id="find" resultMap="ResultMapTwo">
+	select
+		p.*,a.username
+		from
+		project_journal as p
+		LEFT JOIN
+		app_user
+		AS a on
+		a.id = p.create_user_id
+			and
+		p.project_id = ${proId};
+		<if test="0!=status">
+			AND
+			p.`status` = ${status}
+		</if>
+		<if test="null!=userId">
+			AND
+			p.create_user_id = ${userId}
+		</if>
+
+
+
+
+
+	</select>
 
 
 

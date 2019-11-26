@@ -5,11 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="../../css/global.css" media="all" />
+    <link rel="stylesheet" href="../../css/font-awesome/css/font-awesome.css" media="all" />
+
+    <link rel="stylesheet" href="css/sidebar.css">
 </head>
 <body>
+<!--
 <img id="headimgurl" width="80px">
 <hr>
 <span id="hello"></span>
+-->
+
+<div id="wrapper" style="left:0;">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <!-- <div class="headSculpture">
+           <img src="images/headSculpture.jpg" alt="">
+           <p>昵称：粉红色少女</p>
+        </div> -->
+        <div class="option">
+            <ul>
+                <li><img src="images/home.png" alt="">
+                    <p>首页</p>
+                </li>
+                <li><img src="images/works.png" alt="">
+                    <p>我的作品</p>
+                </li>
+                <li><img src="images/release.png" alt="">
+                    <p>发布作品</p>
+                </li>
+                <li><img src="images/collection.png" alt="">
+                    <p>我的收藏</p>
+                </li>
+                <li><img src="images/setup.png" alt="">
+                    <p>设置</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 侧边栏按钮 -->
+    <button></button>
+    <!-- 内容区域 -->
+    <div class="banner">
+        <h2>原创侧边栏抽屉</h2>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/sidebar.js"></script>
 </body>
 
 <script src="../../js/constant.js"></script>
@@ -34,7 +80,7 @@
                 $.ajax({
                     type: 'post',
                     url: domainName + '/sys/login-wechat?openid=' + openid + '&tempCode=' + tempCode,
-                   // timeout: 5000, //超时时间设置，单位毫秒
+                    // timeout: 5000, //超时时间设置，单位毫秒
                     data: $("#login-form").serialize(),
                     success: function (data) {
                         //将access_token和refresh_token写入本地

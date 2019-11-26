@@ -2,8 +2,10 @@ package com.xinlang.yx.project_record.service;
 
 import com.xinlang.yx.project_record.VO.RecordVO;
 import com.xinlang.yx.project_record.bean.Record;
+import com.xinlang.yx.project_record.bean.RecordResult;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -21,7 +23,7 @@ public interface IRecordService {
 
     List<Record> findByTarIdAUID(Integer targetId);
 
-    List<Record> findByTarIdAUIDASTU(Integer targetId, Integer unSubmit);
+    
 
     List<RecordVO> findByTarIdAUIDASTUVO(Integer targetId, Integer checkPass);
 
@@ -32,4 +34,9 @@ public interface IRecordService {
     void delFile(List<Integer> fileIds, Integer id);
 
     List<Record> findByproId(Integer proId,Integer status,Integer wetherUser);
+
+    List<Record> findByTarIdAUIDASTU(Integer targetId, Integer checkPass);
+
+    List<RecordResult> find(Integer proId, Integer status, Integer weatherUser);
+
 }

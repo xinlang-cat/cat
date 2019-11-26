@@ -1,21 +1,15 @@
 package com.xinlang.yx.project_record.bean;
 
 import lombok.Data;
-import tk.mybatis.mapper.annotation.KeySql;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
+ * @author 杨珣
+ * @date 2019-11-22
  */
 @Data
-@Table(name = "project_journal")
-public class Record implements Serializable {
-    @Id
-    @KeySql(useGeneratedKeys = true)
+public class RecordResult {
     private Integer id;
 
     /**
@@ -43,6 +37,10 @@ public class Record implements Serializable {
      */
     private Long checkUserId;
     /**
+     * 审核人
+     */
+    private String checkUser;
+    /**
      * 状态
      */
     private Integer status;
@@ -55,9 +53,11 @@ public class Record implements Serializable {
      */
     private Long createUserId;
     /**
+     * 创建人
+     */
+    private String createUser;
+    /**
      * 备注
      */
     private String remark;
-
-
 }
