@@ -89,14 +89,17 @@ public class ItemFundUseService implements IItemFundUseService {
 
     @Override
     @Transactional
-    public List<ItemFundUse> queryFundUseByItemIdAndUserId(Integer iId, int userTd) {
+    public List<ItemFundUse> queryFundUseByItemIdAndUserId(Integer iId) {
 
         ItemFundUse itemFundUse = new ItemFundUse();
         itemFundUse.setItem_id(iId);
-        itemFundUse.setEdit_userid(userTd);
         List<ItemFundUse> itemFundUses = itemFundUseMapper.select(itemFundUse);
         //查询相关图片
         for (ItemFundUse fundUs : itemFundUses) {
+            fundUs.setEdit_dateStr(DateUtils.dateToString(fundUs.getEdit_date(), "yyyy年MM月dd日"));
+            if(itemFundUse.getCheck_date()!=null){
+                fundUs.setCheck_dateStr(DateUtils.dateToString(fundUs.getCheck_date(), "yyyy年MM月dd日"));
+            }
             List<String> urls = itemFundUseMapper.selectUseBill(fundUs.getId());
             fundUs.setBill_url(urls);
         }

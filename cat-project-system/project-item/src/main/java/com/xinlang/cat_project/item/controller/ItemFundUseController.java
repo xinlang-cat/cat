@@ -63,18 +63,18 @@ public class ItemFundUseController {
     }
 
     /**
-     * 获取当前用户所保存的所有数据
+     * 获取项目所有资金使用数据
      * @param
      * @return
      */
-    @ApiOperation(value = "获取当前用户所保存的所有资金使用信息")
-    @LogAnnotation(module = "获取当前用户所保存的所有资金使用信息")
-    @GetMapping("/my/{Iid}")
-    public ResponseEntity<List<ItemFundUse>> getFundUseByItemIdAndUserId(@PathVariable Integer Iid){
+    @ApiOperation(value = "获取项目所有资金使用数据")
+    @LogAnnotation(module = "获取项目所有资金使用数据")
+    @GetMapping("/all/{Iid}")
+    public ResponseEntity<List<ItemFundUse>> getFundUseByItemId(@PathVariable Integer Iid){
 
         //int UserTd = consumeUser.getLoginAppUser().getId().intValue();
-        int UserTd = AppUserUtil.getLoginAppUser().getId().intValue();
-        List<ItemFundUse> itemFundUses = itemFundUseService.queryFundUseByItemIdAndUserId(Iid,UserTd);
+        //int UserTd = AppUserUtil.getLoginAppUser().getId().intValue();
+        List<ItemFundUse> itemFundUses = itemFundUseService.queryFundUseByItemIdAndUserId(Iid);
         return ResponseEntity.ok(itemFundUses);
     }
 

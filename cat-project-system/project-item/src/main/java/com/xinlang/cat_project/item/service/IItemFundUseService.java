@@ -13,7 +13,7 @@ public interface IItemFundUseService {
 
     List<ItemFundUse> queryFundUseByBId(Integer Bid);
 
-    List<ItemFundUse> queryFundUseByItemIdAndUserId(Integer iid, int userTd);
+    List<ItemFundUse> queryFundUseByItemIdAndUserId(Integer iid);
 
     void updateFundUse(ItemFundUse itemFundUse);
 

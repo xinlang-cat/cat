@@ -14,12 +14,11 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
-            <input type="hidden" value="" id="itemId" name="item_id"/>
-            <input type="hidden" value="" id="budgetId" name="budget_id"/>
+            <input type="hidden" value="" id="id" name="id"/>
             <div class="form-group">
                 <label class="col-md-2 control-label">金额</label>
                 <div class="col-md-6">
-                    <input class="form-control" placeholder="金额" type="text" name="expenditure" maxlength="50"
+                    <input class="form-control" placeholder="金额" type="text" name="expenditure" id="expenditure" maxlength="50"
                            data-bv-notempty="true"
                            data-bv-notempty-message="金额 不能为空">
                 </div>
@@ -27,7 +26,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">开支描述</label>
                 <div class="col-md-6">
-                    <textarea class="layui-textarea" name="remark"
+                    <textarea class="layui-textarea" name="remark" id="remark"
                               style="border-color: #ccc;"
                               data-bv-notempty="true"
                               data-bv-notempty-message=" 内容不能为空"></textarea>
@@ -38,7 +37,12 @@
                 <div class="col-md-6">
                     <div class="layui-upload">
                         <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                            <div class="layui-upload-list" id="img"></div>
+                            <div class="layui-upload-list" id="img">
+                                <!--<div style="position: relative">
+                                    <button type="button" class="layui-btn layui-btn-xs" style="position: absolute;top: 10px;right: 10px"><i class="layui-icon">&#xe640;</i></button>
+                                    <img src="">
+                                </div>-->
+                            </div>
                         </blockquote>
                     </div>
                 </div>
@@ -47,7 +51,7 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" onclick="closeThis()">关闭</button>
-                        <button class="btn btn-primary" type="submit" onclick="add()">
+                        <button class="btn btn-primary" type="submit" onclick="update()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -92,30 +96,42 @@
         });
     });
     var id = getUrlParam("id");
-    $("#budgetId").val(id);
+    $("#id").val(id);
     var urls=[];
-
-    getItemId(id);
-    function getItemId(id){
+    /*回填*/
+    initData(id);
+    function initData(id){
         $.ajax({
             type : 'get',
-            url : domainName + '/project-item/item/budget/'+id,
+            url : domainName + '/project-item/item/fund/use/'+id,
             async : false,
             success : function(data) {
-                $("#itemId").val(data.item_id);
+                $("#expenditure").val(data.expenditure);
+                $("#remark").val(data.remark);
+                var str = '';
+                $(data.bill_url).each(function () {
+                    urls.push(this);
+                    str += '<div style="position: relative">\n' +
+                        '   <button type="button" class="layui-btn layui-btn-xs" style="position: absolute;top: 0;right: 15px" onclick="removeImg(this);"><i class="layui-icon">&#xe640;</i></button>' +
+                        '       <img src="'+ this +'" class="layui-upload-img">'+
+                        '   </div>';
+                });
+                $("#img").append(str);
             }
         });
     }
+
     function removeImg(e) {
         $(e).parent().remove();
         urls.length = 0;
-        var url = '';
+        var url;
         $("img").each(function(){
             url = $(this).attr("src");
             urls.push(url);
         });
     }
-    function add() {
+
+    function update() {
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -125,7 +141,7 @@
         var formdata = $("#form").serializeObject();
         formdata.bill_url=urls;
         $.ajax({
-            type: 'post',
+            type: 'put',
             url: domainName + '/project-item/item/fund/use',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),

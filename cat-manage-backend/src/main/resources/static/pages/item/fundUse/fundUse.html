@@ -13,9 +13,9 @@
 <body>
     <!-- 按钮组 -->
     <div class="btn-box">
-        <div>
-            <a href="../list.html" class="layui-btn  layui-btn-sm" style="width:100%;">
-                <i class="layui-icon layui-icon-return"></i>我&nbsp;&nbsp;&nbsp;&nbsp;的</a>
+        <div style="display: block;">
+            <a id="useAll" class="layui-btn  layui-btn-sm" style="width:100%;">
+                <i class="layui-icon layui-icon-return"></i>全&nbsp;&nbsp;&nbsp;&nbsp;部</a>
         </div>
         <div style="display: block;">
             <a href="../../list-layout/list.html" class="layui-btn  layui-btn-sm" style="width:100%;display: block;">
@@ -68,6 +68,8 @@
     });
 
     var id = getUrlParam("id");
+
+    $("#useAll").attr("href","fundUseAll.html?id="+id);
     fundBudgetAll(id);
     function fundBudgetAll(id){
         $.ajax({
@@ -144,7 +146,7 @@
         layer.open({
             title:"使用详情",
             type: 2,
-            area: ['800px', '400px'],
+            area: ['800px', '500px'],
             maxmin: true,
             shadeClose: true,
             content: ['useInfo.html?id='+id]
@@ -154,7 +156,7 @@
         layer.open({
             title:"资金使用录入",
             type: 2,
-            area: ['800px', '600px'],
+            area: ['800px', '500px'],
             maxmin: true,
             shadeClose: true,
             content: ['addFundUse.html?id='+id]

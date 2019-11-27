@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>资金使用</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+    <style>
+        .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+    </style>
+</head>
+
+<body>
+<div style="width: 90%;margin: 0 auto;">
+	<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+		<p id="remark"></p>
+		<div class="layui-upload-list" id="img"></div>
+	</blockquote>
+</div>
+</body>
+
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../js/my/permission.js"></script>
+<script type="text/javascript">
+	var id = getUrlParam("id");
+	useInfo(id);
+	function useInfo(id){
+		$.ajax({
+			type : 'get',
+			url : domainName + '/project-item/item/fund/use/'+id,
+			async : false,
+			success : function(data) {
+				$("#remark").text(data.remark);
+				$(data.bill_url).each(function () {
+					$("#img").append('<img src="'+ this +'" class="layui-upload-img">');
+				});
+			}
+		});
+	}
+</script>
+
+</html>
