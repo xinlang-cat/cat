@@ -11,6 +11,7 @@ import com.xinlang.cat_project.item.pojo.ItemContent;
 import com.xinlang.cat_project.item.pojo.ItemTarget;;
 import com.xinlang.cat_project.item.pojo.ItemUser;
 import com.xinlang.cat_project.item.service.IItemTargetService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_common.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,22 @@ public class ItemTargetService implements IItemTargetService {
         for (ItemTarget t : list) {
             t.setStart_dateStr(DateUtils.dateToString(t.getStart_date(), "yyyy年MM月dd日"));
             t.setEnd_dateStr(DateUtils.dateToString(t.getEnd_date(), "yyyy年MM月dd日"));
+        }
+        return list;
+    }
+
+    @Override
+    public List<ItemTarget> queryTargetByUserId(Integer itemId) {
+        //通过userId查询tsrgetId
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        List<Integer> ids = itemTargetMapper.selectTargetIdByUserId(itemId, userId);
+
+        List<ItemTarget> list = new ArrayList<>();
+        for (Integer id : ids) {
+            ItemTarget itemTarget = itemTargetMapper.selectByPrimaryKey(id);
+            itemTarget.setStart_dateStr(DateUtils.dateToString(itemTarget.getStart_date(), "yyyy年MM月dd日"));
+            itemTarget.setEnd_dateStr(DateUtils.dateToString(itemTarget.getEnd_date(), "yyyy年MM月dd日"));
+            list.add(itemTarget);
         }
         return list;
     }

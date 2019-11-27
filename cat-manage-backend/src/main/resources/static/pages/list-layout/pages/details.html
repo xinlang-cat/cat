@@ -40,7 +40,7 @@
             <i class="layui-icon layui-icon-add-1"></i>项目人员</a>
     </div>
     <div>
-        <a href="../list.html" class="layui-btn  layui-btn-sm" style="width:100%;">
+        <a onclick=" history.back(-1);" class="layui-btn  layui-btn-sm" style="width:100%;">
             <i class="layui-icon layui-icon-return"></i>返&nbsp;&nbsp;&nbsp;&nbsp;回</a>
     </div>
 </div>
@@ -389,13 +389,15 @@
     /*基本信息*/
     getBasic(id);
     /*主要研究内容*/
-    content_target(id)
+    content_target(id);
     /*资金构成*/
     fundSource(id);
     /*总资金预算*/
     fundBudgetAll(id);
     /*项目人员*/
-    personnel(id)
+    personnel(id);
+
+    bntShow();
 </script>
 
 </html>

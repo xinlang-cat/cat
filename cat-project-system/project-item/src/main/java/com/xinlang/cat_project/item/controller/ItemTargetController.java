@@ -2,6 +2,7 @@ package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemTarget;
 import com.xinlang.cat_project.item.service.IItemTargetService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,19 @@ public class ItemTargetController {
     public ResponseEntity<List<ItemTarget>> getTargetByItemId(@PathVariable Integer itemId){
 
         List<ItemTarget> target = targetService.queryTargetByItemId(itemId);
+        return ResponseEntity.ok(target);
+    }
+
+    /**
+     * 获取当前用户相关指标
+     * @return
+     */
+    @ApiOperation(value = "获取当前用户相关指标")
+    @LogAnnotation(module = "获取当前用户相关指标")
+    @GetMapping("/my/{itemId}")
+    public ResponseEntity<List<ItemTarget>> getTargetByUserId(@PathVariable Integer itemId){
+
+        List<ItemTarget> target = targetService.queryTargetByUserId(itemId);
         return ResponseEntity.ok(target);
     }
 

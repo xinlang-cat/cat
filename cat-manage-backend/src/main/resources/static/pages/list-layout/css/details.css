@@ -31,6 +31,7 @@
 }
 .btn-box>div{
     margin: 5px;
+    display: none;
 }
 .btn-box a{
     background-color: #c2c2c2;
@@ -40,6 +41,7 @@
     margin: 0 auto;
     position: relative;
 }
+/*
 table tr td:hover>div{
     display: block;
-}
+}*/

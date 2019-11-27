@@ -46,7 +46,7 @@ function content_target(id) {
             '           <th>考核指标</th>\n' +
             '           <th>描述</th>\n' +
             '           <th>数量</th>\n' +
-            '           <th>操作</th>\n' +
+            '           <th>详情</th>\n' +
             '       </tr>\n' +
             '   </thead>\n' +
             '   <tbody>';
@@ -59,7 +59,7 @@ function content_target(id) {
                 '       <td>/</td>\n' +
                 '       <td>/</td>\n' +
                 '       <td>' +
-                '           <a class="layui-btn layui-btn-sm" onclick="viewInfo1('+this.id+')">更多</a>' +
+                '           <a class="layui-btn layui-btn-xs" onclick="viewInfo1('+this.id+')">更多</a>' +
                 '           <div class="operation">\n' +
                 '               <div class="layui-btn-group">\n' +
                 '                   <a href="updateContent.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -80,6 +80,7 @@ function content_target(id) {
         var str6 = '';
         $(targets).each(function (index) {
             var target = this;
+            analysisUnit(target.unit);
             count(target.type);
             if(target.type==0){
                 if(index==0){
@@ -87,9 +88,9 @@ function content_target(id) {
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
                         '       <td rowspan="'+typeCount+'">技术指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -106,9 +107,9 @@ function content_target(id) {
                     str5 += '<tr>\n' +
                         '       <td rowspan="'+typeCount+'">技术指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -124,9 +125,9 @@ function content_target(id) {
                 }else {
                     str5 += '<tr>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -141,16 +142,15 @@ function content_target(id) {
                         '    </tr>';
                 }
                 count1++;
-                typeCount = 0;
             }else {
                 if(index==0){
                     str4 += '<tr>\n' +
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
                         '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -167,9 +167,9 @@ function content_target(id) {
                     str6 += '<tr>\n' +
                         '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -185,9 +185,9 @@ function content_target(id) {
                 }else {
                     str6 += '<tr>\n' +
                         '       <td>'+target.target+'</td>\n' +
-                        '       <td>1'+target.count+target.unit+'</td>\n' +
+                        '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
-                        '           <a class="layui-btn layui-btn-sm" onclick="viewInfo2('+this.id+')">更多</a>' +
+                        '           <a class="layui-btn layui-btn-xs" onclick="viewInfo2('+this.id+')">更多</a>' +
                         '           <div class="operation">\n' +
                         '               <div class="layui-btn-group">\n' +
                         '                   <a href="updateTarget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
@@ -202,15 +202,27 @@ function content_target(id) {
                         '    </tr>';
                 }
                 count2++;
-                typeCount = 0;
             }
-
+            typeCount = 0;
+            unit = '';
         })
         str2 += str4 + str5 + str6;
     })
     $('#content').append(str1);
     $('#content').append(str2);
     $('#content').append(str3);
+}
+/*解析单位*/
+var unit = '';
+function analysisUnit(sign) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-label/label/tree/' + sign,
+        async: false,
+        success: function (data) {
+            unit = data[0].content;
+        }
+    });
 }
 
 function viewInfo2(id){
@@ -226,7 +238,7 @@ function viewInfo2(id){
 }
 function viewInfo1(id){
     layer.open({
-        title:"指标详情",
+        title:"内容详情",
         type: 2,
         area: ['800px', '400px'],
         maxmin: true,

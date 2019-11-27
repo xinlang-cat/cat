@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+    <style>
+        blockquote {
+            font-size: 14px;
+        }
+        span{margin-right: 20px;}
+    </style>
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -11,31 +18,40 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">研究内容</label>
                 <div class="col-md-10">
-                    <p id="content"></p>
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                        <p id="content"></p>
+                    </blockquote>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">指标内容</label>
                 <div class="col-md-10">
-                    <p id="targetRemark"></p>
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                        <p id="targetRemark"></p>
+                    </blockquote>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">实施地点</label>
                 <div class="col-md-10">
-                    <p id="district"></p>
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                        <p id="district"></p>
+                    </blockquote>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">起始时间</label>
                 <div class="col-md-10">
-                    <p id="date"></p>
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                        <p id="date"></p>
+                    </blockquote>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">实施人员</label>
-                <div class="col-md-10" id="users">
-                    <span></span>
+                <div class="col-md-10">
+                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;" id="users">
+                    </blockquote>
                 </div>
             </div>
            <!-- <div class="form-actions">
