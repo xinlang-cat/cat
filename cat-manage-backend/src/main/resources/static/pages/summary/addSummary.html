@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<fieldset>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label" style="">编辑项目总结</label>
+				<div class="col-md-10">
+					<textarea class="layui-textarea" id="demo" style="display: none">
+					</textarea>
+				</div>
+			</div>
+			<div class="form-actions">
+				<div class="row" align="center">
+					<div class="col-md-12">
+					    <button class="btn btn-primary" id="returnOld" >返回</button>
+						<button class="btn btn-primary" type="submit" onclick="add(this)">
+							<i class="fa fa-save"></i> 发表
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+	</div>
+
+	<script src="../../js/constant.js"></script>
+	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jq.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		var layedit, index;
+		var h = $(window).height() - 100;
+		layui.use(['layedit','upload'], function(){
+		  layedit = layui.layedit;
+		  layedit.set({
+              uploadImage: {
+                  url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
+                  type: 'post'
+              }
+            });
+		  index = layedit.build('demo',{
+			  height:h
+		  });
+		});
+		var itemId = getUrlParam("item_id");
+		var itemName = getUrlParam("item_name");
+		$("#returnOld").click(function () {
+			location.href="summaryList.html?itemId="+itemId;
+		});
+		function add(obj) {
+		    $(obj).attr("disabled",true);
+		    var formdata = $("#form").serializeObject();
+		    formdata.content = layedit.getContent(index);
+		    formdata.itemId = itemId;
+		    formdata.itemName = itemName;
+			$.ajax({
+				type : 'post',
+				url : domainName + '/api-summary/summary',
+				contentType: "application/json; charset=utf-8",  
+				data : JSON.stringify(formdata),
+				success : function(data) {
+				    var msg = "保存成功";
+					layer.msg(msg, {shift: -1, time: 1000}, function(){
+						location.href = "summaryList.html?item_id=";
+                    });
+				}
+			});
+            $(obj).attr("disabled",false);
+		}
+		
+	</script>
+</body>
+</html>
