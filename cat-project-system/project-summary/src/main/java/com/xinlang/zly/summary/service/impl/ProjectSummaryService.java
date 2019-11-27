@@ -6,7 +6,9 @@ import com.xinlang.bean.utils.RowBoundsUtil;
 import com.xinlang.zly.summary.bean.ProjectSummary;
 import com.xinlang.zly.summary.mapper.ProjectSummaryMapper;
 import com.xinlang.zly.summary.service.IProjectSummaryService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.user.AppUser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class ProjectSummaryService implements IProjectSummaryService {
     @Override
     public void save(ProjectSummary projectSummary) {
         projectSummary.setCreateTime(new Date());
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        projectSummary.setUserId(appUser.getId().intValue());
+        projectSummary.setName(appUser.getNickname());
         projectSummaryMapper.insertSelective(projectSummary);
     }
 
