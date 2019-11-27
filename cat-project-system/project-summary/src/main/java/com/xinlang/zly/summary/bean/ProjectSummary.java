@@ -22,7 +22,7 @@ public class ProjectSummary implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer userId;//系统用户表id
-    private Integer userType;//用户类型
+    private Integer  userType;//用户类型
     private String name;//用户姓名
     private Integer itemId;//项目表id
     private String itemName;//项目名称

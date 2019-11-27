@@ -151,7 +151,12 @@
     }
     function update(){
 
-        var formdata  = $("#form").serializeObject();
+        var targetIds = [];
+        $('input[name="targetIds"]:checked').each(function(){
+            targetIds.push($(this).val());
+        });
+        var formdata = $("#form").serializeObject();
+        formdata.targetIds = targetIds;
         $.ajax({
             type: 'put',
             url: domainName + '/project-item/item/user',

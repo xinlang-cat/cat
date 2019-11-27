@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+    <style>
+        .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+        #img{overflow: hidden;}
+        #img>div{float: left;}
+    </style>
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <input type="hidden" value="" id="id" name="id"/>
+            <div class="form-group">
+                <label class="col-md-2 control-label">金额</label>
+                <div class="col-md-6">
+                    <input class="form-control" placeholder="金额" type="text" name="expenditure" id="expenditure" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="金额 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">开支描述</label>
+                <div class="col-md-6">
+                    <textarea class="layui-textarea" name="remark" id="remark"
+                              style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><button type="button" class="layui-btn" id="file">相关材料</button></label>
+                <div class="col-md-6">
+                    <div class="layui-upload">
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            <div class="layui-upload-list" id="img">
+                                <!--<div style="position: relative">
+                                    <button type="button" class="layui-btn layui-btn-xs" style="position: absolute;top: 10px;right: 10px"><i class="layui-icon">&#xe640;</i></button>
+                                    <img src="">
+                                </div>-->
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="closeThis()">关闭</button>
+                        <button class="btn btn-primary" type="submit" onclick="update()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript">
+    layui.use(['layer','upload'], function(){
+        var layer = layui.layer
+            ,upload = layui.upload;
+        //多图片上传
+        upload.render({
+            elem: '#file'
+            , accept: 'images'
+            ,url: domainName+'/zuul/api-f/files'
+            ,multiple: true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    var str = '<div style="position: relative">\n' +
+                        '   <button type="button" class="layui-btn layui-btn-xs" style="position: absolute;top: 0;right: 15px" onclick="removeImg(this);"><i class="layui-icon">&#xe640;</i></button>' +
+                        '       <img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">'+
+                        '   </div>';
+                    $('#img').append(str);
+                });
+            }
+            ,done: function(res){
+                //上传完毕
+                urls.push(res.url);
+                var imgs = $("img");
+                $(imgs[imgs.length-1]).attr("src",res.url);
+            }
+        });
+    });
+    var id = getUrlParam("id");
+    $("#id").val(id);
+    var urls=[];
+    /*回填*/
+    initData(id);
+    function initData(id){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/fund/use/'+id,
+            async : false,
+            success : function(data) {
+                $("#expenditure").val(data.expenditure);
+                $("#remark").val(data.remark);
+                var str = '';
+                $(data.bill_url).each(function () {
+                    urls.push(this);
+                    str += '<div style="position: relative">\n' +
+                        '   <button type="button" class="layui-btn layui-btn-xs" style="position: absolute;top: 0;right: 15px" onclick="removeImg(this);"><i class="layui-icon">&#xe640;</i></button>' +
+                        '       <img src="'+ this +'" class="layui-upload-img">'+
+                        '   </div>';
+                });
+                $("#img").append(str);
+            }
+        });
+    }
+
+    function removeImg(e) {
+        $(e).parent().remove();
+        urls.length = 0;
+        var url;
+        $("img").each(function(){
+            url = $(this).attr("src");
+            urls.push(url);
+        });
+    }
+
+    function update() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        formdata.bill_url=urls;
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/fund/use',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+
+                });
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
+                parent.location.reload();
+            }
+        });
+    }
+    function closeThis() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+</script>
+</body>
+</html>

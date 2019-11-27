@@ -49,4 +49,7 @@ public interface ItemTargetMapper extends Mapper<ItemTarget> {
      */
     @Select("SELECT user_id FROM target_user WHERE item_id=#{item_id} AND target_id=#{target_id}")
     List<Integer> selectTargetUserByTargetId(@Param("item_id") Integer item_id, @Param("target_id") Integer target_id);
+
+    @Select("SELECT target_id FROM target_user WHERE item_id=#{item_id} AND user_id=#{user_id}")
+    List<Integer> selectTargetIdByUserId(@Param("item_id")Integer item_id, @Param("user_id")Integer user_id);
 }

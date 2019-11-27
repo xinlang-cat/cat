@@ -33,7 +33,7 @@ public class ItemFundUse {
     private String check_opinion;
 
     @Transient
-    private List<Integer> bill_url;
+    private List<String> bill_url;
 
     @Transient
     private String edit_dateStr;

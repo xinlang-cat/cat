@@ -62,10 +62,10 @@
                 <div class="col-md-7">
                     <select class="form-control input-sm" id="unit" name="unit">
                         <option value=''>- 请选择 -</option>
-                        <option value='0'>个</option>
-                        <option value='1'>项-</option>
-                        <option value='2'>亩</option>
-                        <option value='2'>棵</option>
+                        <!--<option value='个'>个</option>
+                        <option value='项'>项-</option>
+                        <option value='亩'>亩</option>
+                        <option value='棵'>棵</option>-->
                     </select>
                 </div>
             </div>
@@ -125,6 +125,9 @@
 <script type="text/javascript" src="../../../js/common.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="../../../js/project/initData.js"></script>
+
+</body>
+</html>
 
 <script>
     layui.use(['layer', 'laydate','form'], function () {
@@ -191,23 +194,27 @@
             }
         })
     })
-    //显示所有人员
-    /*function initUserSelect() {
+    getUnit('unit');
+    //获取单位
+    function getUnit(sign) {
         $.ajax({
             type : 'get',
-            url : domainName + '/project-user/user/all',
+            url : domainName + '/api-label/label/tree/'+sign,
             async : false,
             success : function(data) {
-                var checkbox = $('#users');
-                for(var i=0; i<data.length; i++){
-                    var d = data[i];
-                    var userId = d.userId;
-                    var name = d.name;
-                    checkbox.append('<input type="checkbox" name="userIds" value="'+userId+'" title="'+name+'">');
+                var select = $("#unit");
+                var ds = data[0].child;
+                for(var i=0; i<ds.length; i++){
+                    var d = ds[i];
+                    var sign = d['sign'];
+                    var name = d['content'];
+
+                    select.append("<option value='"+ sign +"'>" +name+"</option>");
                 }
             }
         });
-    }*/
+    }
+
     //保存
     function add() {
         $('#form').bootstrapValidator();
@@ -230,5 +237,3 @@
         });
     }
 </script>
-</body>
-</html>

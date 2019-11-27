@@ -15,6 +15,8 @@ public interface IItemTargetService {
 
     List<ItemTarget> queryTargetByItemId(Integer itemId);
 
+    List<ItemTarget> queryTargetByUserId(Integer itemId);
+
     void updateTarget(ItemTarget target);
 
     void deleteTarget(Integer id);
