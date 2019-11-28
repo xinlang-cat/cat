@@ -45,7 +45,7 @@ security:
       prefer-token-info: false
 file:
   local:
-    path: E:/localFile
+    path: D:/localFile
     prefix: /statics
     urlPrefix: http://xinlangxfpt.mynatapp.cc/api-f${file.local.prefix}
   aliyun:
@@ -56,7 +56,7 @@ file:
     domain: https://xxx
 album:
   local:
-    path: F:/localFile
+    path: D:/localFile
     prefix: /statics
     urlPrefix: http://xinlangxfpt.mynatapp.cc/api-f${album.local.prefix}
     mini: #缩略图宽

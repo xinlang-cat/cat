@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-3 control-label">
+                    <button id="file" type="button" class="layui-btn " id="test2">图片上传</button>
+                </label>
+                <div class="col-md-7">
+                    <div data-bv-notempty="true"
+                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 750px;"
+                         id="demo2"></div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" id="btn_return">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+</body>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript">
+    var id = getUrlParam("id");
+    alert(id);
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+    var urls=[];
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#file' //绑定元素
+            , accept: 'images'
+            , url: domainName + '/zuul/api-f/albums' //上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').append('<img style="width: 250px;margin-left: 10px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                });
+            }
+            , done: function (res) {
+                //上传完毕回调
+                urls.push(res.url);
+                alert("成功");
+            }
+            , error: function () {
+
+                alert("失败");
+                //请求异常回调
+            }
+        })
+    })
+    $("#btn_return").click(function () {
+
+        $(location).attr("href", "new_usefund.html?id=" + id + "");
+
+    })
+</script>
+
+</html>
+
