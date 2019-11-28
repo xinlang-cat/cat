@@ -1,8 +1,10 @@
 package com.xinlang.zly.summary.service;
 
 import com.xinlang.zly.summary.bean.ProjectSummary;
+import com.xinlang.zly_xyx.common.Page;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -15,4 +17,6 @@ public interface IProjectSummaryService {
     List<ProjectSummary> findByUserId(Integer userId);
     List<ProjectSummary> findByItemIdAndUserType(Integer itemId,String userType);
     void delete(Integer id);
+    Page<ProjectSummary> findByParams(Map<String,Object> params);
+    Page<ProjectSummary> link(Map<String,Object> params);
 }
