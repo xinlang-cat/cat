@@ -17,28 +17,28 @@
 	                   			<td>
 		                   			<form class="form-inline" onsubmit="return false">
 		                   				<div class="form-group">
-											用户名：
-											<input id="username" type="text" class="form-control" placeholder="用户名">
-											昵称：
-											<input id="nickname" type="text" class="form-control" placeholder="昵称">
+											姓名：
+											<input id="name" type="text" class="form-control" placeholder="姓名">
+											单位/公司名称：
+											<input id="deptName" type="text" class="form-control" placeholder="单位/公司名称">
+											类型：
+											<select class="form-control input-sm" id="userType">
+												<option value="">全部</option>
+												<option value="1">甲方</option>
+												<option value="0">乙方</option>
+											</select>
 											状态：
 											<select class="form-control input-sm" id="enabled">
 												<option value="">全部</option>
 												<option value="1">正常</option>
 												<option value="0">禁用</option>
 											</select>
-											类型：
-											<select class="form-control input-sm" id="type">
-												<option value="">全部</option>
-												<option value="BACKEND">后端管理用户</option>
-												<option value="APP">前端app用户</option>
-											</select>
-											<button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+											<button id="searchBt" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe615;</i>搜索</button>
 										</div>
 									</form>
 	                   			</td>
 	                   			<td align="right">
-	                   				<button class="layui-btn layui-btn-sm" onclick="location.href='addUser.html'">
+	                   				<button class="layui-btn layui-btn-sm" onclick="location.href='addProjectUser.html'">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
 	                   			</td>
@@ -54,11 +54,12 @@
                                 <tr>
                                 </tr>                       
                                 <tr>
-                                    <th>username</th>
-                                    <th>昵称</th>
-                                    <th>手机号</th>
-                                    <th>类型</th>
-									<th>状态</th>     
+                                    <th>姓名</th>
+                                    <th>性别</th>
+                                    <th>证件号码</th>
+                                    <th>单位名称</th>
+									<th>职务</th>
+									<th>电话</th>
 									<th>操作</th>
                                 </tr>
                             </thead>
@@ -98,13 +99,13 @@ layui.use(['layer','util'], function(){
                     "url": "../../js/plugin/datatables/Chinese.lang"
                 },
             	"ajax": {
-            		"url" : domainName + "/api-u/users",
+            		"url" : domainName + "/project-user/users",
             		"type":"get",
             		"data":function(d){
-            			d.username = $('#username').val();
-        				d.nickname = $('#nickname').val();
+            			d.name = $('#name').val();
+        				d.deptName = $('#deptName').val();
         				d.enabled = $("#enabled").val();
-        				d.type = $("#type").val();
+        				d.userType = $("#userType").val();
             		},
             		"dataSrc": function (json) {
             			json.recordsTotal=json.total;
@@ -133,62 +134,59 @@ layui.use(['layer','util'], function(){
             	},
             	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
                 "columns": [
-                	{ "data": "username", "defaultContent": ""},
-                    { "data": "nickname", "defaultContent": ""},
-                    { "data": "phone", "defaultContent": ""},
-                    { 
-                    	"data": "type",
-                    	"defaultContent": "",
-                    	"render": function (data, type, row) {
-                    		if(data =="BACKEND"){
-                    			return "后端管理用户";
-                    		}
-                    		return "前端app用户";
-                    	}
-                    },
-                    { 
-                    	"data": "enabled",
-                    	"defaultContent": "",
-                    	"render": function (data, type, row) {
-                    		if(data){
-                    			return "正常";
-                    		}
-                    		return "禁用";
-                    	}
-                    },
+                	{ "data": "name", "defaultContent": ""},
+					{
+						"data": "sex",
+						"defaultContent": "",
+						"render": function (data, type, row) {
+							if(data == 1){
+								return "男";
+							}
+							return "女";
+						}
+					},
+                    { "data": "idCard", "defaultContent": ""},
+                    { "data": "deptName", "defaultContent": ""},
+					{ "data": "job", "defaultContent": ""},
+					{ "data": "telephone", "defaultContent": ""},
                     { 
                     	"data": "", 
                     	"defaultContent": "",
                     	"render": function (data, type, row) {
-                    		var id = row['id'];
-                    		var href = "updateUser.html?id=" + id;
-                            var edit = buttonEdit(href, "back:user:update", pers);
-                            
+                    		var id = row['userId'];
+							var del = buttonDel(id, "", pers);
                             //重置密码
                             var resetPassword = "";
-                            if($.inArray("back:user:password", pers) >= 0){
+                            if($.inArray("", pers) >= 0){
                             	var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>重置密码</i></button>");
                             	btn.attr("onclick", 'resetPassword(' +id+')');
                             	resetPassword = btn.prop("outerHTML");
                             }
-                            
-                            //分配角色
-                            var setRoles = "";
-                            if($.inArray("back:user:role:set", pers) >= 0){
-                            	var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>分配角色</i></button>");
-                            	btn.attr("onclick", 'setRoles(' +id+')');
-                            	setRoles = btn.prop("outerHTML");
-                            }
-                            return edit + resetPassword + setRoles;
+                            return  resetPassword + del;
                       	}
                     },
                 ],
             } );
     }
 
-    //init();
+    init();
 });
+function del(id){
+	layer.confirm('确定要删除吗？', {
+		btn : [ '确定', '取消' ]
+	}, function() {
+		$.ajax({
+			type : 'delete',
+			url : domainName + "/project-user/user/"+id,
+			success : function(data) {
+				example.ajax.reload();
+				layer.msg("删除成功");
+			}
+		});
 
+		layer.close(1);
+	});
+}
 
 function resetPassword(id){
 	layer.open({
@@ -204,22 +202,11 @@ function resetPassword(id){
 		                });
 					}
 				});
-				
+
 			}
 		});
 }
 
-function setRoles(id){
-	layer.open({
-		title:"分配角色",
-		type: 2,
-		area: ['800px', '400px'],
-		maxmin: true,
-		shadeClose: true,
-		content: ['setRoles.html?userId='+id]
-			
-	});
-}
 
 $("#searchBt").click(function(){
 	example.ajax.reload();
