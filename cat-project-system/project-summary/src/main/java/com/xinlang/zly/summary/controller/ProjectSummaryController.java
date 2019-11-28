@@ -2,6 +2,7 @@ package com.xinlang.zly.summary.controller;
 
 import com.xinlang.zly.summary.bean.ProjectSummary;
 import com.xinlang.zly.summary.service.IProjectSummaryService;
+import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -61,6 +63,13 @@ public class ProjectSummaryController {
     @LogAnnotation(module = "根据项目id和用户类型查询listt")
     public List<ProjectSummary> findByItemIdAndUserType(@PathVariable Integer itemId, String userType){
         return projectSummaryService.findByItemIdAndUserType(itemId,userType);
+    }
+
+    @GetMapping("/summarys")
+    @LogAnnotation(module = "根据实体中的属性查询项目总结")
+    @ApiOperation(value = "根据实体中的属性查询")
+    public Page<ProjectSummary> findByParams(@RequestParam Map<String,Object> params){
+        return projectSummaryService.findByParams(params);
     }
 
     @ApiOperation(value="根据id删除一条记录")
