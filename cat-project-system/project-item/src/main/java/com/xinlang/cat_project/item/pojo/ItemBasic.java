@@ -35,7 +35,7 @@ public class ItemBasic implements Serializable {
     private String consignor;
     private String undertaker;
     private String supervisor_dept;
-    private String supervisor;
+    private Integer supervisor;
     private String overall_objective;
     private Integer district;
     private String contract_file;
@@ -44,6 +44,7 @@ public class ItemBasic implements Serializable {
     private Date edit_date;
     private Integer edit_userid;
     private String dept_code;
+    private String type;
     private Integer status;
 
     @Transient

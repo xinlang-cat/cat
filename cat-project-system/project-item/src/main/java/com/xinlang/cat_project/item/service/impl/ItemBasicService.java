@@ -94,7 +94,7 @@ public class ItemBasicService implements IItemBasicService {
         //SET 创建人id、创建时间、状态
         basic.setEdit_userid(loginAppUser.getId().intValue());
         basic.setEdit_date(new Date());
-        basic.setDept_code(company.getDeptCode());
+        basic.setUndertaker(company.getDeptCode());
         try {
             basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), "yyyy年MM月dd日"));
             basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), "yyyy年MM月dd日"));
@@ -129,7 +129,7 @@ public class ItemBasicService implements IItemBasicService {
         ItemBasic itemBasic = new ItemBasic();
         List<ItemBasic> list = new ArrayList<>();
         if(company!=null){
-            itemBasic.setDept_code(company.getDeptCode());
+            itemBasic.setUndertaker(company.getDeptCode());
             list = itemBasicMapper.select(itemBasic);
         }
         if(!CollectionUtils.isEmpty(list)){

@@ -78,6 +78,7 @@ function content_target(id) {
         var str4 = '';
         var str5 = '';
         var str6 = '';
+        var str7 = '';
         $(targets).each(function (index) {
             var target = this;
             analysisUnit(target.unit);
@@ -144,7 +145,7 @@ function content_target(id) {
                 count1++;
             }else {
                 if(index==0){
-                    str4 += '<tr>\n' +
+                    str6 += '<tr>\n' +
                         '       <td rowspan="'+targets.length+'">'+content.headline+'</td>\n' +
                         '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
@@ -164,7 +165,7 @@ function content_target(id) {
                         '       </td>\n' +
                         '   </tr>';
                 }else if(count2==0){
-                    str6 += '<tr>\n' +
+                    str7 += '<tr>\n' +
                         '       <td rowspan="'+typeCount+'">经济指标</td>\n' +
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>'+target.count+unit+'</td>\n' +
@@ -183,7 +184,7 @@ function content_target(id) {
                         '       </td>\n' +
                         '    </tr>';
                 }else {
-                    str6 += '<tr>\n' +
+                    str7 += '<tr>\n' +
                         '       <td>'+target.target+'</td>\n' +
                         '       <td>'+target.count+unit+'</td>\n' +
                         '       <td>' +
@@ -206,7 +207,11 @@ function content_target(id) {
             typeCount = 0;
             unit = '';
         })
-        str2 += str4 + str5 + str6;
+        if(str4!=''){
+            str2 += str4 + str5 + str6 + str7;
+        }else{
+            str2 += str6 + str7 + str5;
+        }
     })
     $('#content').append(str1);
     $('#content').append(str2);
