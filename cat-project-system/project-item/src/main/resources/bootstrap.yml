@@ -10,8 +10,6 @@ eureka:
   client:
     registry-fetch-interval-seconds: 5
     service-url:
-
-      #defaultZone: http://cat:cat@192.168.5.19:8761/eureka/
       defaultZone: http://cat:cat@cat.eureka.com:8761/eureka/
 
 

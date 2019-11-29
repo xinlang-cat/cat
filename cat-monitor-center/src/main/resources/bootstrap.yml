@@ -13,7 +13,6 @@ eureka:
     hostname: ${spring.application.name}
   client:
     service-url:
-
       defaultZone: http://cat:cat@cat.eureka.com:8761/eureka/
 
 

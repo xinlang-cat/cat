@@ -192,8 +192,10 @@
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
+    var userId;//当前用户ID
+    var deptCode;//当前用户的公司代码
+    getCompanryCode();
     initData();
-
     function initData() {
         $.ajax({
             type: 'get',
@@ -203,8 +205,12 @@
             success: function (data) {
                 var str = '';
                 $(data).each(function(){
-                    var st1 = this.status==0?"initial":"none";
-                    var st2 = this.status==0?"none":"initial";
+                    var st1 = this.status==0?"":"none";
+                    var st2 = this.status==2?"":"none";
+                    var st3 = "none";
+                    if(this.status==1&&deptCode==this.supervisor_dept){
+                        st3 = "";
+                    }
                     str += '<div class="masonry__item">\n' +
                         '            <figure>\n' +
                         '                <figcaption class="content">\n' +
@@ -214,13 +220,15 @@
                         '                       <span>结束时间：'+this.end_dateStr+'</span></p>\n' +
                         '                    <ul class="tags">\n' +
                         '                        <li><a href="pages/details.html?id='+this.id+'">基本信息</a></li>\n' +
-                        '                        <li style="display: '+st1+';"><a onclick="submit('+this.id+')">提交</a></li>\n' +
-                        '                        <li style="display: '+st2+';"><a href="../project/my_implement.html?id='+this.id+'">实施日志</a></li>\n' +
-                        '                        <li style="display: '+st2+';"><a href="">阶段总结</a></li>\n' +
-                        '                        <li style="display: '+st2+';"><a href="../item/fundUse/fundUse.html?id='+this.id+'">经费使用</a></li>\n' +
+                        '                        <li style="display: '+st2+';"><a href="../project/journal.html?id='+this.id+'">实施日志</a></li>\n' +
+                        '                        <li style="display: '+st2+';"><a href="../project/report.html?id='+this.id+'">阶段总结</a></li>\n' +
+                        '                        <li style="display: '+st2+';"><a href="../item/fundUse/fundUse.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li style="display: '+st2+';"><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
                         '                        <li style="display: '+st2+';"><a href="#!">结题申请</a></li>\n' +
-                        '                        <li style="display: '+st2+';"><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
+                        '                        <li style="display: '+st1+';"><a onclick="submit('+this.id+')">提交</a></li>\n' +
+                        '                        <li style="display: '+st3+';"><a onclick="check('+this.id+','+this.status+',1)">通过</a></li>\n' +
+                        '                        <li style="display: '+st3+';"><a onclick="check('+this.id+','+this.status+',0)">不通过</a></li>\n' +
+                        '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
                         '                    </ul>\n' +
                         '                </figcaption>\n' +
                         '            </figure>\n' +
@@ -245,6 +253,54 @@
                 }
             });
             layer.close(1);
+        });
+    }
+    function check(id,status,boolean) {
+
+        if(boolean==1){
+            status++
+        }else {
+            status--
+        }
+        layer.confirm('确定要提交吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'put',
+                url: domainName + '/project-item/item',
+                data: '{"id":'+id+',"status":'+status+'}',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("提交成功！");
+                }
+            });
+            layer.close(1);
+        });
+    }
+    //获取当前用户的公司代码
+    function getCompanryCode() {
+        getUser();
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company-anon/'+userId,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                deptCode = data.deptCode;
+            }
+        });
+    }
+    //获取当前用户的ID
+    function getUser() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                userId = data.id;
+            }
         });
     }
 </script>
