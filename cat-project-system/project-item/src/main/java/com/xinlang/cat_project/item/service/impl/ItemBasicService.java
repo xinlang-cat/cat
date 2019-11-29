@@ -8,7 +8,9 @@ import com.xinlang.cat_project.item.exception.ItemException;
 import com.xinlang.cat_project.item.fegin.ConsumeCompany;
 import com.xinlang.cat_project.item.fegin.ConsumeUser;
 import com.xinlang.cat_project.item.mapper.ItemBasicMapper;
+import com.xinlang.cat_project.item.mapper.ItemUserMapper;
 import com.xinlang.cat_project.item.pojo.ItemBasic;
+import com.xinlang.cat_project.item.pojo.ItemUser;
 import com.xinlang.cat_project.item.pojo.PageResult;
 import com.xinlang.cat_project.item.service.IItemBasicService;
 import com.xinlang.cat_project.item.utils.constant;
@@ -39,6 +41,9 @@ public class ItemBasicService implements IItemBasicService {
     private ItemBasicMapper itemBasicMapper;
 
     @Autowired
+    private ItemUserMapper itemUserMapper;
+
+    @Autowired
     private ConsumeUser consumeUser;
 
     @Autowired
@@ -58,7 +63,7 @@ public class ItemBasicService implements IItemBasicService {
             }else if(params.get("status") != ""){
                 example.createCriteria().andEqualTo("status", params.get("status"));
             }
-            example.createCriteria().andGreaterThanOrEqualTo("status", 1);
+            example.createCriteria().andGreaterThanOrEqualTo("status", constant.ItemStatus.PROCEED);
         }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序
@@ -123,14 +128,36 @@ public class ItemBasicService implements IItemBasicService {
 
     @Override
     public List<ItemBasic> queryCompanyItem() {
-        //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
-        LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
-        Company company = consumeCompany.findByUserId(loginAppUser.getId().intValue());
-        ItemBasic itemBasic = new ItemBasic();
+        //用于保存项目信息
         List<ItemBasic> list = new ArrayList<>();
-        if(company!=null){
-            itemBasic.setUndertaker(company.getDeptCode());
-            list = itemBasicMapper.select(itemBasic);
+        //先获取当前登录用户ID
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        //通过用户ID获取用户相关的项目ID
+        ItemUser itemUser = new ItemUser();
+        itemUser.setUser_id(userId);
+        List<ItemUser> itemUsers = itemUserMapper.select(itemUser);
+        if(!CollectionUtils.isEmpty(itemUsers)){
+            //不为空，则说明在项目中属于承担方的成员
+            //遍历项目ID查询项目
+            for (ItemUser i: itemUsers) {
+                ItemBasic itemBasic = itemBasicMapper.selectByPrimaryKey(i.getItem_id());
+                list.add(itemBasic);
+            }
+        }else {
+            //为空，则判是否是委托方、承担方、监管方
+            //通过用户ID获取用户的公司信息
+            Company company = consumeCompany.findByUserId(userId);
+            //通过公司代码查询项目
+            Example example = new Example(ItemBasic.class);
+            example.createCriteria().andEqualTo("consignor",company.getDeptCode())
+                    .orEqualTo("undertaker",company.getDeptCode()).orEqualTo("supervisor_dept",company.getDeptCode());
+            List<ItemBasic> items = itemBasicMapper.selectByExample(example);
+            //获取进行中的项目
+            for (ItemBasic item : items) {
+                if(item.getStatus()>= constant.ItemStatus.BASICS_CHECK){
+                    list.add(item);
+                }
+            }
         }
         if(!CollectionUtils.isEmpty(list)){
             for (ItemBasic basic : list) {

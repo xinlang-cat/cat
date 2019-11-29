@@ -27,8 +27,13 @@ public class constant {
          */
         public static final Integer  NEW= 0;
         /**
-         * 进行
+         * 基本信息审核
          */
-        public static final Integer IMPLEMENT = 1;
+        public static final Integer BASICS_CHECK = 1;
+        /**
+         * 基本信息审核
+         */
+        public static final Integer PROCEED = 2;
     }
+
 }
