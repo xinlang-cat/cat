@@ -91,6 +91,7 @@
             return;
         }
         var formdata = $("#form").serializeObject();
+
         $.ajax({
             type: 'put',
             url: domainName + '/project-report/report/',

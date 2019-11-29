@@ -47,7 +47,7 @@ public class RecordController {
     }
 
     @LogAnnotation(module = "删除实施日志")
-    @DeleteMapping("/record")
+    @DeleteMapping("/record/{id}")
     public void delete(@PathVariable Integer id){
         recordService.delete(id);
 

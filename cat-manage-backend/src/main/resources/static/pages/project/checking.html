@@ -24,15 +24,14 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">所属指标</label>
                 <div class="col-md-7">
-                    <select class="form-control input-sm" lay-skin="primary" id="targetId" name="targetId">
-                        <!-- <option value="">- 请选择 -</option>-->
-                    </select>
+                    <input class="form-control" placeholder="所属指标" type="text" name="target"
+                           maxlength="50" id="target" data-bv-notempty="true" data-bv-notempty-message="标题 不能为空">
 
                 </div>
             </div>
 
             <div class="form-group">
-
+                <input type="hidden" name="ids" id="ids" value="">
                 <input type="hidden" name="projectId" id="projectId" value="projectId">
                 <input type="hidden" name="id" id="id" value="id">
                 <input type="hidden" name="return" id="return" value="return">
@@ -59,6 +58,7 @@
                         </textarea>
                 </div>
             </div>
+            <button class="btn btn-primary" id="getTar" onclick="getTarget()" style="display: none">返回</button>
 
 
 
@@ -118,8 +118,11 @@
         $("input").attr("disabled",true);
         $("select").attr("disabled",true);
         $("textarea").attr("disabled",true);
-        getTarget(projectId);
         getRecord(id);
+       /* getTarget(projectId);*/
+
+
+
         var layer = layui.layer
             , upload = layui.upload
             , laydate = layui.laydate;
@@ -133,21 +136,14 @@
         });
     })
 
-    function getTarget(projectId) {
-
+    function getTarget() {
+    var targetId = $("#ids").val();
         $.ajax({
             type : 'get',
-            url : domainName + '/project-item/item/target/my/'+projectId,
+            url : domainName + '/project-item/item/target/'+targetId,
             async : false,
             success : function(data) {
-                $("#targetId").append('<option value="">- 请选择 -</option>');
-                var str = '';
-                $(data).each(function () {
-
-                    str +=  '<option value="'+this.id+'">-'
-                        + this.target + '-</option>';
-                    $("#targetId").append(str);
-                });
+                $("#target").val(data.target);
 
             }
         });
@@ -159,7 +155,7 @@
             contentType: "application/json; charset=utf-8",
             async:false,
             success: function (res) {
-                $("#targetId").val(res.targetId);
+                $("#ids").val(res.targetId);
                 $("#id").val(res.id);
 
                 $("#title").val(res.title);
@@ -167,6 +163,10 @@
                 $("#demo").val(res.content);
 
                 $("#workingDay").val(res.time);
+                $("#targetId").val(res.targetId);
+
+                $("#getTar").click();
+
                 var str = '';
 
                 if (res.status!=2){
@@ -206,8 +206,12 @@
             contentType: "application/json; charset=utf-8",
             async:false,
             success: function (res) {
+                layer.msg("审核成功", {shift: -1, time: 1000}, function(){
 
-                $(location).attr("href", "check.html?id=" + projectId);
+                    $(location).attr("href", "check.html?id=" + projectId);
+                });
+
+
             }
         })
     }
@@ -219,8 +223,10 @@
             contentType: "application/json; charset=utf-8",
             async:false,
             success: function (res) {
+                layer.msg("审核成功", {shift: -1, time: 1000}, function(){
 
-                $(location).attr("href", "check.html?id=" + projectId);
+                    $(location).attr("href", "check.html?id=" + projectId);
+                });
             }
         })
     }

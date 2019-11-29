@@ -174,7 +174,7 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
 
 
 <script>
-
+    var layer = layui.layer;
     var proId = getUrlParam("id");
     var money=0;
     var urls=[];
@@ -228,6 +228,7 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
                 $("#content2").append(str1);
                 $("#content3").append(str2);
                 $("#content4").append(str3);
+                $("#check").click();
             }
         })
     })
@@ -240,8 +241,11 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
             contentType: "application/json; charset=utf-8",
             async:false,
             success: function (res) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    $(location).attr("href", "my_implement.html?id=" + projectId);
+                });
 
-                $(location).attr("href", "my_implement.html?id=" + projectId);
+
             }
         })
     }
@@ -265,7 +269,10 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
     })
 
     function submit(id) {
-        $(location).attr("href", "implement.html?id=" + id+"&&projectId="+proId);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            $(location).attr("href", "implement.html?id=" + id+"&&projectId="+proId);
+        });
+
     }
     $("#no_pass").click(function () {
         $("#zijin").css("display","none");
