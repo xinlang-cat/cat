@@ -91,7 +91,6 @@
                 $(res.bill_url).each(function (index) {
                     $('#demo2').append('<div><button  onclick="deleteImg('+index+',this);" style="position: absolute;" type="button" class="layui-btn layui-btn-primary">删除</button>  <img  style="width: 250px;margin-left: 10px;height: 150px;" src="' + this + '" alt="' + file.name + '" class="layui-upload-img"></img></div>');
                     urls.push(this);
-
                 })
             }
         })
@@ -135,7 +134,6 @@
             }
         })
     })
-
     layui.use(['layer', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload

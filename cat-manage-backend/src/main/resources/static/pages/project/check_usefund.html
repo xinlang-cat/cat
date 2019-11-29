@@ -24,8 +24,8 @@
                 <label class="col-md-3 control-label">意见</label>
                 <div class="col-md-7">
                     <select class="form-control input-sm"  value="" name="status">
-                       <option value="1">通过</option>
-                          <option value="2">不通过</option>
+                       <option value="2">通过</option>
+                          <option value="3">不通过</option>
                     </select>
                 </div>
             </div>
@@ -115,7 +115,7 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "UseOfFunding.html?id=" + item;
+                    location.href = "Mycheck.html?id=" + item;
                 });
             }
         });

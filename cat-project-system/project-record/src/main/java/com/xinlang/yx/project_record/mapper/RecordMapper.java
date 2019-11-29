@@ -2,6 +2,7 @@ package com.xinlang.yx.project_record.mapper;
 
 import com.xinlang.yx.project_record.VO.RecordVO;
 import com.xinlang.yx.project_record.bean.Record;
+import com.xinlang.yx.project_record.bean.RecordResult;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -25,4 +26,8 @@ public interface RecordMapper extends tk.mybatis.mapper.common.Mapper<Record> {
     void delFile(@Param("id") Integer id, @Param("fileId") Integer fileId);
 
     List<Record> findByproId(@Param("proId") Integer proId, @Param("status") Integer status, @Param("userId") Long userId);
+
+    List<RecordResult> find(@Param("proId") Integer proId, @Param("status") Integer status, @Param("userId") Long userId);
+
+    String getName(@Param("createUserId")Long createUserId);
 }

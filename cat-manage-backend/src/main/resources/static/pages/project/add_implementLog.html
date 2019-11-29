@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+   <!-- <link rel="stylesheet" type="text/css" media="screen" href="dist/summernote.css">-->
+
+
+
+    
+<style>
+
+</style>
+</head>
+
+<body>
+
+    <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" onsubmit="return false" id="form">
+
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">所属指标</label>
+                    <div class="col-md-7">
+                        <select class="form-control input-sm" lay-skin="primary" id="targetId" name="targetId">
+                           <!-- <option value="">- 请选择 -</option>-->
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <input type="hidden" name="projectId" id="projectId" value="projectId">
+                    <label class="col-md-3 control-label">标题</label>
+                    <div class="col-md-7">
+                        <input class="form-control" placeholder="标题" type="text" name="title"
+                            maxlength="50" id="title" data-bv-notempty="true" data-bv-notempty-message="标题 不能为空">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">开始时间</label>
+                    <div class="col-md-7">
+                        <input class="form-control date" placeholder="开始时间" type="text" name="workingDay"
+                            maxlength="50" id="workingDay" data-bv-notempty="true" data-bv-notempty-message="开始时间 不能为空">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">内容</label>
+                    <div class="col-md-7">
+                        <textarea class="layui-textarea" id="demo" style="display: none">  
+                        </textarea>
+                    </div>
+                </div>
+
+
+                
+
+                
+
+                <div class="form-actions">
+                    <div class="row" align="center">
+                        <div class="col-md-12">
+                            <button class="btn btn-primary" id="btn_return">返回</button>
+                            <button class="btn btn-primary" type="submit" onclick="add()">
+                                <i class="fa fa-save"></i> 保存
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+    </fieldset>
+    </form>
+    </div>
+
+
+
+
+
+
+
+    <script src="../../js/constant.js"></script>
+    <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jq.js"></script>
+    <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/my/permission.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+
+
+
+
+
+   <script type="text/javascript">
+       var projectId = getUrlParam("projectId");
+
+       var itemId = projectId;
+
+
+
+       layui.use(['layer', 'laydate','upload'], function (){
+           getTarget(projectId);
+           var layer = layui.layer
+               , upload = layui.upload
+               , laydate = layui.laydate;
+
+           lay('.date').each(function () {
+               laydate.render({
+                   elem: this
+                   , format: 'yyyy-MM-dd'
+                   , trigger: 'click'
+               });
+           });
+       })
+
+           function getTarget(projectId) {
+               $.ajax({
+                   type : 'get',
+                   url : domainName + '/project-item/item/target/my/'+projectId,
+                   async : false,
+                   success : function(data) {
+                       $("#targetId").append('<option value="">- 请选择 -</option>');
+                       var str = '';
+                       $(data).each(function () {
+
+                           str +=  '<option value="'+this.id+'">-'
+                               + this.target + '-</option>';
+                           $("#targetId").append(str);
+                       });
+
+                   }
+               });
+           }
+
+		var layedit, index;
+
+		layui.use(['layedit','upload'], function(){
+		  layedit = layui.layedit;
+		  layedit.set({
+              uploadImage: {
+                  url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
+                  type: 'post'
+              }
+            });
+		  index = layedit.build('demo');
+
+		});
+       $("#btn_return").click(function () {
+           $(location).attr("href", "my_implement.html?id=" + projectId);
+       })
+
+		function add(obj, send) {
+			var title = $("#title").val();
+			var workingDay = $("#workingDay").val();
+		    if(title.trim() == ""){
+		       layer.msg("标题不能为空")
+			   return;
+		    }
+		    if(workingDay.trim() == ""){
+		       layer.msg("工作时间不能为空")
+			   return;
+		    }
+		    $(obj).attr("disabled",true);
+
+		    var formdata = $("#form").serializeObject();
+		    formdata.title = title;
+		    formdata.workingDay = workingDay;
+		    formdata.content = layedit.getContent(index);
+		    formdata.projectId= projectId;
+
+			$.ajax({
+				type : 'post',
+				url : domainName + '/project-record/record',
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(formdata),
+				success : function(data) {
+				    var msg = "成功";
+
+					layer.msg(msg, {shift: -1, time: 1000}, function(){
+						location.href = "my_implement.html?id="+projectId;
+                    });
+				}
+			});
+            $(obj).attr("disabled",false);
+		}
+
+	</script>
+ 
+</body>
+
+
+</html>

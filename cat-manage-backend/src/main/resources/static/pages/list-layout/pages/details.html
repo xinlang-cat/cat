@@ -40,7 +40,7 @@
             <i class="layui-icon layui-icon-add-1"></i>项目人员</a>
     </div>
     <div>
-        <a onclick=" history.back(-1);" class="layui-btn  layui-btn-sm" style="width:100%;">
+        <a class="layui-btn  layui-btn-sm" style="width:100%;" id="return">
             <i class="layui-icon layui-icon-return"></i>返&nbsp;&nbsp;&nbsp;&nbsp;回</a>
     </div>
 </div>
@@ -385,6 +385,7 @@
     $("#addFund").attr("href","addFund.html?id="+id);
     $("#addBudget").attr("href","addBudget.html?id="+id);
     $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
+    $("#return").attr("href","../list.html");
 
     /*基本信息*/
     getBasic(id);
