@@ -206,9 +206,9 @@
                 var str = '';
                 $(data).each(function(){
                     var st1 = this.status==0?"":"none";
-                    var st2 = this.status==2?"":"none";
+                    var st2 = this.status>=2?"":"none";
                     var st3 = "none";
-                    if(this.status==1&&deptCode==this.supervisor_dept){
+                    if(this.status==1&&deptCode==this.supervisor_dept||this.status==3&&deptCode==this.supervisor_dept){
                         st3 = "";
                     }
                     str += '<div class="masonry__item">\n' +
@@ -224,8 +224,8 @@
                         '                        <li style="display: '+st2+';"><a href="../project/report.html?id='+this.id+'">阶段总结</a></li>\n' +
                         '                        <li style="display: '+st2+';"><a href="../item/fundUse/fundUse.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li style="display: '+st2+';"><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
-                        '                        <li style="display: '+st2+';"><a href="#!">结题申请</a></li>\n' +
-                        '                        <li style="display: '+st1+';"><a onclick="submit('+this.id+')">提交</a></li>\n' +
+                        '                        <li style="display: '+st2+';"><a onclick="submit('+this.id+','+this.status+')">结题申请</a></li>\n' +
+                        '                        <li style="display: '+st1+';"><a onclick="submit('+this.id+','+this.status+')">提交</a></li>\n' +
                         '                        <li style="display: '+st3+';"><a onclick="check('+this.id+','+this.status+',1)">通过</a></li>\n' +
                         '                        <li style="display: '+st3+';"><a onclick="check('+this.id+','+this.status+',0)">不通过</a></li>\n' +
                         '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
@@ -238,14 +238,16 @@
             }
         });
     }
-    function submit(id) {
+    function submit(id,status) {
+        if(status==3){layer.msg("申请已提交过了！");return}
+        status++
         layer.confirm('确定要提交吗？', {
             btn: ['确定', '取消']
         }, function () {
             $.ajax({
                 type: 'put',
                 url: domainName + '/project-item/item',
-                data: '{"id":'+id+',"status":1}',
+                data: '{"id":'+id+',"status":'+status+'}',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     window.location.reload();
@@ -262,21 +264,33 @@
         }else {
             status--
         }
-        layer.confirm('确定要提交吗？', {
-            btn: ['确定', '取消']
-        }, function () {
-            $.ajax({
-                type: 'put',
-                url: domainName + '/project-item/item',
-                data: '{"id":'+id+',"status":'+status+'}',
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    window.location.reload();
-                    layer.msg("提交成功！");
-                }
+        if(status!=4){
+            layer.confirm('确定要提交吗？', {
+                btn: ['确定', '取消']
+            }, function () {
+                $.ajax({
+                    type: 'put',
+                    url: domainName + '/project-item/item',
+                    data: '{"id":'+id+',"status":'+status+'}',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        window.location.reload();
+                        layer.msg("提交成功！");
+                    }
+                });
+                layer.close(1);
             });
-            layer.close(1);
-        });
+        }else {
+            layer.open({
+                title:"匹配专家",
+                type: 2,
+                area: ['800px', '400px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['pages/matchExpert.html?id='+id]
+            });
+        }
+
     }
     //获取当前用户的公司代码
     function getCompanryCode() {
