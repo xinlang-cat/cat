@@ -41,10 +41,10 @@ public class ProjectUserItemController {
         return projectUserItem;
     }
 
-    @PostMapping(value = "/item/match/expert",params = {"labelSign","population","itemId"})
+    @PostMapping(value = "/item/match/expert")
     @ApiOperation(value = "匹配专家")
     @LogAnnotation(module = "匹配专家")
-    @PreAuthorize("hasAnyAuthority('project:item:match:expert')")
+    //@PreAuthorize("hasAnyAuthority('project:item:match:expert')")
     public ProjectUserItem matchExpert(String labelSign,Integer population,Integer itemId){
         //找到所有拥有{labelSign}标签的专家
        List<ProjectUserDomain> domains = projectUserDomainService.findByLabelSign(labelSign, ProjectUserType.EXPERT.name());
