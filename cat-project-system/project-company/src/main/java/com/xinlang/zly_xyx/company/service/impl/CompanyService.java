@@ -58,7 +58,7 @@ public class CompanyService implements ICompanyService {
         Example example = new Example(Company.class);
         example.createCriteria().andEqualTo("deptCode",deptCode);
         List<Company> list = companyMapper.selectByExample(example);
-        if(list != null){
+        if(!list.isEmpty()){
             return list.get(0);
         }
         return null;

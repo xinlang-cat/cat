@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<title>注册</title>
+	<link href="css/login.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<div class="login">
+		<div class="message">鑫朗快速开发平台</div>
+		<div id="darkbannerwrap"></div>
+		<form id="login-form" method="post" onsubmit="return false;" >
+			<input id="username" name="username" placeholder="用户名" type="text">
+			<hr class="hr15">
+			<input id="password" name="password" placeholder="密码" type="password">
+			<hr class="hr15">
+			<input id="nickname" name="nickname" placeholder="昵称" type="text">
+			<hr class="hr15">
+			<select class="form-control input-sm" name="sex" id="sex" >
+				<option value="1">男</option>
+				<option value="0">女</option>
+			</select>
+			<hr class="hr15">
+			<button style="width: 100%;" type="submit"
+					onclick="add()">注册</button>
+			<hr class="hr20">
+			<a href="login.html">登陆</a>
+			<span id="info" style="color: red"></span>
+			<input type="hidden" value="BACKEND" name="type"><!-- 后端用户 -->
+		</form>
+	</div>
+	<script src="js/constant.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="layui/layui.js"></script>
+	<script type="text/javascript">
+		layui.use('layer', function(){
+			var layer = layui.layer;
+		});
+		function add() {
+			var formdata = $("#login-form").serializeObject();
+			$.ajax({
+				type : 'post',
+				url : domainName + '/api-u/users-anon/register',
+				timeout : 5000, //超时时间设置，单位毫秒
+				contentType: "application/json; charset=utf-8",
+				data :  JSON.stringify(formdata),
+				success : function(data) {
+					layer.msg("成功", {shift: -1, time: 1000}, function(){
+						location.href = "login.html";
+					});
+				}
+			});
+		}
+	</script>
+</body>
+</html>
