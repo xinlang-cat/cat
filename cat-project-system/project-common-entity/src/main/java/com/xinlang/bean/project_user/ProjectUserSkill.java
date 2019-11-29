@@ -23,7 +23,7 @@ public class ProjectUserSkill implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer userId;
-    private Integer userType;
+    private String userType;
     private String labelSign;//技术专长标签代码
     private Date createTime;
     private Date updateTime;
