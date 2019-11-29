@@ -16,9 +16,20 @@ function getBasic(id) {
                 '                        <td>\n' +
                 '                            <p id="contract_number">' + data.contract_number + '</p>\n' +
                 '                        </td>\n' +
+                '                        </td>\n' +
+                '                        <td style="font-weight: 600;">合同文件</td>\n' +
+                '                        <td>\n' +
+                '                            <a id="contract_file" href="">' + data.contract_file + '</a>\n' +
+                '                        </td>\n' +
+                '                    </tr>\n' +
+                '                    <tr>\n' +
                 '                        <td style="font-weight: 600;">计划类别</td>\n' +
                 '                        <td>\n' +
                 '                            <p id="plan_category">' + data.plan_category + '</p>\n' +
+                '                        </td>\n' +
+                '                        <td style="font-weight: 600;">计划批次</td>\n' +
+                '                        <td>\n' +
+                '                            <p id="batch">' + data.batch + '</p>\n' +
                 '                        </td>\n' +
                 '                    </tr>\n' +
                 '                    <tr>\n' +
@@ -26,9 +37,9 @@ function getBasic(id) {
                 '                        <td>\n' +
                 '                            <p id="item_name">' + data.item_name + '</p>\n' +
                 '                        </td>\n' +
-                '                        <td style="font-weight: 600;">计划批次</td>\n' +
+                '                        <td style="font-weight: 600;">项目类型</td>\n' +
                 '                        <td>\n' +
-                '                            <p id="batch">' + data.batch + '</p>\n' +
+                '                            <p id="type">' + data.type + '</p>\n' +
                 '                        </td>\n' +
                 '                    </tr>\n' +
                 '                    <tr>\n' +
@@ -52,16 +63,6 @@ function getBasic(id) {
                 '                        </td>\n' +
                 '                    </tr>\n' +
                 '                    <tr>\n' +
-                '                        <td style="font-weight: 600;">实施地点</td>\n' +
-                '                        <td>\n' +
-                '                            <p id="district">' + data.district + '</p>\n' +
-                '                        </td>\n' +
-                '                        <td style="font-weight: 600;">合同文件</td>\n' +
-                '                        <td>\n' +
-                '                            <a id="contract_file" href="">' + data.contract_file + '</a>\n' +
-                '                        </td>\n' +
-                '                    </tr>\n' +
-                '                    <tr>\n' +
                 '                        <td style="font-weight: 600;">开始时间</td>\n' +
                 '                        <td>\n' +
                 '                            <p id="start_dateStr">' + data.start_dateStr + '</p>\n' +
@@ -72,12 +73,18 @@ function getBasic(id) {
                 '                        </td>\n' +
                 '                    </tr>\n' +
                 '                    <tr>\n' +
+                '                        <td style="font-weight: 600;">实施地点</td>\n' +
+                '                        <td colspan="3">\n' +
+                '                            <p id="district">' + data.district + '</p>\n' +
+                '                        </td>\n' +
+                '                    </tr>\n' +
+                '                    <tr>\n' +
                 '                        <td style="font-weight: 600;">总体目标</td>\n' +
                 '                        <td colspan="3">\n' +
                 '                            <p id="overall_objective">' + data.overall_objective + '</p>\n' +
                 '                            <div class="operation">\n' +
                 '                                <div class="layui-btn-group">\n' +
-                '                                    <a href="updateBasic.html?id=' + id + '" class="layui-btn layui-btn-sm">\n' +
+                '                                    <a href="../../item/updateItem.html?id=' + id + '" class="layui-btn layui-btn-sm">\n' +
                 '                                        <i class="layui-icon">&#xe642;</i>\n' +
                 '                                    </a>\n' +
                 '                                    <a href="#?id=' + id + '" class="layui-btn layui-btn-disabled layui-btn-sm">\n' +
@@ -89,26 +96,58 @@ function getBasic(id) {
                 '                    </tr>\n' +
                 '                </tbody>';
             $("#basis").append(str);
-            planCategory(data.plan_category);
+            analysisLabel(data.plan_category);
+            $("#plan_category").text(name);
+            analysisLabel(data.type);
+            $("#type").text(name);
+            analysisCompany(data.consignor);
+            $("#consignor").text(company);
+            analysisCompany(data.undertaker);
+            $("#undertaker").text(company);
+            analysisCompany(data.supervisor_dept);
+            $("#supervisor_dept").text(company);
+            supervisor(data.supervisor);
             district(data.district);
             contractFile(data.contract_file);
         }
     });
 }
 
-/*解析计划类别*/
-function planCategory(sign) {
+/*解析计划类别、项目类型、等*/
+var name = '';
+function analysisLabel(sign) {
     $.ajax({
         type: 'get',
         url: domainName + '/api-label/label/tree/' + sign,
         async: false,
         success: function (data) {
-            var name = data[0].content;
-            $("#plan_category").text(name);
+            name = data[0].content;
         }
     });
 }
-
+/*解析机构*/
+var company = '';
+function analysisCompany(code) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-c/company/' + code,
+        async: false,
+        success: function (data) {
+            company = data.signName;
+        }
+    });
+}
+/*解析监理*/
+function supervisor(userId){
+    $.ajax({
+        type : 'get',
+        url : domainName + '/api-c/user/'+userId,
+        async : false,
+        success : function(data) {
+            $("#supervisor").text(data.name);
+        }
+    });
+}
 /*解析地点*/
 function district(code) {
     $.ajax({
