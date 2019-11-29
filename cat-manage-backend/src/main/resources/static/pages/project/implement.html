@@ -19,6 +19,7 @@
 
 <div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form">
+        <input type="hidden" name="ids" id="ids" value="">
 
         <fieldset>
             <div class="form-group">
@@ -33,8 +34,8 @@
 
             <div class="form-group">
 
-                <input type="hidden" name="projectId" id="projectId" value="projectId">
-                <input type="hidden" name="id" id="id" value="id">
+                <input type="hidden" name="projectId" id="projectId" value="">
+                <input type="hidden" name="id" id="id" value="">
                 <input type="hidden" name="return" id="return" value="return">
                 <label class="col-md-3 control-label">标题</label>
                 <div class="col-md-7">
@@ -52,7 +53,7 @@
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group" id="neron">
                 <label class="col-md-3 control-label">内容</label>
                 <div class="col-md-7">
                         <textarea class="layui-textarea" id="demo" style="display: none">
@@ -69,10 +70,10 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add()" id="add">
+                        <button class="btn btn-primary" type="submit" onclick="updata_report()" id="add">
                             <i class="fa fa-save"></i> 保存
                         </button>
-                        <button class="btn btn-primary" type="submit" onclick="post()" id="post">
+                        <button class="btn btn-primary" type="submit" onclick="toCheck()" id="post">
                             <i class="fa fa-save"></i> 提交
                         </button>
                     </div>
@@ -95,6 +96,7 @@
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
@@ -115,8 +117,9 @@
 
 
     layui.use(['layer', 'laydate','upload'], function (){
-        getTarget(projectId);
         getRecord(id);
+        getTarget(projectId);
+
         var layer = layui.layer
             , upload = layui.upload
             , laydate = layui.laydate;
@@ -131,6 +134,8 @@
     })
 
     function getTarget(projectId) {
+        var targetId = $("#ids").val();
+        alert(targetId);
 
         $.ajax({
             type : 'get',
@@ -140,12 +145,54 @@
                 $("#targetId").append('<option value="">- 请选择 -</option>');
                 var str = '';
                 $(data).each(function () {
+                    if (this.id == targetId){
+                        str +=  '<option value="'+this.id+'" selected="selected">-'
+                            + this.target + '-</option>';
+                    }else {
+                        str +=  '<option value="'+this.id+'">-'
+                            + this.target + '-</option>';
+                    }
 
-                    str +=  '<option value="'+this.id+'">-'
-                        + this.target + '-</option>';
                     $("#targetId").append(str);
                 });
 
+            }
+        });
+    }
+    function toCheck() {
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-record/record/submit/'+id,
+            contentType: "application/json; charset=utf-8",
+            async:false,
+            success: function (res) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.reload();
+                });
+
+
+                /* $(location).attr("href", "submit.html?id=" + projectId);*/
+            }
+        })
+    }
+    function updata_report() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        formdata.content = layedit.getContent(index);
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-record/record/',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "submit.html?id=" + projectId;
+                });
             }
         });
     }
@@ -157,6 +204,8 @@
             async:false,
             success: function (res) {
                 $("#targetId").val(res.targetId);
+                $("#ids").val(res.targetId);
+
                 $("#id").val(res.id);
 
                 $("#title").val(res.title);
@@ -172,15 +221,6 @@
                     $("#post").css("display","none");
                 }
 
-
-
-                /*subject_id=res.budget_id;
-                itemId=res.item_id;
-                var str = '';
-                $(res.bill_url).each(function (index) {
-                    $('#demo2').append('<div><button  onclick="deleteImg('+index+',this);" style="position: absolute;" type="button" class="layui-btn layui-btn-primary">删除</button>  <img  style="width: 250px;margin-left: 10px;height: 150px;" src="' + this + '" alt="' + file.name + '" class="layui-upload-img"></img></div>');
-                    urls.push(this);
-                })*/
             }
         })
     }
@@ -210,40 +250,7 @@
         }
     })
 
-    function add(obj, send) {
-        var title = $("#title").val();
-        var workingDay = $("#workingDay").val();
-        if(title.trim() == ""){
-            layer.msg("标题不能为空")
-            return;
-        }
-        if(workingDay.trim() == ""){
-            layer.msg("工作时间不能为空")
-            return;
-        }
-        $(obj).attr("disabled",true);
 
-        var formdata = $("#form").serializeObject();
-        formdata.title = title;
-        formdata.workingDay = workingDay;
-        formdata.content = layedit.getContent(index);
-        formdata.projectId= projectId;
-
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-record/record',
-            contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(formdata),
-            success : function(data) {
-                var msg = "成功";
-
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    location.href = "my_implement.html?id="+projectId;
-                });
-            }
-        });
-        $(obj).attr("disabled",false);
-    }
 
 </script>
 

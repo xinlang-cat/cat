@@ -78,7 +78,7 @@
                     str +=  ' <li class="green">\n' +
                         '                    <h3>'+this.time+'<span>'+this.createUser+'</span></h3>\n' +
                         '                    <dl>\n' +
-                        '                        <dt><a href="implement.html?id='+this.id+'&&projectId='+this.projectId+'&&return=2">'+this.title+'</a><span>'+this.state+'</span></dt>\n' +
+                        '                        <dt><a href="checking.html?id='+this.id+'&&projectId='+this.projectId+'&&return=2">'+this.title+'</a><span>'+this.state+'</span></dt>\n' +
                         '                    </dl>\n' +
                         '                </li>';
 
@@ -106,6 +106,9 @@
 
     function add() {
         $(location).attr("href", "add_implementLog.html?projectId=" + projectId);
+    }
+    function back() {
+        $(location).attr("href", "../../list-layout.list.html" );
     }
 
     function systole(){
@@ -145,7 +148,7 @@
     <div class="form-actions">
         <div class="row" align="left">
             <div class="col-md-12">
-                <button class="btn btn-primary" id="btn_return">返回</button>
+                <a href="../list-layout/list.html" class="btn btn-primary">返回</a>
                 <button class="btn btn-primary" type="submit" onclick="add()">
                     <i class="fa fa-save"></i> 添加
                 </button>

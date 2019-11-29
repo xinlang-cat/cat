@@ -164,7 +164,9 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
 
 
 <script>
-
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
     var proId = getUrlParam("id");
     var money=0;
     var urls=[];
@@ -190,7 +192,7 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
                             + '<th  style="text-align: center;"><a href="implement.html?id='+this.id+'&&projectId='+this.projectId+'&&return=1">详情</a></th>'
                             + '<th style="text-align: center;">'
                             + ' <button  onclick="post(' + this.id + ')" type="button" class="layui-btn layui-btn-primary layui-btn-xs">提交</button>'
-                            + ' <button  onclick="submit(' + this.id + ')" type="button" class="layui-btn layui-btn-primary layui-btn-xs">删除</button>'
+                            + ' <button  onclick="del (' + this.id + ')" type="button" class="layui-btn layui-btn-primary layui-btn-xs">删除</button>'
                             + '</th>'
                             + '</tr>';
                     }
@@ -231,6 +233,7 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
                 $("#content2").append(str1);
                 $("#content3").append(str2);
                 $("#content4").append(str3);
+                $("#no_sub").click();
             }
         })
     })
@@ -243,8 +246,28 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
             contentType: "application/json; charset=utf-8",
             async:false,
             success: function (res) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.reload();
+                });
 
-                $(location).attr("href", "my_implement.html?id=" + projectId);
+
+               /* $(location).attr("href", "submit.html?id=" + projectId);*/
+            }
+        })
+    }
+    function del(id){
+        $.ajax({
+            type: 'delete',
+            url: domainName + '/project-record/record/'+id,
+            contentType: "application/json; charset=utf-8",
+            async:false,
+            success: function (res) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.reload();
+                });
+
+
+                /*$(location).attr("href", "submit.html?id=" + projectId);*/
             }
         })
     }
@@ -268,7 +291,10 @@ layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offs
     })
 
     function submit(id) {
-        $(location).attr("href", "implement.html?id=" + id+"&&projectId="+proId);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            $(location).attr("href", "implement.html?id=" + id+"&&projectId="+proId);
+        });
+
     }
     $("#no_pass").click(function () {
         $("#zijin").css("display","none");

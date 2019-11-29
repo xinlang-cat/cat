@@ -56,8 +56,8 @@ zuul:
       path: /project-report/**
       serviceId: project-report
     summary:
-      path: /project-summary/**
-      serviceId: api-summary
+      path: /api-summary/**
+      serviceId: project-summary
   host:
     connect-timeout-millis: 10000
     socket-timeout-millis: 60000
