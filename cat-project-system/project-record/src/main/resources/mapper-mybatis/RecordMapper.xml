@@ -20,29 +20,29 @@
 
 	<resultMap id="ResultMapTwo" type="com.xinlang.yx.project_record.bean.RecordResult">
 		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="projectId" jdbcType="INTEGER" property="project_id" />
-		<result column="targetId" jdbcType="INTEGER" property="target_id" />
+		<result column="project_id" jdbcType="INTEGER" property="projectId" />
+		<result column="target_id" jdbcType="INTEGER" property="targetId" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="content" jdbcType="VARCHAR" property="content" />
-		<result column="createTime" jdbcType="TIMESTAMP" property="create_time" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="remark" jdbcType="VARCHAR" property="remark" />
-		<result column="createUser" jdbcType="VARCHAR" property="createUser" />
-		<result column="checkUser" jdbcType="VARCHAR" property="checkUser" />
-		<result column="workingDay" jdbcType="TIMESTAMP" property="working_day" />
-		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
+		<result column="create_user" jdbcType="VARCHAR" property="createUser" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="working_day" jdbcType="TIMESTAMP" property="workingDay" />
+		<result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
 		<result column="status" jdbcType="INTEGER" property="status" />
 	</resultMap>
 
 	<resultMap id="VOResultMap" type="com.xinlang.yx.project_record.VO.RecordVO">
 		<id column="id" jdbcType="INTEGER" property="id" />
-		<result column="projectId" jdbcType="INTEGER" property="project_id" />
-		<result column="targetId" jdbcType="INTEGER" property="target_id" />
+		<result column="project_id" jdbcType="INTEGER" property="projectId" />
+		<result column="target_id" jdbcType="INTEGER" property="targetId" />
 		<result column="title" jdbcType="VARCHAR" property="title" />
 		<result column="content" jdbcType="VARCHAR" property="content" />
-		<result column="createTime" jdbcType="TIMESTAMP" property="create_time" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
 		<result column="remark" jdbcType="VARCHAR" property="remark" />
-		<result column="workingDay" jdbcType="TIMESTAMP" property="working_day" />
-		<result column="createUserId" jdbcType="INTEGER" property="create_user_id" />
+		<result column="working_day" jdbcType="DATE" property="workingDay" />
+		<result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
 		<result column="status" jdbcType="INTEGER" property="status" />
 
 		<collection property="files" ofType="com.xinlang.zly_xyx.cat_file_server.bean.Album">
@@ -85,7 +85,7 @@
 			album as f
 		on
 			m.journal_file_id = f.id
-		and
+		WHERE
 			j.id=${id}
 
 	</select>
@@ -137,15 +137,15 @@
 
 	<select id="find" resultMap="ResultMapTwo">
 	select
-		p.*,a.username
+		p.*,a.username as createUser
 		from
 		project_journal as p
 		LEFT JOIN
 		app_user
 		AS a on
 		a.id = p.create_user_id
-			and
-		p.project_id = ${proId};
+			where
+		p.project_id = ${proId}
 		<if test="0!=status">
 			AND
 			p.`status` = ${status}
@@ -155,12 +155,18 @@
 			p.create_user_id = ${userId}
 		</if>
 
+	</select>
 
-
+	<select id="getName" resultType="String">
+		select
+		username
+		from
+		app_user
+		where
+		id = ${createUserId}
 
 
 	</select>
-
 
 
 </mapper>

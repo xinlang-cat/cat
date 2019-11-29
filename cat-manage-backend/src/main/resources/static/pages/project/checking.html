@@ -69,11 +69,11 @@
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add()" id="add">
-                            <i class="fa fa-save"></i> 保存
+                        <button class="btn btn-primary" type="submit" onclick="pass()" id="add">
+                            <i class="fa fa-save"></i> 通过
                         </button>
-                        <button class="btn btn-primary" type="submit" onclick="post()" id="post">
-                            <i class="fa fa-save"></i> 提交
+                        <button class="btn btn-primary" type="submit" onclick="fail()" id="post">
+                            <i class="fa fa-save"></i> 不通过
                         </button>
                     </div>
                 </div>
@@ -115,6 +115,9 @@
 
 
     layui.use(['layer', 'laydate','upload'], function (){
+        $("input").attr("disabled",true);
+        $("select").attr("disabled",true);
+        $("textarea").attr("disabled",true);
         getTarget(projectId);
         getRecord(id);
         var layer = layui.layer
@@ -164,23 +167,14 @@
                 $("#demo").val(res.content);
 
                 $("#workingDay").val(res.time);
-                if (res.status===2||res.status===3){
-                    $("input").attr("disabled",true);
-                    $("select").attr("disabled",true);
-                    $("textarea").attr("disabled",true);
+                var str = '';
+
+                if (res.status!=2){
+
                     $("#add").css("display","none");
                     $("#post").css("display","none");
                 }
 
-
-
-                /*subject_id=res.budget_id;
-                itemId=res.item_id;
-                var str = '';
-                $(res.bill_url).each(function (index) {
-                    $('#demo2').append('<div><button  onclick="deleteImg('+index+',this);" style="position: absolute;" type="button" class="layui-btn layui-btn-primary">删除</button>  <img  style="width: 250px;margin-left: 10px;height: 150px;" src="' + this + '" alt="' + file.name + '" class="layui-upload-img"></img></div>');
-                    urls.push(this);
-                })*/
             }
         })
     }
@@ -202,47 +196,33 @@
     });
 
     $("#btn_return").click(function () {
-        if (jump==2){
-            $(location).attr("href", "my_implement.html?id=" + projectId);
-        }else {
-
-            $(location).attr("href", "submit.html?id=" + projectId);
-        }
+        $(location).attr("href", "check.html?id=" + projectId);
     })
 
-    function add(obj, send) {
-        var title = $("#title").val();
-        var workingDay = $("#workingDay").val();
-        if(title.trim() == ""){
-            layer.msg("标题不能为空")
-            return;
-        }
-        if(workingDay.trim() == ""){
-            layer.msg("工作时间不能为空")
-            return;
-        }
-        $(obj).attr("disabled",true);
-
-        var formdata = $("#form").serializeObject();
-        formdata.title = title;
-        formdata.workingDay = workingDay;
-        formdata.content = layedit.getContent(index);
-        formdata.projectId= projectId;
-
+    function pass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-record/record',
+            type: 'put',
+            url: domainName + '/project-record/record/checkPass/'+id,
             contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(formdata),
-            success : function(data) {
-                var msg = "成功";
+            async:false,
+            success: function (res) {
 
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    location.href = "my_implement.html?id="+projectId;
-                });
+                $(location).attr("href", "check.html?id=" + projectId);
             }
-        });
-        $(obj).attr("disabled",false);
+        })
+    }
+
+    function fail() {
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-record/record/checkFail/'+id,
+            contentType: "application/json; charset=utf-8",
+            async:false,
+            success: function (res) {
+
+                $(location).attr("href", "check.html?id=" + projectId);
+            }
+        })
     }
 
 </script>

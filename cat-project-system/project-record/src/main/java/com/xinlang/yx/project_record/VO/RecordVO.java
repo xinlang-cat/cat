@@ -21,6 +21,11 @@ public class RecordVO {
      */
     private Integer targetId;
     /**
+     * 项目id
+     */
+    private Integer projectId
+            ;
+    /**
      * 日志标题
      */
     private String title;
@@ -44,6 +49,7 @@ public class RecordVO {
      * 实施时间
      */
     private Date workingDay;
+    private String time;
     /**
      * 审核人
      */

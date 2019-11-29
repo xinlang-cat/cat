@@ -8,6 +8,7 @@ import com.xinlang.yx.project_record.mapper.RecordMapper;
 import com.xinlang.yx.project_record.service.IRecordService;
 import com.xinlang.yx.project_record.utils.constant;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
+import com.xinlang.zly_xyx.cat_common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,8 +81,10 @@ public class RecordService implements IRecordService {
 
     @Override
     public RecordVO findVOById(Integer id) {
-
-        return recordMapper.findVO(id);
+        RecordVO vo=recordMapper.findVO(id);
+        System.out.println("vo="+vo);
+        vo.setTime(DateUtils.dateToString(vo.getWorkingDay(), "yyyy-MM-dd"));
+        return vo;
     }
 
     @Override
@@ -126,6 +129,7 @@ public class RecordService implements IRecordService {
         if(weatherUser==1){
             userId = AppUserUtil.getLoginAppUser().getId();
         }
+
         List<RecordResult> result = recordMapper.find(proId,status,userId);
 
         return result;
@@ -136,6 +140,37 @@ public class RecordService implements IRecordService {
         int status =constant.ConstantStatus.CHECK_PASS;
         Long userId=  AppUserUtil.getLoginAppUser().getId();
         List<RecordResult> result = recordMapper.find(proId,status,userId);
+        for (RecordResult results : result){
+            results.setTime(DateUtils.dateToString(results.getCreateTime(), "yyyy年MM月dd日"));
+            results.setState(results.getStatus()==1?"未提交":results.getStatus()==2?"待审核":results.getStatus()==3?"审核通过":"审核未通过");
+            results.setCreateUser(recordMapper.getName(results.getCreateUserId()));
+        }
+        return result;
+    }
+
+    @Override
+    public List<RecordResult> findAll(Integer proId) {
+        int status =0;
+        Long userId=  AppUserUtil.getLoginAppUser().getId();
+        List<RecordResult> result = recordMapper.find(proId,status,userId);
+        for (RecordResult results : result){
+            results.setTime(DateUtils.dateToString(results.getCreateTime(), "yyyy年MM月dd日"));
+            results.setState(results.getStatus()==1?"未提交":results.getStatus()==2?"待审核":results.getStatus()==3?"审核通过":"审核未通过");
+
+        }
+        return result;
+    }
+
+    @Override
+    public List<RecordResult> findCheck(Integer proId) {
+        int status =0;
+        Long userId= null;
+        List<RecordResult> result = recordMapper.find(proId,status,userId);
+        for (RecordResult results : result){
+            results.setTime(DateUtils.dateToString(results.getCreateTime(), "yyyy年MM月dd日"));
+            results.setState(results.getStatus()==1?"未提交":results.getStatus()==2?"待审核":results.getStatus()==3?"审核通过":"审核未通过");
+            results.setCreateUser(recordMapper.getName(results.getCreateUserId()));
+        }
         return result;
     }
 

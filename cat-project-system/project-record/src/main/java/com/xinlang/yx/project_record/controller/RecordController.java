@@ -31,6 +31,7 @@ public class RecordController {
         return Record;
     }
 
+
     @LogAnnotation(module = "实施日志添加图片")
     @PostMapping("/record/addFile")
     public void addFile(@PathVariable List<Integer> fileIds,Integer id){
@@ -68,15 +69,16 @@ public class RecordController {
 
     @LogAnnotation(module = "获取未提交的实施日志")
     @GetMapping("/getUnSubJournal/{targetId}")
-    public List<Record> findByTarIdAUIDASTU(@PathVariable Integer targetId){
-
-        return recordService.findByTarIdAUIDASTU(targetId,constant.ConstantStatus.UN_SUBMIT);
+    public List<RecordResult> findByTarIdAUIDASTU(@PathVariable Integer targetId){
+        List<RecordResult> results = recordService.find(targetId,constant.ConstantStatus.UN_SUBMIT,1);
+        return results;
     }
 
 
     @LogAnnotation(module = "提交实施日志")
     @PutMapping("/record/submit/{id}")
     public void submit(@PathVariable Integer id){
+        System.out.println("提交了");
          recordService.check(id,constant.ConstantStatus.CHECK_IN);
 
     }
@@ -89,16 +91,20 @@ public class RecordController {
     }
 
     @LogAnnotation(module = "审核通过")
-    @PostMapping("/record/checkPass")
-    public Record checkPass(@RequestBody Record Record){
+    @PutMapping("/record/checkPass/{id}")
+    public Record checkPass(@PathVariable Integer id){
+        Record Record = new Record();
+        Record.setTargetId(id);
         Record.setStatus(constant.ConstantStatus.CHECK_PASS);
         recordService.update(Record);
         return Record;
     }
 
     @LogAnnotation(module = "审核不通过")
-    @PostMapping("/record/checkFail")
-    public Record checkFail(@RequestBody Record Record){
+    @PutMapping("/record/checkFail/{id}")
+    public Record checkFail(@PathVariable Integer id){
+        Record Record = new Record();
+        Record.setTargetId(id);
         Record.setStatus(constant.ConstantStatus.CHECK_fail);
         recordService.update(Record);
         return Record;
@@ -134,14 +140,16 @@ public class RecordController {
 
     @LogAnnotation(module = "获取所有的实施日志")
     @GetMapping("/record")
-    public List<RecordResult> find(@RequestParam Map<String, Object> params){
+    public  ResponseEntity<List<RecordResult>> find(@RequestParam Map<String, Object> params){
 
 
         Integer status = Integer.valueOf ((String) params.get("status"));
         Integer proId = Integer.valueOf ((String) params.get("proId"));
         Integer weatherUser = Integer.valueOf ((String) params.get("type"));
+        System.out.println(proId+","+status+","+weatherUser);
+        List<RecordResult> results = recordService.find(proId,status,weatherUser);
 
-        return recordService.find(proId,status,weatherUser);//所有的
+        return ResponseEntity.ok(results);//所有的
 
     }
 
@@ -149,8 +157,29 @@ public class RecordController {
     @GetMapping("/record/findPass/{proId}")
 
     public List<RecordResult> findPass(@PathVariable Integer proId){
+        List<RecordResult> results =recordService.findPass(proId);
 
-        return recordService.findPass(proId);//所有的
+        return results;//所有的
+
+    }
+
+    @LogAnnotation(module = "获取我的所有的实施日志")
+    @GetMapping("/record/findAll/{proId}")
+
+    public List<RecordResult> findAll(@PathVariable Integer proId){
+        List<RecordResult> results =recordService.findAll(proId);
+
+        return results;//所有的
+
+    }
+
+    @LogAnnotation(module = "获取我的所有的实施日志")
+    @GetMapping("/record/findCheck/{proId}")
+
+    public List<RecordResult> findCheck(@PathVariable Integer proId){
+        List<RecordResult> results =recordService.findCheck(proId);
+
+        return results;//所有的
 
     }
 

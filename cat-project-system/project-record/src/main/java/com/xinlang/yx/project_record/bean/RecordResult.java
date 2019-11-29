@@ -21,6 +21,10 @@ public class RecordResult {
      */
     private Integer projectId;
     /**
+     * 项目id
+     */
+    private String username;
+    /**
      * 日志标题
      */
     private String title;
@@ -60,4 +64,8 @@ public class RecordResult {
      * 备注
      */
     private String remark;
+
+    private String time;
+
+    private String state;
 }

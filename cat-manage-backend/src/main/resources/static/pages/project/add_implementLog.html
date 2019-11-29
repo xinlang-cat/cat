@@ -22,11 +22,18 @@
 
             <fieldset>
                 <div class="form-group">
-                    <select class="form-control input-sm" id="targetId">
-                        <option value=""></option>
+                    <label class="col-md-3 control-label">所属指标</label>
+                    <div class="col-md-7">
+                        <select class="form-control input-sm" lay-skin="primary" id="targetId" name="targetId">
+                           <!-- <option value="">- 请选择 -</option>-->
+                        </select>
 
-                    </select>
-                    <input type="hidden" name="projectId" value="" id="projectId">
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <input type="hidden" name="projectId" id="projectId" value="projectId">
                     <label class="col-md-3 control-label">标题</label>
                     <div class="col-md-7">
                         <input class="form-control" placeholder="标题" type="text" name="title"
@@ -63,6 +70,7 @@
                             <button class="btn btn-primary" type="submit" onclick="add()">
                                 <i class="fa fa-save"></i> 保存
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -83,23 +91,25 @@
     <script src="../../js/constant.js"></script>
     <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../js/jq.js"></script>
-    <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript" src="../../layui/layui.js"></script>
-
+    <script type="text/javascript" src="../../js/my/permission.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+
 
 
 
 
    <script type="text/javascript">
-       var projectId = getUrlParam("proId");
-       var itemId = getUrlParam("proId");
+       var projectId = getUrlParam("projectId");
+
+       var itemId = projectId;
 
 
 
        layui.use(['layer', 'laydate','upload'], function (){
-           getTarget(itemId);
+           getTarget(projectId);
            var layer = layui.layer
                , upload = layui.upload
                , laydate = layui.laydate;
@@ -113,18 +123,18 @@
            });
        })
 
-           function getTarget(itemId) {
-               alert(itemId);
+           function getTarget(projectId) {
                $.ajax({
                    type : 'get',
-                   url : domainName + '/project-item/item/target/my/'+itemId,
+                   url : domainName + '/project-item/item/target/my/'+projectId,
                    async : false,
                    success : function(data) {
+                       $("#targetId").append('<option value="">- 请选择 -</option>');
                        var str = '';
                        $(data).each(function () {
 
-                           str =  '<option value="'+this.id+'">'
-                               + this.target + '</option>';
+                           str +=  '<option value="'+this.id+'">-'
+                               + this.target + '-</option>';
                            $("#targetId").append(str);
                        });
 
@@ -145,6 +155,9 @@
 		  index = layedit.build('demo');
 
 		});
+       $("#btn_return").click(function () {
+           $(location).attr("href", "my_implement.html?id=" + projectId);
+       })
 
 		function add(obj, send) {
 			var title = $("#title").val();
@@ -160,10 +173,10 @@
 		    $(obj).attr("disabled",true);
 
 		    var formdata = $("#form").serializeObject();
-		    /*formdata.title = title;
+		    formdata.title = title;
 		    formdata.workingDay = workingDay;
 		    formdata.content = layedit.getContent(index);
-		    formdata.projectId= projectId;*/
+		    formdata.projectId= projectId;
 
 			$.ajax({
 				type : 'post',
@@ -172,11 +185,9 @@
 				data : JSON.stringify(formdata),
 				success : function(data) {
 				    var msg = "成功";
-				    if(send) {
-				        msg = "异步发送邮件，请在列表中查看结果";
-					}
+
 					layer.msg(msg, {shift: -1, time: 1000}, function(){
-						location.href = "mailList.html";
+						location.href = "my_implement.html?id="+projectId;
                     });
 				}
 			});

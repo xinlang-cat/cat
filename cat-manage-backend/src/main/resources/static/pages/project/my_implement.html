@@ -1,231 +1,223 @@
-<!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+
+    <title>jQuery animate滑动收缩展开时间轴大事记发展历程</title>
+
+
+    <style>
+        *{margin:0;padding:0;list-style-type:none;}
+        a,img{border:0;}
+        body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+
+        .demo{width:960px;margin:60px auto 0 auto;}
+        /*history*/
+        .history{background:url(images/line04.gif) repeat-y 187px 0;overflow:hidden;position:relative;}
+        .history-date{overflow:hidden;position:relative;}
+        .history-date h2{background:#fff url(images/icon06.gif) no-repeat 158px 0;height:59px;font-size:25px;font-family:微软雅黑;font-weight:normal;padding-left:45px;margin-bottom:74px; }
+        .history-date h2.first{position:absolute;left:0;top:0;width:935px;z-index:99;}
+        .history-date h2 a{color:black;display:inline-block;*display:inline;zoom:1;background:url(images/icon08.gif) no-repeat right 50%;padding-right:17px;margin:21px 97px 0 0;}
+        .history-date h2 a:hover{text-decoration:none;}
+        .history-date h2 img{vertical-align:-5px;}
+        .history-date h2.date02{background:none;}
+        .history-date ul li{background:url(images/icon07.gif) no-repeat 180px 0;padding-bottom:50px;zoom:1;}
+        .history-date ul li.last{padding-bottom:0;}
+        .history-date ul li:after{content:" ";display:block;height:0;clear:both;visibility:hidden;}
+        .history-date ul li h3{float:left;width:168px;text-align:right;padding-right:19px;color:#c3c3c3;font:normal 18px/16px Arial;}
+        .history-date ul li h3 span{display:block;color:#d0d0d0;font-size:12px;}
+        .history-date ul li dl{float:left;padding-left:41px;margin-top:-5px;font-family:微软雅黑;}
+        .history-date ul li dl dt{font:20px/22px 微软雅黑;color:#737373;}
+        .history-date ul li dl dt span{display:block;color:#787878;font-size:12px;}
+        .history-date ul li.green h3{color:#1db702;}
+        .history-date ul li.green h3 span{color:#a8dda3;}
+        .history-date ul li.green dl{margin-top:-8px;}
+        .history-date ul li.green dl dt{font-size:30px;line-height:28px;}
+        .history-date ul li.green dl dt a{display:inline-block;*display:inline;zoom:1;overflow:hidden;vertical-align:middle;margin-left:12px;}
+        .history-date ul li.green dl dd{padding-top:20px;display:none;}
+        .history-date ul li.green dl dd img{float:left;}
+        .history-date ul li.green dl dd p{overflow:hidden;zoom:1;line-height:21px;color:#787878;}
+        .history-date h2.first .more-history{font-size:16px;background:transparent;margin-left:30px;}
+        .history-date h2.first .more-history:hover{text-decoration:underline;}
+        *body .history-date ul li dl dt{_font-size:12px!important;_font-weight:bold;}
+        *body .history-date ul li dl dt span{_font-weight:normal!important;}
+        *body .history-date ul li.green dl dt a{_background:transparent!important;*background:transparent!important;*font-size:12px!important;_font-weight:normal!important;}
+
+    </style>
 </head>
 <body>
-<div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <header style="height: 100%">
-            <div align="left">
-                <table style="width: 100%">
-                    <tr>
-                        <td>
-                            <form class="form-inline" onsubmit="return false">
-                                <div class="form-group">
-                                    状态：
-                                    <select class="form-control input-sm" id="status">
-                                        <option value=0>全部</option>
-                                        <option value=1>未提交</option>
-                                        <option value=2>待审核</option>
-                                        <option value=3>审核通过</option>
-                                        <option value=4>审核未通过</option>
-                                    </select>
-                                    类型：
-                                    <select class="form-control input-sm" id="type">
-                                        <option value=0>全部</option>
-                                        <option value=1>我的文档</option>
-                                    </select>
-                                    <input type="hidden" name="id" id="id" value="id">
-
-
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                </div>
-                            </form>
-                        </td>
-                        <td align="right">
-                            <button style="width: 30px;height: 20px;float: right;margin-top: 30px;margin-right: 4%;"
-                                    class="layui-btn layui-btn-sm" id="add_report">
-                                <p style="line-height: 20px;margin-left: -3px;"> <i class="layui-icon">&#xe608;</i></p>
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </header>
-
-        <div>
-            <div class="widget-body no-padding">
-                <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
-                    <thead>
-                    <tr>
-                    </tr>
-                    <tr>
-                        <th>提交人</th>
-                        <th>标题</th>
-                        <th>提交时间</th>
-
-                        <th>状态</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-
-
 <script src="../../js/constant.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
-    var proId = getUrlParam("id");
+    var projectId = getUrlParam("id");
 
-    var pers = checkPermission();
-    var example;
+    $(function(){
+        systole();
 
-    $("#add_report").click(function () {
-        $(location).attr("href", "add_implementLog.html?id=" + proId);
-    })
+        getRecord();
 
-    layui.use(['layer','util'], function(){
-        var layer = layui.layer;
-        var util = layui.util;
-
-
-        function init(){
-            example =
-                $('#dt-table').DataTable({
-                    "searching": false,
-                    "processing": false,
-                    "serverSide" : true,
-                    "ordering" :false,
-                    "language": {
-                        "url": "../../js/plugin/datatables/Chinese.lang"
-                    },
-                    "ajax": {
-                        "url" : domainName + "/project-record/record",
-                        "type":"get",
-                        "data":function(d){
-                            d.proId = proId;
-                            d.status = $('#status').val();
-                            d.type = $("#type").val();
-                        },
-                        "dataSrc": function (json) {
-                            json.recordsTotal=json.total;
-                            json.recordsFiltered=json.total;
-                            return json.data;
-                        },
-                        "error":function(xhr, textStatus, errorThrown){
-                            var msg = xhr.responseText;
-                            console.log(msg);
-                            if (xhr.status == 400) {
-                                layer.msg(JSON.parse(msg).message);
-                            } else if (xhr.status == 401) {
-                                localStorage.removeItem("token");
-                                layer.msg("token过期，请重新登录", {shift: -1, time: 1000}, function(){
-                                    location.href = loginPage;
-                                });
-                            } else if (xhr.status == 403) {
-                                layer.msg('未授权');
-                            } else if (xhr.status == 500) {
-                                var info = JSON.parse(msg);
-                                var exception = info.exception;
-                                var message = info.message;
-                                layer.msg('系统错误：' + (exception ? exception : message));
-                            }
-                        }
-                    },
-                    "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
-                    "columns": [
-                        { "data": "username", "defaultContent": ""},
-                        { "data": "title", "defaultContent": ""},
-                        { "data": "createTime", "defaultContent": ""},
-                        {
-                            "data": "status",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                if(data ==1){
-                                    return "未提交";
-                                }else if (data ==2){
-                                    return "待审核";
-                                }
-                                else if (data ==3){
-                                    return "审核通过";
-                                }
-                                return "审核未通过";
-                            }
-                        },
-                        {
-                            "data": "",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var id = row['id'];
-                                var href = "updateUser.html?id=" + id;
-                                var edit = buttonEdit(href, "back:user:update", pers);
-
-                                //重置密码
-                                var resetPassword = "";
-                                if($.inArray("back:user:password", pers) >= 0){
-                                    var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>重置密码</i></button>");
-                                    btn.attr("onclick", 'resetPassword(' +id+')');
-                                    resetPassword = btn.prop("outerHTML");
-                                }
-
-                                //分配角色
-                                var setRoles = "";
-                                if($.inArray("back:user:role:set", pers) >= 0){
-                                    var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>分配角色</i></button>");
-                                    btn.attr("onclick", 'setRoles(' +id+')');
-                                    setRoles = btn.prop("outerHTML");
-                                }
-                                return edit + resetPassword + setRoles;
-                            }
-                        },
-                    ],
-                } );
-        }
-
-        init();
     });
 
+    function getRecord() {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-record/record/findPass/'+projectId,
+            async : false,
+            success : function(data) {
 
-    function resetPassword(id){
-        layer.open({
-            title:"重置密码",
-            content : '<input id="psw" type="text" class="form-control" value="88888888">',
-            yes : function(index, layero) {
-                $.ajax({
-                    type : 'put',
-                    url : domainName + '/api-u/users/'+id+'/password?newPassword='+$('#psw').val(),
-                    success : function(data) {
-                        layer.msg("成功", {shift: -1, time: 1000}, function(){
-                            layer.close(index);
-                        });
-                    }
+                var str = '';
+                $(data).each(function () {
+
+                    str +=  ' <li class="green">\n' +
+                        '                    <h3>'+this.time+'<span>'+this.createUser+'</span></h3>\n' +
+                        '                    <dl>\n' +
+                        '                        <dt><a href="implement.html?id='+this.id+'&&projectId='+this.projectId+'&&return=2">'+this.title+'</a><span>'+this.state+'</span></dt>\n' +
+                        '                    </dl>\n' +
+                        '                </li>';
+
                 });
+
+                $("#record").append(str);
+                $("#a").click();
+                $("#a").click();
+
+
 
             }
         });
     }
+    function unSub() {
+        $(location).attr("href", "submit.html?id=" + projectId);
+    }
+    function check() {
+        $(location).attr("href", "check.html?id=" + projectId);
+    }
+    /*$("#add_report").click(function () {
 
-    function setRoles(id){
-        layer.open({
-            title:"分配角色",
-            type: 2,
-            area: ['800px', '400px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['setRoles.html?userId='+id]
+        $(location).attr("href", "add_implementLog.html?projectId=" + projectId);
+    })*/
 
-        });
+    function add() {
+        $(location).attr("href", "add_implementLog.html?projectId=" + projectId);
     }
 
-    $("#searchBt").click(function(){
-        example.ajax.reload();
-    });
+    function systole(){
+        if(!$(".history").length){
+            return;
+        }
+        var $warpEle = $(".history-date"),
+            $targetA = $warpEle.find("h2 a,ul li dl dt a"),
+            parentH,
+            eleTop = [];
+
+        parentH = $warpEle.parent().height();
+        $warpEle.parent().css({"height":59});
+
+       /* setTimeout(function(){
+
+            $warpEle.find("ul").children(":not('h2:first')").each(function(idx){
+                eleTop.push($(this).position().top);
+                $(this).css({"margin-top":-eleTop[idx]}).children().hide();
+            }).animate({"margin-top":0}, 1600).children().fadeIn();
+
+            $warpEle.parent().animate({"height":parentH}, 2600);
+
+            $warpEle.find("ul").children(":not('h2:first')").addClass("bounceInDown").css({"-webkit-animation-duration":"2s","-webkit-animation-delay":"0","-webkit-animation-timing-function":"ease","-webkit-animation-fill-mode":"both"}).end().children("h2").css({"position":"relative"});
+
+        }, 600);*/
+
+        $targetA.click(function(){
+            $(this).parent().css({"position":"relative"});
+            $(this).parent().siblings().slideToggle();
+            $warpEle.parent().removeAttr("style");
+            return false;
+        });
+    };
 </script>
+<td align="right">
+    <div class="form-actions">
+        <div class="row" align="left">
+            <div class="col-md-12">
+                <button class="btn btn-primary" id="btn_return">返回</button>
+                <button class="btn btn-primary" type="submit" onclick="add()">
+                    <i class="fa fa-save"></i> 添加
+                </button>
+                <button class="btn btn-primary" type="submit" onclick="unSub()">
+                    <i class="fa fa-save"></i> 我的日志
+                </button>
+                <button class="btn btn-primary" type="submit" onclick="check()">
+                    <i class="fa fa-save"></i> 审核
+                </button>
+
+            </div>
+            <!--<div class="col-md-12">
+
+                <button class="btn btn-primary" type="submit" onclick="add()">
+                    <i class="fa fa-save"></i> 添加
+                </button>
+            </div>
+            <div class="col-md-12">
+
+                <button class="btn btn-primary" type="submit" onclick="unSub()">
+                    <i class="fa fa-save"></i> 我的日志
+                </button>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="submit" onclick="check()">
+                    <i class="fa fa-save"></i> 审核
+                </button>
+            </div>-->
+        </div>
+    </div>
+
+</td>
+<div class="demo" align="left" style="margin-top: 60px" >
+    <div class="history">
+        <div class="history-date">
+            <ul id="record">
+                <h2 class="first">
+                    <a href="#nogo" id="a">实施日志</a><!--<img src="images/img05.gif" alt="360极速浏览器历程" />-->
+
+                </h2>
+                <!--<div id="record">
+                </div>-->
+                <!--<li class="green">
+                    <h3>10.08<span>2012</span></h3>
+                    <dl>
+                        <dt>发布全新的极速浏览器6.0版本<span>升级极速内核到21.0；全新默认界面；新增小窗口播放功能</span></dt>
+                    </dl>
+                </li>
+                <li>
+                    <h3>07.02<span>2012</span></h3>
+                    <dl>
+                        <dt>升级极速内核到19.0<span>支持网络摄像头，浏览器可直接访问摄像头</span></dt>
+                    </dl>
+                </li>
+                <li class="green">
+                    <h3>06.27<span>2012</span></h3>
+                    <dl>
+                        <dt>发布国内首个HTML5实验室<span>大力推广HTML5</span></dt>
+                    </dl>
+                </li>
+                <li>
+                    <h3>06.15<span>2012</span></h3>
+                    <dl>
+                        <dt>新增了下载文件前扫描下载链接安全性的功能</dt>
+                    </dl>
+                </li>-->
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
 </html>

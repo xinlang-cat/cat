@@ -90,6 +90,10 @@ public class ItemTargetController {
     public ResponseEntity<List<ItemTarget>> getTargetByUserId(@PathVariable Integer itemId){
 
         List<ItemTarget> target = targetService.queryTargetByUserId(itemId);
+        ItemTarget a =new ItemTarget();
+        a.setId(1);
+        a.setTarget("测试");
+        target.add(a);
         return ResponseEntity.ok(target);
     }
 

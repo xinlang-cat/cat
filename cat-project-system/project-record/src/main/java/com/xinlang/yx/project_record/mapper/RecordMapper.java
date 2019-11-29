@@ -28,4 +28,6 @@ public interface RecordMapper extends tk.mybatis.mapper.common.Mapper<Record> {
     List<Record> findByproId(@Param("proId") Integer proId, @Param("status") Integer status, @Param("userId") Long userId);
 
     List<RecordResult> find(@Param("proId") Integer proId, @Param("status") Integer status, @Param("userId") Long userId);
+
+    String getName(@Param("createUserId")Long createUserId);
 }

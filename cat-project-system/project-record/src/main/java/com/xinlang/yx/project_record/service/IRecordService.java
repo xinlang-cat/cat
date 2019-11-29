@@ -23,8 +23,6 @@ public interface IRecordService {
 
     List<Record> findByTarIdAUID(Integer targetId);
 
-    
-
     List<RecordVO> findByTarIdAUIDASTUVO(Integer targetId, Integer checkPass);
 
     RecordVO findVOById(Integer id);
@@ -40,4 +38,8 @@ public interface IRecordService {
     List<RecordResult> find(Integer proId, Integer status, Integer weatherUser);
 
     List<RecordResult> findPass(Integer proId);
+
+    List<RecordResult> findAll(Integer proId);
+
+    List<RecordResult> findCheck(Integer proId);
 }
