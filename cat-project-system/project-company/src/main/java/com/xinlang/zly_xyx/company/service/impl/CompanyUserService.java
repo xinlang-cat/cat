@@ -1,8 +1,10 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;
 import com.xinlang.zly_xyx.company.service.ICompanyUserService;
+import com.xinlang.zly_xyx.user.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +30,8 @@ public class CompanyUserService implements ICompanyUserService {
         if(companyUserMapper.selectByExample(example) == null){
             throw new IllegalArgumentException("该用户已绑定其他组织!");
         }
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        companyUser.setUserId(appUser.getId().intValue());
        companyUserMapper.insertSelective(companyUser);
     }
 
