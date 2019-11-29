@@ -29,8 +29,8 @@
                 <label class="col-md-2 control-label">负责人手机</label>
                 <div class="col-md-10">
                     <input class="form-control" placeholder="负责人手机号" type="text" maxlength="11" name="principalPhone"
-                     data-bv-notempty="true"
-                    data-bv-notempty-message="负责人手机号 不能为空">
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="负责人手机号 不能为空">
                 </div>
             </div>
             <div class="form-group">
@@ -97,6 +97,19 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-2 control-label">公司类型</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="type" id="type">
+                        <option value="">全部</option>
+                        <option value="PARTY_A">甲方</option>
+                        <option value="PARTY_B">乙方</option>
+                        <option value="PARTY_C">监理</option>
+                        <option value="PARTY_D">验收</option>
+                        <option value="EXPERT">专家</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-2 control-label">所在地域</label>
                 <div class="col-md-10" style="width: 200px;padding-right: 0px;">
                     <select class="form-control input-sm" name="provinceCode" id="provinceCode">
@@ -128,7 +141,7 @@
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="location.href='companyList.html'">返回</button>
+                        <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
                         <button class="btn btn-primary" type="submit" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
@@ -157,6 +170,7 @@
         if(!bootstrapValidator.isValid()){
             return;
         }
+
         var formdata = $("#form").serializeObject();
         $.ajax({
             type : 'post',
@@ -165,7 +179,7 @@
             data : JSON.stringify(formdata),
             success : function(data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function(){
-                    location.href = "companyList.html";
+                    $.go(-1);
                 });
             }
         });

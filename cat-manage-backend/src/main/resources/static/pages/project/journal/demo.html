@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery animate滑动收缩展开时间轴大事记发展历程</title>
+
+
+<style>
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+
+.demo{width:960px;margin:60px auto 0 auto;}
+/*history*/
+.history{background:url(images/line04.gif) repeat-y 187px 0;overflow:hidden;position:relative;}
+.history-date{overflow:hidden;position:relative;}
+.history-date h2{background:#fff url(images/icon06.gif) no-repeat 158px 0;height:59px;font-size:25px;font-family:微软雅黑;font-weight:normal;padding-left:45px;margin-bottom:74px; }
+.history-date h2.first{position:absolute;left:0;top:0;width:935px;z-index:99;}
+.history-date h2 a{color:black;display:inline-block;*display:inline;zoom:1;background:url(images/icon08.gif) no-repeat right 50%;padding-right:17px;margin:21px 97px 0 0;}
+.history-date h2 a:hover{text-decoration:none;}
+.history-date h2 img{vertical-align:-5px;}
+.history-date h2.date02{background:none;}
+.history-date ul li{background:url(images/icon07.gif) no-repeat 180px 0;padding-bottom:50px;zoom:1;}
+.history-date ul li.last{padding-bottom:0;}
+.history-date ul li:after{content:" ";display:block;height:0;clear:both;visibility:hidden;}
+.history-date ul li h3{float:left;width:168px;text-align:right;padding-right:19px;color:#c3c3c3;font:normal 18px/16px Arial;}
+.history-date ul li h3 span{display:block;color:#d0d0d0;font-size:12px;}
+.history-date ul li dl{float:left;padding-left:41px;margin-top:-5px;font-family:微软雅黑;}
+.history-date ul li dl dt{font:20px/22px 微软雅黑;color:#737373;}
+.history-date ul li dl dt span{display:block;color:#787878;font-size:12px;}
+.history-date ul li.green h3{color:#1db702;}
+.history-date ul li.green h3 span{color:#a8dda3;}
+.history-date ul li.green dl{margin-top:-8px;}
+.history-date ul li.green dl dt{font-size:30px;line-height:28px;}
+.history-date ul li.green dl dt a{display:inline-block;*display:inline;zoom:1;overflow:hidden;vertical-align:middle;margin-left:12px;}
+.history-date ul li.green dl dd{padding-top:20px;display:none;}
+.history-date ul li.green dl dd img{float:left;}
+.history-date ul li.green dl dd p{overflow:hidden;zoom:1;line-height:21px;color:#787878;}
+.history-date h2.first .more-history{font-size:16px;background:transparent;margin-left:30px;}
+.history-date h2.first .more-history:hover{text-decoration:underline;}
+*body .history-date ul li dl dt{_font-size:12px!important;_font-weight:bold;}
+*body .history-date ul li dl dt span{_font-weight:normal!important;}
+*body .history-date ul li.green dl dt a{_background:transparent!important;*background:transparent!important;*font-size:12px!important;_font-weight:normal!important;}
+
+</style>
+</head>
+<body>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	systole();
+});
+function systole(){
+	if(!$(".history").length){
+		return;
+	}
+	var $warpEle = $(".history-date"),
+		$targetA = $warpEle.find("h2 a,ul li dl dt a"),
+		parentH,
+		eleTop = [];
+	
+	parentH = $warpEle.parent().height();
+	$warpEle.parent().css({"height":59});
+	
+	setTimeout(function(){
+		
+		$warpEle.find("ul").children(":not('h2:first')").each(function(idx){
+			eleTop.push($(this).position().top);
+			$(this).css({"margin-top":-eleTop[idx]}).children().hide();
+		}).animate({"margin-top":0}, 1600).children().fadeIn();
+
+		$warpEle.parent().animate({"height":parentH}, 2600);
+
+		$warpEle.find("ul").children(":not('h2:first')").addClass("bounceInDown").css({"-webkit-animation-duration":"2s","-webkit-animation-delay":"0","-webkit-animation-timing-function":"ease","-webkit-animation-fill-mode":"both"}).end().children("h2").css({"position":"relative"});
+		
+	}, 600);
+
+	$targetA.click(function(){
+		$(this).parent().css({"position":"relative"});
+		$(this).parent().siblings().slideToggle();
+		$warpEle.parent().removeAttr("style");
+		return false;
+	});
+};
+</script>
+
+<div class="demo">
+	<div class="history">
+		<div class="history-date">
+			<ul>
+				<h2 class="first">
+					<a href="#nogo">2012年</a><img src="images/img05.gif" alt="360极速浏览器历程" />
+			
+				</h2>
+				<li class="green">
+					<h3>10.08<span>2012</span></h3>
+					<dl>
+						<dt>发布全新的极速浏览器6.0版本<span>升级极速内核到21.0；全新默认界面；新增小窗口播放功能</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>07.19<span>2012</span></h3>
+					<dl>
+						<dt>升级极速内核到20.0<span>HTML5支持度全球最好，达到469分，测试页面： </span></dt>
+						<A href="http://html5test.com/" target="_blank">http://html5test.com/</A>
+					</dl>
+				</li>
+				<li>
+					<h3>07.02<span>2012</span></h3>
+					<dl>
+						<dt>升级极速内核到19.0<span>支持网络摄像头，浏览器可直接访问摄像头</span></dt>
+					</dl>
+				</li>
+				<li class="green">
+					<h3>06.27<span>2012</span></h3>
+					<dl>
+						<dt>发布国内首个HTML5实验室<span>大力推广HTML5</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>06.15<span>2012</span></h3>
+					<dl>
+						<dt>新增了下载文件前扫描下载链接安全性的功能</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>06.05<span>2012</span></h3>
+					<dl>
+						<dt>W3C联盟首席执行官访华，首站访问360公司</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>05.12<span>2012</span></h3>
+					<dl>
+						<dt>360受邀出席W3C联盟成员见面会议</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>05.11<span>2012</span></h3>
+					<dl>
+						<dt>升级极速内核到18.0<span>新增多用户使用浏览器的功能</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>05.03<span>2012</span></h3>
+					<dl>
+						<dt>360极速浏览器用户数突破5000万，活跃用户超2000万</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>03.08<span>2012</span></h3>
+					<dl>
+						<dt>升级极速内核到17.0，提升浏览器速度、增强安全性<span>新增HTTP管线化技术，大幅提升网页加载速度</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>01.29<span>2012</span></h3>
+					<dl>
+						<dt>国内率先加入W3C联盟HTML工作组，参与HTML5标准制定</span></dt>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="history-date">
+			<ul>
+				<h2 class="date02"><a href="#nogo">2011年</a></h2>
+				<li>
+					<h3>12.12<span>2011</span></h3>
+					<dl>
+						<dt>升级极速内核到16.0，提升浏览器速度、增强安全性<span>新增对360网购保镖支持，保护网上交易安全</span></dt>
+					</dl>
+				</li>
+				<li class="green">
+					<h3>11.24<span>2011</span></h3>
+					<dl>
+						<dt>发布国内首个双核浏览器实验室<span>轻松测试浏览器性能</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>11.01<span>2011</span></h3>
+					<dl>
+						<dt>升级极速内核到15.0<span>提升浏览器速度、增强安全性</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>10.27<span>2011</span></h3>
+					<dl>
+						<dt>作为国内唯一受邀参展的浏览器厂商，参展2011谷歌开发者日大会</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>09.22<span>2011</span></h3>
+					<dl>
+						<dt>升级极速内核到14.0<span>加入Canvas 2D的GPU加速等特性</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>09.21<span>2011</span></h3>
+					<dl>
+						<dt>360极速浏览器用户量超千万，宣布与Chromium社区版本同步</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>08.30<span>2011</span></h3>
+					<dl>
+						<dt>升级极速内核到13.0<span>新增更丰富的皮肤自定义支持</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>06.22<span>2011</span></h3>
+					<dl>
+						<dt>新增对crx格式的关联<span>双击crx文件即可安装扩展、皮肤</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>05.19<span>2011</span></h3>
+					<dl>
+						<dt>升级极速内核到10.0<span>极速浏览器与安全浏览器网络收藏夹互通</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>04.07<span>2011</span></h3>
+					<dl>
+						<dt>推出应用开放平台，与开发者共享用户资源</dt>
+					</dl>
+				</li>
+				<li>
+					<h3>03.27<span>2011</span></h3>
+					<dl>
+						<dt>新增360云安全网址拦截<span>新增IE9高速模式，支持GPU硬件加速</span></dt>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="history-date">
+			<ul>
+				<h2 class="date02"><a href="#nogo">2010年</a></h2>
+				<li>
+					<h3>12.13<span>2010</span></h3>
+					<dl>
+						<dt>升级极速内核到7.0<span>提升浏览器速度、增强安全性</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>10.20<span>2010</span></h3>
+					<dl>
+						<dt>升级极速内核到6.0<span>新增360帐户，同步网络收藏夹</span></dt>
+					</dl>
+				</li>
+				<li>
+					<h3>09.15<span>2010</span></h3>
+					<dl>
+						<dt>首款双核安全浏览器 - 360极速浏览器发布<span>首个包含沙箱、系统级防注入、完整多进程隔离架构等安全机制的双核浏览器<br><br></span></dt>
+						<br><br><br><br>
+					</dl>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

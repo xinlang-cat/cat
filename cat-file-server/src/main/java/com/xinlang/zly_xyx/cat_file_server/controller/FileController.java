@@ -101,6 +101,7 @@ public class FileController {
     @PreAuthorize("hasAuthority('file:query')")
     @GetMapping
     public Page<File> findFiles(@RequestParam Map<String, Object> params) {
+
         int total = fileMapper.count(params);
         List<File> list = Collections.emptyList();
         if (total > 0) {

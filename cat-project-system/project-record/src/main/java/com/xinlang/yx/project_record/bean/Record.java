@@ -23,6 +23,10 @@ public class Record implements Serializable {
      */
     private Integer targetId;
     /**
+     * 项目id
+     */
+    private Integer projectId;
+    /**
      * 日志标题
      */
     private String title;
@@ -47,7 +51,7 @@ public class Record implements Serializable {
      */
     private Date workingDay;
     /**
-     * 创建人
+     * 创建人id
      */
     private Long createUserId;
     /**
