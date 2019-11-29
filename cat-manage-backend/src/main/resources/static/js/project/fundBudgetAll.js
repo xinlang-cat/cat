@@ -39,7 +39,7 @@ function fundBudgetAll(id){
                     '                   <a href="updateBudget.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
                     '                       <i class="layui-icon">&#xe642;</i>\n' +
                     '                   </a>\n' +
-                    '                   <a class="layui-btn layui-btn-sm" onclick="del('+this.id+');">\n' +
+                    '                   <a class="layui-btn layui-btn-sm" onclick="deleteBudget('+this.id+');">\n' +
                     '                       <i class="layui-icon">&#xe640;</i>\n' +
                     '                   </a>\n' +
                     '               </div>\n' +
@@ -67,7 +67,7 @@ function analysisSource(id){
     });
 }
 /*删除资金预算*/
-function del(id) {
+function deleteBudget(id) {
     layer.confirm('确定要删除吗？', {
         btn: ['确定', '取消']
     }, function () {

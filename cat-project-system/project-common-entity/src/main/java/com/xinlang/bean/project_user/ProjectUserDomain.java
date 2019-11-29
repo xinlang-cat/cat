@@ -23,7 +23,7 @@ public class ProjectUserDomain implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer userId;
-    private Integer userType;//用户类型
+    private String userType;//用户类型
     private String labelSign;//领域标签代码
     private Date createTime;
     private Date updateTime;

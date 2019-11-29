@@ -35,7 +35,6 @@ public class ProjectUserController {
 
     @ApiOperation(value = "添加用户信息,全参不包含id")
     @LogAnnotation(module = "添加用户信息")
-    @PreAuthorize("hasAnyAuthority('project:user:save')")
     @PostMapping("/user")
     public ProjectUser save(@RequestBody ProjectUser projectUser){
         projectUserService.save(projectUser);
@@ -44,7 +43,6 @@ public class ProjectUserController {
 
     @ApiOperation(value = "修改用户信息，id必填")
     @LogAnnotation(module = "修改用户信息")
-    @PreAuthorize("hasAnyAuthority('project:user:update')")
     @PutMapping("/user")
     public ProjectUser update(@RequestBody ProjectUser projectUser){
         projectUserService.update(projectUser);
@@ -53,7 +51,6 @@ public class ProjectUserController {
 
     @ApiOperation(value = "查询所有用户信息")
     @LogAnnotation(module = "查询所有用户信息")
-    @PreAuthorize("hasAnyAuthority('project:user:query')")
     @GetMapping("/user/all")
     public List<ProjectUser> findAll(){
         List<ProjectUser> list =  projectUserService.findAll();

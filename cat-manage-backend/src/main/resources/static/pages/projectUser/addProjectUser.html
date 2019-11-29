@@ -9,11 +9,10 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<form class="form-horizontal" onsubmit="return false" id="form">
 		<fieldset>
-
 			<div class="form-group">
 				<label class="col-md-1 control-label">姓名</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="姓名" type="text" name="name" maxlength="50"
+					<input class="form-control" placeholder="姓名" type="text" name="name" 
 						data-bv-notempty="true"
 						data-bv-notempty-message="姓名 不能为空">
 				</div>
@@ -23,7 +22,7 @@
 				</div>
 				<label class="col-md-1 control-label">民族</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="民族" type="text" name="nation" maxlength="50">
+					<input class="form-control" placeholder="民族" type="text" name="nation" >
 				</div>
 			</div>
 
@@ -48,18 +47,18 @@
 				</div>
 				<label class="col-md-1 control-label">证件号码</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="证件号码" type="text" name="idCard" maxlength="50">
+					<input class="form-control" placeholder="证件号码" type="text" name="idCard" >
 				</div>
 			</div>
 
 			<div class="form-group">
 				<label class="col-md-1 control-label">单位/公司代码</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode" maxlength="50">
+					<input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode" >
 				</div>
 				<label class="col-md-1 control-label">单位/公司名称</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="单位/公司名称" type="text" name="deptName" maxlength="50">
+					<input class="form-control" placeholder="单位/公司名称" type="text" name="deptName" >
 				</div>
 				<label class="col-md-1 control-label">性别</label>
 				<div class="col-md-2">
@@ -73,11 +72,11 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">单位/公司级别</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="单位/公司级别" type="text" name="deptType" maxlength="50">
+					<input class="form-control" placeholder="单位/公司级别" type="text" name="deptType" >
 				</div>
 				<label class="col-md-1 control-label">职称</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle" maxlength="50">
+					<input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle" >
 				</div>
 				<label class="col-md-1 control-label">政治面貌</label>
 				<div class="col-md-2">
@@ -92,15 +91,15 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">职务</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="职务" type="text" name="job" maxlength="50">
+					<input class="form-control" placeholder="职务" type="text" name="job" >
 				</div>
 				<label class="col-md-1 control-label">职称级别</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="职称级别" type="text" name="academicTitleRank" maxlength="50">
+					<input class="form-control" placeholder="职称级别" type="text" name="academicTitleRank">
 				</div>
 				<label class="col-md-1 control-label">毕业院校</label>
 				<div class="col-md-2">
-					<input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom" maxlength="50">
+					<input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom">
 				</div>
 			</div>
 
@@ -126,7 +125,7 @@
 				</div>
 				<label class="col-md-1 control-label">学位获得时间</label>
 				<div class="col-md-2">
-					<input type="text" class="form-control" placeholder="学位获得时间" name="lastYear">
+					<input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear">
 				</div>
 			</div>
 
@@ -168,13 +167,13 @@
 				<div class="col-md-2">
 					<select class="form-control input-sm" name="nowMajor" id="nowMajor">
 						<option value="1">计算机</option>
-						<option value="0">地理地质</option>
-						<option value="0">软件工程</option>
+						<option value="1">地理地质</option>
+						<option value="1">软件工程</option>
 					</select>
 				</div>
 				<label class="col-md-1 control-label">主要研究领域</label>
 				<div class="col-md-2">
-					<select class="form-control input-sm" name="nowMajor" id="mainDomain">
+					<select class="form-control input-sm" name="mainDomain" id="mainDomain">
 						<option value="1">计算机</option>
 						<option value="0">地理地质</option>
 						<option value="0">软件工程</option>
@@ -219,7 +218,7 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">通讯地址</label>
 				<div class="col-md-8">
-					<input class="form-control" placeholder="通讯地址" type="text" name="address" maxlength="50">
+					<input class="form-control" placeholder="通讯地址" type="text" name="address" >
 				</div>
 			</div>
 			<div class="form-group">
@@ -237,13 +236,13 @@
 				</div>
 			</div>
 
-			<input type="hidden" class="form-control" name="enable" value="1">
+			<input type="hidden" class="form-control" name="enable" value="true">
 			<div class="form-actions">
 				<div class="row" align="center">
 					<div class="col-md-12">
 					    <button class="btn btn-primary" onclick="location.href='projectUserList.html'">返回</button>
 						<button class="btn btn-primary" type="submit" onclick="add()">
-							<i class="fa fa-save"></i> 保存
+							<i class="fa fa-save"></i>
 						</button>
 					</div>
 				</div>
@@ -262,14 +261,9 @@
 <script type="text/javascript">
 	var layedit ,index1,index2;
 	layui.use(['layer','util', 'laydate'], function(){
-		var layer = layui.layer;
-		var util = layui.util;
 		var laydate = layui.laydate;
 		laydate.render({
-			elem: '#beginTime'
-		});
-		laydate.render({
-			elem: '#endTime'
+			elem: '#birthDate'
 		});
 	})
 	layui.use(['layedit','upload'], function(){
@@ -291,17 +285,17 @@
 	    if(!bootstrapValidator.isValid()){
 		   return;
 	    }
-	    
 	    var formdata = $("#form").serializeObject();
-
+			formdata.accomplishment = layedit.getContent(index1);
+			formdata.achievement = layedit.getContent(index2);
 		$.ajax({
 			type : 'post',
-			url : domainName + '/api-u/users-anon/register',
+			url : domainName + '/project-user/user',
 			contentType: "application/json; charset=utf-8",  
 			data : JSON.stringify(formdata),
 			success : function(data) {
 				layer.msg("成功", {shift: -1, time: 1000}, function(){
-                    location.href = "userList.html";
+                    location.href = "projectUserList.html";
                 });
 			}
 		});

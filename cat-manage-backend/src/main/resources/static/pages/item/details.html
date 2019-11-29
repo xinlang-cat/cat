@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>基本信息</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/details.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/details.css">
 </head>
 
 <body>
@@ -358,20 +358,20 @@
 </div>
 </body>
 
-<script src="../../../js/constant.js"></script>
-<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../../js/jq.js"></script>
-<script type="text/javascript" src="../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../../js/common.js"></script>
-<script type="text/javascript" src="../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../js/my/permission.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 
-<script type="text/javascript" src="../../../js/project/basis.js"></script>
-<script type="text/javascript" src="../../../js/project/content-target.js"></script>
-<script type="text/javascript" src="../../../js/project/fund.js"></script>
-<script type="text/javascript" src="../../../js/project/fundBudgetAll.js"></script>
-<script type="text/javascript" src="../../../js/project/personnel.js"></script>
+<script type="text/javascript" src="../../js/project/basis.js"></script>
+<script type="text/javascript" src="../../js/project/content-target.js"></script>
+<script type="text/javascript" src="../../js/project/fund.js"></script>
+<script type="text/javascript" src="../../js/project/fundBudgetAll.js"></script>
+<script type="text/javascript" src="../../js/project/personnel.js"></script>
 <script type="text/javascript">
     layui.use(['layer'], function () {
         var layer = layui.layer;
@@ -385,7 +385,7 @@
     $("#addFund").attr("href","addFund.html?id="+id);
     $("#addBudget").attr("href","addBudget.html?id="+id);
     $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
-    $("#return").attr("href","../list.html");
+    $("#return").attr("href","itemList.html");
 
     /*基本信息*/
     getBasic(id);

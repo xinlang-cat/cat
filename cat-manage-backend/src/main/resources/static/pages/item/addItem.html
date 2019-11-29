@@ -16,20 +16,20 @@
                            data-bv-notempty="true"
                            data-bv-notempty-message="合同编号 不能为空">
                 </div>
-                <label class="col-md-1 control-label">计划类别</label>
+                <label class="col-md-1 control-label">合同文件</label>
+                <div class="col-md-3">
+                    <input class="form-control layui-btn" placeholder="合同文件" type="text" id="file" maxlength="50"
+                           style="height: 32px;color: #555;border: 1px solid #ccc;background-color: #fff;line-height: 32;
+                           text-align: left;padding: 6px 12px;">
+                    <input type="hidden" name="contract_file" id="contract">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">计划类别</label>
                 <div class="col-md-3">
                     <select class="form-control input-sm" name="plan_category" id="planCategory">
                         <option value=''>- 请选择 -</option>
                     </select>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-2 control-label">项目名称</label>
-                <div class="col-md-3">
-                    <input class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="项目名称 不能为空">
                 </div>
                 <label class="col-md-1 control-label">计划批次</label>
                 <div class="col-md-3">
@@ -38,37 +38,42 @@
                            data-bv-notempty-message="计划批次 不能为空">
                 </div>
             </div>
-
+            <div class="form-group">
+                <label class="col-md-2 control-label">项目名称</label>
+                <div class="col-md-3">
+                    <input class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="项目名称 不能为空">
+                </div>
+                <label class="col-md-1 control-label">项目类型</label>
+                <div class="col-md-3">
+                    <select class="form-control input-sm" lay-skin="primary" name="type" id="type">
+                        <option value="">- 请选择 -</option>
+                    </select>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">委托单位</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="委托单位" type="text" name="consignor" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="委托单位 不能为空">
+                    <select class="form-control input-sm" lay-skin="primary" name="consignor" id="consignor">
+                        <option value="">- 请选择 -</option>
+                    </select>
                 </div>
-                <label class="col-md-1 control-label">承担单位</label>
+                <label class="col-md-1 control-label">管理单位</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="承担单位" type="text" name="undertaker" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="承担单位 不能为空">
+                    <select class="form-control input-sm" lay-skin="primary" name="supervisor_dept" id="supervisor_dept">
+                        <option value="">- 请选择 -</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">管理单位</label>
+                <label class="col-md-2 control-label">管理代表</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="管理单位" type="text" name="supervisor_dept" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="管理单位 不能为空">
+                    <select class="form-control input-sm" lay-skin="primary" name="supervisor" id="supervisor">
+                        <option value="">- 请选择 -</option>
+                    </select>
                 </div>
-                <label class="col-md-1 control-label">管理代表</label>
-                <div class="col-md-3">
-                    <input class="form-control" placeholder="管理代表" type="text" name="supervisor" maxlength="50"
-                           data-bv-notempty="true"
-                           data-bv-notempty-message="管理代表 不能为空">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">实施地点</label>
+                <label class="col-md-1 control-label">实施地点</label>
                 <div class="col-md-3">
                     <select class="form-control input-sm" lay-skin="primary" id="map">
                         <option value="">- 请选择 -</option>
@@ -78,13 +83,6 @@
                             style="position: absolute;right: 16px;top: 4px;background-color: #e1e1e1;">
                         <i class="layui-icon">&#xe669;</i>
                     </button>
-                </div>
-                <label class="col-md-1 control-label">合同文件</label>
-                <div class="col-md-3">
-                    <input class="form-control layui-btn" placeholder="合同文件" type="text" id="file" maxlength="50"
-                           style="height: 32px;color: #555;border: 1px solid #ccc;background-color: #fff;line-height: 32;
-                           text-align: left;padding: 6px 12px;">
-                    <input type="hidden" name="contract_file" id="contract">
                 </div>
             </div>
             <div class="form-group">
@@ -110,11 +108,10 @@
                               data-bv-notempty-message=" 内容不能为空"></textarea>
                 </div>
             </div>
-
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="location.href='itemList.html'">返回</button>
+                        <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
                         <button class="btn btn-primary" type="submit" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
@@ -167,9 +164,18 @@
     });
 
     //初始化数据
-    initplanCategorySelect();
-    getprovince();
-    //监听
+    initplanCategorySelect("planType");
+    initTypeSelect("projectType");
+    initCompanySelect();
+    getprovince();//获取省
+    //监听监管单位选择
+    $("#supervisor_dept").change(function () {
+         var deptCode = $("#supervisor_dept option:selected").val();
+        $("#supervisor").empty();
+        $("#supervisor").append("<option value=''>- 请选择 -</option>");
+        initCompanyUserSelect(deptCode);
+    });
+    //监听地点选择
     var code = '',
         text = '';
     $("#map").change(function () {
@@ -222,7 +228,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.href = "itemList.html";
+                   /* location.href = "itemList.html";*/
+                    location.href = "../list.html";
                 });
             }
         });

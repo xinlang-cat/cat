@@ -72,15 +72,24 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
             }
             if (beanMap.containsKey(properName)) {
                 Method writeMethod = propertyDescriptor.getWriteMethod();
-                Object value = beanMap.get(properName);
+                String value = beanMap.get(properName).toString();
                 if (null == writeMethod || StringUtils.isBlank(value.toString())) {
                     continue;
                 }
                 if (!writeMethod.isAccessible()) {
                     writeMethod.setAccessible(true);
                 }
+                String reg="^\\d+$";
+                if(StringUtils.isBlank(value)){
+                    continue;
+                }
                 try {
-                    writeMethod.invoke(bean, value);
+                    if(value.matches(reg)){
+                        Integer v1 = Integer.valueOf(value);
+                        writeMethod.invoke(bean, v1);
+                    }else{
+                        writeMethod.invoke(bean, value);
+                    }
                 } catch (Throwable throwable) {
                     throw new RuntimeException("Could not set property '" + properName + " ' to bean" + throwable);
                 }

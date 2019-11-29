@@ -2,13 +2,17 @@ package com.xinlang.zly.project_user.controller;
 
 import com.xinlang.bean.project_user.ProjectUserDomain;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -26,6 +30,21 @@ public class ProjectUserDomainController {
     public ProjectUserDomain save(@RequestBody ProjectUserDomain projectUserDomain) {
         projectUserDomainService.save(projectUserDomain);
         return projectUserDomain;
+    }
+    @PostMapping("/toDomains")
+    @ApiOperation(value = "全参不包括id")
+    @LogAnnotation(module = "添加用户所能服务的具体产业或领域")
+    public void save(String userType,@RequestBody Set<String> signs) {
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        Integer userId = appUser.getId().intValue();
+        ProjectUserDomain domain = new ProjectUserDomain();
+        domain.setCreateTime(new Date());
+        domain.setUserId(userId);
+        domain.setUserType(userType);
+        signs.forEach(sign->{
+            domain.setLabelSign(sign);
+            projectUserDomainService.save(domain);
+        });
     }
 
     @PutMapping("/domain")

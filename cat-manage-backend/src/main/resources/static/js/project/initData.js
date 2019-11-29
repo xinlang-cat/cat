@@ -1,7 +1,7 @@
-function initplanCategorySelect(){
+function initplanCategorySelect(sign){
     $.ajax({
         type : 'get',
-        url : domainName + '/api-label/label/tree/PZBM',
+        url : domainName + '/api-label/label/tree/'+sign,
         async : false,
         success : function(data) {
             var select = $("#planCategory");
@@ -14,6 +14,60 @@ function initplanCategorySelect(){
 
                 select.append("<option value='"+ sign +"'>" +name+"</option>");
                 //   }
+            }
+        }
+    });
+}
+function initTypeSelect(sign){
+    $.ajax({
+        type : 'get',
+        url : domainName + '/api-label/label/tree/'+sign,
+        async : false,
+        success : function(data) {
+            var select = $("#type");
+            //select.append("<option value=''>- 请选择 -</option>");
+            var ds = data[0].child;
+            for(var i=0; i<ds.length; i++){
+                var d = ds[i];
+                var sign = d['sign'];
+                var name = d['content'];
+
+                select.append("<option value='"+ sign +"'>" +name+"</option>");
+                //   }
+            }
+        }
+    });
+}
+/*获取机构*/
+function initCompanySelect(){
+    $.ajax({
+        type : 'get',
+        url : domainName + '/api-c/company/all',
+        async : false,
+        success : function(data) {
+            for(var i=0; i<data.length; i++){
+                var d = data[i];
+                var sign = d['deptCode'];
+                var name = d['signName'];
+                $("#consignor").append("<option value='"+ sign +"'>" +name+"</option>");
+                $("#undertaker").append("<option value='"+ sign +"'>" +name+"</option>");
+                $("#supervisor_dept").append("<option value='"+ sign +"'>" +name+"</option>");
+            }
+        }
+    });
+}
+/*获取监理*/
+function initCompanyUserSelect(code){
+    $.ajax({
+        type : 'get',
+        url : domainName + '/api-c/user/dept/'+code,
+        async : false,
+        success : function(data) {
+            for(var i=0; i<data.length; i++){
+                var d = data[i];
+                var sign = d['userId'];
+                var name = d['name'];
+                $("#supervisor").append("<option value='"+ sign +"'>" +name+"</option>");
             }
         }
     });
