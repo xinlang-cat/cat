@@ -92,22 +92,16 @@ public class RecordController {
 
     @LogAnnotation(module = "审核通过")
     @PutMapping("/record/checkPass/{id}")
-    public Record checkPass(@PathVariable Integer id){
-        Record Record = new Record();
-        Record.setTargetId(id);
-        Record.setStatus(constant.ConstantStatus.CHECK_PASS);
-        recordService.update(Record);
-        return Record;
+    public void checkPass(@PathVariable Integer id){
+
+        recordService.check(id,constant.ConstantStatus.CHECK_PASS);
+
     }
 
     @LogAnnotation(module = "审核不通过")
     @PutMapping("/record/checkFail/{id}")
-    public Record checkFail(@PathVariable Integer id){
-        Record Record = new Record();
-        Record.setTargetId(id);
-        Record.setStatus(constant.ConstantStatus.CHECK_fail);
-        recordService.update(Record);
-        return Record;
+    public void checkFail(@PathVariable Integer id){
+        recordService.check(id,constant.ConstantStatus.CHECK_fail);
     }
 
     @LogAnnotation(module = "获取过审的实施日志")

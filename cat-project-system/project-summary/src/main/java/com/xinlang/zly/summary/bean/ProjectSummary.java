@@ -25,6 +25,7 @@ public class ProjectSummary implements Serializable {
     private Integer  userType;//用户类型
     private String name;//用户姓名
     private Integer itemId;//项目表id
+    private String itemName;//项目名称
     private String content;//内容
     private Date createTime;
     private Date updateTime;

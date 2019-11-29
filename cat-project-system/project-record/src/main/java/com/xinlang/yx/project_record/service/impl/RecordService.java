@@ -43,6 +43,8 @@ public class RecordService implements IRecordService {
 
     @Override
     public void update(Record record) {
+        System.out.println(record);
+        System.out.println(record.getStatus());
 
         recordMapper.updateByPrimaryKeySelective(record);
     }

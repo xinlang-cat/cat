@@ -7,6 +7,7 @@ import com.xinlang.zly.project_user.mapper.ProjectUserDomainMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserSkillService;
+import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import com.xinlang.zly.project_user.service.IProjectUserService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -66,6 +68,15 @@ public class ProjectUserController {
         List<ProjectUser> list =  projectUserService.findByUserType(userType);
         setDomainAndSkill(list);
         return list;
+    }
+
+    @GetMapping("/users")
+    @LogAnnotation(module = "根据实体中的属性查询用户")
+    @ApiOperation(value = "根据实体中的属性查询")
+    public Page<ProjectUser> findByParams(@RequestParam Map<String,Object> params){
+        Page<ProjectUser> page = projectUserService.findByParams(params);
+        setDomainAndSkill(page.getData());
+        return page;
     }
 
     @ApiOperation(value =  "根据系统用户表id查询用户信息")

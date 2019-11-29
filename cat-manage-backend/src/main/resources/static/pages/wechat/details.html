@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+       <meta name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no"> 
+<head>
+    <meta charset="UTF-8">
+    <title>基本信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+        <style>
+        .title {
+            text-align: center;
+            line-height: 30px;
+            color: black;
+            font-weight: 600;
+            background-color: #e4e4e4;
+            height: 30px;
+        }
+           </style>
+</head>
+<body>
+            <div style="margin-top: 10px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form class="form-horizontal" onsubmit="return false" id="form">
+                            <fieldset>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">合同编号</label>
+                                    <div class="col-md-3">
+                                        <div id="contract_number" class="form-control"></div>
+                                    </div>
+                                    <label class="col-md-1 control-label">计划类别</label>
+                                    <div class="col-md-3">
+                                                <div id="plan_category" class="form-control"></div>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">项目名称</label>
+                                    <div class="col-md-3">
+                                                <div id="item_name" class="form-control"></div>
+                                    </div>
+                                    <label class="col-md-1 control-label">计划批次</label>
+                                    <div class="col-md-3">
+                                                <div id="batch" class="form-control"></div>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">委托单位</label>
+                                    <div class="col-md-3">
+                                                <div id="consignor" class="form-control"></div>
+                                    </div>
+                                    <label class="col-md-1 control-label">承担单位</label>
+                                    <div class="col-md-3">
+                                                <div id="undertaker" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">管理单位</label>
+                                    <div class="col-md-3">
+                                                <div id="supervisor_dept" class="form-control"></div>
+                                    </div>
+                                    <label class="col-md-1 control-label">管理代表</label>
+                                    <div class="col-md-3">
+                                                <div id="supervisor" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">实施地点</label>
+                                    <div class="col-md-3">
+                                                <div id="district" class="form-control"></div>
+                                    </div>
+                                    <label class="col-md-1 control-label">合同文件</label>
+                                    <div class="col-md-3">
+                                                <div id="contract_file" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">开始时间</label>
+                                    <div class="col-md-3">
+                                                <div id="start_dateStr" class="form-control"></div>
+                                    </div>
+                                    <label class="col-md-1 control-label">结束时间</label>
+                                    <div class="col-md-3">
+                                                <div id="end_dateStr" class="form-control"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">总体目标</label>
+                                    <div class="col-md-7">
+                                        <div id="overall_objective" class="layui-textarea" name="overall_objective"
+                                                  style="border-color: #ccc;"
+                                                  data-bv-notempty="true"
+                                                  data-bv-notempty-message=" 内容不能为空"></div>
+                                    </div>
+                                </div>
+
+                                <p class="title">主要研究内容</p>
+                                <table class="layui-table" id="content">
+                                    <colgroup>
+                                        <col width="30%">
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="10%">
+                                        <col width="10%">
+                                    </colgroup>
+
+
+                                </table>
+
+                                <p class="title">资金构成</p>
+                                <div style="position: relative;">
+                                    <div class="content">
+
+                                        <table class="layui-table" id="fundSource">
+                                            <colgroup>
+                                                <col width="25%">
+                                                <col width="30%">
+                                                <col width="60%">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;">来源</th>
+                                                <th style="text-align: center;">金额(万元)</th>
+                                                <th style="text-align: center;">备注</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="zijin">
+                                            <tr>
+                                                <th style="text-align: center;">合计</th>
+                                                <th id="zijinheji" style="text-align: center;"></th>
+                                                <th style="text-align: center;"></th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <p class="title">总资金预算</p>
+                                <div style="position: relative;">
+                                    <div class="content">
+
+                                        <table class="layui-table" >
+                                            <colgroup>
+                                                <col width="15%">
+                                                <col width="20%">
+                                                <col width="20%">
+                                                <col width="20%">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;">科目</th>
+                                                <th style="text-align: center;">金额(万元)</th>
+                                                <th style="text-align: center;">资金来源</th>
+                                                <th style="text-align: center;">开支内容</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="yusuan">
+                                            <tr>
+                                                <td><p class="weui-media-box__desc">合计</p></td>
+                                                <td id="yusuanheji" style="text-align: center;"></td>
+                                                <td></td>
+                                                <td></td>
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <p class="title">项目人员</p>
+
+                                <div style="position: relative;">
+                                    <div class="content">
+
+                                        <table class="layui-table" id="onepage">
+                                            <colgroup>
+                                                <col width="33.33%">
+                                                <col width="33.33%">
+                                                <col width="33.33%">
+                                            </colgroup>
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;">姓名</th>
+                                                <th style="text-align: center;">职称</th>
+                                                <th style="text-align: center;">
+                                                    <p class="weui-media-box__desc">研究开发中的责任分工</p>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="renyuan">
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+</body>
+
+	<script src="../../js/constant.js"></script>
+	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jq.js"></script>
+	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+
+
+       <script type="text/javascript" src="js/content-target.js"></script>
+
+<script>
+
+    var id = getUrlParam("id");
+    getBasic(id);
+    function getBasic(id){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/'+id,
+            async : false,
+            success : function(data) {
+                $("#contract_number").text(data.contract_number);
+                //$("#plan_category").text(data.plan_category);
+                getPlanCategory(data.plan_category);
+                $("#item_name").text(data.item_name);
+                $("#batch").text(data.batch);
+
+                $("#consignor").text(data.consignor);
+                $("#undertaker").text(data.undertaker);
+                $("#supervisor_dept").text(data.supervisor_dept);
+                $("#supervisor").text(data.supervisor);
+
+                //$("#district").text(data.district);
+                getDistrict(data.district);
+                //$("#contract_file").text(data.contract_file);
+                getContractFile(data.contract_file);
+                $("#start_dateStr").text(data.start_dateStr);
+                $("#end_dateStr").text(data.end_dateStr);
+
+                $("#overall_objective").text(data.overall_objective);
+            }
+        });
+    }
+    function getPlanCategory(sign){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/api-label/label/tree/'+sign,
+            async : false,
+            success : function(data) {
+                var name = data[0].content;
+                $("#plan_category").text(name);
+            }
+        });
+    }
+    /*获取地区*/
+    function getDistrict(code){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/province/tree/'+code,
+            async : false,
+            success : function(data) {
+                var select = $("#map"),
+                    provinceName,
+                    city,
+                    area,
+                    street;
+                var str;
+                if(data.street != undefined){
+                    provinceName = data.province.provinceName;
+                    city = data.city.cityName;
+                    area = data.area.areaName;
+                    street = data.street.streetName;
+                    str = provinceName+'-'+city+'-'+area+'-'+street+'-';
+                }else if(data.area != undefined){
+                    provinceName = data.province.provinceName;
+                    city = data.city.cityName;
+                    area = data.area.areaName;
+                    str = provinceName+'-'+city+'-'+area+'-';
+                }else if(data.city != undefined){
+                    provinceName = data.province.provinceName;
+                    city = data.city.cityName;
+                    str = provinceName+'-'+city+'-';
+                }else if(data.province != undefined){
+                    provinceName = data.province.provinceName;
+                    str = provinceName+'-';
+                }
+                $("#district").text(str);
+            }
+        });
+    }
+    /*获取合同文件*/
+    function getContractFile(id){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/api-f/files/'+id,
+            async : false,
+            success : function(data) {
+                var url = data.url,
+                    name = data.name;
+                //$("#file").val(name);
+                $("#contract_file").text(name);
+                $("#contract_file").attr("href",url);
+            }
+        });
+    }
+
+
+
+
+
+    content_target(id);
+    fundSource(id);
+    function fundSource(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fund/all/' + id,
+            async: false,
+            success: function (data) {
+                var str;
+                var count=0;
+                $(data).each(function () {
+                    count+=this.money;
+                    str+= ' <tr>'
+                        + ' <td style="text-align: center;">'+this.source+'</td>'
+                        + ' <td style="text-align: center;">'+this.money+'</td>'
+                        + ' <td style="text-align: center;">'+ this.remark+'</td>'
+                        + '</tr>';
+                })
+                     $("#zijin").append(str);
+                $("#zijinheji").text(count);
+
+            }
+        })
+    }
+
+
+
+
+
+    fundBudgetAll(id);
+    function fundBudgetAll(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/budget/all/' + id,
+            async: false,
+            success: function (data) {
+
+                var str;
+                var count=0;
+                $(data).each(function () {
+                    count+=this.money;
+                    analysisSource(this.fund_id);
+                str+=' <tr>'
+               +'<td style="text-align: center;">'+this.subject+'</td>'
+               +' <td style="text-align: center;">'+this.money+'</td>'
+               +'<td style="text-align: center;"> '+sourceName+' </td>'
+               +' <td style="text-align: center;"><p class="weui-media-box__desc">'+ this.content+'</p></td>'
+                +'</tr>' ;
+                })
+                $("#yusuan").append(str);
+                $("#yusuanheji").text(count);
+            }
+        })
+    }
+
+
+    var sourceName;
+    function analysisSource(id){
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/fund/'+id,
+            async : false,
+            success : function(data) {
+                sourceName = data.source;
+            }
+        });
+    }
+
+    personnel(id);
+    function personnel(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/user/all/' + id,
+            async: false,
+            success: function (data) {
+              var str;
+                $(data).each(function () {
+               str+='  <tr>'
+                   +' <td style="text-align:center;">\n'
+                   +' <p > '+this.name +'</p>'
+                   + '</td>'
+                   +' <td>'+this.idType+'</td>'
+                   + '<td>'
+                   +'<p>'+this.deptName+'</p>\n'
+                   +'</td>'
+                   +'</tr>';
+
+            })
+               $("#renyuan").append(str);
+        }
+    })
+    }
+</script>
+
+</html>

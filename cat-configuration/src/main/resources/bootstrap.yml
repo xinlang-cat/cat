@@ -23,7 +23,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://cat:cat@cat.eureka.com:8761/eureka/
-      #defaultZone: http://cat:cat@192.168.5.24:8761/eureka/
 
 management:
   endpoints:

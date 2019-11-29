@@ -1,8 +1,10 @@
 package com.xinlang.zly.project_user.service;
 
 import com.xinlang.bean.project_user.ProjectUser;
+import com.xinlang.zly_xyx.common.Page;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,4 +19,6 @@ public interface IProjectUserService {
     List<ProjectUser> findByUserId(Integer userId);
     List<ProjectUser> findByUserIds(Set<Integer> userIds);
     void delete(Integer id);
+    Page<ProjectUser> findByParams(Map<String,Object> params);
+    Page<ProjectUser> link(Map<String,Object> params);
 }
