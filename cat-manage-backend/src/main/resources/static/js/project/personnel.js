@@ -61,7 +61,7 @@ function personnel(id){
                     '                   <a href="updatePersonnel.html?id='+this.itemUser.id+'" class="layui-btn layui-btn-sm">\n' +
                     '                       <i class="layui-icon">&#xe642;</i>\n' +
                     '                   </a>\n' +
-                    '                   <a class="layui-btn layui-btn-sm" onclick="del('+this.itemUser.id+')">\n' +
+                    '                   <a class="layui-btn layui-btn-sm" onclick="deleteUser('+this.itemUser.id+')">\n' +
                     '                       <i class="layui-icon">&#xe640;</i>\n' +
                     '                   </a>\n' +
                     '                </div>\n' +
@@ -76,7 +76,7 @@ function personnel(id){
     });
 }
 
-function del(id) {
+function deleteUser(id) {
     layer.confirm('确定要删除吗？', {
         btn: ['确定', '取消']
     }, function () {

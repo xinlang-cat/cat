@@ -28,7 +28,7 @@ function fundSource(id){
                     '                   <a href="updateFund.html?id='+this.id+'" class="layui-btn layui-btn-sm">\n' +
                     '                       <i class="layui-icon">&#xe642;</i>\n' +
                     '                   </a>\n' +
-                    '                   <a class="layui-btn layui-btn-sm" onclick="del('+this.id+');">\n' +
+                    '                   <a class="layui-btn layui-btn-sm" onclick="deleteFund('+this.id+');">\n' +
                     '                       <i class="layui-icon">&#xe640;</i>\n' +
                     '                   </a>\n' +
                     '               </div>\n' +
@@ -43,7 +43,7 @@ function fundSource(id){
     });
 }
 
-function del(id) {
+function deleteFund(id) {
     layer.confirm('确定要删除吗？', {
         btn: ['确定', '取消']
     }, function () {
