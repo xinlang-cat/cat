@@ -2,8 +2,10 @@ package com.xinlang.zly.summary.controller;
 
 import com.xinlang.zly.summary.bean.ProjectSummary;
 import com.xinlang.zly.summary.service.IProjectSummaryService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -44,6 +46,10 @@ public class ProjectSummaryController {
     @GetMapping(value = "/summary",params = {"userId","itemId"})
     @LogAnnotation(module = "根据用户id和项目id查询list")
     public ProjectSummary findByUserIdAndItemId(Integer userId, Integer itemId){
+        if(userId != null ){
+            AppUser appUser = AppUserUtil.getLoginAppUser();
+            userId = appUser.getId().intValue();
+        }
         return projectSummaryService.findByUserIdAndItemId(userId,itemId);
     }
 
