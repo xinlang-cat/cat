@@ -1,4 +1,4 @@
-package com.xinlang.bean.utils;
+package com.xinlang.zly_xyx.cat_common.utils;
 
 import tk.mybatis.mapper.entity.Example;
 
