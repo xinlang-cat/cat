@@ -24,6 +24,9 @@
 									</form>
 	                   			</td>
 	                   			<td align="right">
+                                    <button class="layui-btn layui-btn-sm" onclick="work()" permission="mail:save">
+                                        <i class="layui-icon">&#xe608;</i> 工作总结
+                                    </button>
 	                   				<button class="layui-btn layui-btn-sm" onclick="addSummary()" permission="mail:save">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
@@ -166,6 +169,9 @@ function del(id){
 
 function addSummary() {
     location.href='addSummary.html?itemId='+item_id+'&itemName='+item_name;
+}
+function work() {
+    location.href='addWorkSummary.html?itemId='+item_id;
 }
 function showDetail(userId,itemId){
     alert(itemId)

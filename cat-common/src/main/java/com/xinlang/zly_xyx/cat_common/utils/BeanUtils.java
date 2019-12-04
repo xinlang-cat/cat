@@ -1,4 +1,4 @@
-package com.xinlang.bean.utils;
+package com.xinlang.zly_xyx.cat_common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cglib.beans.BeanMap;
@@ -6,6 +6,7 @@ import org.springframework.cglib.beans.BeanMap;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
 import java.util.Map;
+
 /**
  * @author 张龙毅 18777811286@163.com
  * 2019-11-24

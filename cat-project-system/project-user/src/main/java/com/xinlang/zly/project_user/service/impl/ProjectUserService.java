@@ -1,13 +1,11 @@
 package com.xinlang.zly.project_user.service.impl;
 
 import com.xinlang.bean.project_user.ProjectUser;
-import com.xinlang.bean.utils.BeanUtils;
-import com.xinlang.bean.utils.ExampleUtil;
-import com.xinlang.bean.utils.RowBoundsUtil;
-import com.xinlang.zly.project_user.mapper.ProjectUserDomainMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserMapper;
-import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserService;
+import com.xinlang.zly_xyx.cat_common.utils.BeanUtils;
+import com.xinlang.zly_xyx.cat_common.utils.ExampleUtil;
+import com.xinlang.zly_xyx.cat_common.utils.RowBoundsUtil;
 import com.xinlang.zly_xyx.common.Page;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;

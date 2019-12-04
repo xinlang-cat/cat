@@ -1,6 +1,6 @@
 package com.xinlang.zly.summary.mapper;
 
-import com.xinlang.zly.summary.bean.ProjectSummary;
+import com.xinlang.zly.summary.bean.WorkSummary;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * 2019-11-11
  */
 @Mapper
-@Repository("projectSummaryMapper")
-public interface ProjectSummaryMapper extends tk.mybatis.mapper.common.Mapper<ProjectSummary> {
+@Repository("workSummaryMapper")
+public interface WorkSummaryMapper extends tk.mybatis.mapper.common.Mapper<WorkSummary> {
 }

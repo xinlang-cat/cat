@@ -1,9 +1,9 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
 import com.xinlang.bean.company.Company;
-import com.xinlang.bean.utils.ExampleUtil;
-import com.xinlang.bean.utils.RowBoundsUtil;
-import com.xinlang.bean.utils.BeanUtils;
+import com.xinlang.zly_xyx.cat_common.utils.BeanUtils;
+import com.xinlang.zly_xyx.cat_common.utils.ExampleUtil;
+import com.xinlang.zly_xyx.cat_common.utils.RowBoundsUtil;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyMapper;
