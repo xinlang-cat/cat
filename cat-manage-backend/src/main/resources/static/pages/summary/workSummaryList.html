@@ -74,7 +74,6 @@
 var pers = checkPermission();
 var example;
 var item_id = getUrlParam("item_id");
-var item_name = getUrlParam("item_name");
 layui.use(['layer','util'], function(){
     var layer = layui.layer;
     var util = layui.util;
@@ -89,10 +88,9 @@ layui.use(['layer','util'], function(){
                     "url": "../../js/plugin/datatables/Chinese.lang"
                 },
             	"ajax": {
-            		"url" : domainName + "/api-summary/summarys",
+            		"url" : domainName + "/api-summary/work/list",
             		"type":"get",
             		"data":function(d){
-                        d.name = $('#name').val();
                         d.itemId = item_id;
             		},
             		"dataSrc": function (json) {
@@ -122,8 +120,7 @@ layui.use(['layer','util'], function(){
             	},
             	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
                 "columns": [
-                    { "data": "name", "defaultContent": ""},
-                    { "data": "itemName", "defaultContent": ""},
+                    { "data": "createUserName", "defaultContent": ""},
                     {
                         "data": "createTime",
                         "defaultContent": "",
@@ -136,12 +133,12 @@ layui.use(['layer','util'], function(){
                     	"defaultContent": "",
                     	"render": function (data, type, row) {
                     		var id = row['id'];
-                    		var userId = row["userId"];
+                    		var userId = row["createUserId"];
                     		var itemId = row["itemId"];
                     		var href = "updateSummary.html?id=" + id;
                             var edit =  buttonEdit(href, "", pers);
                             var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
-                            btn.attr("onclick", "showDetail(" +userId+","+itemId+")");
+                            btn.attr("onclick", "showDetail(" +id+")");
                             var showDetail = btn.prop("outerHTML");
                             var del = buttonDel(id,"",pers);
                             return  edit+showDetail +del;

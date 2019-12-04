@@ -10,7 +10,11 @@ eureka:
   client:
     registry-fetch-interval-seconds: 5
     service-url:
+<<<<<<< HEAD
       defaultZone: http://cat:cat@xinlangxfpt.mynatapp.cc:8761/eureka/
+=======
+      defaultZone: http://cat:cat@192.168.5.3:8761/eureka/
+>>>>>>> 35afc02f949ad25f2f328e4f4feec3c45b6fa34c
 
 spring:
   application:

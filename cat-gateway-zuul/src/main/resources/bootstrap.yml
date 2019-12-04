@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 80
 
 eureka:
   instance:
@@ -10,7 +10,11 @@ eureka:
   client:
     registry-fetch-interval-seconds: 5
     service-url:
+
       defaultZone: http://cat:cat@xinlangxfpt.mynatapp.cc:8761/eureka/
+
+     # defaultZone: http://cat:cat@192.168.5.3:8761/eureka/
+
 
 spring:
   application:

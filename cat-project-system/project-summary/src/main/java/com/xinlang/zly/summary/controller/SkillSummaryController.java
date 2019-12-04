@@ -1,6 +1,8 @@
 package com.xinlang.zly.summary.controller;
 
+import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.zly.summary.bean.SkillSummary;
+import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.ISkillSummaryService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
@@ -24,6 +26,8 @@ public class SkillSummaryController {
 
     @Autowired
     private ISkillSummaryService skillSummaryService;
+    @Autowired
+    private ConsumeProjectUser consumeProjectUser;
 
     @PostMapping
     @LogAnnotation(module = "添加技术总结")
@@ -33,7 +37,10 @@ public class SkillSummaryController {
         skillSummary.setCreateTime(date);
         skillSummary.setUpdateTime(date);
         AppUser appUser = AppUserUtil.getLoginAppUser();
-        skillSummary.setCreateUserId(appUser.getId().intValue());
+        Integer userId = appUser.getId().intValue();
+        ProjectUser projectUser = consumeProjectUser.findByUserId(userId);
+        skillSummary.setCreateUserId(userId);
+        skillSummary.setCreateUserName(projectUser.getName());
         skillSummaryService.save(skillSummary);
         return skillSummary;
     }
