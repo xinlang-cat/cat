@@ -1,6 +1,8 @@
 package com.xinlang.zly.summary.controller;
 
+import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.zly.summary.bean.WorkSummary;
+import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.IWorkSummaryService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
@@ -24,6 +26,8 @@ public class WorkSummaryController {
 
     @Autowired
     private IWorkSummaryService workSummaryService;
+    @Autowired
+    private ConsumeProjectUser consumeProjectUser;
 
     @PostMapping
     @LogAnnotation(module = "添加工作总结")
@@ -33,7 +37,10 @@ public class WorkSummaryController {
         workSummary.setCreateTime(date);
         workSummary.setUpdateTime(date);
         AppUser appUser = AppUserUtil.getLoginAppUser();
-        workSummary.setCreateUserId(appUser.getId().intValue());
+        Integer userId = appUser.getId().intValue();
+        ProjectUser projectUser = consumeProjectUser.findByUserId(userId);
+        workSummary.setCreateUserId(userId);
+        workSummary.setCreateUserName(projectUser.getName());
         workSummaryService.save(workSummary);
         return workSummary;
     }
