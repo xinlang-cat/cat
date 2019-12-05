@@ -14,6 +14,7 @@ import com.xinlang.cat_project.item.pojo.ItemUser;
 import com.xinlang.cat_project.item.pojo.PageResult;
 import com.xinlang.cat_project.item.service.IItemBasicService;
 import com.xinlang.cat_project.item.utils.constant;
+import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_common.utils.DateUtils;
 import com.xinlang.zly_xyx.user.LoginAppUser;
@@ -35,7 +36,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class ItemBasicService implements IItemBasicService {
+public class ItemBasicService extends BaseService<ItemBasic> implements IItemBasicService {
 
     @Autowired
     private ItemBasicMapper itemBasicMapper;
@@ -88,40 +89,6 @@ public class ItemBasicService implements IItemBasicService {
     }
 
     @Override
-    public void saveItem(ItemBasic basic) {
-        //获取当前用户ID
-        //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
-        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
-        //SET 创建人id、创建时间、状态
-        basic.setEdit_userid(userId);
-        basic.setEdit_date(new Date());
-        try {
-            basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), format1));
-            basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), format1));
-        }catch (Exception e){
-            log.error("日期格式错误！",e);
-            throw new ItemException(ExceptionEnum.DATE_FORMAT_ERROR);
-        }
-        //新增项目
-        int count = itemBasicMapper.insertSelective(basic);
-        if(count != 1){
-            throw new ItemException(ExceptionEnum.ITEM_SAVE_ERROR);
-        }
-    }
-
-    @Override
-    public ItemBasic queryItemById(Integer id) {
-        ItemBasic basic = itemBasicMapper.selectByPrimaryKey(id);
-        if(basic==null){
-            throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
-        basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), format1));
-        basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), format1));
-        basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), format2));
-        return basic;
-    }
-
-    @Override
     public List<ItemBasic> queryCompanyItem() {
         //用于保存项目信息
         List<ItemBasic> list = new ArrayList<>();
@@ -162,35 +129,6 @@ public class ItemBasicService implements IItemBasicService {
             }
         }
         return list;
-    }
-
-    @Override
-    public void updateItem(ItemBasic basic) {
-        //获取当前用户ID
-        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
-        basic.setEdit_userid(userId);
-        basic.setEdit_date(new Date());
-        try {
-            if(basic.getStart_dateStr()!=null&&basic.getEnd_dateStr()!=null) {
-                basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), format1));
-                basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), format1));
-            }
-        }catch (Exception e){
-            log.error("日期格式错误！",e);
-            throw new ItemException(ExceptionEnum.DATE_FORMAT_ERROR);
-        }
-        int i = itemBasicMapper.updateByPrimaryKeySelective(basic);
-        if(i != 1){
-            throw new ItemException(ExceptionEnum.ITEM_UPDATE_ERROR);
-        }
-    }
-
-    @Override
-    public void deleteItem(Integer id) {
-        int i = itemBasicMapper.deleteByPrimaryKey(id);
-        if(i != 1){
-            throw new ItemException(ExceptionEnum.ITEM_DELETE_ERROR);
-        }
     }
 
     @Override
