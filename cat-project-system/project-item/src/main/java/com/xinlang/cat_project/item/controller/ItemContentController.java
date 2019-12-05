@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 梁应昌
@@ -21,70 +23,63 @@ import java.util.List;
 public class ItemContentController {
 
     @Autowired
-    private IItemContentService planService;
+    private IItemContentService iItemContentService;
 
-    /**
-     * 添加内容
-     * @param itemContent
-     * @return
-     */
-    @ApiOperation(value = "添加主要研究内容信息")
-    @LogAnnotation(module = "添加主要研究内容信息")
-    @PreAuthorize("hasAnyAuthority('project:content:save')")
-    @PostMapping
-    public ResponseEntity<Void> savePlan(@RequestBody ItemContent itemContent) {
-        planService.savePlan(itemContent);
+    @ApiOperation(value = "添加一条主要研究内容")
+    @LogAnnotation(module = "添加一条主要研究内容")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("one")
+    public ResponseEntity<Void> saveContent(@RequestBody ItemContent itemContent) {
+        iItemContentService.save(itemContent);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 获取单条内容
-     * @param id 内容id
-     * @return
-     */
-    @ApiOperation(value = "获取一条主要研究内容信息，id必填")
-    @LogAnnotation(module = "获取一条主要研究内容信息")
-    @GetMapping("/{id}")
-    public ResponseEntity<ItemContent> getPlanById(@PathVariable Integer id){
+    @ApiOperation(value = "添加多条主要研究内容")
+    @LogAnnotation(module = "添加多条主要研究内容")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("multi")
+    public ResponseEntity<Void> saveContents(@RequestBody List<ItemContent> itemContents) {
+        iItemContentService.saveContents(itemContents);
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
-        ItemContent itemContent = planService.queryPlanById(id);
+    @ApiOperation(value = "查询主要研究内容")
+    @LogAnnotation(module = "查询主要研究内容")
+    @GetMapping("/list")
+    public ResponseEntity<List<ItemContent>> getPlanById(@RequestParam Map<String, Object> params){
+        List<ItemContent> itemContent = iItemContentService.findListByParams(params,ItemContent.class);
         return ResponseEntity.ok(itemContent);
     }
 
-    /**
-     * 获取当前项目所有内容
-     * @param Tid 项目id
-     * @return
-     */
-    @ApiOperation(value = "获取所有主要研究内容信息，item_id必填")
-    @LogAnnotation(module = "获取所有主要研究内容信息")
-    @GetMapping("/all/{Tid}")
-    public ResponseEntity<List<ItemContent>> getPlanByTid(@PathVariable Integer Tid){
-
-        List<ItemContent> itemContent = planService.queryPlanByTId(Tid);
-        return ResponseEntity.ok(itemContent);
-    }
-
-    /**
-     * 更改
-     * @param itemContent
-     * @return
-     */
-    @ApiOperation(value = "修改主要研究内容信息，id必填")
-    @LogAnnotation(module = "修改条主要研究内容信息")
-    @PreAuthorize("hasAnyAuthority('project:content:update')")
-    @PutMapping
-    public ResponseEntity<Void> updatePlan(@RequestBody ItemContent itemContent){
-        planService.updatePlan(itemContent);
+    @ApiOperation(value = "修改一条主要研究内容")
+    @LogAnnotation(module = "修改一条条主要研究内容")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping("one")
+    public ResponseEntity<Void> updateContent(@RequestBody ItemContent itemContent){
+        iItemContentService.update(itemContent);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ApiOperation(value = "删除主要研究内容信息，id必填")
-    @LogAnnotation(module = "删除主要研究内容信息")
-    @PreAuthorize("hasAnyAuthority('project:content:delete')")
+    @ApiOperation(value = "修改多条主要研究内容")
+    @LogAnnotation(module = "修改多条主要研究内容")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @Transactional
+    @PutMapping("multi")
+    public ResponseEntity<Void> updateContents(@RequestBody List<ItemContent> itemContents){
+        for (ItemContent itemContent : itemContents) {
+            iItemContentService.delete(itemContent.getId());
+        }
+        iItemContentService.saveContents(itemContents);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "删除主要研究内容")
+    @LogAnnotation(module = "删除主要研究内容")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlan(@PathVariable Integer id){
-        planService.deletePlan(id);
+    public ResponseEntity<Void> deleteContent(@PathVariable Integer id){
+        iItemContentService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
 }
