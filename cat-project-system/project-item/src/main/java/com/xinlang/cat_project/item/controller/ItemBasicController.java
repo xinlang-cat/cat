@@ -63,7 +63,6 @@ public class ItemBasicController {
     @PreAuthorize("hasAnyAuthority('project:basic:save')")
     @PostMapping
     public ResponseEntity<Void> saveItem(@RequestBody ItemBasic basic) {
-
         itemService.saveItem(basic);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }

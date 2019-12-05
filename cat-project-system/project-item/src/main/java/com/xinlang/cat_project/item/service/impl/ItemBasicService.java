@@ -49,6 +49,10 @@ public class ItemBasicService implements IItemBasicService {
     @Autowired
     private ConsumeCompany consumeCompany;
 
+    /*日期格式*/
+    private String format1 = "yyyy-MM-dd";
+    private String format2 = "yyyy-MM-dd HH:mm";
+
     @Override
     public PageResult<ItemBasic> queryList(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params) throws ItemException{
         // 开始分页
@@ -74,12 +78,10 @@ public class ItemBasicService implements IItemBasicService {
         List<ItemBasic> list = itemBasicMapper.selectByExample(example);
         for (int i=0;i<list.size();i++){
             ItemBasic it = list.get(i);
-            it.setStart_dateStr(DateUtils.dateToString(it.getStart_date(),"yyyy年MM月dd日"));
-            it.setEnd_dateStr(DateUtils.dateToString(it.getEnd_date(),"yyyy年MM月dd日"));
+            it.setStart_dateStr(DateUtils.dateToString(it.getStart_date(),format1));
+            it.setEnd_dateStr(DateUtils.dateToString(it.getEnd_date(),format1));
+            it.setEdit_dateStr(DateUtils.dateToString(it.getEdit_date(), format2));
         }
-       /* if(CollectionUtils.isEmpty(list)){
-            throw new ItemException(ExceptionEnum.ITEM_NOT_FOUND);
-        }*/
         //解析分页结果
         PageInfo<ItemBasic> info = new PageInfo<>(list);
         return  new PageResult<>(info.getTotal(), list);
@@ -87,22 +89,15 @@ public class ItemBasicService implements IItemBasicService {
 
     @Override
     public void saveItem(ItemBasic basic) {
-
-        //获取当前用户
+        //获取当前用户ID
         //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
-        LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
-        //通过当前用户获取公司
-        Company company = consumeCompany.findByUserId(loginAppUser.getId().intValue());
-        if(company == null){
-            throw new ItemException(ExceptionEnum.USER_INFO_NOT_PERFECT);
-        }
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         //SET 创建人id、创建时间、状态
-        basic.setEdit_userid(loginAppUser.getId().intValue());
+        basic.setEdit_userid(userId);
         basic.setEdit_date(new Date());
-        basic.setUndertaker(company.getDeptCode());
         try {
-            basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), "yyyy年MM月dd日"));
-            basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), "yyyy年MM月dd日"));
+            basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), format1));
+            basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), format1));
         }catch (Exception e){
             log.error("日期格式错误！",e);
             throw new ItemException(ExceptionEnum.DATE_FORMAT_ERROR);
@@ -120,9 +115,9 @@ public class ItemBasicService implements IItemBasicService {
         if(basic==null){
             throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
         }
-        basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), "yyyy年MM月dd日"));
-        basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), "yyyy年MM月dd日"));
-        basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), "yyyy年MM月dd日"));
+        basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), format1));
+        basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), format1));
+        basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), format2));
         return basic;
     }
 
@@ -161,9 +156,9 @@ public class ItemBasicService implements IItemBasicService {
         }
         if(!CollectionUtils.isEmpty(list)){
             for (ItemBasic basic : list) {
-                basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), "yyyy年MM月dd日"));
-                basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), "yyyy年MM月dd日"));
-                basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), "yyyy年MM月dd日"));
+                basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), format1));
+                basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), format1));
+                basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), format2));
             }
         }
         return list;
@@ -171,10 +166,14 @@ public class ItemBasicService implements IItemBasicService {
 
     @Override
     public void updateItem(ItemBasic basic) {
+        //获取当前用户ID
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        basic.setEdit_userid(userId);
+        basic.setEdit_date(new Date());
         try {
             if(basic.getStart_dateStr()!=null&&basic.getEnd_dateStr()!=null) {
-                basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), "yyyy年MM月dd日"));
-                basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), "yyyy年MM月dd日"));
+                basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), format1));
+                basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), format1));
             }
         }catch (Exception e){
             log.error("日期格式错误！",e);
