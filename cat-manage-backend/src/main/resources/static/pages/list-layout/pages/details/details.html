@@ -12,7 +12,8 @@
 <body>
     <!-- 按钮组 -->
     <!-- 基本信息 -->
-    <form class="form-horizontal" onsubmit="return false" id="form">
+    <form class="form-horizontal" onsubmit="return false" id="form_basic">
+        <fieldset>
     <div style="position: relative;">
         <div class="content">
             <!--    <p class="title">基本信息</p> -->
@@ -29,7 +30,7 @@
                     <tr>
                         <td>合同编号：</td>
                         <td>
-                            <input style="border: none;" class="form-control" placeholder="合同编号" type="text" name="contract_number" maxlength="50"
+                            <input style="border: none;" class="form-control" placeholder="合同编号" type="text" name="contract_no" maxlength="50"
                                    data-bv-notempty="true"
                                    data-bv-notempty-message="合同编号 不能为空">
                         </td>
@@ -37,10 +38,10 @@
                     <tr>
                         <td>计划类别：</td>
                         <td>
-                            <input style="border: none;" class="form-control" placeholder="计划类别" type="text" name="plan_category" maxlength="50"
+
+                            <input style="border: none;" class="form-control" placeholder="计划类别" type="text" name="category" maxlength="50"
                                    data-bv-notempty="true"
                                    data-bv-notempty-message="计划类别 不能为空">
-
                         </td>
                     </tr>
                     <tr>
@@ -63,7 +64,7 @@
                     <tr>
                         <td>承担单位：</td>
                         <td>
-                            <input style="border: none;" class="form-control" placeholder="承担单位" type="text" name="contract_number" maxlength="50"
+                            <input style="border: none;" class="form-control" placeholder="承担单位" type="text" name="undertaker" maxlength="50"
                                    data-bv-notempty="true"
                                    data-bv-notempty-message="承担单位 不能为空">
                         </td>
@@ -71,7 +72,7 @@
                     <tr>
                         <td>管理单位：</td>
                         <td>
-                            <input style="border: none;" class="form-control" placeholder="管理单位" type="text" name="supervisor_dept" maxlength="50"
+                            <input style="border: none;" class="form-control" placeholder="管理单位" type="text" name="administrator" maxlength="50"
                                    data-bv-notempty="true"
                                    data-bv-notempty-message="管理单位 不能为空">
                         </td>
@@ -79,7 +80,7 @@
                     <tr>
                         <td>下达文号：</td>
                         <td>
-                            <input style="border: none;" class="form-control" placeholder="下达文号" type="text" name="contract_number" maxlength="50"
+                            <input style="border: none;" class="form-control" placeholder="下达文号" type="text" name="item_number" maxlength="50"
                                    data-bv-notempty="true"
                                    data-bv-notempty-message="下达文号 不能为空">
                         </td>
@@ -87,9 +88,12 @@
                     <tr>
                         <td>开始时间：</td>
                         <td>
+
+
                             <input style="border: none;" class="form-control date" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
-                                   id="start" data-bv-notempty="true"
+                                    data-bv-notempty="true"
                                    data-bv-notempty-message="开始时间 不能为空">
+
                         </td>
                     </tr>
                     <tr>
@@ -103,7 +107,7 @@
                     <tr>
                         <td>总体目标：</td>
                         <td colspan="3">
-                             <textarea style="border: none;" placeholder="总体目标" class="layui-textarea" name="overall_objective"
+                             <textarea style="border: none;" placeholder="总体目标" class="layui-textarea" name="outline"
                                        style="border-color: #ccc;"
                                        data-bv-notempty="true"
                                        data-bv-notempty-message=" 内容不能为空"></textarea>
@@ -114,14 +118,32 @@
         </div>
    </div>
 
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="Add();">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
     </form>
+
     <!-- 主要研究内容 -->
+    <form class="form-horizontal" onsubmit="return false" id="form_content">
+        <fieldset>
+            <input type="hidden" name="item_id" id="item_id" value="" />
   <div style="position: relative;">
         <div class="content">
             <!--     <p class="title">主要研究内容</p> -->
             <table class="layui-table" >
                 <colgroup>
-                    <col width="100%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="30%">
                 </colgroup>
                 <div style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;">
                 <button onclick="add_content()"  type="button"
@@ -134,7 +156,12 @@
                     </tr>
                 </thead> -->
                 <tbody id="maincontent" >
-                    <tr>
+                <tr>
+                    <td style="text-align: center;">序号</td>
+                    <td style="text-align: center;">标题</td>
+                    <td style="text-align: center;">内容</td>
+                </tr>
+                   <!-- <tr>
                         <td>
                             <span style="margin-left: 1%;font-size: 15px;"><span>(1)</span>八角高接换冠快速改良技术研究</span>
                             <p>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -158,7 +185,7 @@
                                 根据八角开花结果生物学特性和生产做业条件 ，开展配方施肥、激素处理、修剪控梢等人工干预保果壮果研究,针对生产中存在春季过度落果
                                 、果实生长不良等关键问题，提出促进幼果生长、实现优质果实的八角保果壮果技术</p>
                         </td>
-                    </tr>
+                    </tr>-->
 
                 </tbody>
 
@@ -169,7 +196,7 @@
 
 
 
-            <div class="operation">
+          <!--  <div class="operation">
                 <div class="layui-btn-group" style="margin-left: 0;">
                     <button type="button" class="layui-btn layui-btn-sm">
                         <i class="layui-icon">&#xe642;</i>
@@ -186,11 +213,12 @@
                         <i class="layui-icon">&#xe640;</i>
                     </button>
                 </div>
-            </div>
+            </div>-->
         </div>
  </div>
     <!-- 项目资金 -->
-
+        </fieldset>
+    </form>
 
     <div style="position: relative;">
         <div class="content">
@@ -502,37 +530,37 @@
                         <tr>
                                 <td rowspan="6">乙方</td>
                                 <td>项目负责人</td>
-                                <td><input style="border: none;" class="form-control" placeholder="项目负责人" type="text" name="item_name" maxlength="50"
+                                <td><input style="border: none;" class="form-control" placeholder="项目负责人" type="text"  maxlength="50"
                                            data-bv-notempty="true"
                                            data-bv-notempty-message="项目负责人 不能为空"></td>
                               </tr>
                               <tr>
                                 <td>（单位）</td>
-                                <td><input style="border: none;" class="form-control" placeholder="（单位）" type="text" name="item_name" maxlength="50"
+                                <td><input style="border: none;" class="form-control" placeholder="（单位）" type="text"  maxlength="50"
                                                          data-bv-notempty="true"
                                                          data-bv-notempty-message="（单位） 不能为空"></td>
                               </tr>
                               <tr>
                                 <td>组织机构代码/统一社会信用代码</td>
-                                <td><input style="border: none;" class="form-control" placeholder="组织机构代码/统一社会信用代码" type="text" name="item_name" maxlength="50"
+                                <td><input style="border: none;" class="form-control" placeholder="组织机构代码/统一社会信用代码" type="text"  maxlength="50"
                                                              data-bv-notempty="true"
                                                              data-bv-notempty-message="组织机构代码/统一社会信用代码 不能为空"></td>
                               </tr>
                               <tr>
                                 <td>账户名称</td>
-                                <td><input style="border: none;" class="form-control" placeholder="账户名称" type="text" name="item_name" maxlength="50"
+                                <td><input style="border: none;" class="form-control" placeholder="账户名称" type="text"  maxlength="50"
                                                          data-bv-notempty="true"
                                                          data-bv-notempty-message="账户名称 不能为空"></td>
                               </tr>
                               <tr>
                                 <td>开户银行</td>
-                                <td><input style="border: none;" class="form-control" placeholder="开户银行" type="text" name="item_name" maxlength="50"
+                                <td><input style="border: none;" class="form-control" placeholder="开户银行" type="text"  maxlength="50"
                                                         data-bv-notempty="true"
                                                         data-bv-notempty-message="开户银行 不能为空"></td>
                               </tr>
                               <tr>
                                 <td>账号</td>
-                                <td><input style="border: none;" class="form-control" placeholder="账号" type="text" name="item_name" maxlength="50"
+                                <td><input style="border: none;" class="form-control" placeholder="账号" type="text"  maxlength="50"
                                                             data-bv-notempty="true"
                                                             data-bv-notempty-message="账号 不能为空"></td>
                               </tr>
@@ -543,7 +571,7 @@
                         <tr>
                             <td>丙方</td>
                             <td>项目管理联系人</td>
-                            <td><input style="border: none;" class="form-control" placeholder="项目管理联系人" type="text" name="item_name" maxlength="50"
+                            <td><input style="border: none;" class="form-control" placeholder="项目管理联系人" type="text"  maxlength="50"
                                          data-bv-notempty="true"
                                          data-bv-notempty-message="项目管理联系人 不能为空"></td>
                           </tr>
@@ -599,49 +627,107 @@
         <!-- 项目人员 -->
 
     </div>
+
+
 </body>
 
 <script src="../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
-<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../../js/my/permission.js"></script>
-
+<!--<script type="text/javascript" src="../../../../js/my/permission.js"></script>-->
+<!--
 <script type="text/javascript" src="../../../../js/project/basis.js"></script>
 <script type="text/javascript" src="../../../../js/project/content-target.js"></script>
 <script type="text/javascript" src="../../../../js/project/fund.js"></script>
 <script type="text/javascript" src="../../../../js/project/fundBudgetAll.js"></script>
-<script type="text/javascript" src="../../../../js/project/personnel.js"></script>
+<script type="text/javascript" src="../../../../js/project/personnel.js"></script>-->
+<script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 
 
 <script>
+    layui.use(['layer', 'laydate','upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
 
-    laydate.render({
-        elem: '#start_date'
-        , format: 'yyyy年MM月dd日'
-    });
-    laydate.render({
-        elem: '#end_date'
-        , format: 'yyyy年MM月dd日'
-    });
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+            });
+        });
+    })
+
+
+    function Add(){
+      /*  $('#form_basic').bootstrapValidator();
+        var bootstrapValidator = $("#form_basic").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }*/
+        var formdata = $("#form_basic").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                /* layer.msg("成功", {shift: -1, time: 1000}, function () {
+                     //location.href = "details.html?id="+id;
+                     location.href = "../list.html";
+                 });*/
+                alert(data.id);
+               $("#item_id").val();
+                alert("成功");
+            }
+        });
+    }
+
+
+    function add_content() {
+       /* $('#form_content').bootstrapValidator();
+        var bootstrapValidator = $("#form_content").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }*/
+        var formdata = $("#form_content").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/content',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                /* layer.msg("成功", {shift: -1, time: 1000}, function () {
+                     //location.href = "details.html?id="+id;
+                     location.href = "../list.html";
+                 });*/
+                alert("成功");
+            }
+        });
+
+    }
 </script>
 
 <script>
+    var i=1;
     function add_content() {
         let str;
-        str='<tr>'
-            +' <td>' +
-            ' <textarea style="border: none;" class="layui-textarea" name="overall_objective"' +
-            ' style="border-color: #ccc;"' +
-            ' data-bv-notempty="true"' +
-            '  data-bv-notempty-message=" 内容不能为空"></textarea>' +
-            '</td>'
-            + '</tr>';
+        str='  <tr>' +
+            ' <td style="text-align: center;">'+i+' </td>' +
+            ' <td style="text-align: center;">     <input style="border: none;" class="form-control" placeholder="标题" type="text" name="headline" maxlength="50"' +
+            ' data-bv-notempty="true"\n' +
+            ' data-bv-notempty-message="标题 不能为空"></td>' +
+            '<td style="text-align: center;">     <input style="border: none;" class="form-control" placeholder="内容" type="text" name="content" maxlength="50"' +
+            ' data-bv-notempty="true"\n' +
+            '  data-bv-notempty-message="内容 不能为空"></td>' +
+            ' </tr>'
 
         $("#maincontent").append(str);
+        i++;
     }
 
     function add_yusuan() {
@@ -698,12 +784,10 @@
             '    class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>\n' +
             '\n' +
             '    </tr>';
-
-
-
         $("#Qiyu").append(str);
     }
 </script>
+
 <!-- <script type="text/javascript">
   /*   layui.use(['layer'], function () {
         var layer = layui.layer;
