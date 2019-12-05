@@ -28,23 +28,19 @@ public class ItemBasic implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    private String contract_number;
-    private String plan_category;
+    private String contract_no;
+    private String category;
     private String item_name;
-    private String batch;
     private String consignor;
     private String undertaker;
-    private String supervisor_dept;
-    private Integer supervisor;
-    private String overall_objective;
-    private Integer district;
+    private String administrator;
+    private String item_number;
+    private String outline;
     private String contract_file;
     private Date start_date;
     private Date end_date;
     private Date edit_date;
     private Integer edit_userid;
-    private String dept_code;
-    private String type;
     private Integer status;
 
     @Transient
