@@ -7,13 +7,16 @@
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
 	<form class="form-horizontal" onsubmit="return false" id="form">
 		<fieldset>
+			<input id="id" name="id" style="display: none">
+
 			<div class="form-group">
 				<label class="col-md-2 control-label">公司名称</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="公司名称" type="text" name="signName" maxlength="50"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="signName"
 						   data-bv-notempty-message="公司名称 不能为空">
 				</div>
 			</div>
@@ -21,7 +24,7 @@
 				<label class="col-md-2 control-label">负 责 人</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="负责人姓名" type="text" name="principal" maxlength="50"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="principal"
 						   data-bv-notempty-message="负责人姓名 不能为空">
 				</div>
 			</div>
@@ -29,7 +32,7 @@
 				<label class="col-md-2 control-label">负责人手机</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="负责人手机号" type="text" maxlength="11" name="principalPhone"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="principalPhone"
 						   data-bv-notempty-message="负责人手机号 不能为空">
 				</div>
 			</div>
@@ -37,7 +40,7 @@
 				<label class="col-md-2 control-label">法人姓名</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="法人姓名" type="text" name="legalPerson" maxlength="50"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="legalPerson"
 						   data-bv-notempty-message="法人姓名 不能为空">
 				</div>
 			</div>
@@ -45,7 +48,7 @@
 				<label class="col-md-2 control-label">法人身份证</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="法人身份证" type="text" name="legalPersonCard" maxlength="18"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="legalPersonCard"
 						   data-bv-notempty-message="法人身份证 不能为空">
 				</div>
 			</div>
@@ -53,7 +56,7 @@
 				<label class="col-md-2 control-label">法人手机</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="法人手机" type="text" name="legalPersonPhone" maxlength="18"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="legalPersonPhone"
 						   data-bv-notempty-message="法人手机 不能为空">
 				</div>
 			</div>
@@ -61,14 +64,14 @@
 				<label class="col-md-2 control-label">公司固话</label>
 				<div class="col-md-10">
 					<input class="form-control" placeholder="公司固话" type="text" name="telephone" maxlength="18"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" id="telephone"
 						   data-bv-notempty-message="公司固话 不能为空">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">注册资金</label>
 				<div class="col-md-10">
-					<input class="form-control" placeholder="注册资金（万元）" type="text" name="registeredCapital" maxlength="11">
+					<input class="form-control" placeholder="注册资金（万元）" type="text" name="registeredCapital" maxlength="11" id="registeredCapital">
 				</div>
 			</div>
 			<div class="form-group">
@@ -91,7 +94,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">信用代码</label>
 				<div class="col-md-10">
-					<input class="form-control" placeholder="信用代码" type="text" name="deptCode" maxlength="18"
+					<input class="form-control" placeholder="信用代码" type="text" name="deptCode" maxlength="18" id="deptCode"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="信用代码 不能为空">
 				</div>
@@ -134,7 +137,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">详细地址</label>
 				<div class="col-md-10">
-					<input class="form-control" placeholder="详细地址" type="text" name="address" maxlength="50">
+					<input class="form-control" placeholder="详细地址" type="text" name="address" maxlength="50" id="address">
 				</div>
 			</div>
 
@@ -142,7 +145,7 @@
 				<div class="row" align="center">
 					<div class="col-md-12">
 						<button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
-						<button class="btn btn-primary" type="submit" onclick="add()">
+						<button class="btn btn-primary" type="submit" onclick="update()">
 							<i class="fa fa-save"></i> 保存
 						</button>
 					</div>
@@ -160,10 +163,106 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
+	var deptCode = getUrlParam("deptCode");
+	$(function () {
+		$.ajax({
+			type: 'get',
+			url : domainName + '/api-c/company/'+deptCode,
+			contentType: "application/json; charset=utf-8",
+			success: function (res) {
+				$("#signName").val(res.signName);
+				$("#principal").val(res.principal);
+				$("#principalPhone").val(res.principalPhone);
+				$("#legalPerson").val(res.legalPerson);
+				$("#legalPersonCard").val(res.legalPersonCard);
+				$("#legalPersonPhone").val(res.legalPersonPhone);
+				$("#telephone").val(res.telephone);
+				$("#registeredCapital").val(res.registeredCapital);
+				$("#deptCode").val(res.deptCode);
+				$("#type").val(res.type);
+				$("#address").val(res.address);
+				$("#provinceCode").click();
+				$("#provinceCode").val(res.provinceCode);
+				city(res.provinceCode);
+				$("#cityCode").val(res.cityCode);
+				area(res.cityCode);
+				$("#areaCode").val(res.areaCode);
+				street(res.areaCode);
+				$("#streetCode").val(res.streetCode);
+			}
+		})
+	})
+	initData();
+
+	function city(provinceCode) {
+		$.ajax({
+			type : 'get',
+			url : domainName + '/map/city/all/'+provinceCode,
+			async : false,
+			success : function(data) {
+				var select = $("#cityCode");
+				$("#cityCode,#areaCode,#streetCode").empty();
+				select.append("<option value=''>请选择城市</option>");
+				for(var i=0; i<data.length; i++){
+					var d = data[i];
+					var code = d.cityCode;
+					var name = d.cityName;
+					select.append("<option value='"+ code +"'>" +name+"</option>");
+				}
+			}
+		});
+	}
+
+	function area(cityCode) {
+		$.ajax({
+			type : 'get',
+			url : domainName + '/map/area/all/'+cityCode,
+			async : false,
+			success : function(data) {
+				var select = $("#areaCode");
+				$("#areaCode,#streetCode").empty();
+				select.append("<option value=''>请选择区县</option>");
+				for(var i=0; i<data.length; i++){
+					var d = data[i];
+					var code = d.areaCode;
+					var name = d.areaName;
+					select.append("<option value='"+ code +"'>" +name+"</option>");
+				}
+			}
+		});
+	}
+	function street(areaCode) {
+		$.ajax({
+			type : 'get',
+			url : domainName + '/map/street/all/'+areaCode,
+			async : false,
+			success : function(data) {
+				var select = $("#streetCode");
+				$("#streetCode").empty();
+				select.append("<option value=''>请选择街道/镇</option>");
+				for(var i=0; i<data.length; i++){
+					var d = data[i];
+					var code = d.streetCode;
+					var name = d.streetName;
+					select.append("<option value='"+ code +"'>" +name+"</option>");
+				}
+			}
+		});
+	}
+
+
+
+
+
+	function initData(){
+		$("#id").val(getUrlParam("id"));
+		$("#signName").val(decodeURIComponent(getUrlParam("signName")));
+		$("#deptCode").val(decodeURIComponent(getUrlParam("deptCode")));
+	}
 	layui.use('layer', function(){
 		var layer = layui.layer;
 	});
-	function add() {
+	function update() {
 		$('#form').bootstrapValidator();
 		var bootstrapValidator = $("#form").data('bootstrapValidator');
 		bootstrapValidator.validate();
@@ -172,8 +271,9 @@
 		}
 
 		var formdata = $("#form").serializeObject();
+
 		$.ajax({
-			type : 'post',
+			type : 'put',
 			url : domainName + '/api-c/company',
 			contentType: "application/json; charset=utf-8",
 			data : JSON.stringify(formdata),

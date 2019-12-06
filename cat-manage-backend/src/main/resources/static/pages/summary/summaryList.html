@@ -89,7 +89,7 @@ layui.use(['layer','util'], function(){
                     "url": "../../js/plugin/datatables/Chinese.lang"
                 },
             	"ajax": {
-            		"url" : domainName + "/api-summary/summarys",
+            		"url" : domainName + "/api-summary/skill/page",
             		"type":"get",
             		"data":function(d){
                         d.name = $('#name').val();
@@ -159,7 +159,7 @@ function del(id){
     }, function() {
         $.ajax({
             type : 'delete',
-            url : domainName + '/api-summary/summary/'+id,
+            url : domainName + '/api-summary/skill/'+id,
             success : function(data) {
                 example.ajax.reload();
                 layer.msg("删除成功");
@@ -178,10 +178,9 @@ function work() {
 }
 
 function showWork() {
-    location.href='workSummaryList.html?itemId='+item_id;
+    location.href='workSummaryList.html?item_id='+item_id;
 }
 function showDetail(userId,itemId){
-    alert(itemId)
 	layer.open({
 		title:"详情",
 		type: 2,

@@ -49,7 +49,7 @@ security:
   oauth2:
     resource:
 
-      user-info-uri: http://xinlangxfpt.mynatapp.cc:8080/api-o/user-me
+      user-info-uri: http://192.168.5.19/api-o/user-me
 
       prefer-token-info: false
 aliyun:

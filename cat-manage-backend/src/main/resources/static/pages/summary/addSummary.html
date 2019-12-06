@@ -63,7 +63,7 @@
 		    formdata.itemName = itemName;
 			$.ajax({
 				type : 'post',
-				url : domainName + '/api-summary/summary',
+				url : domainName + '/api-summary/skill',
 				contentType: "application/json; charset=utf-8",  
 				data : JSON.stringify(formdata),
 				success : function(data) {
