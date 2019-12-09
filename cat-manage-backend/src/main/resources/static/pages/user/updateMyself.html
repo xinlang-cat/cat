@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">出生时间</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate">
+						<input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate" readonly="readonly">
 					</div>
 				</div>
 
@@ -183,7 +183,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">学位获得时间</label>
 					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear">
+						<input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear" readonly="readonly">
 					</div>
 				</div>
 
@@ -211,9 +211,9 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">所学专业</label>
 					<div class="col-md-8">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" aria-describedby="major" name="major">
-							<span class="input-group-addon" id="major"><a >选择</a></span>
+						<div class="input-group" id="major" data-status="true" data-sign="PZBM">
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" name="major" readonly="readonly">
+							<span class="input-group-addon" ><a >选择</a></span>
 						</div>
 					</div>
 				</div>
@@ -236,7 +236,7 @@
 					<label class="col-md-2 control-label">现从事专业</label>
 					<div class="col-md-8">
 						<div class="input-group" id="nowMajor" data-status="true" data-sign="PZBM">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" >
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
 							<span class="input-group-addon"><a >选择</a></span>
 						</div>
 					</div>
@@ -245,7 +245,10 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">主要研究领域</label>
 					<div class="col-md-8">
-						<input class="form-control" placeholder="主要研究领域" type="text" name="mainDomain" id="mainDomain"  readonly="readonly">
+						<div class="input-group" id="mainDomain" data-status="true" data-sign="PZBM">
+							<input type="text" class="form-control" placeholder="主要研究领域" name="mainDomain" readonly="readonly">
+							<span class="input-group-addon"><a >选择</a></span>
+						</div>
 					</div>
 				</div>
 				
@@ -287,7 +290,7 @@
 					<label class="col-md-2 control-label">服务的产业或领域</label>
 					<div class="col-md-8">
 						<div class="input-group" id="domains" data-status="true" data-sign="RURAL_INDUSTRY">
-							<input type="text" class="form-control" placeholder="服务的产业或领域" name="domains">
+							<input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly">
 							<span class="input-group-addon" ><a>选择</a></span>
 						</div>
 					</div>
@@ -297,7 +300,7 @@
 					<label class="col-md-2 control-label">技术专长及提供的服务</label>
 					<div class="col-md-8">
 						<div class="input-group" id="skills" data-status="true" data-sign="RURAL_INDUSTRY">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务"name="skills">
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
 							<span class="input-group-addon" ><a >选择</a></span>
 						</div>
 					</div>
@@ -341,31 +344,6 @@
 		</form>
 	</div>
 
-
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<form class="layui-form" onsubmit="return false" id="form3">
-			<div class="layui-form-item">
-				<div class="layui-inline">
-					<label class="layui-form-label"></label>
-					<div class="layui-input-inline">
-						<input type="checkbox" lay-filter="selectAll" lay-skin="primary" title="全选"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>全选</span><i class="layui-icon layui-icon-ok"></i></div>
-					</div>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<div class="layui-input-block" id="ckb">
-					<input type="checkbox" name="permission" id="59" value="59" title="修改标签">
-					<div class="layui-unselect layui-form-checkbox layui-form-checked"><span>修改标签</span><i class="layui-icon layui-icon-ok"></i></div>
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<div class="layui-input-block">
-					<button class="layui-btn" onclick="save()">立即提交</button>
-				</div>
-			</div>
-		</form>
-	</div>
-
 	<script src="../../js/constant.js"></script>
 	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="../../js/jq.js"></script>
@@ -387,6 +365,7 @@
 
 			laydate.render({
 				elem: '#birthDate'
+				, type: 'year'
 			});
 
 			layedit.set({
@@ -395,80 +374,46 @@
 					type: 'post'
 				}
 			});
+			laydate.render({
+				elem: '#lastYear'
+				, type: 'year'
+			});
 
 			index1 = layedit.build('accomplishment');
 			index2 = layedit.build('achievement');
 		});
 
-		initData();
-
-		function initData(){
-			$.ajax({
-				type : 'get',
-				url : domainName + '/api-u/users/current',
-				async : false,
-				success : function(data) {
-					setValue(data);
-					$.ajax({
-						type : 'get',
-						url : domainName + '/project-user/user-anon/'+data.id,
-						async : false,
-						success : function(data) {
-							if(jQuery.isEmptyObject(data)){
-								$("#div_submit").empty();
-								var str = '<button class="btn btn-primary" type="submit" onclick="update(0)">\n' +
-										'\t\t\t\t\t\t\t\t<i class="fa fa-save"></i> 保存\n' +
-										'\t\t\t\t\t\t\t</button>';
-								$("#div_submit").append(str);
-							}else{
-								var str = '<button class="btn btn-primary" type="submit" onclick="update(1)">\n' +
-										'\t\t\t\t\t\t\t\t<i class="fa fa-save"></i> 保存\n' +
-										'\t\t\t\t\t\t\t</button>';
-								$("#div_submit").append(str);
-								$("#projectUserId").val(data.id);
-								$("#sex").val(data.sex);
-								$("#name").val(data.name);
-								$("#birthDate").val(data.birthDate);
-								$("#nation").val(data.nation);
-								$("#idType").val(data.idType);
-								$("#idCard").val(data.idCard);
-								$("#stateCode").val(data.stateCode);
-								$("#provinceCode").val(data.provinceCode);
-								$("#cityCode").val(data.cityCode);
-								$("#areaCode").val(data.areaCode);
-								$("#streetCode").val(data.streetCode);
-								$("#deptCode").val(data.deptCode);
-								$("#deptName").val(data.deptName);
-								$("#deptType").val(data.deptType);
-								$("#academicTitle").val(data.academicTitle);
-								$("#politics").val(data.politics);
-								$("#job").val(data.job);
-								$("#academicTitleRank").val(data.academicTitleRank);
-								$("#graduatedFrom").val(data.graduatedFrom);
-								$("#address").val(data.address);
-								$("#degree").val(data.degree);
-								$("#academicDiplomas").val(data.academicDiplomas);
-								$("#lastYear").val(data.lastYear);
-								$("#degreeState").val(data.degreeState);
-								$("#degreeSchool").val(data.degreeSchool);
-								$("#email").val(data.email);
-								$("#major").val(data.major);
-								$("#telephone").val(data.telephone);
-								$("#nowMajor").val(data.nowMajor);
-								$("#phone").val(data.phone);
-								$("#mainDomain").val(data.mainDomain);
-								$("#fax").val(data.fax);
-								$("#postcode").val(data.postcode);
-								$("#projects").val(data.projects);
-								$("#achievement").val(data.achievement);
-								$("#accomplishment").val(data.accomplishment);
-								$("#userType").val(data.userType);
+		$.ajax({
+			type : 'get',
+			url : domainName + '/api-u/users/current',
+			async : false,
+			success : function(data) {
+				setValue(data);
+				$.ajax({
+					type : 'get',
+					url : domainName + '/project-user/user-anon/'+data.id,
+					async : false,
+					success : function(data) {
+						var element = $("#div_submit");
+						element.empty();
+						var str = '';
+						if(jQuery.isEmptyObject(data[0])){
+							str = '<button class="btn btn-primary" type="submit" onclick="update(0)"><i class="fa fa-save"></i> 保存</button>';
+						}else{
+							str = '<button class="btn btn-primary" type="submit" onclick="update(1)"><i class="fa fa-save"></i> 保存</button>';
+							for(var key in data[0]){
+								var date= data[0][key];
+								if(!jQuery.isEmptyObject(date)) if(key == 'birthDate' || key == 'lastYear'){
+									date = formatDate2(date);
+								}
+								$('#'+key).val(date);
 							}
 						}
-					});
-				}
-			});
-		}
+						element.append(str);
+					}
+				});
+			}
+		});
 
 		function update(status) {
 			$('#form').bootstrapValidator();
@@ -484,10 +429,12 @@
 				contentType: "application/json; charset=utf-8",
 				data : JSON.stringify(formdata),
 				success : function(data) {
+					formdata.accomplishment = layedit.getContent(index1);
+					formdata.achievement = layedit.getContent(index2);
+					formdata.uerId = $("#projectUserId").val();
+					formdata.birthDate = Date.parse(new Date(formdata.birthDate));
+					formdata.lastYear = Date.parse(new Date(formdata.lastYear));
 					if(status == 1){
-						formdata.accomplishment = layedit.getContent(index1);
-						formdata.achievement = layedit.getContent(index2);
-						formdata.uerId = $("#projectUserId").val();
 						$.ajax({
 							type : 'put',
 							url : domainName + '/project-user/user',
@@ -498,11 +445,7 @@
 							}
 						});
 					}else {
-						formdata.accomplishment = layedit.getContent(index1);
-						formdata.achievement = layedit.getContent(index2);
 						formdata.id = null;
-						formdata.uerId = $("#projectUserId").val();
-						formdata.userType =
 						$.ajax({
 							type : 'post',
 							url : domainName + '/project-user/user',
@@ -519,7 +462,6 @@
 								});
 							}
 						});
-
 					}
 					layer.msg("成功", {shift: -1, time: 1000}, function(){
 						parent.$(".admin-header-user span").text($("#nickname").val());
@@ -530,7 +472,7 @@
 			});
 		}
 
-		$("#deptCode").change(function () {
+		$("#deptCode").blur(function () {
 			var deptCode =$.trim( $(this).val());
 			$.ajax({
 				type : 'get',
@@ -556,7 +498,7 @@
 					}
 				}
 			});
-		})
+		});
 
 		function setValue(data) {
 			$("#id").val(data.id);

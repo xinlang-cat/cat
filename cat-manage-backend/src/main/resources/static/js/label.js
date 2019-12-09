@@ -54,6 +54,7 @@ function setProperty(data,children1){
 var index = null;
 layui.use(['form', 'layer'], function() {
     var form = layui.form;
+    var layer = layui.layer;
     $($("div[data-sign]")).click(function () {
         var status = $(this).data("status");
         var name = $(this).attr("id");
