@@ -23,5 +23,4 @@ public class ItemContent {
     private Integer item_id;
     private String title;
     private String content;
-
 }

@@ -77,12 +77,6 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
         }
         //查询
         List<ItemBasic> list = itemBasicMapper.selectByExample(example);
-        for (int i=0;i<list.size();i++){
-            ItemBasic it = list.get(i);
-            it.setStart_dateStr(DateUtils.dateToString(it.getStart_date(),format1));
-            it.setEnd_dateStr(DateUtils.dateToString(it.getEnd_date(),format1));
-            it.setEdit_dateStr(DateUtils.dateToString(it.getEdit_date(), format2));
-        }
         //解析分页结果
         PageInfo<ItemBasic> info = new PageInfo<>(list);
         return  new PageResult<>(info.getTotal(), list);
@@ -119,13 +113,6 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
                 if(item.getStatus()>= constant.ItemStatus.BASICS_CHECK){
                     list.add(item);
                 }
-            }
-        }
-        if(!CollectionUtils.isEmpty(list)){
-            for (ItemBasic basic : list) {
-                basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), format1));
-                basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), format1));
-                basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), format2));
             }
         }
         return list;
