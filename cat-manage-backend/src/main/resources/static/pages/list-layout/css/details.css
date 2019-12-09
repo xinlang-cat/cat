@@ -3,14 +3,14 @@
 .bold{
 
 }
-.title {
+/*.title {
     text-align: center;
     line-height: 30px;
     color: black;
     font-weight: 600;
     background-color: #e4e4e4;
     height: 30px;
-}
+}*/
 /* 水平居中 */
 .center{
     text-align:center;
@@ -37,7 +37,7 @@
     background-color: #c2c2c2;
 }
 .content{
-    width: 80%;
+    width: 98%;
     margin: 0 auto;
     position: relative;
 }
