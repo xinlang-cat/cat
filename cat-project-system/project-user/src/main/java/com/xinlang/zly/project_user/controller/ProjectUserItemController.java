@@ -48,6 +48,9 @@ public class ProjectUserItemController {
     public ProjectUserItem matchExpert(String labelSign,Integer population,Integer itemId){
         //找到所有拥有{labelSign}标签的专家
        List<ProjectUserDomain> domains = projectUserDomainService.findByLabelSign(labelSign, ProjectUserType.EXPERT.name());
+       if(!"".equals(domains)||null==domains){
+           throw new IllegalArgumentException("没有该专业的专家");
+       }
        if (population>domains.size()){
            throw new IllegalArgumentException("没有足够的专家");
        }
