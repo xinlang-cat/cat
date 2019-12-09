@@ -11,7 +11,7 @@
 		<fieldset>
 			<div class="form-group">
 				<label class="col-md-2 control-label">公司名称</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="公司名称" type="text" name="signName" maxlength="50"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="公司名称 不能为空">
@@ -19,7 +19,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">负 责 人</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="负责人姓名" type="text" name="principal" maxlength="50"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="负责人姓名 不能为空">
@@ -27,7 +27,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">负责人手机</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="负责人手机号" type="text" maxlength="11" name="principalPhone"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="负责人手机号 不能为空">
@@ -35,7 +35,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">法人姓名</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="法人姓名" type="text" name="legalPerson" maxlength="50"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="法人姓名 不能为空">
@@ -43,7 +43,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">法人身份证</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="法人身份证" type="text" name="legalPersonCard" maxlength="18"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="法人身份证 不能为空">
@@ -51,7 +51,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">法人手机</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="法人手机" type="text" name="legalPersonPhone" maxlength="18"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="法人手机 不能为空">
@@ -59,7 +59,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">公司固话</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="公司固话" type="text" name="telephone" maxlength="18"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="公司固话 不能为空">
@@ -67,13 +67,13 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">注册资金</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="注册资金（万元）" type="text" name="registeredCapital" maxlength="11">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">营业执照</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<button type="button" class="layui-btn" id="charter_file">
 						<i class="layui-icon">&#xe67c;</i>上传营业执照
 					</button>
@@ -84,23 +84,22 @@
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label"></label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<a  id="max_img" target='_blank' href=''>  <img src="" id="mini_img" style="width: 150px"></a>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-2 control-label">信用代码</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="信用代码" type="text" name="deptCode" maxlength="18"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="信用代码 不能为空">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-2 control-label">公司类型</label>
-				<div class="col-md-10">
-					<select class="form-control input-sm" name="type" id="type">
-						<option value="">全部</option>
+				<label class="col-md-2 control-label">公司/机构角色</label>
+				<div class="col-md-8">
+					<select class="form-control input-sm" name="identity" id="identity">
 						<option value="PARTY_A">甲方</option>
 						<option value="PARTY_B">乙方</option>
 						<option value="PARTY_C">监理</option>
@@ -109,31 +108,50 @@
 					</select>
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">公司/机构类型</label>
+				<div class="col-md-8">
+					<select class="form-control input-sm" name="type" id="type">
+						<option value="ACADEMY">大专院校</option>
+						<option value="FIRM">企业</option>
+						<option value="UNIT">事业单位</option>
+						<option value="RESTS">其他</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">??? </label>
+				<div class="layui-form-item">
+					<div class="layui-input-block" id="ckb">
+					</div>
+				</div>
+			</div>
+
 			<div class="form-group">
 				<label class="col-md-2 control-label">所在地域</label>
-				<div class="col-md-10" style="width: 200px;padding-right: 0px;">
+				<div class="col-md-2">
 					<select class="form-control input-sm" name="provinceCode" id="provinceCode">
 					</select>
 				</div>
-				<label class="col-md-2 control-label" style="width: 0px;">-</label>
-				<div class="col-md-10" style="width: 200px;padding: 0px" >
+				<div class="col-md-2">
 					<select class="form-control input-sm" name="cityCode" id="cityCode">
 					</select>
 				</div>
-				<label class="col-md-2 control-label" style="width: 0px;">-</label>
-				<div class="col-md-10" style="width: 200px;padding: 0px">
+				<div class="col-md-2">
 					<select class="form-control input-sm" name="areaCode" id="areaCode">
 					</select>
 				</div>
-				<label class="col-md-2 control-label" style="width: 0px;">-</label>
-				<div class="col-md-10" style="width: 200px;padding: 0px">
+				<div class="col-md-2">
 					<select class="form-control input-sm" name="streetCode" id="streetCode">
 					</select>
 				</div>
 			</div>
+
 			<div class="form-group">
 				<label class="col-md-2 control-label">详细地址</label>
-				<div class="col-md-10">
+				<div class="col-md-8">
 					<input class="form-control" placeholder="详细地址" type="text" name="address" maxlength="50">
 				</div>
 			</div>
@@ -160,6 +178,25 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
+
+	$.ajax({
+		type : 'get',
+		url : domainName + '/api-u/permissions',
+		async : false,
+		success : function(data) {
+			var ckb = $("#ckb");
+			$.each(data.data, function(i,item){
+				var id = item.id;
+				var name = item.name;
+				var input = $('<input type="checkbox" name="permission">');
+				input.attr("id", id);
+				input.attr("value", id);
+				input.attr("title", name);
+				ckb.append(input);
+			});
+		}
+	});
+
 	layui.use('layer', function(){
 		var layer = layui.layer;
 	});
@@ -179,7 +216,7 @@
 			data : JSON.stringify(formdata),
 			success : function(data) {
 				layer.msg("成功", {shift: -1, time: 1000}, function(){
-					location.href = "companyList.html";
+					$.go(-1);
 				});
 			}
 		});
@@ -199,6 +236,21 @@
 			}
 		});
 	});
+	var dxy={
+			menu      :  "loadPage.htm?url=/collect/menu.page",     // 进入菜单页面
+			guangfaPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入广发信息收集页面
+			pinganPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入平安信息收集页面
+			nuonuoPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入诺诺信息收集页面
+			youbangPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入友邦信息收集页面
+			inputMobileNo : "loadPage.htm?url=/collect/inputMobileNo.page",  // 进入输入手机号页面
+			readIdCard   : "loadPage.htm?url=/collect/readIdCard.page",    // 进入读取身份证页面
+			member     : "loadPage.htm?url=/collect/member.page",      // 进入输入会员卡号页面
+			bankCard    : "loadPage.htm?url=/collect/bankCard.page",     // 进入插入银行卡页面
+			url      : "loadPage.htm?url=/collect/url.page"        // 进入跳转url页面
+	}
+	for(var key in dxy){
+		console.log(key+" : "+dxy[key])
+	}
 
 </script>
 </body>

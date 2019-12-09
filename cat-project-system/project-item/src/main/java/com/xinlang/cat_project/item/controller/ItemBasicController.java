@@ -57,7 +57,7 @@ public class ItemBasicController {
 
     @ApiOperation(value = "添加项目信息")
     @LogAnnotation(module = "添加项目信息")
-    //@PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping
     public ResponseEntity<ItemBasic> saveItem(@RequestBody ItemBasic itemBasic) {
         //获取当前用户ID,并SET编辑人
@@ -100,7 +100,6 @@ public class ItemBasicController {
         itemBasicService.update(itemBasic);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
     @ApiOperation(value = "删除项目信息")
     @LogAnnotation(module = "删除项目信息")
     @PreAuthorize("hasAnyAuthority('project:item:delete')")
@@ -109,7 +108,6 @@ public class ItemBasicController {
         itemBasicService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
     @ApiOperation(value = "废弃项目")
     @LogAnnotation(module = "废弃项目")
     @PreAuthorize("hasAnyAuthority('project:item:discard')")

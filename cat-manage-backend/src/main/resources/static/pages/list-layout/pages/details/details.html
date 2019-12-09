@@ -8,6 +8,16 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/details.css">
+
+
+<style type="text/css">
+
+#maincontent  .BTN:hover{
+display: initial;
+}
+
+
+</style>
 </head>
 <body>
     <!-- 按钮组 -->
@@ -20,8 +30,10 @@
                 <colgroup>
                     <col width="10%">
                     <col width="40%">
-
                 </colgroup>
+                <div style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;">
+                    <button onclick="update_basic();"  type="button"
+                    class="layui-btn layui-btn-primary layui-btn-sm">修改</button></div>
                 <thead>
                     <th style="text-align: center;font-size: 16px;" colspan="4">基本信息</th>
                 </thead>
@@ -121,45 +133,30 @@
             <!--     <p class="title">主要研究内容</p> -->
             <table class="layui-table" >
                 <colgroup>
-                    <col width="100%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="30%">
                 </colgroup>
                 <div style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;">
                 <button onclick="add_content()"  type="button"
                 class="layui-btn layui-btn-primary layui-btn-sm">添加</button></div>
                 <thead>
-                    <th style="text-align: center;font-size: 16px;" colspan="4">主要研究内容</th>
+                    <th style="text-align: center;font-size: 16px;" colspan="3">主要研究内容</th>
                 </thead>
                 <!-- <thead>
                     <tr>                   
                     </tr>
                 </thead> -->
                 <tbody id="maincontent" >
-                    <tr>
-                        <td>
-                            <span style="margin-left: 1%;font-size: 15px;"><span>(1)</span>八角高接换冠快速改良技术研究</span>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;
-                                利用现有八角林， 开展不同树形、不同树龄、不同嫁接时间的八角高接换冠技术研究， 综合考虑树冠恢
-                                复速度、型实品质、采搞成本等经济因素， 提出实现快速改良、丰产优质、节本增效目标的A角商战换
-                                冠技Ac.</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="margin-left: 1%;font-size: 15px;"><span>(2)</span>八角高效树冠调控技术研究</span>
-                            <p>
-                                利用现有八角林，开展不同树形，不同树龄的整形修剪，回缩复壮，控梢促果等树冠调控技术研究，针对生产种存在生长衰退、树冠宽大、采摘困难等实际问题，提出具有乔化窄冠、便于采摘、丰产高效等优点的八角高效树冠调控技术，
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="margin-left: 1%;font-size: 15px;"><span>(3)</span>八角保果壮果技术研究</span>
-                            <p>
-                                根据八角开花结果生物学特性和生产做业条件 ，开展配方施肥、激素处理、修剪控梢等人工干预保果壮果研究,针对生产中存在春季过度落果
-                                、果实生长不良等关键问题，提出促进幼果生长、实现优质果实的八角保果壮果技术</p>
-                        </td>
-                    </tr>
-
+                  <tr><td style="text-align: center;">序号</td>
+                    <td style="text-align: center;">标题</td>
+                    <td style="text-align: center;">内容</td>
+                    <tr><td>1</td>
+                        <td>个好借口个好借口</td>
+                        <td>内容个好借口个好借口半节课</td>
+                
+                </tr>
+                 
                 </tbody>
 
 
@@ -169,7 +166,7 @@
 
 
 
-            <div class="operation">
+       <!--      <div class="operation">
                 <div class="layui-btn-group" style="margin-left: 0;">
                     <button type="button" class="layui-btn layui-btn-sm">
                         <i class="layui-icon">&#xe642;</i>
@@ -187,10 +184,10 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
  </div>
     <!-- 项目资金 -->
-
+  </div>
 
     <div style="position: relative;">
         <div class="content">
@@ -615,9 +612,11 @@
 <script type="text/javascript" src="../../../../js/project/fund.js"></script>
 <script type="text/javascript" src="../../../../js/project/fundBudgetAll.js"></script>
 <script type="text/javascript" src="../../../../js/project/personnel.js"></script>
-
-
 <script>
+
+layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
 
     laydate.render({
         elem: '#start_date'
@@ -628,6 +627,8 @@
         , format: 'yyyy年MM月dd日'
     });
 </script>
+
+
 
 <script>
     function add_content() {
@@ -703,6 +704,21 @@
 
         $("#Qiyu").append(str);
     }
+</script>
+
+<script>
+
+    function update_basic(){
+        layer.open({
+            title:"修改基本信息",
+            type: 2,
+            area: ['850px', '550px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../update/update_basic.html']
+        });
+    }
+
 </script>
 <!-- <script type="text/javascript">
   /*   layui.use(['layer'], function () {
