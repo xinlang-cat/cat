@@ -20,7 +20,7 @@
                                     公司名称：
                                     <input id="signName" type="text" class="form-control" placeholder="公司名称">
                                     公司类型：
-                                    <select class="form-control input-sm" id="type">
+                                    <select class="form-control input-sm" id="identity">
                                         <option value="">全部</option>
                                         <option value="PARTY_A">甲方</option>
                                         <option value="PARTY_B">乙方</option>
@@ -100,7 +100,7 @@
                         "type":"get",
                         "data":function(d){
                             d.signName = $('#signName').val();
-                            d.type = $('#type').val();
+                            d.identity = $('#identity').val();
                         },
                         "dataSrc": function (json) {
                             json.recordsTotal=json.total;
@@ -142,7 +142,7 @@
                                 return util.toDateString(data);
                             }
                         },
-                        {   "data": "type",
+                        {   "data": "identity",
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 if(data == "PARTY_A") { return "甲方"}

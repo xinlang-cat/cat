@@ -14,6 +14,7 @@ import com.xinlang.cat_project.item.pojo.ItemUser;
 import com.xinlang.cat_project.item.pojo.PageResult;
 import com.xinlang.cat_project.item.service.IItemBasicService;
 import com.xinlang.cat_project.item.utils.constant;
+import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_common.utils.DateUtils;
 import com.xinlang.zly_xyx.user.LoginAppUser;
@@ -35,7 +36,7 @@ import java.util.Map;
  */
 @Service
 @Slf4j
-public class ItemBasicService implements IItemBasicService {
+public class ItemBasicService extends BaseService<ItemBasic> implements IItemBasicService {
 
     @Autowired
     private ItemBasicMapper itemBasicMapper;
@@ -48,6 +49,10 @@ public class ItemBasicService implements IItemBasicService {
 
     @Autowired
     private ConsumeCompany consumeCompany;
+
+    /*日期格式*/
+    private String format1 = "yyyy-MM-dd";
+    private String format2 = "yyyy-MM-dd HH:mm";
 
     @Override
     public PageResult<ItemBasic> queryList(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params) throws ItemException{
@@ -74,56 +79,13 @@ public class ItemBasicService implements IItemBasicService {
         List<ItemBasic> list = itemBasicMapper.selectByExample(example);
         for (int i=0;i<list.size();i++){
             ItemBasic it = list.get(i);
-            it.setStart_dateStr(DateUtils.dateToString(it.getStart_date(),"yyyy年MM月dd日"));
-            it.setEnd_dateStr(DateUtils.dateToString(it.getEnd_date(),"yyyy年MM月dd日"));
+            it.setStart_dateStr(DateUtils.dateToString(it.getStart_date(),format1));
+            it.setEnd_dateStr(DateUtils.dateToString(it.getEnd_date(),format1));
+            it.setEdit_dateStr(DateUtils.dateToString(it.getEdit_date(), format2));
         }
-       /* if(CollectionUtils.isEmpty(list)){
-            throw new ItemException(ExceptionEnum.ITEM_NOT_FOUND);
-        }*/
         //解析分页结果
         PageInfo<ItemBasic> info = new PageInfo<>(list);
         return  new PageResult<>(info.getTotal(), list);
-    }
-
-    @Override
-    public void saveItem(ItemBasic basic) {
-
-        //获取当前用户
-        //LoginAppUser loginAppUser = consumeUser.getLoginAppUser();
-        LoginAppUser loginAppUser = AppUserUtil.getLoginAppUser();
-        //通过当前用户获取公司
-        Company company = consumeCompany.findByUserId(loginAppUser.getId().intValue());
-        if(company == null){
-            throw new ItemException(ExceptionEnum.USER_INFO_NOT_PERFECT);
-        }
-        //SET 创建人id、创建时间、状态
-        basic.setEdit_userid(loginAppUser.getId().intValue());
-        basic.setEdit_date(new Date());
-        basic.setUndertaker(company.getDeptCode());
-        try {
-            basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), "yyyy年MM月dd日"));
-            basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), "yyyy年MM月dd日"));
-        }catch (Exception e){
-            log.error("日期格式错误！",e);
-            throw new ItemException(ExceptionEnum.DATE_FORMAT_ERROR);
-        }
-        //新增项目
-        int count = itemBasicMapper.insertSelective(basic);
-        if(count != 1){
-            throw new ItemException(ExceptionEnum.ITEM_SAVE_ERROR);
-        }
-    }
-
-    @Override
-    public ItemBasic queryItemById(Integer id) {
-        ItemBasic basic = itemBasicMapper.selectByPrimaryKey(id);
-        if(basic==null){
-            throw new ItemException(ExceptionEnum.DATA_NOT_FOUND);
-        }
-        basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), "yyyy年MM月dd日"));
-        basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), "yyyy年MM月dd日"));
-        basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), "yyyy年MM月dd日"));
-        return basic;
     }
 
     @Override
@@ -162,37 +124,12 @@ public class ItemBasicService implements IItemBasicService {
         }
         if(!CollectionUtils.isEmpty(list)){
             for (ItemBasic basic : list) {
-                basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), "yyyy年MM月dd日"));
-                basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), "yyyy年MM月dd日"));
-                basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), "yyyy年MM月dd日"));
+                basic.setStart_dateStr(DateUtils.dateToString(basic.getStart_date(), format1));
+                basic.setEnd_dateStr(DateUtils.dateToString(basic.getEnd_date(), format1));
+                basic.setEdit_dateStr(DateUtils.dateToString(basic.getEdit_date(), format2));
             }
         }
         return list;
-    }
-
-    @Override
-    public void updateItem(ItemBasic basic) {
-        try {
-            if(basic.getStart_dateStr()!=null&&basic.getEnd_dateStr()!=null) {
-                basic.setStart_date(DateUtils.stringToDate(basic.getStart_dateStr(), "yyyy年MM月dd日"));
-                basic.setEnd_date(DateUtils.stringToDate(basic.getEnd_dateStr(), "yyyy年MM月dd日"));
-            }
-        }catch (Exception e){
-            log.error("日期格式错误！",e);
-            throw new ItemException(ExceptionEnum.DATE_FORMAT_ERROR);
-        }
-        int i = itemBasicMapper.updateByPrimaryKeySelective(basic);
-        if(i != 1){
-            throw new ItemException(ExceptionEnum.ITEM_UPDATE_ERROR);
-        }
-    }
-
-    @Override
-    public void deleteItem(Integer id) {
-        int i = itemBasicMapper.deleteByPrimaryKey(id);
-        if(i != 1){
-            throw new ItemException(ExceptionEnum.ITEM_DELETE_ERROR);
-        }
     }
 
     @Override

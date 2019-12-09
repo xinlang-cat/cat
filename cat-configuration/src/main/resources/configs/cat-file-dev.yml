@@ -41,15 +41,14 @@ mybatis:
 security:
   oauth2:
     resource:
-
       user-info-uri: http://192.168.5.19/api-o/user-me
-
 
       prefer-token-info: false
 file:
   local:
     path: E:/localFile
     prefix: /statics
+
 
     urlPrefix: http://192.168.5.19/api-f${file.local.prefix}
 
@@ -63,6 +62,7 @@ album:
   local:
     path: D:/localFile
     prefix: /statics
+
 
     urlPrefix: http://192.168.5.19/api-f${album.local.prefix}
 
