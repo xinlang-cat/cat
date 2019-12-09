@@ -58,7 +58,7 @@ layui.use(['form', 'layer'], function() {
         var status = $(this).data("status");
         var name = $(this).attr("id");
         var sign = $(this).data("sign");
-        var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="ckb">';
+        var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="label">';
         $.ajax({
             type: 'get',
             url: domainName + '/api-label/label/tree/' + sign,
