@@ -1,5 +1,6 @@
-/*初始化计划类别*/
-function initCategorySelect(sign) {
+
+/*初始化计划类别、指标类型等（标签）*/
+function initSelectData(sign,node) {
     $.ajax({
         type: 'get',
         url: domainName + '/api-label/label/tree/' + sign,
@@ -7,7 +8,7 @@ function initCategorySelect(sign) {
         success: function (data) {
             var ds = data[0].child;
             $(ds).each(function () {
-                $('#category').append('<option value=' + this.sign + '>' + this.content + '</option>');
+                node.append('<option value=' + this.sign + '>' + this.content + '</option>');
             });
         }
     })
@@ -25,20 +26,6 @@ function initCompanySelect() {
                 $('#consignor').append('<option value=' + code + '>' + name + '</option>');
                 $('#undertaker').append('<option value=' + code + '>' + name + '</option>');
                 $('#administrator').append('<option value=' + code + '>' + name + '</option>');
-            });
-        }
-    })
-}
-/*初始化指标类型*/
-function initTargetSelect(sign) {
-    $.ajax({
-        type: 'get',
-        url: domainName + '/api-label/label/tree/' + sign,
-        async: false,
-        success: function (data) {
-            var ds = data[0].child;
-            $(ds).each(function () {
-                $('#targetType').append('<option value=' + this.sign + '>' + this.content + '</option>');
             });
         }
     })

@@ -26,8 +26,20 @@ function addContent() {
     });
 }
 
-function addTarget() {
+function addTarget1() {//数量指标
     var formdata = $("#form3").serializeJson();
+    $.ajax({
+        type: 'post',
+        url: domainName + '/project-item/item/target/multi',
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        data: formdata,
+        success: function (data) {
+        }
+    });
+}
+function addTarget2() {//其他指标
+    var formdata = $("#form4").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/target/multi',

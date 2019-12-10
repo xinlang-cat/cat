@@ -25,20 +25,6 @@
         .layui-btn {
             background-color: #a0a8c5;
         }
-
-        .layui-input,  .layui-select {
-            height: 32px;
-            border: 1px solid #ccc;
-            border-radius: 0px;
-        }
-
-        .layui-form-select dl dd {
-            line-height: 32px;
-        }
-        .layui-input:focus,.layui-textarea:focus{
-            border-color: #66afe9!important;
-            box-shadow: rgba(102,175,233,0.9) 0px 0px 8px;
-      }
     </style>
 </head>
 
@@ -66,8 +52,8 @@
                 <tr>
                     <td>计划类别：</td>
                     <td>
-                        <select class="form-control" id="category" name="category">
-                            <option value=""></option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="category" name="category">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
@@ -81,24 +67,24 @@
                 <tr>
                     <td>委托单位：</td>
                     <td>
-                        <select class="form-control" lay-verify="required" id="consignor" name="consignor">
-                            <option value=""></option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="consignor" name="consignor">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>承担单位：</td>
                     <td>
-                        <select class="form-control" lay-verify="required" id="undertaker" name="undertaker">
-                            <option value=""></option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="undertaker" name="undertaker">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>管理单位：</td>
                     <td>
-                        <select class="form-control" lay-verify="required" id="administrator" name="administrator">
-                            <option value=""></option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="administrator" name="administrator">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
@@ -227,9 +213,12 @@
                     <td><input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="jishu">
                         <input type="hidden" name="status" value="0">
-                        <input class="form-control" lay-verify="required"
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
+                            <option value=''>请选择</option>
+                        </select>
+                        <!--<input class="form-control" lay-verify="required"
                                placeholder="指标内容" type="text"
-                               name="target"></td>
+                               name="target"></td>-->
                     <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
                                name="count"></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
@@ -237,7 +226,7 @@
                         <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
                                name="end_date"></td>
                     <td>
-                        <select class="form-control input-sm site" lay-ignore>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
                             <option value=''>请选择</option>
                         </select>
                         <input type="hidden" name="district">
@@ -284,16 +273,16 @@
                     <td><input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="jingji">
                         <input type="hidden" name="status" value="0">
-                        <input class="form-control" lay-verify="required"
-                               placeholder="指标内容" type="text"
-                               name="target"></td>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
+                            <option value=''>请选择</option>
+                        </select>
                     <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
                                name="count"></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
                                name="start_date">
                         <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
                                name="end_date"></td>
-                    <td><select class="form-control input-sm site" lay-ignore>
+                    <td><select class="form-control input-sm site" lay-verify="required" lay-ignore>
                         <option value=''>请选择</option>
                     </select>
                         <input type="hidden" name="district">
@@ -308,7 +297,10 @@
             </table>
         </div>
         <div id="forma"></div>
-        <!--其他指标-->
+        <button class="layui-btn" lay-submit lay-filter="sub3" id="sub3">提交</button>
+    </form>
+    <!--其他指标-->
+    <form class="layui-form" id="form4">
         <div class="module target">
             <div class="layui-btn-group btn-group">
                 <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
@@ -346,7 +338,7 @@
                                name="start_date">
                         <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
                                name="end_date"></td>
-                    <td><select class="form-control input-sm site" lay-ignore>
+                    <td><select class="form-control input-sm site" lay-verify="required" lay-ignore>
                         <option value=''>请选择</option>
                     </select>
                         <input type="hidden" name="district">
@@ -360,7 +352,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="layui-btn" lay-submit lay-filter="sub3" id="sub3">提交</button>
+        <button class="layui-btn" lay-submit lay-filter="sub4" id="sub4">提交</button>
     </form>
     <!--项目成员-->
     <div class="module">
@@ -714,9 +706,15 @@
             return false;
         });
         form.on('submit(sub3)', function (data) {
+            $('#sub4').trigger('click');
+            return false;
+        });
+        //上面只是为了验证表单，下面才是真正的提交
+        form.on('submit(sub4)', function (data) {
             saveBasics();
             addContent();
-            addTarget();
+            addTarget1();
+            addTarget2();
             layer.msg("保存成功", {shift: -1, time: 1000}, function () {
 
             });
@@ -724,12 +722,13 @@
         });
     });
     /*初始化数据*/
-    initCategorySelect("planType");
+    initSelectData('planType', $('#category'));//计划类别
+    initSelectData('target', $('select[name=target]'));//考核指标
     initCompanySelect();
     initProvinceSelect();
 
     //监听地点选择
-    $(".content").on('change','.site',function() {
+    $(".content").on('change', '.site', function () {
         var code = $(this).val();
         var text = $(this).next().text() + $(this).find("option:selected").text() + '-';
         $(this).next().val(code);
@@ -738,11 +737,11 @@
         $(this).append("<option value='" + code + "'>" + text + "</option>");
         var texts = text.split('-');
         if (texts.length == 2) {
-            getCity(code,$(this));
+            getCity(code, $(this));
         } else if (texts.length == 3) {
-            getArea(code,$(this));
+            getArea(code, $(this));
         } else if (texts.length == 4) {
-            getStreet(code,$(this));
+            getStreet(code, $(this));
         }
     });
 
@@ -771,7 +770,6 @@
                 , laydate = layui.laydate;
             var str = $(e).parent().next().find('tbody').children().last().clone(true);
             $(e).parent().next().find('tbody').append(str);
-            form.render('select');
             //清空表单内容
             var lastTr = $(e).parent().next().find('tbody').children().last();
             lastTr.find('input[type=text]').val('');
@@ -859,8 +857,9 @@
                         + '<td><input type="hidden" name="item_id">'
                         + '<input type="hidden" name="type" value="' + type + '">'
                         + '<input type="hidden" name="status" value="0">'
-                        + '<input class="form-control" lay-verify="required" placeholder="指标内容" type="text"'
-                        + ' name="target"></td>'
+                        + '<select class="form-control input-sm" lay-verify="required" lay-ignore name="target">'
+                        + '<option value="">请选择</option>'
+                        + '</select></td>'
                         + ' <td> <input class="form-control" lay-verify="required" placeholder="数量" type="text"'
                         + ' name="count"></td>'
                         + '<td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"'
@@ -868,7 +867,7 @@
                         + '<input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"'
                         + ' name="end_date"></td>'
                         + '<td>'
-                        + '<select class="form-control input-sm site" lay-ignore>'
+                        + '<select class="form-control input-sm site" lay-verify="required" lay-ignore>'
                         + '<option value="">请选择</option>'
                         + '</select>'
                         + '<input type="hidden" name="district">'
@@ -883,9 +882,9 @@
                         + '    </table>'
                         + '</div>';
                     $("#forma").append(str);
-                    $("#forma").find('.module').last().find('tbody').children().last().find('button').trigger('click');
+                    initSelectData('target', $("#forma").find('.module').last().find('tbody').children().find('select[name=target]'));//考核指标
+                    $("#forma").find('.module').last().find('tbody').children().find('button').trigger('click');
                     //渲染
-                    form.render('select');
                     lay('.date').each(function () {
                         laydate.render({
                             elem: this
@@ -903,7 +902,7 @@
                 }
             });
         });
-        initTargetSelect("targetType");
+        initSelectData("targetType", $('#targetType'));
     }
 
     function delete_target() {
