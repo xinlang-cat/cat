@@ -24,23 +24,15 @@ class ItemTarget {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer item_id;
-    private Integer content_id;
     private String target;
-    private String remark;
     private Integer count;
-    private String unit;
+    private String content;
     private Integer district;
     private Date start_date;
     private Date end_date;
-    private Integer type;
+    private String type;
     private Integer status;
 
     @Transient
     private List<Integer> userIds;
-
-    @Transient
-    private String start_dateStr;
-    @Transient
-    private String end_dateStr;
-
 }
