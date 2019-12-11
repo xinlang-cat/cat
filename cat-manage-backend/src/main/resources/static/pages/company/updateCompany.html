@@ -152,12 +152,14 @@
 				<div class="row" align="center">
 					<div class="col-md-12">
 						<button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
-						<button class="btn btn-primary" type="submit" onclick="add()">
+						<button class="btn btn-primary" type="submit" onclick="update()">
 							<i class="fa fa-save"></i> 保存
 						</button>
 					</div>
 				</div>
 			</div>
+
+			<input type="hidden" name="id" value="">
 
 		</fieldset>
 	</form>
@@ -171,12 +173,22 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
 
-
-
+	$.ajax({
+		type : 'get',
+		url : domainName + '/api-c/company/now-user',
+		async : false,
+		success : function(data) {
+			for(var key in data){
+				$("input[name="+key+"]").val(data[key]);
+			}
+			$("#mini_img").attr("src",data.charter);
+			$("#max_img").attr("href",data.charter);
+		}
+	});
 	layui.use('layer', function(){
 		var layer = layui.layer;
 	});
-	function add() {
+	function update() {
 		$('#form').bootstrapValidator();
 		var bootstrapValidator = $("#form").data('bootstrapValidator');
 		bootstrapValidator.validate();
@@ -186,13 +198,13 @@
 
 		var formdata = $("#form").serializeObject();
 		$.ajax({
-			type : 'post',
+			type : 'put',
 			url : domainName + '/api-c/company',
 			contentType: "application/json; charset=utf-8",
 			data : JSON.stringify(formdata),
 			success : function(data) {
 				layer.msg("成功", {shift: -1, time: 1000}, function(){
-					$.go(-1);
+
 				});
 			}
 		});
@@ -212,21 +224,6 @@
 			}
 		});
 	});
-	var dxy={
-			menu      :  "loadPage.htm?url=/collect/menu.page",     // 进入菜单页面
-			guangfaPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入广发信息收集页面
-			pinganPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入平安信息收集页面
-			nuonuoPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入诺诺信息收集页面
-			youbangPage   :  "loadPage.htm?url=/collect/menu.page",     // 进入友邦信息收集页面
-			inputMobileNo : "loadPage.htm?url=/collect/inputMobileNo.page",  // 进入输入手机号页面
-			readIdCard   : "loadPage.htm?url=/collect/readIdCard.page",    // 进入读取身份证页面
-			member     : "loadPage.htm?url=/collect/member.page",      // 进入输入会员卡号页面
-			bankCard    : "loadPage.htm?url=/collect/bankCard.page",     // 进入插入银行卡页面
-			url      : "loadPage.htm?url=/collect/url.page"        // 进入跳转url页面
-	}
-	for(var key in dxy){
-		console.log(key+" : "+dxy[key])
-	}
 
 </script>
 </body>
