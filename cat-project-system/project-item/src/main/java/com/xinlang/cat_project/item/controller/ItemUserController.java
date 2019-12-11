@@ -1,6 +1,8 @@
 package com.xinlang.cat_project.item.controller;
 
+import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.cat_project.item.VO.ItemUserInfo;
+import com.xinlang.cat_project.item.fegin.ConsumeProjectUser;
 import com.xinlang.cat_project.item.pojo.ItemUser;
 import com.xinlang.cat_project.item.service.IItemUserService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
@@ -9,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,75 +28,50 @@ public class ItemUserController {
 
     @Autowired
     private IItemUserService itemUserService;
+    @Autowired
+    private ConsumeProjectUser consumeProjectUser;
 
-    /**
-     * 新增项目成员
-     * @param itemUser
-     * @return
-     */
-    @ApiOperation(value = "添加成员信息")
-    @LogAnnotation(module = "添加成员信息")
-    @PreAuthorize("hasAnyAuthority('project:item:user:save')")
+    @ApiOperation(value = "添加成员")
+    @LogAnnotation(module = "添加成员")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping
     public ResponseEntity<Void> saveItemUser(@RequestBody ItemUser itemUser) {
-
-        itemUserService.saveItemUser(itemUser);
+        itemUserService.save(itemUser);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 获取单条项目成员数据
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "获取一条成员信息")
-    @LogAnnotation(module = "获取一条成员信息")
-    @GetMapping("/{id}")
-    public ResponseEntity<Map<String,Object>> getItemUserInfoById(@PathVariable Integer id){
-
-        Map<String,Object> itemUserInfo = itemUserService.queryItemUserInfoById(id);
-        return ResponseEntity.ok(itemUserInfo);
+    @ApiOperation(value = "查询成员信息")
+    @LogAnnotation(module = "查询成员信息")
+    @GetMapping("list")
+    @Transactional
+    public ResponseEntity<List<Map<String,Object>>> getItemUserInfoById(@RequestParam Map<String, Object> params){
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<ItemUser> itemUsers = itemUserService.findListByParams(params, ItemUser.class);
+        for (ItemUser u : itemUsers) {
+            Map<String, Object> ItemUserInfo = new HashMap<>();
+            List<ProjectUser> projectUser = consumeProjectUser.findByUserId(u.getUser_id());
+            ItemUserInfo.put("itemUser",u);
+            ItemUserInfo.put("projectUser",projectUser);
+            list.add(ItemUserInfo); //添加进list
+        }
+        return ResponseEntity.ok(list);
     }
 
-    /**
-     * 获取当前项目的所有成员数据
-     * @param Iid 项目id
-     * @return
-     */
-    @ApiOperation(value = "获取项目的所有成员信息")
-    @LogAnnotation(module = "获取项目的所有成员信息")
-    @GetMapping("all/{Iid}")
-    public ResponseEntity<List<Map<String,Object>>> getItemUserInfoAllByIId(@PathVariable Integer Iid){
-
-        List<Map<String,Object>> itemUserInfo = itemUserService.queryItemUserInfoAllByIid(Iid);
-        return ResponseEntity.ok(itemUserInfo);
-    }
-
-    /**
-     * 更改
-     * @param itemUser
-     * @return
-     */
-    @ApiOperation(value = "修改成员信息， id必填")
-    @LogAnnotation(module = "修改成员信息")
-    @PreAuthorize("hasAnyAuthority('project:item:user:update')")
+    @ApiOperation(value = "修改成员")
+    @LogAnnotation(module = "修改成员")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
     @PutMapping
     public ResponseEntity<Void> updateItemUser(@RequestBody ItemUser itemUser){
-        itemUserService.updateItemUser(itemUser);
+        itemUserService.update(itemUser);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 删除
-     * @param id
-     * @return
-     */
     @ApiOperation(value = "删除成员信息")
     @LogAnnotation(module = "删除成员信息")
     @PreAuthorize("hasAnyAuthority('project:item:user:delete')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteItemUser(@PathVariable Integer id){
-        itemUserService.deleteItemUser(id);
+        itemUserService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

@@ -5,10 +5,11 @@ import com.xinlang.cat_project.item.VO.TargetInfoAll;
 import com.xinlang.cat_project.item.pojo.ItemTarget;
 import org.apache.ibatis.annotations.*;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.common.special.InsertListMapper;
 
 import java.util.List;
 
-public interface ItemTargetMapper extends Mapper<ItemTarget> {
+public interface ItemTargetMapper extends Mapper<ItemTarget>, InsertListMapper<ItemTarget> {
 
     TargetInfo selectTargetInfoById(Integer id);
 

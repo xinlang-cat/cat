@@ -25,639 +25,664 @@
         .layui-btn {
             background-color: #a0a8c5;
         }
-
-        .form-actions {
-            margin-top: 100px;
-        }
-        .layui-input:focus,.layui-textarea:focus{
-            border-color: #66afe9!important;
-            box-shadow: rgba(102,175,233,0.9) 0px 0px 8px;
-      }
     </style>
 </head>
 
 <body>
-    <div class="content">
-        <!--基本信息-->
-        <div class="module">
-            <form class="layui-form" id="form1">
-                <table lay-even lay-skin="nob" class="layui-table" >
-                    <colgroup>
-                        <col width="10%">
-                        <col width="90%">
-                    </colgroup>
-                    <thead>
-                        <th class="header" colspan="4">基本信息</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>合同编号：</td>
-                            <td>
-                                <input class="form-control" lay-verify="required" placeholder="合同编号" type="text"
-                                    id="contract_no" name="contract_no">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>计划类别：</td>
-                            <td>
-
-                                <select class="form-control" name="interest" id="category" name="category"
-                                    lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>项目名称</td>
-                            <td><input style="border: none;" class="form-control" placeholder="项目名称" type="text"
-                                       name="项目名称" maxlength="50" data-bv-notempty="true"
-                                       data-bv-notempty-message="项目名称 不能为空"></td>
-                        </tr>
-                        <tr>
-                            <td>委托单位：</td>
-                            <td>
-                                <select class="form-control" id="consignor" name="consignor" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>承担单位：</td>
-                            <td>
-                                <select class="form-control" id="undertaker" name="undertaker" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>管理单位：</td>
-                            <td>
-
-                                <select class="form-control" id="administrrator" name="administrrator"
-                                    lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>下达文号：</td>
-                            <td>
-                                <input class="form-control" lay-verify="required" placeholder="下达文号" type="text"
-                                    id="item_number" name="item_number">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>开始时间：</td>
-                            <td>
-                                <input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                                    id="start_date" name="start_date">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>结束时间：</td>
-                            <td>
-                                <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                                    id="end_date" name="end_date">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>总体目标：</td>
-                            <td>
+<div class="content">
+    <!--基本信息-->
+    <div class="module">
+        <form class="layui-form" id="form1">
+            <table lay-even lay-skin="nob" class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="90%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="4">基本信息</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>合同编号：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="合同编号" type="text"
+                               id="contract_no" name="contract_no">
+                    </td>
+                </tr>
+                <tr>
+                    <td>计划类别：</td>
+                    <td>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="category" name="category">
+                            <option value="">请选择</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>项目名称：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="合同编号" type="text"
+                               id="item_name" name="item_name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>委托单位：</td>
+                    <td>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="consignor" name="consignor">
+                            <option value="">请选择</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>承担单位：</td>
+                    <td>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="undertaker" name="undertaker">
+                            <option value="">请选择</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>管理单位：</td>
+                    <td>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="administrator" name="administrator">
+                            <option value="">请选择</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>下达文号：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="下达文号" type="text"
+                               id="item_number" name="item_number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>开始时间：</td>
+                    <td>
+                        <input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               id="start_date" name="start_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>结束时间：</td>
+                    <td>
+                        <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               id="end_date" name="end_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>总体目标：</td>
+                    <td>
                                 <textarea placeholder="总体目标" class="layui-textarea form-control" lay-verify="required"
-                                    id="outline" name="outline"></textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!--提交按钮-->
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
-        <!--主要研究内容-->
-        <div class="module">
-            <form class="layui-form" id="form2">
-                <div class="layui-btn-group btn-group">
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-                <table lay-even lay-skin="nob" class="layui-table" >
-                    <colgroup>
-                        <col width="10%">
-                        <col width="90%">
-                    </colgroup>
-                    <thead>
-                        <th class="header" colspan="4">主要研究内容</th>
-                    </thead>
-                    <tbody id="mian-content">
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input class="form-control" lay-verify="required" placeholder="标题" type="text"
-                                    name="end_date">
-                                <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
-                                    name="outline"></textarea>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!--提交按钮-->
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
-        <!--考核指标-->
-        <div class="module">
+                                          id="outline" name="outline"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn" lay-submit lay-filter="sub1" id="sub1">提交</button>
+        </form>
+    </div>
+    <!--主要研究内容-->
+    <div class="module">
+        <form class="layui-form" id="form2">
             <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" onclick="option_target();">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
                     <i class="layui-icon">&#xe654;</i>
                 </button>
-                <button type="button" class="layui-btn layui-btn-sm" onclick="delete_target();">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
                     <i class="layui-icon">&#xe640;</i>
                 </button>
             </div>
-            <table lay-even lay-skin="nob" class="layui-table" >
+            <table lay-even lay-skin="nob" class="layui-table">
                 <colgroup>
-                    <col width="40%">
+                    <col width="10%">
+                    <col width="90%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="4">主要研究内容</th>
+                </thead>
+                <tbody id="mian-content">
+                <tr>
+                    <td><input type="hidden" name="item_id"></td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="标题" type="text"
+                               name="title">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn" lay-submit lay-filter="sub2" id="sub2">提交</button>
+        </form>
+    </div>
+    <!--考核指标-->
+    <div class="module">
+        <div class="layui-btn-group btn-group">
+            <button type="button" class="layui-btn layui-btn-sm" onclick="option_target();">
+                <i class="layui-icon">&#xe654;</i>
+            </button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="delete_target();">
+                <i class="layui-icon">&#xe640;</i>
+            </button>
+        </div>
+        <table lay-even lay-skin="nob" class="layui-table">
+            <colgroup>
+                <col width="40%">
+                <col width="20%">
+                <col width="20%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="4">考核指标</th>
+            </thead>
+
+        </table>
+    </div>
+    <!--技术指标-->
+    <form class="layui-form" id="form3">
+        <div class="module target">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table lay-even lay-skin="nob" class="layui-table">
+                <colgroup>
+                    <col width="30%">
+                    <col width="10%">
+                    <col width="20%">
                     <col width="20%">
                     <col width="20%">
                 </colgroup>
                 <thead>
-                    <th class="header" colspan="4">考核指标</th>
+                <th class="header" colspan="5">技术指标</th>
+                <tr>
+                    <td>内容</td>
+                    <td>数量</td>
+                    <td>时间</td>
+                    <td>地点</td>
+                    <td>人员</td>
+                </tr>
                 </thead>
-
+                <tbody>
+                <tr>
+                    <td><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="jishu">
+                        <input type="hidden" name="status" value="0">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
+                            <option value=''>请选择</option>
+                        </select>
+                        <!--<input class="form-control" lay-verify="required"
+                               placeholder="指标内容" type="text"
+                               name="target"></td>-->
+                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
+                               name="count"></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date">
+                        <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date"></td>
+                    <td>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                            <option value=''>请选择</option>
+                        </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"></td>
+                </tr>
+                </tbody>
             </table>
         </div>
-        <!--技术指标-->
-        <div id="jishu" class="module">
-            <form class="layui-form" id="form3">
-                <div class="layui-btn-group btn-group">
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-                <table lay-even lay-skin="nob" class="layui-table" >
-                    <colgroup>
-                        <col width="30%">
-                        <col width="10%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                    </colgroup>
-                    <thead>
-                        <th class="header zhibiao" colspan="5">技术指标</th>
-                        <tr>
-                            <td>内容</td>
-                            <td>数量</td>
-                            <td>时间</td>
-                            <td>地点</td>
-                            <td>人员</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> <input class="form-control" lay-verify="required" placeholder="指标内容" type="text"
-                                    name="end_date"></td>
-                            <td> <input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                                    name="end_date"></td>
-                            <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                                    name="start_date"></td>
-                            <td><select name="interest" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select></td>
-                            <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"
-                                name="start_date"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
         <!--经济指标-->
-        <div id="jingji" class="module">
-            <form class="layui-form" id="form4">
-                <div class="layui-btn-group btn-group">
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-                <table lay-even lay-skin="nob" class="layui-table" >
-                    <colgroup>
-                        <col width="30%">
-                        <col width="10%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                    </colgroup>
-                    <thead>
-                        <th class="header zhibiao" colspan="5">经济指标</th>
-                        <tr>
-                            <td>内容</td>
-                            <td>数量</td>
-                            <td>时间</td>
-                            <td>地点</td>
-                            <td>人员</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> <input class="form-control" lay-verify="required" placeholder="指标内容" type="text"
-                                    name="end_date"></td>
-                            <td> <input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                                    name="end_date"></td>
-                            <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                                    name="start_date"></td>
-                            <td><select name="interest" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select></td>
-                            <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"
-                                name="start_date"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
+        <div class="module target">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table lay-even lay-skin="nob" class="layui-table">
+                <colgroup>
+                    <col width="30%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="5">经济指标</th>
+                <tr>
+                    <td>内容</td>
+                    <td>数量</td>
+                    <td>时间</td>
+                    <td>地点</td>
+                    <td>人员</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="jingji">
+                        <input type="hidden" name="status" value="0">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
+                            <option value=''>请选择</option>
+                        </select>
+                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
+                               name="count"></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date">
+                        <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date"></td>
+                    <td><select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                        <option value=''>请选择</option>
+                    </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div id="forma"></div>
-        <!--其他指标-->
-        <div id="qita" class="module">
-            <form class="layui-form" id="form5">
-                <div class="layui-btn-group btn-group">
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                        <i class="layui-icon">&#xe640;</i>
+        <button class="layui-btn" lay-submit lay-filter="sub3" id="sub3">提交</button>
+    </form>
+    <!--其他指标-->
+    <form class="layui-form" id="form4">
+        <div class="module target">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table lay-even lay-skin="nob" class="layui-table">
+                <colgroup>
+                    <col width="40%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="4">其他指标</th>
+                <tr>
+                    <td>内容</td>
+                    <td>时间</td>
+                    <td>地点</td>
+                    <td>人员</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="qita">
+                        <input type="hidden" name="status" value="0">
+                        <input class="form-control" lay-verify="required"
+                               placeholder="指标内容" type="text"
+                               name="content"></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date">
+                        <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date"></td>
+                    <td><select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                        <option value=''>请选择</option>
+                    </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="layui-btn" lay-submit lay-filter="sub4" id="sub4">提交</button>
+    </form>
+    <!--项目成员-->
+    <div class="module">
+        <form class="layui-form" id="form6">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table lay-even lay-skin="nob" class="layui-table">
+                <colgroup>
+                    <col width="15%">
+                    <col width="6%">
+                    <col width="6%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="13%">
+                    <col width="14%">
+                    <col width="18%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="9">项目组人员信息</th>
+                <tr>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>证件类型/证件号码</th>
+                    <th>职称</th>
+                    <th>从事专业</th>
+                    <th>工作单位</th>
+                    <th>研究开发中的责任分工</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th><select name="interest" lay-filter="aihao">
+                        <option value=""></option>
+                        <option value="1">覃世杰</option>
+                        <option value="2">笑死超</option>
+                    </select></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </tbody>
+            </table>
+            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+        </form>
+    </div>
+    <!--科技经费用途预算-->
+    <div class="module">
+        <form class="layui-form" id="form7">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table lay-even class="layui-table" id="basis">
+                <colgroup>
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="55%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="4">科技经费用途预算(桂财教函[2010]28号)</th>
+                <tr>
+                    <td>科目</td>
+                    <td>金额(万元)</td>
+                    <td>开支内容</td>
+                    <td>使用状况</td>
+                </tr>
+                <tr>
+                    <td>合计</td>
+                    <td>70</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>(一)直接使用</td>
+                    <td>70</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input class="form-control" lay-verify="required" placeholder="科目" type="text"
+                               name="end_date"></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额" type="text"
+                               name="end_date"></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="开支内容" type="text"
+                               name="end_date"></td>
+                    <td class="btn_center">
+                        <button type="button"
+                                class="layui-btn layui-btn-primary layui-btn-sm ">详情
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+        </form>
+    </div>
+    <!--签订合同各方-->
+    <div class="module">
+        <form class="layui-form" id="form8">
+            <table lay-even class="layui-table">
+                <colgroup>
+                    <col width="15%">
+                    <col width="40%">
+                    <col width="40%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="3">签订合同各方</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="7">乙方</td>
+                    <td>项目负责人</td>
+                    <td><input style="border: none;" class="form-control" placeholder="项目负责人" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="项目负责人 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>（单位）</td>
+                    <td><input style="border: none;" class="form-control" placeholder="（单位）" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="（单位） 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>组织机构代码/统一社会信用代码</td>
+                    <td><input style="border: none;" class="form-control" placeholder="组织机构代码/统一社会信用代码"
+                               type="text" name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="组织机构代码/统一社会信用代码 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>账户名称</td>
+                    <td><input style="border: none;" class="form-control" placeholder="账户名称" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="账户名称 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>开户银行</td>
+                    <td><input style="border: none;" class="form-control" placeholder="开户银行" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="开户银行 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>账号</td>
+                    <td><input style="border: none;" class="form-control" placeholder="账号" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="账号 不能为空"></td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td rowspan="2">丙方</td>
+                    <td>项目管理联系人</td>
+                    <td><input style="border: none;" class="form-control" placeholder="项目管理联系人" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="项目管理联系人 不能为空"></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+        </form>
+    </div>
+    <div class="module">
+        <form class="layui-form" id="form9">
+            <table lay-even class="layui-table">
+                <colgroup>
+                    <col width="15%">
+                    <col width="40%">
+                    <col width="40%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="3">签订合同各方联系方式</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="6">甲方</td>
+                    <td>联系人</td>
+                    <td><input style="border: none;" class="form-control" placeholder="联系人" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="联系人 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td><input style="border: none;" class="form-control" placeholder="电话" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="电话 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td><input style="border: none;" class="form-control" placeholder="传真"
+                               type="text" name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="传真 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td><input style="border: none;" class="form-control" placeholder="邮编" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="邮编 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td><input style="border: none;" class="form-control" placeholder="地址" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="地址 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td><input style="border: none;" class="form-control" placeholder="E-mail(电子邮箱)" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="E-mail(电子邮箱) 不能为空"></td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td rowspan="6">乙方</td>
+                    <td>联系人</td>
+                    <td><input style="border: none;" class="form-control" placeholder="联系人" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="联系人 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td><input style="border: none;" class="form-control" placeholder="电话" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="电话 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td><input style="border: none;" class="form-control" placeholder="传真"
+                               type="text" name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="传真 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td><input style="border: none;" class="form-control" placeholder="邮编" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="邮编 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td><input style="border: none;" class="form-control" placeholder="地址" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="地址 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td><input style="border: none;" class="form-control" placeholder="E-mail(电子邮箱)" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="E-mail(电子邮箱) 不能为空"></td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td rowspan="6">丙方</td>
+                    <td>联系人</td>
+                    <td><input style="border: none;" class="form-control" placeholder="联系人" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="联系人 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td><input style="border: none;" class="form-control" placeholder="电话" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="电话 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td><input style="border: none;" class="form-control" placeholder="传真"
+                               type="text" name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="传真 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td><input style="border: none;" class="form-control" placeholder="邮编" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="邮编 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td><input style="border: none;" class="form-control" placeholder="地址" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="地址 不能为空"></td>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td><input style="border: none;" class="form-control" placeholder="E-mail(电子邮箱)" type="text"
+                               name="item_name" maxlength="50" data-bv-notempty="true"
+                               data-bv-notempty-message="E-mail(电子邮箱) 不能为空"></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+        </form>
+        <div class="form-actions">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+                    <button class="btn btn-primary" type="submit" onclick="save();">
+                        <i class="fa fa-save"></i> 保存
                     </button>
                 </div>
-                <table lay-even lay-skin="nob" class="layui-table" >
-                    <colgroup>
-                        <col width="40%">
-                        <col width="20%">
-                        <col width="20%">
-                        <col width="20%">
-                    </colgroup>
-                    <thead>
-                        <th class="header zhibiao" colspan="4">其他指标</th>
-                        <tr>
-                            <td>内容</td>
-                            <td>时间</td>
-                            <td>地点</td>
-                            <td>人员</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> <input class="form-control" lay-verify="required" placeholder="指标内容" type="text"
-                                    name="end_date"></td>
-                            <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                                    name="start_date"></td>
-                            <td><select name="interest" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">未完成</option>
-                                    <option value="2">完成</option>
-                                </select></td>
-                            <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"
-                                name="start_date"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
-        <!--项目成员-->
-        <div class="module">
-            <form class="layui-form" id="form6">
-                <div class="layui-btn-group btn-group">
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-                <table lay-even lay-skin="nob" class="layui-table">
-                    <colgroup>
-                        <col width="15%">
-                        <col width="6%">
-                        <col width="6%">
-                        <col width="20%">
-                        <col width="15%">
-                        <col width="13%">
-                        <col width="14%">
-                        <col width="18%">
-                    </colgroup>
-                    <thead>
-                        <th class="header" colspan="9">项目组人员信息</th>
-                        <tr>
-                            <th>姓名</th>
-                            <th>性别</th>
-                            <th>年龄</th>
-                            <th>证件类型/证件号码</th>
-                            <th>职称</th>
-                            <th>从事专业</th>
-                            <th>工作单位</th>
-                            <th>研究开发中的责任分工</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th><select name="interest" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="1">覃世杰</option>
-                                    <option value="2">笑死超</option>
-                                </select></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
-        <!--科技经费用途预算-->
-        <div class="module">
-            <form class="layui-form" id="form7">
-                <div class="layui-btn-group btn-group">
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-                <table lay-even class="layui-table" id="basis">
-                    <colgroup>
-                        <col width="20%">
-                        <col width="10%">
-                        <col width="55%">
-                        <col width="10%">
-                    </colgroup>
-                    <thead>
-                        <th class="header" colspan="4">科技经费用途预算(桂财教函[2010]28号)</th>
-                        <tr>
-                            <td>科目</td>
-                            <td>金额(万元)</td>
-                            <td>开支内容</td>
-                            <td>使用状况</td>
-                        </tr>
-                        <tr>
-                            <td>合计</td>
-                            <td>70</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(一)直接使用</td>
-                            <td>70</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input class="form-control" lay-verify="required" placeholder="科目" type="text"
-                                    name="end_date"></td>
-                            <td><input class="form-control" lay-verify="required" placeholder="金额" type="text"
-                                    name="end_date"></td>
-                            <td><input class="form-control" lay-verify="required" placeholder="开支内容" type="text"
-                                    name="end_date"></td>
-                            <td class="btn_center"> <button type="button"
-                                    class="layui-btn layui-btn-primary layui-btn-sm ">详情</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
-        <!--签订合同各方-->
-        <div class="module">
-            <form class="layui-form" id="form8">
-                <table lay-even class="layui-table">
-                    <colgroup>
-                        <col width="15%">
-                        <col width="40%">
-                        <col width="40%">
-                    </colgroup>
-                    <thead>
-                    <th class="header" colspan="3">签订合同各方</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td rowspan="7">乙方</td>
-                        <td>项目负责人</td>
-                        <td><input style="border: none;" class="form-control" placeholder="项目负责人" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="项目负责人 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>（单位）</td>
-                        <td><input style="border: none;" class="form-control" placeholder="（单位）" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="（单位） 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>组织机构代码/统一社会信用代码</td>
-                        <td><input style="border: none;" class="form-control" placeholder="组织机构代码/统一社会信用代码"
-                                   type="text" name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="组织机构代码/统一社会信用代码 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>账户名称</td>
-                        <td><input style="border: none;" class="form-control" placeholder="账户名称" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="账户名称 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>开户银行</td>
-                        <td><input style="border: none;" class="form-control" placeholder="开户银行" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="开户银行 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>账号</td>
-                        <td><input style="border: none;" class="form-control" placeholder="账号" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="账号 不能为空"></td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td rowspan="2">丙方</td>
-                        <td>项目管理联系人</td>
-                        <td><input style="border: none;" class="form-control" placeholder="项目管理联系人" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="项目管理联系人 不能为空"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
-        </div>
-        <div class="module">
-            <form class="layui-form" id="form9">
-                <table lay-even class="layui-table">
-                    <colgroup>
-                        <col width="15%">
-                        <col width="40%">
-                        <col width="40%">
-                    </colgroup>
-                    <thead>
-                    <th class="header" colspan="3">签订合同各方联系方式</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td rowspan="6">甲方</td>
-                        <td>联系人</td>
-                        <td><input style="border: none;" class="form-control" placeholder="联系人" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="联系人 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>电话</td>
-                        <td><input style="border: none;" class="form-control" placeholder="电话" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="电话 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>传真</td>
-                        <td><input style="border: none;" class="form-control" placeholder="传真"
-                                   type="text" name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="传真 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>邮编</td>
-                        <td><input style="border: none;" class="form-control" placeholder="邮编" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="邮编 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>地址</td>
-                        <td><input style="border: none;" class="form-control" placeholder="地址" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="地址 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail(电子邮箱)</td>
-                        <td><input style="border: none;" class="form-control" placeholder="E-mail(电子邮箱)" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="E-mail(电子邮箱) 不能为空"></td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td rowspan="6">乙方</td>
-                        <td>联系人</td>
-                        <td><input style="border: none;" class="form-control" placeholder="联系人" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="联系人 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>电话</td>
-                        <td><input style="border: none;" class="form-control" placeholder="电话" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="电话 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>传真</td>
-                        <td><input style="border: none;" class="form-control" placeholder="传真"
-                                   type="text" name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="传真 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>邮编</td>
-                        <td><input style="border: none;" class="form-control" placeholder="邮编" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="邮编 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>地址</td>
-                        <td><input style="border: none;" class="form-control" placeholder="地址" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="地址 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail(电子邮箱)</td>
-                        <td><input style="border: none;" class="form-control" placeholder="E-mail(电子邮箱)" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="E-mail(电子邮箱) 不能为空"></td>
-                    </tr>
-                    </tbody>
-                    <tbody>
-                    <tr>
-                        <td rowspan="6">丙方</td>
-                        <td>联系人</td>
-                        <td><input style="border: none;" class="form-control" placeholder="联系人" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="联系人 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>电话</td>
-                        <td><input style="border: none;" class="form-control" placeholder="电话" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="电话 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>传真</td>
-                        <td><input style="border: none;" class="form-control" placeholder="传真"
-                                   type="text" name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="传真 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>邮编</td>
-                        <td><input style="border: none;" class="form-control" placeholder="邮编" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="邮编 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>地址</td>
-                        <td><input style="border: none;" class="form-control" placeholder="地址" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="地址 不能为空"></td>
-                    </tr>
-                    <tr>
-                        <td>E-mail(电子邮箱)</td>
-                        <td><input style="border: none;" class="form-control" placeholder="E-mail(电子邮箱)" type="text"
-                                   name="item_name" maxlength="50" data-bv-notempty="true"
-                                   data-bv-notempty-message="E-mail(电子邮箱) 不能为空"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-            </form>
+            </div>
         </div>
     </div>
+</div>
 </body>
+<script type="text/javascript" src='../../../../js/constant.js'></script>
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="../../../../js/constant.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src='../../js/serializeJson.js'></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script type="text/javascript" src='../../js/saveData.js'></script>
 <script>
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
@@ -672,24 +697,89 @@
             });
         });
         //监听提交
-        form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
+        form.on('submit(sub1)', function (data) {
+            $('#sub2').trigger('click');
+            return false;
+        });
+        form.on('submit(sub2)', function (data) {
+            $('#sub3').trigger('click');
+            return false;
+        });
+        form.on('submit(sub3)', function (data) {
+            $('#sub4').trigger('click');
+            return false;
+        });
+        //上面只是为了验证表单，下面才是真正的提交
+        form.on('submit(sub4)', function (data) {
+            saveBasics();
+            addContent();
+            addTarget1();
+            addTarget2();
+            layer.msg("保存成功", {shift: -1, time: 1000}, function () {
+
+            });
             return false;
         });
     });
+    /*初始化数据*/
+    initSelectData('planType', $('#category'));//计划类别
+    initSelectData('target', $('select[name=target]'));//考核指标
+    initCompanySelect();
+    initProvinceSelect();
+
+    //监听地点选择
+    $(".content").on('change', '.site', function () {
+        var code = $(this).val();
+        var text = $(this).next().text() + $(this).find("option:selected").text() + '-';
+        $(this).next().val(code);
+        $(this).next().text(text);
+        $(this).empty();
+        $(this).append("<option value='" + code + "'>" + text + "</option>");
+        var texts = text.split('-');
+        if (texts.length == 2) {
+            getCity(code, $(this));
+        } else if (texts.length == 3) {
+            getArea(code, $(this));
+        } else if (texts.length == 4) {
+            getStreet(code, $(this));
+        }
+    });
+
+    //刷新地点选择
+    function refresh(e) {
+        var siteSelect = $(e).prev().prev();
+        siteSelect.empty();
+        siteSelect.append("<option value=''>请选择</option>");
+        getProvince(siteSelect);
+        siteSelect.next().val('');
+        siteSelect.next().text('');
+    }
+
+    //保存
+    function save() {
+        $('#sub1').trigger('click');
+        //saveBasics();
+        //addContent();
+    }
+
     //添加一行
     function add_row(e) {
         layui.use(['layer', 'form', 'laydate'], function () {
             var layer = layui.layer
                 , form = layui.form
                 , laydate = layui.laydate;
-            var str = $(e).parent().next().find('tbody').children().last().clone();
+            var str = $(e).parent().next().find('tbody').children().last().clone(true);
             $(e).parent().next().find('tbody').append(str);
-            form.render('select');
             //清空表单内容
-            $(e).parent().next().find('tbody').children().last().find('input').val('');
-            $(e).parent().next().find('tbody').children().last().find('textarea').val('');
-            $(e).parent().next().find('tbody').children().last().find('select').val('');
+            var lastTr = $(e).parent().next().find('tbody').children().last();
+            lastTr.find('input[type=text]').val('');
+            lastTr.find('input[name=district]').val('');
+            lastTr.find('input[name=district]').text('');
+            lastTr.find('textarea').val('');
+            lastTr.find('select').val('');
+
+            lastTr.find('button').trigger('click');
+            //渲染
             lay('.date').each(function () {
                 laydate.render({
                     elem: this
@@ -700,6 +790,7 @@
             });
         });
     }
+
     //删除一行
     function del_row(e) {
         var dom = $(e).parent().next().find('tbody').children();
@@ -708,6 +799,7 @@
         }
         $(e).parent().next().find('tbody').children().last().remove();
     }
+
     //添加考核指标类型
     function option_target() {
         layui.use(['form', 'laydate'], function () {
@@ -722,23 +814,18 @@
                     ' <div class="form-group">'
                     + '  <label class="col-md-3 control-label">考核指标</label>'
                     + ' <div class="col-md-7">'
-                    + '  <select class="form-control input-sm" id="type" name="type">'
+                    + '  <select class="form-control input-sm" id="targetType" name="type">'
                     + '  <option value=' + '' + '>- 请选择 -</option>'
-                    + '<option value=' + 0 + '>技术指标</option>'
-                    + '<option value=' + 1 + '>经济指标</option>'
-                    + '<option value=' + 2 + '>人才培养指标</option>'
-                    + '<option value=' + 3 + '>常规定量指标</option>'
-                    + '<option value=' + 4 + '>其他指标</option>'
+
                     + ' </select>'
                     + ' </div>'
                     + ' </div>',
                 yes: function (index, layero) {
-                    var typeValue = $("#type").val();
-                    var type = $("#type option:selected").text();
+                    var text = $("#targetType option:selected").text();
+                    var type = $("#targetType").val();
                     let str;
                     str =
-                        ' <div id="classname"  class="module">'
-                        + ' <form class="layui-form">'
+                        ' <div id="classname"  class="module target">'
                         + ' <div class="layui-btn-group btn-group">'
                         + '  <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">'
                         + ' <i class="layui-icon">&#xe654;</i>'
@@ -756,55 +843,48 @@
                         + '<col width="20%">'
                         + '</colgroup>'
                         + '<thead>'
-                        + ' <th class="header zhibiao" colspan="5">' + type + '</th>'
+                        + ' <th class="header" colspan="5">' + text + '</th>'
                         + '<tr>'
-                        + ' <td>描述</td>'
+                        + ' <td>内容</td>'
                         + ' <td>数量</td>'
-                        + '<td>实施时间</td>'
-                        + '<td>实施地点</td>'
-                        + ' <td>实施人员</td>'
+                        + '<td>时间</td>'
+                        + '<td>地点</td>'
+                        + ' <td>人员</td>'
                         + '</tr>'
                         + ' </thead>'
                         + '<tbody>'
                         + '<tr>'
-                        + '<td> <input class="form-control" lay-verify="required" placeholder="目录" type="text"'
-                        + ' name="end_date"></td>'
+                        + '<td><input type="hidden" name="item_id">'
+                        + '<input type="hidden" name="type" value="' + type + '">'
+                        + '<input type="hidden" name="status" value="0">'
+                        + '<select class="form-control input-sm" lay-verify="required" lay-ignore name="target">'
+                        + '<option value="">请选择</option>'
+                        + '</select></td>'
                         + ' <td> <input class="form-control" lay-verify="required" placeholder="数量" type="text"'
-                        + ' name="end_date"></td>'
+                        + ' name="count"></td>'
                         + '<td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"'
-                        + ' name="start_date"></td>'
-                        + ' <td><select name="interest" lay-filter="aihao">'
-                        + '  <option value=""></option>'
-                        + '  <option value="1">未完成</option>'
-                        + '  <option value="2">完成</option>'
-                        + ' </select></td>'
-                        + ' <td><select name="interest" lay-filter="aihao">'
-                        + ' <option value=""></option>'
-                        + ' <option value="1">未完成</option>'
-                        + '   <option value="2">完成</option>'
-                        + '  </select></td>'
+                        + ' name="start_date">'
+                        + '<input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"'
+                        + ' name="end_date"></td>'
+                        + '<td>'
+                        + '<select class="form-control input-sm site" lay-verify="required" lay-ignore>'
+                        + '<option value="">请选择</option>'
+                        + '</select>'
+                        + '<input type="hidden" name="district">'
+                        + '<button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"'
+                        + 'style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">'
+                        + '<i class="layui-icon">&#xe669;</i>'
+                        + '</button>'
+                        + ' </td>'
+                        + ' <td><input class="form-control " lay-verify="required" placeholder="人员" type="text"></td>'
                         + '</tr>'
                         + ' </tbody>'
                         + '    </table>'
-                        + '</form>'
                         + '</div>';
                     $("#forma").append(str);
-                    if (typeValue == 0) {
-                        $("#classname").attr("id", "jishu");
-                    }
-                    if (typeValue == 1) {
-                        $("#classname").attr("id", "jingji");
-                    }
-                    if (typeValue == 2) {
-                        $("#classname").attr("id", "rencai");
-                    }
-                    if (typeValue == 3) {
-                        $("#classname").attr("id", "changgui");
-                    }
-                    if (typeValue == 4) {
-                        $("#classname").attr("id", "qita");
-                    }
-                    form.render('select');
+                    initSelectData('target', $("#forma").find('.module').last().find('tbody').children().find('select[name=target]'));//考核指标
+                    $("#forma").find('.module').last().find('tbody').children().find('button').trigger('click');
+                    //渲染
                     lay('.date').each(function () {
                         laydate.render({
                             elem: this
@@ -813,74 +893,50 @@
                         });
 
                     });
-                    layer.msg("成功", { shift: -1, time: 1000 }, function () {
+                    layer.msg("成功", {shift: -1, time: 1000}, function () {
                         layer.close(index);
                     });
-
                 }
                 , btn2: function (index, layero) {
                     layer.close(index);
                 }
             });
         });
+        initSelectData("targetType", $('#targetType'));
     }
+
     function delete_target() {
-        layui.use(['form', 'laydate'], function () {
-            var form = layui.form
-                , laydate = layui.laydate;
-
-            index = layer.open({
-
-                title: "选择指标",
-                btn: ['确定', '关闭'],
-                type: 1,
-                area: ['450px', '350px'],
-                content:
-                    ' <div class="form-group">'
-                    + '  <label class="col-md-3 control-label">考核指标</label>'
-                    + ' <div class="col-md-7">'
-                    + '  <select class="form-control input-sm" id="typea" name="type">'
-                    + ' </select>'
-                    + ' </div>'
-                    + ' </div>',
-                yes: function (index, layero) {
-                    var type = $("#typea option:selected").text();
-
-                    if (type == '技术指标') {
-                        $("#jishu").remove();
-                    }
-                    if (type == '经济指标') {
-                        $("#jingji").remove();
-                    }
-                    if (type == '其他指标') {
-                        $("#qita").remove();
-                    }
-                    if (type == '人才培养指标') {
-                        $("#rencai").remove();
-                    }
-                    if (type == '常规定量指标') {
-                        $("#changgui").remove();
-                    }
-                    layer.msg("成功", { shift: -1, time: 1000 }, function () {
-                        layer.close(index);
-                    });
-                }, btn2: function (index, layero) {
+        index = layer.open({
+            title: "选择要删除的指标",
+            btn: ['确定', '关闭'],
+            type: 1,
+            area: ['450px', '350px'],
+            content:
+                ' <div class="form-group">'
+                + '  <label class="col-md-3 control-label">考核指标</label>'
+                + ' <div class="col-md-7">'
+                + '  <select class="form-control input-sm" id="targetType" name="type">'
+                + ' </select>'
+                + ' </div>'
+                + ' </div>',
+            yes: function (index, layero) {
+                var i = $("#targetType option:selected").val();
+                var t = $(".target");
+                $(t[i]).remove();
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
                     layer.close(index);
-                }
-            })
-            var zhibiaolength = $(".zhibiao").length;
-            var name;
-            for (var i = 0; i < zhibiaolength; i++) {
-                name = $(".zhibiao").eq(i).text();
-                var str = '<option value=' + i + '>' + name + '</option>';
-                $("#typea").append(str);
+                });
+            }, btn2: function (index, layero) {
+                layer.close(index);
             }
         })
+        var t = $(".target");
+        alert(t.length);
+        $(t).each(function (index) {
+            var text = $(this).find('th').text();
+            $("#targetType").append('<option value=' + index + '>' + text + '</option>');
+        })
     }
-
-
-
-
 </script>
 
 </html>

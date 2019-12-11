@@ -1,23 +1,11 @@
 package com.xinlang.cat_project.item.service;
 
 import com.xinlang.cat_project.item.pojo.ItemTarget;
+import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
 import java.util.List;
-import java.util.Map;
 
-public interface IItemTargetService {
+public interface IItemTargetService extends IBaseService<ItemTarget> {
 
-    void saveTarget(ItemTarget target);
-
-    ItemTarget queryTargetById(Integer id);
-
-    List<ItemTarget> queryTargetByCId(Integer Cid);
-
-    List<ItemTarget> queryTargetByItemId(Integer itemId);
-
-    List<ItemTarget> queryTargetByUserId(Integer itemId);
-
-    void updateTarget(ItemTarget target);
-
-    void deleteTarget(Integer id);
+    void saveTargets(List<ItemTarget> itemTargets);
 }

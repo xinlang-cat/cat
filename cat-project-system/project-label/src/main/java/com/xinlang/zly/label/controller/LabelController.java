@@ -119,9 +119,19 @@ public class LabelController {
     @LogAnnotation(module = "获取所有标签")
     @GetMapping("/label/all")
     public List<Label> findAll() {
-        return  labelService.findAll();
+        List<Label> all =  labelService.findAll();
+        List<Label> list = new ArrayList<>();
+        setLabelTable(0,all,list);
+        return  list;
     }
-
+    private void setLabelTable(Integer pid, List<Label> all, List<Label> list) {
+        all.forEach(a->{
+            if(a.getPid().equals(pid)){
+                list.add(a);
+                setLabelTable(a.getId(),all,list);
+            }
+        });
+    }
     /**
      * 所有标签树
      * @param all

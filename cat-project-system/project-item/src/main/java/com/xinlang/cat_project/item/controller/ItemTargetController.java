@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,100 +25,60 @@ public class ItemTargetController {
     @Autowired
     private IItemTargetService targetService;
 
-    /**
-     * 新增指标
-     * @param target
-     * @return
-     */
-    @ApiOperation(value = "添加指标信息")
-    @LogAnnotation(module = "添加指标信息")
-    @PreAuthorize("hasAnyAuthority('project:target:save')")
-    @PostMapping
+    @ApiOperation(value = "添加一条指标")
+    @LogAnnotation(module = "添一条加指标")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("/one")
     public ResponseEntity<Void> saveTarget(@RequestBody ItemTarget target){
-        targetService.saveTarget(target);
+        targetService.save(target);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 获取单条指标
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "获取一条指标信息")
-    @LogAnnotation(module = "获取一条指标信息")
-    @GetMapping("/{id}")
-    public ResponseEntity<ItemTarget> getTargetById(@PathVariable Integer id){
+    @ApiOperation(value = "添加多条指标")
+    @LogAnnotation(module = "添加多条指标")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("/multi")
+    public ResponseEntity<Void> saveContents(@RequestBody List<ItemTarget> itemTargets) {
+        targetService.saveTargets(itemTargets);
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
-        ItemTarget target = targetService.queryTargetById(id);
+    @ApiOperation(value = "查询指标")
+    @LogAnnotation(module = "查询指标")
+    @GetMapping("/list")
+    public ResponseEntity<List<ItemTarget>> getTargetById(@RequestParam Map<String, Object> params){
+        List<ItemTarget> target = targetService.findListByParams(params,ItemTarget.class);
         return ResponseEntity.ok(target);
     }
 
-    /**
-     * 获取当前内容全部指标
-     * @param Cid 内容id
-     * @return
-     */
-    @ApiOperation(value = "获取主要研究内容的所有指标信息")
-    @LogAnnotation(module = "获取主要研究内容的所有指标信息")
-    @GetMapping("/group/{Cid}")
-    public ResponseEntity<List<ItemTarget>> getTargetByCid(@PathVariable Integer Cid){
-
-        List<ItemTarget> target = targetService.queryTargetByCId(Cid);
-        return ResponseEntity.ok(target);
-    }
-
-    /**
-     * 获取项目全部指标
-     * @param itemId 项目id
-     * @return
-     */
-    @ApiOperation(value = "获取项目所有指标信息")
-    @LogAnnotation(module = "获取项目所有指标信息")
-    @GetMapping("/all/{itemId}")
-    public ResponseEntity<List<ItemTarget>> getTargetByItemId(@PathVariable Integer itemId){
-
-        List<ItemTarget> target = targetService.queryTargetByItemId(itemId);
-        return ResponseEntity.ok(target);
-    }
-
-    /**
-     * 获取当前用户相关指标
-     * @return
-     */
-    @ApiOperation(value = "获取当前用户相关指标")
-    @LogAnnotation(module = "获取当前用户相关指标")
-    @GetMapping("/my/{itemId}")
-    public ResponseEntity<List<ItemTarget>> getTargetByUserId(@PathVariable Integer itemId){
-
-        List<ItemTarget> target = targetService.queryTargetByUserId(itemId);
-        return ResponseEntity.ok(target);
-    }
-
-    /**
-     * 更改
-     * @param target
-     * @return
-     */
-    @ApiOperation(value = "修改指标信息，id必填")
-    @LogAnnotation(module = "修改指标信息")
-    @PreAuthorize("hasAnyAuthority('project:target:update')")
-    @PutMapping
+    @ApiOperation(value = "修改指标")
+    @LogAnnotation(module = "修改指标")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping("/one")
     public ResponseEntity<Void> updateTarget(@RequestBody ItemTarget target){
-        targetService.updateTarget(target);
+        targetService.update(target);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 删除
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "删除指标信息，id必填")
-    @LogAnnotation(module = "删除指标信息")
-    @PreAuthorize("hasAnyAuthority('project:target:delete')")
+    @ApiOperation(value = "修改多条指标")
+    @LogAnnotation(module = "修改多条指标")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @Transactional
+    @PutMapping("/multi")
+    public ResponseEntity<Void> updateContents(@RequestBody List<ItemTarget> itemContents){
+        for (ItemTarget itemContent : itemContents) {
+            targetService.delete(itemContent.getId());
+        }
+        targetService.saveTargets(itemContents);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "删除指标")
+    @LogAnnotation(module = "删除指标")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTarget(@PathVariable Integer id){
-        targetService.deleteTarget(id);
+        targetService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

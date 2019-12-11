@@ -21,12 +21,7 @@ public class ItemUser {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    private Integer pid;
     private Integer user_id;
     private Integer item_id;
-    private String responsible;
     private Integer type;
-
-    @Transient
-    private List<Integer> targetIds;
 }
