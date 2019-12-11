@@ -26,4 +26,8 @@ public class ItemUserService extends BaseService<ItemUser> implements IItemUserS
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
 
+    @Override
+    public void saveitemUsers(List<ItemUser> itemUsers) {
+        itemUserMapper.insertList(itemUsers);
+    }
 }

@@ -31,12 +31,21 @@ public class ItemUserController {
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
 
-    @ApiOperation(value = "添加成员")
-    @LogAnnotation(module = "添加成员")
+    @ApiOperation(value = "添加一条成员")
+    @LogAnnotation(module = "添加一条成员")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
-    @PostMapping
+    @PostMapping("/one")
     public ResponseEntity<Void> saveItemUser(@RequestBody ItemUser itemUser) {
         itemUserService.save(itemUser);
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "添加多条成员")
+    @LogAnnotation(module = "添加多条成员")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("/multi")
+    public ResponseEntity<Void> saveContents(@RequestBody List<ItemUser> itemUsers) {
+        itemUserService.saveitemUsers(itemUsers);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

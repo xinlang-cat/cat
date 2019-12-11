@@ -8,4 +8,5 @@ import java.util.Map;
 
 public interface IItemUserService extends IBaseService<ItemUser> {
 
+    void saveitemUsers(List<ItemUser> itemUsers);
 }
