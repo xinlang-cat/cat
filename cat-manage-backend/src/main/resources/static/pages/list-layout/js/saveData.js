@@ -50,3 +50,15 @@ function addTarget2() {//其他指标
         }
     });
 }
+function addPersonnel() {//其他指标
+    var formdata = $("#form5").serializeJson();
+    $.ajax({
+        type: 'post',
+        url: domainName + '/project-item/item/user/multi',
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        data: formdata,
+        success: function (data) {
+        }
+    });
+}
