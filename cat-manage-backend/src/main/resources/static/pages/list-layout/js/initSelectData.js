@@ -102,30 +102,66 @@ function getStreet(AreaCode,node){
     });
 }
 //查询当前用户所在的公司代码
-function queryDeptCode(id) {
+var deptCode;
+function queryDeptCode() {
     $.ajax({
         type : 'get',
-        url : domainName + '/project-item/item/'+id,
+        url : domainName + '/api-c/company/now-user',
         async : false,
         success : function(data) {
-            deptCode = data.dept_code;
+            deptCode = data.deptCode;
         }
     });
 }
 //初始化人员选择
-function initUserSelect(deptCode) {
+function initUserSelect(deptCode,node) {
     $.ajax({
         type : 'get',
         url : domainName + '/api-c/user/dept/'+deptCode,
         async : false,
         success : function(data) {
-            var select = $("#userSelect");
-            for(var i=0; i<data.length; i++){
-                var d = data[i];
-                var userId = d.userId;
-                var name = d.name;
-                select.append("<option value='"+ userId +"'>" +name+"</option>");
+            $(data).each(function () {
+                var userId = this.userId;
+                var name = this.name;
+                node.append("<option value='"+ userId +"'>" +name+"</option>");
+            })
+        }
+    });
+}
+//查询用户信息
+function queryUserInfo(usetId,node) {
+    $.ajax({
+        type : 'get',
+        url : domainName + '/project-user/user-anon/'+usetId,
+        async : false,
+        success : function(data) {
+            var d = data[0];
+            var sex = d.sex || '',
+                birthDate = d.birthDate || '',
+                idType = d.idType || '',
+                idCard = d.idCard || '',
+                academicTitle = d.academicTitle || '',
+                nowMajor = d.nowMajor || '',
+                deptName = d.deptName || '';
+            if(sex==1){
+                sex='男';
+            }else {
+                sex='女';
             }
+            // 获得今天的时间，计算年龄
+            var date = new Date();
+            var startDate = new Date(birthDate);
+            var newDate = date.getTime() - startDate.getTime();
+            var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 /365);
+            if (isNaN(age)){
+                age = "";
+            }
+            node.parent().nextAll().eq(0).children().eq(0).val(sex);
+            node.parent().nextAll().eq(1).children().eq(0).val(age);
+            node.parent().nextAll().eq(2).children().eq(0).val(idType+'/'+idCard);
+            node.parent().nextAll().eq(3).children().eq(0).val(academicTitle);
+            node.parent().nextAll().eq(4).children().eq(0).val(nowMajor);
+            node.parent().nextAll().eq(5).children().eq(0).val(deptName);
         }
     });
 }

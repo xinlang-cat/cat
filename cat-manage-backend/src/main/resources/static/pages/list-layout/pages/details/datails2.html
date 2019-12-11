@@ -367,14 +367,14 @@
             </div>
             <table lay-even lay-skin="nob" class="layui-table">
                 <colgroup>
-                    <col width="15%">
-                    <col width="6%">
-                    <col width="6%">
+                    <col width="10%">
+                    <col width="8%">
+                    <col width="8%">
                     <col width="20%">
-                    <col width="15%">
-                    <col width="13%">
+                    <col width="10%">
+                    <col width="10%">
                     <col width="14%">
-                    <col width="18%">
+                    <col width="20%">
                 </colgroup>
                 <thead>
                 <th class="header" colspan="9">项目组人员信息</th>
@@ -391,18 +391,16 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th><select name="interest" lay-filter="aihao">
-                        <option value=""></option>
-                        <option value="1">覃世杰</option>
-                        <option value="2">笑死超</option>
-                    </select></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="user_id">
+                        <option value="">请选择</option>
+                    </select></td>
+                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="职称" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="研究开发中的责任分工" type="text"></td>
                 </tr>
                 </tbody>
             </table>
@@ -726,6 +724,8 @@
     initSelectData('target', $('select[name=target]'));//考核指标
     initCompanySelect();
     initProvinceSelect();
+    queryDeptCode();
+    initUserSelect(deptCode,$('select[name=user_id]'));
 
     //监听地点选择
     $(".content").on('change', '.site', function () {
@@ -755,6 +755,11 @@
         siteSelect.next().text('');
     }
 
+    //监听人员选择
+    $(".content").on('change', 'select[name=user_id]', function () {
+        var usetId = $(this).val();
+        queryUserInfo(usetId,$(this));
+    });
     //保存
     function save() {
         $('#sub1').trigger('click');
