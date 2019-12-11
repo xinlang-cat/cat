@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="report/css/timeline1.css">
+</head>
+<body>
+
+
+<div class="content">
+    <article id="content">
+        <h3>我的总结</h3>
+       <!-- <section>
+            <span class="point-time point-green"></span>
+            <time datetime="2013-03">
+                <span>标题</span>
+                <span>操作</span>
+            </time>
+            <aside>
+                <p class="things">大叔带三度的啊打算</p>
+                <p class="brief"><span><button type="button"
+                                               class="layui-btn layui-btn-primary layui-btn-xs">修改</button><button type="button"
+                                                                                                                   class="layui-btn layui-btn-primary layui-btn-xs">删除</button><button type="button"
+                                                                                                                                                                                       class="layui-btn layui-btn-primary layui-btn-xs">提交</button></span> </p>
+            </aside>
+        </section>-->
+    </article>
+</div>
+<form class="form-horizontal" onsubmit="return false" id="form">
+    <input type="hidden" name="id" value="" id="id">
+    <input type="hidden" name="status" value="2">
+    <input type="hidden" name="projectId" value="" id="projectId">
+</form>
+</body>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/project/initData.js"></script>
+<script type="text/javascript" src="../../js/project/projectDetails.js"></script>
+<script>
+    var id = 26;
+    $("#projectId").val(id);
+    $("#add_report").click(function () {
+        $(location).attr("href", "add_report.html?id=" + id);
+    })
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+    });
+    $(function(){
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-report/report/getAllReport/'+id,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                   /* str += '<tr>'
+                        + '<th style="text-align: center;">' + this.title + '</th>'
+                        + '<th style="text-align: center;">' + this.content + '</th>'
+                        + '<th style="text-align: center;">'
+                        + ' <div style="width: 100%;height: 20px;align-self: center;">'
+                        + '<button onclick="updat_report('+this.id+')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
+                        + '<p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe642;</i></p>'
+                        + '</button>'
+                        + '<button onclick="delete_report('+this.id+');" style="height: 20px;width: 30px;align-self: center;"   class="layui-btn layui-btn-sm">  <p style="line-height: 20px;margin-left: -3px;"><i  class="layui-icon">&#xe640;</i></p>'
+                        + '</button>'
+                        + '</div>'
+                        + '</th>';*/
+                    if(this.status==1) {
+                        str += '<section>' +
+                            '<span class="point-time point-green"></span>\n' +
+                            '<time datetime="2013-03">\n' +
+                            ' <span>标题</span>\n' +
+                            ' <span>操作</span>\n' +
+                            '</time>\n' +
+                            '<aside>\n' +
+                            '<p style="text-align: 18px;" class="things">' + this.title + '</p>' +
+                            '<p class="brief"><span><button onclick="updat_report(' + this.id + ')" type="button"\n' +
+                            'class="layui-btn layui-btn-primary layui-btn-xs">修改</button><button onclick="delete_report(' + this.id + ');" type="button"' +
+                            'class="layui-btn layui-btn-primary layui-btn-xs">删除</button><button onclick="tijiao('+this.id+')" type="button"' +
+                            ' class="layui-btn layui-btn-primary layui-btn-xs">提交</button></span> </p>' +
+                            '</aside>'
+                            + '</section>';
+                    }
+                })
+                $("#content").append(str);
+            }
+        })
+    })
+
+
+
+    function updat_report(id) {
+        $(location).attr("href", "updata_report.html?id=" + id);
+    }
+    function tijiao(id) {
+        $("#id").val(id);
+        post_report();
+    }
+
+    function post_report() {
+        var formdata = $("#form").serializeObject();
+        layer.confirm('确定要提交吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'put',
+                url : domainName + '/project-report/report',
+                contentType: "application/json; charset=utf-8",
+                data : JSON.stringify(formdata),
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("提交成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+
+
+    $("#BTN").click(function () {
+        $(location).attr("href", "report.html?id=" + id);
+
+    })
+
+    function delete_report(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/project-report/report/del/' + id,
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+</script>
+
+</html>

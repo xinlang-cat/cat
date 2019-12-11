@@ -41,6 +41,7 @@ $(function () {
         async : false,
         success : function(data) {
             var select = $("#provinceCode");
+            select.append("<option value=''>请选择省份</option>");
             for(var i=0; i<data.length; i++){
                 var d = data[i];
                 var code = d.provinceCode;

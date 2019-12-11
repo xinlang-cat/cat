@@ -89,6 +89,7 @@ public class LabelController {
         if(list.size()>1){
             return null;
         }
+        System.out.println(list);
        return list;
     }
 

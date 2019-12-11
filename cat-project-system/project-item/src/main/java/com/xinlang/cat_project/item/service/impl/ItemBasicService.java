@@ -107,13 +107,14 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
             Example example = new Example(ItemBasic.class);
             example.createCriteria().andEqualTo("consignor",company.getDeptCode())
                     .orEqualTo("undertaker",company.getDeptCode()).orEqualTo("supervisor_dept",company.getDeptCode());
-            List<ItemBasic> items = itemBasicMapper.selectByExample(example);
+            /*List<ItemBasic> items = itemBasicMapper.selectByExample(example);*/
+            list = itemBasicMapper.selectByExample(example);
             //获取进行中的项目
-            for (ItemBasic item : items) {
+            /*for (ItemBasic item : items) {
                 if(item.getStatus()>= constant.ItemStatus.BASICS_CHECK){
                     list.add(item);
                 }
-            }
+            }*/
         }
         return list;
     }

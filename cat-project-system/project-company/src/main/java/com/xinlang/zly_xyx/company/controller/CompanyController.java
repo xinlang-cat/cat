@@ -1,6 +1,7 @@
 package com.xinlang.zly_xyx.company.controller;
 
 import com.xinlang.bean.company.Company;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
@@ -59,8 +60,11 @@ public class CompanyController {
 
     @GetMapping("/company-anon/{userId}")
     @LogAnnotation(module = "根据系统用户表id查询公司、机构")
-    @ApiOperation(value = "根据系统用户表id查询公司、机构")
+    @ApiOperation(value = "根据系统用户表id查询公司、机构，默认获取当前用户的")
     public Company findByUserId(@PathVariable Integer userId){
+        if(userId == null){
+            userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        }
         return companyService.findByUserId(userId);
     }
 

@@ -13,5 +13,5 @@ public interface IProjectUserSkillService {
     void update(ProjectUserSkill projectUserSkill);
     List<ProjectUserSkill> findByUserId(Integer userId);
     List<ProjectUserSkill> findByLabelSign(String labelSign,String userType);
-    void delete(Integer id);
+    void delete(Integer userId);
 }

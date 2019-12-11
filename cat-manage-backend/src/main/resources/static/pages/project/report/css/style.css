@@ -1,0 +1,22 @@
+@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+body{background:#f9f9f9;color:#363636;font-size:13px}
+a{color:#767676;font-size:13px;font-weight:200}
+a:hover{color:#565656}
+/* container */
+#container{position:relative;padding-bottom:30px;margin:0px auto 200px;padding-left:0px;width:1040px;padding-right:0px;height:auto;overflow:hidden;padding-top:30px}
+.timeline_container{z-index:50;text-align:center;margin:0px auto;width:29px;display:block;height:100%;cursor:pointer}
+.timeline{position:absolute;margin:0px auto;width:4px;display:block;background:#eeeeee;float:left;height:100%;font-size:0px;top:0px;left:518px}
+.timeline div.plus{z-index:5000;position:absolute;width:29px;background:url(../images/timeline.png) 0px -36px;height:10px;top:0px;left:-11px}
+.timeline div.plus2{position:absolute;width:10px;bottom:0px;background:url(../images/timeline.png) -29px -26px;height:10px;left:-3px}
+.leftcorner{z-index:99;position:absolute;width:36px;display:block;height:26px;overflow:hidden}
+.rightcorner{z-index:99;position:absolute;width:36px;display:block;height:26px;overflow:hidden}
+.rightcorner{background:url(../images/timeline.png) 0px 0px;top:25px;right:-36px}
+.leftcorner{background:url(../images/timeline.png) -36px 0px;top:10px;left:-36px}
+.item{border-bottom:#eaeaea 1px solid;position:relative;border-left:#eaeaea 1px solid;padding-bottom:15px;line-height:30px;margin:20px 30px 0px;min-height:60px;padding-left:15px;width:428px;padding-right:15px;display:block;font-family:"microsoft jhenghei", "microsoft yahei";word-wrap:break-word;background:#ffffff;float:left;font-size:13px;border-top:#eaeaea 1px solid;border-right:#eaeaea 1px solid;padding-top:15px;box-shadow:0px 1px 8px rgba(202, 202, 202, 0.3)}
+.item h3{line-height:30px;width:428px;display:block;height:30px;font-weight:normal}
+.item h3 .fl{float:left;color:#363636;font-size:14px}
+.item h3 .fr{text-align:right;float:right;color:#999999;font-size:12px}
+.item p.con{border-bottom:#ececec 1px dashed;padding-bottom:15px;line-height:30px;width:428px;display:block;color:#555555;border-top:#ececec 1px dashed;font-weight:normal;padding-top:15px}
+.item p{text-indent:2em}
+.item h4{padding-bottom:15px;padding-left:0px;width:428px;padding-right:0px;display:block;padding-top:15px}

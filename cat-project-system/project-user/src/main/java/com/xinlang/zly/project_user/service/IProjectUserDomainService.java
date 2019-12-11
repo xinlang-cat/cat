@@ -14,5 +14,5 @@ public interface IProjectUserDomainService {
     void update(ProjectUserDomain projectUserDomain);
     List<ProjectUserDomain> findByUserId(Integer userId);
     List<ProjectUserDomain> findByLabelSign(String labelSign, String userType);
-    void delete(Integer id);
+    void delete(Integer userId);
 }

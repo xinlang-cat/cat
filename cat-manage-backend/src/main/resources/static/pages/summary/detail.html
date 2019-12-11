@@ -45,7 +45,7 @@
                 $.ajax({
                     type : 'get',
 					data:data,
-                    url : domainName + '/api-summary/summary',
+                    url : domainName + '/api-summary/skill',
                     async : false,
                     success : function(data) {
                     	$("#itemTile").append(data.name+"的项目总结");
