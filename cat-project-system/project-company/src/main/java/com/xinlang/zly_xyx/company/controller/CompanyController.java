@@ -30,7 +30,6 @@ public class CompanyController {
     public Company save(@RequestBody Company company){
         company.setCreateTime(new Date());
         company.setEnabled(true);
-
         companyService.save(company);
         return company;
     }

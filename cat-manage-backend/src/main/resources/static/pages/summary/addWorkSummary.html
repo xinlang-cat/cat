@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+</head>
+<body>
+
+<div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
+    <p style="text-align: center;line-height:30px;color: #FFF;">项目工作总结报告</p>
+
+</div>
+<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+
+        <fieldset>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">企业基本情况</label>
+                <input type="text" id="itemId" name="itemId" value="" style="display: none">
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="deptInfo" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">项目背景</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="projectContent" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">资金到位情况</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="fullyFunded" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">技术指标完成情况</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="skillIndicator" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">经济指标完成情况</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="economyIndicator" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">项目的社会效益</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="socialBenefit" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">科技经费支持对企业和项目的影响</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="combinedInfluence" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" id="btn_return">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add_content()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+
+
+<script>
+    var itemId = getUrlParam("itemId");
+
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+
+    function add_content() {
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+        var formdata = $("#form").serializeObject();
+        formdata.itemId = itemId;
+        $.ajax({
+            type : 'post',
+            url : domainName + '/api-summary/work',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    alert("aaa");
+                });
+            }
+        });
+
+    }
+
+
+</script>
+</body>
+</html>

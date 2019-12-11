@@ -54,10 +54,12 @@ function setProperty(data,children1){
 var index = null;
 layui.use(['form', 'layer'], function() {
     var form = layui.form;
+    var layer = layui.layer;
     $($("div[data-sign]")).click(function () {
         var status = $(this).data("status");
         var name = $(this).attr("id");
         var sign = $(this).data("sign");
+        var type = $(this).data("type");
         var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="label">';
         $.ajax({
             type: 'get',
@@ -65,7 +67,11 @@ layui.use(['form', 'layer'], function() {
             async: false,
             success: function (data) {
                 $.each(data[0].child, function (i, item) {
-                    element += '<input type="checkbox" name="' + name + '" id="' + item.id + '" value="' + item.sign + '" title="' + item.content + '"><div class="layui-unselect layui-form-checkbox"><span>' + item.content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
+                    if(type=='radio'){
+                        element += ' <input type="radio" name="' + name + '" value="' + item.sign + '" title="' + item.content + '" id="' + item.id + '">'
+                    }else{
+                        element += '<input type="checkbox" name="' + name + '" id="' + item.id + '" value="' + item.sign + '" title="' + item.content + '"><div class="layui-unselect layui-form-checkbox"><span>' + item.content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
+                    }
                 });
                 if (status) {
                     element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'SaveLabel()">保存</button></div></div></form></div>';
@@ -80,7 +86,11 @@ layui.use(['form', 'layer'], function() {
                     shadeClose: true,
                     content: element
                 });
-                form.render('checkbox');
+                if(type=='radio'){
+                    form.render('radio');
+                }else{
+                    form.render('checkbox');
+                }
             }
         });
     });

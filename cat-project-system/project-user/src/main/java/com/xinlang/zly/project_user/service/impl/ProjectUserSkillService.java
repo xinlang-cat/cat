@@ -72,7 +72,9 @@ public class ProjectUserSkillService implements IProjectUserSkillService {
     }
 
     @Override
-    public void delete(Integer id) {
-        projectUserSkillMapper.deleteByPrimaryKey(id);
+    public void delete(Integer userId) {
+        Example example = new Example(ProjectUserSkill.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        projectUserSkillMapper.deleteByExample(example);
     }
 }

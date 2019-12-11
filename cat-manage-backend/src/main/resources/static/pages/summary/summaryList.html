@@ -24,6 +24,12 @@
 									</form>
 	                   			</td>
 	                   			<td align="right">
+                                    <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showWork()">
+                                        <i class="layui-icon">&#xe615;</i>查看工作总结
+                                    </button>
+                                    <button class="layui-btn layui-btn-sm" onclick="work()" permission="mail:save">
+                                        <i class="layui-icon">&#xe608;</i> 工作总结
+                                    </button>
 	                   				<button class="layui-btn layui-btn-sm" onclick="addSummary()" permission="mail:save">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
@@ -83,7 +89,7 @@ layui.use(['layer','util'], function(){
                     "url": "../../js/plugin/datatables/Chinese.lang"
                 },
             	"ajax": {
-            		"url" : domainName + "/api-summary/summarys",
+            		"url" : domainName + "/api-summary/skill/page",
             		"type":"get",
             		"data":function(d){
                         d.name = $('#name').val();
@@ -153,7 +159,7 @@ function del(id){
     }, function() {
         $.ajax({
             type : 'delete',
-            url : domainName + '/api-summary/summary/'+id,
+            url : domainName + '/api-summary/skill/'+id,
             success : function(data) {
                 example.ajax.reload();
                 layer.msg("删除成功");
@@ -167,8 +173,14 @@ function del(id){
 function addSummary() {
     location.href='addSummary.html?itemId='+item_id+'&itemName='+item_name;
 }
+function work() {
+    location.href='addWorkSummary.html?itemId='+item_id;
+}
+
+function showWork() {
+    location.href='workSummaryList.html?item_id='+item_id;
+}
 function showDetail(userId,itemId){
-    alert(itemId)
 	layer.open({
 		title:"详情",
 		type: 2,

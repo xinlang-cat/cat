@@ -61,20 +61,11 @@
             <button class="btn btn-primary" id="getTar" onclick="getTarget()" style="display: none">返回</button>
 
 
-
-
-
-
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="pass()" id="add">
-                            <i class="fa fa-save"></i> 通过
-                        </button>
-                        <button class="btn btn-primary" type="submit" onclick="fail()" id="post">
-                            <i class="fa fa-save"></i> 不通过
-                        </button>
+                       <button data-method="confirmTrans" class="btn btn-primary" onclick="aaa()" id="check">审核</button>
                     </div>
                 </div>
             </div>
@@ -113,7 +104,6 @@
     var itemId = projectId;
 
 
-
     layui.use(['layer', 'laydate','upload'], function (){
         $("input").attr("disabled",true);
         $("select").attr("disabled",true);
@@ -127,6 +117,7 @@
             , upload = layui.upload
             , laydate = layui.laydate;
 
+
         lay('.date').each(function () {
             laydate.render({
                 elem: this
@@ -135,6 +126,7 @@
             });
         });
     })
+
 
     function getTarget() {
     var targetId = $("#ids").val();
@@ -171,12 +163,53 @@
 
                 if (res.status!=2){
 
-                    $("#add").css("display","none");
-                    $("#post").css("display","none");
+                    $("#check").css("display","none");
+
                 }
 
             }
         })
+    }
+
+    function aaa() {
+        layer.msg('请选择审核结果', {
+            btn: ['通过', '不通过', '关闭']
+            ,yes: function(){
+                $.ajax({
+                    type: 'put',
+                    url: domainName + '/project-record/record/checkPass/'+id,
+                    contentType: "application/json; charset=utf-8",
+                    async:false,
+                    success: function (res) {
+                        layer.msg("审核成功", {shift: -1, time: 1000}, function(){
+
+                            $(location).attr("href", "check.html?id=" + projectId);
+                        });
+
+
+                    }
+                })
+            }
+            ,btn2: function(){
+                $.ajax({
+                    type: 'put',
+                    url: domainName + '/project-record/record/checkFail/'+id,
+                    contentType: "application/json; charset=utf-8",
+                    async:false,
+                    success: function (res) {
+                        layer.msg("审核成功", {shift: -1, time: 1000}, function(){
+
+                            $(location).attr("href", "check.html?id=" + projectId);
+                        });
+
+
+                    }
+                })
+            }
+            ,btn3: function(){
+                layer.closeAll();
+            }
+        });
     }
 
 

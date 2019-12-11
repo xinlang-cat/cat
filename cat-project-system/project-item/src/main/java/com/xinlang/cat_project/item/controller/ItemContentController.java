@@ -37,7 +37,7 @@ public class ItemContentController {
     @ApiOperation(value = "添加多条主要研究内容")
     @LogAnnotation(module = "添加多条主要研究内容")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
-    @PostMapping("multi")
+    @PostMapping("/multi")
     public ResponseEntity<Void> saveContents(@RequestBody List<ItemContent> itemContents) {
         iItemContentService.saveContents(itemContents);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
@@ -54,7 +54,7 @@ public class ItemContentController {
     @ApiOperation(value = "修改一条主要研究内容")
     @LogAnnotation(module = "修改一条条主要研究内容")
     @PreAuthorize("hasAnyAuthority('project:item:update')")
-    @PutMapping("one")
+    @PutMapping("/one")
     public ResponseEntity<Void> updateContent(@RequestBody ItemContent itemContent){
         iItemContentService.update(itemContent);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -64,7 +64,7 @@ public class ItemContentController {
     @LogAnnotation(module = "修改多条主要研究内容")
     @PreAuthorize("hasAnyAuthority('project:item:update')")
     @Transactional
-    @PutMapping("multi")
+    @PutMapping("/multi")
     public ResponseEntity<Void> updateContents(@RequestBody List<ItemContent> itemContents){
         for (ItemContent itemContent : itemContents) {
             iItemContentService.delete(itemContent.getId());
