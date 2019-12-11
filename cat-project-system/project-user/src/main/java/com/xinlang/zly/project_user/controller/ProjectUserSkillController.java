@@ -44,6 +44,7 @@ public class ProjectUserSkillController {
         skill.setUserType(userType);
         signs.forEach(sign->{
             skill.setLabelSign(sign);
+            skill.setId(null);
             projectUserSkillService.save(skill);
         });
     }
@@ -69,10 +70,10 @@ public class ProjectUserSkillController {
         return projectUserSkillService.findByLabelSign(labelSign,userType);
     }
 
-    @ApiOperation(value = "根据ID删除")
-    @LogAnnotation(module = "根据ID删除用户技术标签")
-    @DeleteMapping("/skill/{id}")
-    public void delete(@PathVariable Integer id) {
-        projectUserSkillService.delete(id);
+    @ApiOperation(value = "根据系统用户ID删除")
+    @LogAnnotation(module = "根据I系统用户ID删除用户技术标签")
+    @DeleteMapping("/skill/{userId}")
+    public void delete(@PathVariable Integer userId) {
+        projectUserSkillService.delete(userId);
     }
 }

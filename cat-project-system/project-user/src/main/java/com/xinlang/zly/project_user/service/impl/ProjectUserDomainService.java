@@ -68,7 +68,9 @@ public class ProjectUserDomainService implements IProjectUserDomainService {
     }
 
     @Override
-    public void delete(Integer id) {
-        projectUserDomainMapper.deleteByPrimaryKey(id);
+    public void delete(Integer userId) {
+        Example example = new Example(ProjectUserDomain.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        projectUserDomainMapper.deleteByExample(example);
     }
 }

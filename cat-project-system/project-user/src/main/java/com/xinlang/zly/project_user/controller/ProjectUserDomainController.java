@@ -43,6 +43,7 @@ public class ProjectUserDomainController {
         domain.setUserType(userType);
         signs.forEach(sign->{
             domain.setLabelSign(sign);
+            domain.setId(null);
             projectUserDomainService.save(domain);
         });
     }
@@ -68,10 +69,10 @@ public class ProjectUserDomainController {
         return projectUserDomainService.findByLabelSign(labelSign,userType);
     }
 
-    @DeleteMapping("/domain/{id}")
-    @ApiOperation(value = "根据id删除")
-    @LogAnnotation(module = "根据id删除用户所能服务的具体产业或领域")
-    public void delete(@PathVariable Integer id) {
-        projectUserDomainService.delete(id);
+    @DeleteMapping("/domain/{userId}")
+    @ApiOperation(value = "根据系统用户id删除")
+    @LogAnnotation(module = "根据i系统用户d删除用户所能服务的具体产业或领域")
+    public void delete(@PathVariable Integer userId) {
+        projectUserDomainService.delete(userId);
     }
 }

@@ -211,11 +211,12 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">所学专业</label>
 					<div class="col-md-8">
-						<div class="input-group" id="major" data-status="true" data-sign="PZBM">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" name="major" readonly="readonly">
+						<div class="input-group" id="major" data-status="true" data-type="radio" data-sign="projectType">
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
 							<span class="input-group-addon" ><a >选择</a></span>
 						</div>
 					</div>
+					<input type="text" class="form-control" id="majorValue1" name="major" style="display: none">
 				</div>
 
 				<div class="form-group">
@@ -235,21 +236,23 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">现从事专业</label>
 					<div class="col-md-8">
-						<div class="input-group" id="nowMajor" data-status="true" data-sign="PZBM">
+						<div class="input-group" id="nowMajor" data-status="true" data-type="radio" data-sign="projectType">
 							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
 							<span class="input-group-addon"><a >选择</a></span>
 						</div>
 					</div>
+					<input type="text" class="form-control" id="MajorValue" name="nowMajor" style="display: none">
 				</div>
 
 				<div class="form-group">
 					<label class="col-md-2 control-label">主要研究领域</label>
 					<div class="col-md-8">
-						<div class="input-group" id="mainDomain" data-status="true" data-sign="PZBM">
-							<input type="text" class="form-control" placeholder="主要研究领域" name="mainDomain" readonly="readonly">
+						<div class="input-group" id="mainDomain" data-status="true" data-type="radio" data-sign="projectType">
+							<input type="text" class="form-control" placeholder="主要研究领域"  readonly="readonly">
 							<span class="input-group-addon"><a >选择</a></span>
 						</div>
 					</div>
+					<input type="text" class="form-control" id="mainValue" name="mainDomain" style="display: none">
 				</div>
 				
 				<div class="form-group">
@@ -289,7 +292,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">服务的产业或领域</label>
 					<div class="col-md-8">
-						<div class="input-group" id="domains" data-status="true" data-sign="RURAL_INDUSTRY">
+						<div class="input-group" id="domains" data-status="true" data-sign="projectType">
 							<input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly">
 							<span class="input-group-addon" ><a>选择</a></span>
 						</div>
@@ -299,7 +302,7 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">技术专长及提供的服务</label>
 					<div class="col-md-8">
-						<div class="input-group" id="skills" data-status="true" data-sign="RURAL_INDUSTRY">
+						<div class="input-group" id="skills" data-status="true" data-type="1" data-sign="projectType">
 							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
 							<span class="input-group-addon" ><a >选择</a></span>
 						</div>
@@ -341,7 +344,13 @@
 					</div>
 				</div>
 			</fieldset>
+
 		</form>
+
+			<input type="text" class="form-control" id="domainsVa" name="domainsVa" style="display: none">
+			<input type="text" class="form-control" id="skillsVa" name="signs" style="display: none">
+
+
 	</div>
 
 	<script src="../../js/constant.js"></script>
@@ -442,6 +451,7 @@
 							data : JSON.stringify(formdata),
 							success : function(data) {
 
+
 							}
 						});
 					}else {
@@ -465,6 +475,10 @@
 					}
 					layer.msg("成功", {shift: -1, time: 1000}, function(){
 						parent.$(".admin-header-user span").text($("#nickname").val());
+						delSkills();
+						delDomains();
+						updateSkills();
+						updateDomains();
 						refresh_token(); //刷新当前登录用户缓存
 						deleteCurrentTab();
 					});
@@ -505,6 +519,108 @@
 			$("#username").val(data.username);
 			$("#nickname").val(data.nickname);
 			$("#sex").val(data.sex);
+		}
+
+		function mainDomainSaveLabel() {
+			var res =$("input[type='radio']:checked").val();
+			$("#mainValue").val(res);
+			layer.msg("成功", {shift: -1, time: 1000}, function(){
+				layer.close(index);
+			});
+		}
+		function nowMajorSaveLabel() {
+			var DomainValue =$("input[type='radio']:checked").val();
+			$("#MajorValue").val(DomainValue);
+			layer.msg("成功", {shift: -1, time: 1000}, function(){
+				layer.close(index);
+			});
+		}
+
+		function majorSaveLabel() {
+			var majorValue =$("input[type='radio']:checked").val();
+			$("#majorValue1").val(majorValue);
+			layer.msg("成功", {shift: -1, time: 1000}, function(){
+				layer.close(index);
+			});
+		}
+
+		function skillsSaveLabel() {
+			var obj = document.getElementsByName('skills');
+			var length = obj.length;
+			var str = [];
+			for(var i=0; i<length; i++){
+				var value = obj[i].value;
+				str.push(value);
+			}
+			$("#skillsVa").val(str);
+			layer.msg("成功", {shift: -1, time: 1000}, function(){
+				layer.close(index);
+			});
+
+		}
+		function updateSkills() {
+			var userType= $("#identity").val();
+			var signs= $("#skillsVa").val();
+			var result = signs.split(",");
+			$.ajax({
+				type: 'post',
+				url : domainName + '/project-user/toSkills?userType='+userType,
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(result),
+				success: function (data) {
+					layer.msg("成功");
+				}
+			});
+		}
+		function delSkills() {
+			var id= $("#id").val();
+			$.ajax({
+				type : 'delete',
+				url : domainName + "/project-user/skill/"+id,
+				success : function(data) {
+
+				}
+			});
+		}
+		function delDomains() {
+			var id= $("#id").val();
+			$.ajax({
+				type : 'delete',
+				url : domainName + "/project-user/domain/"+id,
+				success : function(data) {
+
+				}
+			});
+		}
+
+		function domainsSaveLabel() {
+			var obj = document.getElementsByName('domains');
+			var skills = [];
+			var length = obj.length;
+			for(var i=0; i<length; i++){
+				if (obj[i].checked) {
+					skills.push(obj[i].value);
+				}
+			}
+			$("#domainsVa").val(skills);
+			layer.msg("成功", {shift: -1, time: 1000}, function(){
+				layer.close(index);
+			});
+
+		}
+		function updateDomains() {
+			var userType= $("#identity").val();
+			var signs= $("#domainsVa").val();
+			var result = signs.split(",");
+			$.ajax({
+				type: 'post',
+				url : domainName + '/project-user/toDomains?userType='+userType,
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(result),
+				success: function (data) {
+					layer.msg("成功");
+				}
+			});
 		}
 
 	</script>
