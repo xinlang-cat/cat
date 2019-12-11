@@ -24,4 +24,7 @@ public class ItemUser {
     private Integer user_id;
     private Integer item_id;
     private Integer type;
+    @Transient
+    private List<Integer> targetId;
+
 }

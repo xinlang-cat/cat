@@ -101,3 +101,31 @@ function getStreet(AreaCode,node){
         }
     });
 }
+//查询当前用户所在的公司代码
+function queryDeptCode(id) {
+    $.ajax({
+        type : 'get',
+        url : domainName + '/project-item/item/'+id,
+        async : false,
+        success : function(data) {
+            deptCode = data.dept_code;
+        }
+    });
+}
+//初始化人员选择
+function initUserSelect(deptCode) {
+    $.ajax({
+        type : 'get',
+        url : domainName + '/api-c/user/dept/'+deptCode,
+        async : false,
+        success : function(data) {
+            var select = $("#userSelect");
+            for(var i=0; i<data.length; i++){
+                var d = data[i];
+                var userId = d.userId;
+                var name = d.name;
+                select.append("<option value='"+ userId +"'>" +name+"</option>");
+            }
+        }
+    });
+}
