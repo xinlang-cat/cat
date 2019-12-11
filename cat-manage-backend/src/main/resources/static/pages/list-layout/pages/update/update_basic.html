@@ -9,128 +9,168 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/details.css">
 </head>
+<style>
+    .layui-table thead tr {
+        background: #dbe7f3;
+        text-align: center;
+    }
+    .layui-table th {
+        text-align: center;
+        font-weight: 400;
+    }
+    .layui-btn {
+        background-color: #a0a8c5;
+    }
+    .form-actions {
+        margin-top: 100px;
+    }
+    .layui-input:focus,.layui-textarea:focus{
+        border-color: #66afe9!important;
+        box-shadow: rgba(102,175,233,0.9) 0px 0px 8px;
+    }
+    .content{
+        width: 70%;
+        margin: 0 auto;
+        position: relative;
+    }
+</style>
+</head>
+
 <body>
-        <form class="form-horizontal" onsubmit="return false" id="form">
-                <div style="position: relative;">
-                    <div class="content">
-                        <!--    <p class="title">基本信息</p> -->
-                        <table class="layui-table" id="basis">
-                            <colgroup>
-                                <col width="10%">
-                                <col width="40%">
-                            </colgroup>
-                
-                            <tbody>
-                                <tr>
-                                    <td>合同编号：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control" placeholder="合同编号" type="text" name="contract_number" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="合同编号 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>计划类别：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control" placeholder="计划类别" type="text" name="plan_category" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="计划类别 不能为空">
-            
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>项目名称：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="项目名称 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>委托单位：</td>
-                                    <td>
-            
-                                        <input style="border: none;" class="form-control" placeholder="委托单位" type="text" name="consignor" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="委托单位 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>承担单位：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control" placeholder="承担单位" type="text" name="contract_number" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="承担单位 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>管理单位：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control" placeholder="管理单位" type="text" name="supervisor_dept" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="管理单位 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>下达文号：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control" placeholder="下达文号" type="text" name="contract_number" maxlength="50"
-                                               data-bv-notempty="true"
-                                               data-bv-notempty-message="下达文号 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>开始时间：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control date" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
-                                               id="start" data-bv-notempty="true"
-                                               data-bv-notempty-message="开始时间 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>结束时间：</td>
-                                    <td>
-                                        <input style="border: none;" class="form-control date" placeholder="结束时间" type="text" name="end_dateStr" maxlength="50"
-                                               id="end" data-bv-notempty="true"
-                                               data-bv-notempty-message="结束时间 不能为空">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>总体目标：</td>
-                                    <td colspan="3">
-                                         <textarea style="border: none;" placeholder="总体目标" class="layui-textarea" name="overall_objective"
-                                                   style="border-color: #ccc;"
-                                                   data-bv-notempty="true"
-                                                   data-bv-notempty-message=" 内容不能为空"></textarea>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-               </div>
-            
-                </form>
+<div class="content">
+    <!--基本信息-->
+    <div class="module">
+        <form class="layui-form" id="form1">
+            <table lay-even lay-skin="nob" class="layui-table" >
+                <colgroup>
+                    <col width="10%">
+                    <col width="90%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>合同编号：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="合同编号" type="text"
+                               id="contract_no" name="contract_no">
+                    </td>
+                </tr>
+                <tr>
+                    <td>计划类别：</td>
+                    <td>
 
+                        <select class="form-control" name="interest" id="category" name="category"
+                                lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="1">未完成</option>
+                            <option value="2">完成</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>项目名称：</td>
+                    <td>
+                        <select class="form-control" name="interest" id="item_name" name="item_name"
+                                lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="1">未完成</option>
+                            <option value="2">完成</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>委托单位：</td>
+                    <td>
+                        <select class="form-control" id="consignor" name="consignor" lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="1">未完成</option>
+                            <option value="2">完成</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>承担单位：</td>
+                    <td>
+                        <select class="form-control" id="undertaker" name="undertaker" lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="1">未完成</option>
+                            <option value="2">完成</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>管理单位：</td>
+                    <td>
 
-                <div class="form-actions">
-                        <div class="row" align="center">
-                            <div class="col-md-12">
-                                <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
-                                <button class="btn btn-primary" type="submit" onclick="add()">
-                                    <i class="fa fa-save"></i> 保存
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                        <select class="form-control" id="administrrator" name="administrrator"
+                                lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="1">未完成</option>
+                            <option value="2">完成</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>下达文号：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="下达文号" type="text"
+                               id="item_number" name="item_number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>开始时间：</td>
+                    <td>
+                        <input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               id="start_date" name="start_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>结束时间：</td>
+                    <td>
+                        <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               id="end_date" name="end_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>总体目标：</td>
+                    <td>
+                                <textarea placeholder="总体目标" class="layui-textarea form-control" lay-verify="required"
+                                          id="outline" name="outline"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+        </form>
+    </div>
+</div>
 </body>
-
-<script src="../../js/constant.js"></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
-<script type="text/javascript" src="../../js/my/permission.js"></script>
-
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , form = layui.form
+            , laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        });
+    });
+</script>
 </html>
