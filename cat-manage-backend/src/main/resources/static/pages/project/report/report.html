@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+	<style>
+		.timeline{
+			background-color: #dbe7f3;
+		}
+
+	</style>
+</head>
+<body>
+	<div style="width: 92%;" id="container">
+		<div class="timeline_container">
+			<div class="timeline">
+				<div class="plus"></div>
+				<div class="plus2"></div>
+			</div>
+		</div>
+		<button style="position: fixed;margin-left: 89%;margin-top: 20px;" type="button"
+				class="layui-btn layui-btn-primary layui-btn-sm" id="add_report">添加总结</button>
+		<button style="position: fixed;margin-left: 89%;margin-top: 60px;" type="button"
+				class="layui-btn layui-btn-primary layui-btn-sm" id="my_check">我的总结</button>
+		<button style="position: fixed;margin-left: 89%;margin-top: 100px;" type="button"
+				class="layui-btn layui-btn-primary layui-btn-sm">返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回</button>
+	</div>
+</body>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script>
+	var id = 26;
+	layui.use(['layer', 'laydate','upload'], function () {
+		var layer = layui.layer
+				,upload = layui.upload
+				, laydate = layui.laydate;
+		lay('.date').each(function(){
+			laydate.render({
+				elem: this
+				,format:'yyyy年MM月dd日'
+				,trigger: 'click'
+			});
+		});
+	});
+
+	$("#add_report").click(function () {
+		layer.open({
+			title:"添加阶段报告",
+			type:2,
+			area:['550px','450px'],
+			maxmin:true,
+			shadeClose:true,
+			content: ['../add_report.html']
+		})
+	})
+	$("#my_check").click(function () {
+		layer.open({
+			title:"我的阶段报告",
+			type:2,
+			area:['550px','450px'],
+			maxmin:true,
+			shadeClose:true,
+			content: ['../new_report.html']
+		})
+	})
+	$(function() {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-report/report/getAllReport/' + id,
+			contentType: "application/json; charset=utf-8",
+			success: function (res) {
+				var str = '';
+				$(res).each(function () {
+					if(this.status==2) {
+						str += '<div class="item">' +
+                                '<h3><span class="fl">' + this.title + '</span><span class="fr">'+this.createTime+'</span></h3>\n' +
+                                '<p class="con">' + this.content + '</p>\n' +
+                                '<h4></h4>\n' +
+                                '</div>';
+					}
+				})
+				$("#container").append(str);
+			}
+		})
+	})
+
+</script>
+</html>
