@@ -26,4 +26,32 @@ public class ItemUserService extends BaseService<ItemUser> implements IItemUserS
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
 
+    @Override
+    @Transactional
+    public void saveitemUsers(List<ItemUser> itemUsers) {
+        itemUserMapper.insertList(itemUsers);
+        for (ItemUser itemUser : itemUsers) {
+            List<Integer> targetIds = itemUser.getTargetIds();
+            for (Integer targetId : targetIds) {
+                itemUserMapper.insertTargetUser(itemUser.getItem_id(),targetId,itemUser.getUser_id());
+            }
+        }
+    }
+
+    @Override
+    public void insertTargetUser(Integer item_id, Integer targetId, Integer user_id) {
+        itemUserMapper.insertTargetUser(item_id,targetId,user_id);
+    }
+
+    @Override
+    public List<Integer> selectTargetUserByUserId(Integer item_id, Integer user_id) {
+        return itemUserMapper.selectTargetUserByUserId(item_id, user_id);
+    }
+
+    @Override
+    @Transactional
+    public void DeleteTargetUser(Integer id) {
+        ItemUser itemUser = itemUserMapper.selectByPrimaryKey(id);
+        itemUserMapper.DeleteTargetUserByUserId(itemUser.getItem_id(),itemUser.getUser_id());
+    }
 }

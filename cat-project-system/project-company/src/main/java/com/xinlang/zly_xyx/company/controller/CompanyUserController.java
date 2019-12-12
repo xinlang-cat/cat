@@ -47,7 +47,7 @@ public class CompanyUserController {
     @GetMapping("/user/dept/{deptCode}")
     @LogAnnotation(module = "根据公司代码查询list")
     @ApiOperation(value = "根据公司代码查询list")
-    public List<CompanyUser> findByDeptCode(String deptCode) {
+    public List<CompanyUser> findByDeptCode(@PathVariable String deptCode) {
         return companyUserService.findByDeptCode(deptCode);
     }
 

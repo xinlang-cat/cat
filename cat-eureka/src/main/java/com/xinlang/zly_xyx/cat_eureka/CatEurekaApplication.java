@@ -20,5 +20,4 @@ public class  CatEurekaApplication {
         SpringApplication.run(CatEurekaApplication.class,args);
     }
 
-
 }
