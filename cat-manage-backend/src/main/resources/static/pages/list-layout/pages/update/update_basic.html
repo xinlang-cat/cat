@@ -18,21 +18,21 @@
         text-align: center;
         font-weight: 400;
     }
-    .layui-btn {
+   .layui-btn {
         background-color: #a0a8c5;
-    }
+    }    /*
     .form-actions {
         margin-top: 100px;
-    }
+    }*/
     .layui-input:focus,.layui-textarea:focus{
         border-color: #66afe9!important;
         box-shadow: rgba(102,175,233,0.9) 0px 0px 8px;
     }
-    .content{
-        width: 70%;
+   /* .content{
+        width: 90%;
         margin: 0 auto;
         position: relative;
-    }
+    }*/
 </style>
 </head>
 
@@ -41,71 +41,60 @@
     <!--基本信息-->
     <div class="module">
         <form class="layui-form" id="form1">
-            <table lay-even lay-skin="nob" class="layui-table" >
+            <table lay-even lay-skin="nob" class="layui-table">
                 <colgroup>
-                    <col width="10%">
-                    <col width="90%">
+                    <col width="20%">
+                    <col width="80%">
                 </colgroup>
+                <thead>
+                <th class="header" colspan="4">基本信息</th>
+                </thead>
                 <tbody>
+                <input type="hidden" id="id" name="id" value=""/>
                 <tr>
                     <td>合同编号：</td>
                     <td>
-                        <input class="form-control" lay-verify="required" placeholder="合同编号" type="text"
+                    <input  class="form-control" lay-verify="required" placeholder="合同编号" type="text"
                                id="contract_no" name="contract_no">
+
                     </td>
                 </tr>
                 <tr>
                     <td>计划类别：</td>
                     <td>
-
-                        <select class="form-control" name="interest" id="category" name="category"
-                                lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="1">未完成</option>
-                            <option value="2">完成</option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="category" name="category">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>项目名称：</td>
                     <td>
-                        <select class="form-control" name="interest" id="item_name" name="item_name"
-                                lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="1">未完成</option>
-                            <option value="2">完成</option>
-                        </select>
+                        <input class="form-control" lay-verify="required" placeholder="合同编号" type="text"
+                               id="item_name" name="item_name">
                     </td>
                 </tr>
                 <tr>
                     <td>委托单位：</td>
                     <td>
-                        <select class="form-control" id="consignor" name="consignor" lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="1">未完成</option>
-                            <option value="2">完成</option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="consignor" name="consignor">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>承担单位：</td>
                     <td>
-                        <select class="form-control" id="undertaker" name="undertaker" lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="1">未完成</option>
-                            <option value="2">完成</option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="undertaker" name="undertaker">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>管理单位：</td>
                     <td>
-
-                        <select class="form-control" id="administrrator" name="administrrator"
-                                lay-filter="aihao">
-                            <option value=""></option>
-                            <option value="1">未完成</option>
-                            <option value="2">完成</option>
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="administrator" name="administrator">
+                            <option value="">请选择</option>
                         </select>
                     </td>
                 </tr>
@@ -140,7 +129,7 @@
                 </tbody>
             </table>
             <!--提交按钮-->
-            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+            <button class="layui-btn" lay-submit lay-filter="sub1" onclick="update()">提交</button>
         </form>
     </div>
 </div>
@@ -154,6 +143,8 @@
 <script type="text/javascript" src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script type="text/javascript">
+    var id =getUrlParam("id");
+    $("#id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload
@@ -172,5 +163,74 @@
             return false;
         });
     });
+ $(function () {
+     $.ajax({
+         type: 'get',
+         url: domainName + '/project-item/item/basic/list',
+         data: "id=" + id,
+         async: false,
+         contentType: "application/json; charset=utf-8",
+         success: function (data) {
+             var d = data[0];
+             initSelectData(d.category, $("#category"));
+             $("#contract_no").val(d.contract_no);
+             $("#item_name").val(d.item_name);
+             $("#item_number").val(d.item_number);
+             $("#start_date").val(d.start_date);
+             $("#end_date").val(d.end_date);
+             $("#outline").text(d.outline);
+             $("#category").val(d.category);
+             $("#consignor option:selected").html(d.consignor);
+             $("#undertaker option:selected").html(d.undertaker);
+             $("#administrator option:selected").html(d.administrator);
+
+         }
+     })
+ })
+
+    initCompanySelect();
+    function initCompanySelect() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/all',
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    var code = this.deptCode,
+                        name = this.signName;
+                    $('#consignor').append('<option value=' + code + '>' + name + '</option>');
+                    $('#undertaker').append('<option value=' + code + '>' + name + '</option>');
+                    $('#administrator').append('<option value=' + code + '>' + name + '</option>');
+                });
+            }
+        })
+    }
+
+    function initSelectData(sign,node) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                var ds = data[0].child;
+                $(ds).each(function () {
+                    node.append('<option value=' + this.sign + '>' + this.content + '</option>');
+                });
+            }
+        })
+    }
+    function update() {
+        var formdata = $("#form1").serializeObject();
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/basic',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(formdata),
+            success: function (data) {
+              alert("成功");
+            }
+        });
+    }
 </script>
 </html>
