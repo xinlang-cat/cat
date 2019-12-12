@@ -6,10 +6,11 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.common.special.InsertListMapper;
 
 import java.util.List;
 
-public interface ItemUserMapper extends Mapper<ItemUser> {
+public interface ItemUserMapper extends Mapper<ItemUser>, InsertListMapper<ItemUser> {
     /**
      * 添加成员与指标的关系
      * @param target_id
@@ -36,4 +37,5 @@ public interface ItemUserMapper extends Mapper<ItemUser> {
      */
     @Delete("DELETE FROM target_user WHERE item_id=#{item_id} AND user_id=#{user_id}")
     int DeleteTargetUserByUserId(@Param("item_id") Integer item_id, @Param("user_id") Integer user_id);
+
 }

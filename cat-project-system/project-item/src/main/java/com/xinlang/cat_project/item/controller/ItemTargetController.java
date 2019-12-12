@@ -38,9 +38,9 @@ public class ItemTargetController {
     @LogAnnotation(module = "添加多条指标")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping("/multi")
-    public ResponseEntity<Void> saveContents(@RequestBody List<ItemTarget> itemTargets) {
+    public ResponseEntity<List<ItemTarget>> saveContents(@RequestBody List<ItemTarget> itemTargets) {
         targetService.saveTargets(itemTargets);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+        return  ResponseEntity.status(HttpStatus.CREATED).body(itemTargets);
     }
 
     @ApiOperation(value = "查询指标")
