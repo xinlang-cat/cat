@@ -19,7 +19,7 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">名称</label>
 				<div class="col-md-6">
-					<input class="form-control" placeholder="名称" type="text" name="content" id="content" maxlength="30"
+					<input class="form-control" placeholder="名称" type="text" name="content" id="content" maxlength="50"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="名称 不能为空">
 				</div>
@@ -27,9 +27,15 @@
 			<div class="form-group">
 				<label class="col-md-2 control-label">sign</label>
 				<div class="col-md-6">
-					<input class="form-control" placeholder="标识" type="text" name="sign" id="sign" maxlength="30"
+					<input class="form-control" placeholder="标识" type="text" name="sign" id="sign" maxlength="50"
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="标识 不能为空">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">sign</label>
+				<div class="col-md-6">
+					<input class="form-control" placeholder="标识" type="text" name="unit" id="unit" maxlength="50">
 				</div>
 			</div>
 
@@ -103,6 +109,7 @@
 					$("#content").val(res[0].content);
 					$("#sign").val(res[0].sign);
 					$("#sort").val(res[0].sort);
+					$("#unit").val(res[0].unit);
 				}
 			});
 		}

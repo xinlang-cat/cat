@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class BaseService<T> implements IBaseService<T> {
     @Autowired
-    protected Mapper<T> mapper;
+    private Mapper<T> mapper;
 
     @Override
     public void save(T t) {
@@ -36,19 +36,18 @@ public class BaseService<T> implements IBaseService<T> {
     public List<T> findListByParams(Map<String, Object> params,Class<T> beanClazz) {
         Example example = ExampleUtil.getLinkExample(params,beanClazz,"","");
         return mapper.selectByExample(example);
-
     }
 
     @Override
     public Page<T> findPageByParams(Map<String, Object> params,Class<T> beanClazz) {
         T t = BeanUtils.toBean(params,beanClazz );
-        List<T> companys = Collections.emptyList();
+        List<T> list = Collections.emptyList();
         int total = mapper.selectCount(t);
         if(total>0){
             RowBounds rowBounds = RowBoundsUtil.getRowBounds(params);
-            companys = mapper.selectByRowBounds(t,rowBounds);
+            list = mapper.selectByRowBounds(t,rowBounds);
         }
-        return new Page<>(total,companys);
+        return new Page<>(total,list);
     }
 
     @Override
