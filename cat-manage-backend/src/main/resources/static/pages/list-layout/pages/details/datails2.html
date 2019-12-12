@@ -51,7 +51,8 @@
                 <tr>
                     <td>计划类别：</td>
                     <td>
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="category" name="category">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="category"
+                                name="category">
                             <option value="">请选择</option>
                         </select>
                     </td>
@@ -66,7 +67,8 @@
                 <tr>
                     <td>委托单位：</td>
                     <td>
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="consignor" name="consignor">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="consignor"
+                                name="consignor">
                             <option value="">请选择</option>
                         </select>
                     </td>
@@ -74,7 +76,8 @@
                 <tr>
                     <td>承担单位：</td>
                     <td>
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="undertaker" name="undertaker">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="undertaker"
+                                name="undertaker">
                             <option value="">请选择</option>
                         </select>
                     </td>
@@ -82,7 +85,8 @@
                 <tr>
                     <td>管理单位：</td>
                     <td>
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="administrator" name="administrator">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore id="administrator"
+                                name="administrator">
                             <option value="">请选择</option>
                         </select>
                     </td>
@@ -355,7 +359,7 @@
     </form>
     <!--项目成员-->
     <div class="module">
-        <form class="layui-form" id="form6">
+        <form class="layui-form" id="form5">
             <div class="layui-btn-group btn-group">
                 <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
                     <i class="layui-icon">&#xe654;</i>
@@ -390,20 +394,22 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="user_id">
-                        <option value="">请选择</option>
-                    </select></td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="user_id">
+                            <option value="">请选择</option>
+                        </select></td>
                     <td><input class="form-control" placeholder="性别" type="text" readonly></td>
                     <td><input class="form-control" placeholder="年龄" type="text" readonly></td>
                     <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>
                     <td><input class="form-control" placeholder="职称" type="text" readonly></td>
                     <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
                     <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
-                    <td><input class="form-control" placeholder="研究开发中的责任分工" type="text"></td>
+                    <td><input class="form-control targetIds" placeholder="负责或参与的指标" name="targetIds" type="text" readonly></td>
                 </tr>
                 </tbody>
             </table>
-            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+            <button class="layui-btn" lay-submit lay-filter="sub5" id="sub5">提交</button>
         </form>
     </div>
     <!--科技经费用途预算-->
@@ -706,12 +712,17 @@
             $('#sub4').trigger('click');
             return false;
         });
-        //上面只是为了验证表单，下面才是真正的提交
         form.on('submit(sub4)', function (data) {
+            $('#sub5').trigger('click');
+            return false;
+        });
+        //上面只是为了验证表单，下面才是真正的提交
+        form.on('submit(sub5)', function (data) {
             saveBasics();
             addContent();
             addTarget1();
             addTarget2();
+            addPersonnel();
             layer.msg("保存成功", {shift: -1, time: 1000}, function () {
 
             });
@@ -724,7 +735,7 @@
     initCompanySelect();
     initProvinceSelect();
     queryDeptCode();
-    initUserSelect(deptCode,$('select[name=user_id]'));
+    initUserSelect(deptCode, $('select[name=user_id]'));
 
     //监听地点选择
     $(".content").on('change', '.site', function () {
@@ -757,8 +768,48 @@
     //监听人员选择
     $(".content").on('change', 'select[name=user_id]', function () {
         var usetId = $(this).val();
-        queryUserInfo(usetId,$(this));
+        queryUserInfo(usetId, $(this));
     });
+    //监听负责分工
+    $(".content").on('click', '.targetIds', function () {
+        var thisInput = $(this);
+        layui.use(['form', 'layer'], function () {
+            var form = layui.form;
+            var layer = layui.layer;
+
+            index = layer.open({
+                title: "负责或参与的指标",
+                type: 1,
+                area: ['800px', '400px'],
+                btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    var vals = [];
+                    $('input[name=fake]:checked').each(function () {
+                        vals.push($(this).val());
+                    })
+                    thisInput.val(vals);
+                    layer.close(index);
+                },
+                btn2: function (index, layero) {
+                    layer.close(index);
+                },
+                content: '<div class="layui-form"><div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">请选择</label>\n' +
+                    '    <div class="layui-input-block checkbox">\n' +
+                    '    </div>\n' +
+                    '  </div></div>'
+            });
+            $("select[name=target]").each(function () {
+                var val = $(this).find('option:selected').val();
+                var text = $(this).find('option:selected').text();
+                if(val!=''){
+                    $(".checkbox").append('<input type="checkbox" name="fake" value="'+val+'" title="'+text+'">');
+                }
+            })
+            form.render('checkbox');
+        })
+    });
+
     //保存
     function save() {
         $('#sub1').trigger('click');
@@ -935,7 +986,6 @@
             }
         })
         var t = $(".target");
-        alert(t.length);
         $(t).each(function (index) {
             var text = $(this).find('th').text();
             $("#targetType").append('<option value=' + index + '>' + text + '</option>');
