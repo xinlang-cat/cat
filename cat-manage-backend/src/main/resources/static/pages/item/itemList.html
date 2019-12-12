@@ -45,6 +45,9 @@
                             <button class="layui-btn layui-btn-sm" onclick="location.href='addItem.html'">
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
+                            <button class="layui-btn layui-btn-sm" onclick="matchExpert()">
+                                <i class="layui-icon">&#xe608;</i> 匹配专家
+                            </button>
                         </td>
                     </tr>
                 </table>
@@ -212,7 +215,18 @@
         init();
     });
 
+    function matchExpert(id) {
+        layer.open({
+            title:"匹配专家",
+            type: 2,
+            area: ['800px', '600px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../projectUser/matchExpert.html?itemId='+id]
 
+
+        });
+    }
     function resetPassword(id){
         layer.open({
             title:"重置密码",

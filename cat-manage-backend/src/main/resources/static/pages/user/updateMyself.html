@@ -211,8 +211,8 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">所学专业</label>
 					<div class="col-md-8">
-						<div class="input-group" id="major" data-status="true" data-type="radio" data-sign="projectType">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
+						<div class="input-group" id="major" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text1">
 							<span class="input-group-addon" ><a >选择</a></span>
 						</div>
 					</div>
@@ -236,8 +236,8 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">现从事专业</label>
 					<div class="col-md-8">
-						<div class="input-group" id="nowMajor" data-status="true" data-type="radio" data-sign="projectType">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
+						<div class="input-group" id="nowMajor" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text2">
 							<span class="input-group-addon"><a >选择</a></span>
 						</div>
 					</div>
@@ -247,12 +247,12 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">主要研究领域</label>
 					<div class="col-md-8">
-						<div class="input-group" id="mainDomain" data-status="true" data-type="radio" data-sign="projectType">
-							<input type="text" class="form-control" placeholder="主要研究领域"  readonly="readonly">
+						<div class="input-group" id="mainDomain" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
+							<input type="text" class="form-control" placeholder="主要研究领域"  readonly="readonly" id="text3">
 							<span class="input-group-addon"><a >选择</a></span>
 						</div>
 					</div>
-					<input type="text" class="form-control" id="mainValue" name="mainDomain" style="display: none">
+					<input type="hidden" class="form-control" id="mainValue" name="mainDomain">
 				</div>
 				
 				<div class="form-group">
@@ -292,8 +292,8 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">服务的产业或领域</label>
 					<div class="col-md-8">
-						<div class="input-group" id="domains" data-status="true" data-sign="projectType">
-							<input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly">
+						<div class="input-group" id="domains" data-status="true" data-sign="INDUSTRY_GROUP">
+							<input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly" id="text4">
 							<span class="input-group-addon" ><a>选择</a></span>
 						</div>
 					</div>
@@ -302,8 +302,8 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">技术专长及提供的服务</label>
 					<div class="col-md-8">
-						<div class="input-group" id="skills" data-status="true" data-type="1" data-sign="projectType">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly">
+						<div class="input-group" id="skills" data-status="true" data-type="1" data-sign="INDUSTRY_GROUP">
+							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text5">
 							<span class="input-group-addon" ><a >选择</a></span>
 						</div>
 					</div>
@@ -337,9 +337,9 @@
 				<div class="form-actions">
 					<div class="row" align="center">
 						<div class="col-md-12" id="div_submit">
-							<button class="btn btn-primary" type="submit" onclick="update()">
+							<!--<button class="btn btn-primary" type="submit" onclick="update()">
 								<i class="fa fa-save"></i> 保存
-							</button>
+							</button>-->
 						</div>
 					</div>
 				</div>
@@ -347,8 +347,8 @@
 
 		</form>
 
-			<input type="text" class="form-control" id="domainsVa" name="domainsVa" style="display: none">
-			<input type="text" class="form-control" id="skillsVa" name="signs" style="display: none">
+			<input type="hidden" class="form-control" id="domainsVa" name="domainsVa">
+			<input type="hidden" class="form-control" id="skillsVa" name="signs">
 
 
 	</div>
@@ -398,6 +398,9 @@
 			async : false,
 			success : function(data) {
 				setValue(data);
+				getUserMessage(data.id);
+				getUserDomain(data.id);
+				getUserSkill(data.id);
 				$.ajax({
 					type : 'get',
 					url : domainName + '/project-user/user-anon/'+data.id,
@@ -449,6 +452,7 @@
 							url : domainName + '/project-user/user',
 							contentType: "application/json; charset=utf-8",
 							data : JSON.stringify(formdata),
+
 							success : function(data) {
 
 
@@ -519,18 +523,79 @@
 			$("#username").val(data.username);
 			$("#nickname").val(data.nickname);
 			$("#sex").val(data.sex);
+			$("#phone").val(data.phone);
+		}
+		function getUserMessage(id) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/project-user/user-anon/'+id,
+				async : false,
+				success : function(data) {
+					$(data).each(function () {
+						$("#postcode").val(this.postcode);
+						$("#graduatedFrom").val(this.graduatedFrom);
+						$("#degree").val(this.degree);
+						$("#academicDiplomas").val(this.academicDiplomas);
+						$("#lastYear").val(this.lastYear);
+						$("#degreeState").val(this.degreeState);
+						$("#degreeSchool").val(this.degreeSchool);
+						$("#email").val(this.email);
+						$("#telephone").val(this.telephone);
+						$("#phone").val(this.phone);
+						$("#fax").val(this.fax);
+						$("#address").val(this.address);
+						$("#projects").val(this.projects);
+						$("#accomplishment").val(this.accomplishment);
+						$("#achievement").val(this.achievement);
+						$("#provinceCode").click();
+						$("#provinceCode").val(this.provinceCode);
+						city(this.provinceCode);
+						$("#cityCode").val(this.cityCode);
+						area(this.cityCode);
+						$("#areaCode").val(this.areaCode);
+						street(this.areaCode);
+						$("#streetCode").val(this.streetCode);
+						$("#majorValue1").val(this.major);
+						getName(this.major,$("#text1"));
+						$("#MajorValue").val(this.nowMajor);
+						getName(this.nowMajor,$("#text2"));
+						$("#mainValue").val(this.mainDomain);
+						getName(this.mainDomain,$("#text3"));
+
+					});
+
+				}
+			});
+		}
+		function getName(sign,node) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/api-label/label/tree/'+sign,
+				async : false,
+				success : function(data) {
+					$(data).each(function () {
+						node.val(this.content);
+					});
+
+				}
+			});
+
 		}
 
 		function mainDomainSaveLabel() {
 			var res =$("input[type='radio']:checked").val();
+			var text =$("input[type='radio']:checked").attr('title');
 			$("#mainValue").val(res);
+			$("#text3").val(text);
 			layer.msg("成功", {shift: -1, time: 1000}, function(){
 				layer.close(index);
 			});
 		}
 		function nowMajorSaveLabel() {
 			var DomainValue =$("input[type='radio']:checked").val();
+			var text =$("input[type='radio']:checked").attr('title');
 			$("#MajorValue").val(DomainValue);
+			$("#text2").val(text);
 			layer.msg("成功", {shift: -1, time: 1000}, function(){
 				layer.close(index);
 			});
@@ -538,7 +603,9 @@
 
 		function majorSaveLabel() {
 			var majorValue =$("input[type='radio']:checked").val();
+			var text =$("input[type='radio']:checked").attr('title');
 			$("#majorValue1").val(majorValue);
+			$("#text1").val(text);
 			layer.msg("成功", {shift: -1, time: 1000}, function(){
 				layer.close(index);
 			});
@@ -546,6 +613,10 @@
 
 		function skillsSaveLabel() {
 			var obj = document.getElementsByName('skills');
+			var texts=[];
+			$("input[type='checkbox']:checked").each(function () {
+				texts.push($(this).attr('title'));
+			})
 			var length = obj.length;
 			var str = [];
 			for(var i=0; i<length; i++){
@@ -553,6 +624,7 @@
 				str.push(value);
 			}
 			$("#skillsVa").val(str);
+			$("#text5").val(texts);
 			layer.msg("成功", {shift: -1, time: 1000}, function(){
 				layer.close(index);
 			});
@@ -595,6 +667,10 @@
 
 		function domainsSaveLabel() {
 			var obj = document.getElementsByName('domains');
+			var texts=[];
+			$("input[type='checkbox']:checked").each(function () {
+				texts.push($(this).attr('title'));
+			})
 			var skills = [];
 			var length = obj.length;
 			for(var i=0; i<length; i++){
@@ -603,6 +679,7 @@
 				}
 			}
 			$("#domainsVa").val(skills);
+			$("#text4").val(texts);
 			layer.msg("成功", {shift: -1, time: 1000}, function(){
 				layer.close(index);
 			});
@@ -621,6 +698,110 @@
 					layer.msg("成功");
 				}
 			});
+		}
+		function city(provinceCode) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/map/city/all/'+provinceCode,
+				async : false,
+				success : function(data) {
+					var select = $("#cityCode");
+					$("#cityCode,#areaCode,#streetCode").empty();
+					select.append("<option value=''>请选择城市</option>");
+					for(var i=0; i<data.length; i++){
+						var d = data[i];
+						var code = d.cityCode;
+						var name = d.cityName;
+						select.append("<option value='"+ code +"'>" +name+"</option>");
+					}
+				}
+			});
+		}
+
+		function area(cityCode) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/map/area/all/'+cityCode,
+				async : false,
+				success : function(data) {
+					var select = $("#areaCode");
+					$("#areaCode,#streetCode").empty();
+					select.append("<option value=''>请选择区县</option>");
+					for(var i=0; i<data.length; i++){
+						var d = data[i];
+						var code = d.areaCode;
+						var name = d.areaName;
+						select.append("<option value='"+ code +"'>" +name+"</option>");
+					}
+				}
+			});
+		}
+		function street(areaCode) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/map/street/all/'+areaCode,
+				async : false,
+				success : function(data) {
+					var select = $("#streetCode");
+					$("#streetCode").empty();
+					select.append("<option value=''>请选择街道/镇</option>");
+					for(var i=0; i<data.length; i++){
+						var d = data[i];
+						var code = d.streetCode;
+						var name = d.streetName;
+						select.append("<option value='"+ code +"'>" +name+"</option>");
+					}
+				}
+			});
+		}
+		function getUserDomain(id) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/project-user/domain/'+id,
+				async : false,
+				success : function(data) {
+					var signs = [];
+					for(var i=0; i<data.length; i++){
+						var d = data[i];
+						signs.push(d.labelSign);
+					}
+					$("#domainsVa").val(signs);
+					getNames(signs,$("#text4"));
+				}
+			});
+		}
+
+		function getUserSkill(id) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/project-user/skill-anon/'+id,
+				async : false,
+				success : function(data) {
+					var signs = [];
+					for(var i=0; i<data.length; i++){
+						var d = data[i];
+						signs.push(d.labelSign);
+					}
+					$("#skillsVa").val(signs);
+					getNames(signs,$("#text5"));
+				}
+			});
+
+		}
+		function getNames(sign,node) {
+			$.ajax({
+				type : 'get',
+				url : domainName + '/api-label/label/tree/'+sign,
+				async : false,
+				success : function(data) {
+					var content = [];
+					$(data).each(function () {
+						content.push(this.content);
+					});
+					node.val(content);
+				}
+			});
+
 		}
 
 	</script>
