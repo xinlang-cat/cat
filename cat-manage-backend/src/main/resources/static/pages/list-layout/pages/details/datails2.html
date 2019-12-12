@@ -406,7 +406,10 @@
                     <td><input class="form-control" placeholder="职称" type="text" readonly></td>
                     <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
                     <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
-                    <td><input class="form-control targetIds" placeholder="负责或参与的指标" name="targetIds" type="text" readonly></td>
+                    <td>
+                        <input class="form-control targetIds" placeholder="负责或参与的指标" type="text" readonly>
+                        <input type="hidden" name="targetIds">
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -784,11 +787,13 @@
                 area: ['800px', '400px'],
                 btn: ['确定', '关闭'],
                 yes: function (index, layero) {
-                    var vals = [];
+                    var titles = [],vals = [];
                     $('input[name=fake]:checked').each(function () {
+                        titles.push($(this).attr('title'));
                         vals.push($(this).val());
                     })
-                    thisInput.val(vals);
+                    thisInput.val(titles);
+                    thisInput.next().val(vals);
                     layer.close(index);
                 },
                 btn2: function (index, layero) {
