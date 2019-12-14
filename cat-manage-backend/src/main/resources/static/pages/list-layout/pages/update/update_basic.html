@@ -128,7 +128,7 @@
                 </tr>
                 </tbody>
             </table>
-            <!--提交按钮-->
+
             <button class="layui-btn" lay-submit lay-filter="sub1" onclick="update()">提交</button>
         </form>
     </div>
@@ -163,7 +163,13 @@
             return false;
         });
     });
- $(function () {
+    /*初始化数据*/
+    initplanCategorySelect();
+    initCompanySelect();
+    initData();
+
+    /*回填*/
+ function initData() {
      $.ajax({
          type: 'get',
          url: domainName + '/project-item/item/basic/list',
@@ -172,23 +178,19 @@
          contentType: "application/json; charset=utf-8",
          success: function (data) {
              var d = data[0];
-             initSelectData(d.category, $("#category"));
              $("#contract_no").val(d.contract_no);
-             $("#item_name").val(d.item_name);
-             $("#item_number").val(d.item_number);
-             $("#start_date").val(d.start_date);
-             $("#end_date").val(d.end_date);
-             $("#outline").text(d.outline);
              $("#category").val(d.category);
-             $("#consignor option:selected").html(d.consignor);
-             $("#undertaker option:selected").html(d.undertaker);
-             $("#administrator option:selected").html(d.administrator);
-
+             $("#item_name").val(d.item_name);
+             $("#consignor").val(d.consignor);
+             $("#undertaker").val(d.undertaker);
+             $("#administrator").val(d.administrator);
+             $("#item_number").val(d.item_number);
+             $("#start_date").val(d.start_date.substring(0,10));
+             $("#end_date").val(d.end_date.substring(0,10));
+             $("#outline").val(d.outline);
          }
      })
- })
-
-    initCompanySelect();
+ }
     function initCompanySelect() {
         $.ajax({
             type: 'get',
@@ -206,18 +208,24 @@
         })
     }
 
-    function initSelectData(sign,node) {
+    function initplanCategorySelect(){
         $.ajax({
-            type: 'get',
-            url: domainName + '/api-label/label/tree/' + sign,
-            async: false,
-            success: function (data) {
+            type : 'get',
+            url : domainName + '/api-label/label/tree/all',
+            async : false,
+            success : function(data) {
+                var select = $("#category");
+                //select.append("<option value=''>- 请选择 -</option>");
                 var ds = data[0].child;
-                $(ds).each(function () {
-                    node.append('<option value=' + this.sign + '>' + this.content + '</option>');
-                });
+                for(var i=0; i<ds.length; i++){
+                    var d = ds[i];
+                    var sign = d['sign'];
+                    var name = d['content'];
+                    select.append("<option value='"+ sign +"'>" +name+"</option>");
+                    //   }
+                }
             }
-        })
+        });
     }
     function update() {
         var formdata = $("#form1").serializeObject();
@@ -228,7 +236,8 @@
             async: false,
             data: JSON.stringify(formdata),
             success: function (data) {
-              alert("成功");
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index);
             }
         });
     }

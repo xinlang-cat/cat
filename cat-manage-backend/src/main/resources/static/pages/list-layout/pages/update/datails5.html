@@ -27,13 +27,22 @@
             top: 14px;
             z-index: 1;
         }
+        .operation {
+            display: none;
+            position: absolute;
+            bottom:0;
+            right: -80px;
+        }
+        table tr td:hover>div{
+            display: block;
+
+        }
     </style>
 </head>
 <body>
 <div class="content">
-    <!--基本信息-->
+    <!--基本信息 readonly-->
     <div class="module">
-        <form class="layui-form" id="form">
             <div class="layui-btn-group  basic">
                 <button type="button" class="layui-btn layui-btn-sm" id="update_basic">
                     <i class="layui-icon">&#xe642;</i>
@@ -42,8 +51,8 @@
             <fieldset>
                 <table lay-even lay-skin="nob" class="layui-table" id="basis">
                     <colgroup>
-                        <col width="10%">
-                        <col width="90%">
+                        <col width="20%">
+                        <col width="80%">
                     </colgroup>
                     <thead>
                     <th class="header" colspan="4">基本信息</th>
@@ -102,18 +111,8 @@
                     </tbody>
                 </table>
             </fieldset>
-        </form>
     </div>
     <div class="module">
-        <form class="layui-form" id="form2">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                    <i class="layui-icon">&#xe640;</i>
-                </button>
-            </div>
             <table lay-even lay-skin="nob" class="layui-table" >
                 <colgroup>
                     <col width="10%">
@@ -125,59 +124,80 @@
                 <tbody id="mian-content">
                 </tbody>
             </table>
-        </form>
     </div>
     <div class="module">
-        <form class="layui-form" id="form7">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
-                    <i class="layui-icon">&#xe640;</i>
-                </button>
-            </div>
-            <table lay-even class="layui-table" >
+        <table lay-even lay-skin="nob" class="layui-table">
+            <colgroup>
+                <col width="40%">
+                <col width="20%">
+                <col width="20%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="4">考核指标</th>
+            </thead>
+        </table>
+    </div>
+        <div id="forma"></div>
+        <div class="module target">
+            <table lay-even lay-skin="nob" class="layui-table">
                 <colgroup>
+                    <col width="40%">
                     <col width="20%">
-                    <col width="10%">
-                    <col width="55%">
-                    <col width="10%">
+                    <col width="20%">
+                    <col width="20%">
                 </colgroup>
                 <thead>
-                <th class="header" colspan="4">科技经费用途预算(桂财教函[2010]28号)</th>
+                <th class="header" colspan="4">其他指标</th>
                 <tr>
-                    <td>科目</td>
-                    <td>金额(万元)</td>
-                    <td>开支内容</td>
-                    <td>使用状况</td>
+                    <td>内容</td>
+                    <td>时间</td>
+                    <td>地点</td>
+                    <td>人员</td>
                 </tr>
+                </thead>
+                <tbody id="qita">
+
+                </tbody>
+            </table>
+        </div>
+    <div class="module">
+            <table lay-even lay-skin="nob" class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="8%">
+                    <col width="8%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="14%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="9">项目组人员信息</th>
                 <tr>
-                    <td>合计</td>
-                    <td>70</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>(一)直接使用</td>
-                    <td>70</td>
-                    <td></td>
-                    <td></td>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>证件类型/证件号码</th>
+                    <th>职称</th>
+                    <th>从事专业</th>
+                    <th>工作单位</th>
+                    <th>研究开发中的责任分工</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
+                    <td> </td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td class="btn_center"> <button type="button"
-                                                    class="layui-btn layui-btn-primary layui-btn-sm ">详情</button>
-                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 </tbody>
             </table>
-            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
-        </form>
     </div>
 </div>
 </body>
@@ -201,30 +221,7 @@
                 , trigger: 'click'
             });
         });
-        //监听提交
-       /* form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
-            return false;
-        });*/
     });
-    //添加一行
-    function add_row(e) {
-        var str = $(e).parent().next().find('tbody').children().last().clone();
-        var str2 = $(e).parent().next().find('tbody').children().last().clone();
-        $(e).parent().next().find('tbody').append(str);
-        //清空表单内容
-        $(e).parent().next().find('tbody').children().last().find('input').val('');
-        $(e).parent().next().find('tbody').children().last().find('textarea').val('');
-        $(e).parent().next().find('tbody').children().last().find('select').val('');
-    }
-    //删除一行
-    function del_row(e) {
-        var dom = $(e).parent().next().find('tbody').children();
-        if (dom.length == 1) {
-            return;
-        }
-        $(e).parent().next().find('tbody').children().last().remove();
-    }
     getbasic(id);
   $("#update_basic").click(function () {
       layer.open({
@@ -236,7 +233,18 @@
           content:['update_basic.html?id='+id]
       });
   })
+    function update_target(id){
+        layer.open({
+            title:"修改指标信息",
+            type:2,
+            area:['750px','450px'],
+            maxin:true,
+            shadeClose:true,
+            content:['update_target.html?id='+id]
+        });
+    }
     getcontent(id);
+    getTarget(id);
 
 </script>
 </html>

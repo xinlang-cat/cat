@@ -73,18 +73,6 @@
             success: function (res) {
                 var str = '';
                 $(res).each(function () {
-                   /* str += '<tr>'
-                        + '<th style="text-align: center;">' + this.title + '</th>'
-                        + '<th style="text-align: center;">' + this.content + '</th>'
-                        + '<th style="text-align: center;">'
-                        + ' <div style="width: 100%;height: 20px;align-self: center;">'
-                        + '<button onclick="updat_report('+this.id+')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
-                        + '<p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe642;</i></p>'
-                        + '</button>'
-                        + '<button onclick="delete_report('+this.id+');" style="height: 20px;width: 30px;align-self: center;"   class="layui-btn layui-btn-sm">  <p style="line-height: 20px;margin-left: -3px;"><i  class="layui-icon">&#xe640;</i></p>'
-                        + '</button>'
-                        + '</div>'
-                        + '</th>';*/
                     if(this.status==1) {
                         str += '<section>' +
                             '<span class="point-time point-green"></span>\n' +
@@ -106,9 +94,6 @@
             }
         })
     })
-
-
-
     function updat_report(id) {
         $(location).attr("href", "updata_report.html?id=" + id);
     }
@@ -116,7 +101,6 @@
         $("#id").val(id);
         post_report();
     }
-
     function post_report() {
         var formdata = $("#form").serializeObject();
         layer.confirm('确定要提交吗？', {
@@ -135,13 +119,10 @@
             layer.close(1);
         });
     }
-
-
     $("#BTN").click(function () {
         $(location).attr("href", "report.html?id=" + id);
 
     })
-
     function delete_report(id) {
         layer.confirm('确定要删除吗？', {
             btn: ['确定', '取消']
@@ -158,5 +139,4 @@
         });
     }
 </script>
-
 </html>
