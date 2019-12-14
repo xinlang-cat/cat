@@ -106,7 +106,7 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
             //通过公司代码查询项目
             Example example = new Example(ItemBasic.class);
             example.createCriteria().andEqualTo("consignor",company.getDeptCode())
-                    .orEqualTo("undertaker",company.getDeptCode()).orEqualTo("supervisor_dept",company.getDeptCode());
+                    .orEqualTo("undertaker",company.getDeptCode()).orEqualTo("administrator",company.getDeptCode());
             /*List<ItemBasic> items = itemBasicMapper.selectByExample(example);*/
             list = itemBasicMapper.selectByExample(example);
             //获取进行中的项目

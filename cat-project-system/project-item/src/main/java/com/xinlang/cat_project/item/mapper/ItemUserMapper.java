@@ -37,4 +37,5 @@ public interface ItemUserMapper extends Mapper<ItemUser>, InsertListMapper<ItemU
      */
     @Delete("DELETE FROM target_user WHERE item_id=#{item_id} AND user_id=#{user_id}")
     int DeleteTargetUserByUserId(@Param("item_id") Integer item_id, @Param("user_id") Integer user_id);
+
 }

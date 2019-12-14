@@ -1,17 +1,11 @@
 package com.xinlang.cat_project.item.service;
 
 import com.xinlang.cat_project.item.pojo.ItemFund;
+import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
 import java.util.List;
 
-public interface IItemFundService {
-    void saveFund(ItemFund itemFund);
+public interface IItemFundService extends IBaseService<ItemFund> {
 
-    ItemFund queryFundById(Integer id);
-
-    List<ItemFund> queryFundByIId(Integer Iid);
-
-    void updateFund(ItemFund itemFund);
-
-    void deleteFund(Integer id);
+    void saveItemFunds(List<ItemFund> itemFunds);
 }

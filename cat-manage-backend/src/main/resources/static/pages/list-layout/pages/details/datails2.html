@@ -405,7 +405,10 @@
                     <td><input class="form-control" placeholder="职称" type="text" readonly></td>
                     <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
                     <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
-                    <td><input class="form-control targetIds" placeholder="负责或参与的指标" name="targetIds" type="text" readonly></td>
+                    <td>
+                        <input class="form-control targetIds" placeholder="负责或参与的指标" type="text" readonly>
+                        <input type="hidden" name="targetIds">
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -414,7 +417,7 @@
     </div>
     <!--科技经费用途预算-->
     <div class="module">
-        <form class="layui-form" id="form7">
+        <form class="layui-form" id="form6">
             <div class="layui-btn-group btn-group">
                 <button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this);">
                     <i class="layui-icon">&#xe654;</i>
@@ -427,47 +430,49 @@
                 <colgroup>
                     <col width="20%">
                     <col width="10%">
+                    <col width="15%">
                     <col width="55%">
-                    <col width="10%">
                 </colgroup>
                 <thead>
                 <th class="header" colspan="4">科技经费用途预算(桂财教函[2010]28号)</th>
                 <tr>
                     <td>科目</td>
-                    <td>金额(万元)</td>
+                    <td>金额（万元）</td>
+                    <td>经费来源</td>
                     <td>开支内容</td>
-                    <td>使用状况</td>
                 </tr>
                 <tr>
                     <td>合计</td>
-                    <td>70</td>
+                    <td id="total"></td>
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>(一)直接使用</td>
                     <td>70</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr>-->
                 </thead>
                 <tbody>
                 <tr>
-                    <td><input class="form-control" lay-verify="required" placeholder="科目" type="text"
-                               name="end_date"></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="金额" type="text"
-                               name="end_date"></td>
+                    <td><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
                     <td><input class="form-control" lay-verify="required" placeholder="开支内容" type="text"
-                               name="end_date"></td>
-                    <td class="btn_center">
-                        <button type="button"
-                                class="layui-btn layui-btn-primary layui-btn-sm ">详情
-                        </button>
+                               name="remark">
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+            <button class="layui-btn" lay-submit lay-filter="sub6" id="sub6">提交</button>
         </form>
     </div>
     <!--签订合同各方-->
@@ -716,13 +721,18 @@
             $('#sub5').trigger('click');
             return false;
         });
-        //上面只是为了验证表单，下面才是真正的提交
         form.on('submit(sub5)', function (data) {
+            $('#sub6').trigger('click');
+            return false;
+        });
+        //上面只是为了验证表单，下面才是真正的提交
+        form.on('submit(sub6)', function (data) {
             saveBasics();
             addContent();
             addTarget1();
             addTarget2();
             addPersonnel();
+            addFund();
             layer.msg("保存成功", {shift: -1, time: 1000}, function () {
 
             });
@@ -730,12 +740,14 @@
         });
     });
     /*初始化数据*/
-    initSelectData('planType', $('#category'));//计划类别
-    initSelectData('target', $('select[name=target]'));//考核指标
+    initSelectData('PLAN_CATEGOR', $('#category'));//计划类别
+    initSelectData('INDICATORS_OF_LIBRARY', $('select[name=target]'));//考核指标
     initCompanySelect();
     initProvinceSelect();
     queryDeptCode();
     initUserSelect(deptCode, $('select[name=user_id]'));
+    initSelectData('BUDGET_SUBJECT', $('select[name=subject]'));
+    initSelectData('FUNDING_SOURCE', $('select[name=source]'));
 
     //监听地点选择
     $(".content").on('change', '.site', function () {
@@ -783,11 +795,13 @@
                 area: ['800px', '400px'],
                 btn: ['确定', '关闭'],
                 yes: function (index, layero) {
-                    var vals = [];
+                    var titles = [], vals = [];
                     $('input[name=fake]:checked').each(function () {
+                        titles.push($(this).attr('title'));
                         vals.push($(this).val());
                     })
-                    thisInput.val(vals);
+                    thisInput.val(titles);
+                    thisInput.next().val(vals);
                     layer.close(index);
                 },
                 btn2: function (index, layero) {
@@ -802,14 +816,21 @@
             $("select[name=target]").each(function () {
                 var val = $(this).find('option:selected').val();
                 var text = $(this).find('option:selected').text();
-                if(val!=''){
-                    $(".checkbox").append('<input type="checkbox" name="fake" value="'+val+'" title="'+text+'">');
+                if (val != '') {
+                    $(".checkbox").append('<input type="checkbox" name="fake" value="' + val + '" title="' + text + '">');
                 }
             })
             form.render('checkbox');
         })
     });
-
+    //定时任务,监听预算的合计
+    var ref = setInterval(function(){
+        var total = 0;
+        $('input[name=money]').each(function () {
+            total += $(this).val()-0;
+        })
+        $('#total').text(total);
+    },1000);
     //保存
     function save() {
         $('#sub1').trigger('click');
@@ -957,7 +978,7 @@
                 }
             });
         });
-        initSelectData("targetType", $('#targetType'));
+        initSelectData("TARGET_TYPE", $('#targetType'));
     }
 
     function delete_target() {

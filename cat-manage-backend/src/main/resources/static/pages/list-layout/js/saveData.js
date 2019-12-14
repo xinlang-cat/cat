@@ -25,7 +25,7 @@ function addContent() {
         }
     });
 }
-
+var targets;
 function addTarget1() {//数量指标
     var formdata = $("#form3").serializeJson();
     $.ajax({
@@ -35,6 +35,7 @@ function addTarget1() {//数量指标
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
+            targets=data;
         }
     });
 }
@@ -50,11 +51,37 @@ function addTarget2() {//其他指标
         }
     });
 }
-function addPersonnel() {//其他指标
-    var formdata = $("#form5").serializeJson();
+function addPersonnel() {
+    var formdata = $("#form5").serializeArrayObj();
+    $(formdata).each(function(){
+        var ids = [];
+        var targetIds = this.targetIds.split(',');
+        $(targetIds).each(function(){
+            var target = this;
+            $(targets).each(function(){
+                if(target==this.target){
+                    ids.push(this.id);
+                }
+            });
+        });
+        this.targetIds=ids;
+    });
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/user/multi',
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(formdata),
+        success: function (data) {
+        }
+    });
+}
+
+function addFund() {//其他指标
+    var formdata = $("#form6").serializeJson();
+    $.ajax({
+        type: 'post',
+        url: domainName + '/project-item/item/fund/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,
