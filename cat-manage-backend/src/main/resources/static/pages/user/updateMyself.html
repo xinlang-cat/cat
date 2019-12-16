@@ -597,17 +597,17 @@
 			});
 		}
 		function getName(sign,node) {
-			$.ajax({
-				type : 'get',
-				url : domainName + '/api-label/label/tree/'+sign,
-				async : false,
-				success : function(data) {
-					$(data).each(function () {
-						node.val(this.content);
-					});
+				$.ajax({
+					type : 'get',
+					url : domainName + '/api-label/label/tree/'+sign,
+					async : false,
+					success : function(data) {
+						$(data).each(function () {
+							node.val(this.content);
+						});
 
-				}
-			});
+					}
+				});
 
 		}
 
@@ -812,7 +812,10 @@
 						signs.push(d.labelSign);
 					}
 					$("#domainsVa").val(signs);
-					getNames(signs,$("#text4"));
+					if (jQuery.isEmptyObject(signs)){
+						getNames(signs,$("#text4"));
+					}
+
 				}
 			});
 		}
@@ -829,24 +832,32 @@
 						signs.push(d.labelSign);
 					}
 					$("#skillsVa").val(signs);
-					getNames(signs,$("#text5"));
+
+						getNames(signs,$("#text5"));
+
 				}
 			});
 
 		}
-		function getNames(sign,node) {
-			$.ajax({
-				type : 'get',
-				url : domainName + '/api-label/label/tree/'+sign,
-				async : false,
-				success : function(data) {
-					var content = [];
-					$(data).each(function () {
-						content.push(this.content);
-					});
-					node.val(content);
-				}
-			});
+		function getNames(signs,node) {
+			if (!jQuery.isEmptyObject(signs)){
+
+
+				$.ajax({
+					type : 'get',
+					url : domainName + '/api-label/label/tree/'+signs,
+					async : false,
+					success : function(data) {
+						var content = [];
+						$(data).each(function () {
+							content.push(this.content);
+						});
+						node.val(content);
+					}
+				});
+			}
+
+
 
 		}
 
