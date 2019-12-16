@@ -220,67 +220,144 @@
         </table>
     </div>
     <div class="module">
-        <form class="layui-form" id="form8">
+        <form class="layui-form" id="form7">
             <table lay-even class="layui-table">
                 <colgroup>
+                    <col width="10%">
                     <col width="15%">
-                    <col width="40%">
                     <col width="40%">
                 </colgroup>
                 <thead>
-                <th class="header" colspan="3">签订合同各方</th>
+                <th class="header" colspan="3">签订合同各方联系方式</th>
                 </thead>
                 <tbody>
                 <tr>
-                    <td rowspan="7">乙方</td>
-                    <td>项目负责人</td>
-                    <td><input style="border: none;" class="form-control" placeholder="项目负责人" type="text"
-                               name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="项目负责人 不能为空"></td>
+                    <td rowspan="6">甲方<input type="hidden" name="item_id"><input type="hidden" name="type" value="0"></td>
+                    <td>联系人</td>
+                    <td>
+                      <input type="hidden" id="user_id" name="user_id" value="">
+                    </td>
                 </tr>
                 <tr>
-                    <td>（单位）</td>
-                    <td><input style="border: none;" class="form-control" placeholder="（单位）" type="text"
-                               name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="（单位） 不能为空"></td>
+                    <td>电话</td>
+                    <td>
+                    <p id="phone"></p>
+                    </td>
                 </tr>
                 <tr>
-                    <td>组织机构代码/统一社会信用代码</td>
-                    <td><input style="border: none;" class="form-control" placeholder="组织机构代码/统一社会信用代码"
-                               type="text" name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="组织机构代码/统一社会信用代码 不能为空"></td>
+                    <td>传真</td>
+                    <td>
+                        <p id="fax"></p>
+                      </td>
                 </tr>
                 <tr>
-                    <td>账户名称</td>
-                    <td><input style="border: none;" class="form-control" placeholder="账户名称" type="text"
-                               name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="账户名称 不能为空"></td>
+                    <td>邮编</td>
+                    <td>
+                    <p id="postal_code"></p>
+                    </td>
                 </tr>
                 <tr>
-                    <td>开户银行</td>
-                    <td><input style="border: none;" class="form-control" placeholder="开户银行" type="text"
-                               name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="开户银行 不能为空"></td>
+                    <td>地址</td>
+                    <td>
+                        <p id="site"></p>
+                    </td>
                 </tr>
                 <tr>
-                    <td>账号</td>
-                    <td><input style="border: none;" class="form-control" placeholder="账号" type="text"
-                               name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="账号 不能为空"></td>
+                    <td>E-mail(电子邮箱)</td>
+                    <td>
+                    <p id="email"></p>
+                    </td>
                 </tr>
                 </tbody>
                 <tbody>
                 <tr>
-                    <td rowspan="2">丙方</td>
-                    <td>项目管理联系人</td>
-                    <td><input style="border: none;" class="form-control" placeholder="项目管理联系人" type="text"
-                               name="item_name" maxlength="50" data-bv-notempty="true"
-                               data-bv-notempty-message="项目管理联系人 不能为空"></td>
+                    <td rowspan="6">乙方<input type="hidden" name="item_id"><input type="hidden" name="type" value="1"></td>
+                    <td>联系人</td>
+                    <td>
+                        <input type="hidden" value="" id="user_id" name="user_id">
+                    </td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td>
+                    <p id="phone"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td>
+                    <p id="fax"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td>
+                    <p id="postal_code"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td>
+                        <p id="site"></p>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td>
+                    <p id="email"></p>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td rowspan="6">丙方<input type="hidden" name="item_id"><input type="hidden" name="type" value="2"></td>
+                    <td>联系人</td>
+                    <td>
+                    <input id="user_id" value="" type="hidden" name="user_id">
+                    </td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td>
+                    <input id="phone" name="phone" type="hidden" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td>
+                    <p id="fax"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td>
+                    <p id="postal_code"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td>
+                    <p id="site"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td>
+                    <p id="email2"></p></td>
                 </tr>
                 </tbody>
             </table>
-            <button class="layui-btn" lay-submit lay-filter="sub1">提交</button>
+            <button class="layui-btn" lay-submit lay-filter="sub7" id="sub7">提交</button>
         </form>
+        <div class="form-actions">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+                    <button class="btn btn-primary" type="submit" onclick="save();">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

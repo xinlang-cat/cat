@@ -395,8 +395,14 @@ function getResponsibilityName(id) {
     return name;
 }
 
+function getCompanyInfo() {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/company/list',
+        data: "id=" + id,
+        async: false,
+        success: function (data) {
 
-function all_Parties () {
-
-    
+        }
+    })
 }
