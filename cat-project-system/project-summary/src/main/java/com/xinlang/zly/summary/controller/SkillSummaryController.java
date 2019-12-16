@@ -38,7 +38,7 @@ public class SkillSummaryController {
         skillSummary.setUpdateTime(date);
         AppUser appUser = AppUserUtil.getLoginAppUser();
         Integer userId = appUser.getId().intValue();
-        ProjectUser projectUser = consumeProjectUser.findByUserId(userId);
+        ProjectUser projectUser = consumeProjectUser.findByUserId(userId).get(0);
         skillSummary.setCreateUserId(userId);
         skillSummary.setCreateUserName(projectUser.getName());
         skillSummaryService.save(skillSummary);

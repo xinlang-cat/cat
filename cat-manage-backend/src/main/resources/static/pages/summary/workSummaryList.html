@@ -27,6 +27,7 @@
                             <button class="layui-btn layui-btn-sm" onclick="addSummary()" permission="mail:save">
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
+                            <button class="layui-btn layui-btn-sm" onclick="back()" permission="mail:save">返回 </button>
                         </td>
                     </tr>
                 </table>
@@ -153,6 +154,12 @@
 
         init();
     });
+    function addSummary() {
+        location.href='addWorkSummary.html?itemId='+item_id;
+    }
+    function back() {
+        location.href='../list-layout/list.html';
+    }
     function del(id){
         layer.confirm('确定要删除吗？', {
             btn : [ '确定', '取消' ]
