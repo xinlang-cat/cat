@@ -21,6 +21,9 @@ public class ItemFund {
     private Integer id;
     private Integer item_id;
     private String source;
+    private String subject;
     private Float money;
     private String remark;
+    private String doc_number;
+    private Integer type;
 }

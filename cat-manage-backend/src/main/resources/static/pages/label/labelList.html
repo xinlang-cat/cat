@@ -30,10 +30,10 @@
                 <div>
                      <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                           <tr>
-                              <th width="20%">名称</th>
-                              <th width="20%">sign</th>
-                              <th width="20%">计量单位</th>
-							  <th width="20%">类型</th>
+                              <th width="30%">名称</th>
+                              <th width="30%">sign</th>
+                              <th width="10%">计量单位</th>
+							  <th width="10%">类型</th>
 							  <th width="10%">sort</th>
 							  <th width="10%">操作</th>
                           </tr>
@@ -86,14 +86,16 @@ function initMenuList(){
 			var length = data.length;
 			for(var i=0; i<length; i++){
 				var d = data[i];
+                var u = d.unit || '',
+                    t = d.type || '';
 				var tr = "<tr data-tt-id='" + d['id'] + "' data-tt-parent-id='" + d['pid'] + "'>";
 				var td1 = "<td>" + d['content'] +"</td>";
 				tr += td1;
 				var sign = "<td>" + d['sign'] +"</td>";
 				tr += sign;
-                var unit = "<td>" + d['unit'] +"</td>";
+                var unit = "<td>" + u +"</td>";
                 tr += unit;
-                var type = "<td>" + d['type'] +"</td>";
+                var type = "<td>" + t +"</td>";
                 tr += type;
                 var sort = "<td>" + d['sort'] +"</td>";
                 tr += sort;

@@ -67,7 +67,6 @@ public class ItemBasicController {
         itemBasicService.save(itemBasic);
         return  ResponseEntity.status(HttpStatus.CREATED).body(itemBasic);
     }
-
     @ApiOperation(value = "查询项目信息")
     @LogAnnotation(module = "查询项目信息")
     @GetMapping("list")
@@ -75,7 +74,6 @@ public class ItemBasicController {
         List<ItemBasic> basic = itemBasicService.findListByParams(params,ItemBasic.class);
         return ResponseEntity.ok(basic);
     }
-
     /**
      * 获取当前用户的公司项目数据
      * @return

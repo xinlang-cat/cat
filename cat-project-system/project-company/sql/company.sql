@@ -56,6 +56,6 @@ CREATE TABLE `company`  (
 -- ----------------------------
 -- Records of company
 -- ----------------------------
-INSERT INTO `company` VALUES (3, '城市', '450000', '450100', '450103', '450103002', '大大撒', NULL, NULL, '李四', '王五', '31414', '1233123', '1312341', 13123, 'http://192.168.5.195/api-f/statics/2019/11/30/6419b100966263757c1ffacc4f9056ad.jpg', NULL, 'PARTY_C', '123456', NULL, NULL, NULL, NULL, NULL, '2019-11-30 06:47:45', NULL, 1, NULL);
+INSERT INTO `company` VALUES (3, '城市', '450000', '450100', '450103', '450103002', '大大撒', NULL, NULL, '李四', '王五', '31414', '1233123', '1312341', 13123, 'http://192.168.5.135/api-f/statics/2019/11/30/6419b100966263757c1ffacc4f9056ad.jpg', NULL, 'PARTY_C', '123456', NULL, NULL, NULL, NULL, NULL, '2019-11-30 06:47:45', NULL, 1, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

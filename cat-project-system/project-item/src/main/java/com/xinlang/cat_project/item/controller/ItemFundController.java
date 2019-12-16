@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/item/fund")
@@ -20,68 +21,47 @@ public class ItemFundController {
     @Autowired
     private IItemFundService itemFundService;
 
-    @ApiOperation(value = "添加资金信息")
-    @LogAnnotation(module = "添加资金信息")
-    @PreAuthorize("hasAnyAuthority('project:fund:save')")
-    @PostMapping
+    @ApiOperation(value = "添加一条资金")
+    @LogAnnotation(module = "添加一条资金")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("/one")
     public ResponseEntity<Void> saveFund(@RequestBody ItemFund itemFund) {
-        itemFundService.saveFund(itemFund);
+        itemFundService.save(itemFund);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 获取单条资金
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "获取一条资金信息，id必填")
-    @LogAnnotation(module = "获取一条资金信息")
-    @GetMapping("/{id}")
-    public ResponseEntity<ItemFund> getFundById(@PathVariable Integer id){
-
-        ItemFund itemFund = itemFundService.queryFundById(id);
-        return ResponseEntity.ok(itemFund);
+    @ApiOperation(value = "添加多条资金")
+    @LogAnnotation(module = "添加多条资金")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping("/multi")
+    public ResponseEntity<Void> saveFunds(@RequestBody List<ItemFund> itemFunds) {
+        itemFundService.saveItemFunds(itemFunds);
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 获取项目的所有资金
-     * @param Iid
-     * @return
-     */
-    @ApiOperation(value = "获取所有资金信息，item_id必填")
-    @LogAnnotation(module = "获取项目所有资金信息")
-    @GetMapping("/all/{Iid}")
-    public ResponseEntity<List<ItemFund>> getFundByIId(@PathVariable Integer Iid){
-
-        List<ItemFund> itemFund = itemFundService.queryFundByIId(Iid);
-        return ResponseEntity.ok(itemFund);
+    @ApiOperation(value = "查询资金")
+    @LogAnnotation(module = "查询资金")
+    @GetMapping("/list")
+    public ResponseEntity<List<ItemFund>> getFundById(@RequestParam Map<String, Object> params){
+        List<ItemFund> itemFunds = itemFundService.findListByParams(params,ItemFund.class);
+        return ResponseEntity.ok(itemFunds);
     }
 
-    /**
-     * 更改
-     * @param itemFund
-     * @return
-     */
-    @ApiOperation(value = "修改资金信息，id必填")
-    @LogAnnotation(module = "修改资金信息")
-    @PreAuthorize("hasAnyAuthority('project:fund:update')")
+    @ApiOperation(value = "修改资金")
+    @LogAnnotation(module = "修改资金")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
     @PutMapping
     public ResponseEntity<Void> updateFund(@RequestBody ItemFund itemFund){
-        itemFundService.updateFund(itemFund);
+        itemFundService.update(itemFund);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 删除
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "删除资金信息，id必填")
-    @LogAnnotation(module = "删除资金信息")
-    @PreAuthorize("hasAnyAuthority('project:fund:delete')")
+    @ApiOperation(value = "删除资金")
+    @LogAnnotation(module = "删除资金")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFund(@PathVariable Integer id){
-        itemFundService.deleteFund(id);
+        itemFundService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
