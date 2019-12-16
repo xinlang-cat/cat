@@ -121,7 +121,7 @@ function getTarget(id) {
                 var str1 = '';
                 var str2 = '';
                 var str3 = '';
-                var str4='';
+                var str4 = '';
                 $(data).each(function () {
                     if (targetType.sign == this.type) {
 
@@ -149,9 +149,9 @@ function getTarget(id) {
                             '    </table>\n' +
                             ' </div>';
                         str2 += '<tr>\n' +
-                            '<td style="text-align: center;">'+this.target+'</td>\n' +
-                            '<td style="text-align: center;">'+this.count+'</td>\n' +
-                            '<td style="text-align: center;">'+this.start_date.substring(0, 10)+'至'+this.end_date.substring(0, 10)+'</td>\n' +
+                            '<td style="text-align: center;">' + this.target + '</td>\n' +
+                            '<td style="text-align: center;">' + this.count + '</td>\n' +
+                            '<td style="text-align: center;">' + this.start_date.substring(0, 10) + '至' + this.end_date.substring(0, 10) + '</td>\n' +
                             '<td style="text-align: center;" id="district"></td>\n' +
                             '<td style="text-align: center;">' +
                             '<div class="operation">' +
@@ -163,19 +163,19 @@ function getTarget(id) {
                             '<i class="layui-icon">&#xe640;</i>' +
                             '</button>' +
                             '</div>' +
-                            '</div>'+
+                            '</div>' +
                             '</td>' +
                             '</tr>';
-                  /*      getsuperior(this.district);*/
-                        str4+=' <tr>' +
-                            '<td style="text-align: center;">'+this.target+'</td>' +
-                            ' <td style="text-align: center;">'+this.start_date.substring(0, 10)+'至'+this.end_date.substring(0, 10)+'</td>' +
+                        /*      getsuperior(this.district);*/
+                        str4 += ' <tr>' +
+                            '<td style="text-align: center;">' + this.target + '</td>' +
+                            ' <td style="text-align: center;">' + this.start_date.substring(0, 10) + '至' + this.end_date.substring(0, 10) + '</td>' +
                             '<td style="text-align: center;"></td>' +
                             '<td style="text-align: center;"></td>' +
                             '</tr>'
                     }
                 })
-                $('#forma').append(str1+str2+str3);
+                $('#forma').append(str1 + str2 + str3);
                 $("#qita").append(str4);
             })
         }
@@ -231,5 +231,147 @@ function getTargetTypeAll(sign) {
         }
     });
 }*/
+function getFund(id) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/fund/list',
+        data: "item_id=" + id,
+        async: false,
+        success: function (data) {
+            $("#zijinwenhao").text(data[0].doc_number);
+            var str = '';
+            var total=0;
+            $(data).each(function () {
+                total+=this.money;
+                var content = getLablename(this.subject);
+                var source = getLablename(this.source);
+                str += ' <tr>\n' +
+                    '<td>' + content.content + '</td>\n' +
+                    '<td>' + this.money + '</td>\n' +
+                    ' <td>' + source.content + '</td>\n' +
+                    '<td>' + this.remark + '' +
+                    '<div class="operation">' +
+                    '<div class="layui-btn-group">' +
+                    '<button onclick="updata_fund(' + this.id + ')" type="button" class="layui-btn layui-btn-sm">' +
+                    '<i class="layui-icon">&#xe642;</i>' +
+                    '</button>' +
+                    '<button onclick="delete_fund(' + this.id + ')" type="button" class="layui-btn layui-btn-sm">' +
+                    '<i class="layui-icon">&#xe640;</i>' +
+                    '</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>';
 
+            })
+            $("#fund").append(str);
+            $("#total").text(total);
+        }
+    });
 
+}
+
+function getLablename(sign) {
+    var name;
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-label/label/tree/' + sign,
+        async: false,
+        success: function (data) {
+            name = data[0];
+        }
+    })
+    return name;
+}
+
+function delete_fund(id) {
+    layer.confirm('确定要删除吗？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            type: 'delete',
+            url: domainName + '/project-item/item/fund/' + id,
+            success: function (data) {
+                layer.msg("删除成功");
+                location.reload();
+            }
+        });
+        layer.close(1);
+    });
+}
+
+function getItem_user(id) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/user/list',
+        data: "item_id=" + id,
+        async: false,
+        success: function (data) {
+            var str = '';
+            $(data).each(function () {
+                var userInfo = getUserInfo(this.itemUser.user_id);
+                var sex;
+                if (userInfo.sex == 0) {
+                    sex = '女';
+                } else {
+                    sex = '男';
+                }
+                var date = new Date();
+                var startDate = new Date(userInfo.birthDate);
+                var newDate = date.getTime() - startDate.getTime();
+                var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 / 365);
+                if (isNaN(age)) {
+                    age = "";
+                }
+                str += '<tr>\n' +
+                    '<td>' + userInfo.name + '</td>\n' +
+                    '<td>' + sex + '</td>\n' +
+                    '<td>' + age + '</td>\n' +
+                    '<td>' + userInfo.idType + '/' + userInfo.idCard + '</td>\n' +
+                    '<td>' + userInfo.academicTitle + '</td>\n' +
+                    '<td>' + userInfo.nowMajor + '</td>\n' +
+                    '<td>' + userInfo.deptName + '</td>\n' +
+                    '<td>' + userInfo.sex + '' +
+                    '<div style="right: -40px;" class="operation">' +
+                    '<div class="layui-btn-group">' +
+                    '<button onclick="delete_user(' + this.itemUser.id + ')" type="button" class="layui-btn layui-btn-sm">' +
+                    '<i class="layui-icon">&#xe640;</i>' +
+                    '</button>' +
+                    '</div>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>'
+            })
+            $("#item_user").append(str);
+        }
+    })
+}
+
+function getUserInfo(id) {
+    var userinfo;
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-user/user-anon/' + id,
+        async: false,
+        success: function (data) {
+            userinfo = data[0];
+        }
+    })
+    return userinfo;
+}
+
+function delete_user(id) {
+    layer.confirm('确定要删除吗？', {
+        btn: ['确定', '取消']
+    }, function () {
+        $.ajax({
+            type: 'delete',
+            url: domainName + '/project-user/user/' + id,
+            success: function (data) {
+                layer.msg("删除成功");
+                location.reload();
+            }
+        });
+        layer.close(1);
+    });
+}
