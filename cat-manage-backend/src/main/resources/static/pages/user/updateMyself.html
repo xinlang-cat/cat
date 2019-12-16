@@ -454,6 +454,14 @@
 							data : JSON.stringify(formdata),
 
 							success : function(data) {
+								$.ajax({
+									type : 'post',
+									url : domainName + '/api-c/user',
+									contentType: "application/json; charset=utf-8",
+									data : JSON.stringify(formdata),
+									success : function(data) {
+									}
+								});
 
 
 							}
@@ -479,12 +487,14 @@
 					}
 					layer.msg("成功", {shift: -1, time: 1000}, function(){
 						parent.$(".admin-header-user span").text($("#nickname").val());
+						companyUser();//保存用户跟公司信息
 						delSkills();
 						delDomains();
 						updateSkills();
 						updateDomains();
 						refresh_token(); //刷新当前登录用户缓存
 						deleteCurrentTab();
+
 					});
 				}
 			});
@@ -509,7 +519,6 @@
 							}
 						})
 					}else{
-						alert("部门id="+data.id);
 						$("#deptCode").val(data.deptCode);
 						$("#deptName").val(data.signName);
 						$("#deptType").val(data.type);
@@ -518,7 +527,24 @@
 				}
 			});
 		});
-
+		function companyUser() {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+			if(!bootstrapValidator.isValid()){
+				return;
+			}
+			var formdata = $("#form").serializeObject();
+			$.ajax({
+				type : 'post',
+				url : domainName + '/project-company/user',
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					alert("ok");
+				}
+			});
+		}
 		function setValue(data) {
 			$("#id").val(data.id);
 			$("#username").val(data.username);
