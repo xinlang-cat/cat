@@ -37,6 +37,6 @@ CREATE TABLE `file_info` (
 -- Records of file_info
 -- ----------------------------
 
-INSERT INTO `file_info` VALUES ('a8ee3889121c7c75aed010117bf9e625', '形象1.JPG', '1', 'image/jpeg', '5443433', 'F:/localFile/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'http://192.168.5.13/api-f/statics/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'LOCAL', '2019-11-09 00:16:34');
+INSERT INTO `file_info` VALUES ('a8ee3889121c7c75aed010117bf9e625', '形象1.JPG', '1', 'image/jpeg', '5443433', 'F:/localFile/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'http://192.168.5.8/api-f/statics/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'LOCAL', '2019-11-09 00:16:34');
 
 
