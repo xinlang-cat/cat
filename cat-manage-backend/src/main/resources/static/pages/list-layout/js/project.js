@@ -394,3 +394,9 @@ function getResponsibilityName(id) {
     })
     return name;
 }
+
+
+function all_Parties () {
+
+    
+}
