@@ -50,7 +50,11 @@ security:
     resource:
 
 
+<<<<<<< HEAD
       user-info-uri: http://192.168.5.13/api-o/user-me
+=======
+      user-info-uri: http://192.168.5.13/api-o/user-me
+>>>>>>> 367a780c16bcb6778ff608edc48294f373d6df37
 
       prefer-token-info: false
 aliyun:

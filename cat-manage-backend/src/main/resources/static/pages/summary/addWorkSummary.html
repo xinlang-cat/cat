@@ -122,7 +122,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    alert("aaa");
+                    location.href = "workSummaryList.html?item_id=";
+
                 });
             }
         });

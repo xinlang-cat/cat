@@ -34,10 +34,17 @@ security:
     resource:
 
 
+<<<<<<< HEAD
       user-info-uri: http://192.168.5.13/api-o/user-me
       prefer-token-info: false
 wechat:
   domain: http://192.168.5.13/api-u
+=======
+      user-info-uri: http://192.168.5.13/api-o/user-me
+      prefer-token-info: false
+wechat:
+  domain: http://192.168.5.13/api-u
+>>>>>>> 367a780c16bcb6778ff608edc48294f373d6df37
 
 
   infos:
