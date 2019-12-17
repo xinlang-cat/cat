@@ -19,7 +19,7 @@ eureka:
     lease-expiration-duration-in-seconds: 15
     instance-id: ${spring.application.name}:${server.port}
   client:
-    register-with-eureka: true
+    register-with-eureka: false
     fetch-registry: false
     service-url:
 
