@@ -221,6 +221,11 @@
     </div>
     <div class="module">
         <form class="layui-form" id="form7">
+            <div style="top: 5px;" class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" id="userinfo">
+                    <i class="layui-icon">&#xe642;</i>
+                </button>
+            </div>
             <table lay-even class="layui-table">
                 <colgroup>
                     <col width="10%">
@@ -235,37 +240,37 @@
                     <td rowspan="6">甲方<input type="hidden" name="item_id"><input type="hidden" name="type" value="0"></td>
                     <td>联系人</td>
                     <td>
-                      <input type="hidden" id="user_id" name="user_id" value="">
+                        <p id="linkman0"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>电话</td>
                     <td>
-                    <p id="phone"></p>
+                    <p id="phone0"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>传真</td>
                     <td>
-                        <p id="fax"></p>
+                        <p id="fax0"></p>
                       </td>
                 </tr>
                 <tr>
                     <td>邮编</td>
                     <td>
-                    <p id="postal_code"></p>
+                    <p id="postal_code0"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>地址</td>
                     <td>
-                        <p id="site"></p>
+                        <p id="site0"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>E-mail(电子邮箱)</td>
                     <td>
-                    <p id="email"></p>
+                    <p id="email0"></p>
                     </td>
                 </tr>
                 </tbody>
@@ -274,36 +279,36 @@
                     <td rowspan="6">乙方<input type="hidden" name="item_id"><input type="hidden" name="type" value="1"></td>
                     <td>联系人</td>
                     <td>
-                        <input type="hidden" value="" id="user_id" name="user_id">
+                        <p id="linkman1"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>电话</td>
                     <td>
-                    <p id="phone"></p>
+                    <p id="phone1"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>传真</td>
                     <td>
-                    <p id="fax"></p>
+                    <p id="fax1"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>邮编</td>
                     <td>
-                    <p id="postal_code"></p>
+                    <p id="postal_code1"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>地址</td>
                     <td>
-                        <p id="site"></p>
+                        <p id="site1"></p>
                 </tr>
                 <tr>
                     <td>E-mail(电子邮箱)</td>
                     <td>
-                    <p id="email"></p>
+                    <p id="email1"></p>
                     </td>
                 </tr>
                 </tbody>
@@ -312,31 +317,31 @@
                     <td rowspan="6">丙方<input type="hidden" name="item_id"><input type="hidden" name="type" value="2"></td>
                     <td>联系人</td>
                     <td>
-                    <input id="user_id" value="" type="hidden" name="user_id">
+                        <p id="linkman2"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>电话</td>
                     <td>
-                    <input id="phone" name="phone" type="hidden" value="">
+                  <p id="phone2"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>传真</td>
                     <td>
-                    <p id="fax"></p>
+                    <p id="fax2"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>邮编</td>
                     <td>
-                    <p id="postal_code"></p>
+                    <p id="postal_code2"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>地址</td>
                     <td>
-                    <p id="site"></p>
+                    <p id="site2"></p>
                     </td>
                 </tr>
                 <tr>
@@ -346,18 +351,7 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="layui-btn" lay-submit lay-filter="sub7" id="sub7">提交</button>
         </form>
-        <div class="form-actions">
-            <div class="row" align="center">
-                <div class="col-md-12">
-                    <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary" type="submit" onclick="save();">
-                        <i class="fa fa-save"></i> 保存
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 </body>
@@ -407,6 +401,7 @@
     getTarget(id);
     getFund(id);
     getItem_user(id);
+    getCompanyInfo(id);
     function updata_fund(id) {
         layer.open({
             title: "修改资金",
@@ -417,5 +412,15 @@
             content: ['updata_fund.html?id=' + id]
         });
     }
+    $("#userinfo").click(function () {
+        layer.open({
+            title: "修改各方联系方式",
+            type: 2,
+            area: ['750px', '450px'],
+            maxin: true,
+            shadeClose: true,
+            content: ['updata_contactWay.html?id=' + id]
+        });
+    })
 </script>
 </html>

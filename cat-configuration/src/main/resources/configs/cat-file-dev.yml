@@ -41,11 +41,10 @@ mybatis:
 security:
   oauth2:
     resource:
-<<<<<<< HEAD
+
       user-info-uri: http://192.168.5.13/api-o/user-me
-=======
-      user-info-uri: http://192.168.5.13/api-o/user-me
->>>>>>> 367a780c16bcb6778ff608edc48294f373d6df37
+
+
 
       prefer-token-info: false
 file:
@@ -54,11 +53,9 @@ file:
     prefix: /statics
 
 
-<<<<<<< HEAD
     urlPrefix: http://192.168.5.13/api-f${file.local.prefix}
-=======
-    urlPrefix: http://192.168.5.13/api-f${file.local.prefix}
->>>>>>> 367a780c16bcb6778ff608edc48294f373d6df37
+
+
 
   aliyun:
     endpoint: xxx
@@ -72,11 +69,9 @@ album:
     prefix: /statics
 
 
-<<<<<<< HEAD
     urlPrefix: http://192.168.5.13/api-f${album.local.prefix}
-=======
-    urlPrefix: http://192.168.5.13/api-f${album.local.prefix}
->>>>>>> 367a780c16bcb6778ff608edc48294f373d6df37
+
+
 
     mini: #缩略图宽
       width:  108

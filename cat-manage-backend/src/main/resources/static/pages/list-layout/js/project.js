@@ -395,14 +395,38 @@ function getResponsibilityName(id) {
     return name;
 }
 
-function getCompanyInfo() {
+function getCompanyInfo(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/company/list',
-        data: "id=" + id,
+        data: "item_id=" + id,
         async: false,
         success: function (data) {
+            $(data).each(function () {
+                if (this.type == 0) {
+                    $("#phone0").text(this.phone);
+                    $("#postal_code0").text(this.postal_code);
+                    $("#site0").text(this.site);
+                    $("#email0").text(this.email);
+                    $("#fax0").text(this.fax);
+                    $("#linkman0").text(this.linkman);
+                } else if (this.type == 1) {
+                    $("#phone1").text(this.phone);
+                    $("#linkman1").text(this.linkman);
+                    $("#postal_code1").text(this.postal_code);
+                    $("#site1").text(this.site);
+                    $("#email1").text(this.email);
+                    $("#fax1").text(this.fax);
+                } else if (this.type == 2) {
+                    $("#phone2").text(this.phone);
+                    $("#postal_code2").text(this.postal_code);
+                    $("#site2").text(this.site);
+                    $("#email2").text(this.email);
+                    $("#fax2").text(this.fax);
+                    $("#linkman2").text(this.linkman);
+                }
 
+            })
         }
     })
 }
