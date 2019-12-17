@@ -23,7 +23,7 @@ public class ItemCompany {
     private String dept_code;
     private String deposit_bank;
     private String account_number;
-    private Integer user_id;
+    private String linkman;
     private String phone;
     private String fax;
     private String postal_code;

@@ -62,8 +62,8 @@ public class ItemCompanyController {
     @Transactional
     @PutMapping("/multi")
     public ResponseEntity<Void> updateCompanys(@RequestBody List<ItemCompany> itemCompanys){
-        for (ItemCompany itemContent : itemCompanys) {
-            itemCompanyService.delete(itemContent.getId());
+        for (ItemCompany itemCompany : itemCompanys) {
+            itemCompanyService.delete(itemCompany.getId());
         }
         itemCompanyService.saveCompanys(itemCompanys);
         return ResponseEntity.status(HttpStatus.CREATED).build();

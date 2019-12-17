@@ -115,7 +115,7 @@ function getTarget(id) {
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            var targetTypes = getTargetTypeAll('targetType');//获取全部指标类型
+            var targetTypes = getTargetTypeAll('TARGET_TYPE');//获取全部指标类型
             $(targetTypes).each(function () {
                 var targetType = this;
                 var str1 = '';
@@ -124,9 +124,9 @@ function getTarget(id) {
                 var str4 = '';
                 $(data).each(function () {
                     if (targetType.sign == this.type) {
-
+                        var name = getLablename(this.target);
                         str1 = '<div class="module target">\n' +
-                            '            <table lay-even lay-skin="nob" class="layui-table">\n' +
+                            '<table lay-even lay-skin="nob" class="layui-table">\n' +
                             '                <colgroup>\n' +
                             '                    <col width="30%">\n' +
                             '                    <col width="10%">\n' +
@@ -149,7 +149,7 @@ function getTarget(id) {
                             '    </table>\n' +
                             ' </div>';
                         str2 += '<tr>\n' +
-                            '<td style="text-align: center;">' + this.target + '</td>\n' +
+                            '<td style="text-align: center;">' + name.content + '</td>\n' +
                             '<td style="text-align: center;">' + this.count + '</td>\n' +
                             '<td style="text-align: center;">' + this.start_date.substring(0, 10) + '至' + this.end_date.substring(0, 10) + '</td>\n' +
                             '<td style="text-align: center;" id="district"></td>\n' +
@@ -166,9 +166,8 @@ function getTarget(id) {
                             '</div>' +
                             '</td>' +
                             '</tr>';
-                        /*      getsuperior(this.district);*/
                         str4 += ' <tr>' +
-                            '<td style="text-align: center;">' + this.target + '</td>' +
+                            '<td style="text-align: center;">' + name.content + '</td>' +
                             ' <td style="text-align: center;">' + this.start_date.substring(0, 10) + '至' + this.end_date.substring(0, 10) + '</td>' +
                             '<td style="text-align: center;"></td>' +
                             '<td style="text-align: center;"></td>' +
@@ -231,6 +230,7 @@ function getTargetTypeAll(sign) {
         }
     });
 }*/
+
 function getFund(id) {
     $.ajax({
         type: 'get',
@@ -240,9 +240,9 @@ function getFund(id) {
         success: function (data) {
             $("#zijinwenhao").text(data[0].doc_number);
             var str = '';
-            var total=0;
+            var total = 0;
             $(data).each(function () {
-                total+=this.money;
+                total += this.money;
                 var content = getLablename(this.subject);
                 var source = getLablename(this.source);
                 str += ' <tr>\n' +
@@ -268,7 +268,6 @@ function getFund(id) {
             $("#total").text(total);
         }
     });
-
 }
 
 function getLablename(sign) {
@@ -309,6 +308,11 @@ function getItem_user(id) {
         success: function (data) {
             var str = '';
             $(data).each(function () {
+                var names = [];
+                $(this.targetIds).each(function () {
+                    var name = getResponsibilityName(this);
+                    names.push(name.content);
+                })
                 var userInfo = getUserInfo(this.itemUser.user_id);
                 var sex;
                 if (userInfo.sex == 0) {
@@ -331,7 +335,7 @@ function getItem_user(id) {
                     '<td>' + userInfo.academicTitle + '</td>\n' +
                     '<td>' + userInfo.nowMajor + '</td>\n' +
                     '<td>' + userInfo.deptName + '</td>\n' +
-                    '<td>' + userInfo.sex + '' +
+                    '<td >' + names +
                     '<div style="right: -40px;" class="operation">' +
                     '<div class="layui-btn-group">' +
                     '<button onclick="delete_user(' + this.itemUser.id + ')" type="button" class="layui-btn layui-btn-sm">' +
@@ -374,4 +378,55 @@ function delete_user(id) {
         });
         layer.close(1);
     });
+}
+
+function getResponsibilityName(id) {
+    var name;
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/target/list',
+        data: "id=" + id,
+        async: false,
+        success: function (data) {
+            var d = data[0];
+            name = getLablename(d.target);
+        }
+    })
+    return name;
+}
+
+function getCompanyInfo(id) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/company/list',
+        data: "item_id=" + id,
+        async: false,
+        success: function (data) {
+            $(data).each(function () {
+                if (this.type == 0) {
+                    $("#phone0").text(this.phone);
+                    $("#postal_code0").text(this.postal_code);
+                    $("#site0").text(this.site);
+                    $("#email0").text(this.email);
+                    $("#fax0").text(this.fax);
+                    $("#linkman0").text(this.linkman);
+                } else if (this.type == 1) {
+                    $("#phone1").text(this.phone);
+                    $("#linkman1").text(this.linkman);
+                    $("#postal_code1").text(this.postal_code);
+                    $("#site1").text(this.site);
+                    $("#email1").text(this.email);
+                    $("#fax1").text(this.fax);
+                } else if (this.type == 2) {
+                    $("#phone2").text(this.phone);
+                    $("#postal_code2").text(this.postal_code);
+                    $("#site2").text(this.site);
+                    $("#email2").text(this.email);
+                    $("#fax2").text(this.fax);
+                    $("#linkman2").text(this.linkman);
+                }
+
+            })
+        }
+    })
 }
