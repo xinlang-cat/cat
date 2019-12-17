@@ -85,12 +85,7 @@ public class LabelController {
     @LogAnnotation(module = "根据sign获取标签树")
     @GetMapping("/label/tree/{signs}")
     public List<Label> findTreeBySign(@PathVariable Set<String> signs) {
-        List<Label>  list =  labelService.findTreeBySign(signs);
-        if(list.size()>1){
-            return null;
-        }
-        System.out.println(list);
-       return list;
+       return labelService.findTreeBySign(signs);
     }
 
     /**

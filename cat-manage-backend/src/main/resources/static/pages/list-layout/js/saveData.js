@@ -77,11 +77,23 @@ function addPersonnel() {
     });
 }
 
-function addFund() {//其他指标
+function addFund() {
     var formdata = $("#form6").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/fund/multi',
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        data: formdata,
+        success: function (data) {
+        }
+    });
+}
+function addContact() {
+    var formdata = $("#form7").serializeJson();
+    $.ajax({
+        type: 'post',
+        url: domainName + '/project-item/item/company/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,

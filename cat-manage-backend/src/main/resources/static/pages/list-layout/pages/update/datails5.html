@@ -185,17 +185,35 @@
                     <th>研究开发中的责任分工</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="item_user">
+                </tbody>
+            </table>
+    </div>
+    <div class="module">
+            <table lay-even class="layui-table" >
+                <colgroup>
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="55%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="4">科技经费用途预算(<span id="zijinwenhao"></span>)</th>
                 <tr>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>科目</td>
+                    <td>金额（万元）</td>
+                    <td>经费来源</td>
+                    <td>开支内容</td>
                 </tr>
+                <tr>
+                    <td>合计</td>
+                    <td id="total"></td>
+                    <td>/</td>
+                    <td>/</td>
+                </tr>
+                </thead>
+                <tbody id="fund">
+
                 </tbody>
             </table>
     </div>
@@ -245,6 +263,18 @@
     }
     getcontent(id);
     getTarget(id);
+    getFund(id);
+    getItem_user(id);
+    function updata_fund(id){
+        layer.open({
+            title:"修改资金",
+            type:2,
+            area:['750px','450px'],
+            maxin:true,
+            shadeClose:true,
+            content:['updata_fund.html?id='+id]
+        });
+    }
 
 </script>
 </html>

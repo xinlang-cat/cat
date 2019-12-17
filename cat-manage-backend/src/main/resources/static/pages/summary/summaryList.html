@@ -30,6 +30,7 @@
                                     <button class="layui-btn layui-btn-sm" onclick="work()" permission="mail:save">
                                         <i class="layui-icon">&#xe608;</i> 工作总结
                                     </button>
+                                    <button class="layui-btn layui-btn-sm" onclick="back()" permission="mail:save">返回 </button>
 	                   				<button class="layui-btn layui-btn-sm" onclick="addSummary()" permission="mail:save">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
@@ -175,6 +176,9 @@ function addSummary() {
 }
 function work() {
     location.href='addWorkSummary.html?itemId='+item_id;
+}
+function back() {
+    location.href='../list-layout/list.html';
 }
 
 function showWork() {

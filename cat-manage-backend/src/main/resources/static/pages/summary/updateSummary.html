@@ -7,44 +7,81 @@
 </head>
 <body>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<input type="hidden" id="id" name="id">
-		<fieldset>
-			<div class="form-group">
-				<label class="col-md-2 control-label">标题</label>
-				<div class="col-md-10">
-					<input class="form-control" placeholder="标题" type="text" name="subject" id="subject" maxlength="255">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-2 control-label">收件人</label>
-				<div class="col-md-10">
-					<input class="form-control" placeholder="收件人" type="text" name="toEmail" id="toEmail" maxlength="128">
-				</div>
-			</div>
+		<form class="form-horizontal" onsubmit="return false" id="form">
+			<input type="hidden" id="id" name="id" value="">
+			<input type="hidden" id="itemId" name="itemId" value="">
 
-			<div class="form-group">
-				<label class="col-md-2 control-label">内容</label>
-				<div class="col-md-10">
-					<textarea class="layui-textarea" id="demo" style="display: none">  
-					</textarea>
-				</div>
-			</div>
+			<fieldset>
 
-			<div class="form-actions">
-				<div class="row" align="center">
-					<div class="col-md-12">
-					    <button class="btn btn-primary" onclick="location.href='mailList.html'">返回</button>
-						<button class="btn btn-primary" type="submit" onclick="add(this, false)">
-							<i class="fa fa-save"></i> 存草稿
-						</button>
-						<button class="btn btn-primary" type="submit" onclick="add(this, true)">
-							<i class="fa fa-save"></i> 发送
-						</button>
+				<div class="form-group">
+					<label class="col-md-3 control-label">项目背景</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="projectContent" id="projectContent" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
 					</div>
 				</div>
-			</div>
 
-		</fieldset>
+				<div class="form-group">
+					<label class="col-md-3 control-label">研究内容</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="researchContents" id="researchContents" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">技术路线</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="skillRoute" id="skillRoute" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">技术创新点</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="skillInnovate" id="skillInnovate" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">项目技术指标完成情况</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="skillIndicator" id="skillIndicator" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">项目技术评价</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="skillEvaluate" id="skillEvaluate" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label">项目实施对企业的影响</label>
+					<div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="projectEffect" id="projectEffect" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<div class="row" align="center">
+						<div class="col-md-12">
+							<button class="btn btn-primary" id="btn_return">返回</button>
+							<button class="btn btn-primary" type="submit" onclick="add_content()">
+								<i class="fa fa-save"></i> 保存
+							</button>
+						</div>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
 	</div>
 
 	<script src="../../js/constant.js"></script>
@@ -53,73 +90,51 @@
 	<script type="text/javascript" src="../../layui/layui.js"></script>
 	<script type="text/javascript" src="../../js/common.js"></script>
 	<script type="text/javascript">
-		var layedit, index;
-		layui.use(['layedit','upload'], function(){
-		  layedit = layui.layedit;
-		  layedit.set({
-              uploadImage: {
-                  url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
-                  type: 'post'
-              }
-            });
-		  index = layedit.build('demo');
+		layui.use(['layer'], function () {
+			var layer = layui.layer;
 		});
-
-        initData();
-
-        function initData(){
-            var id = getUrlParam("id");
-            if(id != ""){
-                $.ajax({
-                    type : 'get',
-                    url : domainName + '/api-b/mails/' +id,
-                    async : false,
-                    success : function(data) {
-                        $("#id").val(data.id);
-                        $("#toEmail").val(data.toEmail);
-                        $("#subject").val(data.subject);
-                        $("#demo").text(data.content);
-                    }
-                });
-            }
-        }
-	
-		function add(obj, send) {
-			var subject = $("#subject").val();
-			var toEmail = $("#toEmail").val();
-		    if(subject.trim() == ""){
-		       layer.msg("标题不能为空")
-			   return;
-		    }
-		    if(toEmail.trim() == ""){
-		       layer.msg("收件人不能为空")
-			   return;
-		    }
-		    $(obj).attr("disabled",true);
-		    
-		    var formdata = $("#form").serializeObject();
-		    formdata.id = $("#id").val();
-		    formdata.subject = subject;
-		    formdata.toEmail = toEmail;
-		    formdata.content = layedit.getContent(index);
-
+		var id = getUrlParam("id");
+		$("#id").val(id);
+		initData();
+		function initData() {
+			var data = {
+				id: id,
+			}
 			$.ajax({
-				type : 'put',
-				url : domainName + '/api-b/mails?send=' + send,
-				contentType: "application/json; charset=utf-8",  
-				data : JSON.stringify(formdata),
-				success : function(data) {
-                    var msg = "成功";
-                    if(send) {
-                        msg = "异步发送邮件，请在列表中查看结果";
-                    }
-                    layer.msg(msg, {shift: -1, time: 1000}, function(){
-                        location.href = "mailList.html";
-                    });
+				type: 'get',
+				data: data,
+				url: domainName + '/api-summary/skill/list',
+				async: false,
+				success: function (data) {
+					$(data).each(function () {
+						for (var key in data[0]) {
+							$("textarea[name=" + key + "]").val(data[0][key]);
+						}
+					});
+
 				}
 			});
-            $(obj).attr("disabled",false);
 		}
+		function add_content(obj) {
+			var formdata = $("#form").serializeObject();
+			$.ajax({
+				type : 'put',
+				url : domainName + '/api-summary/skill',
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					var msg = "保存成功";
+					layer.msg(msg, {shift: -1, time: 1000}, function(){
+						location.href = "summaryList.html?item_id=";
+					});
+				}
+			});
+			$(obj).attr("disabled",false);
+		}
+		$("#btn_return").click(function () {
+			var itemId= $("#itemId").val();
+			location.href="summaryList.html?itemId="+itemId;
+		});
 		
 	</script>
 </body>

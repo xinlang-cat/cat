@@ -38,7 +38,7 @@ public class WorkSummaryController {
         workSummary.setUpdateTime(date);
         AppUser appUser = AppUserUtil.getLoginAppUser();
         Integer userId = appUser.getId().intValue();
-        ProjectUser projectUser = consumeProjectUser.findByUserId(userId);
+        ProjectUser projectUser = consumeProjectUser.findByUserId(userId).get(0);
         workSummary.setCreateUserId(userId);
         workSummary.setCreateUserName(projectUser.getName());
         workSummaryService.save(workSummary);
