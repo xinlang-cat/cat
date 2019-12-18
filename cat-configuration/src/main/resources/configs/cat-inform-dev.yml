@@ -50,7 +50,7 @@ security:
     resource:
 
 
-      user-info-uri: http://192.168.5.13/api-o/user-me
+      user-info-uri: http://192.168.5.64/api-o/user-me
 
       prefer-token-info: false
 aliyun:

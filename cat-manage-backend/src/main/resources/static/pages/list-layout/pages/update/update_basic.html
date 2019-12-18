@@ -173,7 +173,7 @@
         });
     });
     /*初始化数据*/
-    initplanCategorySelect();
+    initplanCategorySelect('PLAN_CATEGOR');
     initCompanySelect();
     initData();
 
@@ -216,22 +216,16 @@
             }
         })
     }
-    function initplanCategorySelect(){
+    function initplanCategorySelect(sign){
         $.ajax({
             type : 'get',
-            url : domainName + '/api-label/label/tree/all',
+            url: domainName + '/api-label/label/tree/' + sign,
             async : false,
             success : function(data) {
-                var select = $("#category");
-                //select.append("<option value=''>- 请选择 -</option>");
                 var ds = data[0].child;
-                for(var i=0; i<ds.length; i++){
-                    var d = ds[i];
-                    var sign = d['sign'];
-                    var name = d['content'];
-                    select.append("<option value='"+ sign +"'>" +name+"</option>");
-                    //   }
-                }
+                $(ds).each(function () {
+                    $("#category").append('<option value=' + this.sign + '>' + this.content + '</option>');
+                });
             }
         });
     }
