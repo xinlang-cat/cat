@@ -72,7 +72,7 @@ public class AppUserService implements IAppUserService {
             throw new IllegalArgumentException("用户名已存在");
         }
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
-        appUser.setEnabled(Boolean.FALSE);
+        appUser.setEnabled(Boolean.TRUE);
         appUser.setCreateTime(new Date());
         appUser.setUpdateTime(appUser.getCreateTime());
         appUserMapper.save(appUser);
