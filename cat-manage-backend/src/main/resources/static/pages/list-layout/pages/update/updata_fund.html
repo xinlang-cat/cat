@@ -59,7 +59,16 @@
             </tr>
             </tbody>
         </table>
-        <button class="layui-btn" lay-submit lay-filter="sub6" id="sub6" onclick="update();">提交</button>
+        <div class="form-actions">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" onclick="retuen_btn();">返回</button>
+                    <button class="btn btn-primary" type="submit" onclick="update();">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 </body>
@@ -140,13 +149,19 @@
             async: false,
             data: JSON.stringify(formdata),
             success: function (data) {
+                layer.msg("成功", {shift: -1, time: 3000}, function () {
+                });
                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                 parent.location.reload();//刷新父页面，注意一定要在关闭当前iframe层之前执行刷新
-                layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    parent.layer.close(index); //再执行关闭
-                });
+                parent.layer.close(index); //再执行关闭
             }
         })
+    }
+
+    function retuen_btn() {
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.location.reload();//刷新父页面，注意一定要在关闭当前iframe层之前执行刷新
+        parent.layer.close(index); //再执行关闭
     }
 </script>
 </html>

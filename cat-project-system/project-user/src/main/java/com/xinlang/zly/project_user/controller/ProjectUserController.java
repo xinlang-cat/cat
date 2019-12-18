@@ -18,6 +18,7 @@ import com.xinlang.zly.project_user.service.IProjectUserService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -81,6 +82,15 @@ public class ProjectUserController {
     @GetMapping("/user-anon/{userId}")
     public List<ProjectUser> findByUserId(@PathVariable Integer userId){
         List<ProjectUser> list =   projectUserService.findByUserId(userId);
+        setDomainAndSkill(list);
+        return list;
+    }
+
+    @ApiOperation(value =  "根据系统用户表id查询用户信息")
+    @LogAnnotation(module = "根据系统用户表id查询用户信息")
+    @GetMapping("/user/{ids}")
+    public List<ProjectUser> findByUserIds(@PathVariable Set<Integer> ids){
+        List<ProjectUser> list =   projectUserService.findByUserIds(ids);
         setDomainAndSkill(list);
         return list;
     }
