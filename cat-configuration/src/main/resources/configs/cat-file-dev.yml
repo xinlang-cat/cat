@@ -46,7 +46,7 @@ security:
       prefer-token-info: false
 file:
   local:
-    path: E:/localFile
+    path: D:/localFile
     prefix: /statics
 
 
