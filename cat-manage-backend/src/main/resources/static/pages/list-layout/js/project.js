@@ -57,10 +57,10 @@ function getcontent(id) {
         success: function (data) {
             var str = '';
             $(data).each(function () {
-                str += '<tr>' +
+                str += '<tr><td></td>'+
                     '<td>' +
-                    '<span>' + this.title + '</span>' +
-                    '<p>' + this.content + '</p>' +
+                    '<p>' + this.title + '</p>' +
+                    '<span>' + this.content + '</span>' +
                     '<div class="operation">' +
                     '<div class="layui-btn-group">' +
                     '<button onclick="update_con(' + this.id + ')" type="button" class="layui-btn layui-btn-sm">' +
@@ -125,6 +125,7 @@ function getTarget(id) {
                 $(data).each(function () {
                     if (targetType.sign == this.type) {
                         var name = getLablename(this.target);
+                        var text = getsuperior(this.district);
                         str1 = '<div class="module target">\n' +
                             '<table lay-even lay-skin="nob" class="layui-table">\n' +
                             '                <colgroup>\n' +
@@ -152,7 +153,7 @@ function getTarget(id) {
                             '<td style="text-align: center;">' + name.content + '</td>\n' +
                             '<td style="text-align: center;">' + this.count + '</td>\n' +
                             '<td style="text-align: center;">' + this.start_date.substring(0, 10) + '至' + this.end_date.substring(0, 10) + '</td>\n' +
-                            '<td style="text-align: center;" id="district"></td>\n' +
+                            '<td style="text-align: center;" id="district">'+text+'</td>\n' +
                             '<td style="text-align: center;">' +
                             '<div class="operation">' +
                             '<div class="layui-btn-group">' +
@@ -166,16 +167,9 @@ function getTarget(id) {
                             '</div>' +
                             '</td>' +
                             '</tr>';
-                        str4 += ' <tr>' +
-                            '<td style="text-align: center;">' + name.content + '</td>' +
-                            ' <td style="text-align: center;">' + this.start_date.substring(0, 10) + '至' + this.end_date.substring(0, 10) + '</td>' +
-                            '<td style="text-align: center;"></td>' +
-                            '<td style="text-align: center;"></td>' +
-                            '</tr>'
                     }
                 })
                 $('#forma').append(str1 + str2 + str3);
-                $("#qita").append(str4);
             })
         }
     })
@@ -194,14 +188,14 @@ function getTargetTypeAll(sign) {
     return targetTypes;
 }
 
-/*function getsuperior(code){
+function getsuperior(code){
+    var text = '';
     $.ajax({
         type : 'get',
         url : domainName + '/map/province/tree/'+code,
         async : false,
         success : function(data) {
-            var select = $("#district"),
-                provinceName,
+            var provinceName,
                 city,
                 area,
                 street;
@@ -225,11 +219,11 @@ function getTargetTypeAll(sign) {
                 provinceName = data.province.provinceName;
                 str = provinceName+'-';
             }
-
-    /!*        select.append("<option value='"+ code +"'>" +str+"</option>");*!/
+            text=str;
         }
     });
-}*/
+    return text;
+}
 
 function getFund(id) {
     $.ajax({
