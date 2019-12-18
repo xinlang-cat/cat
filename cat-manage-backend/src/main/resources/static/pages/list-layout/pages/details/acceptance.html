@@ -49,9 +49,9 @@
 
 <body>
 <div class="content">
-    <div><h2 style="text-align: center;margin: 40px;">广西科技研究与技术开发计划项目验收申请表</h2></div>
-    <div class="module">
-        <form class="layui-form" id="form">
+    <form class="layui-form" id="form">
+        <div><h2 style="text-align: center;margin: 40px;">广西科技研究与技术开发计划项目验收申请表</h2></div>
+        <div class="module">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -62,6 +62,8 @@
                 </colgroup>
                 <tbody>
                 <tr>
+                    <input type="hidden" id="createUserId" name="createUserId" value="10">
+                    <input type="hidden" id="item_id" name="itemId" value="">
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
                     <td>
@@ -89,20 +91,18 @@
                     </td>
                     <td class="td-text1">申请日期:</td>
                     <td>
-                <span id="filing_date"> <input class="form-control date" placeholder="开始时间" type="text"
-                                               name="start_dateStr" maxlength="50"
-                                               id="start" data-bv-notempty="true"
-                                               data-bv-notempty-message="开始时间 不能为空"></span>
+                <span id="filing_date"> <input class="form-control date" placeholder="申请日期" type="text"
+                                               name="application_date" maxlength="50"
+                                               id="application_date" data-bv-notempty="true"
+                                               data-bv-notempty-message="申请日期 不能为空"></span>
                         <input type="hidden" name="filing_date">
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </form>
-    </div>
+        </div>
 
-    <div class="module">
-        <form class="layui-form" id="form1">
+        <div class="module">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -146,17 +146,13 @@
                 <tr>
                     <td class="td-text1">单位性质:</td>
                     <td>
-                        <select class="form-control input-sm" lay-skin="primary" id="map">
-                            <option value="">- 请选择 -</option>
-                            <option value="">- 大专院校 -</option>
-                            <option value="">- 科研院所 -</option>
-                            <option value="">- 企业 -</option>
-                            <option value="">- 其他 -</option>
-                        </select>
+                       <span>企业</span>
                     </td>
                     <td class="td-text1">申请验收单位建议的验收日期:</td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="申请验收单位建议的验收日期" type="text"
-                               id="check_date" name="check_date"></td>
+                    <td><input class="form-control date" placeholder="申请日期" type="text"
+                               name="suggestDate" maxlength="50"
+                               id="suggestDate" data-bv-notempty="true"
+                               data-bv-notempty-message="申请日期 不能为空"></td>
                 </tr>
                 <tr>
                     <td class="td-text1">项目合同(或课件任务书)约定的项目实施开始时间:</td>
@@ -172,21 +168,19 @@
                     <td class="td-text1">项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况:</td>
                     <td colspan="3"> <textarea placeholder="项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况"
                                                class="layui-textarea form-control" lay-verify="required"
-                                               id="indexAchievingStatus" name="indexAchievingStatus"></textarea></td>
+                                               id="cean" name="cean"></textarea></td>
                 </tr>
                 <tr>
                     <td class="td-text1">提交的验收文件和资料目录:</td>
                     <td colspan="3"> <textarea placeholder="提交的验收文件和资料目录" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="projectData" name="projectData"></textarea></td>
+                                               id="katalog" name="katalog"></textarea></td>
                 </tr>
                 </tbody>
             </table>
-        </form>
-    </div>
+        </div>
 
-    <div class="module">
-        <form class="layui-form" id="form2">
+        <div class="module">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -213,11 +207,9 @@
                 </tr>
                 </tbody>
             </table>
-        </form>
-    </div>
+        </div>
 
-    <div class="module">
-        <form class="layui-form" id="form4">
+        <div class="module">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -440,35 +432,44 @@
                     <td class="td-text">申请验收单位意见:</td>
                     <td colspan="7"> <textarea placeholder="申请验收单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="Comments_of_applicants" name="Comments_of_applicants"></textarea>
+                                               id="applicationDeptOpinion" name="applicationDeptOpinion"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text">受委托管理单位或项目牵头承担单位意见:</td>
                     <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="Comments_of_applicants1" name="Comments_of_applicants1"></textarea>
+                                               id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text">自治区科技厅项目主管处意见:</td>
                     <td colspan="7"> <textarea placeholder="自治区科技同项目主管处意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="Comments_of_applicants2" name="Comments_of_applicants2"></textarea>
+                                               id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text">自治区科技厅条件财务处意见:</td>
                     <td colspan="7"> <textarea placeholder="自治区科技厅条件财务处意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="Comments_of_applicants3" name="Comments_of_applicants3"></textarea>
+                                               id="burgFinanceOpinion" name="burgFinanceOpinion"></textarea>
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </form>
-    </div>
-
+        </div>
+        <div class="form-actions">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                    <button class="btn btn-primary" type="submit" onclick="add_ACC();">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 <script type="text/javascript" src='../../../../js/constant.js'></script>
@@ -481,6 +482,7 @@
 <script type="text/javascript" src='../../js/saveData.js'></script>
 <script>
     var id = 26;
+    $("#item_id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload
@@ -496,7 +498,6 @@
     })
 
     getbasic(id);
-
     function getbasic(id) {
         $.ajax({
             type: 'get',
@@ -517,6 +518,7 @@
             }
         })
     }
+
     /*解析部门名称*/
     function getDept(sign, node) {
         $.ajax({
@@ -528,6 +530,7 @@
             }
         });
     }
+
     getCompanyInfo(id);
     function getCompanyInfo(id) {
         $.ajax({
@@ -600,6 +603,7 @@
         })
         return userinfo;
     }
+
     function getResponsibilityName(id) {
         var name;
         $.ajax({
@@ -614,6 +618,7 @@
         })
         return name;
     }
+
     function getLablename(sign) {
         var name;
         $.ajax({
@@ -626,5 +631,30 @@
         })
         return name;
     }
+     function add_ACC() {
+         var formdata = $("#form").serializeObject();
+         $.ajax({
+             type: 'post',
+             url: domainName + '/api-summary/check-table',
+             contentType: "application/json; charset=utf-8",
+             data: JSON.stringify(formdata),
+             success: function (data) {
+                 var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                 parent.location.reload();//刷新父页面，注意一定要在关闭当前iframe层之前执行刷新
+                 parent.layer.close(index); //再执行关闭
+             }
+         })
+     }
+    getUserId();
+    function getUserId() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            success: function (data) {
+             alert(data.id);
+            }
+        })
+    }
+
 </script>
 </html>
