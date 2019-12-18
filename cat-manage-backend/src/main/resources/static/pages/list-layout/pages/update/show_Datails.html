@@ -363,7 +363,7 @@
 <script type="text/javascript" src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../js/project.js"></script>
 <script>
-    var id = 26;
+    var id = getUrlParam("id");
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload
