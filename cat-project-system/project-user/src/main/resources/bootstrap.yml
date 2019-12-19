@@ -12,7 +12,7 @@ eureka:
     service-url:
 
 
-      defaultZone: http://cat:cat@192.168.5.64:8761/eureka/
+      defaultZone: http://cat:cat@192.168.5.13:8761/eureka/
 
 
 spring:
