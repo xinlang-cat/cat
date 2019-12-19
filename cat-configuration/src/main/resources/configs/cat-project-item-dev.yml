@@ -34,7 +34,7 @@ security:
     resource:
 
 
-      user-info-uri: http://192.168.5.61/api-o/user-me
+      user-info-uri: http://xinlangxfpt.mynatapp.cc/api-o/user-me
 
       prefer-token-info: false
 ribbon:
