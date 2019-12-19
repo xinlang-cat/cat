@@ -11,16 +11,18 @@
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
             <input type="hidden" name="projectId" value="" id="projectId">
+
             <div class="form-group">
-                <label class="col-md-3 control-label">标题</label>
-                <div class="col-md-7">
+                <label class="col-md-1 control-label">标题:</label>
+                <div class="col-md-10">
                     <input class="form-control" placeholder="标题" type="text" id="title" name="title"
                            maxlength="50" data-bv-notempty="true" data-bv-notempty-message="标题 不能为空">
                 </div>
             </div>
+
             <div class="form-group">
-                <label class="col-md-3 control-label">内容</label>
-                <div class="col-md-7">
+                <label class="col-md-1 control-label">内容:</label>
+                <div class="col-md-10">
 					<textarea class="layui-textarea" id="demo" >
 					</textarea>
                 </div>
@@ -36,6 +38,7 @@
                     </div>
                 </div>
             </div>
+
         </fieldset>
     </form>
 </div>
@@ -48,36 +51,19 @@
 <script>
     var id = 26;
     $("#projectId").val(id);
-    /*    function add_report() {
-            $('#form').bootstrapValidator();
-            var bootstrapValidator = $("#form").data('bootstrapValidator');
-            bootstrapValidator.validate();
-            if (!bootstrapValidator.isValid()) {
-                return;
-            }
-            var formdata = $("#form").serializeObject();
-            $.ajax({
-                type: 'post',
-                url: domainName + '/project-report/report',
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(formdata),
-                success: function (data) {
-                    layer.msg("成功", {shift: -1, time: 1000}, function () {
-                        location.href = "report.html?id=" + id;
-                    });
-                }
-            });
-
-        }*/
     $("#btn_return").click(function () {
-        $(location).attr("href", "report.html?id=" + id);
+        $(location).attr("href", "/report.html?id=" + id);
     })
 </script>
 <script type="text/javascript">
-    layui.use(['layer', 'laydate', 'upload'], function () {
-        var layer = layui.layer
-            , upload = layui.upload
-            , laydate = layui.laydate;
+
+    var layedit, index,layer,upload,laydate;
+
+    layui.use(['layer', 'laydate','layedit','upload'], function(){
+        layer = layui.layer;
+        upload = layui.upload
+        laydate = layui.laydate;
+        layedit = layui.layedit;
 
         lay('.date').each(function () {
             laydate.render({
@@ -86,33 +72,21 @@
                 , trigger: 'click'
             });
         });
-    });
-    var layedit, index;
-    layui.use(['layedit','upload'], function(){
-        layedit = layui.layedit;
+
         layedit.set({
             uploadImage: {
                 url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
                 type: 'post'
             }
         });
-        index = layedit.build('demo');
+
+        var h = $(window).height() - 200;
+        layedit.build('demo',{
+            height:h
+        });
     });
-    function add_report(obj, send) {
-        /*     var title = $("#title").val();*/
-        /*   var toEmail = $("#toEmail").val();*/
-        /*  if(title.trim() == ""){
-              layer.msg("标题不能为空")
-              return;
-          }*/
-        /* if(toEmail.trim() == ""){
-             layer.msg("收件人不能为空")
-             return;
-         }*/
-        $(obj).attr("disabled",true);
+    function add_report() {
         var formdata = $("#form").serializeObject();
-        /*   formdata.title = title;*/
-        /*   formdata.toEmail = toEmail;*/
         formdata.content = layedit.getContent(index);
         $.ajax({
             type : 'post',
@@ -121,15 +95,11 @@
             data : JSON.stringify(formdata),
             success : function(data) {
                 var msg = "成功";
-                /*   if(send) {
-                       msg = "异步发送邮件，请在列表中查看结果";
-                   }*/
                 layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    location.href = "new_report.html?id="+id;
+                    location.href = "/report.html";
                 });
             }
         });
-        $(obj).attr("disabled",false);
     }
 </script>
 </body>

@@ -8,7 +8,6 @@
 		.timeline{
 			background-color: #dbe7f3;
 		}
-
 	</style>
 </head>
 <body>
@@ -27,12 +26,12 @@
 				class="layui-btn layui-btn-primary layui-btn-sm">返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回</button>
 	</div>
 </body>
-<script src="../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../js/common.js"></script>
 <script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../js/constant.js"></script>
 <script>
 	var id = 26;
 	layui.use(['layer', 'laydate','upload'], function () {
@@ -47,22 +46,24 @@
 			});
 		});
 	});
+	var h = $(window).height() - 40 + 'px';
+	var w = $(window).width() - 100 + 'px';
 
 	$("#add_report").click(function () {
 		layer.open({
 			title:"添加阶段报告",
 			type:2,
-			area:['550px','450px'],
+			area:[w,h],
 			maxmin:true,
 			shadeClose:true,
 			content: ['../add_report.html']
 		})
-	})
+	});
 	$("#my_check").click(function () {
 		layer.open({
 			title:"我的阶段报告",
 			type:2,
-			area:['550px','450px'],
+			area:[w,h],
 			maxmin:true,
 			shadeClose:true,
 			content: ['../new_report.html']
@@ -74,14 +75,14 @@
 			url: domainName + '/project-report/report/getAllReport/' + id,
 			contentType: "application/json; charset=utf-8",
 			success: function (res) {
+				if(res != null){
+					$(".timeline_container,#my_check").hide();
+					return;
+				}
 				var str = '';
 				$(res).each(function () {
 					if(this.status==2) {
-						str += '<div class="item">' +
-                                '<h3><span class="fl">' + this.title + '</span><span class="fr">'+this.createTime+'</span></h3>\n' +
-                                '<p class="con">' + this.content + '</p>\n' +
-                                '<h4></h4>\n' +
-                                '</div>';
+						str = '<div class="item"><h3><span class="fl">' + this.title + '</span><span class="fr">'+this.createTime+'</span></h3><p class="con">' + this.content + '</p><h4></h4></div>';
 					}
 				})
 				$("#container").append(str);

@@ -44,7 +44,11 @@
             font-size: 14px;
             font-weight: bolder;
         }
-
+        .sp-text{
+            text-align: left;
+            font-size: 14px;
+            font-weight: bolder;
+        }
     </style>
 </head>
 
@@ -68,34 +72,31 @@
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
                     <td>
-                        <span id="contract_no"></span>
+                        <span class="sp-text"  id="contract_no"></span>
                     </td>
                     <td class="td-text1">项目名称:</td>
                     <td>
-                        <span id="item_name"></span>
+                        <span class="sp-text" id="item_name"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">承担单位:</td>
                     <td>
-                        <span class="undertaker"></span>
+                        <span  class="undertaker sp-text "></span>
                     </td>
                     <td class="td-text1">受委托管理单位:</td>
                     <td>
-                        <span id="administrator"></span>
+                        <span class="sp-text" id="administrator"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">申请验收理单位:</td>
                     <td>
-                        <span class="undertaker"></span>
+                        <span class="undertaker sp-text"></span>
                     </td>
                     <td class="td-text1">申请日期:</td>
                     <td>
-                <span > <input class="form-control date" placeholder="申请日期" type="text"
-                                               name="applicationDate" maxlength="50"
-                                               id="applicationDate" data-bv-notempty="true"
-                                               data-bv-notempty-message="申请日期 不能为空"></span>
+                        <span class="sp-text" id="applicationDate"> </span>
                     </td>
                 </tr>
                 </tbody>
@@ -116,65 +117,58 @@
                     <td rowspan="7" class="table-info">申请验收单位信息</td>
                     <td class="td-text1">单位名称:</td>
                     <td>
-                        <span class="undertaker"></span>
+                        <span class="undertaker sp-text"></span>
                     </td>
                     <td class="td-text1">通信地址:</td>
                     <td>
-                        <span id="site"></span>
+                        <span class="sp-text" id="site"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">联 系 人:</td>
                     <td>
-                        <span id="linkman"></span>
+                        <span class="sp-text" id="linkman"></span>
                     </td>
                     <td class="td-text1">联系电话:</td>
                     <td>
-                        <span id="phone"></span>
+                        <span class="sp-text" id="phone"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">邮政编码:</td>
                     <td>
-                        <span id="postal_code"></span>
+                        <span class="sp-text" id="postal_code"></span>
                     </td>
                     <td class="td-text1">电子邮箱:</td>
                     <td>
-                        <span id="email"></span>
+                        <span class="sp-text" id="email"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">单位性质:</td>
                     <td>
-                       <span>企业</span>
+                        <span class="sp-text">企业</span>
                     </td>
                     <td class="td-text1">申请验收单位建议的验收日期:</td>
-                    <td ><input class="form-control date" placeholder="申请日期" type="text"
-                               name="suggestDate" maxlength="50"
-                               id="suggestDate" data-bv-notempty="true"
-                               data-bv-notempty-message="申请日期 不能为空"></td>
+                    <td class="sp-text"  id="suggestDate"></td>
                 </tr>
                 <tr>
                     <td class="td-text1">项目合同(或课件任务书)约定的项目实施开始时间:</td>
                     <td>
-                        <span id="start_date"></span>
+                        <span class="sp-text" id="start_date"></span>
                     </td>
                     <td class="td-text1">项目合同(或课件任务书)约定的项目实施结束时间:</td>
                     <td>
-                        <span id="end_date"></span>
+                        <span class="td-text" id="end_date"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况:</td>
-                    <td colspan="3"> <textarea placeholder="项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况"
-                                               class="layui-textarea form-control" lay-verify="required"
-                                               id="cean" name="cean"></textarea></td>
+                    <td class="sp-text" colspan="3" id="cean"></td>
                 </tr>
                 <tr>
                     <td class="td-text1">提交的验收文件和资料目录:</td>
-                    <td colspan="3"> <textarea placeholder="提交的验收文件和资料目录" class="layui-textarea form-control"
-                                               lay-verify="required"
-                                               id="katalog" name="katalog"></textarea></td>
+                    <td  class="sp-text" colspan="3" id="katalog"> </td>
                 </tr>
                 </tbody>
             </table>
@@ -428,8 +422,7 @@
                 <tr>
                     <td colspan="8"></td>
                 </tr>
-
-                <tr>
+                <tr id="shenqing" >
                     <td class="td-text">申请验收单位意见:</td>
                     <td colspan="7"> <textarea placeholder="申请验收单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
@@ -437,7 +430,7 @@
                     </td>
                 </tr>
 
-                <tr>
+                <tr id="souweituo">
                     <td class="td-text">受委托管理单位或项目牵头承担单位意见:</td>
                     <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
@@ -445,14 +438,14 @@
                     </td>
                 </tr>
 
-                <tr >
+                <tr id="zizhiqu">
                     <td class="td-text">自治区科技厅项目主管处意见:</td>
                     <td colspan="7"> <textarea placeholder="自治区科技同项目主管处意见" class="layui-textarea form-control"
                                                lay-verify="required"
                                                id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
                     </td>
                 </tr>
-                <tr >
+                <tr id="zizhicaiwu">
                     <td class="td-text">自治区科技厅条件财务处意见:</td>
                     <td colspan="7"> <textarea placeholder="自治区科技厅条件财务处意见" class="layui-textarea form-control"
                                                lay-verify="required"
@@ -461,14 +454,14 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="form-actions">
-            <div class="row" align="center">
-                <div class="col-md-12">
-                    <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary" type="submit" onclick="add_ACC();">
-                        <i class="fa fa-save"></i> 保存
-                    </button>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add_ACC();">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -483,14 +476,15 @@
 <script type="text/javascript" src='../../js/serializeJson.js'></script>
 <script type="text/javascript" src='../../js/initSelectData.js'></script>
 <script type="text/javascript" src='../../js/saveData.js'></script>
-<script type="text/javascript" src="../../js/acceptance.js"></script>
+<script type="text/javascript" src='../../js/acceptance.js'></script>
 <script>
-    var id = 26;
-/*    $("#shenqing").hide();
+    var id =26;
+    $("#item_id").val(id);
+    $("#shenqing").hide();
     $("#zizhiqu").hide();
     $("#zizhicaiwu").hide();
     $("#souweituo").hide();
-    $("#item_id").val(id);*/
+    $("#item_id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload
@@ -504,10 +498,6 @@
             });
         });
     })
-
-    var userid=  getUserId();
-$("#createUserId").val(userid);
-
     getdata(id);
     function getdata(id) {
         $.ajax({
@@ -516,54 +506,21 @@ $("#createUserId").val(userid);
             data: "item_id=" + id,
             async: false,
             success: function (data) {
-                $(data).each(function () {
-                    $("#applicationDate").val(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").val(this.suggestDate.substring(0, 10));
-                    $("#cean").text(this.cean);
-                    $("#katalog").text(this.katalog);
-                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
-                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
-                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
-                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
-                    getCompanyInfo2(this.createUserId);
-                })
+                var d=data[0];
+                $("#applicationDeptOpinion").text(d.applicationDeptOpinion);
+                $("#cean").text(d.cean);
+                $("#katalog").text(d.katalog);
+                $("#applicationDate").text(d.applicationDate.substring(0, 10));
+                $("#suggestDate").text(d.suggestDate.substring(0, 10));
+                $("#manageDeptOpinion").text(d.manageDeptOpinion);
+                $("#burgLeaderOpinion").text(d.burgLeaderOpinion);
+                $("#burgFinanceOpinion").text(d.burgFinanceOpinion);
 
-            }
-        })
-    }
-
-
-    function getCompanyInfo2(id) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/company/list',
-            data: "id=" + id,
-            async: false,
-            success: function (data) {
-              var d= data[0];
-              alert(d.site);
             }
         })
     }
     getbasic(id);
     getCompanyInfo(id);
     getItem_user(id);
-     function add_ACC() {
-         var formdata = $("#form").serializeObject();
-         $.ajax({
-             type: 'post',
-             url: domainName + '/api-summary/check-table',
-             contentType: "application/json; charset=utf-8",
-             data: JSON.stringify(formdata),
-             success: function (data) {
-                  alert("成功");
-                   /*  layer.msg("成功");*/
-
-             }
-         })
-     }
-
-
-
 </script>
 </html>
