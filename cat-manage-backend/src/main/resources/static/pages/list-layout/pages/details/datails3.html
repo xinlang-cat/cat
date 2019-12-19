@@ -998,7 +998,7 @@
             saveFund();
             saveContact();
             layer.msg("保存成功", {shift: -1, time: 1000}, function () {
-
+                history.back(-1);
             });
             return false;
         });

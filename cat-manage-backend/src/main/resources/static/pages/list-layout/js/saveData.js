@@ -54,12 +54,17 @@ function savePersonnel() {
         });
         this.targetIds=ids;
     });
+    if(formdata.length>1){
+        formdata = JSON.stringify(formdata)
+    }else {
+        formdata = "[" + JSON.stringify(formdata) + "]"
+    }
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/user/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(formdata),
+        data: formdata,
         success: function (data) {
         }
     });
