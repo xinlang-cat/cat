@@ -18,6 +18,7 @@ function getbasic(id) {
         }
     })
 }
+
 /*解析部门名称*/
 function getDept(sign, node) {
     $.ajax({
@@ -37,7 +38,14 @@ function getCompanyInfo(id) {
         async: false,
         success: function (data) {
             $(data).each(function () {
-                if (this.type == 1) {
+             var datas = getUserId();
+               if (this.type == 1) {
+                   var name=this.linkman;
+                      if (name == datas) {
+                          $("#manageDeptOpinion").attr("readonly", true);
+                          $("#burgLeaderOpinion").attr("readonly", true);
+                          $("#burgFinanceOpinion").attr("readonly", true);
+                      }
                     $("#phone").text(this.phone);
                     $("#postal_code").text(this.postal_code);
                     $("#site").text(this.site);
@@ -45,19 +53,29 @@ function getCompanyInfo(id) {
                     $("#fax").text(this.fax);
                     $("#linkman").text(this.linkman);
                 }
-             /*   if(this.type==2){
-                    var name=this.linkman;
-                    if(name==datas){
-                        $("#souweituo").show();
-                    }
-                }
-                if(this.type==0){
-                    var name=this.linkman;
-                    if(name==datas){
-                        $("#zizhiqu").show();
-                    }
-                }
-*/
+            if(this.type==2){
+                       var name=this.linkman;
+                       if(name==datas){
+                           $("#burgLeaderOpinion").attr("readonly", true);
+                           $("#burgFinanceOpinion").attr("readonly", true);
+                           $("#applicationDeptOpinion").attr("readonly", true);
+                           $("#applicationDate").attr("readonly", true);
+                           $("#suggestDate").attr("readonly", true);
+                           $("#cean").attr("readonly", true);
+                           $("#katalog").attr("readonly", true);
+                       }
+                   }
+                  if(this.type==0){
+                             var name=this.linkman;
+                             if(name==datas){
+                                 $("#applicationDeptOpinion").attr("readonly", true);
+                                 $("#manageDeptOpinion").attr("readonly", true);
+                                 $("#applicationDate").attr("readonly", true);
+                                 $("#suggestDate").attr("readonly", true);
+                                 $("#cean").attr("readonly", true);
+                                 $("#katalog").attr("readonly", true);
+                             }
+                         }
             })
         }
     })
@@ -112,7 +130,6 @@ function getUserInfo(id) {
     })
     return userinfo;
 }
-
 function getResponsibilityName(id) {
     var name;
     $.ajax({
@@ -127,7 +144,6 @@ function getResponsibilityName(id) {
     })
     return name;
 }
-
 function getLablename(sign) {
     var name;
     $.ajax({
@@ -140,7 +156,6 @@ function getLablename(sign) {
     })
     return name;
 }
-
 function getUserId() {
     var datas;
     $.ajax({
@@ -148,7 +163,7 @@ function getUserId() {
         url: domainName + '/api-u/users/current',
         async: false,
         success: function (data) {
-            datas=data.id
+            datas = data.username;
             $("#createUserId").val(data.id);
         }
     })

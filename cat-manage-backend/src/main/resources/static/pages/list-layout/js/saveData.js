@@ -13,7 +13,7 @@ function saveBasics() {
     });
 }
 
-function addContent() {
+function saveContent() {
     var formdata = $("#form2").serializeJson();
     $.ajax({
         type: 'post',
@@ -26,7 +26,7 @@ function addContent() {
     });
 }
 var targets;
-function addTarget1() {//数量指标
+function saveTarget() {//数量指标
     var formdata = $("#form3").serializeJson();
     $.ajax({
         type: 'post',
@@ -39,20 +39,8 @@ function addTarget1() {//数量指标
         }
     });
 }
-function addTarget2() {//其他指标
-    var formdata = $("#form4").serializeJson();
-    $.ajax({
-        type: 'post',
-        url: domainName + '/project-item/item/target/multi',
-        async: false,
-        contentType: "application/json; charset=utf-8",
-        data: formdata,
-        success: function (data) {
-        }
-    });
-}
-function addPersonnel() {
-    var formdata = $("#form5").serializeArrayObj();
+function savePersonnel() {
+    var formdata = $("#form4").serializeArrayObj();
     $(formdata).each(function(){
         var ids = [];
         var targetIds = this.targetIds.split(',');
@@ -66,19 +54,24 @@ function addPersonnel() {
         });
         this.targetIds=ids;
     });
+    if(formdata.length>1){
+        formdata = JSON.stringify(formdata)
+    }else {
+        formdata = "[" + JSON.stringify(formdata) + "]"
+    }
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/user/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(formdata),
+        data: formdata,
         success: function (data) {
         }
     });
 }
 
-function addFund() {
-    var formdata = $("#form6").serializeJson();
+function saveFund() {
+    var formdata = $("#form5").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/fund/multi',
@@ -89,8 +82,8 @@ function addFund() {
         }
     });
 }
-function addContact() {
-    var formdata = $("#form7").serializeJson();
+function saveContact() {
+    var formdata = $("#form6").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/company/multi',

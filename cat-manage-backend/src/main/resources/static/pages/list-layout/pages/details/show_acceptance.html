@@ -482,15 +482,16 @@
               data: "item_id=" + id,
               async: false,
               success: function (data) {
-                  var d=data[0];
-                $("#applicationDeptOpinion").text(d.applicationDeptOpinion);
-                  $("#cean").text(d.cean);
-                  $("#katalog").text(d.katalog);
-                  $("#applicationDate").text(d.applicationDate.substring(0, 10));
-                  $("#suggestDate").text(d.suggestDate.substring(0, 10));
-                  $("#manageDeptOpinion").text(d.manageDeptOpinion);
-                  $("#burgLeaderOpinion").text(d.burgLeaderOpinion);
-                  $("#burgFinanceOpinion").text(d.burgFinanceOpinion);
+                  $(data).each(function () {
+                      $("#applicationDate").text(this.applicationDate.substring(0, 10));
+                      $("#suggestDate").text(this.suggestDate.substring(0, 10));
+                      $("#cean").text(this.cean);
+                      $("#katalog").text(this.katalog);
+                      $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
+                      $("#manageDeptOpinion").text(this.manageDeptOpinion);
+                      $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
+                      $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
+                  })
 
               }
           })

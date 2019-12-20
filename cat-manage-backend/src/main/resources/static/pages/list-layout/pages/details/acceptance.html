@@ -63,7 +63,7 @@
                 </colgroup>
                 <tbody>
                 <tr>
-                    <input type="hidden" id="createUserId" name="createUserId" value="">
+             <input type="hidden" id="createUserId" name="createUserId" value="">
                     <input type="hidden" id="item_id" name="itemId" value="">
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
@@ -466,7 +466,7 @@
             <div class="row" align="center">
                 <div class="col-md-12">
                     <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary" type="submit" onclick="add_ACC();">
+                    <button class="btn btn-primary" type="submit"  onclick="add_ACC();">
                         <i class="fa fa-save"></i> 保存
                     </button>
                 </div>
@@ -486,11 +486,7 @@
 <script type="text/javascript" src="../../js/acceptance.js"></script>
 <script>
     var id = 26;
-/*    $("#shenqing").hide();
-    $("#zizhiqu").hide();
-    $("#zizhicaiwu").hide();
-    $("#souweituo").hide();
-    $("#item_id").val(id);*/
+    $("#item_id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
             , upload = layui.upload
@@ -504,10 +500,6 @@
             });
         });
     })
-
-    var userid=  getUserId();
-$("#createUserId").val(userid);
-
     getdata(id);
     function getdata(id) {
         $.ajax({
@@ -518,30 +510,14 @@ $("#createUserId").val(userid);
             success: function (data) {
                 $(data).each(function () {
                     $("#applicationDate").val(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").val(this.suggestDate.substring(0, 10));
+                   $("#suggestDate").val(this.suggestDate.substring(0, 10));
                     $("#cean").text(this.cean);
                     $("#katalog").text(this.katalog);
                     $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
                     $("#manageDeptOpinion").text(this.manageDeptOpinion);
                     $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
                     $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
-                    getCompanyInfo2(this.createUserId);
                 })
-
-            }
-        })
-    }
-
-
-    function getCompanyInfo2(id) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/company/list',
-            data: "id=" + id,
-            async: false,
-            success: function (data) {
-              var d= data[0];
-              alert(d.site);
             }
         })
     }
@@ -557,13 +533,8 @@ $("#createUserId").val(userid);
              data: JSON.stringify(formdata),
              success: function (data) {
                   alert("成功");
-                   /*  layer.msg("成功");*/
-
              }
          })
      }
-
-
-
 </script>
 </html>
