@@ -145,7 +145,7 @@
 		AS a on
 		a.id = p.create_user_id
 			where
-		p.project_id = ${proId}
+		p.target_id = ${proId}
 		<if test="0!=status">
 			AND
 			p.`status` = ${status}

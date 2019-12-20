@@ -48,6 +48,42 @@
     </style>
 </head>
 <body>
+    <div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <header style="height: 100%">
+                <div align="left">
+                    <table style="width: 100%">
+                        <tr>
+                            <td align="right">
+                                <a href="../list-layout/list.html" class="btn btn-primary">返回</a>
+                                <button class="btn btn-primary" type="submit" onclick="add()">
+                                    <i class="fa fa-save"></i> 添加
+                                </button>
+                                <button class="btn btn-primary" type="submit" onclick="unSub()">
+                                    <i class="fa fa-save"></i> 我的日志
+                                </button>
+                                <button class="btn btn-primary" type="submit" onclick="check()">
+                                    <i class="fa fa-save"></i> 审核
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </header>
+            <div class="demo" align="left" style="margin-top: 60px" >
+                <div class="history">
+                    <div class="history-date">
+                        <ul id="record">
+                            <h2 class="first">
+                                <a href="#nogo" id="a">实施日志</a>
+                            </h2>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
@@ -57,12 +93,9 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
     var projectId = getUrlParam("id");
-
     $(function(){
         systole();
-
         getRecord();
-
     });
 
     function getRecord() {
@@ -71,156 +104,46 @@
             url : domainName + '/project-record/record/findPass/'+projectId,
             async : false,
             success : function(data) {
-
                 var str = '';
                 $(data).each(function () {
-
                     str +=  ' <li class="green">\n' +
-                        '                    <h3>'+this.time+'<span>'+this.createUser+'</span></h3>\n' +
-                        '                    <dl>\n' +
-                        '                        <dt><a href="checking.html?id='+this.id+'&&projectId='+this.projectId+'&&return=2">'+this.title+'</a><span>'+this.state+'</span></dt>\n' +
-                        '                    </dl>\n' +
-                        '                </li>';
-
+                        '<h3>'+this.time+'<span>'+this.createUser+'</span></h3>\n' +
+                        '<dl>\n' +
+                        '<dt><a href="checking.html?id='+this.id+'&&projectId='+this.projectId+'&&return=2">'+this.title+'</a><span>'+this.state+'</span></dt>\n' +
+                        '</dl>\n' +
+                        '</li>';
                 });
-
                 $("#record").append(str);
                 $("#a").click();
-                $("#a").click();
-
-
-
             }
         });
     }
+
     function unSub() {
         $(location).attr("href", "submit.html?id=" + projectId);
     }
     function check() {
         $(location).attr("href", "check.html?id=" + projectId);
     }
-    /*$("#add_report").click(function () {
-
-        $(location).attr("href", "add_implementLog.html?projectId=" + projectId);
-    })*/
-
     function add() {
         $(location).attr("href", "add_implementLog.html?projectId=" + projectId);
     }
     function back() {
         $(location).attr("href", "../../list-layout.list.html" );
     }
-
     function systole(){
         if(!$(".history").length){
             return;
         }
         var $warpEle = $(".history-date"),
-            $targetA = $warpEle.find("h2 a,ul li dl dt a"),
-            parentH,
-            eleTop = [];
-
-        parentH = $warpEle.parent().height();
+            $targetA = $warpEle.find("h2 a,ul li dl dt a")
         $warpEle.parent().css({"height":59});
-
-       /* setTimeout(function(){
-
-            $warpEle.find("ul").children(":not('h2:first')").each(function(idx){
-                eleTop.push($(this).position().top);
-                $(this).css({"margin-top":-eleTop[idx]}).children().hide();
-            }).animate({"margin-top":0}, 1600).children().fadeIn();
-
-            $warpEle.parent().animate({"height":parentH}, 2600);
-
-            $warpEle.find("ul").children(":not('h2:first')").addClass("bounceInDown").css({"-webkit-animation-duration":"2s","-webkit-animation-delay":"0","-webkit-animation-timing-function":"ease","-webkit-animation-fill-mode":"both"}).end().children("h2").css({"position":"relative"});
-
-        }, 600);*/
-
         $targetA.click(function(){
             $(this).parent().css({"position":"relative"});
             $(this).parent().siblings().slideToggle();
             $warpEle.parent().removeAttr("style");
             return false;
         });
-    };
+    }
 </script>
-<td align="right">
-    <div class="form-actions">
-        <div class="row" align="left">
-            <div class="col-md-12">
-                <a href="../list-layout/list.html" class="btn btn-primary">返回</a>
-                <button class="btn btn-primary" type="submit" onclick="add()">
-                    <i class="fa fa-save"></i> 添加
-                </button>
-                <button class="btn btn-primary" type="submit" onclick="unSub()">
-                    <i class="fa fa-save"></i> 我的日志
-                </button>
-                <button class="btn btn-primary" type="submit" onclick="check()">
-                    <i class="fa fa-save"></i> 审核
-                </button>
-
-            </div>
-            <!--<div class="col-md-12">
-
-                <button class="btn btn-primary" type="submit" onclick="add()">
-                    <i class="fa fa-save"></i> 添加
-                </button>
-            </div>
-            <div class="col-md-12">
-
-                <button class="btn btn-primary" type="submit" onclick="unSub()">
-                    <i class="fa fa-save"></i> 我的日志
-                </button>
-            </div>
-            <div class="col-md-12">
-                <button class="btn btn-primary" type="submit" onclick="check()">
-                    <i class="fa fa-save"></i> 审核
-                </button>
-            </div>-->
-        </div>
-    </div>
-
-</td>
-<div class="demo" align="left" style="margin-top: 60px" >
-    <div class="history">
-        <div class="history-date">
-            <ul id="record">
-                <h2 class="first">
-                    <a href="#nogo" id="a">实施日志</a><!--<img src="images/img05.gif" alt="360极速浏览器历程" />-->
-
-                </h2>
-                <!--<div id="record">
-                </div>-->
-                <!--<li class="green">
-                    <h3>10.08<span>2012</span></h3>
-                    <dl>
-                        <dt>发布全新的极速浏览器6.0版本<span>升级极速内核到21.0；全新默认界面；新增小窗口播放功能</span></dt>
-                    </dl>
-                </li>
-                <li>
-                    <h3>07.02<span>2012</span></h3>
-                    <dl>
-                        <dt>升级极速内核到19.0<span>支持网络摄像头，浏览器可直接访问摄像头</span></dt>
-                    </dl>
-                </li>
-                <li class="green">
-                    <h3>06.27<span>2012</span></h3>
-                    <dl>
-                        <dt>发布国内首个HTML5实验室<span>大力推广HTML5</span></dt>
-                    </dl>
-                </li>
-                <li>
-                    <h3>06.15<span>2012</span></h3>
-                    <dl>
-                        <dt>新增了下载文件前扫描下载链接安全性的功能</dt>
-                    </dl>
-                </li>-->
-
-
-            </ul>
-        </div>
-    </div>
-</div>
-
-</body>
 </html>
