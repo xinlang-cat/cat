@@ -45,11 +45,11 @@ img{
 .image-list{
     width: 100%;
     padding: 20px;
-    background-color: #fff;
+    background-color: #f2f2f2;
 }
 .image-list .cover{
     position: relative;
-    width: 160px;
+    width: 310px;
     height: 230px;
     display: inline-block;
     margin-left: 10px;
@@ -99,7 +99,7 @@ img{
     cursor: pointer;
 }
 #pictureViewer .menu-bar .handel:hover{
-    background-color: #009688;
+    background-color: #ff2e67;
 
     -webkit-transition: all .3s;
     -moz-transition: all .3s;
@@ -107,7 +107,7 @@ img{
     -o-transition: all .3s;
     transition: all .3s;
 }
-#pictureViewer .menu-bar .handel.maximization{
+/*#pictureViewer .menu-bar .handel.maximization{
     background-image: url(../images/icons/maximization_black.png);
     background-size: 14px;
 }
@@ -127,7 +127,7 @@ img{
 }
 #pictureViewer .menu-bar .handel.close-view:hover{
     background-image: url(../images/icons/close_white.png);
-}
+}*/
 #pictureViewer .handel-prev,
 #pictureViewer .handel-next{
     display: inline-block;
@@ -146,7 +146,7 @@ img{
     -o-transition: all .3s;
     transition: all .3s;
 }
-#pictureViewer .handel-prev{
+/*#pictureViewer .handel-prev{
     background-image: url(../images/icons/prev_blank.png);
 }
 #pictureViewer .handel-next{
@@ -154,14 +154,14 @@ img{
 }
 #pictureViewer .handel-prev:hover,
 #pictureViewer .handel-next:hover{
-    background-color: #009688;
+    background-color: #ff2e67;
 }
 #pictureViewer .handel-prev:hover{
     background-image: url(../images/icons/prev_white.png);
 }
 #pictureViewer .handel-next:hover{
     background-image: url(../images/icons/next_white.png);
-}
+}*/
 #pictureViewer .picture-content{
     display: inline-block;
     width: 80%;
@@ -204,4 +204,36 @@ img{
 #pictureViewer img{
     max-width: 100%;
     max-height: 100%;
+}
+
+.fxk {
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #c9c9c9;
+    border-radius: 2px;
+    color: #fff;
+    text-align: center;
+    line-height: 15px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+  margin-top: 9px;
+  margin-left: 280px;
+}
+
+.fxk[type="checkbox"]:hover {
+    border: 1px solid #43adea;
+}
+
+.fxk:checked {
+
+    color: #fff;
+    background-color: #43adea;
+    border: 1px solid #43adea;
+
+}
+
+.fxk:after {
+    content: "\2713";
 }
