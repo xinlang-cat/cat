@@ -8,4 +8,6 @@ import java.util.List;
 public interface IItemContentService extends IBaseService<ItemContent> {
 
     void saveContents(List<ItemContent> itemContents);
+
+    void deleteContentByItemId(Integer item_id);
 }

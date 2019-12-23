@@ -1,4 +1,4 @@
-function getbasic(id) {
+function getBasic(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/basic/list',
@@ -7,47 +7,67 @@ function getbasic(id) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var d = data[0];
-            $("#contract_no").text(d.contract_no);
-            $("#item_name").text(d.item_name);
-            $("#item_number").text(d.item_number);
-            $("#start_date").text(d.start_date.substring(0, 10));
-            $("#end_date").text(d.end_date.substring(0, 10));
-            $("#outline").text(d.outline);
-            getLableContent(d.category, $("#category"));
-            getDept(d.consignor, $("#consignor"));
-            getDept(d.undertaker, $("#undertaker"));
-            getDept(d.administrator, $("#administrator"));
+
+            //span数据
+            $("#contract_no_text").text(d.contract_no);
+            $("#category_text").text(analysisLableContent(d.category));
+            $("#item_name_text").text(d.item_name);
+            $("#consignor_text").text(analysisDeptName(d.consignor));
+            $("#undertaker_text").text(analysisDeptName(d.undertaker));
+            $("#administrator_text").text(analysisDeptName(d.administrator));
+
+            $("#start_date_text").text(d.start_date.substring(0, 10));
+            $("#end_date_text").text(d.end_date.substring(0, 10));
+            $("#item_number_text").text(d.item_number);
+            $("#contract_file_text").text(d.contract_file);
+            $("#outline_text").text(d.outline);
+            //表单数据
+            $("#contract_no").val(d.contract_no);
+            $("#category").val(d.category);
+            $("#item_name").val(d.item_name);
+            $("#consignor").val(d.consignor);
+            $("#undertaker").val(d.undertaker);
+            $("#administrator").val(d.administrator);
+
+            $("#start_date").val(d.start_date.substring(0, 10));
+            $("#end_date").val(d.end_date.substring(0, 10));
+            $("#item_number").val(d.item_number);
+            $("#contract_file").val(d.contract_file);
+            $("#outline").val(d.outline);
         }
     })
 }
 
 /*解析标签名称*/
-function getLableContent(sign, node) {
+function analysisLableContent(sign) {
+    var text = '';
     $.ajax({
         type: 'get',
         url: domainName + '/api-label/label/tree/' + sign,
         async: false,
         success: function (data) {
-            var name = data[0].content;
-            node.text(name);
+            text = data[0].content;
         }
     });
+    return text;
 }
 
 /*解析部门名称*/
-function getDept(sign, node) {
+function analysisDeptName(code) {
+    var text = '';
     $.ajax({
         type: 'get',
-        url: domainName + '/api-c/company/' + sign,
+        url: domainName + '/api-c/company/' + code,
         async: false,
         success: function (data) {
-            node.text(data.signName);
+            text = data.signName;
         }
     });
+    return text;
 }
 
 /*获取主要内容*/
-function getcontent(id) {
+function getContent(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/content/list',
@@ -56,25 +76,41 @@ function getcontent(id) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var str = '';
-            $(data).each(function () {
-                str += '<tr><td></td>'+
-                    '<td>' +
-                    '<p>' + this.title + '</p>' +
-                    '<span>' + this.content + '</span>' +
-                    '<div class="operation">' +
-                    '<div class="layui-btn-group">' +
-                    '<button onclick="update_con(' + this.id + ')" type="button" class="layui-btn layui-btn-sm">' +
-                    '<i class="layui-icon">&#xe642;</i>' +
-                    '</button>' +
-                    '<button onclick="delete_con(' + this.id + ')" type="button" class="layui-btn layui-btn-sm">' +
-                    '<i class="layui-icon">&#xe640;</i>' +
-                    '</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '</td>' +
-                    '</tr>';
+            $(data).each(function (index) {
+                if(index==0){
+                    str = '<td>研究内容1\n' +
+                        '                        <input type="hidden" name="id" value="'+this.id+'">\n' +
+                        '                        <input type="hidden" name="item_id" value="'+id+'">\n' +
+                        '                    </td>\n' +
+                        '                    <td>\n' +
+                        '                        <p id="title_text">'+this.title+'</p>\n' +
+                        '                        <input class="form-control hidden" lay-verify="required" placeholder="标题" type="text" name="title" value="'+this.title+'">\n' +
+                        '                        <br>\n' +
+                        '                        <p id="content_text">'+this.content+'</p>\n' +
+                        '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
+                        '                                  name="content">'+this.content+'</textarea>\n' +
+                        '                    </td>';
+                    $("#mian-content").children().first().append(str);
+                }else {
+                    var rowspan = $("#mian-content").children().length + 1;//改变单元格所跨的行数
+                    $("#mian-content").children().first().children().first().attr('rowspan', rowspan);
+                    str = '<tr>\n' +
+                        '                    <td>研究内容'+rowspan+'\n' +
+                        '                        <input type="hidden" name="id" value="'+this.id+'">\n' +
+                        '                        <input type="hidden" name="item_id" value="'+id+'">\n' +
+                        '                    </td>\n' +
+                        '                    <td>\n' +
+                        '                        <p id="title_text">'+this.title+'</p>\n' +
+                        '                        <input class="form-control hidden" lay-verify="required" placeholder="标题" type="text" name="title" value="'+this.title+'">\n' +
+                        '                        <br>\n' +
+                        '                        <p id="content_text">'+this.content+'</p>\n' +
+                        '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
+                        '                                  name="content">'+this.content+'</textarea>\n' +
+                        '                    </td>\n' +
+                        '                </tr>';
+                    $("#mian-content").append(str);
+                }
             })
-            $("#mian-content").append(str);
         }
     })
 }

@@ -8,6 +8,7 @@ import com.xinlang.cat_project.item.service.IItemContentService;
 ;
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,5 +30,12 @@ public class ItemContentService extends BaseService<ItemContent> implements IIte
         if (count < 1){
             throw new ItemException(ExceptionEnum.SAVE_ERROR);
         }
+    }
+
+    @Override
+    public void deleteContentByItemId(Integer item_id) {
+        ItemContent itemContent = new ItemContent();
+        itemContent.setItem_id(item_id);
+        itemContentMapper.delete(itemContent);
     }
 }

@@ -1,18 +1,19 @@
-/*此js用于新增项目*/
+/*此js用于修改项目*/
 //添加一行
-function add_row(e, sign) {
+function add_row(e, sign,) {
     layui.use(['layer', 'form', 'laydate'], function () {
         var layer = layui.layer
             , form = layui.form
             , laydate = layui.laydate;
         var str = '';
+        var itemId = $('input[name=item_id]').val();
         var tbody = $(e).parent().next().find('tbody');
         var rowspan = tbody.children().length + 1;//改变单元格所跨的行数
         tbody.children().first().children().first().attr('rowspan', rowspan);
         if (sign == 'RESEARCH_CONTENTS') {
             str = '<tr>\n' +
                 '<td>研究内容' + rowspan + '\n' +
-                '<input type="hidden" name="item_id">\n' +
+                '<input type="hidden" name="item_id" value="'+itemId+'">\n' +
                 '</td>\n' +
                 '<td>\n' +
                 '<input class="form-control" lay-verify="required" placeholder="标题" type="text" name="title">\n' +
@@ -20,7 +21,7 @@ function add_row(e, sign) {
                 '<textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required" name="content"></textarea>\n' +
                 '</td>\n' +
                 '</tr>';
-        }else if(sign == 'PROJECT_TEAM'){
+        } else if (sign == 'PROJECT_TEAM') {
 
             str = '<tr>\n' +
                 '                    <td>\n' +
@@ -41,7 +42,7 @@ function add_row(e, sign) {
                 '                </tr>';
         }
         tbody.append(str);
-        if(sign == 'PROJECT_TEAM'){//如果是项目组人员需要初始化下拉选
+        if (sign == 'PROJECT_TEAM') {//如果是项目组人员需要初始化下拉选
             initUserSelect(deptCode, tbody.children().last().find('select[name=user_id]'));
         }
         //渲染
@@ -103,7 +104,7 @@ function addTarget() {
                 if (nodes.length != 0) {
                     //先判断是不是其他指标
                     var str = '';
-                    if(type=='OTHER_INDICATORS'){
+                    if (type == 'OTHER_INDICATORS') {
                         str = '<tr>\n' +
                             '                    <td colspan="2"><input type="hidden" name="item_id">\n' +
                             '                        <input type="hidden" name="type" value="OTHER_INDICATORS">\n' +
@@ -126,7 +127,7 @@ function addTarget() {
                             '                        </button>\n' +
                             '                    </td>\n' +
                             '                </tr>';
-                    }else {
+                    } else {
                         str = '<tr>\n' +
                             '                    <td><input type="hidden" name="item_id">\n' +
                             '                        <input type="hidden" name="type" value="' + type + '">\n' +
@@ -161,7 +162,7 @@ function addTarget() {
                 } else {
                     //判断是不是其他指标
                     var str = '';
-                    if(type=='OTHER_INDICATORS'){
+                    if (type == 'OTHER_INDICATORS') {
                         str = '<tr>\n' +
                             '                    <td rowspan="3">' + text + '</td>\n' +
                             '                    <td colspan="2"><input type="hidden" name="item_id">\n' +
@@ -185,7 +186,7 @@ function addTarget() {
                             '                        </button>\n' +
                             '                    </td>\n' +
                             '                </tr>';
-                    }else {
+                    } else {
                         str = ' <tr>\n' +
                             '                    <td rowspan="3">' + text + '</td>\n' +
                             '                    <td><input type="hidden" name="item_id">\n' +
@@ -276,15 +277,11 @@ function deleteTarget() {
             yes: function (index, layero) {
                 var type = $("#targetType").val();
                 var nodes = $('#INDICATORS').find('input[name=type][value=' + type + ']');
-                var tr_last = nodes.last().parent().parent();
-                if(type=='TECHNICAL_INDICATORS'&&nodes.length==1){//如果是第一项
-                    return
-                }
-                tr_last.remove();//删除
+                nodes.last().parent().parent().remove();//删除
                 //改变单元格跨的行数
                 $('#INDICATORS').children().first().children().first().attr('rowspan', $('#INDICATORS').children().length);
                 nodes.first().parent().prev().attr('rowspan', nodes.length - 1);
-                $('#count').text((nodes.length - 1<0?0:nodes.length - 1) + '条');//改变条数
+                $('#count').text((nodes.length - 1 < 0 ? 0 : nodes.length - 1) + '条');//改变条数
 
             }, btn2: function (index, layero) {
                 layer.close(index);
@@ -335,7 +332,7 @@ function addFund() {
                 var type = $("#fundType").val();
                 var str = '<tr>\n' +
                     '                    <td><input type="hidden" name="item_id">\n' +
-                    '                        <input type="hidden" name="type" value="'+type+'">\n' +
+                    '                        <input type="hidden" name="type" value="' + type + '">\n' +
                     '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">\n' +
                     '                            <option value=\'\'>请选择</option>\n' +
                     '                        </select></td>\n' +
@@ -348,17 +345,17 @@ function addFund() {
                     '                                  name="remark"></textarea>\n' +
                     '                    </td>\n' +
                     '                </tr>';
-                $('#thead').attr('rowspan',$('#EXPENDITURE').children().length+1);
-                if(type==0){
-                    $('#direct').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length+1);
+                $('#thead').attr('rowspan', $('#EXPENDITURE').children().length + 1);
+                if (type == 0) {
+                    $('#direct').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + 1);
                     $('#interval').before(str);
-                    $('#count').text($('#EXPENDITURE').find('input[name=type][value='+type+']').length + '条');//改变条数
+                    $('#count').text($('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + '条');//改变条数
                     initSelectData('BUDGET_SUBJECT', $('#interval').prev().find('select[name=subject]'));
                     initSelectData('FUNDING_SOURCE', $('#interval').prev().find('select[name=source]'));
-                }else {
-                    $('#indirect').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length+1);
+                } else {
+                    $('#indirect').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + 1);
                     $('#EXPENDITURE').append(str);
-                    $('#count').text($('#EXPENDITURE').find('input[name=type][value='+type+']').length + '条');//改变条数
+                    $('#count').text($('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + '条');//改变条数
                     initSelectData('BUDGET_SUBJECT', $('#EXPENDITURE').children().last().find('select[name=subject]'));
                     initSelectData('FUNDING_SOURCE', $('#EXPENDITURE').children().last().find('select[name=source]'));
                 }
@@ -374,6 +371,7 @@ function addFund() {
         });
     });
 }
+
 //删除经费
 function deleteFund() {
     layui.use(['form', 'laydate'], function () {
@@ -407,22 +405,16 @@ function deleteFund() {
                 '</div>',
             yes: function (index, layero) {
                 var type = $("#fundType").val();
-                if(type==0){
-                    if($('#count').text()=='3条'){
-                        return
-                    }
+                if (type == 0) {
                     $('#interval').prev().remove();//删除
-                    $('#direct').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length);
-                }else {
-                    if($('#count').text()=='2条'){
-                        return
-                    }
+                    $('#direct').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length);
+                } else {
                     $('#EXPENDITURE').children().last().remove();//删除
-                    $('#indirect').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length);
+                    $('#indirect').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length);
                 }
                 //改变单元格跨的行数
-                $('#thead').attr('rowspan',$('#EXPENDITURE').children().length);
-                $('#count').text($('#EXPENDITURE').find('input[name=type][value='+type+']').length + '条');//改变条数
+                $('#thead').attr('rowspan', $('#EXPENDITURE').children().length);
+                $('#count').text($('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + '条');//改变条数
 
             }, btn2: function (index, layero) {
                 layer.close(index);
