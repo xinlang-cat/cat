@@ -23,6 +23,7 @@ public class WorkLog implements Serializable {
     private String createUserName;//创建人名字
     private Integer itemId;//项目id
     private String title;//日志标题
+
     private String content;//日志内容
     private Integer status;//状态
     private Date createTime;//创建时间
