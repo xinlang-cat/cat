@@ -14,7 +14,7 @@ eureka:
   client:
     service-url:
 
-      defaultZone: http://cat:cat@192.168.5.61:8761/eureka/
+      defaultZone: http://cat:cat@192.168.5.13:8761/eureka/
 
 
 management:

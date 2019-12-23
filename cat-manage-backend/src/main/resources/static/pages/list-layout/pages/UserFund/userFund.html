@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>使用资金</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/details.css">
+    <style>
+        .table-info {
+            background-color: #4FAAA2;
+            border-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+            text-align: center;
+        }
+        .sub {
+            display: none;
+        }
+        .layui-textarea {
+            min-height: 50px;
+            height: auto;
+            line-height: 20px;
+            padding: 6px 10px;
+            resize: vertical;
+        }
+    
+    </style>
+    </head>
+    <body>
+<div class="module">
+    <form class="layui-form" id="form5">
+        <table class="layui-table" id="basis">
+            <colgroup>
+                <col width="3%">
+                <col width="10%">
+                <col width="15%">
+                <col width="10%">
+                <col width="15%">
+                <col width="30%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+          
+            <tr>
+                <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                <th>费用</th>
+                <th>科目</th>
+                <th>金额（万元）</th>
+                <th>经费来源</th>
+                <th>开支内容</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="EXPENDITURE">
+            <tr>
+                <td rowspan="8" class="table-info" id="thead">经费使用</td>
+                <td>合计</td>
+                <td></td>
+                <td id="total"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr><td colspan="4"></td></tr>
+            <tr>
+                <td rowspan="3" id="direct">（一）直接费用</td>
+                <td>设备费</td>
+                <td>70</td>
+                <td>甲方</td>
+                <td>实验耗材，嫁接用品，肥料，农药</td>
+                <td><button type="button" class="layui-btn layui-btn-sm" onclick="addUseFund();">添加</button>
+                    <button type="button" class="layui-btn layui-btn-sm" onclick="particulars();">详情</button>
+                </td>
+            </tr>
+            <tr>
+                <td>材料费</td>
+                <td>大大</td>
+                <td>杀手</td>
+                <td>
+                    大声哭u了
+                </td>
+                <td><button type="button" class="layui-btn layui-btn-sm">添加</button>
+                    <button type="button" class="layui-btn layui-btn-sm">详情</button></td>
+             
+            </tr>
+            <tr>
+                <td>测试化验加工费</td>
+                <td>发沙发上发示范</td>
+                <td>房贷首付分散度f</td>
+                <td>
+                    风刀霜剑费萨达
+                </td>
+                <td><button type="button" class="layui-btn layui-btn-sm">添加</button>
+                    <button type="button" class="layui-btn layui-btn-sm">详情</button></td>
+            </tr>
+            <tr id="interval"><td colspan="4"></td></tr>
+            <tr>
+                <td rowspan="2" id="indirect">（二）间接费用</td>
+                <td>过的痕迹 果</td>
+                <td>胡大  iu撒</td>
+                <td>的干撒股度大u好</td>
+                <td>嗲苏usahd萨达 打算
+                </td>
+                <td><button type="button" class="layui-btn layui-btn-sm">添加</button>
+                    <button type="button" class="layui-btn layui-btn-sm">详情</button></td>
+            </tr>
+            <tr>
+                <td>互惠会很啊</td>
+                <td>大家看撒深度</td>
+                <td>獨潵iu是胡撒大</td>
+                <td>大课间活动卡傻傻的
+                </td>
+                <td><button type="button" class="layui-btn layui-btn-sm">添加</button>
+                    <button type="button" class="layui-btn layui-btn-sm">详情</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <!--提交按钮-->
+        <button class="layui-btn sub" lay-submit lay-filter="sub5" id="sub5">提交</button>
+    </form>
+</div>
+</body>
+
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+
+
+
+<script>
+        
+layui.use(['layer', 'laydate','upload'], function () {
+        var layer = layui.layer
+            ,upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function(){
+            laydate.render({
+                elem: this
+                ,format:'yyyy年MM月dd日'
+                ,trigger: 'click'
+            });
+		});
+	})
+  var h=$(window).height()-40+'px';
+  var w=$(window).width()-100+'px';
+	   function addUseFund(){
+        layer.open({
+            title:"资金使用录入",
+            type: 2,
+		    area:[w,h],
+            maxmin: true,
+            shadeClose: true,
+            content: ['html/add_usefund.html']
+        });
+    }
+
+
+    var h=$(window).height()-40+'px';
+  var w=$(window).width()-100+'px';
+	   function particulars(){
+        layer.open({
+            title:"资金使用录入",
+            type: 2,
+		    area:[w,h],
+            maxmin: true,
+            shadeClose: true,
+            content: ['html/particulars.html']
+        });
+    }
+</script>
+
+</html>
