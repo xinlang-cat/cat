@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IItemCompanyService extends IBaseService<ItemCompany> {
     void saveCompanys(List<ItemCompany> itemCompanys);
+
+    void deleteItemCompanysByItemId(Integer item_id);
 }

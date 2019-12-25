@@ -26,4 +26,11 @@ public class ItemCompanyService extends BaseService<ItemCompany> implements IIte
             throw new ItemException(ExceptionEnum.SAVE_ERROR);
         }
     }
+
+    @Override
+    public void deleteItemCompanysByItemId(Integer item_id) {
+        ItemCompany itemCompany = new ItemCompany();
+        itemCompany.setItem_id(item_id);
+        itemCompanyMapper.delete(itemCompany);
+    }
 }

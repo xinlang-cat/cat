@@ -8,4 +8,6 @@ import java.util.List;
 public interface IItemFundService extends IBaseService<ItemFund> {
 
     void saveItemFunds(List<ItemFund> itemFunds);
+
+    void deleteTtemFundsByItemId(Integer item_id);
 }

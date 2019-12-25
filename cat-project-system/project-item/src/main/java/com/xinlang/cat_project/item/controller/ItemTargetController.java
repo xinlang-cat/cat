@@ -38,7 +38,7 @@ public class ItemTargetController {
     @LogAnnotation(module = "添加多条指标")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping("/multi")
-    public ResponseEntity<List<ItemTarget>> saveContents(@RequestBody List<ItemTarget> itemTargets) {
+    public ResponseEntity<List<ItemTarget>> saveTargets(@RequestBody List<ItemTarget> itemTargets) {
         targetService.saveTargets(itemTargets);
         return  ResponseEntity.status(HttpStatus.CREATED).body(itemTargets);
     }
@@ -65,11 +65,11 @@ public class ItemTargetController {
     @PreAuthorize("hasAnyAuthority('project:item:update')")
     @Transactional
     @PutMapping("/multi")
-    public ResponseEntity<Void> updateContents(@RequestBody List<ItemTarget> itemContents){
-        for (ItemTarget itemContent : itemContents) {
-            targetService.delete(itemContent.getId());
-        }
-        targetService.saveTargets(itemContents);
+    public ResponseEntity<Void> updateTargets(@RequestBody List<ItemTarget> itemTargets){
+        //先删除所有研究内容
+        targetService.deleteTargetByItemId(itemTargets.get(0).getItem_id());
+        //重新添加
+        targetService.saveTargets(itemTargets);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
