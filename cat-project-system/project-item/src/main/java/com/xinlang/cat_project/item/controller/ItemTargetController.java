@@ -66,7 +66,7 @@ public class ItemTargetController {
     @Transactional
     @PutMapping("/multi")
     public ResponseEntity<Void> updateTargets(@RequestBody List<ItemTarget> itemTargets){
-        //先删除所有研究内容
+        //先删除所有指标
         targetService.deleteTargetByItemId(itemTargets.get(0).getItem_id());
         //重新添加
         targetService.saveTargets(itemTargets);

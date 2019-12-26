@@ -46,7 +46,7 @@ security:
       prefer-token-info: false
 file:
   local:
-    path: D:/localFile
+    path: E:/localFile
     prefix: /statics
     urlPrefix: http://192.168.5.61/api-f${file.local.prefix}
 
@@ -58,7 +58,7 @@ file:
     domain: https://xxx
 album:
   local:
-    path: D:/localFile
+    path: E:/localFile
     prefix: /statics
 
 

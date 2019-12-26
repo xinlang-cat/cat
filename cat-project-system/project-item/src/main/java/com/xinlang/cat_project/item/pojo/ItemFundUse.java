@@ -22,8 +22,8 @@ public class ItemFundUse {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer item_id;
-    private Integer budget_id;
-    private Float expenditure;
+    private Integer fund_id;
+    private Float money;
     private String remark;
     private Integer status;
     private Date edit_date;
@@ -34,10 +34,5 @@ public class ItemFundUse {
 
     @Transient
     private List<String> bill_url;
-
-    @Transient
-    private String edit_dateStr;
-    @Transient
-    private String check_dateStr;
 
 }
