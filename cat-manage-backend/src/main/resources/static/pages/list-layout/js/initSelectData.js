@@ -143,6 +143,9 @@ function queryUserInfo(usetId,node) {
                 academicTitle = d.academicTitle || '',
                 nowMajor = d.nowMajor || '',
                 deptName = d.deptName || '';
+            if(d.nowMajor!=''){
+                nowMajor = analysisLablename(d.nowMajor);
+            }
             if(sex==1){
                 sex='男';
             }else {
@@ -164,4 +167,17 @@ function queryUserInfo(usetId,node) {
             node.parent().nextAll().eq(5).children('input').eq(0).val(deptName);
         }
     });
+}
+/*解析标签名称*/
+function analysisLablename(sign) {
+    var text = '';
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-label/label/tree/' + sign,
+        async: false,
+        success: function (data) {
+            text = data[0].content;
+        }
+    });
+    return text;
 }
