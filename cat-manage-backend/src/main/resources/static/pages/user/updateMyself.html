@@ -352,8 +352,8 @@
 				</div>
 			</fieldset>
 		</form>
-			<input type="hidden" class="form-control" id="domainsVa" name="domainsVa">
-			<input type="hidden" class="form-control" id="skillsVa" name="signs">
+			<input style="display: none" class="form-control" id="domainsVa" name="domainsVa">
+			<input style="display: none" class="form-control" id="skillsVa" name="signs">
 	</div>
 
 	<script src="../../js/constant.js"></script>
@@ -401,7 +401,6 @@
 			async : false,
 			success : function(data) {
 				setValue(data);
-				getUserMessage(data.id);
 				getUserDomain(data.id);
 				getUserSkill(data.id);
 				$.ajax({
@@ -428,6 +427,23 @@
 									continue;
 								}
 								$('#'+key).val(date);
+								if (data[0].streetCode != "" && data[0].streetCode != null && data[0].streetCode != undefined){
+									province();
+									$("#provinceCode").val(data[0].provinceCode);
+									city(data[0].provinceCode);
+									$("#cityCode").val(data[0].cityCode);
+									area(data[0].cityCode);
+									$("#areaCode").val(data[0].areaCode);
+									street(data[0].areaCode);
+									$("#streetCode").val(data[0].streetCode);
+								}
+
+								$("#majorValue1").val(data[0].major);
+								getName(data[0].major,$("#text1"));
+								$("#MajorValue").val(data[0].nowMajor);
+								getName(data[0].nowMajor,$("#text2"));
+								$("#mainValue").val(data[0].mainDomain);
+								getName(data[0].mainDomain,$("#text3"));
 							}
 						}
 						element.append(str);
@@ -561,52 +577,7 @@
 			$("#sex").val(data.sex);
 			$("#phone").val(data.phone);
 		}
-		function getUserMessage(id) {
-			$.ajax({
-				type : 'get',
-				url : domainName + '/project-user/user-anon/'+id,
-				async : false,
-				success : function(data) {
-					$(data).each(function () {
-						$("#postcode").val(this.postcode);
-						$("#graduatedFrom").val(this.graduatedFrom);
-						$("#degree").val(this.degree);
-						$("#academicDiplomas").val(this.academicDiplomas);
-						$("#lastYear").val(this.lastYear);
-						$("#degreeState").val(this.degreeState);
-						$("#degreeSchool").val(this.degreeSchool);
-						$("#email").val(this.email);
-						$("#telephone").val(this.telephone);
-						$("#phone").val(this.phone);
-						$("#fax").val(this.fax);
-						$("#address").val(this.address);
-						$("#projects").val(this.projects);
-						$("#accomplishment").val(this.accomplishment);
-						$("#achievement").val(this.achievement);
-						$("#provinceCode").click();
-						if (this.streetCode != "" && this.streetCode != null && this.streetCode != undefined){
-							province();
-							$("#provinceCode").val(this.provinceCode);
-							city(this.provinceCode);
-							$("#cityCode").val(this.cityCode);
-							area(this.cityCode);
-							$("#areaCode").val(this.areaCode);
-							street(this.areaCode);
-							$("#streetCode").val(this.streetCode);
-						}
 
-						$("#majorValue1").val(this.major);
-						getName(this.major,$("#text1"));
-						$("#MajorValue").val(this.nowMajor);
-						getName(this.nowMajor,$("#text2"));
-						$("#mainValue").val(this.mainDomain);
-						getName(this.mainDomain,$("#text3"));
-
-					});
-
-				}
-			});
-		}
 		function getName(sign,node) {
 			if (sign != "" && sign != null && sign != undefined){
 				$.ajax({
@@ -661,8 +632,9 @@
 			var length = obj.length;
 			var str = [];
 			for(var i=0; i<length; i++){
-				var value = obj[i].value;
-				str.push(value);
+				if (obj[i].checked) {
+					str.push(obj[i].value);
+				}
 			}
 			$("#skillsVa").val(str);
 			$("#text5").val(texts);
@@ -824,7 +796,7 @@
 						signs.push(d.labelSign);
 					}
 					$("#domainsVa").val(signs);
-					if (jQuery.isEmptyObject(signs)){
+					if (!jQuery.isEmptyObject(signs)){
 						getNames(signs,$("#text4"));
 					}
 
@@ -844,8 +816,10 @@
 						signs.push(d.labelSign);
 					}
 					$("#skillsVa").val(signs);
-
+					if (!jQuery.isEmptyObject(signs)){
 						getNames(signs,$("#text5"));
+					}
+
 
 				}
 			});

@@ -171,7 +171,7 @@ CREATE TABLE `item_fund_use_bill`  (
 -- ----------------------------
 -- Records of item_fund_use_bill
 -- ----------------------------
-INSERT INTO `item_fund_use_bill` VALUES (6, 'http://192.168.5.19/api-f/statics/2019/11/26/d8a1373908670808ea36c08af9341659.png');
+INSERT INTO `item_fund_use_bill` VALUES (6, 'http://192.168.5.1919/api-f/statics/2019/11/26/d8a1373908670808ea36c08af9341659.png');
 INSERT INTO `item_fund_use_bill` VALUES (6, 'http://192.168.5.19/api-f/statics/2019/11/26/1f68b43682ef5d08daa3733d8db102bf.png');
 INSERT INTO `item_fund_use_bill` VALUES (11, 'http://192.168.5.19/api-f/statics/2019/11/26/1f1d68b3d98c4e745feeaf2784db583c.png');
 INSERT INTO `item_fund_use_bill` VALUES (11, 'http://192.168.5.19/api-f/statics/2019/11/26/1f68b43682ef5d08daa3733d8db102bf.png');
