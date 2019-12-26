@@ -8,4 +8,6 @@ import java.util.List;
 public interface IItemTargetService extends IBaseService<ItemTarget> {
 
     void saveTargets(List<ItemTarget> itemTargets);
+
+    void deleteTargetByItemId(Integer item_id);
 }

@@ -54,4 +54,13 @@ public class ItemUserService extends BaseService<ItemUser> implements IItemUserS
         ItemUser itemUser = itemUserMapper.selectByPrimaryKey(id);
         itemUserMapper.DeleteTargetUserByUserId(itemUser.getItem_id(),itemUser.getUser_id());
     }
+
+    @Override
+    @Transactional
+    public void deleteItemUserByItemId(Integer item_id) {
+        ItemUser itemUser = new ItemUser();
+        itemUser.setItem_id(item_id);
+        itemUserMapper.delete(itemUser);
+        itemUserMapper.DeleteTargetUserByItemId(item_id);
+    }
 }

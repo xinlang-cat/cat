@@ -58,18 +58,13 @@ public class ItemUserController {
     @LogAnnotation(module = "查询成员以及相关指标")
     @GetMapping("list")
     @Transactional
-    public ResponseEntity<List<Map<String,Object>>> getItemUserInfoById(@RequestParam Map<String, Object> params){
-        List<Map<String, Object>> list = new ArrayList<>();
+    public ResponseEntity<List<ItemUser>> getItemUserInfoById(@RequestParam Map<String, Object> params){
         List<ItemUser> itemUsers = itemUserService.findListByParams(params, ItemUser.class);
         for (ItemUser u : itemUsers) {
-            Map<String, Object> ItemUserInfo = new HashMap<>();
-            //List<ProjectUser> projectUser = consumeProjectUser.findByUserId(u.getUser_id());
             List<Integer> targetIds = itemUserService.selectTargetUserByUserId(u.getItem_id(), u.getUser_id());
-            ItemUserInfo.put("itemUser",u);
-            ItemUserInfo.put("targetIds",targetIds);
-            list.add(ItemUserInfo); //添加进list
+            u.setTargetIds(targetIds);
         }
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(itemUsers);
     }
 
     @ApiOperation(value = "修改成员")
@@ -87,10 +82,9 @@ public class ItemUserController {
     @Transactional
     @PutMapping("/multi")
     public ResponseEntity<Void> updateItemUsers(@RequestBody List<ItemUser> itemUsers){
-        for (ItemUser itemContent : itemUsers) {
-            itemUserService.DeleteTargetUser(itemContent.getId());
-            itemUserService.delete(itemContent.getId());
-        }
+        //先删除所有研究内容
+        itemUserService.deleteItemUserByItemId(itemUsers.get(0).getItem_id());
+        //重新添加
         itemUserService.saveitemUsers(itemUsers);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

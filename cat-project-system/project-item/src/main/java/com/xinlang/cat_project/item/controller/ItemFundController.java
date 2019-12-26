@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,9 +51,22 @@ public class ItemFundController {
     @ApiOperation(value = "修改资金")
     @LogAnnotation(module = "修改资金")
     @PreAuthorize("hasAnyAuthority('project:item:update')")
-    @PutMapping
+    @PutMapping("/one")
     public ResponseEntity<Void> updateFund(@RequestBody ItemFund itemFund){
         itemFundService.update(itemFund);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "修改多条资金")
+    @LogAnnotation(module = "修改多条资金")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @Transactional
+    @PutMapping("/multi")
+    public ResponseEntity<Void> updateItemFunds(@RequestBody List<ItemFund> itemFunds){
+        //先删除所有资金
+        itemFundService.deleteTtemFundsByItemId(itemFunds.get(0).getItem_id());
+        //重新添加
+        itemFundService.saveItemFunds(itemFunds);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

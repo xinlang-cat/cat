@@ -66,9 +66,9 @@ public class ItemContentController {
     @Transactional
     @PutMapping("/multi")
     public ResponseEntity<Void> updateContents(@RequestBody List<ItemContent> itemContents){
-        for (ItemContent itemContent : itemContents) {
-            iItemContentService.delete(itemContent.getId());
-        }
+        //先删除所有研究内容
+        iItemContentService.deleteContentByItemId(itemContents.get(0).getItem_id());
+        //重新添加
         iItemContentService.saveContents(itemContents);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

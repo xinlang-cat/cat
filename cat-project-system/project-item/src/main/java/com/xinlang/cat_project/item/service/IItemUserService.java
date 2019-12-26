@@ -15,4 +15,6 @@ public interface IItemUserService extends IBaseService<ItemUser> {
     List<Integer> selectTargetUserByUserId(Integer item_id, Integer user_id);
 
     void DeleteTargetUser(Integer id);
+
+    void deleteItemUserByItemId(Integer item_id);
 }

@@ -1,45 +1,49 @@
-
-function saveBasics() {
+function updateBasics() {
     var formdata = $("#form1").serializeObject();
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: domainName + '/project-item/item/basic',
         contentType: "application/json; charset=utf-8",
         async: false,
         data: JSON.stringify(formdata),
         success: function (data) {
-            $("input[name='item_id']").val(data.id);
+            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                window.location.reload();
+            });
         }
     });
 }
-
-function saveContent() {
+function updateContent() {
     var formdata = $("#form2").serializeJson();
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: domainName + '/project-item/item/content/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
+            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                window.location.reload();
+            });
         }
     });
 }
-var targets;
-function saveTarget() {//数量指标
+function updateTarget() {
     var formdata = $("#form3").serializeJson();
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: domainName + '/project-item/item/target/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
-            targets=data;
+            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                window.location.reload();
+            });
         }
     });
 }
-function savePersonnel() {
+function updatePersonnel() {
     var formdata = $("#form4").serializeArrayObj();
     $(formdata).each(function(){
         var ids = [];
@@ -61,37 +65,45 @@ function savePersonnel() {
         formdata = "[" + JSON.stringify(formdata) + "]"
     }
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: domainName + '/project-item/item/user/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
+            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                window.location.reload();
+            });
         }
     });
 }
-
-function saveFund() {
+function updateFund() {
     var formdata = $("#form5").serializeJson();
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: domainName + '/project-item/item/fund/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
+            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                window.location.reload();
+            });
         }
     });
 }
-function saveContact() {
+function updateContacts() {
     var formdata = $("#form6").serializeJson();
     $.ajax({
-        type: 'post',
+        type: 'put',
         url: domainName + '/project-item/item/company/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
+            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                window.location.reload();
+            });
         }
     });
 }
