@@ -1,7 +1,7 @@
 
 
 
-var domainName = "http://192.168.5.19";
+var domainName = "http://192.168.5.64";
 
 
 var loginPage = "/api-b/login.html";

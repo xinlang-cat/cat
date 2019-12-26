@@ -75,10 +75,6 @@
 			url: domainName + '/project-report/report/getAllReport/' + id,
 			contentType: "application/json; charset=utf-8",
 			success: function (res) {
-				if(res != null){
-					$(".timeline_container,#my_check").hide();
-					return;
-				}
 				var str = '';
 				$(res).each(function () {
 					if(this.status==2) {
