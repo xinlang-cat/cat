@@ -455,7 +455,7 @@
 
 							success : function(data) {
 								$.ajax({
-									type : 'post',
+									type : 'put',
 									url : domainName + '/api-c/user',
 									contentType: "application/json; charset=utf-8",
 									data : JSON.stringify(formdata),
@@ -575,15 +575,17 @@
 						$("#accomplishment").val(this.accomplishment);
 						$("#achievement").val(this.achievement);
 						$("#provinceCode").click();
+						if (this.streetCode != "" && this.streetCode != null && this.streetCode != undefined){
+							province();
+							$("#provinceCode").val(this.provinceCode);
+							city(this.provinceCode);
+							$("#cityCode").val(this.cityCode);
+							area(this.cityCode);
+							$("#areaCode").val(this.areaCode);
+							street(this.areaCode);
+							$("#streetCode").val(this.streetCode);
+						}
 
-						province();
-						$("#provinceCode").val(this.provinceCode);
-						city(this.provinceCode);
-						$("#cityCode").val(this.cityCode);
-						area(this.cityCode);
-						$("#areaCode").val(this.areaCode);
-						street(this.areaCode);
-						$("#streetCode").val(this.streetCode);
 						$("#majorValue1").val(this.major);
 						getName(this.major,$("#text1"));
 						$("#MajorValue").val(this.nowMajor);
@@ -597,6 +599,7 @@
 			});
 		}
 		function getName(sign,node) {
+			if (sign != "" && sign != null && sign != undefined){
 				$.ajax({
 					type : 'get',
 					url : domainName + '/api-label/label/tree/'+sign,
@@ -608,6 +611,8 @@
 
 					}
 				});
+			}
+
 
 		}
 
