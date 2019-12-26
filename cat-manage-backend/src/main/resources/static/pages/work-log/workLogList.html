@@ -79,8 +79,8 @@
            if(data.length>0){
                for(var i=data.length-1;i>=0;i--){
                    str += '<li class="layui-timeline-item"><i class="layui-icon layui-timeline-axis"></i><div class="layui-timeline-content layui-text"><h2 class="layui-timeline-title">';
-                   str += formatDate1(data[i].createTime) + '</h2>';
-                   str += '<h3>' + data[i].title+ '---' + data[i].createUserName+'</h3>'+'<a style="color: #aea9a9;" onclick="detail('+data[i].id+')">';
+                   str += formatDate1(data[i].createTime)+ '---' + data[i].createUserName + '</h2>';
+                   str += '<h3>' + data[i].title+'</h3>'+'<a style="color: #aea9a9;" onclick="detail('+data[i].id+')">';
                    str += data[i].outline + '</a></div></li>';
                }
            }else {
