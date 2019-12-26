@@ -58,9 +58,9 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label">身份选择</label>
+					<label class="col-md-2 control-label">身份类型</label>
 					<div class="col-md-8">
-						<select class="form-control input-sm" name="userType" id="userType">
+						<select class="form-control input-sm"  id="userType1" disabled="disabled">
 							<option value="PARTY_A">甲方</option>
 							<option value="PARTY_B">乙方</option>
 							<option value="PARTY_C">监理</option>
@@ -103,9 +103,14 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-2 control-label">单位/公司级别</label>
+					<label class="col-md-2 control-label">单位/公司类型</label>
 					<div class="col-md-8">
-						<input class="form-control" placeholder="单位/公司级别" type="text" name="deptType" id="deptType"  readonly="readonly">
+						<select class="form-control input-sm" id="deptType1" disabled="disabled">
+							<option value="ACADEMY">大专院校</option>
+							<option value="FIRM">企业</option>
+							<option value="UNIT">事业单位</option>
+							<option value="RESTS">其他</option>
+						</select>
 					</div>
 				</div>
 
@@ -333,6 +338,8 @@
 				</div>
 				<input type="hidden" class="form-control" id="projectUserId">
 				<input type="hidden" class="form-control" id="identity">
+				<input type="hidden" class="form-control" id="userType" name="userType">
+				<input type="hidden" class="form-control" id="deptType" name="deptType">
 				<input type="hidden" class="form-control" name="enable" value="true">
 				<div class="form-actions">
 					<div class="row" align="center">
@@ -344,13 +351,9 @@
 					</div>
 				</div>
 			</fieldset>
-
 		</form>
-
 			<input type="hidden" class="form-control" id="domainsVa" name="domainsVa">
 			<input type="hidden" class="form-control" id="skillsVa" name="signs">
-
-
 	</div>
 
 	<script src="../../js/constant.js"></script>
@@ -418,6 +421,12 @@
 								if(!jQuery.isEmptyObject(date)) if(key == 'birthDate' || key == 'lastYear'){
 									date = formatDate2(date);
 								}
+								if(key == 'id'){
+									$("#projectUserId").val(data[0].id);
+									$("#userType1").val(data[0].userType);
+									$("#deptType1").val(data[0].deptType);
+									continue;
+								}
 								$('#'+key).val(date);
 							}
 						}
@@ -443,27 +452,25 @@
 				success : function(data) {
 					formdata.accomplishment = layedit.getContent(index1);
 					formdata.achievement = layedit.getContent(index2);
-					formdata.uerId = $("#projectUserId").val();
+					formdata.userId = $("#id").val();
 					formdata.birthDate = Date.parse(new Date(formdata.birthDate));
 					formdata.lastYear = Date.parse(new Date(formdata.lastYear));
 					if(status == 1){
+						formdata.id = $("#projectUserId").val();
 						$.ajax({
 							type : 'put',
 							url : domainName + '/project-user/user',
 							contentType: "application/json; charset=utf-8",
 							data : JSON.stringify(formdata),
-
 							success : function(data) {
 								$.ajax({
-									type : 'post',
+									type : 'put',
 									url : domainName + '/api-c/user',
 									contentType: "application/json; charset=utf-8",
 									data : JSON.stringify(formdata),
 									success : function(data) {
 									}
 								});
-
-
 							}
 						});
 					}else {
@@ -522,7 +529,9 @@
 						$("#deptCode").val(data.deptCode);
 						$("#deptName").val(data.signName);
 						$("#deptType").val(data.type);
-						$("#identity").val(data.identity);
+						$("#userType").val(data.identity);
+						$("#deptType1").val(data.type);
+						$("#userType1").val(data.identity);
 					}
 				}
 			});
@@ -575,15 +584,17 @@
 						$("#accomplishment").val(this.accomplishment);
 						$("#achievement").val(this.achievement);
 						$("#provinceCode").click();
+						if (this.streetCode != "" && this.streetCode != null && this.streetCode != undefined){
+							province();
+							$("#provinceCode").val(this.provinceCode);
+							city(this.provinceCode);
+							$("#cityCode").val(this.cityCode);
+							area(this.cityCode);
+							$("#areaCode").val(this.areaCode);
+							street(this.areaCode);
+							$("#streetCode").val(this.streetCode);
+						}
 
-						province();
-						$("#provinceCode").val(this.provinceCode);
-						city(this.provinceCode);
-						$("#cityCode").val(this.cityCode);
-						area(this.cityCode);
-						$("#areaCode").val(this.areaCode);
-						street(this.areaCode);
-						$("#streetCode").val(this.streetCode);
 						$("#majorValue1").val(this.major);
 						getName(this.major,$("#text1"));
 						$("#MajorValue").val(this.nowMajor);
@@ -597,6 +608,7 @@
 			});
 		}
 		function getName(sign,node) {
+			if (sign != "" && sign != null && sign != undefined){
 				$.ajax({
 					type : 'get',
 					url : domainName + '/api-label/label/tree/'+sign,
@@ -608,7 +620,7 @@
 
 					}
 				});
-
+			}
 		}
 
 		function mainDomainSaveLabel() {
@@ -660,7 +672,7 @@
 
 		}
 		function updateSkills() {
-			var userType= $("#identity").val();
+			var userType= $("#userType").val();
 			var signs= $("#skillsVa").val();
 			var result = signs.split(",");
 			$.ajax({
@@ -715,7 +727,7 @@
 
 		}
 		function updateDomains() {
-			var userType= $("#identity").val();
+			var userType= $("#userType").val();
 			var signs= $("#domainsVa").val();
 			var result = signs.split(",");
 			$.ajax({
@@ -841,8 +853,6 @@
 		}
 		function getNames(signs,node) {
 			if (!jQuery.isEmptyObject(signs)){
-
-
 				$.ajax({
 					type : 'get',
 					url : domainName + '/api-label/label/tree/'+signs,
