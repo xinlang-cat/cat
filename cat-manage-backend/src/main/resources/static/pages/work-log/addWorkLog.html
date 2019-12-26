@@ -74,7 +74,7 @@
     var itemId = getUrlParam("item_id");
     var url = domainName + '/project-item/item/target/list';
     var params = {
-        itemId:itemId
+        item_id:itemId
     };
     $.get(url,params,function (data) {
         $.each(data,function (i,item) {
