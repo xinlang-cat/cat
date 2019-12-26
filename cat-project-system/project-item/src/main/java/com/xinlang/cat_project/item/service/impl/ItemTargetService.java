@@ -42,4 +42,11 @@ public class ItemTargetService extends BaseService<ItemTarget> implements IItemT
             throw new ItemException(ExceptionEnum.SAVE_ERROR);
         }
     }
+
+    @Override
+    public void deleteTargetByItemId(Integer item_id) {
+        ItemTarget itemTarget = new ItemTarget();
+        itemTarget.setItem_id(item_id);
+        itemTargetMapper.delete(itemTarget);
+    }
 }

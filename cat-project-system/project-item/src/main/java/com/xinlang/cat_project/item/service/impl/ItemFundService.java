@@ -27,4 +27,11 @@ public class ItemFundService extends BaseService<ItemFund> implements IItemFundS
     public void saveItemFunds(List<ItemFund> itemFunds) {
         itemFundMapper.insertList(itemFunds);
     }
+
+    @Override
+    public void deleteTtemFundsByItemId(Integer item_id) {
+        ItemFund itemFund = new ItemFund();
+        itemFund.setItem_id(item_id);
+        itemFundMapper.delete(itemFund);
+    }
 }

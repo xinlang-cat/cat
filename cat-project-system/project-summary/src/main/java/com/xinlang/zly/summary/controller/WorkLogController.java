@@ -1,10 +1,13 @@
 package com.xinlang.zly.summary.controller;
 
 import com.xinlang.zly.summary.bean.WorkLog;
+import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.IWorkLogService;
 import com.xinlang.zly.summary.service.IWorkLogService;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +26,17 @@ public class WorkLogController {
 
     @Autowired
     private IWorkLogService workLogService;
+    @Autowired
+    private ConsumeProjectUser consumeProjectUser;
 
     @PostMapping
     @LogAnnotation(module = "添加工作日志")
     @ApiOperation(value = "添加工作日志")
     public WorkLog save(@RequestBody WorkLog workLog){
         workLog.setCreateTime(new Date());
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        workLog.setCreateUserId(appUser.getId().intValue());
+        workLog.setCreateUserName(consumeProjectUser.findByUserId(appUser.getId().intValue()).get(0).getName());
         workLogService.save(workLog);
         return workLog;
     }

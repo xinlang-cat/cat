@@ -277,9 +277,6 @@ function deleteTarget() {
                 var type = $("#targetType").val();
                 var nodes = $('#INDICATORS').find('input[name=type][value=' + type + ']');
                 var tr_last = nodes.last().parent().parent();
-                if(type=='TECHNICAL_INDICATORS'&&nodes.length==1){//如果是第一项
-                    return
-                }
                 tr_last.remove();//删除
                 //改变单元格跨的行数
                 $('#INDICATORS').children().first().children().first().attr('rowspan', $('#INDICATORS').children().length);

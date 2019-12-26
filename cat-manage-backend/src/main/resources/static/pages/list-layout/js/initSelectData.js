@@ -156,12 +156,12 @@ function queryUserInfo(usetId,node) {
             if (isNaN(age)){
                 age = "";
             }
-            node.parent().nextAll().eq(0).children().eq(0).val(sex);
-            node.parent().nextAll().eq(1).children().eq(0).val(age);
-            node.parent().nextAll().eq(2).children().eq(0).val(idType+'/'+idCard);
-            node.parent().nextAll().eq(3).children().eq(0).val(academicTitle);
-            node.parent().nextAll().eq(4).children().eq(0).val(nowMajor);
-            node.parent().nextAll().eq(5).children().eq(0).val(deptName);
+            node.parent().nextAll().eq(0).children('input').eq(0).val(sex);
+            node.parent().nextAll().eq(1).children('input').eq(0).val(age);
+            node.parent().nextAll().eq(2).children('input').eq(0).val(idType+'/'+idCard);
+            node.parent().nextAll().eq(3).children('input').eq(0).val(academicTitle);
+            node.parent().nextAll().eq(4).children('input').eq(0).val(nowMajor);
+            node.parent().nextAll().eq(5).children('input').eq(0).val(deptName);
         }
     });
 }

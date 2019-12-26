@@ -25,7 +25,7 @@ function add_row(e, sign,) {
 
             str = '<tr>\n' +
                 '                    <td>\n' +
-                '                        <input type="hidden" name="item_id">\n' +
+                '                        <input type="hidden" name="item_id" value="'+itemId+'">\n' +
                 '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="user_id">\n' +
                 '                            <option value="">请选择</option>\n' +
                 '                        </select></td>\n' +
@@ -101,12 +101,13 @@ function addTarget() {
                 var text = $("#targetType option:selected").text();
                 var type = $("#targetType").val();
                 var nodes = $('#INDICATORS').find('input[name=type][value=' + type + ']');
+                var itemId = $('input[name=item_id]').val();
                 if (nodes.length != 0) {
                     //先判断是不是其他指标
                     var str = '';
                     if (type == 'OTHER_INDICATORS') {
                         str = '<tr>\n' +
-                            '                    <td colspan="2"><input type="hidden" name="item_id">\n' +
+                            '                    <td colspan="2"><input type="hidden" name="item_id" value="'+itemId+'">\n' +
                             '                        <input type="hidden" name="type" value="OTHER_INDICATORS">\n' +
                             '                        <input type="hidden" name="status" value="0">\n' +
                             '                        <input type="hidden" name="target" value=" ">\n' +
@@ -129,7 +130,7 @@ function addTarget() {
                             '                </tr>';
                     } else {
                         str = '<tr>\n' +
-                            '                    <td><input type="hidden" name="item_id">\n' +
+                            '                    <td><input type="hidden" name="item_id" value="'+itemId+'">\n' +
                             '                        <input type="hidden" name="type" value="' + type + '">\n' +
                             '                        <input type="hidden" name="status" value="0">' +
                             '                        <input type="hidden" name="content"  value=" ">\n' +
@@ -165,7 +166,7 @@ function addTarget() {
                     if (type == 'OTHER_INDICATORS') {
                         str = '<tr>\n' +
                             '                    <td rowspan="3">' + text + '</td>\n' +
-                            '                    <td colspan="2"><input type="hidden" name="item_id">\n' +
+                            '                    <td colspan="2"><input type="hidden" name="item_id" value="'+itemId+'">\n' +
                             '                        <input type="hidden" name="type" value="OTHER_INDICATORS">\n' +
                             '                        <input type="hidden" name="status" value="0">\n' +
                             '                        <input type="hidden" name="target"  value=" ">\n' +
@@ -189,7 +190,7 @@ function addTarget() {
                     } else {
                         str = ' <tr>\n' +
                             '                    <td rowspan="3">' + text + '</td>\n' +
-                            '                    <td><input type="hidden" name="item_id">\n' +
+                            '                    <td><input type="hidden" name="item_id" value="'+itemId+'">\n' +
                             '                        <input type="hidden" name="type" value="' + type + '">\n' +
                             '                        <input type="hidden" name="status" value="0">' +
                             '                        <input type="hidden" name="content"  value=" ">\n' +
@@ -329,9 +330,10 @@ function addFund() {
                 '  </div>' +
                 '</div>',
             yes: function (index, layero) {
+                var itemId = $('input[name=item_id]').val();
                 var type = $("#fundType").val();
                 var str = '<tr>\n' +
-                    '                    <td><input type="hidden" name="item_id">\n' +
+                    '                    <td><input type="hidden" name="item_id" value="'+itemId+'">\n' +
                     '                        <input type="hidden" name="type" value="' + type + '">\n' +
                     '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">\n' +
                     '                            <option value=\'\'>请选择</option>\n' +
@@ -405,12 +407,18 @@ function deleteFund() {
                 '</div>',
             yes: function (index, layero) {
                 var type = $("#fundType").val();
-                if (type == 0) {
+                if(type==0){
+                    if($('#count').text()=='3条'){
+                        return
+                    }
                     $('#interval').prev().remove();//删除
-                    $('#direct').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length);
-                } else {
+                    $('#direct').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length);
+                }else {
+                    if($('#count').text()=='2条'){
+                        return
+                    }
                     $('#EXPENDITURE').children().last().remove();//删除
-                    $('#indirect').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length);
+                    $('#indirect').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length);
                 }
                 //改变单元格跨的行数
                 $('#thead').attr('rowspan', $('#EXPENDITURE').children().length);

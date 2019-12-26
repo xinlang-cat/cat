@@ -12,7 +12,7 @@ import java.util.Date;
  *
  */
 @Data
-@Table(name = "project_word_log")
+@Table(name = "project_work_log")
 public class WorkLog implements Serializable {
     private static final long serialVersionUID = -5320384153350355178L;
     @Id
@@ -23,7 +23,7 @@ public class WorkLog implements Serializable {
     private String createUserName;//创建人名字
     private Integer itemId;//项目id
     private String title;//日志标题
-
+    private String outline;//概要
     private String content;//日志内容
     private Integer status;//状态
     private Date createTime;//创建时间
