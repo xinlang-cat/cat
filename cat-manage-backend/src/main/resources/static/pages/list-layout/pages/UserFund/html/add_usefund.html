@@ -20,25 +20,25 @@
             <input type="hidden" name="projectId" value="" id="projectId">
 
             <div class="form-group">
-                <label class="col-md-1 control-label">使用资金:</label>
-                <div class="col-md-10">
-                    <input class="form-control" placeholder="使用资金" type="text" id="title" name="title"
+                <label class="col-md-2 control-label">使用资金:</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="使用资金" type="text" name="money"
                            maxlength="50" data-bv-notempty="true" data-bv-notempty-message="使用资金 不能为空">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-1 control-label">开支内容:</label>
-                <div class="col-md-10">
-                    <textarea placeholder="请输入内容" class="layui-textarea" id="remark" name="remark" data-bv-notempty="true"
+                <label class="col-md-2 control-label">开支内容:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="remark" data-bv-notempty="true"
                     data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-1 control-label">
+                <label class="col-md-2 control-label">
                     <button id="file" type="button" class="layui-btn " id="test2">材料上传</button>
                 </label>
-                <div class="col-md-10">
+                <div class="col-md-8">
                     <div data-bv-notempty="true"
                          data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 100%;"
                          id="demo2"></div>
@@ -48,8 +48,8 @@
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" id="btn_return">返回</button>
-                        <button class="btn btn-primary" type="submit" onclick="add_report()">
+                        <button class="btn btn-primary" onclick="closeCurrent()">关闭</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
                             <i class="fa fa-save"></i> 保存
                         </button>
                     </div>
@@ -61,7 +61,7 @@
 </div>
 <script src="../../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../.../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../../layui/layui.js"></script>
@@ -98,11 +98,40 @@ layui.use(['layer', 'laydate', 'upload'], function () {
             urls.push(res.url);
         }
         , error: function () {
-
             alert("失败");
             //请求异常回调
         }
     })
 })
+   var itemId = getUrlParam("itemId");
+   var fundId = getUrlParam("id");
+   function add() {
+       $('#form').bootstrapValidator();
+       var bootstrapValidator = $("#form").data('bootstrapValidator');
+       bootstrapValidator.validate();
+       if (!bootstrapValidator.isValid()) {
+           return;
+       }
+       var formdata = $("#form").serializeObject();
+       formdata.item_id=itemId;
+       formdata.fund_id=fundId;
+       formdata.bill_url=urls;
+       $.ajax({
+           type: 'post',
+           url: domainName + '/project-item/item/fund/use',
+           contentType: "application/json; charset=utf-8",
+           data: JSON.stringify(formdata),
+           success: function (data) {
+               layer.msg("成功", {shift: -1, time: 1000}, function () {
+                   var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                   parent.layer.close(index); //再执行关闭
+               });
+           }
+       });
+   }
+   function closeCurrent() {
+       var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+       parent.layer.close(index); //再执行关闭
+   }
 </script>
 </html>

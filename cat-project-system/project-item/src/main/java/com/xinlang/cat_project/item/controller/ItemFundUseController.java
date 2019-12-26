@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,81 +30,66 @@ public class ItemFundUseController {
 
     @ApiOperation(value = "添加资金使用信息")
     @LogAnnotation(module = "添加资金使用信息")
-    @PreAuthorize("hasAnyAuthority('project:fundUse:save')")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @Transactional
     @PostMapping
     public ResponseEntity<Void> saveFundUse(@RequestBody ItemFundUse itemFundUse) {
-        itemFundUseService.saveFundUse(itemFundUse);
+        //获取当前用户ID,并SET编辑人
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        itemFundUse.setEdit_userid(userId);
+        itemFundUse.setEdit_date(new Date());
+        //保存
+        itemFundUseService.save(itemFundUse);
+        //保存凭据
+        List<String> bills = itemFundUse.getBill_url();
+        for (String bill : bills) {
+            itemFundUseService.saveBill(itemFundUse.getId(),bill);
+        }
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 获取单条使用数据
-     * @param id
-     * @return
-     */
-    @ApiOperation(value = "获取一条资金使用信息，id 必填")
-    @LogAnnotation(module = "获取一条资金使用信息")
-    @GetMapping("/{id}")
-    public ResponseEntity<ItemFundUse> getFundById(@PathVariable Integer id){
+    @ApiOperation(value = "获取资金使用信息")
+    @LogAnnotation(module = "获取资金使用信息")
+    @GetMapping("/list")
+    public ResponseEntity<List<ItemFundUse>> getFundById(@RequestParam Map<String, Object> params){
 
-        ItemFundUse itemFundUse = itemFundUseService.queryFundUseById(id);
-        return ResponseEntity.ok(itemFundUse);
-    }
-
-    /**
-     * 获取预算的所有使用数据
-     * @param Bid 预算id
-     * @return
-     */
-    @ApiOperation(value = "获取预算的所有资金使用信息")
-    @LogAnnotation(module = "获取预算的所有资金使用信息")
-    @GetMapping("/info/{Bid}")
-    public ResponseEntity<List<ItemFundUse>> getFundUseByBId(@PathVariable Integer Bid){
-        List<ItemFundUse> itemFundUses = itemFundUseService.queryFundUseByBId(Bid);
+        List<ItemFundUse> itemFundUses = itemFundUseService.findListByParams(params, ItemFundUse.class);
+        for (ItemFundUse itemFundUs : itemFundUses) {
+            List<String> bills = itemFundUseService.findBill(itemFundUs.getId());
+            itemFundUs.setBill_url(bills);
+        }
         return ResponseEntity.ok(itemFundUses);
     }
 
-    /**
-     * 获取项目所有资金使用数据
-     * @param
-     * @return
-     */
-    @ApiOperation(value = "获取项目所有资金使用数据")
-    @LogAnnotation(module = "获取项目所有资金使用数据")
-    @GetMapping("/all/{Iid}")
-    public ResponseEntity<List<ItemFundUse>> getFundUseByItemId(@PathVariable Integer Iid){
 
-        //int UserTd = consumeUser.getLoginAppUser().getId().intValue();
-        //int UserTd = AppUserUtil.getLoginAppUser().getId().intValue();
-        List<ItemFundUse> itemFundUses = itemFundUseService.queryFundUseByItemIdAndUserId(Iid);
-        return ResponseEntity.ok(itemFundUses);
-    }
-
-    /**
-     * 更改
-     * @param itemFundUse
-     * @return
-     */
-    @ApiOperation(value = "更改资金使用信息,id必填")
+    @ApiOperation(value = "更改资金使用信息")
     @LogAnnotation(module = "更改资金使用信息")
-    @PreAuthorize("hasAnyAuthority('project:fundUse:update')")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @Transactional
     @PutMapping
     public ResponseEntity<Void> updateFund(@RequestBody ItemFundUse itemFundUse){
-        itemFundUseService.updateFundUse(itemFundUse);
+        //获取当前用户ID,并SET编辑人
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        itemFundUse.setEdit_userid(userId);
+        itemFundUse.setEdit_date(new Date());
+        //修改
+        itemFundUseService.update(itemFundUse);
+        //修改凭据
+        List<String> bills = itemFundUse.getBill_url();
+        for (String bill : bills) {
+            itemFundUseService.updateBill(itemFundUse.getId(),bill);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * 删除
-     * @param id
-     * @return
-     */
     @ApiOperation(value = "删除资金使用信息")
     @LogAnnotation(module = "删除资金使用信息")
-    @PreAuthorize("hasAnyAuthority('project:fundUse:delete')")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFundUse(@PathVariable Integer id){
-        itemFundUseService.deleteFundUse(id);
+        itemFundUseService.delete(id);
+        itemFundUseService.deleteBill(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

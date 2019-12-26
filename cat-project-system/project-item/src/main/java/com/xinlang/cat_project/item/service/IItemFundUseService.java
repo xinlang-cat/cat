@@ -1,21 +1,18 @@
 package com.xinlang.cat_project.item.service;
 
 import com.xinlang.cat_project.item.pojo.ItemFundUse;
+import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
 import java.util.List;
 import java.util.Map;
 
-public interface IItemFundUseService {
+public interface IItemFundUseService extends IBaseService<ItemFundUse> {
 
-    void saveFundUse(ItemFundUse itemFundUse);
+    void saveBill(Integer id, String bill);
 
-    ItemFundUse queryFundUseById(Integer id);
+    List<String> findBill(Integer id);
 
-    List<ItemFundUse> queryFundUseByBId(Integer Bid);
+    void updateBill(Integer id, String bill);
 
-    List<ItemFundUse> queryFundUseByItemIdAndUserId(Integer iid);
-
-    void updateFundUse(ItemFundUse itemFundUse);
-
-    void deleteFundUse(Integer id);
+    void deleteBill(Integer id);
 }
