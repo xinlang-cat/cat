@@ -21,24 +21,23 @@
     var id = getUrlParam("id");
     var url = domainName + '/api-summary/work-log/list';
     $.get(url,{id:id},function (data) {
-        var head = '<h1>'+ data[0].title+'</h1><h3 style="margin-top: 5px;"> ---';
+        var head = '<h1 style="font-weight: bold;">'+ data[0].title+'</h1><h3 id="text" style="margin-top: 5px;"> </h3>';
+        $("#head").append(head);
         $.get(domainName+"/project-item/item/target/list",{id:data[0].targetId},function(res){
-            if(jQuery.isEmptyObject(res[0].target)){
-               var content = res[0].content;
-               if(content.length>40){
-                   content = content.substring(0,40) + '...';
+            if(jQuery.isEmptyObject(res[0].target.trim())){
+               var val = res[0].content;
+               if(val.length>40){
+                   val = val.substring(0,40) + '...';
                }
-               head += content;
+               $("#text").text("---" + val )
             }else{
                 $.get(domainName+"/api-label/label/tree/"+res[0].target,function(result){
-                    head += result[0].content;
+                    $("#text").text("---" + result[0].content )
                 });
             }
         });
-        head += '</h3>';
-        $("#head").append(head);
         var content = '<div>'+ data[0].content + '</div>';
-        content += '<div style="text-align: right;font-size: 18px;margin-top: 40px;margin-right:100px; font-weight: bold">'+data[0].createUserName + '---'+ formatDate1(data[0].createTime)+'</div>';
+        content += '<div style="text-align: right;font-size: 18px;margin-top: 40px;margin-right:100px; font-weight: bold;">'+data[0].createUserName + '---'+ formatDate1(data[0].createTime)+'</div>';
         $("#content").append(content);
     });
 
