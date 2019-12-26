@@ -205,6 +205,7 @@
             async: false,
             success: function (data) {
                 var str = '';
+                getUser();
                 $(data).each(function(){
                     str += '<div class="masonry__item">\n' +
                         '            <figure>\n' +
@@ -215,7 +216,7 @@
                         '                       <span>结束时间：'+this.end_dateStr+'</span></p>\n' +
                         '                    <ul class="tags">\n' +
                         '                        <li><a href="pages/update/projectDetails.html?id='+this.id+'">项目信息</a></li>\n' +
-                        '                        <li><a href="../project/my_implement.html?id='+this.id+'">实施日志</a></li>\n' +
+                        '                        <li><a href="../work-log/workLogList.html?id='+this.id+'&userId='+userId+'">实施日志</a></li>\n' +
                         '                        <li><a href="../project/report/report.html?id='+this.id+'">阶段总结</a></li>\n' +
                         '                        <li><a href="../item/fundUse/fundUse.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
