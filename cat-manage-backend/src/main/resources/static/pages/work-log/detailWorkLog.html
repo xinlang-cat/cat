@@ -6,89 +6,52 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
 <body>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
-        <fieldset>
-            <div class="form-group">
-                <label class="col-md-1 control-label">指标:</label>
-                <div class="col-md-11">
-                    <select class="form-control input-sm" name="targetId" id="targetId" lay-verify="required">
+<div id="head" style="text-align: center;margin: 20px;">
 
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">标题:</label>
-                <div class="col-md-11">
-                    <input class="form-control" placeholder="标题" type="text" name="title" id="title" maxlength="50"
-                           data-bv-notempty="true" lay-verify="required"
-                           data-bv-notempty-message="标题 不能为空">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">概要:</label>
-                <div class="col-md-11">
-                    <textarea placeholder="内容简介，不超过200个字。"
-                              class="layui-textarea form-control" lay-verify="required" maxlength="200"
-                              id="outline" name="outline"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">正文:</label>
-                <div class="col-md-11">
-                        <textarea class="layui-textarea" id="content" lay-verify="required" style="display: none">
-                        </textarea>
-                </div>
-            </div>
-            <div class="form-actions">
-                <div class="row" align="center">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary" type="submit" onclick="add(this)">
-                            <i class="fa fa-save"></i> 提交
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-    </form>
 </div>
+<div id="content"  style="margin: 20px;">
+    <div>
 
+            摇摇晃晃进入青春岁月，如此般奢侈的年华，如此般摇曳的时光，如此般年轻的我们，有着太多美好的时光，有着太多的无奈。
+            恋上青春的岁月，恋上洋洋洒洒的文字，亦如恋上洋溢幸福的脸颊，是在那么羞涩年龄，青春的伤，青春的痛，是那么的让年轻的我们不堪一击。
+            青春的年龄，肆意的挥霍，最后伤也有，痛也是那么的痛彻心扉，终于在不堪重负的一瞬间，把这么沉重的伤交给青春。于是青春疼痛文字几乎记录了曾经不谙世事的我们所有的伤和痛，很多东西总是在一瞬间呈现，于是基于一瞬间的时光，幻化成永恒的记忆。从来不知道人的感情是可以那么肆无忌惮的奔流，没有目的，甚至不知道方向，可依然那么迷恋，迷恋那么肆无忌惮的感觉。很多时候，记忆是那么清晰的回忆，仿佛时光可以倒流般。
+            年轻的我们不谙世事，于是很多时候都会做出让自己后悔的决定，后悔了却不能回头。很深很深的无奈，只有在黑夜的苍穹中深深呼吸，却来你及放松，青春有着太多的迷茫，有着太多的徘徊，可是没有人逃避，因为该面对的，总归是要去面对的。
+            很多很多的誓言，很真很真诺言，都在我们青春的岁月里烙下了永恒的痕迹，却都还在写着青春疼痛文字的回忆，要为我们曾经拥有过的时光划上心满意一足的符号。
+            年轻的我们总是敏感地记录下我们身边所发生的一切，一些无关痛痒的文字，却总是让我们徘徊不前。我们突然就深深地喜欢上这种疼痛的感觉，颓废的感情，堕落的心让我们总是认为自己很坚强。很都时候会为自己偶尔的一次堕落找借口，依然让自己那么潇洒的伪装着，伪装着我们是那么的坚强，其实我们只是太要强。
+            抬头看窗外车走走停停，人来人往，记起的，忘了的，都已成为过去。很多时候我们都希望自己可以在坚强中遗忘，于是任时间慢慢地腐蚀我们的心灵，可以看见一些枯竭了的事情在我们的脑海慢慢消失。年轻的我们很在乎，很在乎我们的每一点进步，才发现一些变化是在不经意间的。
+
+    </div>
+
+</div>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
-    var layedit, index,layer;
-    layui.use(['layedit','upload','layer'], function(){
-        layer = layui.layer;
-        layedit = layui.layedit;
-        layedit.set({
-            uploadImage: {
-                url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
-                type: 'post'
-            }
-        });
-        index = layedit.build('content');
-    });
     var id = getUrlParam("id");
     var url = domainName + '/api-summary/work-log/list';
-    var params = {
-        id:id
-    };
-    $.get(url,params,function (data) {
-        $.each(data,function (i,item) {
-            if(item.content.trim() == ''){
-                $.get(domainName + '/api-label/label/tree/'+item.target,function (res) {
-                    $("#targetId").append('<option value="' + item.id + '">'+ res[0].content +'</option>');
-                });
+    $.get(url,{id:id},function (data) {
+        var head = '<h1>'+ data[0].title+'</h1><h3 style="margin-top: 5px;"> ---';
+        $.get(domainName+"/project-item/item/target/list",{id:data[0].targetId},function(res){
+            if(jQuery.isEmptyObject(res[0].target)){
+               var content = res[0].content;
+               if(content.length>40){
+                   content = content.substring(0,40) + '...';
+               }
+               head += content;
             }else{
-                $("#targetId").append('<option value="' + item.id + '">'+ item.content +'</option>');
+                $.get(domainName+"/api-label/label/tree/"+res[0].target,function(result){
+                    head += result[0].content;
+                });
             }
         });
+        head += '</h3>';
+        $("#head").append(head);
+        var content = '<div>'+ data[0].content + '</div>';
+        content += '<div style="text-align: right;font-size: 18px;margin-top: 40px;font-weight: bold">'+data[0].createUserName + '---'+ formatDate1(data[0].createTime)+'</div>';
+        $("#content").append(content);
     });
-
-
 
 </script>
 </body>
