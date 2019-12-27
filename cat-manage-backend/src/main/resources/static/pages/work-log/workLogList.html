@@ -31,7 +31,7 @@
                                 <i class="layui-icon">&#xe62d;</i> 我的
                             </button>
                             <button class="layui-btn layui-btn-sm" onclick="checkWorkLog()" permission="project:work-log:check">
-                                <i class="layui-icon">&#xe6b2;</i> 审核
+                                <i class="layui-icon">&#xe6b2;</i> 待我审核
                             </button>
                             <button class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">
                                 <i class="layui-icon">&#xe65c;</i> 返回列表
@@ -67,7 +67,7 @@
    function allWorkLog() {
        $("#saveBt").hide();
        var params = {
-           status: 0,
+           status: 1,
            itemId : itemId
        };
        var userName = $("#createUserName").val();
@@ -90,7 +90,7 @@
            $("#content").empty();
            $("#content").append(str + "</ul></div></div>");
            $(".form-group").empty();
-           $(".form-group").append('姓名：<input id="createUserName" type="text" class="form-control" placeholder="姓名"><input id="createUserName" type="hidden" name="createUserName">\n' +
+           $(".form-group").append('姓名：<input id="createUserName" type="text" name="createUserName" class="form-control" placeholder="姓名">' +
                '<button id="searchBt1"onclick="allWorkLog()" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe615;</i>搜索</button>');
        });
    }
@@ -109,6 +109,10 @@
                 myWorkLog();
             }
         });
+    }
+
+    function checkWorkLog() {
+       location.href='checkWorkLog.html?item_id='+itemId+'&userId='+userId;
     }
 
     function detail(id) {
