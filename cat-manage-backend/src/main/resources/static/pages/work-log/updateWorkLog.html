@@ -32,6 +32,12 @@
                         </textarea>
                 </div>
             </div>
+            <div class="form-group" id="check_remark">
+                <label class="col-md-1 control-label">审核意见</label>
+                <div class="col-md-11">
+                    <p id="remark_text"></p>
+                </div>
+            </div>
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
@@ -52,6 +58,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
+    $("#check_remark").hide();
     var layedit, index,layer;
     layui.use(['layedit','upload','layer'], function(){
         layer = layui.layer;
@@ -71,12 +78,17 @@
         for(var key in data[0]){
             $('#'+key).val(data[0][key]);
         }
+        if(data[0].status == -1){
+            $("#check_remark").show();
+            $("#remark_text").text(data[0].remark);
+        }
     });
 
 
     function update(obj) {
         $(obj).attr("disabled",true);
         var formdata = $("#form").serializeObject();
+        formdata.status = 0;
         formdata.content = layedit.getContent(index);
         $.ajax({
             type : 'put',
