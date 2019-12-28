@@ -44,7 +44,6 @@ function savePersonnel() {
     $(formdata).each(function(){
         var ids = [];
         var targetIds = this.targetIds.split(',');
-        alert(targetIds);
         $(targetIds).each(function(){
             var target = this;
             $(targets).each(function(){

@@ -484,7 +484,7 @@
 <script type="text/javascript" src='../../js/saveData.js'></script>
 <script type="text/javascript" src="../../js/acceptance.js"></script>
 <script>
-    var id = 26;
+    var id = getUrlParam("id");
     $("#item_id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer

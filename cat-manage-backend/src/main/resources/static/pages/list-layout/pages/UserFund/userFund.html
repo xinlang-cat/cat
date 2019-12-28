@@ -168,7 +168,7 @@
                                 '                    </td>\n' +
                                 '</tr>';
                         }
-                        $('#direct').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + this.type + ']').length + 1);
+                        $('#direct').attr('rowspan', Number($('#direct').attr('rowspan')) + 1);
                         $('#interval').before(str);
                     } else {
                         if (length == 0) {
@@ -197,7 +197,7 @@
                                 '                    </td>\n' +
                                 '</tr>';
                         }
-                        $('#indirect').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + this.type + ']').length + 1);
+                        $('#indirect').attr('rowspan',Number($('#indirect').attr('rowspan')) + 1);
                         $('#EXPENDITURE').append(str);
                     }
                 })
