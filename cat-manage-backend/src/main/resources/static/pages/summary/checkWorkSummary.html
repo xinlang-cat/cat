@@ -118,13 +118,9 @@
             async : false,
             success : function(data) {
                 $(data).each(function () {
-                    $("#deptInfo").val(this.deptInfo);
-                    $("#projectContent").val(this.projectContent);
-                    $("#fullyFunded").val(this.fullyFunded);
-                    $("#skillIndicator").val(this.skillIndicator);
-                    $("#economyIndicator").val(this.economyIndicator);
-                    $("#socialBenefit").val(this.socialBenefit);
-                    $("#combinedInfluence").val(this.combinedInfluence);
+                    for (var key in data[0]) {
+                        $("textarea[name=" + key + "]").val(data[0][key]);
+                    }
                 });
 
             }
