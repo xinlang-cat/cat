@@ -5,7 +5,7 @@
     <title>验收申请表</title>
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../css/details.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
     <style>
         .layui-table thead tr {
             text-align: center;
@@ -484,7 +484,7 @@
 <script type="text/javascript" src='../../js/saveData.js'></script>
 <script type="text/javascript" src="../../js/acceptance.js"></script>
 <script>
-    var id = 26;
+    var id = getUrlParam("id");
     $("#item_id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
