@@ -74,12 +74,9 @@ public class ItemBasicController {
         List<ItemBasic> basic = itemBasicService.findListByParams(params,ItemBasic.class);
         return ResponseEntity.ok(basic);
     }
-    /**
-     * 获取当前用户的公司项目数据
-     * @return
-     */
-    @ApiOperation(value = "查询当前用户的公司项目")
-    @LogAnnotation(module = "查询当前用户的公司项目")
+
+    @ApiOperation(value = "查询当前用户相关的项目")
+    @LogAnnotation(module = "查询当前用户相关的项目")
     @GetMapping("/company")
     public ResponseEntity<List<ItemBasic>> getCompanyItem(){
         List<ItemBasic> basic = itemBasicService.queryCompanyItem();

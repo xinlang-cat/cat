@@ -143,8 +143,19 @@
                     "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                     "columns": [
                         { "data": "item_name", "defaultContent": ""},
-                        { "data": "start_dateStr", "defaultContent": ""},
-                        { "data": "end_dateStr", "defaultContent": ""},
+                        {
+                            "data": "start_date",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                return formatDate1(data);
+                            }
+                        },
+                        { "data": "end_date",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                return formatDate1(data);
+                            }
+                        },
                         {
                             "data": "type",
                             "defaultContent": "",
@@ -178,34 +189,16 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var id = row['id'];
-                                var href = "updateItem.html?id=" + id;
-                                var edit = buttonEdit(href, "back:user:update", pers);
-                                var del = buttonDel(id, "back:permission:delete", pers);
-                                var detailsHref ="details.html?id="+id;
-                                var conn ="";
+                                //var href = "updateItem.html?id=" + id;
+                                //var edit = buttonEdit(href, "back:user:update", pers);
+                                var del = buttonDel("basic/"+id, "back:permission:delete", pers);
+                                var detailsHref ="../list-layout/pages/projectDetails/projectDetails.html?id="+id;
 
-                                var expert = $("<button class='layui-btn layui-btn-xs' onclick='expert(\"" + id +"\")'>匹配专家</button>");
                                 var details = "";
                                 var btn = $("<a  href="+detailsHref+" class=\"layui-btn layui-btn-xs\"> 详情</a>");
                                 details = btn.prop("outerHTML");
-                                conn=expert.prop("outerHTML")
 
-                                /*//重置密码
-                                var resetPassword = "";
-                                if($.inArray("back:user:password", pers) >= 0){
-                                    var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>重置密码</i></button>");
-                                    btn.attr("onclick", 'resetPassword(' +id+')');
-                                    resetPassword = btn.prop("outerHTML");
-                                }
-
-                                //分配角色
-                                var setRoles = "";
-                                if($.inArray("back:user:role:set", pers) >= 0){
-                                    var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>分配角色</i></button>");
-                                    btn.attr("onclick", 'setRoles(' +id+')');
-                                    setRoles = btn.prop("outerHTML");
-                                }*/
-                                return edit +details+ conn +del;
+                                return details+del;
                             }
                         },
                     ],

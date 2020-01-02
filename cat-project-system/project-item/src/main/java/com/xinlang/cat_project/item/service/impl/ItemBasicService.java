@@ -50,10 +50,6 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
     @Autowired
     private ConsumeCompany consumeCompany;
 
-    /*日期格式*/
-    private String format1 = "yyyy-MM-dd";
-    private String format2 = "yyyy-MM-dd HH:mm";
-
     @Override
     public PageResult<ItemBasic> queryList(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params) throws ItemException{
         // 开始分页
@@ -68,7 +64,7 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
             }else if(params.get("status") != ""){
                 example.createCriteria().andEqualTo("status", params.get("status"));
             }
-            example.createCriteria().andGreaterThanOrEqualTo("status", constant.ItemStatus.PROCEED);
+            //example.createCriteria().andGreaterThanOrEqualTo("status", constant.ItemStatus.PROCEED);
         }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序
