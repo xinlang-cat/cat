@@ -137,7 +137,7 @@ layui.use(['layer','util'], function(){
                     	"defaultContent": "",
                     	"render": function (data, type, row) {
                     		var id = row['id'];
-                    		var userId = row["userId"];
+                    		var userId = row["createUserId"];
                     		var itemId = row["itemId"];
                     		var href = "updateSummary.html?id=" + id;
                             var edit =  buttonEdit(href, "", pers);
@@ -184,13 +184,15 @@ function back() {
 function showWork() {
     location.href='workSummaryList.html?item_id='+item_id;
 }
+var h = $(window).height()-100;
+var w = $(window).width()-200;
 function showDetail(userId,itemId){
 	layer.open({
 		title:"详情",
-		type: 2,
-		area: ['800px', '600px'],
-		maxmin: true,
-		shadeClose: true,
+        type: 2,
+        area: [w + 'px', h + 'px'],
+        maxmin: true,
+        shadeClose: true,
 		content: ['detail.html?userId='+userId+"&itemId="+itemId]
 			
 	});
