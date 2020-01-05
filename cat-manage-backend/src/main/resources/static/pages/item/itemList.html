@@ -47,12 +47,13 @@
                             <button class="layui-btn layui-btn-sm" onclick="location.href='addItem.html'">
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
-                            <button class="layui-btn layui-btn-sm" onclick="matchExpert()">
+                           <!-- <button class="layui-btn layui-btn-sm" onclick="matchExpert()">
                                 <i class="layui-icon">&#xe608;</i> 匹配专家
                             </button>
                             <button class="layui-btn layui-btn-sm" onclick="location.href='projectList.html'">
                                 <i class="layui-icon">&#xe608;</i> 测试
                             </button>
+                            </button>-->
                         </td>
                     </tr>
                 </table>
@@ -198,11 +199,35 @@
                                 var del = buttonDel("basic/" + id, "back:permission:delete", pers);
                                 var detailsHref = "../list-layout/pages/projectDetails/projectDetails.html?id=" + id;
 
+                                var href = "updateItem.html?id=" + id;
+                                var edit = buttonEdit(href, "back:user:update", pers);
+                                var del = buttonDel(id, "back:permission:delete", pers);
+                                var detailsHref ="details.html?id="+id;
+                                var expert = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>匹配专家</i></button>");
+                                expert.attr("onclick", "matchExpert(" +id+")")
+                                var showReport = expert.prop("outerHTML");
                                 var details = "";
                                 var btn = $("<a  href=" + detailsHref + " class=\"layui-btn layui-btn-xs\"> 详情</a>");
                                 details = btn.prop("outerHTML");
 
+
                                 return details + del;
+                                /*//重置密码
+                                var resetPassword = "";
+                                if($.inArray("back:user:password", pers) >= 0){
+                                    var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>重置密码</i></button>");
+                                    btn.attr("onclick", 'resetPassword(' +id+')');
+                                    resetPassword = btn.prop("outerHTML");
+                                }
+
+                                //分配角色
+                                var setRoles = "";
+                                if($.inArray("back:user:role:set", pers) >= 0){
+                                    var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>分配角色</i></button>");
+                                    btn.attr("onclick", 'setRoles(' +id+')');
+                                    setRoles = btn.prop("outerHTML");
+                                }*/
+                                return edit +details+del+showReport;
                             }
                         },
                     ],
@@ -211,12 +236,14 @@
 
         init();
     });
-
+    var h = $(window).height()-100;
+    var w = $(window).width()-200;
     function matchExpert(id) {
+        alert(id);
         layer.open({
             title: "匹配专家",
             type: 2,
-            area: ['800px', '600px'],
+            area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../projectUser/matchExpert.html?itemId=' + id]
