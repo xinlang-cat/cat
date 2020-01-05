@@ -46,6 +46,7 @@ public class ProjectUserItemController {
     @LogAnnotation(module = "匹配专家")
     //@PreAuthorize("hasAnyAuthority('project:item:match:expert')")
     public ProjectUserItem matchExpert(String labelSign,Integer population,Integer itemId){
+        System.err.println(labelSign+","+population+","+itemId);
         //找到所有拥有{labelSign}标签的专家
        List<ProjectUserDomain> domains = projectUserDomainService.findByLabelSign(labelSign, ProjectUserType.EXPERT.name());
        if(!"".equals(domains)||null==domains){
