@@ -23,7 +23,7 @@
 		<button style="position: fixed;margin-left: 89%;margin-top: 60px;" type="button"
 				class="layui-btn layui-btn-primary layui-btn-sm" id="my_check">我的总结</button>
 		<button style="position: fixed;margin-left: 89%;margin-top: 100px;" type="button"
-				class="layui-btn layui-btn-primary layui-btn-sm">返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回</button>
+				class="layui-btn layui-btn-primary layui-btn-sm" onclick="location.href='../../list-layout/list.html'">返&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回</button>
 	</div>
 </body>
 <script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
@@ -33,7 +33,7 @@
 <script type="text/javascript" src="../../../layui/layui.js"></script>
 <script type="text/javascript" src="../../../js/constant.js"></script>
 <script>
-	var id = 26;
+	var id = getUrlParam("id");
 	layui.use(['layer', 'laydate','upload'], function () {
 		var layer = layui.layer
 				,upload = layui.upload

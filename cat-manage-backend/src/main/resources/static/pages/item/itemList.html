@@ -20,9 +20,11 @@
                                     项目名称：
                                     <input id="username" type="text" class="form-control" placeholder="项目名">
                                     开始时间：
-                                    <input id="startDate" type="text" class="form-control" placeholder="开始时间">
+                                    <input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                                           id="startDate" name="start_date" >
                                     结束时间：
-                                    <input id="endDate" type="text" class="form-control" placeholder="结束时间">
+                                    <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                                           id="endDate" name="end_date" >
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
@@ -33,9 +35,9 @@
                                         <option value="-1">废弃</option>
                                     </select>
                                     类型：
-                                    <select class="form-control input-sm" id="type">
+                                    <select class="form-control input-sm" id="category">
                                         <option value="">全部</option>
-                                        <option value="APP">农业</option>
+                                        <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
                                     </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 </div>
@@ -87,14 +89,21 @@
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
+
 <script type="text/javascript">
     var pers = checkPermission();
     var example;
 
-    layui.use(['layer','util'], function(){
+    layui.use(['layer','laydate'], function(){
         var layer = layui.layer;
-        var util = layui.util;
-
+        var laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
         function init(){
             example =
                 $('#dt-table').DataTable({
@@ -112,6 +121,7 @@
                             d.item_name = $('#username').val();
                             d.start_date = $('#startDate').val();
                             d.end_date = $("#endDate").val();
+                            d.category=$("#category").val();
                             d.status = $("#status").val();
                         },
                         "dataSrc": function (json) {
@@ -143,18 +153,34 @@
                     "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                     "columns": [
                         { "data": "item_name", "defaultContent": ""},
-                        { "data": "start_dateStr", "defaultContent": ""},
-                        { "data": "end_dateStr", "defaultContent": ""},
                         {
-                            "data": "type",
+                            "data": "start_date",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                if(data =="BACKEND"){
-                                    return "科技类";
-                                }else {
-                                    return "农产类";
-                                }
-                                return "园林";
+                                return data.substring(0, 10);
+                            }
+                        },
+                        {
+                            "data": "end_date",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                return data.substring(0, 10);
+                            }
+                        },
+                        {
+                            "data": "category",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var text = '';
+                                $.ajax({
+                                    type: 'get',
+                                    url: domainName + '/api-label/label/tree/' + data,
+                                    async: false,
+                                    success: function (data) {
+                                        text = data[0].content;
+                                    }
+                                });
+                                return text;
                             }
                         },
                         {
@@ -217,7 +243,6 @@
     var h = $(window).height()-100;
     var w = $(window).width()-200;
     function matchExpert(id) {
-        alert(id);
         layer.open({
             title:"匹配专家",
             type: 2,
