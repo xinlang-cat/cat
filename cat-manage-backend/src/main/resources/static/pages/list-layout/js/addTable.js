@@ -1,4 +1,5 @@
 /*此js用于新增项目*/
+
 //添加一行
 function add_row(e, sign) {
     layui.use(['layer', 'form', 'laydate'], function () {
@@ -20,14 +21,14 @@ function add_row(e, sign) {
                 '<textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required" name="content"></textarea>\n' +
                 '</td>\n' +
                 '</tr>';
-        }else if(sign == 'PROJECT_TEAM'){
+        } else if (sign == 'PROJECT_TEAM') {
 
-            str = '<tr>\n' +
+            str = ' <tr>\n' +
                 '                    <td>\n' +
+                '                        <input class="form-control" placeholder="姓名" type="text" readonly>\n' +
                 '                        <input type="hidden" name="item_id">\n' +
-                '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="user_id">\n' +
-                '                            <option value="">请选择</option>\n' +
-                '                        </select></td>\n' +
+                '                        <input type="hidden" name="user_id">\n' +
+                '                    </td>\n' +
                 '                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>\n' +
                 '                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>\n' +
                 '                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>\n' +
@@ -35,15 +36,11 @@ function add_row(e, sign) {
                 '                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>\n' +
                 '                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>\n' +
                 '                    <td>\n' +
-                '                        <input class="form-control targetIds" placeholder="负责或参与的指标" type="text" readonly>\n' +
-                '                        <input type="hidden" name="targetIds">\n' +
+                '                        <input class="form-control userName" placeholder="手机号码" type="text">\n' +
                 '                    </td>\n' +
                 '                </tr>';
         }
         tbody.append(str);
-        if(sign == 'PROJECT_TEAM'){//如果是项目组人员需要初始化下拉选
-            initUserSelect(deptCode, tbody.children().last().find('select[name=user_id]'));
-        }
         //渲染
         lay('.date').each(function () {
             laydate.render({
@@ -103,7 +100,7 @@ function addTarget() {
                 if (nodes.length != 0) {
                     //先判断是不是其他指标
                     var str = '';
-                    if(type=='OTHER_INDICATORS'){
+                    if (type == 'OTHER_INDICATORS') {
                         str = '<tr>\n' +
                             '                    <td colspan="2"><input type="hidden" name="item_id">\n' +
                             '                        <input type="hidden" name="type" value="OTHER_INDICATORS">\n' +
@@ -126,7 +123,7 @@ function addTarget() {
                             '                        </button>\n' +
                             '                    </td>\n' +
                             '                </tr>';
-                    }else {
+                    } else {
                         str = '<tr>\n' +
                             '                    <td><input type="hidden" name="item_id">\n' +
                             '                        <input type="hidden" name="type" value="' + type + '">\n' +
@@ -161,7 +158,7 @@ function addTarget() {
                 } else {
                     //判断是不是其他指标
                     var str = '';
-                    if(type=='OTHER_INDICATORS'){
+                    if (type == 'OTHER_INDICATORS') {
                         str = '<tr>\n' +
                             '                    <td rowspan="3">' + text + '</td>\n' +
                             '                    <td colspan="2"><input type="hidden" name="item_id">\n' +
@@ -185,7 +182,7 @@ function addTarget() {
                             '                        </button>\n' +
                             '                    </td>\n' +
                             '                </tr>';
-                    }else {
+                    } else {
                         str = ' <tr>\n' +
                             '                    <td rowspan="3">' + text + '</td>\n' +
                             '                    <td><input type="hidden" name="item_id">\n' +
@@ -281,7 +278,7 @@ function deleteTarget() {
                 //改变单元格跨的行数
                 $('#INDICATORS').children().first().children().first().attr('rowspan', $('#INDICATORS').children().length);
                 nodes.first().parent().prev().attr('rowspan', nodes.length - 1);
-                $('#count').text((nodes.length - 1<0?0:nodes.length - 1) + '条');//改变条数
+                $('#count').text((nodes.length - 1 < 0 ? 0 : nodes.length - 1) + '条');//改变条数
 
             }, btn2: function (index, layero) {
                 layer.close(index);
@@ -332,7 +329,7 @@ function addFund() {
                 var type = $("#fundType").val();
                 var str = '<tr>\n' +
                     '                    <td><input type="hidden" name="item_id">\n' +
-                    '                        <input type="hidden" name="type" value="'+type+'">\n' +
+                    '                        <input type="hidden" name="type" value="' + type + '">\n' +
                     '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">\n' +
                     '                            <option value=\'\'>请选择</option>\n' +
                     '                        </select></td>\n' +
@@ -345,17 +342,17 @@ function addFund() {
                     '                                  name="remark"></textarea>\n' +
                     '                    </td>\n' +
                     '                </tr>';
-                $('#thead').attr('rowspan',$('#EXPENDITURE').children().length+1);
-                if(type==0){
-                    $('#direct').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length+1);
+                $('#thead').attr('rowspan', $('#EXPENDITURE').children().length + 1);
+                if (type == 0) {
+                    $('#direct').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + 1);
                     $('#interval').before(str);
-                    $('#count').text($('#EXPENDITURE').find('input[name=type][value='+type+']').length + '条');//改变条数
+                    $('#count').text($('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + '条');//改变条数
                     initSelectData('BUDGET_SUBJECT', $('#interval').prev().find('select[name=subject]'));
                     initSelectData('FUNDING_SOURCE', $('#interval').prev().find('select[name=source]'));
-                }else {
-                    $('#indirect').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length+1);
+                } else {
+                    $('#indirect').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + 1);
                     $('#EXPENDITURE').append(str);
-                    $('#count').text($('#EXPENDITURE').find('input[name=type][value='+type+']').length + '条');//改变条数
+                    $('#count').text($('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + '条');//改变条数
                     initSelectData('BUDGET_SUBJECT', $('#EXPENDITURE').children().last().find('select[name=subject]'));
                     initSelectData('FUNDING_SOURCE', $('#EXPENDITURE').children().last().find('select[name=source]'));
                 }
@@ -371,6 +368,7 @@ function addFund() {
         });
     });
 }
+
 //删除经费
 function deleteFund() {
     layui.use(['form', 'laydate'], function () {
@@ -404,22 +402,22 @@ function deleteFund() {
                 '</div>',
             yes: function (index, layero) {
                 var type = $("#fundType").val();
-                if(type==0){
-                    if($('#count').text()=='3条'){
+                if (type == 0) {
+                    if ($('#count').text() == '3条') {
                         return
                     }
                     $('#interval').prev().remove();//删除
-                    $('#direct').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length);
-                }else {
-                    if($('#count').text()=='2条'){
+                    $('#direct').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length);
+                } else {
+                    if ($('#count').text() == '2条') {
                         return
                     }
                     $('#EXPENDITURE').children().last().remove();//删除
-                    $('#indirect').attr('rowspan',$('#EXPENDITURE').find('input[name=type][value='+type+']').length);
+                    $('#indirect').attr('rowspan', $('#EXPENDITURE').find('input[name=type][value=' + type + ']').length);
                 }
                 //改变单元格跨的行数
-                $('#thead').attr('rowspan',$('#EXPENDITURE').children().length);
-                $('#count').text($('#EXPENDITURE').find('input[name=type][value='+type+']').length + '条');//改变条数
+                $('#thead').attr('rowspan', $('#EXPENDITURE').children().length);
+                $('#count').text($('#EXPENDITURE').find('input[name=type][value=' + type + ']').length + '条');//改变条数
 
             }, btn2: function (index, layero) {
                 layer.close(index);
@@ -431,5 +429,191 @@ function deleteFund() {
             var length = $('#EXPENDITURE').find('input[name=type][value=' + data.value + ']').length;
             $('#count').text(length + '条');
         });
+    });
+}
+
+//创建用户
+function createUser(userName,node) {
+    layui.use(['form', 'laydate','util'], function () {
+        var form = layui.form
+            , laydate = layui.laydate
+            ,util = layui.util;
+        index = layer.open({
+            title: "创建用户",
+            btn: ['确定', '关闭'],
+            type: 1,
+            area: ['800px', '500px'],
+            content: '<form class="layui-form" action="" lay-filter="example" style="width: 80%;margin: 20px auto;">\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">手机</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="tel" name="username" value="' + userName + '" lay-verify="required|phone" autocomplete="off" class="layui-input">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">密码</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="password" value="123456" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">姓名</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" name="nickname" autocomplete="off" placeholder="请输入姓名" class="layui-input" lay-verify="required">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">性别</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="radio" name="sex" value="1" title="男" checked="">\n' +
+                '      <input type="radio" name="sex" value="0" title="女">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">出生时间</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input type="text" class="layui-input" placeholder="出生时间" name="birthDate" id="birthDate" readonly="readonly" lay-verify="required">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">证件类型</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '        <select class="form-control input-sm" name="idType" id="idType">\n' +
+                '          <option value="身份证">身份证</option>\n' +
+                '          <option value="护照">护照</option>\n' +
+                '        </select>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">证件号码</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input class="layui-input" placeholder="证件号码" type="text" name="idCard" lay-verify="required">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">职称</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <input class="layui-input" placeholder="单位/公司级别" type="text" name="academicTitle" lay-verify="required">\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">从事专业</label>\n' +
+                '    <div class="layui-input-block">\n' +
+                '       <div id="nowMajor"></div>\n' +
+                '    </div>\n' +
+                '  </div>\n' +
+                '  <div class="layui-form-item">\n' +
+                '    <label class="layui-form-label">工作单位</label>\n' +
+                '    <div class="layui-input-block">' +
+                '       <div id="deptName"></div>\n' +
+                '    </div>\n' +
+                '  </div>' +
+                '<button class="layui-btn sub" lay-submit lay-filter="addUser" id="addUser">提交</button>\n' +
+                '</form>',
+            yes: function (index, layero) {
+                $('#addUser').trigger('click');
+            }, btn2: function (index, layero) {
+                layer.close(index);
+            },
+            success: function(layero, index){
+                form.render();
+                //渲染日期组件
+                laydate.render({
+                    elem: '#birthDate'
+                    , type: 'year'
+                });
+                var selcetMajor = xmSelect.render({
+                    el: '#nowMajor',
+                    name: 'nowMajor',
+                    layVerify: 'required',
+                    layVerType: 'msg',
+                    radio: true,
+                    clickClose: true,
+                    data: []
+                })
+                $.ajax({
+                    type: 'get',
+                    url: domainName + '/api-label/label/tree/INDUSTRY_GROUP',
+                    async: false,
+                    success: function (data) {
+                        var d = [];
+                        $(data[0].child).each(function () {
+                            var obj = {name: this.content, value: this.sign};
+                            d.push(obj);
+                        })
+                        selcetMajor.update({
+                            data:d
+                        });
+                    }
+                })
+               var selcetDept = xmSelect.render({
+                    el: '#deptName',
+                   name: 'deptName',
+                   layVerify: 'required',
+                   layVerType: 'msg',
+                    radio: true,
+                    clickClose: true,
+                    filterable: true,
+                    remoteSearch: true,
+                    delay: 500,
+                   remoteMethod: function(val, cb, show){
+                       //这里如果val为空, 则不触发搜索
+                       if(!val){
+                           return cb([]);
+                       }
+                       //这里引入了一个第三方插件axios, 相当于$.ajax
+                       $.ajax({
+                           type: 'get',
+                           url: domainName + '/api-c/company/link',
+                           data: 'signName='+val,
+                           async: false,
+                           success: function (data) {
+                               var d = [];
+                               $(data.data).each(function () {
+                                    var obj = {name: this.signName, value: this.signName};
+                                    d.push(obj);
+                               })
+                               cb(d);
+                           }
+                       })
+                   }
+                })
+                //监听提交
+                form.on('submit(addUser)', function (data) {
+                    var d = data.field;
+                    var user = {username:d.username,password:d.password,nickname:d.nickname,sex:d.sex,type:'BACKEND'};
+                    var userInfo = {name:d.nickname,phone:d.username,sex:d.sex,birthDate:Date.parse(new Date(d.birthDate)),idType:d.idType,idCard:d.idCard,academicTitle:d.academicTitle,nowMajor:d.nowMajor,deptName:d.deptName};
+                    $.ajax({
+                        type : 'post',
+                        url : domainName + '/api-u/users-anon/register',
+                        contentType: "application/json; charset=utf-8",
+                        async: false,
+                        data : JSON.stringify(user),
+                        success : function(data) {
+                            userInfo.userId = data.id;
+                            node.val($('input[name=username]').val());
+                            addUserInfo(userInfo,node,index);
+                        }
+                    });
+                    return false;
+                });
+            }
+        })
+    });
+}
+//添加用户信息
+function addUserInfo(userInfo,node,index) {
+    $.ajax({
+        type : 'post',
+        url : domainName + '/project-user/user',
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        data : JSON.stringify(userInfo),
+        success : function(data) {
+            userInfoUtil(data,node);
+            layer.msg("成功", {shift: -1, time: 1000}, function(){
+                layer.close(index);
+            });
+        }
     });
 }

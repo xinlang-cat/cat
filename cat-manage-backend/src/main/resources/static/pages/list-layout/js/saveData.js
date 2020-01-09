@@ -27,7 +27,7 @@ function saveContent() {
 }
 var targets;
 function saveTarget() {//数量指标
-    var formdata = $("#form3").serializeJson();
+    var formdata = $("#form4").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/target/multi',
@@ -40,7 +40,7 @@ function saveTarget() {//数量指标
     });
 }
 function savePersonnel() {
-    var formdata = $("#form4").serializeArrayObj();
+    var formdata = $("#form3").serializeArrayObj();
     $(formdata).each(function(){
         var ids = [];
         var targetIds = this.targetIds.split(',');

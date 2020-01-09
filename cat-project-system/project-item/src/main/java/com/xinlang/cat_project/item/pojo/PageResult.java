@@ -1,12 +1,20 @@
 package com.xinlang.cat_project.item.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.util.List;
 
 /**
  * @author 梁应昌
  * 2019/9/27
  */
+@Data
+@ToString
 public class PageResult<T> {
+    private Integer statusCode; //状态码
     private Long total;// 总条数
     private Long totalPage;// 总页数
     private List<T> data;// 当前页数据
@@ -14,38 +22,17 @@ public class PageResult<T> {
     public PageResult() {
     }
 
-    public PageResult(Long total, List<T> data) {
+    public PageResult(Integer statusCode, Long total, List<T> data) {
+        this.statusCode = statusCode;
         this.total = total;
         this.data = data;
     }
 
-    public PageResult(Long total, Long totalPage, List<T> data) {
+    public PageResult(Integer statusCode, Long total, Long totalPage, List<T> data) {
+        this.statusCode = statusCode;
         this.total = total;
         this.totalPage = totalPage;
         this.data = data;
     }
 
-    public Long getTotal() {
-        return total;
-    }
-
-    public void setTotal(Long total) {
-        this.total = total;
-    }
-
-    public List<T> getData() {
-        return data;
-    }
-
-    public void setIData(List<T> data) {
-        this.data = data;
-    }
-
-    public Long getTotalPage() {
-        return totalPage;
-    }
-
-    public void setTotalPage(Long totalPage) {
-        this.totalPage = totalPage;
-    }
 }

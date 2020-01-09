@@ -82,6 +82,13 @@ public class CompanyController {
         return companyService.findByParams(params);
     }
 
+    @GetMapping("/company/link")
+    @LogAnnotation(module = "根据实体中的属性查询公司、机构")
+    @ApiOperation(value = "根据实体中的属性查询")
+    public Page<Company> link(@RequestParam Map<String,Object> params){
+        return companyService.link(params);
+    }
+
     @DeleteMapping("/company/{deptCode}")
     @LogAnnotation(module = "删除公司及公司用户中间表信息")
     @ApiOperation(value = "删除公司及公司用户中间表信息")
