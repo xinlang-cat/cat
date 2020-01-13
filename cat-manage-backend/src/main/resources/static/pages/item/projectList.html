@@ -7,9 +7,20 @@
 </head>
 <body>
 <div class="demoTable">
-    搜索ID：
     <div class="layui-inline">
-        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+        <input class="layui-input" name="username" id="username" autocomplete="off" placeholder="项目名">
+        <select class="form-control input-sm" id="status">
+            <option value="">全部</option>
+            <!--<option value="0">就绪</option>-->
+            <option value="1">进行中</option>
+            <option value="2">结题中</option>
+            <option value="3">已结题</option>
+            <option value="-1">废弃</option>
+        </select>
+        <select class="form-control input-sm" id="category">
+            <option value="">全部</option>
+            <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
+        </select>
     </div>
     <button class="layui-btn" data-type="reload">搜索</button>
 </div>
@@ -57,11 +68,17 @@
                 },
                 {
                     field: 'undertaker',
-                    title: '承担单位',sort: true
+                    title: '承担单位',
+                    templet: function (d) {
+                        return initCompanySelect(d.undertaker);
+                    },sort: true
                 },
                 {
                     field: 'administrator',
-                    title: '管理单位',sort: true
+                    title: '管理单位',
+                    templet: function (d) {
+                        return initCompanySelect(d.administrator);
+                    },sort: true
                 },
                 {
                     field: 'start_date',
@@ -81,7 +98,20 @@
                 },
                 {
                     field: 'status',
-                    title: '状态',sort: true
+                    title: '状态',
+                    templet: function (d) {
+                        if(d.statusta==0){
+                            return "就绪";
+                        }else if(d.status==1){
+                            return "进行中";
+                        }else if(d.status==2){
+                            return "结题中";
+                        }else if(d.status==3){
+                            return "已结题";
+                        }
+                        return "废弃";
+                    },
+                    sort: true
                 },
                 {
                     fixed: 'right',
@@ -89,11 +119,14 @@
                     toolbar: '#barDemo'
                 }
             ]],
-            page: true
+            page: true,
+            id: 'testReload'
         });
         var $ = layui.$, active = {
             reload: function(){
-                var demoReload = $('#demoReload');
+                var demoReload = $('#username').val();
+                var category = $('#category').val();
+                var status = $('#status').val();
 
                 //执行重载
                 table.reload('testReload', {
@@ -101,9 +134,9 @@
                         curr: 1 //重新从第 1 页开始
                     }
                     ,where: {
-                        key: {
-                            id: demoReload.val()
-                        }
+                            item_name: demoReload,
+                            category:category,
+                            status:status
                     }
                 }, 'data');
             }
@@ -124,6 +157,19 @@
             async: false,
             success: function (data) {
                 text = data[0].content;
+            }
+        });
+        return text;
+    }
+    /*初始化公司、机构*/
+    function initCompanySelect(code) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/' + code,
+            async: false,
+            success: function (data) {
+                text = data.signName;
             }
         });
         return text;
