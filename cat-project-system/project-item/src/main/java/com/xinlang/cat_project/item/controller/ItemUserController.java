@@ -38,10 +38,10 @@ public class ItemUserController {
     @PostMapping("/one")
     public ResponseEntity<Void> saveItemUser(@RequestBody ItemUser itemUser) {
         itemUserService.save(itemUser);
-        List<Integer> targetIds = itemUser.getTargetIds();
+        /*List<Integer> targetIds = itemUser.getTargetIds();
         for (Integer targetId : targetIds) {
             itemUserService.insertTargetUser(itemUser.getItem_id(),targetId,itemUser.getUser_id());
-        }
+        }*/
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -82,7 +82,7 @@ public class ItemUserController {
     @Transactional
     @PutMapping("/multi")
     public ResponseEntity<Void> updateItemUsers(@RequestBody List<ItemUser> itemUsers){
-        //先删除所有研究内容
+        //先删除所有
         itemUserService.deleteItemUserByItemId(itemUsers.get(0).getItem_id());
         //重新添加
         itemUserService.saveitemUsers(itemUsers);
