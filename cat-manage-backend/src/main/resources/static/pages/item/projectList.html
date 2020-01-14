@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目列表</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="demoTable">
+    搜索ID：
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+<table class="layui-hide" id="test"></table>
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</body>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+
+<script>
+    layui.use(['table', 'util'], function () {
+        var table = layui.table,
+            util = layui.util;
+
+        table.render({
+            elem: '#test'
+            , url: domainName + '/project-item/item/basic/page'
+            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , toolbar: true
+            , request: {
+                pageName: 'page' //页码的参数名称，默认：page
+                , limitName: 'rows' //每页数据量的参数名，默认：limit
+            }
+            , response: {
+                statusName: 'statusCode' //规定数据状态的字段名称，默认：code
+                , statusCode: 200 //重新规定成功的状态码为 200，table 组件默认为 0
+                , countName: 'total' //规定数据总数的字段名称，默认：count
+            }
+            , cols: [[
+                {field: 'id', width: 80, title: 'ID', sort: true},
+                {field: 'item_name', title: '项目名称'},
+                {field: 'contract_no', title: '合同编号'},
+                {
+                    field: 'category',
+                    title: '计划类别',
+                    templet: function (d) {
+                        return analysisLableContent(d.category);
+                    },sort: true
+                },
+                {
+                    field: 'undertaker',
+                    title: '承担单位',sort: true
+                },
+                {
+                    field: 'administrator',
+                    title: '管理单位',sort: true
+                },
+                {
+                    field: 'start_date',
+                    title: '开始时间',
+                    templet: function (d) {
+                        return util.toDateString(d.start_date, 'yyyy-MM-dd');
+                    },
+                    sort: true
+                },
+                {
+                    field: 'end_date',
+                    title: '结束时间',
+                    templet: function (d) {
+                        return util.toDateString(d.end_date, 'yyyy-MM-dd');
+                    },
+                    sort: true
+                },
+                {
+                    field: 'status',
+                    title: '状态',sort: true
+                },
+                {
+                    fixed: 'right',
+                    title: '操作',
+                    toolbar: '#barDemo'
+                }
+            ]],
+            page: true
+        });
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+
+    /*解析标签名称*/
+    function analysisLableContent(sign) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+    }
+</script>
+</html>

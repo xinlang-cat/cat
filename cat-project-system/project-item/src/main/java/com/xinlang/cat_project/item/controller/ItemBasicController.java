@@ -30,27 +30,21 @@ public class ItemBasicController {
 
     /**
      * 查询项目，分页查询
-     * @param page 页数
-     * @param rows 行数
-     * @param sortBy 排序依据 (预留，暂时没用到)
-     * @param desc 排序 (预留，暂时没用到)
+     * @param page 当前页
+     * @param rows 每页大小
+     * @param sortBy 排序字段 (预留，暂时没用到)
+     * @param desc 是否为降序 (预留，暂时没用到)
      * @param params 参数
      * @return
      */
     @LogAnnotation(module = "获取项目列表")
     @GetMapping("/page")
-    public ResponseEntity<PageResult<ItemBasic>> getItemAll(@RequestParam(value = "start", defaultValue = "1") Integer page,
-                                                            @RequestParam(value = "length", defaultValue = "10") Integer rows,
+    public ResponseEntity<PageResult<ItemBasic>> getItemAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                                                             @RequestParam(value = "sortBy", required = false) String sortBy,
                                                             @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                             @RequestParam(required = false) Map<String, Object> params){
 
-        if (page==0){
-            page++;
-        }else {
-            page/=10;
-            page++;
-        }
         PageResult<ItemBasic> result = itemBasicService.queryList(page,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
     }
@@ -74,12 +68,9 @@ public class ItemBasicController {
         List<ItemBasic> basic = itemBasicService.findListByParams(params,ItemBasic.class);
         return ResponseEntity.ok(basic);
     }
-    /**
-     * 获取当前用户的公司项目数据
-     * @return
-     */
-    @ApiOperation(value = "查询当前用户的公司项目")
-    @LogAnnotation(module = "查询当前用户的公司项目")
+
+    @ApiOperation(value = "查询当前用户相关的项目")
+    @LogAnnotation(module = "查询当前用户相关的项目")
     @GetMapping("/company")
     public ResponseEntity<List<ItemBasic>> getCompanyItem(){
         List<ItemBasic> basic = itemBasicService.queryCompanyItem();

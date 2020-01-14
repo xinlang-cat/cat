@@ -26,8 +26,8 @@ function saveContent() {
     });
 }
 var targets;
-function saveTarget() {//数量指标
-    var formdata = $("#form3").serializeJson();
+function saveTarget() {
+    var formdata = $("#form4").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/target/multi',
@@ -40,26 +40,7 @@ function saveTarget() {//数量指标
     });
 }
 function savePersonnel() {
-    var formdata = $("#form4").serializeArrayObj();
-    $(formdata).each(function(){
-        var ids = [];
-        var targetIds = this.targetIds.split(',');
-        alert(targetIds);
-        $(targetIds).each(function(){
-            var target = this;
-            $(targets).each(function(){
-                if(target==this.target){
-                    ids.push(this.id);
-                }
-            });
-        });
-        this.targetIds=ids;
-    });
-    if(formdata.length>1){
-        formdata = JSON.stringify(formdata)
-    }else {
-        formdata = "[" + JSON.stringify(formdata) + "]"
-    }
+    var formdata = $("#form3").serializeJson();
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/user/multi',

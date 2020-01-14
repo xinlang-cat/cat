@@ -27,13 +27,10 @@
                                     <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showWork()">
                                         <i class="layui-icon">&#xe615;</i>查看工作总结
                                     </button>
-                                    <button class="layui-btn layui-btn-sm" onclick="work()" permission="mail:save">
-                                        <i class="layui-icon">&#xe608;</i> 工作总结
-                                    </button>
-                                    <button class="layui-btn layui-btn-sm" onclick="back()" permission="mail:save">返回 </button>
 	                   				<button class="layui-btn layui-btn-sm" onclick="addSummary()" permission="mail:save">
                                       <i class="layui-icon">&#xe608;</i> 添加
                                     </button>
+                                    <button class="layui-btn layui-btn-sm" onclick="back()" permission="mail:save">返回 </button>
 	                   			</td>
 	                   		</tr> 
 	                    </table>
@@ -75,7 +72,7 @@
 var pers = checkPermission();
 var example;
 var item_id = getUrlParam("item_id");
-var item_name = getUrlParam("item_name");
+/*var item_name = getUrlParam("item_name");*/
 layui.use(['layer','util'], function(){
     var layer = layui.layer;
     var util = layui.util;
@@ -137,15 +134,18 @@ layui.use(['layer','util'], function(){
                     	"defaultContent": "",
                     	"render": function (data, type, row) {
                     		var id = row['id'];
-                    		var userId = row["userId"];
+                    		var userId = row["createUserId"];
                     		var itemId = row["itemId"];
                     		var href = "updateSummary.html?id=" + id;
                             var edit =  buttonEdit(href, "", pers);
                             var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
-                            btn.attr("onclick", "showDetail(" +userId+","+itemId+")");
+                            var report = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
+                            btn.attr("onclick", "showDetail(" +id+")");
+                            report.attr("onclick", "generate(" +id+","+itemId+")")
                             var showDetail = btn.prop("outerHTML");
+                            var showReport = report.prop("outerHTML");
                             var del = buttonDel(id,"",pers);
-                            return  edit+showDetail +del;
+                            return  edit+showDetail +del+showReport;
                       	}
                     },
                 ],
@@ -172,8 +172,9 @@ function del(id){
 }
 
 function addSummary() {
-    location.href='addSummary.html?itemId='+item_id+'&itemName='+item_name;
+    location.href='addSummary.html?itemId='+item_id/*+'&itemName='+item_name*/;
 }
+
 function work() {
     location.href='addWorkSummary.html?itemId='+item_id;
 }
@@ -182,16 +183,29 @@ function back() {
 }
 
 function showWork() {
-    location.href='workSummaryList.html?item_id='+item_id;
+    location.href='workSummaryList.html?item_id='+item_id/*+'&itemName='+item_name*/;
 }
-function showDetail(userId,itemId){
+var h = $(window).height()-100;
+var w = $(window).width()-200;
+function generate(id,itemId) {
+    layer.open({
+        title:"详情",
+        type: 2,
+        area: [w + 'px', h + 'px'],
+        maxmin: true,
+        shadeClose: true,
+        content: ['generateSkillReport.html?id='+id+'&itemId='+itemId]
+
+    });
+}
+function showDetail(id){
 	layer.open({
 		title:"详情",
-		type: 2,
-		area: ['800px', '600px'],
-		maxmin: true,
-		shadeClose: true,
-		content: ['detail.html?userId='+userId+"&itemId="+itemId]
+        type: 2,
+        area: [w + 'px', h + 'px'],
+        maxmin: true,
+        shadeClose: true,
+		content: ['detail.html?id='+id]
 			
 	});
 }

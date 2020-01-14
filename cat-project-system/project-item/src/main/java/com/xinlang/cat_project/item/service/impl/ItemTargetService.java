@@ -20,6 +20,7 @@ import java.util.List;
 
 @Service
 @Slf4j
+@Transactional
 public class ItemTargetService extends BaseService<ItemTarget> implements IItemTargetService {
 
     @Autowired
@@ -38,6 +39,12 @@ public class ItemTargetService extends BaseService<ItemTarget> implements IItemT
     @Override
     public void saveTargets(List<ItemTarget> itemTargets) {
         int count = itemTargetMapper.insertList(itemTargets);
+        for (ItemTarget itemTarget : itemTargets) {
+            String userIds = itemTarget.getUserIds();
+            for (String userId : userIds.split(",")) {
+                itemUserMapper.insertTargetUser(itemTarget.getItem_id(),itemTarget.getId(),Integer.parseInt(userId));
+            }
+        }
         if (count < 1){
             throw new ItemException(ExceptionEnum.SAVE_ERROR);
         }

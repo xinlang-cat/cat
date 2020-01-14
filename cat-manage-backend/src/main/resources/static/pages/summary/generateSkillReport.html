@@ -39,11 +39,120 @@
 <div class="content">
 	<div style="height: 60px;width: 100%;" class="layui-row">
 
-		<p style="text-align: center;line-height:60px;font-size: 50px" >项目工作总结报告</p>
+		<p style="text-align: center;line-height:60px;font-size: 50px" >项目技术总结报告</p>
 	</div>
 
 	<div class="module">
 		<form class="layui-form" id="form2">
+			<table class="layui-table">
+				<colgroup>
+					<col width="3%">
+					<col width="10%">
+					<col width="37%">
+					<col width="10%">
+					<col width="40%">
+				</colgroup>
+				<thead>
+				<tr>
+					<th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+					<th colspan="4"><br></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td rowspan="9" class="table-info">基本信息</td>
+					<td>合同编号：</td>
+					<td>
+						<input type="hidden" name="id" id="item_id">
+						<p id="contract_no_text"></p>
+						<input class="form-control hidden" lay-verify="required" placeholder="请输入合同编号" type="text"
+							   id="contract_no" name="contract_no">
+					</td>
+					<td>计划类别：</td>
+					<td>
+						<p id="category_text"></p>
+						<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="category"
+								name="category">
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>项目名称：</td>
+					<td>
+						<p id="item_name_text"></p>
+						<input class="form-control hidden" lay-verify="required" placeholder="请输入项目名称" type="text"
+							   id="item_name" name="item_name">
+					</td>
+					<td>委托单位：</td>
+					<td>
+						<p id="consignor_text"></p>
+						<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="consignor"
+								name="consignor">
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>承担单位：</td>
+					<td>
+						<p id="undertaker_text"></p>
+						<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="undertaker"
+								name="undertaker">
+						</select>
+					</td>
+					<td>管理单位：</td>
+					<td>
+						<p id="administrator_text"></p>
+						<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="administrator"
+								name="administrator">
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>开始时间：</td>
+					<td>
+						<p id="start_date_text"></p>
+						<input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"
+							   id="start_date" name="start_date" readonly>
+					</td>
+					<td>结束时间：</td>
+					<td>
+						<p id="end_date_text"></p>
+						<input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"
+							   id="end_date" name="end_date" readonly>
+					</td>
+				</tr>
+				<tr>
+					<td>下达文号：</td>
+					<td>
+						<p id="item_number_text"></p>
+						<input class="form-control hidden" lay-verify="required" placeholder="请输入下达文号" type="text"
+							   id="item_number" name="item_number">
+					</td>
+					<td colspan="2"></td>
+
+				</tr>
+				</tbody>
+			</table>
+			<table class="layui-table">
+				<colgroup>
+					<col width="3%">
+					<col width="10%">
+					<col width="87%">
+				</colgroup>
+				<thead>
+				<tr>
+					<th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+					<th>序号</th>
+					<th>标题和内容</th>
+				</tr>
+				</thead>
+				<tbody id="mian-content">
+				<tr>
+					<td rowspan="1" class="table-info">主要研究内容</td>
+
+				</tr>
+				</tbody>
+			</table>
 			<table class="layui-table">
 				<colgroup>
 
@@ -61,14 +170,14 @@
 							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" readonly="readonly"></textarea>
 					</td>
 				</tr>
-				<tr>
+				<!--<tr>
 					<td class="table-info">研究内容</td>
 					<td>
 
 					 <textarea placeholder="请输入内容" class="layui-textarea" name="researchContents" id="researchContents" data-bv-notempty="true"
 							   data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" readonly="readonly"></textarea>
 					</td>
-				</tr>
+				</tr>-->
 				<tr>
 					<td class="table-info">技术路线</td>
 					<td>
@@ -129,11 +238,15 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../list-layout/js/projecDetailst.js"></script>
 
 
 <script type="text/javascript">
 	var layedit, index;
 	var id = getUrlParam("id");
+	var itemId = getUrlParam("itemId");
+	getBasic(itemId);
+	getContent(itemId);
 	var h = $(window).height() - 100;
 	layui.use(['layedit','upload'], function(){
 		layedit = layui.layedit;

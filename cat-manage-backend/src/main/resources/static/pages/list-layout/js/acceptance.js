@@ -95,7 +95,7 @@ function getItem_user(id) {
                     var name = getResponsibilityName(this);
                     names.push(name.content);
                 })
-                var userInfo = getUserInfo(this.itemUser.user_id);
+                var userInfo = getUserInfo(this.user_id);
                 var sex;
                 if (userInfo.sex == 0) {
                     sex = '女';
