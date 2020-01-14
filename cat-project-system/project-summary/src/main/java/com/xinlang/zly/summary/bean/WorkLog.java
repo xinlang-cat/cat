@@ -23,7 +23,7 @@ public class WorkLog implements Serializable {
     private Integer createUserId;//创建人id
     private String createUserName;//创建人名字
     private Integer itemId;//项目id
-<<<<<<< HEAD
+
     private String plan;//完成进度百分比
 =======
     private Integer plan;//指标完成进度

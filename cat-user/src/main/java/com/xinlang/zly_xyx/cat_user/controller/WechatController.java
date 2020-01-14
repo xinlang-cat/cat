@@ -51,7 +51,7 @@ public class WechatController {
         if (StringUtils.isBlank(state)) {
             throw new IllegalArgumentException("state不能为空");
         }
-<<<<<<< HEAD
+
         String toUrl = "http://192.168.5.64/api-b/pages/wechat/index.html";
 =======
         String toUrl = "http://192.168.5.24/api-b/pages/wechat/index.html";
