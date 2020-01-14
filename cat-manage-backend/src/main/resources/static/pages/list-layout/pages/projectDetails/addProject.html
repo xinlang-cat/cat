@@ -234,14 +234,14 @@
                     <th>职称</th>
                     <th>从事专业</th>
                     <th>工作单位</th>
-                    <th>研究开发中的责任分工</th>
+                    <th>手机号码</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td rowspan="5" class="table-info">项目组人员信息</td>
                     <td>
-                        <input class="form-control" placeholder="姓名" type="text" readonly>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
                         <input type="hidden" name="item_id">
                         <input type="hidden" name="user_id">
                     </td>
@@ -258,7 +258,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input class="form-control" placeholder="姓名" type="text" readonly>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
                         <input type="hidden" name="item_id">
                         <input type="hidden" name="user_id">
                     </td>
@@ -274,7 +274,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input class="form-control" placeholder="姓名" type="text" readonly>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
                         <input type="hidden" name="item_id">
                         <input type="hidden" name="user_id">
                     </td>
@@ -290,7 +290,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input class="form-control" placeholder="姓名" type="text" readonly>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
                         <input type="hidden" name="item_id">
                         <input type="hidden" name="user_id">
                     </td>
@@ -306,7 +306,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input class="form-control" placeholder="姓名" type="text" readonly>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
                         <input type="hidden" name="item_id">
                         <input type="hidden" name="user_id">
                     </td>
@@ -343,23 +343,25 @@
                     <col width="10%">
                     <col width="20%">
                     <col width="7%">
-                    <col width="17%">
-                    <col width="17%">
+                    <col width="12%">
+                    <col width="12%">
                     <col width="26%">
+                    <col width="10%">
                 </colgroup>
                 <thead>
                 <tr>
                     <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th colspan="6"><br></th>
+                    <th colspan="7"><br></th>
                 </tr>
                 <tr>
                     <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
                     <th>类型</th>
-                    <th>内容</th>
-                    <th>数量</th>
+                    <th colspan="2">内容</th>
+                    <!--<th>数量</th>-->
                     <th>开始时间</th>
                     <th>结束时间</th>
                     <th>地点</th>
+                    <th>实施人员</th>
                 </tr>
                 </thead>
                 <tbody id="INDICATORS">
@@ -367,16 +369,14 @@
                     <td rowspan="13" class="table-info">考核指标</td>
                 </tr>
                 <tr>
-                    <td rowspan="3">技术指标</td>
-                    <td><input type="hidden" name="item_id">
+                    <td rowspan="1">技术指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="TECHNICAL_INDICATORS">
                         <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
                                name="start_date" readonly></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
@@ -391,68 +391,17 @@
                             <i class="layui-icon">&#xe669;</i>
                         </button>
                     </td>
+                    <td><div class="userIds"></div></td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="TECHNICAL_INDICATORS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="TECHNICAL_INDICATORS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="3">经济指标</td>
-                    <td><input type="hidden" name="item_id">
+                    <td rowspan="1">经济指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="ECONOMIC_INDICATORS">
                         <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
                                name="start_date" readonly></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
@@ -467,68 +416,17 @@
                             <i class="layui-icon">&#xe669;</i>
                         </button>
                     </td>
+                    <td><div class="userIds"></div></td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="ECONOMIC_INDICATORS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="ECONOMIC_INDICATORS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="3">人才队伍建设指标</td>
-                    <td><input type="hidden" name="item_id">
+                    <td rowspan="1">人才队伍建设指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="INDICATORS_OF_TALENT_TEAM_CONS">
                         <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
                                name="start_date" readonly></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
@@ -543,67 +441,17 @@
                             <i class="layui-icon">&#xe669;</i>
                         </button>
                     </td>
+                    <td><div class="userIds"></div></td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="INDICATORS_OF_TALENT_TEAM_CONS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="INDICATORS_OF_TALENT_TEAM_CONS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="content" value=" ">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
-                            <option value=''>请选择</option>
-                        </select></td>
-                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
-                               name="count"></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="3">其他指标</td>
+                    <td rowspan="1">其他指标</td>
                     <td colspan="2"><input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="OTHER_INDICATORS">
                         <input type="hidden" name="status" value="0">
                         <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
                         <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
                                   name="content"></textarea></td>
-                    <!--<td><input class="form-control" placeholder="数量" type="text"
-                               name="count" value=" " readonly></td>-->
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
                                name="start_date" readonly></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
@@ -618,16 +466,18 @@
                             <i class="layui-icon">&#xe669;</i>
                         </button>
                     </td>
+                    <td><div class="userIds"></div></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="OTHER_INDICATORS">
+                    <td rowspan="1">数量指标</td>
+                    <td><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="QUANTITY_INDICATORS">
                         <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="target" value=" ">
-                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
-                                  name="content"></textarea></td>
-                    <!--<td><input class="form-control" placeholder="数量" type="text"
-                               name="count" value=" " readonly></td>-->
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="数量" type="text"
+                               name="count"></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
                                name="start_date" readonly></td>
                     <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
@@ -642,30 +492,7 @@
                             <i class="layui-icon">&#xe669;</i>
                         </button>
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="hidden" name="item_id">
-                        <input type="hidden" name="type" value="OTHER_INDICATORS">
-                        <input type="hidden" name="status" value="0">
-                        <input type="hidden" name="target" value=" ">
-                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
-                                  name="content"></textarea></td>
-                    <!--<td><input class="form-control" placeholder="数量" type="text"
-                               name="count" value=" " readonly></td>-->
-                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
-                               name="start_date" readonly></td>
-                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
-                               name="end_date" readonly></td>
-                    <td>
-                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
-                            <option value=''>请选择</option>
-                        </select>
-                        <input type="hidden" name="district">
-                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
-                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
-                            <i class="layui-icon">&#xe669;</i>
-                        </button>
-                    </td>
+                    <td><div class="userIds"></div></td>
                 </tr>
                 </tbody>
             </table>
@@ -1011,9 +838,18 @@
     initCompanySelect();
     initProvinceSelect();
     queryDeptCode();
-    initUserSelect(deptCode, $('select[name=user_id]'));
+    //initUserSelect(deptCode, $('select[name=user_id]'));
     initSelectData('BUDGET_SUBJECT', $('select[name=subject]'));
     initSelectData('FUNDING_SOURCE', $('select[name=source]'));
+    $('.userIds').each(function () {
+        xmSelect.render({
+            name: 'userIds',
+            layVerify: 'required',
+            layVerType: 'msg',
+            el: $(this)[0],
+            data: []
+        })
+    });
 
     //监听地点选择
     $(".content").on('change', '.site', function () {
@@ -1056,7 +892,6 @@
                 contentType: "application/json; charset=utf-8",
                 data: 'username='+userName,
                 success: function (data) {
-                    console.log(data)
                     userId = data.id;
                 }
             });
@@ -1065,6 +900,22 @@
         }
         if(userId != undefined){
             queryUserInfo(userId, $(this));
+            var d = [];
+            $('input[name=user_id]').each(function () {
+                var UId = $(this).val();
+                console.log(UId)
+                if(UId!=''){
+                    var name = $(this).prev().prev().val();
+                    var data = {name: name, value: UId, };
+                    d.push(data)
+                }
+            })
+            $(xmSelect.get()).each(function () {// 给指标的实施人员选择赋值
+                this.update({
+                    data: d
+                })
+            });
+
         }else {
             node.parent().prevAll().eq(6).children('input').eq(0).val('');
             node.parent().prevAll().eq(5).children('input').eq(0).val('');
@@ -1083,9 +934,11 @@
             });
         }
     });
-    //监听负责分工
-    $(".content").on('click', '.targetIds', function () {
-        var thisInput = $(this);
+    /*//监听负责分工
+    $(".content").on('click', '.userIds', function () {
+        console.log(xmSelect.get($(this)[0],true))
+
+        /!*var thisInput = $(this);
         layui.use(['form', 'layer'], function () {
             var form = layui.form;
             var layer = layui.layer;
@@ -1122,8 +975,8 @@
                 }
             })
             form.render('checkbox');
-        })
-    });
+        })*!/
+    });*/
     //定时任务,监听预算的合计
     var ref = setInterval(function () {
         var total = 0;

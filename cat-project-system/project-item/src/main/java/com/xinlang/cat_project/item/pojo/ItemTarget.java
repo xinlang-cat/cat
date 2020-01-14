@@ -34,5 +34,5 @@ class ItemTarget {
     private Integer status;
 
     @Transient
-    private List<Integer> userIds;
+    private String userIds;
 }
