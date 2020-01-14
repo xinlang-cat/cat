@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/details.css">
+</head>
+
+<style>
+    * {
+        color: black;
+    }
+
+    table tr {
+        border: 1px solid #C1D3E3;
+    }
+
+    table td {
+        background: #e8e9fd;
+    }
+</style>
+</head>
+<body>
+<!-- 基本信息-->
+<div
+        style="background: rgba(57, 61,73, 0.1);width: 80%;margin: 0 auto;padding: 10px;border:solid 2px #1AA094;margin-top: 20px;border-radius: 5px;">
+        <div style="position: relative;">
+            <div class="content">
+                <table class="layui-table" id="basis">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="40%">
+                    </colgroup>
+                    <div style="margin-top: 5px;position: absolute;margin-left: 92.4%;z-index: 99;">
+                        <button onclick="update_basic();" type="button"
+                                class="layui-btn layui-btn-primary layui-btn-sm">修改
+                        </button>
+                    </div>
+                    <thead>
+                    <th style="text-align: center;font-size: 16px;background: #1AA094;font-weight: 600;color: #FFF;"
+                        colspan="4">基本信息
+                    </th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>合同编号：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="合同编号" type="text"
+                           id="contract_no"        name="contract_no" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="合同编号 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>计划类别：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="计划类别" type="text"
+                             id="category"      name="category" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="计划类别 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>项目名称：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="项目名称" type="text"
+                              id="item_name"     name="item_name" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="项目名称 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>委托单位：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="委托单位" type="text"
+                              id="consignor"     name="consignor" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="委托单位 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>承担单位：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="承担单位" type="text"
+                            id="undertaker"       name="undertaker" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="承担单位 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>管理单位：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="管理单位" type="text"
+                              id="administrator"     name="administrator" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="管理单位 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>下达文号：</td>
+                        <td>
+                            <div style="border: none;" class="form-control" placeholder="下达文号" type="text"
+                             id="item_number"      name="item_number" maxlength="50" data-bv-notempty="true"
+                                 data-bv-notempty-message="下达文号 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>开始时间：</td>
+                        <td>
+                            <div style="border: none;" class="form-control " placeholder="开始时间"
+                               id="start_date"    type="text"  maxlength="50" id="start"
+                                 data-bv-notempty="true" data-bv-notempty-message="开始时间 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>结束时间：</td>
+                        <td>
+                            <div style="border: none;" class="form-control " placeholder="结束时间"
+                            id="end_date"       type="text"  maxlength="50" id="end" data-bv-notempty="true"
+                                 data-bv-notempty-message="结束时间 不能为空"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>总体目标：</td>
+                        <td colspan="3">
+                                    <div style="border: none;" placeholder="总体目标" class="layui-textarea"
+                                       id="outline"       name="outline" style="border-color: #ccc;" data-bv-notempty="true"
+                                              data-bv-notempty-message=" 内容不能为空"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+</div>
+</body>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script type="text/javascript" src="../js/projecDetailst.js"></script>
+<script>
+    var id=22;
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+            });
+        });
+    })
+
+$(function () {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/basic/list',
+        data: "id="+id,
+        async:false,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var d = data[0];
+            $("#contract_no").text(d.contract_no);
+            $("#category").text(d.category);
+            $("#item_name").text(d.item_name);
+            $("#consignor").text(d.consignor);
+            $("#undertaker").text(d.undertaker);
+            $("#administrator").text(d.administrator);
+            $("#item_number").text(d.item_number);
+            $("#start_date").text(d.start_date);
+            $("#end_date").text(d.end_date);
+            $("#outline").text(d.outline);
+        }
+    })
+})
+    function update_basic() {
+        layer.open({
+            title:"修改基本信息",
+            type:2,
+            area:['750px','450px'],
+            maxin:true,
+            shadeClose:true,
+            content:['update/update_basic.html?id='+id]
+        });
+
+    }
+</script>
+</html>

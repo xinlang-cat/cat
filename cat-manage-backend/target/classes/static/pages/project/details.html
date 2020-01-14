@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <style>
+        .title {
+            text-align: center;
+            line-height: 30px;
+            color: black;
+            font-weight: 600;
+            background-color: #e4e4e4;
+            height: 30px;
+        }
+
+        .table {
+            margin: 0;
+        }
+
+        table tr td {
+            text-align: center;
+        }
+
+        .btn {
+            margin: 0 auto;
+        }
+
+        p {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .box {
+            border: 2px solid #ddd;
+            border-top: none;
+        }
+
+        .return {
+            position: fixed;
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<a id="return_item" style="position: fixed;margin-left: 5px;" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe65c;</i></a>
+<div class="layui-row">
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+    layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+        <p class="title">项目信息</p>
+        <table class="table table-striped table-bordered table-hover">
+            <colgroup>
+                <col width="20">
+                <col width="110">
+                <col width="20">
+                <col width="110">
+            </colgroup>
+            <thead>
+            <tr>
+                <th>合同编号</th>
+                <td>
+                    <p id="contract_number"></p>
+                </td>
+                <th>计划类别</th>
+                <td>
+                    <p id="plan_category"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>项目名称</th>
+                <td>
+                    <p id="item_name"></p>
+                </td>
+                <th>计划批次</th>
+                <td>
+                    <p id="batch"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>委托单位</th>
+                <td>
+                    <p id="consignor"></p>
+                </td>
+                <th>承担单位</th>
+                <td>
+                    <p id="undertaker"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>管理单位</th>
+                <td>
+                    <p id="supervisor_dept"></p>
+                </td>
+                <th>管理代表</th>
+                <td>
+                    <p id="supervisor"></p>
+                </td>
+            </tr>
+            <tr>
+                <th>实施地点</th>
+                <td>
+                    <p id="district"></p>
+                </td>
+                <th>合同文件</th>
+                <td>
+                    <a id="contract_file" href=""></a>
+                </td>
+                <!--改成按钮-->
+            </tr>
+            <tr>
+                <th>开始时间</th>
+                <td>
+                    <p id="start_dateStr"></p>
+                </td>
+                <th>结束时间</th>
+                <td>
+                    <p id="end_dateStr"></p>
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+    layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1"
+         style="border: 2px solid #ddd;border-top: none;">
+        <div class="layui-row">
+            <div style="font-weight: 600; padding: 8px;"
+                 class="layui-col-xs12 layui-col-sm12 layui-col-md12 layui-col-lg12">总体目标
+            </div>
+            <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+                        layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+                <p style="font-weight: 600;" id="overall_objective">
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="layui-row">
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+        <p class="title">主要研究内容</p>
+        <table class="table table-striped table-bordered table-hover"
+               style="width:100%">
+            <colgroup>
+                <col width="15%">
+                <col width="75%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th style="text-align: center;font-weight: 600;">标题</th>
+                    <th style="text-align: center;font-weight: 600;">内容</th>
+                    <th style="text-align: center;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>标题</td>
+                    <td>内容</td>
+                    <td>操作</td>
+                </tr>
+
+
+                <tr>
+                    <th style="text-align: center;font-weight: 600;">考核指标</th>
+                    <th style="text-align: center;font-weight: 600;">数量</th>
+                    <th style="text-align: center;">备注</th>
+                    <th style="text-align: center;font-weight: 600;">地点</th>
+                    <th style="text-align: center;font-weight: 600;">时间</th>
+                    <th style="text-align: center;">操作</th>
+                </tr>
+            </tbody>
+        </table>
+
+        </table>
+    </div>
+</div>-->
+
+<div class="layui-row">
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+        <p class="title">主要研究内容</p>
+        <button style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+                class="layui-btn layui-btn-sm" id="add_content">
+            <p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe608;</i></p>
+        </button>
+        <table class="table table-striped table-bordered table-hover"
+               style="width:100%">
+            <colgroup>
+                <col width="15%">
+                <col width="75%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="text-align: center;font-weight: 600;">标题</th>
+                <th style="text-align: center;font-weight: 600;">内容</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="table_content">
+
+            </tbody>
+        </table>
+
+        <br>
+        <p class="title">考核指标</p>
+        <button style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+                class="layui-btn layui-btn-sm" id="add_Target">
+            <p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe608;</i></p>
+        </button>
+        <table class="table table-striped table-bordered table-hover"
+               style="width:100%">
+            <colgroup>
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+                <col width="15%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th colspan="10" style="text-align: center;"><p>数量指标</th>
+            </tr>
+            <tr>
+                <th style="text-align: center;font-weight: 600;">考核指标</th>
+                <th style="text-align: center;font-weight: 600;">数量</th>
+                <th style="text-align: center;">单位</th>
+                <th style="text-align: center;font-weight: 600;">地点</th>
+                <th style="text-align: center;font-weight: 600;">开始时间</th>
+                <th style="text-align: center;font-weight: 600;">结束时间</th>
+                <th style="text-align: center;font-weight: 600;">人员</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+            </tbody>
+            <tbody id="getTatget">
+
+
+            </tbody>
+        </table>
+
+        <button style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+                class="layui-btn layui-btn-sm" id="add_Target_no">
+            <p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe608;</i></p>
+        </button>
+        <table class="table table-striped table-bordered table-hover"
+               style="width:100%">
+            <colgroup>
+                <col width="15%">
+                <col width="20%">
+                <col width="15%">
+                <col width="15%">
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <th colspan="10" style="text-align: center;"><p>非数量指标</th>
+            </tr>
+            <tr>
+                <th style="text-align: center;font-weight: 600;">考核指标</th>
+                <th style="text-align: center;font-weight: 600;">内容</th>
+                <th style="text-align: center;font-weight: 600;">地点</th>
+                <th style="text-align: center;font-weight: 600;">开始时间</th>
+                <th style="text-align: center;font-weight: 600;">结束时间</th>
+                <th style="text-align: center;font-weight: 600;">人员</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+            </tbody>
+            <tbody id="getTatget_no">
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div style="margin-top: 10px;" class="layui-row">
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+        <p class="title">项目资金</p>
+        <button style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+                class="layui-btn layui-btn-sm" id="addFund">
+            <p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe608;</i></p>
+        </button>
+        <table class="table table-striped table-bordered table-hover">
+            <colgroup>
+                <col width="30%">
+                <col width="20%">
+                <col width="30%">
+                <col width="9%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="text-align: center;">来源</th>
+                <th style="text-align: center;">金额(万元)</th>
+                <th style="text-align: center;">备注</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="TBODY_Fund">
+            <tr>
+                <td style="font-weight: 600;text-align: center;">合计</td>
+                <td><p style="font-weight: 600;text-align: center;" id="summation"></p></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="margin-top: 10px;" class="layui-row">
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+        <p class="title">项目预算</p>
+        <button style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+                class="layui-btn layui-btn-sm" id="add_budget">
+            <p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe608;</i></p>
+        </button>
+        <table class="table table-striped table-bordered table-hover">
+            <colgroup>
+                <col width="20%">
+                <col width="10%">
+                <col width="20%">
+                <col width="39%">
+                <col width="10%">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="text-align: center;">科目</th>
+                <th style="text-align: center;">金额(万元)</th>
+                <th style="text-align: center;">来源</th>
+                <th style="text-align: center;">开支内容</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+            <tr>
+                <th style="text-align: center;">合计</th>
+                <th><p style="text-align: center;" id="summation_budget"></p></th>
+                <th></th>
+                <th></th>
+                <th style="text-align: center;"></th>
+            </tr>
+            </thead>
+            <tbody id="TABLE_YUSUAN">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="margin-top: 10px;" class="layui-row">
+    <div class="layui-col-xs10 layui-col-sm10 layui-col-md10 layui-col-lg10
+layui-col-xs-offset1 layui-col-sm-offset1 layui-col-md-offset1 layui-col-lg-offset1">
+        <p class="title">成员信息</p>
+        <button style="width: 30px;height: 20px;float: right;margin-top: 10px;margin-right: 4%;"
+                class="layui-btn layui-btn-sm" id="add_Personnel">
+            <p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe608;</i></p>
+        </button>
+        <table id="dt-table" class="table table-striped table-bordered table-hover"
+               style="width:100%;margin-top: 20px;">
+            <colgroup>
+                <col width="100">
+                <col width="60">
+                <col width="60">
+                <col width="240">
+                <col width="100">
+                <col width="200">
+                <col width="270">
+                <col width="200">
+                <col width="140">
+            </colgroup>
+            <thead>
+            <tr>
+                <th style="text-align: center;">姓名</th>
+                <th style="text-align: center;">性别</th>
+                <th style="text-align: center;">年龄</th>
+                <th style="text-align: center;">证件类型/证件号码</th>
+                <th style="text-align: center;">职称</th>
+                <th style="text-align: center;">从事专业</th>
+                <th style="text-align: center;">工作单位</th>
+                <th style="text-align: center;">研究开发中的责任分工</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="projectUser">
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+
+</body>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+
+<script type="text/javascript" src="../../js/project/initData.js"></script>
+<script type="text/javascript" src="../../js/project/projectDetails.js"></script>
+
+
+<script>
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+</script>
+
+<script type="text/javascript">
+    var id = getUrlParam("id");
+    /* 项目信息*/
+    getBasic(id);
+
+    /*项目资金*/
+    getProjectFund(id);
+    /*添加资金来源*/
+    $("#addFund").click(function () {
+        var id = getUrlParam("id");
+        $(location).attr("href", "add_fund.html?id=" + id);
+    })
+
+
+    $("#add_Target_no").click(function () {
+        var id = getUrlParam("id");
+        $(location).attr("href", "add_target_no.html?id=" + id);
+    })
+
+    /*修改资金来源*/
+    function updat_fund(fid) {
+        $(location).attr("href", "update_fund.html?fid=" + fid);
+    }
+
+    /*删除资金来源*/
+    function delete_fund(fid) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/project-item/item/fund/' + fid,
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+    /*资金预算*/
+    getFundBudget(id);
+    /*添加资金预算*/
+    $("#add_budget").click(function () {
+        var id = getUrlParam("id");
+        $(location).attr("href", "add_budget.html?id=" + id);
+    })
+
+    /*修改资金预算*/
+    function updat_budget(bid) {
+        $(location).attr("href", "update_budget.html?bid=" + bid);
+    }
+
+    /*删除资金预算*/
+    function delete_budget(bid) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/project-item/item/budget/' + bid,
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+
+    /*项目成员*/
+    getProjectUser(id);
+    /*添加项目成员*/
+    $("#add_Personnel").click(function () {
+        $(location).attr("href", "add_Personnel.html?id=" + id);
+    })
+    $("#add_content").click(function () {
+        $(location).attr("href", "add_content.html?id=" + id);
+    })
+
+    $("#add_Target").click(function () {
+        $(location).attr("href", "add_target.html?id=" + id);
+    })
+
+    $("#return_item").click(function () {
+        $(location).attr("href", "../item/itemList.html?id=" + id);
+    })
+
+
+    /*修改项目成员*/
+    function updat_Personnel(id) {
+        $(location).attr("href", "update_Personnel.html?id=" + id);
+    }
+    /*删除项目成员*/
+    function delete_Personnel(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/project-item/item/user/' + id,
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+    /*获得研究内容*/
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/content/all/' + id,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += '<tr>' +
+                        '<th style="text-align: center;">' + this.headline + '</th>' +
+                        '<th style="text-align: center;">' + this.content + '</th>'
+                        + ' <th>'
+                        + ' <div style="width: 100%;height: 20px;align-self: center;">'
+                        + '<button onclick="update_content(' + this.id + ')" style="height: 20px;width: 30px;" class="layui-btn layui-btn-sm">'
+                        + '<p style="line-height: 20px;margin-left: -3px;"><i class="layui-icon">&#xe642;</i></p>'
+                        + '</button>'
+                        + '<button onclick="delete_content(' + this.id + ');" style="height: 20px;width: 30px;align-self: center;"   class="layui-btn layui-btn-sm">  <p style="line-height: 20px;margin-left: -3px;"><i  class="layui-icon">&#xe640;</i></p>'
+                        + '</button>'
+                        + '</div>'
+                        + '</th>'
+                        + '</tr>';
+                });
+                $("#table_content").append(str);
+
+            }
+        })
+    })
+
+    /*修改研究内容*/
+    function update_content(cid) {
+        $(location).attr("href", "update_content.html?id=" + cid);
+    }
+
+
+    function delete_content(cid) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/project-item/item/content/' + cid,
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/target/all/' + id,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var str1 = '';
+                var str2 = '';
+                $(res).each(function () {
+                    var users = this.projectUser;
+                    if (this.itemTarget.type == 0) {
+                        str1 += '<tr>'
+                            + '<th>' + this.itemTarget.target + '</th>'
+                            + '<th>' + this.itemTarget.count + '</th>'
+                            + '<th>' + this.itemTarget.unit + '</th>'
+                            + '<th>' + this.itemTarget.district + '</th>'
+                            + '<th>' + this.itemTarget.start_dateStr + '</th>'
+                            + '<th>' + this.itemTarget.end_dateStr + '</th>'
+                            + '<th>' + analysisMember(users) + '</th>'
+                            + '<th>' +
+                            '<button type="button" class="layui-btn layui-btn-xs" onclick="update_target('+ this.itemTarget.id+')"><i class="layui-icon">&#xe642;</i>   </button>' +
+                            '<button type="button" class="layui-btn layui-btn-xs" onclick="delete_target('+ this.itemTarget.id+')"><i class="layui-icon">&#xe640;</i>   </button>' +
+                            '</th>'
+                            + '</tr>';
+                    } else {
+                        str2 += '<tr>'
+                            + '<th>' + this.itemTarget.target + '</th>'
+                            + '<th>' + this.itemTarget.remark + '</th>'
+                            + '<th>' + this.itemTarget.district + '</th>'
+                            + '<th>' + this.itemTarget.start_dateStr + '</th>'
+                            + '<th>' + this.itemTarget.end_dateStr + '</th>'
+                            + '<th>' + analysisMember(users) + '</th>'
+                            + '<th>' +
+                            '<button type="button" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe642;</i>   </button>' +
+                            '<button type="button" class="layui-btn layui-btn-xs"><i class="layui-icon">&#xe640;</i>   </button>' +
+                            '</th>'
+                            + '</tr>';
+                    }
+                })
+                $("#getTatget").append(str1);
+                $("#getTatget_no").append(str2);
+            }
+        })
+    })
+
+    /*修改研究内容*/
+    function update_target(id) {
+        $(location).attr("href", "update_target.html?id=" + id);
+    }
+    function delete_target(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/project-item/item/target/' + id,
+                success: function (data) {
+                    window.location.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+
+    function analysisMember(projectUser) {
+        var str = '';
+        $(projectUser).each(function () {
+            str += '<a href="" class="layui-btn layui-btn-xs layui-bg-gray">'+this.name+'</a>'
+            //str += this.name;
+        })
+        return str;
+    }
+</script>
+</html>

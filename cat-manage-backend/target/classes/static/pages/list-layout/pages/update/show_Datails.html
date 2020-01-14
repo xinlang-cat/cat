@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>基本信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/details.css">
+    <style>
+        .layui-table thead tr {
+            background: #dbe7f3;
+            text-align: center;
+        }
+
+        .layui-table th {
+            text-align: center;
+            font-weight: 400;
+        }
+        .layui-btn {
+            background-color: #a0a8c5;
+        }
+
+        .basic {
+            position: absolute;
+            right: 15px;
+            top: 14px;
+            z-index: 1;
+        }
+
+        .operation {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            right: -80px;
+        }
+
+        table tr td:hover > div {
+            display: block;
+
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <!--基本信息 readonly-->
+    <div class="module">
+        <div class="layui-btn-group  basic">
+            <button type="button" class="layui-btn layui-btn-sm" id="update_basic">
+                <i class="layui-icon">&#xe642;</i>
+            </button>
+        </div>
+        <fieldset>
+            <table lay-even lay-skin="nob" class="layui-table" id="basis">
+                <colgroup>
+                    <col width="20%">
+                    <col width="80%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="4">基本信息</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>合同编号：</td>
+                    <td id="contract_no">
+                    </td>
+                </tr>
+                <tr>
+                    <td>计划类别：</td>
+                    <td id="category">
+                    </td>
+                </tr>
+                <tr>
+                    <td>项目名称：</td>
+                    <td id="item_name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>委托单位：</td>
+                    <td id="consignor">
+                    </td>
+                </tr>
+                <tr>
+                    <td>承担单位：</td>
+                    <td id="undertaker">
+                    </td>
+                </tr>
+                <tr>
+                    <td>管理单位：</td>
+                    <td id="administrator">
+                    </td>
+                </tr>
+                <tr>
+                    <td>下达文号：</td>
+                    <td id="item_number">
+                    </td>
+                </tr>
+                <tr>
+                    <td>开始时间：</td>
+                    <td id="start_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>结束时间：</td>
+                    <td id="end_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>总体目标：</td>
+                    <td id="outline">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+    <div class="module">
+        <table lay-even lay-skin="nob" class="layui-table">
+            <colgroup>
+                <col width="10%">
+                <col width="90%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="4">主要研究内容</th>
+            </thead>
+            <tbody id="mian-content">
+            </tbody>
+        </table>
+    </div>
+    <div class="module">
+        <table lay-even lay-skin="nob" class="layui-table">
+            <colgroup>
+                <col width="40%">
+                <col width="20%">
+                <col width="20%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="4">考核指标</th>
+            </thead>
+        </table>
+    </div>
+    <div id="forma"></div>
+    <div class="module target">
+        <table lay-even lay-skin="nob" class="layui-table">
+            <colgroup>
+                <col width="40%">
+                <col width="20%">
+                <col width="20%">
+                <col width="20%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="4">其他指标</th>
+            <tr>
+                <td>内容</td>
+                <td>时间</td>
+                <td>地点</td>
+                <td>人员</td>
+            </tr>
+            </thead>
+            <tbody id="qita">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="module">
+        <table lay-even lay-skin="nob" class="layui-table">
+            <colgroup>
+                <col width="10%">
+                <col width="8%">
+                <col width="8%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+                <col width="14%">
+                <col width="20%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="9">项目组人员信息</th>
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>证件类型/证件号码</th>
+                <th>职称</th>
+                <th>从事专业</th>
+                <th>工作单位</th>
+                <th>研究开发中的责任分工</th>
+            </tr>
+            </thead>
+            <tbody id="item_user">
+            </tbody>
+        </table>
+    </div>
+    <div class="module">
+        <table lay-even class="layui-table">
+            <colgroup>
+                <col width="20%">
+                <col width="10%">
+                <col width="15%">
+                <col width="55%">
+            </colgroup>
+            <thead>
+            <th class="header" colspan="4">科技经费用途预算(<span id="zijinwenhao"></span>)</th>
+            <tr>
+                <td>科目</td>
+                <td>金额（万元）</td>
+                <td>经费来源</td>
+                <td>开支内容</td>
+            </tr>
+            <tr>
+                <td>合计</td>
+                <td id="total"></td>
+                <td>/</td>
+                <td>/</td>
+            </tr>
+            </thead>
+            <tbody id="fund">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="module">
+        <form class="layui-form" id="form7">
+            <div style="top: 5px;" class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" id="userinfo">
+                    <i class="layui-icon">&#xe642;</i>
+                </button>
+            </div>
+            <table lay-even class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="40%">
+                </colgroup>
+                <thead>
+                <th class="header" colspan="3">签订合同各方联系方式</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="6">甲方<input type="hidden" name="item_id"><input type="hidden" name="type" value="0"></td>
+                    <td>联系人</td>
+                    <td>
+                        <p id="linkman0"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td>
+                    <p id="phone0"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td>
+                        <p id="fax0"></p>
+                      </td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td>
+                    <p id="postal_code0"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td>
+                        <p id="site0"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td>
+                    <p id="email0"></p>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td rowspan="6">乙方<input type="hidden" name="item_id"><input type="hidden" name="type" value="1"></td>
+                    <td>联系人</td>
+                    <td>
+                        <p id="linkman1"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td>
+                    <p id="phone1"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td>
+                    <p id="fax1"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td>
+                    <p id="postal_code1"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td>
+                        <p id="site1"></p>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td>
+                    <p id="email1"></p>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td rowspan="6">丙方<input type="hidden" name="item_id"><input type="hidden" name="type" value="2"></td>
+                    <td>联系人</td>
+                    <td>
+                        <p id="linkman2"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>电话</td>
+                    <td>
+                  <p id="phone2"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>传真</td>
+                    <td>
+                    <p id="fax2"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮编</td>
+                    <td>
+                    <p id="postal_code2"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td>
+                    <p id="site2"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail(电子邮箱)</td>
+                    <td>
+                    <p id="email2"></p></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../js/projecDetailst.js"></script>
+<script>
+   /* var id = getUrlParam("id");*/
+   var id=26;
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+    });
+    getbasic(id);
+    $("#update_basic").click(function () {
+        layer.open({
+            title: "修改基本信息",
+            type: 2,
+            area: ['750px', '450px'],
+            maxin: true,
+            shadeClose: true,
+            content: ['update_basic.html?id=' + id]
+        });
+    })
+    function update_target(id) {
+        layer.open({
+            title: "修改指标信息",
+            type: 2,
+            area: ['750px', '450px'],
+            maxin: true,
+            shadeClose: true,
+            content: ['update_target.html?id=' + id]
+        });
+    }
+    getcontent(id);
+    getTarget(id);
+    getFund(id);
+    getItem_user(id);
+    getCompanyInfo(id);
+    function updata_fund(id) {
+        layer.open({
+            title: "修改资金",
+            type: 2,
+            area: ['750px', '450px'],
+            maxin: true,
+            shadeClose: true,
+            content: ['updata_fund.html?id=' + id]
+        });
+    }
+    $("#userinfo").click(function () {
+        layer.open({
+            title: "修改各方联系方式",
+            type: 2,
+            area: ['750px', '450px'],
+            maxin: true,
+            shadeClose: true,
+            content: ['updata_contactWay.html?id=' + id]
+        });
+    })
+</script>
+</html>

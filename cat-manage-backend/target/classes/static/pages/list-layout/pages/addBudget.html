@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+</head>
+<body>
+
+<div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
+    <p style="text-align: center;line-height:30px;color: #FFF;">添加项目预算</p>
+
+</div>
+<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-3 control-label">来源</label>
+                <input type="hidden" value="" id="item_id" name="item_id">
+                <div class="col-md-7">
+                    <select class="form-control input-sm" id="option" value="" name="fund_id">
+                        <!--  <option value="1">男</option>
+                          <option value="0">女</option>-->
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!--   <input type="hidden" name="fund_id" value="" id="fund_id">-->
+                <label class="col-md-3 control-label">科目</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="科目" type="text" name="subject" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="科目 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">金额</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="金额" type="text" name="money" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="金额 不能为空">
+                </div>
+            </div>
+            <!-- <div class="form-group">
+                 <label class="col-md-3 control-label">开支内容</label>
+                 <div class="col-md-7">
+                     <input class="form-control" placeholder="开支内容" type="text" name="content" maxlength="50"
+                            data-bv-notempty="true"
+                            data-bv-notempty-message="开支内容 不能为空">
+                 </div>
+             </div>-->
+            <div class="form-group">
+                <label class="col-md-3 control-label">备注</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="content" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="addBudget();">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+
+
+<script>
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    var id = getUrlParam("id");
+    $("#item_id").val(id);
+
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fund/all/' + id,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += '<option value="' + this.id + '">' + this.source + '</option>';
+                });
+                $("#option").append(str);
+            }
+        })
+    })
+
+    function addBudget() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/budget',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "details.html?id=" + id;
+                });
+            }
+        });
+
+    }
+</script>
+</body>
+</html>

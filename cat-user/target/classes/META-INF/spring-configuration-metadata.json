@@ -1,0 +1,22 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.xinlang.zly_xyx.cat_user.config.WechatConfig",
+      "name": "wechat",
+      "type": "com.xinlang.zly_xyx.cat_user.config.WechatConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.xinlang.zly_xyx.cat_user.config.WechatConfig",
+      "name": "wechat.domain",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.xinlang.zly_xyx.cat_user.config.WechatConfig",
+      "name": "wechat.infos",
+      "type": "java.util.Map<java.lang.String,com.xinlang.zly_xyx.user.WechatInfo>"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加成员</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+</head>
+<body>
+<div style="background-color: #009688; height: 30px; width: 100%;" class="layui-row">
+    <p style="text-align: center;line-height:30px;color: #FFF;">添加成员</p>
+</div>
+
+<div style="margin-top: 10px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <input type="hidden" value="" id="item_id" name="item_id">
+            <div class="form-group">
+                <label class="col-md-3 control-label">姓名</label>
+                <div class="col-md-7">
+                    <select class="form-control input-sm"  value="" name="user_id" id="userSelect">
+                        <!--  <option value="1">男</option>
+                          <option value="0">女</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">所负责的指标</label>
+                <div class="col-md-7 layui-form">
+                    <div class="layui-input-block" id="target">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">研究开发的责任分工</label>
+                <div class="col-md-7">
+                    <textarea class="layui-textarea" name="responsible"
+                              style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add_personnel()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+</body>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+
+
+<script>
+    layui.use(['layer','form'], function () {
+        var layer = layui.layer
+            ,form = layui.form;
+    });
+
+    var id = getUrlParam("id");
+    $("#item_id").val(id);
+
+    queryDeptCode(id);
+    var deptCode;
+    function queryDeptCode(id) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/'+id,
+            async : false,
+            success : function(data) {
+                deptCode = data.dept_code;
+            }
+        });
+    }
+    queryTarget(id);
+    function queryTarget(id) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/target/all/'+id,
+            async : false,
+            success : function(data) {
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    $("#target").append('<input type="checkbox" name="targetIds" value="'+d.id+'" title="'+d.target+'"> ');
+                }
+            }
+        });
+    }
+    initUserSelect(deptCode);
+    function initUserSelect(deptCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/api-c/user/dept/'+deptCode,
+            async : false,
+            success : function(data) {
+                var select = $("#userSelect");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var userId = d.userId;
+                    var name = d.name;
+                    select.append("<option value='"+ userId +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+
+    function add_personnel() {
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var targetIds = [];
+        $('input[name="targetIds"]:checked').each(function(){
+            targetIds.push($(this).val());
+        });
+        var formdata = $("#form").serializeObject();
+        formdata.targetIds = targetIds;
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/user/',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "details.html?id="+ id;
+                });
+            }
+        });
+    }
+
+</script>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/details.css">
+
+
+<style type="text/css">
+
+#maincontent  .BTN:hover{
+display: initial;
+}
+
+
+</style>
+</head>
+<body>
+    <!-- 按钮组 -->
+    <!-- 基本信息 -->
+    <form class="form-horizontal" onsubmit="return false" id="form">
+    <div style="position: relative;">
+        <div class="content">
+            <!--    <p class="title">基本信息</p> -->
+            <table class="layui-table" id="basis">
+                <colgroup>
+                    <col width="10%">
+                    <col width="40%">
+                </colgroup>
+                <div style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;">
+                    <button onclick="update_basic();"  type="button"
+                    class="layui-btn layui-btn-primary layui-btn-sm">修改</button></div>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="4">基本信息</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>合同编号：</td>
+                        <td>
+                            <input style="border: none;" class="form-control" placeholder="合同编号" type="text" name="contract_number" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="合同编号 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>计划类别：</td>
+                        <td>
+                            <input style="border: none;" class="form-control" placeholder="计划类别" type="text" name="plan_category" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="计划类别 不能为空">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>项目名称：</td>
+                        <td>
+                            <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="项目名称 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>委托单位：</td>
+                        <td>
+
+                            <input style="border: none;" class="form-control" placeholder="委托单位" type="text" name="consignor" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="委托单位 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>承担单位：</td>
+                        <td>
+                            <input style="border: none;" class="form-control" placeholder="承担单位" type="text" name="contract_number" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="承担单位 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>管理单位：</td>
+                        <td>
+                            <input style="border: none;" class="form-control" placeholder="管理单位" type="text" name="supervisor_dept" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="管理单位 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>下达文号：</td>
+                        <td>
+                            <input style="border: none;" class="form-control" placeholder="下达文号" type="text" name="contract_number" maxlength="50"
+                                   data-bv-notempty="true"
+                                   data-bv-notempty-message="下达文号 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>开始时间：</td>
+                        <td>
+                            <input style="border: none;" class="form-control date" placeholder="开始时间" type="text" name="start_dateStr" maxlength="50"
+                                   id="start" data-bv-notempty="true"
+                                   data-bv-notempty-message="开始时间 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>结束时间：</td>
+                        <td>
+                            <input style="border: none;" class="form-control date" placeholder="结束时间" type="text" name="end_dateStr" maxlength="50"
+                                   id="end" data-bv-notempty="true"
+                                   data-bv-notempty-message="结束时间 不能为空">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>总体目标：</td>
+                        <td colspan="3">
+                             <textarea style="border: none;" placeholder="总体目标" class="layui-textarea" name="overall_objective"
+                                       style="border-color: #ccc;"
+                                       data-bv-notempty="true"
+                                       data-bv-notempty-message=" 内容不能为空"></textarea>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+   </div>
+
+    </form>
+    <!-- 主要研究内容 -->
+  <div style="position: relative;">
+        <div class="content">
+            <!--     <p class="title">主要研究内容</p> -->
+            <table class="layui-table" >
+                <colgroup>
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="30%">
+                </colgroup>
+                <div style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;">
+                <button onclick="add_content()"  type="button"
+                class="layui-btn layui-btn-primary layui-btn-sm">添加</button></div>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="3">主要研究内容</th>
+                </thead>
+                <!-- <thead>
+                    <tr>                   
+                    </tr>
+                </thead> -->
+                <tbody id="maincontent" >
+                  <tr><td style="text-align: center;">序号</td>
+                    <td style="text-align: center;">标题</td>
+                    <td style="text-align: center;">内容</td>
+                    <tr><td>1</td>
+                        <td>个好借口个好借口</td>
+                        <td>内容个好借口个好借口半节课</td>
+                
+                </tr>
+                 
+                </tbody>
+
+
+            </table>
+
+
+
+
+
+       <!--      <div class="operation">
+                <div class="layui-btn-group" style="margin-left: 0;">
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                    </button>
+                </div>
+                <div class="layui-btn-group" style="margin-left: 0;padding-top: 10px;">
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                    </button>
+                </div>
+            </div>
+        </div> -->
+ </div>
+    <!-- 项目资金 -->
+  </div>
+
+    <div style="position: relative;">
+        <div class="content">
+
+            <table class="layui-table" id="content">
+                <colgroup>
+                    <col width="10%">
+                    <col width="25%">
+                    <col width="10%">
+                    <col width="7%">
+
+                </colgroup>
+                <button style="margin-top: 5px;position: absolute;margin-left: 91%;" type="button"
+                class="layui-btn layui-btn-primary layui-btn-sm">添加</button>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="4">考核指标</th>
+                </thead>
+
+                <tbody>
+                    <tr>
+
+                        <th style="text-align: center;">考核指标</th>
+                        <th style="text-align: center;">描述</th>
+                        <th style="text-align: center;">数量</th>
+                        <th style="text-align: center;">详情</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="3">技术指标</td>
+                        <td>提出八角商接换冠快速改良、乔化帘冠型高效树冠调控和保果壮果技术品l项</td>
+                        <td style="text-align: center;">1</td>
+                        <td style="text-align: center;"><button type="button"
+                            class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+                      </tr>
+                      <tr>
+                        <td>建立八角提质曾增效栽培示范林50亩</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;"><button type="button"
+                            class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+                      </tr>
+                      <tr>
+                        <td>示范林建立第3年</td>
+                        <td style="text-align: center;">3</td>
+                        <td style="text-align: center;"><button type="button"
+                            class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+                      </tr>
+                </tbody>
+            </table>
+            <div class="operation">
+                <div class="layui-btn-group" style="margin-left: 0;">
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                    </button>
+                </div>
+                <div class="layui-btn-group" style="margin-left: 0;padding-top: 10px;">
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe642;</i>
+                    </button>
+                    <button type="button" class="layui-btn layui-btn-sm">
+                        <i class="layui-icon">&#xe640;</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="position: relative;">
+        <div class="content">
+            <!--      <p class="title">项目人员</p> -->
+            <table class="layui-table" id="personnel">
+                <colgroup>
+                    <col width="8%">
+                    <col width="6%">
+                    <col width="6%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="13%">
+                    <col width="14%">
+                    <col width="18%">
+                </colgroup>
+                <button style="margin-top: 5px;position: absolute;margin-left: 91%;" type="button"
+                class="layui-btn layui-btn-primary layui-btn-sm">添加</button>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="8">项目组人员信息</th>
+                </thead>
+                <thead>
+
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>证件类型/证件号码</th>
+                        <th>职称</th>
+                        <th>从事专业</th>
+                        <th>工作单位</th>
+                        <th>研究开发中的责任分工</th>
+                    </tr>
+                    <tr>
+                        <td>黄开顺</td>
+                        <td>男</td>
+                        <td>38</td>
+                        <td>身份证／
+                            452625198011232010
+                        </td>
+                        <td>高级工程师</td>
+                        <td>经济林育种栽培</td>
+                        <td>广西壮族自治区林业科学研究学</td>
+                        <td>
+                            <p>项目主持人</p>
+                            <div class="operation">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-sm">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-sm">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>梁文汇</td>
+                        <td>男</td>
+                        <td>66</td>
+                        <td>身份证／
+                            4525011981012229 lX
+                        </td>
+                        <td>副高级 高级工程 师</td>
+                        <td>经济林育 神栽培</td>
+                        <td>
+                            广西壮族自泊区林业 科学研究院
+                        </td>
+                        <td>
+                            <p>示范林营建</p>
+                            <div class="operation">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-sm">
+                                        <i class="layui-icon">&#xe642;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-sm">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 资金总预算 -->
+    <div style="position: relative;">
+        <div class="content">
+            <!--        <p class="title">科技经费用途预算</p> -->
+            <table class="layui-table" >
+                <colgroup>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="7%">
+
+                </colgroup>
+                <button onclick="add_yusuan()" style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;" type="button"
+                class="layui-btn layui-btn-primary layui-btn-sm">添加</button>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="4">科技经费用途预算(桂财教函[2019]28号)</th>
+                </thead>
+
+                <tbody id="yusuan">
+                    <tr>
+                        <th style="text-align: center;">科目</th>
+                        <th style="text-align: center;">金额(万元)</th>
+                        <th style="text-align: center;">开支内容</th>
+                        <th style="text-align: center;">使用情况</th>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">合计</td>
+                        <td style="text-align: center;">70.00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">(一)直接费用</td>
+                        <td style="text-align: center;">63.00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">材料费</td>
+                        <td style="text-align: center;">20.00</td>
+                        <td>实验耗材,嫁接用品，肥料，农药等专用材料</td>
+                        <td style="text-align: center;"><button type="button"
+                                class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">测试化验加工费</td>
+                        <td style="text-align: center;">8.00</td>
+                        <td>土壤,植物分析测试，八角经济性状分析测试等实验分析，测试</td>
+                        <td style="text-align: center;"><button type="button"
+                                class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- 项目人员 -->
+
+    </div>
+    <div style="position: relative;">
+        <div class="content">
+            <!--        <p class="title">科技经费用途预算</p> -->
+            <table class="layui-table" >
+                <colgroup>
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="15%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="30%">
+
+
+
+                </colgroup>
+                <button onclick="qiyujingfei()" style="margin-top: 5px;position: absolute;margin-left: 91%;z-index: 99;" type="button"
+                class="layui-btn layui-btn-primary layui-btn-sm">添加</button>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="10">其余经费</th>
+                </thead>
+
+                <tbody id="Qiyu">
+                    <tr>
+                        <th style="text-align: center;">负责落实资金的承担单位(或协作单位)名称</th>
+                        <th style="text-align: center;">国家科技部门拨款</th>
+                        <th style="text-align: center;">国家其他部门拨款</th>
+                        <th style="text-align: center;">自治区级部门拨款</th>
+                        <th style="text-align: center;">市级部门拨款</th>
+                        <th style="text-align: center;">自有资金</th>
+                        <th style="text-align: center;">银行贷款</th>
+                        <th style="text-align: center;">国外资金</th>
+                        <th style="text-align: center;">其他资金</th>
+                        <th style="text-align: center;">使用情况</th>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">XXX</td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;">70.00</td>
+                        <td style="text-align: center;"><button type="button"
+                                class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">XXX</td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;">60.00</td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"></td>
+                        <td style="text-align: center;"><button type="button"
+                                class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- 项目人员 -->
+
+    </div>
+
+    <div style="position: relative;">
+        <div class="content">
+            <!--        <p class="title">科技经费用途预算</p> -->
+            <table class="layui-table" id="fundBudgetAll">
+                <colgroup>
+                    <col width="15%">
+                    <col width="40%">
+                    <col width="40%">
+
+
+
+                </colgroup>
+                <thead>
+                    <th style="text-align: center;font-size: 16px;" colspan="3">签订合同各方</th>
+                </thead>
+
+
+
+                <tbody>
+                        <tr>
+                                <td rowspan="6">乙方</td>
+                                <td>项目负责人</td>
+                                <td><input style="border: none;" class="form-control" placeholder="项目负责人" type="text" name="item_name" maxlength="50"
+                                           data-bv-notempty="true"
+                                           data-bv-notempty-message="项目负责人 不能为空"></td>
+                              </tr>
+                              <tr>
+                                <td>（单位）</td>
+                                <td><input style="border: none;" class="form-control" placeholder="（单位）" type="text" name="item_name" maxlength="50"
+                                                         data-bv-notempty="true"
+                                                         data-bv-notempty-message="（单位） 不能为空"></td>
+                              </tr>
+                              <tr>
+                                <td>组织机构代码/统一社会信用代码</td>
+                                <td><input style="border: none;" class="form-control" placeholder="组织机构代码/统一社会信用代码" type="text" name="item_name" maxlength="50"
+                                                             data-bv-notempty="true"
+                                                             data-bv-notempty-message="组织机构代码/统一社会信用代码 不能为空"></td>
+                              </tr>
+                              <tr>
+                                <td>账户名称</td>
+                                <td><input style="border: none;" class="form-control" placeholder="账户名称" type="text" name="item_name" maxlength="50"
+                                                         data-bv-notempty="true"
+                                                         data-bv-notempty-message="账户名称 不能为空"></td>
+                              </tr>
+                              <tr>
+                                <td>开户银行</td>
+                                <td><input style="border: none;" class="form-control" placeholder="开户银行" type="text" name="item_name" maxlength="50"
+                                                        data-bv-notempty="true"
+                                                        data-bv-notempty-message="开户银行 不能为空"></td>
+                              </tr>
+                              <tr>
+                                <td>账号</td>
+                                <td><input style="border: none;" class="form-control" placeholder="账号" type="text" name="item_name" maxlength="50"
+                                                            data-bv-notempty="true"
+                                                            data-bv-notempty-message="账号 不能为空"></td>
+                              </tr>
+                    </tbody>
+
+
+                    <tbody>
+                        <tr>
+                            <td>丙方</td>
+                            <td>项目管理联系人</td>
+                            <td><input style="border: none;" class="form-control" placeholder="项目管理联系人" type="text" name="item_name" maxlength="50"
+                                         data-bv-notempty="true"
+                                         data-bv-notempty-message="项目管理联系人 不能为空"></td>
+                          </tr>
+                    </tbody>
+                <tbody>
+
+                  <!--   <tr>
+                        <th colspan="2">乙方</th>
+                    </tr>
+                    <tr>
+                        <td>项目负责人：</td>
+                        <td></td>
+
+                    </tr>
+                    <tr>
+                        <td>(单位)</td>
+                        <td>广西壮族自治区林业科学研究学</td>
+
+                    </tr>
+                    <tr>
+                        <td>组织机构代码/统一社会信用代码：</td>
+                        <td>124500004985008292</td>
+                    </tr>
+                    <tr>
+                        <td>账号名称：</td>
+                        <td>广西壮族自治区林业科学研究院</td>
+                    </tr>
+                    <tr>
+                        <td>开户银行：</td>
+                        <td>中国农业银行南宁市民族支行</td>
+                    </tr>
+                    <tr>
+                        <td>账号：</td>
+                        <td>20005101040001209</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <th colspan="2">丙方</th>
+                    </tr>
+                    <tr>
+                        <td>项目管理联系人</td>
+                        <td>劳玲</td>
+
+                    </tr> -->
+
+
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- 项目人员 -->
+
+    </div>
+</body>
+
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+
+<script type="text/javascript" src="../../../../js/project/basis.js"></script>
+<script type="text/javascript" src="../../../../js/project/content-target.js"></script>
+<script type="text/javascript" src="../../../../js/project/fund.js"></script>
+<script type="text/javascript" src="../../../../js/project/fundBudgetAll.js"></script>
+<script type="text/javascript" src="../../../../js/project/personnel.js"></script>
+<script>
+
+layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    laydate.render({
+        elem: '#start_date'
+        , format: 'yyyy年MM月dd日'
+    });
+    laydate.render({
+        elem: '#end_date'
+        , format: 'yyyy年MM月dd日'
+    });
+</script>
+
+
+
+<script>
+    function add_content() {
+        let str;
+        str='<tr>'
+            +' <td>' +
+            ' <textarea style="border: none;" class="layui-textarea" name="overall_objective"' +
+            ' style="border-color: #ccc;"' +
+            ' data-bv-notempty="true"' +
+            '  data-bv-notempty-message=" 内容不能为空"></textarea>' +
+            '</td>'
+            + '</tr>';
+
+        $("#maincontent").append(str);
+    }
+
+    function add_yusuan() {
+        let str;
+        str='<tr>'
+          +
+            ' <td style="text-align: center;"> <input style="border: none;" class="form-control date" placeholder="科目" type="text" name="end_dateStr" maxlength="50"' +
+            'data-bv-notempty="true"' +
+            '  data-bv-notempty-message="科目 不能为空"></td>' +
+            '<td style="text-align: center;"> <input style="border: none;" class="form-control date" placeholder="金额" type="text" name="end_dateStr" maxlength="50"' +
+            'data-bv-notempty="true"' +
+            ' data-bv-notempty-message="金额 不能为空"></td>' +
+            '<td style="text-align: center;"><input style="border: none;" class="form-control date" placeholder="开发内容" type="text" name="end_dateStr" maxlength="50"' +
+            'data-bv-notempty="true"' +
+            ' data-bv-notempty-message="开发内容 不能为空"></td>' +
+            ' <td style="text-align: center;"><button type="button"' +
+            'class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>' +
+            '</tr>'
+        $("#yusuan").append(str);
+    }
+
+
+    function qiyujingfei() {
+        let str;
+        str=' <tr>\n' +
+            '    <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"> <input style="border: none;" class="form-control" placeholder="项目名称" type="text" name="item_name" maxlength="50"\n' +
+            '        data-bv-notempty="true"\n' +
+            '        data-bv-notempty-message="项目名称 不能为空"></td>\n' +
+            '        <td style="text-align: center;"><button type="button"\n' +
+            '    class="layui-btn layui-btn-primary layui-btn-sm">详情</button></td>\n' +
+            '\n' +
+            '    </tr>';
+
+
+
+        $("#Qiyu").append(str);
+    }
+</script>
+
+<script>
+
+    function update_basic(){
+        layer.open({
+            title:"修改基本信息",
+            type: 2,
+            area: ['850px', '550px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../update/update_basic.html']
+        });
+    }
+
+</script>
+<!-- <script type="text/javascript">
+  /*   layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    var id = getUrlParam("id");
+
+    //$("#addBasic").attr("href","addBasic.html?id="+id);
+    $("#addContent").attr("href","addContent.html?id="+id);
+    $("#addTarget").attr("href","addTarget.html?id="+id);
+    $("#addFund").attr("href","addFund.html?id="+id);
+    $("#addBudget").attr("href","addBudget.html?id="+id);
+    $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
+
+    /*基本信息*/
+    getBasic(id);
+    /*主要研究内容*/
+    content_target(id)
+    /*资金构成*/
+    fundSource(id);
+    /*总资金预算*/
+    fundBudgetAll(id);
+    /*项目人员*/
+    personnel(id) 
+    */
+</script> -->
+
+</html>
