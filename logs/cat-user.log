@@ -302,3 +302,6 @@ Using generated security password: 47153679-a19c-4521-988f-ca5c698ab909
 2020-01-14 16:45:41.663  INFO [cat-user,,,] 18092 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2020-01-14 16:50:41.672  INFO [cat-user,,,] 18092 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2020-01-14 16:55:41.675  INFO [cat-user,,,] 18092 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 17:00:41.684  INFO [cat-user,,,] 18092 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 17:05:41.685  INFO [cat-user,,,] 18092 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 17:10:41.696  INFO [cat-user,,,] 18092 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
