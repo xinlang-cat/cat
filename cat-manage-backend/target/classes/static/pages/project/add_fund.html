@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+</head>
+<body>
+
+<div style="background-color: #009688;height: 30px;width: 100%;" class="layui-row">
+    <p style="text-align: center;line-height:30px;color: #FFF;">添加项目资金</p>
+
+</div>
+<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+
+        <fieldset>
+            <div class="form-group">
+                <input type="hidden" name="item_id" value="" id="item_id">
+                <label class="col-md-3 control-label">来源</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="来源" type="text" id="source" name="source" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="来源 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">金额</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="金额" type="text" id="money"  name="money" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="金额 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">备注</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" id="remark" name="remark" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" id="btn_return">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add_Fund()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'laydate','upload'], function () {
+        var layer = layui.layer
+            ,upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function(){
+            laydate.render({
+                elem: this
+                ,format:'yyyy年MM月dd日'
+                ,trigger: 'click'
+            });
+        });
+    });
+
+
+
+
+    var id = getUrlParam("id");
+    $("#item_id").val(id);
+    $("#btn_return").click(function () {
+        $(location).attr("href", "details.html?id=" + id + "");
+    })
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+    function add_Fund() {
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/fund',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "details.html?id=" + id;
+                });
+            }
+        });
+
+    }
+</script>
+</body>
+</html>

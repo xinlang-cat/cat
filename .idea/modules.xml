@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/cat.iml" filepath="$PROJECT_DIR$/cat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-Inform/cat-Inform.iml" filepath="$PROJECT_DIR$/cat-Inform/cat-Inform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-api/cat-api.iml" filepath="$PROJECT_DIR$/cat-api/cat-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-auth/cat-auth.iml" filepath="$PROJECT_DIR$/cat-auth/cat-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-common/cat-common.iml" filepath="$PROJECT_DIR$/cat-common/cat-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-configuration/cat-configuration.iml" filepath="$PROJECT_DIR$/cat-configuration/cat-configuration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-eureka/cat-eureka.iml" filepath="$PROJECT_DIR$/cat-eureka/cat-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-file-server/cat-file-server.iml" filepath="$PROJECT_DIR$/cat-file-server/cat-file-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-gateway-zuul/cat-gateway-zuul.iml" filepath="$PROJECT_DIR$/cat-gateway-zuul/cat-gateway-zuul.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-log/cat-log.iml" filepath="$PROJECT_DIR$/cat-log/cat-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-log-operate/cat-log-operate.iml" filepath="$PROJECT_DIR$/cat-log-operate/cat-log-operate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-manage-backend/cat-manage-backend.iml" filepath="$PROJECT_DIR$/cat-manage-backend/cat-manage-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-map-server/cat-map-server.iml" filepath="$PROJECT_DIR$/cat-map-server/cat-map-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-monitor-center/cat-monitor-center.iml" filepath="$PROJECT_DIR$/cat-monitor-center/cat-monitor-center.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/cat-project-system.iml" filepath="$PROJECT_DIR$/cat-project-system/cat-project-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-user/cat-user.iml" filepath="$PROJECT_DIR$/cat-user/cat-user.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-common-entity/project-common-entity.iml" filepath="$PROJECT_DIR$/cat-project-system/project-common-entity/project-common-entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-company/project-company.iml" filepath="$PROJECT_DIR$/cat-project-system/project-company/project-company.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-item/project-item.iml" filepath="$PROJECT_DIR$/cat-project-system/project-item/project-item.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-label/project-label.iml" filepath="$PROJECT_DIR$/cat-project-system/project-label/project-label.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-record/project-record.iml" filepath="$PROJECT_DIR$/cat-project-system/project-record/project-record.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-report/project-report.iml" filepath="$PROJECT_DIR$/cat-project-system/project-report/project-report.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-summary/project-summary.iml" filepath="$PROJECT_DIR$/cat-project-system/project-summary/project-summary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cat-project-system/project-user/project-user.iml" filepath="$PROJECT_DIR$/cat-project-system/project-user/project-user.iml" />
+    </modules>
+  </component>
+</project>

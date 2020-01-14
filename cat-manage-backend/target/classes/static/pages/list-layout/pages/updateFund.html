@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>修改资金来源</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+  <style>
+  .layui-table td, .layui-table th{
+    border-color:  #009688;
+  }
+  </style>
+</head>
+
+<body>
+<div style="background-color: #009688; height: 30px; width: 100%;" class="layui-row">
+    <p style="text-align: center;line-height:30px;color: #FFF;">项目资金</p>
+</div>
+
+<div style="margin-top: 10px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-2 control-label">来源</label>
+                <input type="hidden" value="" name="id" id="fid">
+                <div class="col-md-9">
+                    <input class="form-control" placeholder="请输入来源" type="text" name="source" id="source" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="来源 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">金额(万元)</label>
+                <div class="col-md-9">
+                    <input class="form-control" placeholder="请输入金额" type="text" name="money" id="money" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="金额 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">备注</label>
+                <div class="col-md-9">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="remark" id="remark"  data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空"></textarea>
+                </div>
+            </div>
+            <div  class="form-actions">
+                <div  class="row" align="center">
+                    <div  class="col-md-12">
+                        <button  class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+                        <button   class="btn btn-primary" type="submit" onclick="update();">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+
+
+</body>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script>
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+    var id =getUrlParam("id");
+    $("#fid").val(id);
+    var itemId ='';
+   $(function(){
+       $.ajax({
+           type: 'get',
+           url: domainName + '/project-item/item/fund/'+id,
+           contentType: "application/json; charset=utf-8",
+           success: function (res) {
+               $("#source").val(res.source);
+               $("#money").val(res.money);
+               $("#remark").text(res.remark);
+               itemId=res.item_id;
+           }
+       })
+   })
+    function update(){
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata  = $("#form").serializeObject();
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/fund',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "details.html?id=" + itemId;
+                });
+            }
+        });
+    }
+</script>
+</html>

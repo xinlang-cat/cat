@@ -1,0 +1,84 @@
+spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    sender:
+      type: web
+logging:
+  level:
+    root: info
+    com.cloud: debug
+  file: logs/${spring.application.name}.log
+zuul:
+  ignored-services: '*'
+  sensitiveHeaders: 
+  routes:
+    oauth:
+      path: /api-o/**
+      serviceId: cat-auth
+    api-u:
+      path: /api-u/**
+      serviceId: cat-user
+    backend:
+      path: /api-b/**
+      serviceId: cat-manage-backend
+    log:
+      path: /api-l/**
+      serviceId: cat-log
+    file:
+      path: /api-f/**
+      serviceId: cat-file
+    sms:
+      path: /api-n/**
+      serviceId: cat-inform
+    compamy:
+      path: /api-c/**
+      serviceId: project-company
+    label:
+      path: /api-label/**
+      serviceId: project-label
+    item:
+      path: /project-item/**
+      serviceId: cat-project-item
+    projectUser:
+      path: /project-user/**
+      serviceId: project-user
+    map:
+      path: /map/**
+      serviceId: cat-map-server
+    projectRecord:
+      path: /project-record/**
+      serviceId: project-record
+    projectReport:
+      path: /project-report/**
+      serviceId: project-report
+    summary:
+      path: /api-summary/**
+      serviceId: project-summary
+  host:
+    connect-timeout-millis: 10000
+    socket-timeout-millis: 60000
+  add-proxy-headers: true
+  ribbon:
+    eager-load:
+      enabled: true
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+cron:
+  black-ip: 0/5 * * * * ?
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com

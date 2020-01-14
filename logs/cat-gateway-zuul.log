@@ -1,0 +1,1005 @@
+2020-01-14 09:26:06.365  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.x.z.c.CatGatewayZuulApplication        : The following profiles are active: dev
+2020-01-14 09:26:06.408  INFO [cat-gateway-zuul,,,] 16816 --- [main] ConfigServletWebServerApplicationContext : Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb: startup date [Tue Jan 14 09:26:06 CST 2020]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@3e84448c
+2020-01-14 09:26:09.578  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'proxyRequestHelper' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.zuul.ZuulProxyAutoConfiguration$EndpointConfiguration; factoryMethodName=proxyRequestHelper; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/zuul/ZuulProxyAutoConfiguration$EndpointConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.zuul.ZuulProxyAutoConfiguration$NoActuatorConfiguration; factoryMethodName=proxyRequestHelper; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/zuul/ZuulProxyAutoConfiguration$NoActuatorConfiguration.class]]
+2020-01-14 09:26:09.603  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'counterFactory' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.zuul.ZuulServerAutoConfiguration$ZuulMetricsConfiguration; factoryMethodName=counterFactory; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/zuul/ZuulServerAutoConfiguration$ZuulMetricsConfiguration.class]] with [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.cloud.netflix.zuul.ZuulServerAutoConfiguration$ZuulCounterFactoryConfiguration; factoryMethodName=counterFactory; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/cloud/netflix/zuul/ZuulServerAutoConfiguration$ZuulCounterFactoryConfiguration.class]]
+2020-01-14 09:26:10.348  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=b0040ec4-43d3-3677-9048-6358519f3fa8
+2020-01-14 09:26:10.408  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:11.168  INFO [cat-gateway-zuul,,,] 16816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$bc6d4a9c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-14 09:26:11.212  INFO [cat-gateway-zuul,,,] 16816 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration' of type [org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration$$EnhancerBySpringCGLIB$$e54fd9fe] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-14 09:26:12.525  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-01-14 09:26:12.569  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-01-14 09:26:12.570  INFO [cat-gateway-zuul,,,] 16816 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.32
+2020-01-14 09:26:12.577  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [D:\java\tts9\jdk1.8.0_144\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;D:\java\tts9\jdk1.8.0_144\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\MySQL\MySQL Server 5.5\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\java\redis\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\git\Git\cmd;C:\Users\mi\AppData\Local\Microsoft\WindowsApps;C:\Users\mi\AppData\Local\Microsoft\WindowsApps;.]
+2020-01-14 09:26:13.603  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-01-14 09:26:13.604  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 7196 ms
+2020-01-14 09:26:14.197  WARN [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2020-01-14 09:26:14.198  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-01-14 09:26:14.225  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@5b84b8ee
+2020-01-14 09:26:24.173  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'characterEncodingFilter' to: [/*]
+2020-01-14 09:26:24.174  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'webMvcMetricsFilter' to: [/*]
+2020-01-14 09:26:24.175  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'tracingFilter' to: [/*]
+2020-01-14 09:26:24.176  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'exceptionLoggingFilter' to: [/*]
+2020-01-14 09:26:24.178  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2020-01-14 09:26:24.179  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2020-01-14 09:26:24.181  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'requestContextFilter' to: [/*]
+2020-01-14 09:26:24.183  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] .s.DelegatingFilterProxyRegistrationBean : Mapping filter: 'springSecurityFilterChain' to: [/*]
+2020-01-14 09:26:24.184  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'httpTraceFilter' to: [/*]
+2020-01-14 09:26:24.184  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'corsFilter' to: [/*]
+2020-01-14 09:26:24.185  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.FilterRegistrationBean   : Mapping filter: 'oauth2ClientContextFilter' to: [/*]
+2020-01-14 09:26:24.188  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet dispatcherServlet mapped to [/]
+2020-01-14 09:26:24.192  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.w.servlet.ServletRegistrationBean  : Servlet zuulServlet mapped to [/zuul/*]
+2020-01-14 09:26:24.194  INFO [cat-gateway-zuul,,,] 16816 --- [localhost-startStop-1] o.s.b.a.e.web.ServletEndpointRegistrar   : Registered '/actuator/hystrix.stream' to hystrix.stream-actuator-endpoint
+2020-01-14 09:26:24.676  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.aop.framework.CglibAopProxy          : Final method [protected final org.springframework.context.ApplicationContext org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.getApplicationContext()] cannot get proxied via CGLIB: Calls to this method will NOT be routed to the target instance and might lead to NPEs against uninitialized fields in the proxy instance.
+2020-01-14 09:26:24.676  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.aop.framework.CglibAopProxy          : Final method [protected final org.springframework.security.config.annotation.web.builders.HttpSecurity org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.getHttp() throws java.lang.Exception] cannot get proxied via CGLIB: Calls to this method will NOT be routed to the target instance and might lead to NPEs against uninitialized fields in the proxy instance.
+2020-01-14 09:26:24.761  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing FeignContext-cat-auth: startup date [Tue Jan 14 09:26:24 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:24.801  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:25.244  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2020-01-14 09:26:25.256  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2020-01-14 09:26:25.264  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2020-01-14 09:26:25.264  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2020-01-14 09:26:25.265  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2020-01-14 09:26:25.266  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2020-01-14 09:26:25.464  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 09:26:25.467  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2020-01-14 09:26:25.468  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2020-01-14 09:26:25.468  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2020-01-14 09:26:25.468  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2020-01-14 09:26:25.468  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2020-01-14 09:26:25.468  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2020-01-14 09:26:25.468  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2020-01-14 09:26:25.478  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2020-01-14 09:26:25.480  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 5
+2020-01-14 09:26:25.483  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2020-01-14 09:26:25.486  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1578965185486 with initial instances count: 1
+2020-01-14 09:26:25.789  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing FeignContext-cat-log: startup date [Tue Jan 14 09:26:25 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:25.824  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:25.980  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing FeignContext-cat-manage-backend: startup date [Tue Jan 14 09:26:25 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:26.018  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:27.357  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/service-instances],methods=[GET]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.xinlang.zly_xyx.cat_gateway_zuul.controller.ServiceInstanceController.map()
+2020-01-14 09:26:27.366  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/logout],methods=[GET]}" onto public void com.xinlang.zly_xyx.cat_gateway_zuul.controller.TokenController.logout(java.lang.String,java.lang.String)
+2020-01-14 09:26:27.367  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/login],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.xinlang.zly_xyx.cat_gateway_zuul.controller.TokenController.login(java.lang.String,java.lang.String)
+2020-01-14 09:26:27.368  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/login-wechat],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.xinlang.zly_xyx.cat_gateway_zuul.controller.TokenController.smsLogin(java.lang.String,java.lang.String)
+2020-01-14 09:26:27.368  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/login-sms],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.xinlang.zly_xyx.cat_gateway_zuul.controller.TokenController.smsLogin(java.lang.String,java.lang.String,java.lang.String)
+2020-01-14 09:26:27.369  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/sys/refresh_token],methods=[POST]}" onto public java.util.Map<java.lang.String, java.lang.Object> com.xinlang.zly_xyx.cat_gateway_zuul.controller.TokenController.refresh_token(java.lang.String)
+2020-01-14 09:26:27.376  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/ui]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2020-01-14 09:26:27.377  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources]}" onto public org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2020-01-14 09:26:27.379  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/swagger-resources/configuration/security]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2020-01-14 09:26:27.385  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2020-01-14 09:26:27.386  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2020-01-14 09:26:27.866  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 22 endpoint(s) beneath base path '/actuator'
+2020-01-14 09:26:27.900  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/archaius],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.903  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/auditevents],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.904  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/beans],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.905  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/health],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.905  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/conditions],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.906  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/configprops],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.907  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/env],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.907  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/env/{toMatch}],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.909  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/env],methods=[POST],consumes=[application/vnd.spring-boot.actuator.v2+json || application/json],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.911  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/env],methods=[DELETE],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.913  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/info],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.914  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/logfile],methods=[GET],produces=[application/octet-stream]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.915  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/loggers],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.915  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/loggers/{name}],methods=[POST],consumes=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.915  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/loggers/{name}],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.916  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/heapdump],methods=[GET],produces=[application/octet-stream]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.917  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/threaddump],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.918  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/metrics],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.918  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/metrics/{requiredMetricName}],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.919  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/scheduledtasks],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.919  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/httptrace],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.920  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/mappings],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.921  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/refresh],methods=[POST],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.921  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/features],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.922  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/service-registry],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.923  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/service-registry],methods=[POST],consumes=[application/vnd.spring-boot.actuator.v2+json || application/json],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.923  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/routes],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.924  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/routes],methods=[POST],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.924  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/routes/{format}],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.925  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator/filters],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto public java.lang.Object org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$OperationHandler.handle(javax.servlet.http.HttpServletRequest,java.util.Map<java.lang.String, java.lang.String>)
+2020-01-14 09:26:27.926  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped "{[/actuator],methods=[GET],produces=[application/vnd.spring-boot.actuator.v2+json || application/json]}" onto protected java.util.Map<java.lang.String, java.util.Map<java.lang.String, org.springframework.boot.actuate.endpoint.web.Link>> org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping.links(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2020-01-14 09:26:29.018  INFO [cat-gateway-zuul,,,] 16816 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: f73b837d-c18c-497a-9d98-3aa740fd1bf0
+
+2020-01-14 09:26:29.490  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@62808e9e, org.springframework.security.web.context.SecurityContextPersistenceFilter@4e3ffd0, org.springframework.security.web.header.HeaderWriterFilter@378c48c1, org.springframework.web.filter.CorsFilter@2567f1c5, org.springframework.security.web.authentication.logout.LogoutFilter@84a9f65, org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter@58b03029, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5383bf08, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3c62f69a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@539dd2d0, org.springframework.security.web.session.SessionManagementFilter@1786150f, org.springframework.security.web.access.ExceptionTranslationFilter@75f65d54]
+2020-01-14 09:26:29.668  INFO [cat-gateway-zuul,,,] 16816 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-01-14 09:26:29.810  WARN [cat-gateway-zuul,,,] 16816 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2020-01-14 09:26:29.811  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-01-14 09:26:30.088  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-01-14 09:26:30.523  INFO [cat-gateway-zuul,,,] 16816 --- [DiscoveryClient-HeartbeatExecutor-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CAT-GATEWAY-ZUUL/DESKTOP-EKIV9A4:cat-gateway-zuul:80 - Re-registering apps/CAT-GATEWAY-ZUUL
+2020-01-14 09:26:30.523  INFO [cat-gateway-zuul,,,] 16816 --- [DiscoveryClient-HeartbeatExecutor-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CAT-GATEWAY-ZUUL/DESKTOP-EKIV9A4:cat-gateway-zuul:80: registering service...
+2020-01-14 09:26:30.579  INFO [cat-gateway-zuul,,,] 16816 --- [DiscoveryClient-HeartbeatExecutor-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CAT-GATEWAY-ZUUL/DESKTOP-EKIV9A4:cat-gateway-zuul:80 - registration status: 204
+2020-01-14 09:26:30.756  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb: startup date [Tue Jan 14 09:26:06 CST 2020]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@3e84448c
+2020-01-14 09:26:31.006  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-01-14 09:26:31.006  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2020-01-14 09:26:31.083  INFO [cat-gateway-zuul,,,] 16816 --- [main] .m.m.a.ExceptionHandlerExceptionResolver : Detected @ExceptionHandler methods in exceptionHandlerAdvice
+2020-01-14 09:26:34.128  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2020-01-14 09:26:34.141  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient
+2020-01-14 09:26:34.537  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.c.n.zuul.ZuulFilterInitializer       : Starting filter initializer
+2020-01-14 09:26:34.894  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Registering beans for JMX exposure on startup
+2020-01-14 09:26:34.923  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'environmentManager' has been autodetected for JMX exposure
+2020-01-14 09:26:34.926  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2020-01-14 09:26:34.927  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Bean with name 'refreshScope' has been autodetected for JMX exposure
+2020-01-14 09:26:34.938  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2020-01-14 09:26:34.959  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2020-01-14 09:26:34.984  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.j.e.a.AnnotationMBeanExporter        : Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=26d820eb,type=ConfigurationPropertiesRebinder]
+2020-01-14 09:26:35.053  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 0
+2020-01-14 09:26:35.054  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application cat-gateway-zuul with eureka with status UP
+2020-01-14 09:26:35.055  INFO [cat-gateway-zuul,,,] 16816 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1578965195055, current=UP, previous=STARTING]
+2020-01-14 09:26:35.057  INFO [cat-gateway-zuul,,,] 16816 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CAT-GATEWAY-ZUUL/DESKTOP-EKIV9A4:cat-gateway-zuul:80: registering service...
+2020-01-14 09:26:35.068  INFO [cat-gateway-zuul,,,] 16816 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_CAT-GATEWAY-ZUUL/DESKTOP-EKIV9A4:cat-gateway-zuul:80 - registration status: 204
+2020-01-14 09:26:35.067  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.c.support.DefaultLifecycleProcessor  : Starting beans in phase 2147483647
+2020-01-14 09:26:35.069  INFO [cat-gateway-zuul,,,] 16816 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-01-14 09:26:35.112  INFO [cat-gateway-zuul,,,] 16816 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-01-14 09:26:35.226  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-01-14 09:26:35.969  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2020-01-14 09:26:35.972  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2020-01-14 09:26:35.975  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2020-01-14 09:26:35.982  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_4
+2020-01-14 09:26:35.985  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_5
+2020-01-14 09:26:35.988  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_6
+2020-01-14 09:26:35.996  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_7
+2020-01-14 09:26:35.998  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_8
+2020-01-14 09:26:36.002  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_9
+2020-01-14 09:26:36.005  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_10
+2020-01-14 09:26:36.007  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_11
+2020-01-14 09:26:36.010  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_12
+2020-01-14 09:26:36.013  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_13
+2020-01-14 09:26:36.017  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingPOST_1
+2020-01-14 09:26:36.019  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_14
+2020-01-14 09:26:36.022  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_15
+2020-01-14 09:26:36.024  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_16
+2020-01-14 09:26:36.027  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_17
+2020-01-14 09:26:36.029  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_18
+2020-01-14 09:26:36.032  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingPOST_2
+2020-01-14 09:26:36.034  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_19
+2020-01-14 09:26:36.037  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_20
+2020-01-14 09:26:36.044  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingPOST_3
+2020-01-14 09:26:36.047  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_21
+2020-01-14 09:26:36.051  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_22
+2020-01-14 09:26:36.054  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingPOST_4
+2020-01-14 09:26:36.057  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_23
+2020-01-14 09:26:36.084  INFO [cat-gateway-zuul,,,] 16816 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: smsLoginUsingPOST_1
+2020-01-14 09:26:36.183  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.a.ScheduledAnnotationBeanPostProcessor : No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+2020-01-14 09:26:36.276  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2020-01-14 09:26:36.277  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization started
+2020-01-14 09:26:36.355  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 72 ms
+2020-01-14 09:26:36.358  INFO [cat-gateway-zuul,,,] 16816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-01-14 09:26:36.360  INFO [cat-gateway-zuul,,,] 16816 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 80
+2020-01-14 09:26:36.365  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.x.z.c.CatGatewayZuulApplication        : Started CatGatewayZuulApplication in 40.38 seconds (JVM running for 42.741)
+2020-01-14 09:26:36.380  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-auth: startup date [Tue Jan 14 09:26:36 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:36.484  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:36.864  INFO [cat-gateway-zuul,,,] 16816 --- [RMI TCP Connection(9)-192.168.5.64] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at : http://192.168.5.64:8771/
+2020-01-14 09:26:37.021  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-auth.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:37.080  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-auth
+2020-01-14 09:26:37.090  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-auth instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-auth,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:37.105  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:37.125  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-auth initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-auth,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@426a4301
+2020-01-14 09:26:37.250  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-user: startup date [Tue Jan 14 09:26:37 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:37.367  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:37.615  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:37.638  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-user
+2020-01-14 09:26:37.639  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-user instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-user,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:37.642  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:37.643  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-user initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-user,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@69c51fdb
+2020-01-14 09:26:37.786  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-manage-backend: startup date [Tue Jan 14 09:26:37 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:37.917  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:38.109  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-manage-backend.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:38.134  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-manage-backend
+2020-01-14 09:26:38.135  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-manage-backend instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-manage-backend,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:38.136  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:38.136  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-manage-backend initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-manage-backend,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@65b1693c
+2020-01-14 09:26:38.228  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-log: startup date [Tue Jan 14 09:26:38 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:38.364  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:38.570  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-log.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:38.584  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-log
+2020-01-14 09:26:38.585  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-log instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-log,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:38.586  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:38.588  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-log initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-log,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@893081e
+2020-01-14 09:26:38.642  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-file: startup date [Tue Jan 14 09:26:38 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:38.733  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:38.887  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-file.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:38.902  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-file
+2020-01-14 09:26:38.903  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-file instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-file,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:38.905  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:38.906  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-file initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-file,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@6b04689e
+2020-01-14 09:26:38.959  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-inform: startup date [Tue Jan 14 09:26:38 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:39.005  INFO [cat-gateway-zuul,,,] 16816 --- [RMI TCP Connection(9)-192.168.5.64] c.c.c.ConfigServicePropertySourceLocator : Located environment: name=cat-gateway-zuul, profiles=[dev], label=null, version=null, state=null
+2020-01-14 09:26:39.045  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:39.190  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-inform.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:39.208  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-inform
+2020-01-14 09:26:39.209  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-inform instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-inform,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:39.210  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:39.211  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-inform initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-inform,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@51d2d336
+2020-01-14 09:26:39.270  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-project-company: startup date [Tue Jan 14 09:26:39 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:39.348  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:39.503  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-company.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:39.516  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-project-company
+2020-01-14 09:26:39.516  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: project-company instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-company,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:39.518  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:39.518  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client project-company initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-company,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@38318d67
+2020-01-14 09:26:39.562  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-project-label: startup date [Tue Jan 14 09:26:39 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:39.635  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:39.759  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-label.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:39.771  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-project-label
+2020-01-14 09:26:39.775  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: project-label instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-label,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:39.777  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:39.777  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client project-label initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-label,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@f09c282
+2020-01-14 09:26:39.824  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-project-item: startup date [Tue Jan 14 09:26:39 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:39.897  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:40.070  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-project-item.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:40.089  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-project-item
+2020-01-14 09:26:40.090  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-project-item instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-project-item,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:40.092  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:40.093  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-project-item initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-project-item,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@50eae15a
+2020-01-14 09:26:40.167  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-project-user: startup date [Tue Jan 14 09:26:40 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:40.321  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:40.507  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:40.522  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-project-user
+2020-01-14 09:26:40.523  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: project-user instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-user,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:40.524  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:40.526  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client project-user initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-user,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@6d514259
+2020-01-14 09:26:40.583  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-cat-map-server: startup date [Tue Jan 14 09:26:40 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:40.672  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:40.830  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-map-server.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:40.843  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-cat-map-server
+2020-01-14 09:26:40.844  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: cat-map-server instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-map-server,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:40.845  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:40.846  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client cat-map-server initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=cat-map-server,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@7925e772
+2020-01-14 09:26:40.887  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-localhost: startup date [Tue Jan 14 09:26:40 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:40.981  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:41.259  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] c.netflix.config.ChainedDynamicProperty  : Flipping property: localhost.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:41.291  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-localhost
+2020-01-14 09:26:41.292  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] c.netflix.loadbalancer.BaseLoadBalancer  : Client: localhost instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=localhost,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:41.294  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:41.294  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncReporter{org.springframework.cloud.sleuth.zipkin2.sender.RestTemplateSender@1568310d}] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client localhost initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=localhost,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@654f2a08
+2020-01-14 09:26:41.375  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-project-record: startup date [Tue Jan 14 09:26:41 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:41.428  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:41.452  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-record.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:41.455  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-project-record
+2020-01-14 09:26:41.456  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: project-record instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-record,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:41.457  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:41.458  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client project-record initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-record,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@85fd4b
+2020-01-14 09:26:41.478  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-project-report: startup date [Tue Jan 14 09:26:41 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:41.546  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:41.685  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-report.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:41.713  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-project-report
+2020-01-14 09:26:41.714  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: project-report instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-report,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:41.715  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:41.715  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client project-report initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-report,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@3c98eaa9
+2020-01-14 09:26:41.768  INFO [cat-gateway-zuul,,,] 16816 --- [main] s.c.a.AnnotationConfigApplicationContext : Refreshing SpringClientFactory-project-summary: startup date [Tue Jan 14 09:26:41 CST 2020]; parent: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@26d820eb
+2020-01-14 09:26:41.843  INFO [cat-gateway-zuul,,,] 16816 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2020-01-14 09:26:41.977  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-summary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:26:41.991  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.u.concurrent.ShutdownEnabledTimer    : Shutdown hook installed for: NFLoadBalancer-PingTimer-project-summary
+2020-01-14 09:26:41.992  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.netflix.loadbalancer.BaseLoadBalancer  : Client: project-summary instantiated a LoadBalancer: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-summary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2020-01-14 09:26:41.993  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : Using serverListUpdater PollingServerListUpdater
+2020-01-14 09:26:41.994  INFO [cat-gateway-zuul,,,] 16816 --- [main] c.n.l.DynamicServerListLoadBalancer      : DynamicServerListLoadBalancer for client project-summary initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=project-summary,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@3c6e407
+2020-01-14 09:27:38.141  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-auth.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:27:39.627  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-log.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:27:41.860  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-map-server.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:28:11.120  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-project-item.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:31:08.659  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:31:11.579  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-user.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:31:25.481  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 09:32:40.831  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-label.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:32:43.018  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-summary.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:33:10.559  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: project-company.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:34:09.933  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-0] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-file.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:34:39.165  INFO [cat-gateway-zuul,,,] 16816 --- [PollingServerListUpdater-1] c.netflix.config.ChainedDynamicProperty  : Flipping property: cat-manage-backend.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2020-01-14 09:36:25.488  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 09:37:28.627  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-o/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.627  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-u/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.627  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-b/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.627  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-l/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.627  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-f/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.627  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-n/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-c/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-label/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/project-item/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/project-user/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/map/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/project-record/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/project-report/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:28.628  INFO [cat-gateway-zuul,,,] 16816 --- [http-nio-80-exec-1] o.s.c.n.zuul.web.ZuulHandlerMapping      : Mapped URL path [/api-summary/**] onto handler of type [class org.springframework.cloud.netflix.zuul.web.ZuulController]
+2020-01-14 09:37:44.663  INFO [cat-gateway-zuul,610fb37a309b2215,610fb37a309b2215,true] 16816 --- [http-nio-80-exec-9] c.x.z.c.controller.TokenController       : admin登陆
+2020-01-14 09:41:25.490  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 09:46:25.500  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 09:51:25.503  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 09:56:25.507  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:01:25.509  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:05:24.538  WARN [cat-gateway-zuul,e5a91ed16350a44c,e5a91ed16350a44c,true] 16816 --- [http-nio-80-exec-8] o.s.c.n.z.filters.post.SendErrorFilter   : Error during filtering
+
+com.netflix.zuul.exception.ZuulException: Forwarding error
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.handleException(RibbonRoutingFilter.java:189) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:164) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.run(RibbonRoutingFilter.java:112) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at com.netflix.zuul.ZuulFilter.runFilter(ZuulFilter.java:117) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.processZuulFilter(FilterProcessor.java:193) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.runFilters(FilterProcessor.java:157) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.route(FilterProcessor.java:118) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.ZuulRunner.route(ZuulRunner.java:96) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.http.ZuulServlet.route(ZuulServlet.java:116) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.http.ZuulServlet.service(ZuulServlet.java:81) ~[zuul-core-1.3.1.jar:1.3.1]
+	at org.springframework.web.servlet.mvc.ServletWrappingController.handleRequestInternal(ServletWrappingController.java:165) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.cloud.netflix.zuul.web.ZuulController.handleRequest(ZuulController.java:44) [spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:52) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) [tomcat-embed-websocket-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter.doFilter(OAuth2ClientContextFilter.java:60) [spring-security-oauth2-2.2.1.RELEASE.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.cloud.sleuth.instrument.web.ExceptionLoggingFilter.doFilter(ExceptionLoggingFilter.java:48) [spring-cloud-sleuth-core-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at brave.servlet.TracingFilter.doFilter(TracingFilter.java:86) [brave-instrumentation-servlet-5.1.0.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:155) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:123) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:108) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_144]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_144]
+Caused by: com.netflix.client.ClientException: Load balancer does not have available server for client: project-report
+	at com.netflix.loadbalancer.LoadBalancerContext.getServerFromLoadBalancer(LoadBalancerContext.java:483) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:184) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:180) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:94) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:42) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Subscriber.setProducer(Subscriber.java:209) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10423) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10390) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.blockForSingle(BlockingObservable.java:443) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.single(BlockingObservable.java:340) ~[rxjava-1.3.8.jar:1.3.8]
+	at com.netflix.client.AbstractLoadBalancerAwareClient.executeWithLoadBalancer(AbstractLoadBalancerAwareClient.java:112) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:186) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:51) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:302) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:298) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:46) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:33) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10423) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10390) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.BlockingOperatorToFuture.toFuture(BlockingOperatorToFuture.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.toFuture(BlockingObservable.java:410) ~[rxjava-1.3.8.jar:1.3.8]
+	at com.netflix.hystrix.HystrixCommand.queue(HystrixCommand.java:378) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at com.netflix.hystrix.HystrixCommand.execute(HystrixCommand.java:344) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:159) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	... 109 common frames omitted
+
+2020-01-14 10:06:25.510  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:11:25.511  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:16:25.512  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:21:25.514  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:26:25.516  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:31:25.518  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:36:25.521  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:41:25.522  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:46:25.523  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:51:25.524  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 10:56:25.525  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:01:25.526  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:06:25.528  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:11:25.529  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:16:25.531  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:21:25.532  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:23:21.232  WARN [cat-gateway-zuul,d905c223c9214b78,d905c223c9214b78,true] 16816 --- [http-nio-80-exec-8] o.s.c.n.z.filters.post.SendErrorFilter   : Error during filtering
+
+com.netflix.zuul.exception.ZuulException: Forwarding error
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.handleException(RibbonRoutingFilter.java:189) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:164) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.run(RibbonRoutingFilter.java:112) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at com.netflix.zuul.ZuulFilter.runFilter(ZuulFilter.java:117) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.processZuulFilter(FilterProcessor.java:193) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.runFilters(FilterProcessor.java:157) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.route(FilterProcessor.java:118) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.ZuulRunner.route(ZuulRunner.java:96) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.http.ZuulServlet.route(ZuulServlet.java:116) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.http.ZuulServlet.service(ZuulServlet.java:81) ~[zuul-core-1.3.1.jar:1.3.1]
+	at org.springframework.web.servlet.mvc.ServletWrappingController.handleRequestInternal(ServletWrappingController.java:165) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.cloud.netflix.zuul.web.ZuulController.handleRequest(ZuulController.java:44) [spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:52) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) [tomcat-embed-websocket-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter.doFilter(OAuth2ClientContextFilter.java:60) [spring-security-oauth2-2.2.1.RELEASE.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.cloud.sleuth.instrument.web.ExceptionLoggingFilter.doFilter(ExceptionLoggingFilter.java:48) [spring-cloud-sleuth-core-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at brave.servlet.TracingFilter.doFilter(TracingFilter.java:86) [brave-instrumentation-servlet-5.1.0.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:155) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:123) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:108) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_144]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_144]
+Caused by: com.netflix.client.ClientException: Load balancer does not have available server for client: project-report
+	at com.netflix.loadbalancer.LoadBalancerContext.getServerFromLoadBalancer(LoadBalancerContext.java:483) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:184) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:180) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:94) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:42) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Subscriber.setProducer(Subscriber.java:209) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10423) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10390) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.blockForSingle(BlockingObservable.java:443) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.single(BlockingObservable.java:340) ~[rxjava-1.3.8.jar:1.3.8]
+	at com.netflix.client.AbstractLoadBalancerAwareClient.executeWithLoadBalancer(AbstractLoadBalancerAwareClient.java:112) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:186) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:51) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:302) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:298) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:46) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:33) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10423) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10390) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.BlockingOperatorToFuture.toFuture(BlockingOperatorToFuture.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.toFuture(BlockingObservable.java:410) ~[rxjava-1.3.8.jar:1.3.8]
+	at com.netflix.hystrix.HystrixCommand.queue(HystrixCommand.java:378) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at com.netflix.hystrix.HystrixCommand.execute(HystrixCommand.java:344) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:159) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	... 109 common frames omitted
+
+2020-01-14 11:23:24.531  WARN [cat-gateway-zuul,9d5cff96ffee850c,9d5cff96ffee850c,true] 16816 --- [http-nio-80-exec-6] o.s.c.n.z.filters.post.SendErrorFilter   : Error during filtering
+
+com.netflix.zuul.exception.ZuulException: Forwarding error
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.handleException(RibbonRoutingFilter.java:189) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:164) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.run(RibbonRoutingFilter.java:112) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at com.netflix.zuul.ZuulFilter.runFilter(ZuulFilter.java:117) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.processZuulFilter(FilterProcessor.java:193) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.runFilters(FilterProcessor.java:157) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.FilterProcessor.route(FilterProcessor.java:118) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.ZuulRunner.route(ZuulRunner.java:96) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.http.ZuulServlet.route(ZuulServlet.java:116) ~[zuul-core-1.3.1.jar:1.3.1]
+	at com.netflix.zuul.http.ZuulServlet.service(ZuulServlet.java:81) ~[zuul-core-1.3.1.jar:1.3.1]
+	at org.springframework.web.servlet.mvc.ServletWrappingController.handleRequestInternal(ServletWrappingController.java:165) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.cloud.netflix.zuul.web.ZuulController.handleRequest(ZuulController.java:44) [spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControllerHandlerAdapter.java:52) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:635) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851) [spring-webmvc-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:742) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52) [tomcat-embed-websocket-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter.doFilter(OAuth2ClientContextFilter.java:60) [spring-security-oauth2-2.2.1.RELEASE.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:90) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:320) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:137) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:111) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:170) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:200) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:116) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:96) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:66) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:105) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:56) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:334) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:215) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:178) [spring-security-web-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HttpPutFormContentFilter.doFilterInternal(HttpPutFormContentFilter.java:109) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.cloud.sleuth.instrument.web.ExceptionLoggingFilter.doFilter(ExceptionLoggingFilter.java:48) [spring-cloud-sleuth-core-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at brave.servlet.TracingFilter.doFilter(TracingFilter.java:86) [brave-instrumentation-servlet-5.1.0.jar:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:155) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:123) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:108) [spring-boot-actuator-2.0.4.RELEASE.jar:2.0.4.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107) [spring-web-5.0.8.RELEASE.jar:5.0.8.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:198) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:140) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:81) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:87) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:800) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1471) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_144]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_144]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-8.5.32.jar:8.5.32]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_144]
+Caused by: com.netflix.client.ClientException: Load balancer does not have available server for client: cat-inform
+	at com.netflix.loadbalancer.LoadBalancerContext.getServerFromLoadBalancer(LoadBalancerContext.java:483) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:184) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at com.netflix.loadbalancer.reactive.LoadBalancerCommand$1.call(LoadBalancerCommand.java:180) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:94) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeConcatMap.call(OnSubscribeConcatMap.java:42) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber$1.call(OperatorRetryWithPredicate.java:127) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.enqueue(TrampolineScheduler.java:73) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.schedulers.TrampolineScheduler$InnerCurrentThreadScheduler.schedule(TrampolineScheduler.java:52) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:79) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OperatorRetryWithPredicate$SourceSubscriber.onNext(OperatorRetryWithPredicate.java:45) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$WeakSingleProducer.request(ScalarSynchronousObservable.java:276) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Subscriber.setProducer(Subscriber.java:209) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:138) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.util.ScalarSynchronousObservable$JustOnSubscribe.call(ScalarSynchronousObservable.java:129) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10423) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10390) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.blockForSingle(BlockingObservable.java:443) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.single(BlockingObservable.java:340) ~[rxjava-1.3.8.jar:1.3.8]
+	at com.netflix.client.AbstractLoadBalancerAwareClient.executeWithLoadBalancer(AbstractLoadBalancerAwareClient.java:112) ~[ribbon-loadbalancer-2.2.5.jar:2.2.5]
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:186) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at org.springframework.cloud.netflix.zuul.filters.route.support.AbstractRibbonCommand.run(AbstractRibbonCommand.java:51) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:302) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at com.netflix.hystrix.HystrixCommand$2.call(HystrixCommand.java:298) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:46) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeMap.call(OnSubscribeMap.java:33) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:41) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDoOnEach.call(OnSubscribeDoOnEach.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.unsafeSubscribe(Observable.java:10327) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeDefer.call(OnSubscribeDefer.java:35) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:48) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.OnSubscribeLift.call(OnSubscribeLift.java:30) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10423) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.Observable.subscribe(Observable.java:10390) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.internal.operators.BlockingOperatorToFuture.toFuture(BlockingOperatorToFuture.java:51) ~[rxjava-1.3.8.jar:1.3.8]
+	at rx.observables.BlockingObservable.toFuture(BlockingObservable.java:410) ~[rxjava-1.3.8.jar:1.3.8]
+	at com.netflix.hystrix.HystrixCommand.queue(HystrixCommand.java:378) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at com.netflix.hystrix.HystrixCommand.execute(HystrixCommand.java:344) ~[hystrix-core-1.5.12.jar:1.5.12]
+	at org.springframework.cloud.netflix.zuul.filters.route.RibbonRoutingFilter.forward(RibbonRoutingFilter.java:159) ~[spring-cloud-netflix-zuul-2.0.0.RELEASE.jar:2.0.0.RELEASE]
+	... 109 common frames omitted
+
+2020-01-14 11:26:25.534  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:31:25.536  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:36:25.538  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:41:25.539  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:46:25.541  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:51:25.543  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 11:56:25.545  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:01:25.547  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:06:25.548  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:11:25.550  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:16:25.553  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:21:25.555  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:26:25.557  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:31:25.558  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:36:25.560  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:41:25.561  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:46:25.562  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:51:25.563  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 12:56:25.565  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:01:25.567  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:06:25.567  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:11:25.568  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:16:25.569  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:21:25.570  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:26:25.573  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:31:25.583  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:36:25.585  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:41:25.586  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:46:25.589  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:51:25.590  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 13:56:25.592  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:01:25.593  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:06:25.595  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:11:25.597  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:16:25.598  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:21:25.599  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:26:25.600  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:31:25.601  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:36:25.602  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:41:25.602  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:46:25.604  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:51:25.605  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 14:56:25.606  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:01:25.607  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:06:25.608  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:11:25.610  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:16:25.613  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:21:25.614  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:26:25.617  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:31:25.619  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:36:25.619  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:41:25.621  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:46:25.622  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:51:25.624  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 15:56:25.626  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 16:01:25.627  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 16:06:25.629  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 16:11:25.631  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 16:16:25.632  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 16:21:25.641  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2020-01-14 16:26:25.643  INFO [cat-gateway-zuul,,,] 16816 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

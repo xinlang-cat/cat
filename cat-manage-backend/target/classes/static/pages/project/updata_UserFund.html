@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+
+
+<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-3 control-label">科目</label>
+                <input type="hidden" value="" id="id" name="id"/>
+                <div class="col-md-7">
+                    <select class="form-control input-sm" id="option" value="" name="budget_id">
+                        <!--  <option value="1">男</option>
+                          <option value="0">女</option>-->
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">金额</label>
+                <div class="col-md-7">
+                    <input class="form-control" placeholder="金额" type="text" id="expenditure" name="expenditure" maxlength="50"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="金额 不能为空">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">备注</label>
+                <div class="col-md-7">
+                    <textarea placeholder="请输入内容" class="layui-textarea" id="remark"  name="remark" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                </div>
+            </div>
+           <div class="form-group">
+                <label class="col-md-3 control-label">
+                    <button id="file" type="button" class="layui-btn " id="test2">图片上传</button>
+                </label>
+                <div class="col-md-7">
+                    <div data-bv-notempty="true"
+                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 750px;"
+                         id="demo2"></div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="history.back(-1);">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="updata()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script>
+    var id = getUrlParam("id");
+    $("#id").val(id);
+
+   var subject_id;
+   var itemId;
+    var urls=[];
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fund/use/'+id,
+            contentType: "application/json; charset=utf-8",
+            async:false,
+            success: function (res) {
+                $("#expenditure").val(res.expenditure);
+                $("#remark").text(res.remark);
+                subject_id=res.budget_id;
+                itemId=res.item_id;
+                var str = '';
+                $(res.bill_url).each(function (index) {
+                    $('#demo2').append('<div><button  onclick="deleteImg('+index+',this);" style="position: absolute;" type="button" class="layui-btn layui-btn-primary">删除</button>  <img  style="width: 250px;margin-left: 10px;height: 150px;" src="' + this + '" alt="' + file.name + '" class="layui-upload-img"></img></div>');
+                    urls.push(this);
+                })
+            }
+        })
+    })
+    function deleteImg(index,e) {
+        $(e).parent().remove();
+        urls.length = 0;
+        var url;
+        $("img").each(function(){
+            url = $(this).attr("src");
+            urls.push(url);
+        });
+    }
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/budget/' + subject_id,
+            contentType: "application/json; charset=utf-8",
+            async:false,
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += ' <option value="' + this.id + '">' + this.subject + '</option>';
+                });
+                $("#option").append(str);
+            }
+        })
+    })
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/budget/all/' + itemId,
+            contentType: "application/json; charset=utf-8",
+            async:false,
+            success: function (res) {
+                var str = '';
+                $(res).each(function () {
+                    str += ' <option value="' + this.id + '">' + this.subject + '</option>';
+                });
+                $("#option").append(str);
+            }
+        })
+    })
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#file' //绑定元素
+            , accept: 'images'
+            , url: domainName + '/zuul/api-f/files' //上传接口
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#demo2').append('<img style="width: 250px;margin-left: 10px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                });
+            }
+            , done: function (res) {
+                urls.push(res.url);
+                //上传完毕回调
+            }
+            , error: function () {
+                alert("失败");
+                //请求异常回调
+            }
+        })
+    })
+    function updata() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        formdata.bill_url=urls;
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/fund/use',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "UseOfFunding.html?id=" + itemId;
+                });
+            }
+        });
+    }
+
+    /*  $("#item_id").val(id);
+      layui.use(['layer'], function () {
+          var layer = layui.layer;
+      });
+      $(function () {
+          $.ajax({
+              type: 'get',
+              url: domainName + '/project-item/item/budget/all/' + id,
+              contentType: "application/json; charset=utf-8",
+              success: function (res) {
+                  var str = '';
+                  $(res).each(function () {
+                      str += ' <option value="' + this.id + '">' + this.subject + '</option>';
+                  });
+                  $("#option").append(str);
+              }
+          })
+      })
+      layui.use(['layer', 'laydate', 'upload'], function () {
+          var layer = layui.layer
+              , upload = layui.upload
+              , laydate = layui.laydate;
+
+          lay('.date').each(function () {
+              laydate.render({
+                  elem: this
+                  , format: 'yyyy年MM月dd日'
+                  , trigger: 'click'
+              });
+          });
+
+          //文件上传
+          var uploadInst = upload.render({
+              elem: '#file' //绑定元素
+              , accept: 'images'
+              , url: domainName + '/zuul/api-f/files' //上传接口
+              , before: function (obj) {
+                  //预读本地文件示例，不支持ie8
+                  obj.preview(function (index, file, result) {
+                      $('#demo2').append('<img style="width: 250px;margin-left: 10px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                  });
+              }
+              , done: function (res) {
+
+                  var str = '<input type="checkbox" name="bill_url" value="' + res.path + '" checked>';
+                  $("#bill_url").append(str);
+
+                  //上传完毕回调
+
+              }
+              , error: function () {
+
+                  alert("失败");
+                  //请求异常回调
+              }
+          })
+
+
+      })
+
+
+      function add() {
+          $('#form').bootstrapValidator();
+          var bootstrapValidator = $("#form").data('bootstrapValidator');
+          bootstrapValidator.validate();
+          if (!bootstrapValidator.isValid()) {
+              return;
+          }
+
+          var formdata = $("#form").serializeObject();
+          $.ajax({
+              type: 'post',
+              url: domainName + '/project-item/item/fund/use',
+              contentType: "application/json; charset=utf-8",
+              data: JSON.stringify(formdata),
+              success: function (data) {
+                  layer.msg("成功", {shift: -1, time: 1000}, function () {
+                      location.href = "details.html?id=" + id;
+                  });
+              }
+          });
+
+      }
+
+
+      $("#btn_return").click(function () {
+
+          $(location).attr("href", "details.html?id=" + id + "");
+
+      })
+  */
+</script>
+</body>
+</html>
