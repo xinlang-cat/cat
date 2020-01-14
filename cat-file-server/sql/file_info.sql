@@ -39,8 +39,6 @@ CREATE TABLE `file_info` (
 
 
 INSERT INTO `file_info` VALUES ('a8ee3889121c7c75aed010117bf9e625', '形象1.JPG', '1', 'image/jpeg', '5443433', 'F:/localFile/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'http://192.168.5.64/api-f/statics/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'LOCAL', '2019-11-09 00:16:34');
-=======
-INSERT INTO `file_info` VALUES ('a8ee3889121c7c75aed010117bf9e625', '形象1.JPG', '1', 'image/jpeg', '5443433', 'F:/localFile/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'http://192.168.5.24/api-f/statics/2019/11/09/a8ee3889121c7c75aed010117bf9e625.JPG', 'LOCAL', '2019-11-09 00:16:34');
->>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
+
 
 
