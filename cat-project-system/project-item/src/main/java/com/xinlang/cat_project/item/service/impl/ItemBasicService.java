@@ -50,10 +50,6 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
     @Autowired
     private ConsumeCompany consumeCompany;
 
-    /*日期格式*/
-    private String format1 = "yyyy-MM-dd";
-    private String format2 = "yyyy-MM-dd HH:mm";
-
     @Override
     public PageResult<ItemBasic> queryList(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params) throws ItemException{
         // 开始分页
@@ -61,14 +57,14 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
         // 过滤
         Example example = new Example(ItemBasic.class);
         if (params!=null) {
-            if(params.get("item_name") != "" && params.get("status") != ""){
+            /*if(params.get("item_name") != "" && params.get("status") != ""){
                 example.createCriteria().andLike("item_name", "%" + params.get("item_name") + "%").andEqualTo("status", params.get("status"));
             }else if(params.get("item_name") != ""){
                 example.createCriteria().andLike("item_name", "%" + params.get("item_name") + "%");
             }else if(params.get("status") != ""){
                 example.createCriteria().andEqualTo("status", params.get("status"));
-            }
-            example.createCriteria().andGreaterThanOrEqualTo("status", constant.ItemStatus.PROCEED);
+            }*/
+            //example.createCriteria().andGreaterThanOrEqualTo("status", constant.ItemStatus.PROCEED);
         }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序
@@ -79,7 +75,7 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
         List<ItemBasic> list = itemBasicMapper.selectByExample(example);
         //解析分页结果
         PageInfo<ItemBasic> info = new PageInfo<>(list);
-        return  new PageResult<>(info.getTotal(), list);
+        return  new PageResult<>(200, info.getTotal(), list);
     }
 
     @Override

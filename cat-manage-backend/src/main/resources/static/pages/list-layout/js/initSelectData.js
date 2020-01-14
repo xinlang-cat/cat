@@ -136,37 +136,44 @@ function queryUserInfo(usetId,node) {
         async : false,
         success : function(data) {
             var d = data[0];
-            var sex = d.sex || '',
-                birthDate = d.birthDate || '',
-                idType = d.idType || '',
-                idCard = d.idCard || '',
-                academicTitle = d.academicTitle || '',
-                nowMajor = d.nowMajor || '',
-                deptName = d.deptName || '';
-            if(d.nowMajor!=''){
-                nowMajor = analysisLablename(d.nowMajor);
-            }
-            if(sex==1){
-                sex='男';
-            }else {
-                sex='女';
-            }
-            // 获得今天的时间，计算年龄
-            var date = new Date();
-            var startDate = new Date(birthDate);
-            var newDate = date.getTime() - startDate.getTime();
-            var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 /365);
-            if (isNaN(age)){
-                age = "";
-            }
-            node.parent().nextAll().eq(0).children('input').eq(0).val(sex);
-            node.parent().nextAll().eq(1).children('input').eq(0).val(age);
-            node.parent().nextAll().eq(2).children('input').eq(0).val(idType+'/'+idCard);
-            node.parent().nextAll().eq(3).children('input').eq(0).val(academicTitle);
-            node.parent().nextAll().eq(4).children('input').eq(0).val(nowMajor);
-            node.parent().nextAll().eq(5).children('input').eq(0).val(deptName);
+            userInfoUtil(d,node);
         }
     });
+}
+//用于数据填入表单
+function userInfoUtil(d,node) {
+    var sex = d.sex || '',
+        birthDate = d.birthDate || '',
+        idType = d.idType || '',
+        idCard = d.idCard || '',
+        academicTitle = d.academicTitle || '',
+        nowMajor = d.nowMajor || '',
+        deptName = d.deptName || '',
+        name = d.name || '';
+    if(d.nowMajor!=''){
+        nowMajor = analysisLablename(d.nowMajor);
+    }
+    if(sex==1){
+        sex='男';
+    }else {
+        sex='女';
+    }
+    // 获得今天的时间，计算年龄
+    var date = new Date();
+    var startDate = new Date(birthDate);
+    var newDate = date.getTime() - startDate.getTime();
+    var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 /365);
+    if (isNaN(age)){
+        age = "";
+    }
+    node.parent().prevAll().eq(6).children('input').eq(0).val(name);
+    node.parent().prevAll().eq(6).children('input').eq(2).val(d.userId);//userId
+    node.parent().prevAll().eq(5).children('input').eq(0).val(sex);
+    node.parent().prevAll().eq(4).children('input').eq(0).val(age);
+    node.parent().prevAll().eq(3).children('input').eq(0).val(idType+'/'+idCard);
+    node.parent().prevAll().eq(2).children('input').eq(0).val(academicTitle);
+    node.parent().prevAll().eq(1).children('input').eq(0).val(nowMajor);
+    node.parent().prevAll().eq(0).children('input').eq(0).val(deptName);
 }
 /*解析标签名称*/
 function analysisLablename(sign) {

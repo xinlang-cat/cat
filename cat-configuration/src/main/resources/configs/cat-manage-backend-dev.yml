@@ -45,7 +45,11 @@ mybatis:
 security:
   oauth2:
     resource:
+<<<<<<< HEAD
       user-info-uri: http://192.168.5.64/api-o/user-me
+=======
+      user-info-uri: http://192.168.5.24/api-o/user-me
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
       prefer-token-info: false
 info:
   company: 鑫朗通信技术有限公司

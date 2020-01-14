@@ -30,12 +30,12 @@ public class ItemUserService extends BaseService<ItemUser> implements IItemUserS
     @Transactional
     public void saveitemUsers(List<ItemUser> itemUsers) {
         itemUserMapper.insertList(itemUsers);
-        for (ItemUser itemUser : itemUsers) {
+        /*for (ItemUser itemUser : itemUsers) {
             List<Integer> targetIds = itemUser.getTargetIds();
             for (Integer targetId : targetIds) {
                 itemUserMapper.insertTargetUser(itemUser.getItem_id(),targetId,itemUser.getUser_id());
             }
-        }
+        }*/
     }
 
     @Override
