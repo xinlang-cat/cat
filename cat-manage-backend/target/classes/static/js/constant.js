@@ -29,6 +29,18 @@ function   formatDate2(now)   {
     var   year=now.getFullYear();
     return   year;
 }
+<<<<<<< HEAD
+=======
+
+function   formatDate3(now)   {
+    var   now= new Date(now);
+    var   year=now.getFullYear();
+    var   month=now.getMonth()+1;
+    var   date=now.getDate();
+    return   year+"/"+fixZero(month,2)+"/"+fixZero(date,2);
+}
+
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
 //时间如果为单位数补0
 function fixZero(num,length){
     var str=""+num;

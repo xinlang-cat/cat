@@ -15,6 +15,7 @@
         <div></div>
     </div>
 </div>
+<<<<<<< HEAD
 <!-- coidea:loader END -->
 
 <!-- coidea:sidebar START -->
@@ -26,23 +27,32 @@
 <!-- coidea:sidebar END -->
 
 <!-- coidea:header START -->
+=======
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
 <header>
     <div class="header-inner">
         <h1>项目列表</h1>
     </div>
 </header>
+<<<<<<< HEAD
 <!-- coidea:header END -->
 
 <!-- coidea:grid-list START -->
 <section class="grid-holder">
 
     <!-- coidea:grid-list:navigation+switcher START -->
+=======
+<section class="grid-holder">
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
     <div class="grid-list-layout">
         <nav class="navigation">
             <li> <a href="pages/details/addProject.html"><span>新增</span></a></li>
             <li ><a href="../summary/summaryList.html?item_id=1&item_name=test">结题总结</a></li>
         </nav>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
         <div class="grid-list-holder">
           <span class="grid-layout active">
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -132,6 +142,7 @@
         </span>
         </div>
     </div>
+<<<<<<< HEAD
     <!-- coidea:grid-list:navigation+switcher END -->
 
     <!-- coidea:grid-list:main-section START -->
@@ -179,6 +190,12 @@
 <!-- coidea:grid-list END -->
 
 <!--<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
+=======
+    <div class="grid masonry" id="list">
+    </div>
+
+</section>
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="assets/js/TweenMax.min.js"></script>
 <script src="assets/js/ScrollToPlugin.min.js"></script>
@@ -212,12 +229,22 @@
                         '                <figcaption class="content">\n' +
                         '                    <h2 style="max-width: 400px;">'+this.item_name+'</h2>\n' +
                         '                    <p class="date" style="max-width: 400px;">' +
+<<<<<<< HEAD
                         '                       <span style="margin-right: 10px;">开始时间：'+this.start_date.substring(0, 10)+'</span>' +
                         '                       <span>结束时间：'+this.end_date.substring(0, 10)+'</span></p>\n' +
                         '                    <ul class="tags">\n' +
                         '                        <li><a href="pages/update/projectDetails.html?id='+this.id+'">项目信息</a></li>\n' +
                         '                        <li><a href="../work-log/workLogList.html?id='+this.id+'&userId='+userId+'">实施日志</a></li>\n' +
                         '                        <li><a href="../project/report/report.html?id='+this.id+'">阶段总结</a></li>\n' +
+=======
+                        '                        <span style="margin-right: 10px;">开始时间：'+this.start_date.substring(0, 10)+'</span>' +
+                        '                        <span>结束时间：'+this.end_date.substring(0, 10)+'</span></p>\n' +
+                        '                        <ul class="tags">\n' +
+                        '                        <li><a href="pages/update/projectDetails.html?id='+this.id+'">项目信息</a></li>\n' +
+                        '                        <li><a href="../indicator/indicatorList.html?itemId='+this.id+'&userId='+userId+'">项目指标</a></li>\n' +
+                        '                        <li><a href="../work-log/workLogList.html?id='+this.id+'&userId='+userId+'">实施日志</a></li>\n' +
+                        '                        <li><a href="../stage/stageList.html?item_id='+this.id+'&userId='+userId+'">阶段总结</a></li>\n' +
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
                         '                        <li><a href="pages/UserFund/userFund.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
                         '                        <li><a href="pages/details/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +
@@ -226,7 +253,11 @@
                         '                </figcaption>\n' +
                         '            </figure>\n' +
                         '        </div>';
+<<<<<<< HEAD
                 })
+=======
+                });
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
                 $("#list").append(str);
             }
         });
@@ -251,7 +282,10 @@
         });
     }
     function check(id,status,boolean) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
         if(boolean==1){
             status++
         }else {
@@ -283,7 +317,10 @@
                 content: ['pages/matchExpert.html?id='+id]
             });
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0bdab14c8ff5f414e64b8b86a9954cd585962f27
     }
     //获取当前用户的公司代码
     function getCompanryCode() {

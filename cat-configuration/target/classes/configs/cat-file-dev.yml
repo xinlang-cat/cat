@@ -60,6 +60,7 @@ album:
   local:
     path: D:/localFile
     prefix: /statics
+
     urlPrefix: http://192.168.5.64/api-f${album.local.prefix}
 
     mini: #缩略图宽

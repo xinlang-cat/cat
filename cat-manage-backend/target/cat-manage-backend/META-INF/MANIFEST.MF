@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: pc
+Implementation-Vendor-Id: com.xinlang.zly-xyx
+Created-By: IntelliJ IDEA
+Build-Jdk: 1.8.0_144
+Main-Class: ${start-class}
+
