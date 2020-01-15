@@ -39,10 +39,7 @@ mybatis:
     mapUnderscoreToCamelCase: true
 security:
   oauth2:
-    resource:
-
-
-      user-info-uri: http://192.168.5.48/api-o/user-me
+    resource:-info-uri: http://192.168.5.64/api-o/user-me
 
       prefer-token-info: false
 elasticsearch:

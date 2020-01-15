@@ -45,7 +45,6 @@ public class WorkLogController {
     @LogAnnotation(module = "修改工作日志")
     @ApiOperation(value = "修改工作日志")
     public WorkLog update(@RequestBody WorkLog workLog){
-        workLog.setUpdateTime(new Date());
         workLogService.update(workLog);
         return workLog;
     }
@@ -69,5 +68,12 @@ public class WorkLogController {
     @ApiOperation(value = "删除工作日志")
     public void delete(@PathVariable Integer id){
         workLogService.delete(id);
+    }
+
+    @GetMapping("/lately")
+    @ApiOperation(value = "查询最新一条工作日志")
+    @LogAnnotation(module = "查询最新一条工作日志")
+    public WorkLog findLatelyByItemIdAndTargetId(@RequestParam String itemId,@RequestParam String targetId){
+        return workLogService.findLatelyByItemIdAndTargetId(itemId,targetId);
     }
 }

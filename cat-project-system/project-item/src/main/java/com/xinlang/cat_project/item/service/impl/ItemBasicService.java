@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,14 +57,25 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(ItemBasic.class);
-        if (params!=null) {
-            /*if(params.get("item_name") != "" && params.get("status") != ""){
+
+        if (params.get("item_name")!=null && params.get("category") != null && params.get("status") != null) {
+
+
+            if(params.get("item_name") !="" && params.get("category") != ""&& params.get("status") != ""){
+                example.createCriteria().andLike("item_name", "%" + params.get("item_name") + "%").andEqualTo("status", params.get("status")).andEqualTo("category", params.get("category"));
+            }else if(params.get("item_name")!=""&& params.get("status") != ""){
                 example.createCriteria().andLike("item_name", "%" + params.get("item_name") + "%").andEqualTo("status", params.get("status"));
-            }else if(params.get("item_name") != ""){
+            }else if(params.get("status") != "" && params.get("category") != ""){
+                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("category", params.get("category"));
+            }else if(params.get("item_name")!=""&& params.get("category") != ""){
+                example.createCriteria().andLike("item_name", "%" + params.get("item_name") + "%").andEqualTo("category", params.get("category"));
+            }else if (params.get("item_name")!=""){
                 example.createCriteria().andLike("item_name", "%" + params.get("item_name") + "%");
-            }else if(params.get("status") != ""){
+            }else if (params.get("category") != ""){
+                example.createCriteria().andEqualTo("category", params.get("category"));
+            }else if (params.get("status") != ""){
                 example.createCriteria().andEqualTo("status", params.get("status"));
-            }*/
+            }
             //example.createCriteria().andGreaterThanOrEqualTo("status", constant.ItemStatus.PROCEED);
         }
         if (StringUtils.isNotBlank(sortBy)) {

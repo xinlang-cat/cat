@@ -15,10 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.xinlang.zly_xyx.cat_file_server.service.IAlbumService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -86,5 +83,11 @@ public class AlbumController {
     @GetMapping("/{id}")
     public Album findById(@PathVariable String id) {
         return albumMapper.getById(id);
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "根据ids查询相册")
+    public List<Album> findByIds(@RequestParam("ids") Set<String> ids) {
+        return albumMapper.getByIds(new ArrayList<>(ids));
     }
 }
