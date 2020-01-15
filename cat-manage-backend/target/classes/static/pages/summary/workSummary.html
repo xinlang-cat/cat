@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目工作总结报告</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/details.css">
+</head>
+
+<body>
+<!-- 按钮组 -->
+<div class="btn-box">
+
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addContent">
+            <i class="layui-icon layui-icon-add-1"></i>研究内容</a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addTarget">
+            <i class="layui-icon layui-icon-add-1"></i>考核指标</a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addFund">
+            <i class="layui-icon layui-icon-add-1"></i>项目资金</a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addBudget">
+            <i class="layui-icon layui-icon-add-1"></i>项目预算
+        </a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addPersonnel">
+            <i class="layui-icon layui-icon-add-1"></i>项目人员</a>
+    </div>
+    <div>
+        <a class="layui-btn  layui-btn-sm" style="width:100%;" id="return">
+            <i class="layui-icon layui-icon-return"></i>返&nbsp;&nbsp;&nbsp;&nbsp;回</a>
+    </div>
+</div>
+<!-- 基本信息 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">基本信息</p>
+        <table class="layui-table" id="basis">
+            <colgroup>
+                <col width="10%">
+                <col width="40%">
+                <col width="10%">
+                <col width="40%">
+            </colgroup>
+
+        </table>
+    </div>
+</div>
+<!-- 主要研究内容 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">主要研究内容</p>
+        <table class="layui-table" id="content">
+            <colgroup>
+                <col width="30%">
+                <col width="20%">
+                <col width="30%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+
+        </table>
+
+    </div>
+</div>
+<!-- 项目资金 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">资金构成</p>
+        <table class="layui-table" id="fundSource">
+            <colgroup>
+                <col width="15%">
+                <col width="10%">
+                <col width="75%">
+            </colgroup>
+
+        </table>
+    </div>
+</div>
+<!-- 资金总预算 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">总资金预算</p>
+        <table class="layui-table" id="fundBudgetAll">
+            <colgroup>
+                <col width="15%">
+                <col width="10%">
+                <col width="15%">
+                <col width="60%">
+            </colgroup>
+
+        </table>
+    </div>
+    <!-- 项目人员 -->
+    <div style="position: relative;">
+        <div class="content">
+            <p class="title">项目人员</p>
+            <table class="layui-table" id="personnel">
+                <colgroup>
+                    <col width="8%">
+                    <col width="6%">
+                    <col width="6%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="13%">
+                    <col width="14%">
+                    <col width="18%">
+                </colgroup>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript" src="../../js/project/basis.js"></script>
+<script type="text/javascript" src="../../js/project/content-target.js"></script>
+<script type="text/javascript" src="../../js/project/fund.js"></script>
+<script type="text/javascript" src="../../js/project/fundBudgetAll.js"></script>
+<script type="text/javascript" src="../../js/project/personnel.js"></script>
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    var id = getUrlParam("id");
+
+    //$("#addBasic").attr("href","addBasic.html?id="+id);
+    $("#addContent").attr("href","addContent.html?id="+id);
+    $("#addTarget").attr("href","addTarget.html?id="+id);
+    $("#addFund").attr("href","addFund.html?id="+id);
+    $("#addBudget").attr("href","addBudget.html?id="+id);
+    $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
+    $("#return").attr("href","itemList.html");
+
+    /*基本信息*/
+    getBasic(id);
+    /*主要研究内容*/
+    content_target(id);
+    /*资金构成*/
+    fundSource(id);
+    /*总资金预算*/
+    fundBudgetAll(id);
+    /*项目人员*/
+    personnel(id);
+
+    bntShow();
+</script>
+
+</html>

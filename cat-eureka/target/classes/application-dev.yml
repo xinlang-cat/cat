@@ -1,0 +1,46 @@
+#开发环境配置
+server:
+  port: 8761
+
+spring:
+  security:
+    user:
+      name: cat
+      password: cat
+      roles: SUPERUSER
+  application:
+    name: cat-eureka
+
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.5.48:${server.port}/eureka/
+    registry-fetch-interval-seconds: 5
+  server:
+    eviction-interval-timer-in-ms: 3000
+    enable-self-preservation: false
+    renewal-percent-threshold: 0.9
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    root: info
+  file: logs/${spring.application.name}.log
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com

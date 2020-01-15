@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/font-awesome/css/font-awesome.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<form class="form-horizontal" onsubmit="return false" id="form">
+		<fieldset>
+			<input type="hidden" id="id" name="id">
+			<div class="form-group">
+				<label class="col-md-2 control-label">上级标签</label>
+				<div class="col-md-6">
+					<select id="parentId" name="pid" class="form-control input-sm"></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">名称</label>
+				<div class="col-md-6">
+					<input class="form-control" placeholder="名称" type="text" name="content" id="content" maxlength="50"
+						   data-bv-notempty="true"
+						   data-bv-notempty-message="名称 不能为空">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">sign</label>
+				<div class="col-md-6">
+					<input class="form-control" placeholder="标识" type="text" name="sign" id="sign" maxlength="50"
+						   data-bv-notempty="true"
+						   data-bv-notempty-message="标识 不能为空">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">sign</label>
+				<div class="col-md-6">
+					<input class="form-control" placeholder="标识" type="text" name="unit" id="unit" maxlength="50">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">排序</label>
+				<div class="col-md-6">
+					<input class="form-control" placeholder="排序" name="sort" id="sort" type="number" value="100"
+						   data-bv-notempty="true"
+						   data-bv-notempty-message="排序 不能为空">
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<div class="row" align="center">
+					<div class="col-md-12">
+						<button class="btn btn-primary" onclick="location.href='labelList.html'">返回</button>
+						<button class="btn btn-primary" type="submit" onclick="update()">
+							<i class="fa fa-save"></i> 保存
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</fieldset>
+	</form>
+</div>
+
+	<script src="../../js/constant.js"></script>
+	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jq.js"></script>
+	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript" src="../../js/my/ztree-menu.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript">
+	layui.use('layer', function(){
+	    var layer = layui.layer;
+	});
+
+	initParentLabelSelect();
+
+	function initParentLabelSelect(){
+		$.ajax({
+			type : 'get',
+			url : domainName + '/api-label/label/all',
+			async : false,
+			success : function(data) {
+				var select = $("#parentId");
+				select.append("<option value='0'>root</option>");
+				for(var i=0; i<data.length; i++){
+					var d = data[i];
+					var id = d['id'];
+					var name = d['content'];
+					select.append("<option value='"+ id +"'>" +name+"</option>");
+				}
+			}
+		});
+	}
+	var id = getUrlParam("id");
+	initData();
+
+	function initData(){
+		if(id != ""){
+			$.ajax({
+				type : 'get',
+				url : domainName + '/api-label/label/'+id,
+				async : true,
+				success : function(res) {
+					$("#id").val(res[0].id);
+					$("#parentId").val(res[0].pid);
+					$("#content").val(res[0].content);
+					$("#sign").val(res[0].sign);
+					$("#sort").val(res[0].sort);
+					$("#unit").val(res[0].unit);
+				}
+			});
+		}
+	}
+
+		function update() {
+			if($("#parentId").val() == id){
+	            layer.msg("父级菜单不能是自己");
+	            return;
+			}
+			
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+		    if(!bootstrapValidator.isValid()){
+			   return;
+		    }
+		    
+		    var formdata = $("#form").serializeObject();
+
+			$.ajax({
+				type : 'put',
+				url : domainName + '/api-label/label',
+				contentType: "application/json; charset=utf-8",  
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					layer.msg("修改成功", {shift: -1, time: 1000}, function(){
+                        location.href = "labelList.html";
+                    });
+				}
+			});
+		}
+		
+	</script>
+</body>
+</html>

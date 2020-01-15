@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>基本信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/details.css">
+</head>
+
+<body>
+<!-- 按钮组 -->
+<div class="btn-box">
+    <!--<div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addBasic">
+            <i class="layui-icon layui-icon-add-1"></i>基本信息
+        </a>
+    </div>-->
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addContent">
+            <i class="layui-icon layui-icon-add-1"></i>研究内容</a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addTarget">
+            <i class="layui-icon layui-icon-add-1"></i>考核指标</a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addFund">
+            <i class="layui-icon layui-icon-add-1"></i>项目资金</a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addBudget">
+            <i class="layui-icon layui-icon-add-1"></i>项目预算
+        </a>
+    </div>
+    <div>
+        <a href="#" class="layui-btn  layui-btn-sm" id="addPersonnel">
+            <i class="layui-icon layui-icon-add-1"></i>项目人员</a>
+    </div>
+    <div>
+        <a class="layui-btn  layui-btn-sm" style="width:100%;" id="return">
+            <i class="layui-icon layui-icon-return"></i>返&nbsp;&nbsp;&nbsp;&nbsp;回</a>
+    </div>
+</div>
+<!-- 基本信息 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">基本信息</p>
+        <table class="layui-table" id="basis">
+            <colgroup>
+                <col width="10%">
+                <col width="40%">
+                <col width="10%">
+                <col width="40%">
+            </colgroup>
+            <!--<thead>
+                <th colspan="4">基本信息</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>合同编号</td>
+                    <td>
+                        <p id="contract_number"></p>
+                    </td>
+                    <td>计划类别</td>
+                    <td>
+                        <p id="plan_category"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>项目名称</td>
+                    <td>
+                        <p id="item_name"></p>
+                    </td>
+                    <td>计划批次</td>
+                    <td>
+                        <p id="batch"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>委托单位</td>
+                    <td>
+                        <p id="consignor"></p>
+                    </td>
+                    <td>承担单位</td>
+                    <td>
+                        <p id="undertaker"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>管理单位</td>
+                    <td>
+                        <p id="supervisor_dept"></p>
+                    </td>
+                    <td>管理代表</td>
+                    <td>
+                        <p id="supervisor"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>实施地点</td>
+                    <td>
+                        <p id="district"></p>
+                    </td>
+                    <td>合同文件</td>
+                    <td>
+                        <a id="contract_file" href=""></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>开始时间</td>
+                    <td>
+                        <p id="start_dateStr"></p>
+                    </td>
+                    <td>结束时间</td>
+                    <td>
+                        <p id="end_dateStr"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>总体目标</td>
+                    <td colspan="3">
+                        <p id="overall_objective"></p>
+                        <div class="operation">
+                            <div class="layui-btn-group">
+                                <button type="button" class="layui-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe642;</i>
+                                </button>
+                                <button type="button" class="layui-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>-->
+        </table>
+    </div>
+</div>
+<!-- 主要研究内容 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">主要研究内容</p>
+        <table class="layui-table" id="content">
+            <colgroup>
+                <col width="30%">
+                <col width="20%">
+                <col width="30%">
+                <col width="10%">
+                <col width="10%">
+            </colgroup>
+            <!--<thead>
+            <tr>
+                <th>研究内容</th>
+                <th>考核指标</th>
+                <th>描述</th>
+                <th>数量</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td rowspan="3">研究内容研究内容研究内容</td>
+                <td>经济指标</td>
+                <td>啊拉拉啊了</td>
+                <td>10项</td>
+                <td>更多</td>
+            </tr>
+            <tr>
+                <td rowspan="2">经济指标</td>
+                <td>啊拉拉啊了</td>
+                <td>10项</td>
+                <td>更多</td>
+            </tr>
+            <tr>
+                <td>啊拉拉啊了</td>
+                <td>10项</td>
+                <td>更多</td>
+            </tr>
+            <tr>
+                <td>研究内容研究内容研究内容</td>
+                <td>经济指标</td>
+                <td>啊拉拉啊了</td>
+                <td>10项</td>
+                <td>更多</td>
+            </tr>
+            <tr>
+                <td>研究内容研究内容研究内容</td>
+                <td>经济指标</td>
+                <td>啊拉拉啊了</td>
+                <td>10项</td>
+                <td>更多</td>
+            </tr>
+            </tbody>-->
+        </table>
+        <!-- <div class="operation">
+            <div class="layui-btn-group" style="margin-left: 0;">
+                <button type="button" class="layui-btn layui-btn-sm">
+                    <i class="layui-icon">&#xe642;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <div class="layui-btn-group" style="margin-left: 0;padding-top: 10px;">
+                <button type="button" class="layui-btn layui-btn-sm">
+                    <i class="layui-icon">&#xe642;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+        </div> -->
+    </div>
+</div>
+<!-- 项目资金 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">资金构成</p>
+        <table class="layui-table" id="fundSource">
+            <colgroup>
+                <col width="15%">
+                <col width="10%">
+                <col width="75%">
+            </colgroup>
+            <!--<thead>
+            <tr>
+                <th>来源</th>
+                <th>金额(万元)</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>甲方</td>
+                <td>70.00</td>
+                <td>
+                    <p>/</p>
+                    <div class="operation">
+                        <div class="layui-btn-group">
+                            <button type="button" class="layui-btn layui-btn-sm">
+                                <i class="layui-icon">&#xe642;</i>
+                            </button>
+                            <button type="button" class="layui-btn layui-btn-sm">
+                                <i class="layui-icon">&#xe640;</i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>-->
+        </table>
+    </div>
+</div>
+<!-- 资金总预算 -->
+<div style="position: relative;">
+    <div class="content">
+        <p class="title">总资金预算</p>
+        <table class="layui-table" id="fundBudgetAll">
+            <colgroup>
+                <col width="15%">
+                <col width="10%">
+                <col width="15%">
+                <col width="60%">
+            </colgroup>
+            <!--<thead>
+            <tr>
+                <th>科目</th>
+                <th>金额(万元)</th>
+                <th>资金来源</th>
+                <th>开支内容</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>合计</td>
+                <td>70.00</td>
+                <td>\</td>
+                <td>\</td>
+            </tr>
+            <tr>
+                <td>材料费</td>
+                <td>200.00</td>
+                <td>甲方</td>
+                <td>
+                    <p>/</p>
+                    <div class="operation">
+                        <div class="layui-btn-group">
+                            <button type="button" class="layui-btn layui-btn-sm">
+                                <i class="layui-icon">&#xe642;</i>
+                            </button>
+                            <button type="button" class="layui-btn layui-btn-sm">
+                                <i class="layui-icon">&#xe640;</i>
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>-->
+        </table>
+    </div>
+    <!-- 项目人员 -->
+    <div style="position: relative;">
+        <div class="content">
+            <p class="title">项目人员</p>
+            <table class="layui-table" id="personnel">
+                <colgroup>
+                    <col width="8%">
+                    <col width="6%">
+                    <col width="6%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="13%">
+                    <col width="14%">
+                    <col width="18%">
+                </colgroup>
+                <!--<thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>证件类型/证件号码</th>
+                    <th>职称</th>
+                    <th>从事专业</th>
+                    <th>工作单位</th>
+                    <th>研究开发中的责任分工</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>拉拉啊</td>
+                    <td>男</td>
+                    <td>66</td>
+                    <td>身份证/454545454545454545</td>
+                    <td>高级工程师</td>
+                    <td>从事专业事专业</td>
+                    <td>工作单位工作单位工作单位工作</td>
+                    <td>
+                        <p>研究开发中的责任分工</p>
+                        <div class="operation">
+                            <div class="layui-btn-group">
+                                <button type="button" class="layui-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe642;</i>
+                                </button>
+                                <button type="button" class="layui-btn layui-btn-sm">
+                                    <i class="layui-icon">&#xe640;</i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>-->
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript" src="../../js/project/basis.js"></script>
+<script type="text/javascript" src="../../js/project/content-target.js"></script>
+<script type="text/javascript" src="../../js/project/fund.js"></script>
+<script type="text/javascript" src="../../js/project/fundBudgetAll.js"></script>
+<script type="text/javascript" src="../../js/project/personnel.js"></script>
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    var id = getUrlParam("id");
+
+    //$("#addBasic").attr("href","addBasic.html?id="+id);
+    $("#addContent").attr("href","addContent.html?id="+id);
+    $("#addTarget").attr("href","addTarget.html?id="+id);
+    $("#addFund").attr("href","addFund.html?id="+id);
+    $("#addBudget").attr("href","addBudget.html?id="+id);
+    $("#addPersonnel").attr("href","addPersonnel.html?id="+id);
+    $("#return").attr("href","itemList.html");
+
+    /*基本信息*/
+    getBasic(id);
+    /*主要研究内容*/
+    content_target(id);
+    /*资金构成*/
+    fundSource(id);
+    /*总资金预算*/
+    fundBudgetAll(id);
+    /*项目人员*/
+    personnel(id);
+
+    bntShow();
+</script>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="content">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<form class="layui-form" onsubmit="return false" id="form">
+			<input type="hidden" id="itemId" name="itemId" value="">
+
+			<table class="layui-table">
+				<colgroup>
+
+					<col width="10%">
+					<col width="90%">
+				</colgroup>
+				<thead>
+				</thead>
+				<tbody>
+				<tr>
+					<td class="table-info">项目背景</td>
+					<td>
+
+					<textarea placeholder="请输入内容" class="layui-textarea" name="projectContent" id="projectContent" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>
+				<!--<tr>
+					<td class="table-info">研究内容</td>
+					<td>
+
+					 <textarea placeholder="请输入内容" class="layui-textarea" name="researchContents" id="researchContents" data-bv-notempty="true"
+							   data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>-->
+				<tr>
+					<td class="table-info">技术路线</td>
+					<td>
+
+					<textarea placeholder="请输入内容" class="layui-textarea" name="skillRoute" id="skillRoute" data-bv-notempty="true"
+							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-info">技术创新点</td>
+					<td>
+
+					 <textarea placeholder="请输入内容" class="layui-textarea" name="skillInnovate" id="skillInnovate" data-bv-notempty="true"
+							   data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-info">项目技术指标完成情况</td>
+					<td>
+
+				  <textarea placeholder="请输入内容" class="layui-textarea" name="skillIndicator" id="skillIndicator" data-bv-notempty="true"
+							data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-info">项目技术评价</td>
+					<td>
+
+					 <textarea placeholder="请输入内容" class="layui-textarea" name="skillEvaluate" id="skillEvaluate" data-bv-notempty="true"
+							   data-bv-notempty-message="内容 不能为空"style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-info">项目实施对企业的影响</td>
+					<td>
+
+					 <textarea placeholder="请输入内容" class="layui-textarea" name="projectEffect" id="projectEffect" data-bv-notempty="true"
+							   data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" ></textarea>
+					</td>
+				</tr>
+
+				</tbody>
+			</table>
+		</form>
+	</div>
+	<div class="form-actions">
+		<div class="row" align="center">
+			<div class="col-md-12">
+				<button class="btn btn-primary" id="btn_return">返回</button>
+				<button class="btn btn-primary" type="submit" onclick="add_content()">
+					<i class="fa fa-save"></i> 保存
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<script src="../../js/constant.js"></script>
+	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="../../js/jq.js"></script>
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<script type="text/javascript" src="../../js/common.js"></script>
+	<script type="text/javascript">
+		layui.use(['layer'], function () {
+			var layer = layui.layer;
+		});
+		var id = getUrlParam("id");
+		$("#id").val(id);
+		initData();
+		function initData() {
+			var data = {
+				id: id,
+			}
+			$.ajax({
+				type: 'get',
+				data: data,
+				url: domainName + '/api-summary/skill/list',
+				async: false,
+				success: function (data) {
+					$("#itemId").val(data[0].itemId);
+					$(data).each(function () {
+						for (var key in data[0]) {
+							$("textarea[name=" + key + "]").val(data[0][key]);
+						}
+					});
+
+				}
+			});
+		}
+		function add_content(obj) {
+			var formdata = $("#form").serializeObject();
+			$.ajax({
+				type : 'put',
+				url : domainName + '/api-summary/skill',
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					var msg = "保存成功";
+					layer.msg(msg, {shift: -1, time: 1000}, function(){
+						location.href = "summaryList.html?item_id=";
+					});
+				}
+			});
+			$(obj).attr("disabled",false);
+		}
+		$("#btn_return").click(function () {
+			var itemId= $("#itemId").val();
+			location.href="summaryList.html?item_id="+itemId;
+		});
+		
+	</script>
+</body>
+</html>
