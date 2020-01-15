@@ -32,10 +32,14 @@ mybatis:
 security:
   oauth2:
     resource:
+<<<<<<< HEAD
 
 
       user-info-uri: http://192.168.5.19/api-o/user-me
 
+=======
+      user-info-uri: http://192.168.5.64/api-o/user-me
+>>>>>>> d8ca695cae06bb9c21813f24545350bc191b5377
       prefer-token-info: false
 ribbon:
   ReadTimeout: 10000

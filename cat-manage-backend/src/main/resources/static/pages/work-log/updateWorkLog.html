@@ -9,27 +9,39 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
         <fieldset>
-            <div class="form-group">
-                <label class="col-md-1 control-label">标题:</label>
-                <div class="col-md-11">
-                    <input class="form-control" placeholder="标题" type="text" name="title" id="title" maxlength="50"
-                           data-bv-notempty="true" lay-verify="required"
-                           data-bv-notempty-message="标题 不能为空">
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-1 control-label">指标当前进度:</label>
+                <div class="col-md-8" disabled="disabled">
+                    <div id="slideTest6" class="demo-slider" style="margin-top: 15px;"></div>
+                </div>
+                <div class="col-md-3" id="slideTestValue">
+
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-1 control-label">概要:</label>
+                <label class="col-md-1 control-label"></label>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">内容:</label>
                 <div class="col-md-11">
-                    <textarea placeholder="内容简介，不超过200个字。"
-                              class="layui-textarea form-control" lay-verify="required" maxlength="200"
-                              id="outline" name="outline"></textarea>
+                    <textarea placeholder="内容。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="content" name="content"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-1 control-label">正文:</label>
+                <label class="col-md-1 control-label"></label>
                 <div class="col-md-11">
-                        <textarea class="layui-textarea" id="content" lay-verify="required" style="display: none">
-                        </textarea>
+                    <button type="button" class="layui-btn" id="upload_accessory">
+                        <i class="layui-icon">&#xe67c;</i>上传附件
+                    </button>
+                    <span style="color: #999;">只支持jpg格式的图片</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">附件:</label>
+                <div class="col-md-11" id="accessory_files">
+
                 </div>
             </div>
             <div class="form-group" id="check_remark">
@@ -59,37 +71,74 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
     $("#check_remark").hide();
-    var layedit, index,layer;
-    layui.use(['layedit','upload','layer'], function(){
-        layer = layui.layer;
-        layedit = layui.layedit;
-        layedit.set({
-            uploadImage: {
-                url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
-                type: 'post'
+
+    var id = getUrlParam("id");
+    layui.use(['layedit','upload','layer',"slider"], function(){
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var $ = layui.$,slider = layui.slider;
+
+        upload.render({
+            elem: '#upload_accessory' //绑定元素
+            , accept: 'jpg'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/albums'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
             }
         });
-        index = layedit.build('content');
+
+        //初始化数据
+        var url = domainName + '/api-summary/work-log/list';
+        $.get(url,{id:id},function (data) {
+            var plan = data[0].plan;
+            slider.render({
+                elem: '#slideTest6'
+                ,value : plan.replace('%','')
+                ,min: 0
+                ,max: 100
+                ,tips:true
+                ,setTips: function(value){ //自定义提示文本
+                    return plan;
+                }
+                ,disabled: true
+            });
+            $("#slideTestValue").append('<p>百分比：' + plan + '</p>')
+            for(var key in data[0]){
+                $('#'+key).val(data[0][key]);
+            }
+            if(data[0].status == -1){
+                $("#check_remark").show();
+                $("#remark_text").text(data[0].remark);
+            }
+            $.get(domainName+"/api-f/albums/list",{ids:data[0].accessory},function (data) {
+                $.each(data,function (i,item) {
+                   addImgHtml(item)
+                });
+            })
+        });
     });
-    var id = getUrlParam("id");
-    var url = domainName + '/api-summary/work-log/list';
 
-    $.get(url,{id:id},function (data) {
-        for(var key in data[0]){
-            $('#'+key).val(data[0][key]);
+    //显示隐藏图片删除按钮
+    function showOrHideCloseBut(obj){
+        var eum = $(obj).children("a:eq(1)");
+        var flag = $(eum).is(":hidden");
+        if(flag){
+            $(eum).show();
+        }else{
+            $(eum).hide();
         }
-        if(data[0].status == -1){
-            $("#check_remark").show();
-            $("#remark_text").text(data[0].remark);
-        }
-    });
+    }
 
-
+    //保存修改
     function update(obj) {
         $(obj).attr("disabled",true);
         var formdata = $("#form").serializeObject();
+        formdata.accessory = formdata.accessory.join(',');
         formdata.status = 0;
-        formdata.content = layedit.getContent(index);
         $.ajax({
             type : 'put',
             url : domainName + '/api-summary/work-log',
@@ -102,6 +151,43 @@
             }
         });
         $(obj).attr("disabled",false);
+    }
+
+    //移除一张图片
+    function deleteImg(obj) {
+        $(obj).parent('div').remove();
+    }
+
+    //查看图片
+    var h = $(window).height()-50;
+    var w = $(window).width()-100;
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "' />";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    //插入一张图片
+    function addImgHtml(item) {
+        var str = '';
+        var val = item.name.substring(0, item.name.indexOf("."));
+        if (val.length > 10) {
+            val = val.substring(0, 8) + '...';
+        }
+        str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+        str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
+        str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+        str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        $("#accessory_files").append(str);
+        $(".close-a").hide();
     }
 
 </script>
