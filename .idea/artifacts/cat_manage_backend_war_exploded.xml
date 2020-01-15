@@ -129,10 +129,7 @@
           <element id="library" level="project" name="Maven: org.hibernate.validator:hibernate-validator:6.0.11.Final" />
           <element id="library" level="project" name="Maven: javax.validation:validation-api:2.0.1.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.2.Final" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/openjfx/javafx.base/11.0.0-SNAPSHOT/javafx.base-11.0.0-20180702.224858-3.jar" output-file-name="javafx.base-11.0.0-SNAPSHOT.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/openjfx/javafx.base/11.0.0-SNAPSHOT/javafx.base-11.0.0-20180702.223831-2-linux.jar" output-file-name="javafx.base-11.0.0-SNAPSHOT-linux.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/openjfx/javafx.base/11.0.0-SNAPSHOT/javafx.base-11.0.0-20180702.224858-3-mac.jar" output-file-name="javafx.base-11.0.0-SNAPSHOT-mac.jar" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/openjfx/javafx.base/11.0.0-SNAPSHOT/javafx.base-11.0.0-20180629.175051-1-win.jar" output-file-name="javafx.base-11.0.0-SNAPSHOT-win.jar" />
+          <element id="library" level="project" name="Maven: org.openjfx:javafx.base:11.0.0-SNAPSHOT" />
           <element id="library" level="project" name="Maven: org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.0.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security.oauth:spring-security-oauth2:2.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.8.RELEASE" />

@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 @Table(name = "project_work_log")
 public class WorkLog implements Serializable {
+
     private static final long serialVersionUID = -5320384153350355178L;
     @Id
     @KeySql(useGeneratedKeys = true)
@@ -22,11 +23,11 @@ public class WorkLog implements Serializable {
     private Integer createUserId;//创建人id
     private String createUserName;//创建人名字
     private Integer itemId;//项目id
-    private Integer plan;//指标完成进度
+    private String plan;//完成进度百分比
     private String content;//日志内容
     private Integer status;//状态
     private Date createTime;//创建时间
-    private Date updateTime;//修改时间
+    private String accessory;//附件
     private Date implementTime;//实施时间
     private String remark;//备注
 }

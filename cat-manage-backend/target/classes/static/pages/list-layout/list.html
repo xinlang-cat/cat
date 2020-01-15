@@ -15,17 +15,34 @@
         <div></div>
     </div>
 </div>
+<!-- coidea:loader END -->
+
+<!-- coidea:sidebar START -->
+<!--<aside class="sidebar">
+    <div class="logo">
+        <a href="http://www.17sucai.com/">+</a>
+    </div>
+</aside>-->
+<!-- coidea:sidebar END -->
+
+<!-- coidea:header START -->
 <header>
     <div class="header-inner">
         <h1>项目列表</h1>
     </div>
 </header>
+<!-- coidea:header END -->
+
+<!-- coidea:grid-list START -->
 <section class="grid-holder">
+
+    <!-- coidea:grid-list:navigation+switcher START -->
     <div class="grid-list-layout">
         <nav class="navigation">
             <li> <a href="pages/details/addProject.html"><span>新增</span></a></li>
             <li ><a href="../summary/summaryList.html?item_id=1&item_name=test">结题总结</a></li>
         </nav>
+
         <div class="grid-list-holder">
           <span class="grid-layout active">
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -115,10 +132,53 @@
         </span>
         </div>
     </div>
+    <!-- coidea:grid-list:navigation+switcher END -->
+
+    <!-- coidea:grid-list:main-section START -->
     <div class="grid masonry" id="list">
+
+        <!--<div class="masonry__item">
+            <figure>
+                <figcaption class="content">
+                    <h2>Cycling 2019</h2>
+                    <p class="date"><span>Updated</span> MARCH 16, 2019</p>
+                    <ul class="tags">
+                        <li><a href="#!">VARIABLE</a></li>
+                        <li><a href="#!">PROPERTY</a></li>
+                        <li><a href="#!">SPEED</a></li>
+                        <li><a href="#!">LOREM</a></li>
+                        <li><a href="#!">IPSUM</a></li>
+                        <li><a href="#!">SIT</a></li>
+                        <li><a href="#!" class="more" data-click-state="1">+</a></li>
+                    </ul>
+                </figcaption>
+            </figure>
+        </div>
+        <div class="masonry__item">
+            <figure>
+                <figcaption class="content">
+                    <h2>Cycling 2019</h2>
+                    <p class="date"><span>Updated</span> MARCH 16, 2019</p>
+                    <ul class="tags">
+                        <li><a href="#!">VARIABLE</a></li>
+                        <li><a href="#!">PROPERTY</a></li>
+                        <li><a href="#!">SPEED</a></li>
+                        <li><a href="#!">LOREM</a></li>
+                        <li><a href="#!">IPSUM</a></li>
+                        <li><a href="#!">SIT</a></li>
+                        <li><a href="#!" class="more" data-click-state="1">+</a></li>
+                    </ul>
+                </figcaption>
+            </figure>
+        </div>-->
+
     </div>
+    <!-- coidea:grid-list:main-section END -->
 
 </section>
+<!-- coidea:grid-list END -->
+
+<!--<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="assets/js/TweenMax.min.js"></script>
 <script src="assets/js/ScrollToPlugin.min.js"></script>
@@ -152,13 +212,12 @@
                         '                <figcaption class="content">\n' +
                         '                    <h2 style="max-width: 400px;">'+this.item_name+'</h2>\n' +
                         '                    <p class="date" style="max-width: 400px;">' +
-                        '                        <span style="margin-right: 10px;">开始时间：'+this.start_date.substring(0, 10)+'</span>' +
-                        '                        <span>结束时间：'+this.end_date.substring(0, 10)+'</span></p>\n' +
-                        '                        <ul class="tags">\n' +
+                        '                       <span style="margin-right: 10px;">开始时间：'+this.start_date.substring(0, 10)+'</span>' +
+                        '                       <span>结束时间：'+this.end_date.substring(0, 10)+'</span></p>\n' +
+                        '                    <ul class="tags">\n' +
                         '                        <li><a href="pages/update/projectDetails.html?id='+this.id+'">项目信息</a></li>\n' +
-                        '                        <li><a href="../indicator/indicatorList.html?itemId='+this.id+'&userId='+userId+'">项目指标</a></li>\n' +
                         '                        <li><a href="../work-log/workLogList.html?id='+this.id+'&userId='+userId+'">实施日志</a></li>\n' +
-                        '                        <li><a href="../stage/stageList.html?item_id='+this.id+'&userId='+userId+'">阶段总结</a></li>\n' +
+                        '                        <li><a href="../project/report/report.html?id='+this.id+'">阶段总结</a></li>\n' +
                         '                        <li><a href="pages/UserFund/userFund.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
                         '                        <li><a href="pages/details/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +
@@ -167,7 +226,7 @@
                         '                </figcaption>\n' +
                         '            </figure>\n' +
                         '        </div>';
-                });
+                })
                 $("#list").append(str);
             }
         });
@@ -192,6 +251,7 @@
         });
     }
     function check(id,status,boolean) {
+
         if(boolean==1){
             status++
         }else {
@@ -223,6 +283,7 @@
                 content: ['pages/matchExpert.html?id='+id]
             });
         }
+
     }
     //获取当前用户的公司代码
     function getCompanryCode() {

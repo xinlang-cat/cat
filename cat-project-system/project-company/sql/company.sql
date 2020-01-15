@@ -38,7 +38,7 @@ CREATE TABLE `company`  (
   `telephone` varchar(14) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '公司号码',
   `registered_capital` int(6) DEFAULT NULL COMMENT '注册资本(万）',
   `charter` varchar(400) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '营业执照',
-  `trade` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '行业‘,\'号分隔',
+  `trade` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '行业，\号分隔',
   `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '企业类型',
   `dept_code` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '组织机构代码',
   `credential` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '资质等级',
@@ -56,6 +56,6 @@ CREATE TABLE `company`  (
 -- ----------------------------
 -- Records of company
 -- ----------------------------
-INSERT INTO `company` VALUES (3, '城市', '450000', '450100', '450103', '450103002', '大大撒', NULL, NULL, '李四', '王五', '31414', '1233123', '1312341', 13123, 'http://192.168.5.245/api-f/statics/2019/11/30/6419b100966263757c1ffacc4f9056ad.jpg', NULL, 'PARTY_C', '123456', NULL, NULL, NULL, NULL, NULL, '2019-11-30 06:47:45', NULL, 1, NULL);
 
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `company` VALUES (3, '城市', '450000', '450100', '450103', '450103002', '大大撒', NULL, NULL, '李四', '王五', '31414', '1233123', '1312341', 13123, 'http://192.168.5.645/api-f/statics/2019/11/30/6419b100966263757c1ffacc4f9056ad.jpg', NULL, 'PARTY_C', '123456', NULL, NULL, NULL, NULL, NULL, '2019-11-30 06:47:45', NULL, 1, NULL);
+

@@ -19,5 +19,4 @@ public class  CatEurekaApplication {
     public static void main(String[] args){
         SpringApplication.run(CatEurekaApplication.class,args);
     }
-
 }

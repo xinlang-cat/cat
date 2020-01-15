@@ -54,10 +54,7 @@
       <module name="project-record" target="1.8" />
       <module name="project-report" target="1.8" />
       <module name="project-summary" target="1.8" />
-      <module name="project-system" target="1.8" />
-      <module name="project-system-label" target="1.8" />
       <module name="project-user" target="1.8" />
-      <module name="test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -75,7 +72,6 @@
       <module name="cat-manage-backend" options="-parameters" />
       <module name="cat-map-server" options="-parameters" />
       <module name="cat-monitor-center" options="-parameters" />
-      <module name="cat-project-system" options="-parameters" />
       <module name="cat-user" options="-parameters" />
       <module name="project-common-entity" options="-parameters" />
       <module name="project-company" options="-parameters" />
@@ -84,10 +80,7 @@
       <module name="project-record" options="-parameters" />
       <module name="project-report" options="-parameters" />
       <module name="project-summary" options="-parameters" />
-      <module name="project-system" options="-parameters" />
-      <module name="project-system-label" options="-parameters" />
       <module name="project-user" options="-parameters" />
-      <module name="test" options="-parameters" />
     </option>
   </component>
 </project>
