@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinlang.cat_project.item.mapper.ItemTargetMapper">
+
+<!--<resultMap id="targetInfoMap" type="com.xinlang.cat_project.item.VO.TargetInfo">
+    <id column="tid" jdbcType="INTEGER" property="id"/>
+    <association property="target" javaType="com.xinlang.cat_project.item.pojo.ItemTarget">
+        <id column="tid" jdbcType="INTEGER" property="id"/>
+        <result column="item_id" jdbcType="INTEGER" property="item_id"/>
+        <result column="subject" jdbcType="VARCHAR" property="subject"/>
+        <result column="edit_date" jdbcType="TIMESTAMP" property="edit_date"/>
+        <result column="edit_userid" jdbcType="INTEGER" property="edit_userid"/>
+        <result column="tstatus" jdbcType="INTEGER" property="status"/>
+    </association>
+    <collection property="targetStandards"
+                ofType="com.xinlang.cat_project.item.pojo.TargetStandard">
+        <id column="sid" jdbcType="INTEGER" property="id"/>
+        <result column="target_id" jdbcType="INTEGER" property="target_id"/>
+        <result column="node" jdbcType="VARCHAR" property="node"/>
+        <result column="amount" jdbcType="INTEGER" property="amount"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="sstatus" jdbcType="INTEGER" property="status"/>
+    </collection>
+</resultMap>
+
+<select id="selectTargetInfoById" parameterType="int" resultMap="targetInfoMap">
+        SELECT
+            t.id AS tid, item_id, subject, edit_date,edit_userid, t.status AS tstatus,
+            s.id AS sid, target_id, node, amount, remark, s.status AS sstatus
+        FROM
+            target AS t
+        LEFT JOIN
+            target_standard AS s
+        ON
+            t.id=s.target_id
+        WHERE
+            t.id= #{id}
+    </select>
+
+<resultMap id="targetInfoAllMap" type="com.xinlang.cat_project.item.VO.TargetInfoAll">
+    <id column="item_id" jdbcType="INTEGER" property="id"/>
+    <collection property="targetInfos" resultMap="targetInfoMap">
+    </collection>
+</resultMap>
+
+<select id="selectTargetInfoAllById" parameterType="int" resultMap="targetInfoAllMap">
+        SELECT
+            t.id AS tid, item_id, subject, edit_date,edit_userid, t.status AS tstatus,
+            s.id AS sid, target_id, node, amount, remark, s.status AS sstatus
+        FROM
+            target AS t
+        LEFT JOIN
+            target_standard AS s
+        ON
+            t.id=s.target_id
+        WHERE
+            t.item_id= #{id}
+    </select>-->
+</mapper>

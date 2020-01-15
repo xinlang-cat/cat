@@ -1,0 +1,64 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/map_server?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-test-query: SELECT 1
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: pig
+    password: pig
+    virtual-host: /
+  mvc:
+    servlet:
+      load-on-startup: 1
+  aop:
+    proxy-target-class: true
+  zipkin:
+    base-url: http://localhost:9411
+    enabled: true
+    sender:
+      type: web
+mybatis:
+  type-aliases-package: com.xinlang.zly.map.bean
+  mapper-locations: classpath:/mapper-mybatis/*
+  configuration:
+    mapUnderscoreToCamelCase: true
+security:
+  oauth2:
+    resource:
+
+
+      user-info-uri: http://192.168.5.19/api-o/user-me
+
+      prefer-token-info: false
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+logging:
+  level:
+    root: info
+  file: logs/${spring.application.name}.log
+
+baidu:
+  map:
+    ak: 1RCUrYA1VEnxozLjRGIL84uBBZT48GtS
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com

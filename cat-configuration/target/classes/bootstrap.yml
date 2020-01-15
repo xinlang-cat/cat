@@ -1,0 +1,44 @@
+server:
+  port: 8771
+
+spring:
+  application:
+    name: cat-configuration
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configs/
+        git:
+          uri: https://github.com/
+          default-label: master
+          force-pull: true
+          search-paths: '{application}-{profile}'
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: ${spring.application.name}
+  client:
+    service-url:
+
+      defaultZone: http://cat:cat@192.168.5.19:8761/eureka/
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    root: info
+  file: logs/${spring.application.name}.log
+
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com
+

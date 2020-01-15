@@ -1,0 +1,30 @@
+server:
+  port: 9001
+
+spring:
+  application:
+    name: cat-monitor-center
+
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    prefer-ip-address: true
+    hostname: ${spring.application.name}
+  client:
+    service-url:
+      defaultZone: http://cat:cat@xinlangxfpt.mynatapp.cc:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+info:
+  company: 鑫朗通信技术有限公司
+  phone: 18777811286
+  email: 516281013@qq.com
+

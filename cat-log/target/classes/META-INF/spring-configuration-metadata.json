@@ -1,0 +1,22 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.xinlang.zly_xyx.cat_log.config.ElasticSearchConfig",
+      "name": "elasticsearch",
+      "type": "com.xinlang.zly_xyx.cat_log.config.ElasticSearchConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.xinlang.zly_xyx.cat_log.config.ElasticSearchConfig",
+      "name": "elasticsearch.cluster-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.xinlang.zly_xyx.cat_log.config.ElasticSearchConfig",
+      "name": "elasticsearch.cluster-nodes",
+      "type": "java.lang.String"
+    }
+  ]
+}

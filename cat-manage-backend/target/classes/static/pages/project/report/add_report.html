@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../layui/css/layui.css">
+</head>
+<body>
+<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <input type="hidden" name="projectId" value="" id="projectId">
+
+            <div class="form-group">
+                <label class="col-md-1 control-label">标题:</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="标题" type="text" id="title" name="title"
+                           maxlength="50" data-bv-notempty="true" data-bv-notempty-message="标题 不能为空">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 control-label">内容:</label>
+                <div class="col-md-10">
+					<textarea class="layui-textarea" id="demo" >
+					</textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" id="btn_return">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add_report()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../layui/layui.js"></script>
+<script>
+    var id = 26;
+    $("#projectId").val(id);
+    $("#btn_return").click(function () {
+        $(location).attr("href", "/report.html?id=" + id);
+    })
+</script>
+<script type="text/javascript">
+
+    var layedit, index,layer,upload,laydate;
+
+    layui.use(['layer', 'laydate','layedit','upload'], function(){
+        layer = layui.layer;
+        upload = layui.upload
+        laydate = layui.laydate;
+        layedit = layui.layedit;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+
+        layedit.set({
+            uploadImage: {
+                url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
+                type: 'post'
+            }
+        });
+
+        var h = $(window).height() - 200;
+        layedit.build('demo',{
+            height:h
+        });
+    });
+    function add_report() {
+        var formdata = $("#form").serializeObject();
+        formdata.content = layedit.getContent(index);
+        $.ajax({
+            type : 'post',
+            url : domainName + '/project-report/report',
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(formdata),
+            success : function(data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                    location.href = "report.html";
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

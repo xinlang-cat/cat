@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-1 control-label">标题:</label>
+                <div class="col-md-11">
+                    <input class="form-control" placeholder="标题" type="text" name="title" id="title" maxlength="50"
+                           data-bv-notempty="true" lay-verify="required"
+                           data-bv-notempty-message="标题 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">概要:</label>
+                <div class="col-md-11">
+                    <textarea placeholder="内容简介，不超过200个字。"
+                              class="layui-textarea form-control" lay-verify="required" maxlength="200"
+                              id="outline" name="outline"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">正文:</label>
+                <div class="col-md-11">
+                        <textarea class="layui-textarea" id="content" lay-verify="required" style="display: none">
+                        </textarea>
+                </div>
+            </div>
+            <div class="form-group" id="check_remark">
+                <label class="col-md-1 control-label">审核意见</label>
+                <div class="col-md-11">
+                    <p id="remark_text"></p>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" type="submit" onclick="update()">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="id" id="id">
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+    $("#check_remark").hide();
+    var layedit, index,layer;
+    layui.use(['layedit','upload','layer'], function(){
+        layer = layui.layer;
+        layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
+                type: 'post'
+            }
+        });
+        index = layedit.build('content');
+    });
+    var id = getUrlParam("id");
+    var url = domainName + '/api-summary/work-log/list';
+
+    $.get(url,{id:id},function (data) {
+        for(var key in data[0]){
+            $('#'+key).val(data[0][key]);
+        }
+        if(data[0].status == -1){
+            $("#check_remark").show();
+            $("#remark_text").text(data[0].remark);
+        }
+    });
+
+
+    function update(obj) {
+        $(obj).attr("disabled",true);
+        var formdata = $("#form").serializeObject();
+        formdata.status = 0;
+        formdata.content = layedit.getContent(index);
+        $.ajax({
+            type : 'put',
+            url : domainName + '/api-summary/work-log',
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(formdata),
+            success : function(data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                });
+            }
+        });
+        $(obj).attr("disabled",false);
+    }
+
+</script>
+</body>
+</html>

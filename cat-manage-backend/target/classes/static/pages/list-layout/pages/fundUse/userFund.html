@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>使用资金</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/details.css">
+    <style>
+        .table-info {
+            background-color: #4FAAA2;
+            border-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+            text-align: center;
+        }
+
+        .sub {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="module">
+    <button class="layui-btn layui-btn-sm" onclick="location.href='../../list.html'" style="float: right;margin: 20px;">
+        <i class="layui-icon">&#xe65c;</i> 返回列表
+    </button>
+    <form class="layui-form" id="form5">
+        <table class="layui-table" id="basis">
+            <colgroup>
+                <col width="3%">
+                <col width="10%">
+                <col width="15%">
+                <col width="10%">
+                <col width="10%">
+                <col width="15%">
+                <col width="30%">
+                <col width="7%">
+            </colgroup>
+            <thead>
+
+            <tr>
+                <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                <th>费用</th>
+                <th>科目</th>
+                <th>金额（万元）</th>
+                <th>剩余金额（万元）</th>
+                <th>经费来源</th>
+                <th>开支内容</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="EXPENDITURE">
+            <tr>
+                <td rowspan="8" class="table-info" id="thead">经费用途预算与使用情况</td>
+                <td>合计</td>
+                <td></td>
+                <td id="total"></td>
+                <td id="surplus"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="6"></td>
+            </tr>
+
+            <tr id="interval">
+                <td colspan="6"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/projecDetailst.js"></script>
+<script>
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy年MM月dd日'
+                , trigger: 'click'
+            });
+        });
+    })
+    //获取资金数据
+    var id = getUrlParam("id");
+    getFund(id);
+
+    function addUseFund(fundId) {
+        layer.open({
+            title: "资金使用录入",
+            type: 2,
+            area: ['1000px', '600px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['html/add_usefund.html?itemId=' + id + '&id=' + fundId]
+        });
+    }
+
+    function particulars(id) {
+        layer.open({
+            title: "资金使用明细",
+            type: 2,
+            area: ['1000px', '600px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['html/particulars.html?id=' + id]
+        });
+    }
+
+    function getFund(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fund/list',
+            data: "item_id=" + id,
+            async: false,
+            success: function (data) {
+                var str = '';
+                var total = 0;
+                var total_2 = 0;
+                $(data).each(function () {
+                    total += this.money;
+                    var surplus = gatFundUse(this.id,this.money);
+                    total_2 += surplus;
+                    var subject = analysisLableContent(this.subject);
+                    var source = analysisLableContent(this.source);
+                    $('#thead').attr('rowspan', $('#EXPENDITURE').children().length + 1);
+                    var length = $('#EXPENDITURE').find('input[name=type][value=' + this.type + ']').length;
+                    if (this.type == 0) {
+                        if (length == 0) {
+                            str = '<tr>\n' +
+                                '                    <td rowspan="1" id="direct">（一）直接费用<input type="hidden" name="type" value="0"></td>\n' +
+                                '                    <td><p>' + subject + '</p></td>\n' +
+                                '                    <td><p>' + this.money + '</p></td>\n' +
+                                '                    <td><p>' + surplus + '</p></td>\n' +
+                                '                    <td><p>' + source + '</p></td>\n' +
+                                '                    <td><p>' + this.remark + '</p></td>\n' +
+                                '                    <td>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="addUseFund(' + this.id + ');">录入</button>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="particulars(' + this.id + ');">明细</button>' +
+                                '                    </td>\n' +
+                                '</tr>';
+                        } else {
+                            str = '<tr>\n' +
+                                '                    <td><p>' + subject + '</p></td>\n' +
+                                '                    <td><p>' + this.money + '</p></td>\n' +
+                                '                    <td><p>' + surplus + '</p></td>\n' +
+                                '                    <td><p>' + source + '</p></td>\n' +
+                                '                    <td><p>' + this.remark + '</p></td>\n' +
+                                '                    <td>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="addUseFund(' + this.id + ');">录入</button>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="particulars(' + this.id + ');">明细</button>' +
+                                '                    </td>\n' +
+                                '</tr>';
+                        }
+                        $('#direct').attr('rowspan', Number($('#direct').attr('rowspan')) + 1);
+                        $('#interval').before(str);
+                    } else {
+                        if (length == 0) {
+                            str = '<tr>\n' +
+                                '                    <td rowspan="1" id="indirect">（二）间接费用<input type="hidden" name="type" value="1"></td>\n' +
+                                '                    <td><p>' + subject + '</p></td>\n' +
+                                '                    <td><p>' + this.money + '</p></td>\n' +
+                                '                    <td><p>' + surplus + '</p></td>\n' +
+                                '                    <td><p>' + source + '</p></td>\n' +
+                                '                    <td><p>' + this.remark + '</p></td>\n' +
+                                '                    <td>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="addUseFund(' + this.id + ');">录入</button>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="particulars(' + this.id + ');">明细</button>' +
+                                '                    </td>\n' +
+                                '</tr>';
+                        } else {
+                            str = '<tr>\n' +
+                                '                    <td><p>' + subject + '</p></td>\n' +
+                                '                    <td><p>' + this.money + '</p></td>\n' +
+                                '                    <td><p>' + surplus + '</p></td>\n' +
+                                '                    <td><p>' + source + '</p></td>\n' +
+                                '                    <td><p>' + this.remark + '</p></td>\n' +
+                                '                    <td>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="addUseFund(' + this.id + ');">录入</button>' +
+                                '                       <button type="button" class="layui-btn layui-btn-xs" onclick="particulars(' + this.id + ');">明细</button>' +
+                                '                    </td>\n' +
+                                '</tr>';
+                        }
+                        $('#indirect').attr('rowspan',Number($('#indirect').attr('rowspan')) + 1);
+                        $('#EXPENDITURE').append(str);
+                    }
+                })
+                $("#total").text(total);
+                $("#surplus").text(total_2);
+            }
+        });
+    }
+    function gatFundUse(id,original) {
+        var surplus = 0;
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fund/use/list',
+            data: "fund_id=" + id,
+            async: false,
+            success: function (data) {
+                var count=0;
+                $(data).each(function () {
+                    count +=this.money;
+                })
+                surplus = original-count;
+            }
+        })
+        return surplus;
+    }
+</script>
+
+</html>

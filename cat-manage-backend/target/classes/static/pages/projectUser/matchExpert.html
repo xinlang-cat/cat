@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>项目信息</title>
+	<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
+	<style>
+		.table-info {
+			background-color: #4FAAA2;
+			border-color: #4FAAA2;
+			margin: 40px;
+			color: white;
+			font-size: 18px;
+			font-weight: bolder;
+			text-align: center;
+		}
+
+		.sub {
+			display: none;
+		}
+		.layui-textarea {
+			min-height: 50px;
+			height: auto;
+			line-height: 20px;
+			padding: 6px 10px;
+			resize: vertical;
+		}
+	</style>
+</head>
+
+<body>
+<div class="content">
+	<div class="module">
+		<form class="layui-form" id="form2">
+			<div class="layui-btn-group btn-group">
+				<button type="button" class="layui-btn layui-btn-sm" onclick="add_row(this,'RESEARCH_CONTENTS');">
+					<i class="layui-icon">&#xe654;</i>
+				</button>
+				<button type="button" class="layui-btn layui-btn-sm" onclick="del_row(this);">
+					<i class="layui-icon">&#xe640;</i>
+				</button>
+			</div>
+			<table class="layui-table">
+				<colgroup>
+					<col width="3%">
+					<col width="67%">
+					<col width="30%">
+				</colgroup>
+				<thead>
+				<tr>
+					<th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+					<th>行业</th>
+					<th>数量</th>
+				</tr>
+				</thead>
+				<tbody id="mian-content">
+				<tr>
+					<td rowspan="2" class="table-info">专家行业与数量</td>
+					<input type="hidden" name="itemId" value="">
+					<td>
+						<div class="col-md-8">
+							<div class="input-group"  data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP" id="1" onclick="choose(1)">
+								<input type="text" class="form-control" placeholder="专家类型"  readonly="readonly" id="type1">
+								<input type="hidden" class="form-control" id="labelSign1" name="labelSign" >
+								<span class="input-group-addon"><a >选择</a></span>
+							</div>
+						</div>
+					</td>
+					<td><input name="population" id="count1">专家数量</td>
+				</tr>
+				<tr>
+					<input type="hidden" name="itemId" value="">
+					<td>
+						<div class="col-md-8">
+							<div class="input-group"  data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP" id="2" onclick="choose(2)">
+								<input type="text" class="form-control" placeholder="专家类型"  readonly="readonly" id="type2">
+								<input type="hidden" class="form-control" id="labelSign2" name="labelSign" >
+								<span class="input-group-addon"><a >选择</a></span>
+							</div>
+						</div>
+					</td>
+					<td><input name="population" id="count2">专家数量</td>
+				</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+
+	<div class="module">
+
+		<div class="form-actions">
+			<div class="row" align="center">
+				<div class="col-md-12" id="div_submit">
+					<button class="btn btn-primary" type="submit" onclick="update()">
+						<i class="fa fa-save"></i> 确定
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+
+<script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../list-layout/js/saveData.js'></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/matchExpert.js"></script>
+<script>
+	var itemId = getUrlParam("itemId");
+    function del_row(e) {
+        var dom = $(e).parent().next().find('tbody').children();
+        if (dom.length == 1) {
+            return;
+        }
+        $(e).parent().next().find('tbody').children().last().remove();
+        var tbody = $(e).parent().next().find('tbody');
+        tbody.children().first().children().first().attr('rowspan', tbody.children().length);
+    }
+	function add_row(e, sign) {
+		layui.use(['layer', 'form', 'laydate'], function () {
+			var layer = layui.layer
+					, form = layui.form
+					, laydate = layui.laydate;
+			var str = '';
+			var tbody = $(e).parent().next().find('tbody');
+			var rowspan = tbody.children().length + 1;//改变单元格所跨的行数
+			tbody.children().first().children().first().attr('rowspan', rowspan);
+
+				str = '<tr>\n' +
+						'<input type="hidden" name="itemId" value="">\n' +
+						'<td>\n' +
+						'<div class="col-md-8">\n' +
+						'<div class="input-group"  data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP" onclick="choose('+rowspan+')" id='+rowspan+'>\n' +
+						'<input type="text" class="form-control" placeholder="专家类型"  readonly="readonly" id="type'+rowspan+'" >\n' +
+						'<input type="hidden" class="form-control" id="labelSign'+rowspan+'" name="labelSign" >\n' +
+						'<span class="input-group-addon"><a >选择</a></span>\n' +
+						'</div>\n' +
+						'</div>\n' +
+						'</td>\n' +
+						'<td><input name="population" id="count'+rowspan+'">专家数量\n' +
+						'<input type="hidden" name="item_id">\n' +
+						'</td>\n' +
+						'</tr>';
+
+			tbody.append(str);
+
+			//渲染
+			lay('.date').each(function () {
+				laydate.render({
+					elem: this
+					, showBottom: false
+					, trigger: 'click'
+				});
+				$(".date").removeAttr("lay-key");
+			});
+		});
+	}
+
+	var itemId = getUrlParam("itemId");
+
+	var layedit ,index1,index2,layer,tree,util,laydate,form;
+
+	layui.use(['tree','layedit','upload','layer','util', 'laydate'], function(){
+		layedit = layui.layedit;
+		layer  = layui.layer;
+		laydate = layui.laydate;
+		tree = layui.tree;
+		util = layui.util;
+		form = layui.form;
+		index1 = layedit.build('accomplishment');
+		index2 = layedit.build('achievement');
+	});
+
+
+	function mainDomainSaveLabel() {
+		var res =$("input[type='radio']:checked").val();
+		var text =$("input[type='radio']:checked").attr('title');
+		$("#labelSign").val(res);
+		$("#title").val(text);
+		layer.msg("成功", {shift: -1, time: 1000}, function(){
+			layer.close(index);
+		});
+	}
+
+
+	//保存
+	function save() {
+		$('#sub1').trigger('click');
+	}
+	function update() {
+		var index= document.getElementsByTagName("tr").length;
+		var labelSign;
+		var population;
+        var texts=[];
+		for(i=1;i<index;i++) {
+			labelSign=$("#labelSign"+i).val();
+			population=$("#count"+i).val();
+			$.ajax({
+				type : 'post',
+				url: domainName + '/project-user/item/match/expert?itemId='+itemId+'&labelSign='+labelSign+'&population='+population,
+				success : function(data) {
+
+				},
+				error:function () {
+				    var sign = "type"+(i-1);
+				    var type = $("#"+sign).val();
+                    texts.push(type);
+
+                }
+			});
+		}
+        layer.msg(texts+"相关专家数量不足，请重新选择")
+
+}
+</script>
+
+</html>
