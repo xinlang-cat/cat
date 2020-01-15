@@ -90,9 +90,4 @@ public class AlbumController {
     public List<Album> findByIds(@RequestParam("ids") Set<String> ids) {
         return albumMapper.getByIds(new ArrayList<>(ids));
     }
-    @GetMapping("/list1")
-    @ApiOperation(value = "根据ids查询相册")
-    public List<Album> findByIds1(@RequestParam("ids") Set<String> ids) {
-        return albumMapper.getByIds(new ArrayList<>(ids));
-    }
 }
