@@ -22,7 +22,7 @@ public class WorkLogService extends BaseService<WorkLog> implements IWorkLogServ
 
 
     @Override
-    public WorkLog findLatelyByItemIdAndTargetId(String itemId,String targetId) {
+    public WorkLog findLatelyByItemIdAndTargetId(Integer itemId,Integer targetId) {
         return workLogMapper.findLatelyByItemIdAndTargetId(itemId,targetId);
     }
 }

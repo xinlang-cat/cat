@@ -6,9 +6,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class CatLogApplicatiom {
+public class CatLogApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CatLogApplicatiom.class,args);
+        SpringApplication.run(CatLogApplication.class,args);
 
     }
 }
