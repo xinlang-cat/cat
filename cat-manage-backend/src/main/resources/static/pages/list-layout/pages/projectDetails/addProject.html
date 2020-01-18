@@ -504,14 +504,14 @@
     <!--科技经费用途预算-->
     <div class="module">
         <form class="layui-form" id="form5">
-            <div class="layui-btn-group btn-group">
+            <!--<div class="layui-btn-group btn-group">
                 <button type="button" class="layui-btn layui-btn-sm" onclick="addFund();">
                     <i class="layui-icon">&#xe654;</i>
                 </button>
                 <button type="button" class="layui-btn layui-btn-sm" onclick="deleteFund();">
                     <i class="layui-icon">&#xe640;</i>
                 </button>
-            </div>
+            </div>-->
             <table class="layui-table" id="basis">
                 <colgroup>
                     <col width="3%">
@@ -522,10 +522,10 @@
                     <col width="37%">
                 </colgroup>
                 <thead>
-                <tr>
+               <!-- <tr>
                     <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
                     <th colspan="5"><br></th>
-                </tr>
+                </tr>-->
                 <tr>
                     <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
                     <th>费用</th>
@@ -537,21 +537,21 @@
                 </thead>
                 <tbody id="EXPENDITURE">
                 <tr>
-                    <td rowspan="8" class="table-info" id="thead">经费用途预算</td>
+                    <td rowspan="14" class="table-info" id="thead">经费用途预算</td>
                     <td>合计</td>
                     <td></td>
                     <td id="total"></td>
                     <td></td>
                     <td></td>
                 </tr>
-                <tr><td colspan="4"></td></tr>
+                <tr><td colspan="5"></td></tr>
                 <tr>
-                    <td rowspan="3" id="direct">（一）直接费用</td>
-                    <td><input type="hidden" name="item_id">
+                    <td rowspan="9" id="direct">（一）直接费用</td>
+                    <td>设备费
+                        <input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="0">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">
-                            <option value=''>请选择</option>
-                        </select></td>
+                        <input type="hidden" name="subject" value="INSTALLATION_COST">
+                    </td>
                     <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
                                name="money"></td>
                     <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
@@ -562,11 +562,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="item_id">
+                    <td>材料费
+                        <input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="0">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">
-                            <option value=''>请选择</option>
-                        </select></td>
+                        <input type="hidden" name="subject" value="MATERIALS_EXPENSES">
+                    </td>
                     <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
                                name="money"></td>
                     <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
@@ -577,11 +577,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="item_id">
+                    <td>测试化验加工费
+                        <input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="0">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">
-                            <option value=''>请选择</option>
-                        </select></td>
+                        <input type="hidden" name="subject" value="COST_OF_TESTING_AND_PROCESSING">
+                    </td>
                     <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
                                name="money"></td>
                     <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
@@ -591,14 +591,104 @@
                                   name="remark"></textarea>
                     </td>
                 </tr>
-                <tr id="interval"><td colspan="4"></td></tr>
+                <tr>
+                    <td>燃料及动力费
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="FUEL_AND_POWER_CHARGRS">
+                    </td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="remark"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>差旅/会议/国际合作与交流费
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="TRAVEL_ON_BUSINESS">
+                    </td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="remark"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>出版/文献/信息传播/知识产权事务费
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="PUBLISH">
+                    </td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="remark"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>劳务费
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="SERVICE_FEE">
+                    </td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="remark"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>专家咨询费
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="EXPERT_CONSULTATION_FEE">
+                    </td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="remark"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>其他支出
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="OTHER_EXPENSES">
+                    </td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                        <option value=''>请选择</option>
+                    </select></td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="remark"></textarea>
+                    </td>
+                </tr>
+                <tr id="interval"><td colspan="5"></td></tr>
                 <tr>
                     <td rowspan="2" id="indirect">（二）间接费用</td>
-                    <td><input type="hidden" name="item_id">
+                    <td>绩效支出
+                        <input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="1">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">
-                            <option value=''>请选择</option>
-                        </select></td>
+                        <input type="hidden" name="subject" value="PERFORMANCE_OF_THE_SPENDING">
+                    </td>
                     <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
                                name="money"></td>
                     <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
@@ -609,11 +699,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="item_id">
+                    <td>其他费用
+                        <input type="hidden" name="item_id">
                         <input type="hidden" name="type" value="1">
-                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="subject">
-                            <option value=''>请选择</option>
-                        </select></td>
+                        <input type="hidden" name="subject" value="OTHER_CHARGES">
+                    </td>
                     <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
                                name="money"></td>
                     <td><select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
