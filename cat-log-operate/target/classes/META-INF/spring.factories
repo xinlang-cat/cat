@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.xinlang.zly_xyx.cat_log_operate.LogAutoConfiguration,\
-com.xinlang.zly_xyx.cat_log_operate.LogAop
