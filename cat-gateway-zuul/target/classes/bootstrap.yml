@@ -9,7 +9,11 @@ eureka:
   client:
     registry-fetch-interval-seconds: 5
     service-url:
+<<<<<<< Updated upstream
       defaultZone: http://cat:cat@192.168.5.48:8761/eureka/
+=======
+      defaultZone: http://cat:cat@192.168.5.64:8761/eureka/
+>>>>>>> Stashed changes
 spring:
   application:
     name: cat-gateway-zuul

@@ -22,9 +22,13 @@ eureka:
     hostname: ${spring.application.name}
   client:
     service-url:
+<<<<<<< Updated upstream
 
       defaultZone: http://cat:cat@192.168.5.48:8761/eureka/
 
+=======
+      defaultZone: http://cat:cat@192.168.5.64:8761/eureka/
+>>>>>>> Stashed changes
 
 management:
   endpoints:

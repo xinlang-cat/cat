@@ -45,7 +45,11 @@ mybatis:
 security:
   oauth2:
     resource:
+<<<<<<< Updated upstream
       user-info-uri: http://192.168.5.48/api-o/user-me
+=======
+      user-info-uri: http://192.168.5.64/api-o/user-me
+>>>>>>> Stashed changes
       prefer-token-info: false
 info:
   company: 鑫朗通信技术有限公司

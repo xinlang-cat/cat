@@ -7,9 +7,46 @@
 </head>
 <body>
 <div class="demoTable">
+<<<<<<< Updated upstream
     搜索ID：
     <div class="layui-inline">
         <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+=======
+    <form class="form-inline" onsubmit="return false">
+        <div class="layui-inline">
+            <input id="username" type="text" class="layui-input" placeholder="项目名" autocomplete="off">
+
+            <select class="layui-select" id="status">
+                <option value="">状态</option>
+                <!--<option value="0">就绪</option>-->
+                <option value="1">进行中</option>
+                <option value="2">结题中</option>
+                <option value="3">已结题</option>
+                <option value="-1">废弃</option>
+            </select>
+
+            <select class="layui-select" id="category">
+                <option value="">类型</option>
+                <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
+            </select>
+            <button class="layui-btn" data-type="reload">搜索</button>
+        </div>
+    </form>
+   <!-- <div class="layui-inline">
+        <input class="layui-input" name="username" id="username" autocomplete="off" placeholder="项目名">
+        <select class="form-control input-sm" id="status">
+            <option value="">全部</option>
+            &lt;!&ndash;<option value="0">就绪</option>&ndash;&gt;
+            <option value="1">进行中</option>
+            <option value="2">结题中</option>
+            <option value="3">已结题</option>
+            <option value="-1">废弃</option>
+        </select>
+        <select class="form-control input-sm" id="category">
+            <option value="">全部</option>
+            <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
+        </select>
+>>>>>>> Stashed changes
     </div>
     <button class="layui-btn" data-type="reload">搜索</button>
 </div>
