@@ -19,7 +19,8 @@ function getBasic(id) {
             $("#start_date_text").text(d.start_date.substring(0, 10));
             $("#end_date_text").text(d.end_date.substring(0, 10));
             $("#item_number_text").text(d.item_number);
-            $("#contract_file_text").text(d.contract_file);
+            $("#contract_file_text").attr('href',analysisFile(d.contract_file).url);
+            $("#contract_file_text").text(analysisFile(d.contract_file).name);
             $("#outline_text").text(d.outline);
             //表单数据
             $("#contract_no").val(d.contract_no);
@@ -63,6 +64,20 @@ function analysisDeptName(code) {
             text = data.signName;
         }
     });
+    return text;
+}
+/*解析文件*/
+function analysisFile(id) {
+    var text = {};
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-f/files/'+id,
+        async: false,
+        success: function (data) {
+            text = data;
+        }
+    });
+    console.log(text.name)
     return text;
 }
 
@@ -138,8 +153,9 @@ function getTarget(id) {
                         var target = analysisLableContent(this.target);
                         var option = initTargetSelect('INDICATORS_OF_LIBRARY', this.target);
                         var text = getsuperior(this.district);
+                        var userNames = analysisUser(this.userIds);
                         if (n == 1) {
-                            if (this.type == 'OTHER_INDICATORS') {
+                            if (this.type != 'QUANTITY_INDICATORS') {
                                 str = '<tr>\n' +
                                     '                    <td rowspan="1">' + targetType.content + '</td>\n' +
                                     '                    <td colspan="2"><input type="hidden" name="id" value="' + this.id + '">' +
@@ -169,6 +185,7 @@ function getTarget(id) {
                                     '                            <i class="layui-icon">&#xe669;</i>\n' +
                                     '                        </button>\n' +
                                     '                    </td>\n' +
+                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
                                     '                </tr>';
                             } else {
                                 str = '<tr>\n' +
@@ -205,10 +222,11 @@ function getTarget(id) {
                                     '                            <i class="layui-icon">&#xe669;</i>\n' +
                                     '                        </button>\n' +
                                     '                    </td>\n' +
+                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
                                     '                </tr>';
                             }
                         } else {
-                            if (this.type == 'OTHER_INDICATORS') {
+                            if (this.type != 'QUANTITY_INDICATORS') {
                                 str += '<tr>\n' +
                                     '                    <td colspan="2"><input type="hidden" name="id" value="' + this.id + '">' +
                                     '                        <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
@@ -237,6 +255,7 @@ function getTarget(id) {
                                     '                            <i class="layui-icon">&#xe669;</i>\n' +
                                     '                        </button>\n' +
                                     '                    </td>\n' +
+                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
                                     '                </tr>';
                             } else {
                                 str += '<tr>\n' +
@@ -271,7 +290,8 @@ function getTarget(id) {
                                     '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
                                     '                            <i class="layui-icon">&#xe669;</i>\n' +
                                     '                        </button>\n' +
-                                    '                    </td>\n' +
+                                    '                    </td>' +
+                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
                                     '                </tr>';
                             }
                         }
@@ -358,6 +378,23 @@ function getsuperior(code) {
     return text;
 }
 
+/*解析实施人员*/
+function  analysisUser(ids) {
+    var userIds = ids.split(',');
+    var userNames = [];
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-user/user/'+ids,
+        async: false,
+        success: function (data) {
+            $(data).each(function () {
+                userNames.push(this.name);
+            });
+        }
+    })
+    return userNames;
+}
+
 /*获取项目人员*/
 function getItemUser(id) {
     $.ajax({
@@ -418,7 +455,7 @@ function getItemUser(id) {
                         '                        <p>' + userInfo.deptName + '</p>\n' +
                         '                        <input class="form-control hidden" placeholder="工作单位" type="text" readonly value="' + userInfo.deptName + '"></td>\n' +
                         '                    <td>\n' +
-                        '                        <p>项目主持人</p>\n' +
+                        '                        <p>'+userInfo.phone+'</p>\n' +
                         '                        <input class="form-control hidden" placeholder="负责或参与的指标" type="text" value="项目主持人" readonly>\n' +
                         '                        <input type="hidden" name="targetIds" value="COMPERE">\n' +
                         '                        <input type="hidden" name="type" value="0">\n' +
@@ -451,7 +488,7 @@ function getItemUser(id) {
                         '                        <p>' + userInfo.deptName + '</p>\n' +
                         '                        <input class="form-control hidden" placeholder="工作单位" type="text" readonly value="' + userInfo.deptName + '"></td>\n' +
                         '                    <td>\n' +
-                        '                        <p>' + responsible + '</p>\n' +
+                        '                        <p>'+userInfo.phone+'</p>\n' +
                         '                        <input class="form-control targetIds hidden" placeholder="负责或参与的指标" type="text" readonly value="' + responsible + '">\n' +
                         '                        <input type="hidden" name="targetIds" value="' + this.targetIds + '">\n' +
                         '                    </td>\n' +

@@ -10,4 +10,6 @@ public interface IItemTargetService extends IBaseService<ItemTarget> {
     void saveTargets(List<ItemTarget> itemTargets);
 
     void deleteTargetByItemId(Integer item_id);
+
+    List<Integer> findTargetUsers(Integer target_id, Integer item_id);
 }

@@ -32,6 +32,7 @@ class ItemTarget {
     private Date end_date;
     private String type;
     private Integer status;
+    private String plan;
 
     @Transient
     private String userIds;

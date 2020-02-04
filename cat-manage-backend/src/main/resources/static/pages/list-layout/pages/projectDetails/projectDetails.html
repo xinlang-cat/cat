@@ -140,7 +140,8 @@
                     </td>
                     <td>合同文件：</td>
                     <td>
-                        <p id="contract_file_text"></p>
+                        <!--<p id="contract_file_text"></p>-->
+                        <a id="contract_file_text" href=""></a>
                         <input class="form-control hidden" placeholder="合同文件" type="text" id="contract_file"
                                name="contract_file"
                                readonly>
@@ -218,62 +219,6 @@
             <button class="layui-btn sub" lay-submit lay-filter="sub2" id="sub2">提交</button>
         </form>
     </div>
-    <!--考核指标-->
-    <div class="module">
-        <form class="layui-form" id="form3">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="addTarget();">
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="deleteTarget();">
-                    <i class="layui-icon">&#xe640;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
-            <table class="layui-table">
-                <colgroup>
-                    <col width="3%">
-                    <col width="10%">
-                    <col width="20%">
-                    <col width="7%">
-                    <col width="17%">
-                    <col width="17%">
-                    <col width="26%">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th colspan="6"><br></th>
-                </tr>
-                <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th>类型</th>
-                    <th>内容</th>
-                    <th>数量</th>
-                    <th>开始时间</th>
-                    <th>结束时间</th>
-                    <th>地点</th>
-                </tr>
-                </thead>
-                <tbody id="INDICATORS">
-                <tr>
-                    <td rowspan="1" class="table-info">考核指标</td>
-                </tr>
-                </tbody>
-            </table>
-            <!--提交按钮-->
-            <button class="layui-btn sub" lay-submit lay-filter="sub3" id="sub3">提交</button>
-        </form>
-    </div>
     <!--项目成员-->
     <div class="module">
         <form class="layui-form" id="form4">
@@ -321,7 +266,7 @@
                     <th>职称</th>
                     <th>从事专业</th>
                     <th>工作单位</th>
-                    <th>研究开发中的责任分工</th>
+                    <th>手机号码</th>
                 </tr>
                 </thead>
                 <tbody id="PERSONNEL">
@@ -330,6 +275,64 @@
             </table>
             <!--提交按钮-->
             <button class="layui-btn sub" lay-submit lay-filter="sub4" id="sub4">提交</button>
+        </form>
+    </div>
+    <!--考核指标-->
+    <div class="module">
+        <form class="layui-form" id="form3">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="editData(this);">
+                    <i class="layui-icon">&#xe642;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="addTarget();">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="deleteTarget();">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
+                    <i class="layui-icon">&#xe605;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
+                    <i class="layui-icon">&#x1006;</i>
+                </button>
+            </div>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="7%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="26%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+               <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th colspan="7"><br></th>
+                </tr>
+               <tr>
+                   <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                   <th>类型</th>
+                   <th colspan="2">内容</th>
+                   <!--<th>数量</th>-->
+                   <th>开始时间</th>
+                   <th>结束时间</th>
+                   <th>地点</th>
+                   <th>实施人员</th>
+               </tr>
+                </thead>
+                <tbody id="INDICATORS">
+                <tr>
+                    <td rowspan="1" class="table-info">考核指标</td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn sub" lay-submit lay-filter="sub3" id="sub3">提交</button>
         </form>
     </div>
     <!--科技经费用途预算-->

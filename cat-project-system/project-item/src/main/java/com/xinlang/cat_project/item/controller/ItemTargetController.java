@@ -45,10 +45,23 @@ public class ItemTargetController {
 
     @ApiOperation(value = "查询指标")
     @LogAnnotation(module = "查询指标")
+    @Transactional
     @GetMapping("/list")
     public ResponseEntity<List<ItemTarget>> getTargetById(@RequestParam Map<String, Object> params){
-        List<ItemTarget> target = targetService.findListByParams(params,ItemTarget.class);
-        return ResponseEntity.ok(target);
+        List<ItemTarget> targets = targetService.findListByParams(params,ItemTarget.class);
+        for (ItemTarget target : targets) {
+            List<Integer> ids = targetService.findTargetUsers(target.getId(),target.getItem_id());
+            String str = "";
+            for (Integer id : ids) {
+                if(str.equals("")){
+                    str = id.toString();
+                }else {
+                    str += ","+ id.toString();
+                }
+            }
+            target.setUserIds(str);
+        }
+        return ResponseEntity.ok(targets);
     }
 
     @ApiOperation(value = "修改指标")

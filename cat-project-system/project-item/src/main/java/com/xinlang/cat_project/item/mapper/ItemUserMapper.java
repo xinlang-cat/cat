@@ -28,6 +28,12 @@ public interface ItemUserMapper extends Mapper<ItemUser>, InsertListMapper<ItemU
      */
     @Select("SELECT target_id FROM target_user WHERE item_id=#{item_id} AND user_id=#{user_id}")
     List<Integer> selectTargetUserByUserId(@Param("item_id") Integer item_id, @Param("user_id") Integer user_id);
+    /**
+     * 查询指标的相关人员
+     * @return
+     */
+    @Select("SELECT user_id FROM target_user WHERE target_id=#{target_id} AND item_id=#{item_id}")
+    List<Integer> selectTargetUserByTarget(@Param("target_id") Integer target_id, @Param("item_id") Integer item_id);
 
     /**
      * 删除人员的相关指标

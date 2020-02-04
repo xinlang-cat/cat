@@ -56,4 +56,9 @@ public class ItemTargetService extends BaseService<ItemTarget> implements IItemT
         itemTarget.setItem_id(item_id);
         itemTargetMapper.delete(itemTarget);
     }
+
+    @Override
+    public List<Integer> findTargetUsers(Integer target_id, Integer item_id) {
+        return itemUserMapper.selectTargetUserByTarget(target_id,item_id);
+    }
 }
