@@ -21,6 +21,5 @@ public class ItemContent {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer item_id;
-    private String title;
     private String content;
 }

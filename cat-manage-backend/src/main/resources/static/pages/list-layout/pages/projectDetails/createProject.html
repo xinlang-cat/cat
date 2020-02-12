@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
+    <style>
+        .table-info {
+            background-color: #4FAAA2;
+            border-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <!--基本信息-->
+    <div class="module">
+        <div><h2 style="text-align: center;margin: 40px;">项目信息</h2></div>
+        <form class="layui-form" id="form1">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="37%">
+                    <col width="10%">
+                    <col width="40%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="9" class="table-info">基本信息</td>
+                </tr>
+                <tr>
+                    <td>合同编号：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="请输入合同编号" type="text"
+                               name="contract_no">
+                    </td>
+                    <td>计划类别：</td>
+                    <td>
+                        <select class="form-control" lay-verify="required" lay-ignore id="category"
+                                name="category">
+                            <option value="">请选择计划类别</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>项目名称：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="请输入项目名称" type="text"
+                               name="item_name">
+                    </td>
+                    <td>委托单位：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="请输入委托单位" type="text"
+                               name="consignor">
+                    </td>
+                </tr>
+                <tr>
+                    <td>承担单位：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="请输入承担单位" type="text"
+                               name="undertaker" id="undertaker" readonly>
+                    </td>
+                    <td>管理单位：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="请输入管理单位" type="text"
+                               name="administrator">
+                    </td>
+                </tr>
+                <tr>
+                    <td>开始时间：</td>
+                    <td>
+                        <input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date" readonly>
+                    </td>
+                    <td>结束时间：</td>
+                    <td>
+                        <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>下达文号：</td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="请输入下达文号" type="text"
+                               name="item_number">
+                    </td>
+                    <td>合同文件：</td>
+                    <td>
+                        <input class="form-control" placeholder="合同文件" type="text" id="contract" name=""
+                               readonly>
+                        <input type="hidden" name="contract_file" id="contract_file">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="2" class="table-info">总体目标</td>
+                </tr>
+                <tr>
+                    <td>总体目标</td>
+                    <td>
+                        <textarea placeholder="总体目标" class="layui-textarea form-control" lay-verify="required"
+                                  name="outline"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn sub" lay-submit lay-filter="sub1" id="sub1">提交</button>
+        </form>
+    </div>
+    <!--主要研究内容-->
+    <div class="module">
+        <form class="layui-form" id="form2">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_research_contents();">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_research_contents();">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table class="layui-table" lay-skin="line">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th colspan="2"><br></th>
+                </tr>
+                </thead>
+                <tbody id="research-contents">
+                <tr>
+                    <td rowspan="2" class="table-info">主要研究内容</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="hidden" name="item_id">
+                    </td>
+                    <td>
+                        <textarea placeholder="主要研究内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn sub" lay-submit lay-filter="sub2" id="sub2">提交</button>
+        </form>
+    </div>
+    <!--项目成员-->
+    <div class="module">
+        <form class="layui-form" id="form3">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_personnel();">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_personnel();">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="7%">
+                    <col width="7%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="17%">
+                    <col width="20%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th colspan="8"><br></th>
+                </tr>
+                <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>证件类型/证件号码</th>
+                    <th>职称</th>
+                    <th>从事专业</th>
+                    <th>工作单位</th>
+                    <th>手机号码</th>
+                </tr>
+                </thead>
+                <tbody id="personnel">
+                <tr>
+                    <td rowspan="4" class="table-info">项目组人员信息</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="user_id">
+                        <input type="hidden" name="type" value="0">
+                    </td>
+                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="职称" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
+                    <td>
+                        <input class="form-control userName" placeholder="手机号码" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="user_id">
+                        <input type="hidden" name="type" value="1">
+                    </td>
+                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="职称" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
+                    <td>
+                        <input class="form-control userName" placeholder="手机号码" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input class="form-control name" placeholder="姓名" type="text" readonly>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="user_id">
+                        <input type="hidden" name="type" value="1">
+                    </td>
+                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="职称" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>
+                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>
+                    <td>
+                        <input class="form-control userName" placeholder="手机号码" type="text">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn sub" lay-submit lay-filter="sub3" id="sub3">提交</button>
+        </form>
+    </div>
+    <!--考核指标-->
+    <div class="module">
+        <form class="layui-form" id="form4">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_indicators();">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_indicators();">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="20%">
+                    <col width="7%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="26%">
+                    <col width="10%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th colspan="7"><br></th>
+                </tr>
+                <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th>类型</th>
+                    <th colspan="2">内容</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>地点</th>
+                    <th>实施人员</th>
+                </tr>
+                </thead>
+                <tbody id="indicators">
+                <tr>
+                    <td rowspan="13" class="table-info">考核指标</td>
+                </tr>
+                <tr>
+                    <td rowspan="1">技术指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="TECHNICAL_INDICATORS">
+                        <input type="hidden" name="status" value="0">
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date" readonly></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date" readonly></td>
+                    <td>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                            <option value=''>请选择</option>
+                        </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td>
+                        <div class="userIds"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">经济指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="ECONOMIC_INDICATORS">
+                        <input type="hidden" name="status" value="0">
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date" readonly></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date" readonly></td>
+                    <td>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                            <option value=''>请选择</option>
+                        </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td>
+                        <div class="userIds"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">人才队伍建设指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="INDICATORS_OF_TALENT_TEAM_CONS">
+                        <input type="hidden" name="status" value="0">
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date" readonly></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date" readonly></td>
+                    <td>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                            <option value=''>请选择</option>
+                        </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td>
+                        <div class="userIds"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">其他指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="OTHER_INDICATORS">
+                        <input type="hidden" name="status" value="0">
+                        <input type="hidden" name="target" value=" ">
+                        <input type="hidden" name="count" value=" ">
+                        <textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required"
+                                  name="content"></textarea></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date" readonly></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date" readonly></td>
+                    <td>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                            <option value=''>请选择</option>
+                        </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td>
+                        <div class="userIds"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="1">数量指标</td>
+                    <td colspan="2"><input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="QUANTITY_INDICATORS">
+                        <input type="hidden" name="status" value="0">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="target">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                               name="start_date" readonly></td>
+                    <td><input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                               name="end_date" readonly></td>
+                    <td>
+                        <select class="form-control input-sm site" lay-verify="required" lay-ignore>
+                            <option value=''>请选择</option>
+                        </select>
+                        <input type="hidden" name="district">
+                        <button type="button" class="layui-btn layui-btn-xs" onclick="refresh(this);"
+                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">
+                            <i class="layui-icon">&#xe669;</i>
+                        </button>
+                    </td>
+                    <td>
+                        <input class="form-control" lay-verify="required" placeholder="数量" type="text" name="count">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn sub" lay-submit lay-filter="sub4" id="sub4">提交</button>
+        </form>
+    </div>
+    <!--科技经费用途预算-->
+    <div class="module">
+        <form class="layui-form" id="form5">
+            <div class="layui-btn-group btn-group">
+                <button type="button" class="layui-btn layui-btn-sm" onclick="add_fund();">
+                    <i class="layui-icon">&#xe654;</i>
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" onclick="del_fund();">
+                    <i class="layui-icon">&#xe640;</i>
+                </button>
+            </div>
+            <table class="layui-table" id="basis">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="37%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="15%">
+                </colgroup>
+                <thead>
+                <tr>
+                     <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                     <th colspan="5"><br></th>
+                 </tr>
+                <tr>
+                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th>科目</th>
+                    <th>开支内容</th>
+                    <th>经费来源</th>
+                    <th>金额（万元）</th>
+                    <th>小计（万元）</th>
+                </tr>
+                </thead>
+                <tbody id="expenditure">
+                <tr>
+                    <td rowspan="14" class="table-info">经费用途预算</td>
+                    <td colspan="5">（一）直接费用</td>
+                </tr>
+                <tr>
+                    <td>设备费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="INSTALLATION_COST">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>材料费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="MATERIALS_EXPENSES">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>测试化验加工费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="COST_OF_TESTING_AND_PROCESSING">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>燃料及动力费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="FUEL_AND_POWER_CHARGRS">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>差旅/会议/国际合作与交流费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="TRAVEL_ON_BUSINESS">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>出版/文献/信息传播/知识产权事务费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="PUBLISH">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>劳务费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="SERVICE_FEE">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>专家咨询费</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="EXPERT_CONSULTATION_FEE">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>其他支出</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="OTHER_EXPENSES">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">（二）间接费用</td>
+                </tr>
+                <tr>
+                    <td>绩效支出</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="1">
+                        <input type="hidden" name="subject" value="PERFORMANCE_OF_THE_SPENDING">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                <tr>
+                    <td>其他费用</td>
+                    <td><textarea placeholder="开支内容" class="layui-textarea form-control remark" lay-verify="required"></textarea>
+                    </td>
+                    <td>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="1">
+                        <input type="hidden" name="subject" value="OTHER_CHARGES">
+                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><input class="form-control" lay-verify="required" placeholder="金额（万元）" type="text"
+                               name="money"></td>
+                </tr>
+                </tbody>
+            </table>
+            <!--提交按钮-->
+            <button class="layui-btn sub" lay-submit lay-filter="sub5" id="sub5">提交</button>
+        </form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src='../../../../js/constant.js'></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="application/javascript" src="../../../../layui/xm-select.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script type="text/javascript" src='../../js/saveData.js'></script>
+<script type="text/javascript" src='../../js/addTable.js'></script>
+<script type="text/javascript" src='../../js/serializeJson.js'></script>
+<script>
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer,
+            upload = layui.upload,
+            form = layui.form,
+            laydate = layui.laydate;
+
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#contract' //绑定元素
+            , accept: 'file'
+            , url: domainName + '/zuul/api-f/files' //上传接口
+            , done: function (res) {
+                //上传完毕回调
+                var id = res.id,
+                    name = res.name;
+                $("#contract_file").val(id);
+                $("#contract").val(name);
+            }
+            , error: function () {
+                //请求异常回调
+            }
+        });
+        //监听提交
+        form.on('submit(sub1)', function (data) {
+            saveBasics();
+            return false;
+        });
+        form.on('submit(sub2)', function (data) {
+            saveContent();
+            return false;
+        });
+        form.on('submit(sub3)', function (data) {
+            savePersonnel();
+            return false;
+        });
+        form.on('submit(sub4)', function (data) {
+            saveTarget();
+            return false;
+        });
+        form.on('submit(sub5)', function (data) {
+            saveFund();
+            return false;
+        });
+    });
+    /*初始化数据*/
+    initSelectData('PLAN_CATEGOR', $('#category'));//计划类别
+    initSelectData('INDICATORS_OF_LIBRARY', $('select[name=target]'));//考核指标
+    initProvinceSelect();//地点
+    initCompanySelect($('#undertaker'));//当前用户公司
+    $('.userIds').each(function () {
+        xmSelect.render({
+            name: 'userIds',
+            layVerify: 'required',
+            layVerType: 'msg',
+            el: $(this)[0],
+            data: []
+        })
+    });
+    initSelectData('FUNDING_SOURCE', $('select[name=source]'));
+
+    //监听人员选择
+    $(".content").on('blur', '.userName', function () {
+        var node = $(this);
+        var userId;
+        var val = $(this).val();
+        if (val == '') {
+            return;
+        }
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users-anon/internal',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: 'username=' + val,
+            success: function (data) {
+                userId = data.id;
+            }
+        });
+        if (userId != undefined) {
+            queryUserInfo(userId, $(this));
+            var d = [];
+            $('input[name=user_id]').each(function () {
+                var UId = $(this).val();
+                console.log(UId)
+                if (UId != '') {
+                    var name = $(this).prev().prev().val();
+                    var data = {name: name, value: UId,};
+                    d.push(data)
+                }
+            })
+            $(xmSelect.get()).each(function () {// 给指标的实施人员选择赋值
+                this.update({
+                    data: d
+                })
+            });
+        } else {
+            node.parent().prevAll().eq(6).children('input').eq(0).val('');
+            node.parent().prevAll().eq(5).children('input').eq(0).val('');
+            node.parent().prevAll().eq(4).children('input').eq(0).val('');
+            node.parent().prevAll().eq(3).children('input').eq(0).val('');
+            node.parent().prevAll().eq(2).children('input').eq(0).val('');
+            node.parent().prevAll().eq(1).children('input').eq(0).val('');
+            node.parent().prevAll().eq(0).children('input').eq(0).val('');
+            layer.msg('该用户不存在', {
+                time: 20000, //20s后自动关闭
+                btn: ['创建', '算了'],
+                yes: function (index, layero) {
+                    createUser(val, node);
+                    layer.close(index);
+                }
+            });
+        }
+    });
+
+    //监听地点选择
+    $(".content").on('change', '.site', function () {
+        var code = $(this).val();
+        var text = $(this).next().text() + $(this).find("option:selected").text() + '-';
+        $(this).next().val(code);
+        $(this).next().text(text);
+        $(this).empty();
+        $(this).append("<option value='" + code + "'>" + text + "</option>");
+        var texts = text.split('-');
+        if (texts.length == 2) {
+            getCity(code, $(this));
+        } else if (texts.length == 3) {
+            getArea(code, $(this));
+        } else if (texts.length == 4) {
+            getStreet(code, $(this));
+        }
+    });
+
+    //刷新地点选择
+    function refresh(e) {
+        var siteSelect = $(e).prev().prev();
+        siteSelect.empty();
+        siteSelect.append("<option value=''>请选择</option>");
+        getProvince(siteSelect);
+        siteSelect.next().val('');
+        siteSelect.next().text('');
+    }
+</script>
+</html>

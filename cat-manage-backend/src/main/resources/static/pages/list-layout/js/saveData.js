@@ -1,4 +1,3 @@
-
 function saveBasics() {
     var formdata = $("#form1").serializeObject();
     $.ajax({
@@ -25,7 +24,9 @@ function saveContent() {
         }
     });
 }
+
 var targets;
+
 function saveTarget() {
     var formdata = $("#form4").serializeJson();
     $.ajax({
@@ -35,10 +36,11 @@ function saveTarget() {
         contentType: "application/json; charset=utf-8",
         data: formdata,
         success: function (data) {
-            targets=data;
+            targets = data;
         }
     });
 }
+
 function savePersonnel() {
     var formdata = $("#form3").serializeJson();
     $.ajax({
@@ -53,17 +55,47 @@ function savePersonnel() {
 }
 
 function saveFund() {
-    var formdata = $("#form5").serializeJson();
+    var formdata = $("#form5").serializeArrayObj();
+    var remarks = $('.remark');
+
+    $(formdata).each(function () {
+
+        if (this.subject == 'INSTALLATION_COST') {
+            this.remark = $(remarks[0]).val()
+        } else if (this.subject == 'MATERIALS_EXPENSES') {
+            this.remark = $(remarks[1]).val()
+        } else if (this.subject == 'COST_OF_TESTING_AND_PROCESSING') {
+            this.remark = $(remarks[2]).val()
+        } else if (this.subject == 'FUEL_AND_POWER_CHARGRS') {
+            this.remark = $(remarks[3]).val()
+        } else if (this.subject == 'TRAVEL_ON_BUSINESS') {
+            this.remark = $(remarks[4]).val()
+        } else if (this.subject == 'PUBLISH') {
+            this.remark = $(remarks[5]).val()
+        } else if (this.subject == 'SERVICE_FEE') {
+            this.remark = $(remarks[6]).val()
+        } else if (this.subject == 'EXPERT_CONSULTATION_FEE') {
+            this.remark = $(remarks[7]).val()
+        } else if (this.subject == 'OTHER_EXPENSES') {
+            this.remark = $(remarks[8]).val()
+        } else if (this.subject == 'PERFORMANCE_OF_THE_SPENDING') {
+            this.remark = $(remarks[9]).val()
+        } else if (this.subject == 'OTHER_CHARGES') {
+            this.remark = $(remarks[10]).val()
+        }
+    })
+
     $.ajax({
         type: 'post',
         url: domainName + '/project-item/item/fund/multi',
         async: false,
         contentType: "application/json; charset=utf-8",
-        data: formdata,
+        data: JSON.stringify(formdata),
         success: function (data) {
         }
     });
 }
+
 function saveContact() {
     var formdata = $("#form6").serializeJson();
     $.ajax({
