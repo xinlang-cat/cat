@@ -73,7 +73,7 @@ public class WorkLogController {
     @GetMapping("/lately")
     @ApiOperation(value = "查询最新一条工作日志")
     @LogAnnotation(module = "查询最新一条工作日志")
-    public WorkLog findLatelyByItemIdAndTargetId(@RequestParam String itemId,@RequestParam String targetId){
+    public WorkLog findLatelyByItemIdAndTargetId(@RequestParam Integer itemId,@RequestParam Integer targetId){
         return workLogService.findLatelyByItemIdAndTargetId(itemId,targetId);
     }
 }

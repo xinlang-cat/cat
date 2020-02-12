@@ -11,5 +11,5 @@ import java.util.Map;
  * 2019-12-20
  */
 public interface IWorkLogService extends IBaseService<WorkLog> {
-    WorkLog findLatelyByItemIdAndTargetId(String itemId,String targetId);
+    WorkLog findLatelyByItemIdAndTargetId(Integer itemId,Integer targetId);
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xinlang.zly.summary.mapper.WorkLogMapper">
-	<select id="findLatelyByItemIdAndTargetId" resultType="com.xinlang.zly.summary.bean.WorkLog">
+	<select id="findLatelyByItemIdAndTargetId" parameterType="Integer" resultType="com.xinlang.zly.summary.bean.WorkLog">
 		SELECT
 			plan
 		FROM

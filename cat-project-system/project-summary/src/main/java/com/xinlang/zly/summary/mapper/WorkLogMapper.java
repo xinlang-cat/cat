@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository("workLogMapper")
 public interface WorkLogMapper extends tk.mybatis.mapper.common.Mapper<WorkLog> {
-    WorkLog findLatelyByItemIdAndTargetId(String itemId,String targetId);
+    WorkLog findLatelyByItemIdAndTargetId(Integer itemId,Integer targetId);
 }
