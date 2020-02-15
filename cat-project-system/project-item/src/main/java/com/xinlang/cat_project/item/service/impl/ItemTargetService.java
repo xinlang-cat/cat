@@ -45,8 +45,8 @@ public class ItemTargetService extends BaseService<ItemTarget> implements IItemT
                 for (String userId : userIds.split(",")) {
                     itemUserMapper.insertTargetUser(itemTarget.getItem_id(),itemTarget.getId(),Integer.parseInt(userId));
                 }
-            } catch (NullPointerException e) {
-                //暂不处理
+            } catch (Exception e) {
+                continue;
             }
         }
         if (count < 1){

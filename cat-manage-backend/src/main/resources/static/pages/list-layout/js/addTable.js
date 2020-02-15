@@ -43,6 +43,9 @@ function add_personnel() {
     $('#personnel').children().first().children().first().attr('rowspan', rowspan);
     //添加到后面
     $('#personnel').append(str);
+    //另有它用
+    var itemId = $('input[name=item_id]').val();
+    $("input[name='item_id']").val(itemId);
 }
 
 function del_personnel() {
@@ -120,6 +123,10 @@ function add_indicators() {
                     boolean = true;
 
                 }
+                //另有它用
+                var itemId = $('input[name=item_id]').val();
+                $("input[name='item_id']").val(itemId);
+
                 initSelectData('INDICATORS_OF_LIBRARY', $('#indicators').find('input[name=type][value=' + type + ']').last().parent().find('select[name=target]'));//初始化新添加的表格中的指标选择
                 $('#indicators').find('input[name=type][value=' + type + ']').last().parent().parent().find('button').trigger('click');//点击新添加的表格中的地点刷新按钮，起到初始化的作用
                 //渲染人员选择
@@ -132,13 +139,6 @@ function add_indicators() {
                         d.push(data)
                     }
                 })
-                xmSelect.render({
-                    name: 'userIds',
-                    layVerify: 'required',
-                    layVerType: 'msg',
-                    el: $('#indicators').find('input[name=type][value=' + type + ']').last().parent().parent().find('.userIds')[0],
-                    data: d
-                })
                 //渲染日期组件
                 lay('.date').each(function () {
                     laydate.render({
@@ -147,6 +147,13 @@ function add_indicators() {
                         , trigger: 'click'
                     });
                 });
+                xmSelect.render({
+                    name: 'userIds',
+                    layVerify: 'required',
+                    layVerType: 'msg',
+                    el: $('#indicators').find('input[name=type][value=' + type + ']').last().parent().parent().find('.userIds')[0],
+                    data: d
+                })
             },
             btn2: function (index, layero) {//关闭
                 layer.close(index);
@@ -258,6 +265,10 @@ function add_fund() {
                 nodes.last().parent().parent().after(str);
                 $('#count').text(nodes.length + 1 + '条');//改变条数
                 initSelectData('FUNDING_SOURCE', $('#expenditure').find('input[name=subject][value=' + subject + ']').last().next());
+
+                //另有它用
+                var itemId = $('input[name=item_id]').val();
+                $("input[name='item_id']").val(itemId);
             }, btn2: function (index, layero) {
                 layer.close(index);
             }

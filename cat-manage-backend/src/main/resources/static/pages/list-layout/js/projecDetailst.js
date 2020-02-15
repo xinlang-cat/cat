@@ -12,14 +12,14 @@ function getBasic(id) {
             $("#contract_no_text").text(d.contract_no);
             $("#category_text").text(analysisLableContent(d.category));
             $("#item_name_text").text(d.item_name);
-            $("#consignor_text").text(analysisDeptName(d.consignor));
-            $("#undertaker_text").text(analysisDeptName(d.undertaker));
-            $("#administrator_text").text(analysisDeptName(d.administrator));
+            $("#consignor_text").text(d.consignor);
+            $("#undertaker_text").text(d.undertaker);
+            $("#administrator_text").text(d.administrator);
 
             $("#start_date_text").text(d.start_date.substring(0, 10));
             $("#end_date_text").text(d.end_date.substring(0, 10));
             $("#item_number_text").text(d.item_number);
-            $("#contract_file_text").attr('href',analysisFile(d.contract_file).url);
+            $("#contract_file_text").attr('href', analysisFile(d.contract_file).url);
             $("#contract_file_text").text(analysisFile(d.contract_file).name);
             $("#outline_text").text(d.outline);
             //表单数据
@@ -33,6 +33,7 @@ function getBasic(id) {
             $("#start_date").val(d.start_date.substring(0, 10));
             $("#end_date").val(d.end_date.substring(0, 10));
             $("#item_number").val(d.item_number);
+            $("#contract").val(analysisFile(d.contract_file).name);
             $("#contract_file").val(d.contract_file);
             $("#outline").val(d.outline);
         }
@@ -66,18 +67,22 @@ function analysisDeptName(code) {
     });
     return text;
 }
+
 /*解析文件*/
 function analysisFile(id) {
+    if (id == '') {
+        return '';
+    }
     var text = {};
     $.ajax({
         type: 'get',
-        url: domainName + '/api-f/files/'+id,
+        url: domainName + '/api-f/files/' + id,
         async: false,
         success: function (data) {
             text = data;
         }
     });
-    console.log(text.name)
+    //console.log(text.name)
     return text;
 }
 
@@ -90,47 +95,13 @@ function getContent(id) {
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            var str = '';
-            $(data).each(function (index) {
-                if (index == 0) {
-                    str = '<td>研究内容1\n' +
-                        '                        <input type="hidden" name="id" value="' + this.id + '">\n' +
-                        '                        <input type="hidden" name="item_id" value="' + id + '">\n' +
-                        '                    </td>\n' +
-                        '                    <td>\n' +
-                        '                        <p id="title_text">' + this.title + '</p>\n' +
-                        '                        <input class="form-control hidden" lay-verify="required" placeholder="标题" type="text" name="title" value="' + this.title + '">\n' +
-                        '                        <br>\n' +
-                        '                        <p id="content_text">' + this.content + '</p>\n' +
-                        '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
-                        '                                  name="content">' + this.content + '</textarea>\n' +
-                        '                    </td>';
-                    $("#mian-content").children().first().append(str);
-                } else {
-                    var rowspan = $("#mian-content").children().length + 1;//改变单元格所跨的行数
-                    $("#mian-content").children().first().children().first().attr('rowspan', rowspan);
-                    str = '<tr>\n' +
-                        '                    <td>研究内容' + rowspan + '\n' +
-                        '                        <input type="hidden" name="id" value="' + this.id + '">\n' +
-                        '                        <input type="hidden" name="item_id" value="' + id + '">\n' +
-                        '                    </td>\n' +
-                        '                    <td>\n' +
-                        '                        <p id="title_text">' + this.title + '</p>\n' +
-                        '                        <input class="form-control hidden" lay-verify="required" placeholder="标题" type="text" name="title" value="' + this.title + '">\n' +
-                        '                        <br>\n' +
-                        '                        <p id="content_text">' + this.content + '</p>\n' +
-                        '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
-                        '                                  name="content">' + this.content + '</textarea>\n' +
-                        '                    </td>\n' +
-                        '                </tr>';
-                    $("#mian-content").append(str);
-                }
-            })
+            var d = data[0];
+
+            $("#content_text").text(d.content);
+            $("#content").val(d.content);
         }
     })
 }
-
-var targets;
 
 /*获取考核指标*/
 function getTarget(id) {
@@ -141,169 +112,112 @@ function getTarget(id) {
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            targets = data;//后面人员的负责分工用到
-            var targetTypes = getTargetTypeAll('TARGET_TYPE');//先获取全部指标类型
-            $(targetTypes).each(function (i) {
-                var targetType = this;
-                var str = '';
-                var n = 0;
-                $(data).each(function (j) {
-                    if (targetType.sign == this.type) {
-                        n++;//符合的次数
-                        var target = analysisLableContent(this.target);
-                        var option = initTargetSelect('INDICATORS_OF_LIBRARY', this.target);
-                        var text = getsuperior(this.district);
-                        var userNames = analysisUser(this.userIds);
-                        if (n == 1) {
-                            if (this.type != 'QUANTITY_INDICATORS') {
-                                str = '<tr>\n' +
-                                    '                    <td rowspan="1">' + targetType.content + '</td>\n' +
-                                    '                    <td colspan="2"><input type="hidden" name="id" value="' + this.id + '">' +
-                                    '                        <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
-                                    '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
-                                    '                        <input type="hidden" name="status" value="' + this.status + '">\n' +
-                                    '                        <input type="hidden" name="target" value=" ">\n' +
-                                    '                        <p>' + this.content + '</p>\n' +
-                                    '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
-                                    '                                  name="content">' + this.content + '</textarea></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.start_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"\n' +
-                                    '                               name="start_date" value="' + this.start_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.end_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"\n' +
-                                    '                               name="end_date" value="' + this.end_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + text + '</p>\n' +
-                                    '                        <select class="form-control input-sm site hidden" lay-verify="required" lay-ignore>\n' +
-                                    '                            <option value="1" selected>' + text + '</option>\n' +
-                                    '                        </select>\n' +
-                                    '                        <input type="hidden" name="district" value="' + this.district + '">\n' +
-                                    '                        <button type="button" class="layui-btn layui-btn-xs hidden" onclick="refresh(this);"\n' +
-                                    '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
-                                    '                            <i class="layui-icon">&#xe669;</i>\n' +
-                                    '                        </button>\n' +
-                                    '                    </td>\n' +
-                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
-                                    '                </tr>';
-                            } else {
-                                str = '<tr>\n' +
-                                    '                    <td rowspan="1">' + targetType.content + '</td>\n' +
-                                    '                    <td><input type="hidden" name="id" value="' + this.id + '">' +
-                                    '                        <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
-                                    '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
-                                    '                        <input type="hidden" name="status" value="' + this.status + '">\n' +
-                                    '                        <input type="hidden" name="content" value=" ">\n' +
-                                    '                        <p>' + target + '</p>\n' +
-                                    '                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="target">\n' +
-                                    '                        ' + option + '\n' +
-                                    '                        </select></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.count + '</p>\n' +
-                                    '                        <input class="form-control hidden" lay-verify="required" placeholder="数量"\n' +
-                                    '                               type="text" name="count" value="' + this.count + '"></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.start_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"\n' +
-                                    '                               name="start_date" value="' + this.start_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.end_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"\n' +
-                                    '                               name="end_date" value="' + this.end_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + text + '</p>\n' +
-                                    '                        <select class="form-control input-sm site hidden" lay-verify="required" lay-ignore>\n' +
-                                    '                            <option value="1" selected>' + text + '</option>\n' +
-                                    '                        </select>\n' +
-                                    '                        <input type="hidden" name="district" value="' + this.district + '">\n' +
-                                    '                        <button type="button" class="layui-btn layui-btn-xs hidden" onclick="refresh(this);"\n' +
-                                    '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
-                                    '                            <i class="layui-icon">&#xe669;</i>\n' +
-                                    '                        </button>\n' +
-                                    '                    </td>\n' +
-                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
-                                    '                </tr>';
-                            }
-                        } else {
-                            if (this.type != 'QUANTITY_INDICATORS') {
-                                str += '<tr>\n' +
-                                    '                    <td colspan="2"><input type="hidden" name="id" value="' + this.id + '">' +
-                                    '                        <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
-                                    '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
-                                    '                        <input type="hidden" name="status" value="' + this.status + '">\n' +
-                                    '                        <input type="hidden" name="target" value=" ">\n' +
-                                    '                        <p>' + this.content + '</p>\n' +
-                                    '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
-                                    '                                  name="content">' + this.content + '</textarea></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.start_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"\n' +
-                                    '                               name="start_date" value="' + this.start_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.end_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"\n' +
-                                    '                               name="end_date" value="' + this.end_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + text + '</p>\n' +
-                                    '                        <select class="form-control input-sm site hidden" lay-verify="required" lay-ignore>\n' +
-                                    '                            <option value="1" selected>' + text + '</option>\n' +
-                                    '                        </select>\n' +
-                                    '                        <input type="hidden" name="district" value="' + this.district + '">\n' +
-                                    '                        <button type="button" class="layui-btn layui-btn-xs hidden" onclick="refresh(this);"\n' +
-                                    '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
-                                    '                            <i class="layui-icon">&#xe669;</i>\n' +
-                                    '                        </button>\n' +
-                                    '                    </td>\n' +
-                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
-                                    '                </tr>';
-                            } else {
-                                str += '<tr>\n' +
-                                    '                    <td><input type="hidden" name="id" value="' + this.id + '">' +
-                                    '                        <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
-                                    '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
-                                    '                        <input type="hidden" name="status" value="' + this.status + '">\n' +
-                                    '                        <input type="hidden" name="content" value=" ">\n' +
-                                    '                        <p>' + target + '</p>\n' +
-                                    '                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="target">\n' +
-                                    '                        ' + option + '\n' +
-                                    '                        </select></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.count + '</p>\n' +
-                                    '                        <input class="form-control hidden" lay-verify="required" placeholder="数量"\n' +
-                                    '                               type="text" name="count" value="' + this.count + '"></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.start_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"\n' +
-                                    '                               name="start_date" value="' + this.start_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + this.end_date.substring(0, 10) + '</p>\n' +
-                                    '                        <input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"\n' +
-                                    '                               name="end_date" value="' + this.end_date.substring(0, 10) + '" readonly></td>\n' +
-                                    '                    <td>\n' +
-                                    '                        <p>' + text + '</p>\n' +
-                                    '                        <select class="form-control input-sm site hidden" lay-verify="required" lay-ignore>\n' +
-                                    '                            <option value="1" selected>' + text + '</option>\n' +
-                                    '                        </select>\n' +
-                                    '                        <input type="hidden" name="district" value="' + this.district + '">\n' +
-                                    '                        <button type="button" class="layui-btn layui-btn-xs hidden" onclick="refresh(this);"\n' +
-                                    '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
-                                    '                            <i class="layui-icon">&#xe669;</i>\n' +
-                                    '                        </button>\n' +
-                                    '                    </td>' +
-                                    '                    <td><div class="userIds">'+userNames+'</div></td>\n' +
-                                    '                </tr>';
-                            }
-                        }
+            $(data).each(function () {
+                var t = this;
+                var text = getsuperior(this.district);
+                var option = initTargetSelect('INDICATORS_OF_LIBRARY', this.target);
+                var userNames = analysisUser(this.userIds);
+
+                var arr = $('#indicators').find('input[name=type][value=' + this.type + ']');
+
+                var str1 = '<td colspan="2"><input type="hidden" name="id" value="' + this.id + '">' +
+                    '                       <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
+                    '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
+                    '                        <input type="hidden" name="status" value="' + this.status + '">\n' +
+                    '                        <p>' + analysisLableContent(this.target) + '</p>\n' +
+                    '                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="target">\n' +
+                    '                        ' + option + '\n' +
+                    '                        </select></td>\n' +
+                    '                    <td><p>' + this.start_date.substring(0, 10) + '</p><input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"\n' +
+                    '                               name="start_date" value="' + this.start_date.substring(0, 10) + '" readonly></td>\n' +
+                    '                    <td><p>' + this.end_date.substring(0, 10) + '</p><input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"\n' +
+                    '                               name="end_date" value="' + this.end_date.substring(0, 10) + '" readonly></td>\n' +
+                    '                    <td><p>' + text + '</p>\n' +
+                    '                        <select class="form-control input-sm site hidden" lay-verify="required" lay-ignore>\n' +
+                    '                            <option value="1" selected>' + text + '</option>\n' +
+                    '                        </select>\n' +
+                    '                        <input type="hidden" name="district" value="' + this.district + '">\n' +
+                    '                        <button type="button" class="layui-btn layui-btn-xs hidden" onclick="refresh(this);"\n' +
+                    '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
+                    '                            <i class="layui-icon">&#xe669;</i>\n' +
+                    '                        </button>\n' +
+                    '                    </td>\n' +
+                    '                    <td>\n' +
+                    '                        <p>' + this.count + '</p><input class="form-control hidden" lay-verify="required" placeholder="数量" type="text" name="count" value="' + this.count + '">\n' +
+                    '                    </td>\n' +
+                    '                </tr>',
+                    str2 = '<td colspan="2"><input type="hidden" name="id" value="' + this.id + '">' +
+                        '                       <input type="hidden" name="item_id" value="' + this.item_id + '">\n' +
+                        '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
+                        '                        <input type="hidden" name="status" value="' + this.status + '">\n' +
+                        '                        <input type="hidden" name="target" value="' + this.target + '">\n' +
+                        '                        <input type="hidden" name="count" value="' + this.count + '">' +
+                        '                        <p>' + this.content + '</p>\n' +
+                        '                        <textarea placeholder="内容" class="layui-textarea form-control hidden" lay-verify="required"\n' +
+                        '                                  name="content">' + this.content + '</textarea></td>\n' +
+                        '                    <td><p>' + this.start_date.substring(0, 10) + '</p><input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"\n' +
+                        '                               name="start_date" value="' + this.start_date.substring(0, 10) + '" readonly></td>\n' +
+                        '                    <td><p>' + this.end_date.substring(0, 10) + '</p><input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"\n' +
+                        '                               name="end_date" value="' + this.end_date.substring(0, 10) + '" readonly></td>\n' +
+                        '                    <td><p>' + text + '</p>\n' +
+                        '                        <select class="form-control input-sm site hidden" lay-verify="required" lay-ignore>\n' +
+                        '                            <option value="1" selected>' + text + '</option>\n' +
+                        '                        </select>\n' +
+                        '                        <input type="hidden" name="district" value="' + this.district + '">\n' +
+                        '                        <button type="button" class="layui-btn layui-btn-xs hidden" onclick="refresh(this);"\n' +
+                        '                                style="position: absolute;right: 20px;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
+                        '                            <i class="layui-icon">&#xe669;</i>\n' +
+                        '                        </button>\n' +
+                        '                    </td>\n' +
+                        '                    <td><p>' + userNames + '</p>\n' +
+                        '                        <div class="userIds hidden"></div>\n' +
+                        '                    </td>\n' +
+                        '                </tr>',
+                    str = '';
+
+                if (arr.length != 0) {//判断是否已存在该类型指标
+                    if (this.type == 'QUANTITY_INDICATORS') { //判断是否是数量指标
+                        str = '<tr>' + str1;
+                    } else {
+                        str = '<tr>' + str2;
                     }
-                    $('#INDICATORS').children().first().children().first().attr('rowspan', data.length + 1);
-                })
-                $('#INDICATORS').append(str);
-                $('#INDICATORS').find('input[name=type][value=' + targetType.sign + ']').first().parent().prev().attr('rowspan', n);
+                    //单元格所跨的行数+1
+                    arr.first().parent().prev().attr('rowspan', arr.length + 1);
+                    arr.last().parent().parent().after(str);
+                } else {
+                    if (this.type == 'QUANTITY_INDICATORS') { //判断是否是数量指标
+                        str = '<tr><td rowspan="1">' + analysisLableContent(this.type) + '</td>' + str1;
+                    } else {
+                        str = '<tr><td rowspan="1">' + analysisLableContent(this.type) + '</td>' + str2;
+                    }
+                    $('#indicators').append(str);
+                }
+                //渲染人员选择
+                if (this.type != 'QUANTITY_INDICATORS') {
+
+                    var d = [];
+                    $('input[name=user_id]').each(function () {
+                        var UId = $(this).val();
+                        if (UId != '') {
+                            var name = $(this).prev().prev().val();
+                            var data = {name: name, value: UId,};
+                            d.push(data)
+                        }
+                    })
+                    var xm = xmSelect.render({
+                        name: 'userIds',
+                        layVerify: 'required',
+                        layVerType: 'msg',
+                        el: $('#indicators').find('input[name=type][value=' + t.type + ']').last().parent().parent().find('.userIds')[0],
+                        data: d
+                    })
+                    xm.setValue(this.userIds.split(','))
+                }
             })
         }
     })
 }
+
 
 /*获取全部指标类型*/
 function getTargetTypeAll(sign) {
@@ -379,12 +293,12 @@ function getsuperior(code) {
 }
 
 /*解析实施人员*/
-function  analysisUser(ids) {
+function analysisUser(ids) {
     var userIds = ids.split(',');
     var userNames = [];
     $.ajax({
         type: 'get',
-        url: domainName + '/project-user/user/'+ids,
+        url: domainName + '/project-user/user/' + ids,
         async: false,
         success: function (data) {
             $(data).each(function () {
@@ -396,106 +310,67 @@ function  analysisUser(ids) {
 }
 
 /*获取项目人员*/
-function getItemUser(id) {
+function getPersonnel(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/user/list',
         data: "item_id=" + id,
         async: false,
         success: function (data) {
+            console.log(data)
             var str = '';
             $(data).each(function (index) {
-                var option = initUserSelectData(gatDeptCode(), this.user_id);
-                var responsible = [];//负责分工
-                $(this.targetIds).each(function () {
-                    responsible.push(analysisResponsible(this));
-                })
-                var userInfo = getUserInfo(this.user_id);
-                if (userInfo.nowMajor != '') {
-                    userInfo.nowMajor = analysisLablename(userInfo.nowMajor);
-                }
-                var sex;
-                if (userInfo.sex == 0) {
-                    sex = '女';
-                } else {
+                var d = getUserInfo(this.user_id);
+                var sex = d.sex || '',
+                    birthDate = d.birthDate || '',
+                    idType = d.idType || '',
+                    idCard = d.idCard || '',
+                    academicTitle = d.academicTitle || '',
+                    nowMajor = d.nowMajor || '',
+                    deptName = d.deptName || '',
+                    name = d.name || '';
+
+                if (sex === '1') {
                     sex = '男';
+                } else {
+                    sex = '女';
                 }
+                // 获得今天的时间，计算年龄
                 var date = new Date();
-                var startDate = new Date(userInfo.birthDate);
+                var startDate = new Date(birthDate);
                 var newDate = date.getTime() - startDate.getTime();
                 var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 / 365);
                 if (isNaN(age)) {
                     age = "";
                 }
-                if (index == 0) {
-                    str = '<tr>\n' +
-                        '                    <td rowspan="' + data.length + '" class="table-info">项目组人员信息</td>\n' +
-                        '                    <td>\n' +
-                        '                        <input type="hidden" name="item_id" value="' + id + '">\n' +
-                        '                        <p>' + userInfo.name + '</p>\n' +
-                        '                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="user_id">\n' +
-                        '                            ' + option + '\n' +
-                        '                        </select></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + sex + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="性别" type="text" readonly value="' + sex + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + age + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="年龄" type="text" readonly value="' + age + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.idType + '/' + userInfo.idCard + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="证件类型/证件号码" type="text" readonly value="' + userInfo.idType + '/' + userInfo.idCard + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.academicTitle + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="职称" type="text" readonly value="' + userInfo.academicTitle + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.nowMajor + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="从事专业" type="text" readonly value="' + userInfo.nowMajor + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.deptName + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="工作单位" type="text" readonly value="' + userInfo.deptName + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>'+userInfo.phone+'</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="负责或参与的指标" type="text" value="项目主持人" readonly>\n' +
-                        '                        <input type="hidden" name="targetIds" value="COMPERE">\n' +
-                        '                        <input type="hidden" name="type" value="0">\n' +
-                        '                    </td>\n' +
-                        '                </tr>';
-                } else {
-                    str += '<tr>\n' +
-                        '                    <td>\n' +
-                        '                        <input type="hidden" name="item_id" value="' + id + '">\n' +
-                        '                        <p>' + userInfo.name + '</p>\n' +
-                        '                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="user_id">\n' +
-                        '                            ' + option + '\n' +
-                        '                        </select></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + sex + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="性别" type="text" readonly value="' + sex + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + age + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="年龄" type="text" readonly value="' + age + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.idType + '/' + userInfo.idCard + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="证件类型/证件号码" type="text" readonly value="' + userInfo.idType + '/' + userInfo.idCard + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.academicTitle + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="职称" type="text" readonly value="' + userInfo.academicTitle + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.nowMajor + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="从事专业" type="text" readonly value="' + userInfo.nowMajor + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>' + userInfo.deptName + '</p>\n' +
-                        '                        <input class="form-control hidden" placeholder="工作单位" type="text" readonly value="' + userInfo.deptName + '"></td>\n' +
-                        '                    <td>\n' +
-                        '                        <p>'+userInfo.phone+'</p>\n' +
-                        '                        <input class="form-control targetIds hidden" placeholder="负责或参与的指标" type="text" readonly value="' + responsible + '">\n' +
-                        '                        <input type="hidden" name="targetIds" value="' + this.targetIds + '">\n' +
-                        '                    </td>\n' +
-                        '                </tr>';
-                }
-            })
-            $("#PERSONNEL").append(str);
+                str += '<tr>\n' +
+                    '                    <td>\n' +
+                    '                        <p>' + name + '</p>\n' +
+                    '                        <input class="form-control name hidden" placeholder="姓名" type="text" value="' + name + '" readonly>\n' +
+                    '                        <input type="hidden" name="item_id" value="' + id + '">\n' +
+                    '                        <input type="hidden" name="user_id" value="' + this.user_id + '">\n' +
+                    '                        <input type="hidden" name="type" value="' + this.type + '">\n' +
+                    '                    </td>\n' +
+                    '                    <td><p>' + sex + '</p>' +
+                    '                        <input class="form-control hidden" placeholder="性别" type="text" value="' + sex + '" readonly></td>\n' +
+                    '                    <td><p>' + age + '</p>' +
+                    '                        <input class="form-control hidden" placeholder="年龄" type="text" value="' + age + '" readonly></td>\n' +
+                    '                    <td><p>' + idType + '/' + idCard + '</p>' +
+                    '                        <input class="form-control hidden" placeholder="证件类型/证件号码" value="' + idType + '/' + idCard + '" type="text" readonly></td>\n' +
+                    '                    <td><p>' + academicTitle + '</p>' +
+                    '                        <input class="form-control hidden" placeholder="职称" type="text" value="' + academicTitle + '" readonly></td>\n' +
+                    '                    <td><p>' + nowMajor + '</p>' +
+                    '                        <input class="form-control hidden" placeholder="从事专业" type="text" value="' + nowMajor + '" readonly></td>\n' +
+                    '                    <td><p>' + deptName + '</p>' +
+                    '                        <input class="form-control hidden" placeholder="工作单位" type="text" value="' + deptName + '" readonly></td>\n' +
+                    '                    <td>\n' +
+                    '                        <p>' + d.phone + '</p>\n' +
+                    '                        <input class="form-control userName hidden" placeholder="手机号码" type="text" value="' + d.phone + '">\n' +
+                    '                    </td>\n' +
+                    '                </tr>';
+            });
+            $('#personnel').children().first().children().first().attr('rowspan', data.length + 1);
+            $("#personnel").append(str);
         }
     })
 }
@@ -564,6 +439,63 @@ function initUserSelectData(deptCode, selected) {
 }
 
 function getFund(id) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/fund/list',
+        data: "item_id=" + id,
+        async: false,
+        success: function (data) {
+            $(data).each(function () {
+                var sourceOption = initTargetSelect('FUNDING_SOURCE', this.source);
+                var nodes = $('#expenditure').find('input[name=subject][value=' + this.subject + ']');
+
+                if (nodes.parent().prev().find('textarea').val() == '') {
+                    nodes.parent().prev().find('textarea').val(this.remark);
+                    nodes.parent().prev().find('p').text(this.remark);
+                    nodes.prev().prev().val(this.item_id);
+                    nodes.prev().val(this.type);
+                    nodes.prev().prev().prev().text(analysisLableContent(this.source));
+                    nodes.next().val(this.source);
+                    nodes.parent().next().find('input').val(this.money);
+                    nodes.parent().next().find('p').text(this.money);
+                }else {
+                    var str = '<tr>\n' +
+                        '                    <td><p>'+analysisLableContent(this.source)+'</p>\n' +
+                        '                        <input type="hidden" name="item_id" value="'+this.item_id+'">\n' +
+                        '                        <input type="hidden" name="type" value="'+this.type+'">\n' +
+                        '                        <input type="hidden" name="subject" value="' + this.subject + '">\n' +
+                        '                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">\n' +
+                        '                        ' + sourceOption + '\n' +
+                        '                        </select></td>\n' +
+                        '                    <td><p>'+this.money+'</p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"\n' +
+                        '                               name="money" value="'+this.money+'"></td>\n' +
+                        '                </tr>';
+                    $('#expenditure').children().first().children().first().attr('rowspan', $('#expenditure').children().length + 1);
+                    nodes.first().parent().parent().children().eq(0).attr('rowspan', nodes.length + 1);
+                    nodes.first().parent().parent().children().eq(1).attr('rowspan', nodes.length + 1);
+                    nodes.first().parent().parent().children().eq(4).attr('rowspan', nodes.length + 1);
+                    nodes.last().parent().parent().after(str);
+                }
+                //小计
+                var subjects = $('#expenditure').find('input[name=subject][value=' + this.subject + ']');
+                var subtotal = 0;
+                $(subjects).each(function () {
+                    var money = $(this).parent().next().find('input[name=money]').val();
+                    if (money !== '') {
+                        subtotal += money - 0;
+                    }
+                })
+                if (subtotal != 0) {
+                    $(subjects).first().parent().next().next().text(subtotal);
+                } else {
+                    $(subjects).first().parent().next().next().text('');
+                }
+            })
+        }
+    });
+}
+
+function getFund1(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/fund/list',

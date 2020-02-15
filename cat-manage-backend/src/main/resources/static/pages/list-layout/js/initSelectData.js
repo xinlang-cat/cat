@@ -144,9 +144,9 @@ function userInfoUtil(d,node) {
         nowMajor = d.nowMajor || '',
         deptName = d.deptName || '',
         name = d.name || '';
-    if(d.nowMajor!=''){
+/*    if(d.nowMajor!=''){
         nowMajor = analysisLablename(d.nowMajor);
-    }
+    }*/
     if(sex==1){
         sex='男';
     }else {

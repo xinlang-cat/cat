@@ -1,60 +1,31 @@
 /*此js用于修改项目*/
 //添加一行
-function add_row(e, sign,) {
-    layui.use(['layer', 'form', 'laydate'], function () {
-        var layer = layui.layer
-            , form = layui.form
-            , laydate = layui.laydate;
-        var str = '';
-        var itemId = $('input[name=item_id]').val();
-        var tbody = $(e).parent().next().find('tbody');
-        var rowspan = tbody.children().length + 1;//改变单元格所跨的行数
-        tbody.children().first().children().first().attr('rowspan', rowspan);
-        if (sign == 'RESEARCH_CONTENTS') {
-            str = '<tr>\n' +
-                '<td>研究内容' + rowspan + '\n' +
-                '<input type="hidden" name="item_id" value="'+itemId+'">\n' +
-                '</td>\n' +
-                '<td>\n' +
-                '<input class="form-control" lay-verify="required" placeholder="标题" type="text" name="title">\n' +
-                '<br>\n' +
-                '<textarea placeholder="内容" class="layui-textarea form-control" lay-verify="required" name="content"></textarea>\n' +
-                '</td>\n' +
-                '</tr>';
-        } else if (sign == 'PROJECT_TEAM') {
-
-            str = '<tr>\n' +
-                '                    <td>\n' +
-                '                        <input type="hidden" name="item_id" value="'+itemId+'">\n' +
-                '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="user_id">\n' +
-                '                            <option value="">请选择</option>\n' +
-                '                        </select></td>\n' +
-                '                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>\n' +
-                '                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>\n' +
-                '                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>\n' +
-                '                    <td><input class="form-control" placeholder="职称" type="text" readonly></td>\n' +
-                '                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>\n' +
-                '                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>\n' +
-                '                    <td>\n' +
-                '                        <input class="form-control targetIds" placeholder="负责或参与的指标" type="text" readonly>\n' +
-                '                        <input type="hidden" name="targetIds">\n' +
-                '                    </td>\n' +
-                '                </tr>';
-        }
-        tbody.append(str);
-        if (sign == 'PROJECT_TEAM') {//如果是项目组人员需要初始化下拉选
-            initUserSelect(deptCode, tbody.children().last().find('select[name=user_id]'));
-        }
-        //渲染
-        lay('.date').each(function () {
-            laydate.render({
-                elem: this
-                , showBottom: false
-                , trigger: 'click'
-            });
-            $(".date").removeAttr("lay-key");
-        });
-    });
+//项目人员
+function add_personnel() {
+    var str = '<tr>\n' +
+        '                    <td>\n' +
+        '                        <input class="form-control name" placeholder="姓名" type="text" readonly>\n' +
+        '                        <input type="hidden" name="item_id">\n' +
+        '                        <input type="hidden" name="user_id">\n' +
+        '                        <input type="hidden" name="type" value="1">\n' +
+        '                    </td>\n' +
+        '                    <td><input class="form-control" placeholder="性别" type="text" readonly></td>\n' +
+        '                    <td><input class="form-control" placeholder="年龄" type="text" readonly></td>\n' +
+        '                    <td><input class="form-control" placeholder="证件类型/证件号码" type="text" readonly></td>\n' +
+        '                    <td><input class="form-control" placeholder="职称" type="text" readonly></td>\n' +
+        '                    <td><input class="form-control" placeholder="从事专业" type="text" readonly></td>\n' +
+        '                    <td><input class="form-control" placeholder="工作单位" type="text" readonly></td>\n' +
+        '                    <td>\n' +
+        '                        <input class="form-control userName" placeholder="手机号码" type="text">\n' +
+        '                    </td>\n' +
+        '                </tr>';
+    //单元格所跨的行数+1
+    var rowspan = $('#personnel').children().length + 1;
+    $('#personnel').children().first().children().first().attr('rowspan', rowspan);
+    //添加到后面
+    $('#personnel').append(str);
+    var itemId = $('input[name=item_id]').val();
+    $("input[name='item_id']").val(id);
 }
 
 //删除一行
