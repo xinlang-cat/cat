@@ -40,9 +40,13 @@ public class ItemTargetService extends BaseService<ItemTarget> implements IItemT
     public void saveTargets(List<ItemTarget> itemTargets) {
         int count = itemTargetMapper.insertList(itemTargets);
         for (ItemTarget itemTarget : itemTargets) {
-            String userIds = itemTarget.getUserIds();
-            for (String userId : userIds.split(",")) {
-                itemUserMapper.insertTargetUser(itemTarget.getItem_id(),itemTarget.getId(),Integer.parseInt(userId));
+            try {
+                String userIds = itemTarget.getUserIds();
+                for (String userId : userIds.split(",")) {
+                    itemUserMapper.insertTargetUser(itemTarget.getItem_id(),itemTarget.getId(),Integer.parseInt(userId));
+                }
+            } catch (Exception e) {
+                continue;
             }
         }
         if (count < 1){
