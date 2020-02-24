@@ -1,10 +1,13 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemTarget;
+import com.xinlang.cat_project.item.pojo.auditApply;
+import com.xinlang.cat_project.item.service.IAuditApplyService;
 import com.xinlang.cat_project.item.service.IItemTargetService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
+import net.minidev.json.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +28,8 @@ public class ItemTargetController {
 
     @Autowired
     private IItemTargetService targetService;
+    @Autowired
+    private IAuditApplyService auditApplyService;
 
     @ApiOperation(value = "添加一条指标")
     @LogAnnotation(module = "添一条加指标")
@@ -92,6 +98,38 @@ public class ItemTargetController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTarget(@PathVariable Integer id){
         targetService.delete(id);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "添加指标查定")
+    @LogAnnotation(module = "添加指标查定")
+    @PreAuthorize("hasAnyAuthority('project:auditApply:save')")
+    @PostMapping("/auditApply/one")
+    public ResponseEntity<Void> saveAuditApply(@RequestBody auditApply auditApply){
+        auditApply.setEdit_date(new Date());
+        auditApply.setStatus(1);
+        auditApplyService.save(auditApply);
+
+
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "查询指标查定")
+    @LogAnnotation(module = "查询指标查定")
+    @Transactional
+    @GetMapping("/applyList")
+    public ResponseEntity<List<auditApply>> getApplyById(@RequestParam Map<String, Object> params){
+        List<auditApply> targets = auditApplyService.findListByParams(params,auditApply.class);
+
+        return ResponseEntity.ok(targets);
+    }
+
+    @ApiOperation(value = "修改指标查定")
+    @LogAnnotation(module = "修改指标查定")
+    @PreAuthorize("hasAnyAuthority('project:auditApply:update')")
+    @PutMapping("/auditApply/update")
+    public ResponseEntity<Void> updateAuditApply(@RequestBody auditApply auditApply){
+        auditApplyService.update(auditApply);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
