@@ -14,19 +14,13 @@ function initSelectData(sign,node) {
     })
 }
 /*初始化公司、机构*/
-function initCompanySelect() {
+function initCompanySelect(node) {
     $.ajax({
         type: 'get',
-        url: domainName + '/api-c/company/all',
+        url: domainName + '/api-c/company/now-user',
         async: false,
         success: function (data) {
-            $(data).each(function () {
-                var code = this.deptCode,
-                    name = this.signName;
-                $('#consignor').append('<option value=' + code + '>' + name + '</option>');
-                $('#undertaker').append('<option value=' + code + '>' + name + '</option>');
-                $('#administrator').append('<option value=' + code + '>' + name + '</option>');
-            });
+            node.val(data.signName);
         }
     })
 }
@@ -150,9 +144,9 @@ function userInfoUtil(d,node) {
         nowMajor = d.nowMajor || '',
         deptName = d.deptName || '',
         name = d.name || '';
-    if(d.nowMajor!=''){
+/*    if(d.nowMajor!=''){
         nowMajor = analysisLablename(d.nowMajor);
-    }
+    }*/
     if(sex==1){
         sex='男';
     }else {
