@@ -22,7 +22,11 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
+<<<<<<< HEAD
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.5.13:${server.port}/eureka/
+=======
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@192.168.5.38:${server.port}/eureka/
+>>>>>>> fa4ca95642d5c2bbd0fc5a796c460243e5d2f74e
     registry-fetch-interval-seconds: 5
   server:
     eviction-interval-timer-in-ms: 3000

@@ -33,7 +33,6 @@ class ItemTarget {
     private String type;
     private Integer status;
     private String plan;
-
     @Transient
     private String userIds;
 }

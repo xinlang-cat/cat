@@ -112,6 +112,7 @@ function getTarget(id) {
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
+            $('#indicators').children().first().children().first().attr('rowspan', data.length + 1);
             $(data).each(function () {
                 var t = this;
                 var text = getsuperior(this.district);

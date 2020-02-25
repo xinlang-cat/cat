@@ -32,16 +32,57 @@
             <div class="form-group">
                 <label class="col-md-1 control-label"></label>
                 <div class="col-md-11">
-                    <button type="button" class="layui-btn" id="upload_accessory">
-                        <i class="layui-icon">&#xe67c;</i>上传附件
+                    <button type="button" class="layui-btn" id="upload_img">
+                        <i class="layui-icon">&#xe67c;</i>上传图片
                     </button>
                     <span style="color: #999;">只支持jpg格式的图片</span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-1 control-label">附件:</label>
-                <div class="col-md-11" id="accessory_files">
+                <label class="col-md-1 control-label">图片:</label>
+                <div class="col-md-11" id="accessory_imgs">
 
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label"></label>
+                <div class="col-md-11">
+                    <button type="button" class="layui-btn" id="upload_video">
+                        <i class="layui-icon">&#xe67c;</i>上传视频
+                    </button>
+                    <span style="color: #999;">只支持jpg格式的图片</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">视频:</label>
+                <div class="col-md-11" id="accessory_videos">
+
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 40px;">
+                <label class="col-md-1 control-label"></label>
+                <div class="col-md-11">
+                    <button type="button" class="layui-btn" id="upload_file">
+                        <i class="layui-icon">&#xe67c;</i>上传文件
+                    </button>
+                    <span style="color: #999;">只支持doc、docx、fdf格式的文件</span>
+                </div>
+            </div>
+            <div class="form-group" >
+                <label class="col-md-1 control-label">文件:</label>
+                <div class="col-md-11" >
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <th>文件名</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="accessory_files">
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="form-group" id="check_remark">
@@ -79,10 +120,34 @@
         var $ = layui.$,slider = layui.slider;
 
         upload.render({
-            elem: '#upload_accessory' //绑定元素
-            , accept: 'jpg'
+            elem: '#upload_file' //绑定元素
+            , accept: 'file'
             , multiple: true
-            , url: domainName + '/zuul/api-f/albums'
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
+            }
+        });
+        upload.render({
+            elem: '#upload_video' //绑定元素
+            , accept: 'video'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
+            }
+        });
+        upload.render({
+            elem: '#upload_img' //绑定元素
+            , accept: 'images'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
             , allDone: function (obj) { //当文件全部被提交后，才触发
                 layer.msg("上传成功");
             }
@@ -114,9 +179,9 @@
                 $("#check_remark").show();
                 $("#remark_text").text(data[0].remark);
             }
-            $.get(domainName+"/api-f/albums/list",{ids:data[0].accessory},function (data) {
+            $.get(domainName+"/api-f/files/list",{ids:data[0].accessory},function (data) {
                 $.each(data,function (i,item) {
-                   addImgHtml(item)
+                    addImgHtml(item)
                 });
             })
         });
@@ -182,12 +247,57 @@
         if (val.length > 10) {
             val = val.substring(0, 8) + '...';
         }
-        str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
-        str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
-        str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
-        str += '<p style="color: #aea9a9;">' + val + '</p></div>';
-        $("#accessory_files").append(str);
-        $(".close-a").hide();
+
+        if(item.contentType.substring(1,0)=='i'){
+            str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
+            str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_imgs").append(str);
+            $(".close-a").hide();
+        }
+        if(item.contentType.substring(1,0)=='v'){
+            str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<video controls style="width: 250px;height: 250px;" src="'+ item.url +'">' + item.name + '</video>';
+            str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $('#accessory_videos').append(str);
+            $(".close-a1").hide();
+        }
+        if(item.contentType.substring(1,0)=='a'){
+            str = '<tr id="'+ item.id +'"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
+            str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile('+ item.id +')"><i class="layui-icon">&#xe640;</i></button></td>';
+            str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
+            $('#accessory_files').append(str);
+        }
+    }
+
+    function deleteFile(id){
+        layer.confirm('确定要删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                type : 'delete',
+                url : domainName + '/api-f/files/'+id,
+                success : function(data) {
+                    layer.msg("删除成功");
+                }
+            });
+
+            $("#"+id).remove();
+            layer.close(1);
+        });
+    }
+
+    //显示隐藏视频删除按钮
+    function showOrHideCloseBut1(obj) {
+        var eum = $(obj).children("a:eq(0)");
+        var flag = $(eum).is(":hidden");
+        if (flag) {
+            $(eum).show();
+        } else {
+            $(eum).hide();
+        }
     }
 
 </script>

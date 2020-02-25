@@ -40,11 +40,15 @@ mybatis:
 security:
   oauth2:
     resource:
+<<<<<<< HEAD
       resource:-info-uri: http://192.168.5.13/api-o/user-me
+=======
+      resource:-info-uri: http://192.168.5.38/api-o/user-me
+>>>>>>> fa4ca95642d5c2bbd0fc5a796c460243e5d2f74e
       prefer-token-info: false
 elasticsearch:
   clusterName: elasticsearch
-  clusterNodes: 127.0.0.1:9300
+  clusterNodes: 192.168.5.38:9300
 
 info:
   company: 鑫朗通信技术有限公司

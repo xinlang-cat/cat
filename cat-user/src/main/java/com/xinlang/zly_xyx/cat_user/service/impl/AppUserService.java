@@ -52,9 +52,9 @@ public class AppUserService implements IAppUserService {
         if(StringUtils.isBlank(username)){
             throw new IllegalArgumentException("用户名不能为空");
         }
-        if(PhoneUtil.checkPhone(username)){
-            throw new IllegalArgumentException("用户名不能使用纯数字");
-        }
+//        if(PhoneUtil.checkPhone(username)){
+//            throw new IllegalArgumentException("用户名不能使用纯数字");
+//        }
         if(EmailUtil.emailFormat(username) || username.contains("|")){
             throw new IllegalArgumentException("用户名包含非法字符");
         }

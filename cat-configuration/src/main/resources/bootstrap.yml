@@ -22,7 +22,11 @@ eureka:
     hostname: ${spring.application.name}
   client:
     service-url:
+<<<<<<< HEAD
       defaultZone: http://cat:cat@192.168.5.13:8761/eureka/
+=======
+      defaultZone: http://cat:cat@192.168.5.38:8761/eureka/
+>>>>>>> fa4ca95642d5c2bbd0fc5a796c460243e5d2f74e
 
 management:
   endpoints:

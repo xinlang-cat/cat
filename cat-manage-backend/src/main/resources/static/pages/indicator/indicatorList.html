@@ -33,7 +33,6 @@
                         <th style="width:13%">起止时间</th>
                         <th style="width:6%;">完成情况</th>
                         <th style="width:5%;">进度[%]</th>
-                        <th style="width:8%;">阶段报告</th>
                         <th style="width:8%;">实施日志</th>
                     </tr>
                     </thead>
@@ -130,15 +129,6 @@
                         },
                         {"data": "status", "defaultContent": ""},
                         {"data": "", "defaultContent": "0%"},
-                        {
-                            "data": "id",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="location.href=\'../work-log/workLogList.html?itemId=' + itemId + '&targetId=' + data + '&userId=' + userId + '\'" ><i class="layui-icon">阶段报告详情</i></button>');
-                                var showDetail = btn.prop("outerHTML");
-                                return showDetail;
-                            }
-                        },
                         {
                             "data": "id",
                             "defaultContent": "",

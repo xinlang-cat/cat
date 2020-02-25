@@ -107,7 +107,7 @@
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['addWorkLog.html?item_id='+itemId],
+            content: ['addWorkLog.html?item_id='+itemId+'&targetId='+targetId],
             end : function() {
                 myWorkLog();
             }
@@ -134,6 +134,7 @@
         $("#saveBt").show();
         var params  = {
             itemId : itemId,
+            targetId : targetId,
             createUserId : userId
         };
         var status = $("#status").val();

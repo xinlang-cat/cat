@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 var domainName = "http://192.168.5.13";
+=======
+var domainName = "http://192.168.5.38";
+>>>>>>> fa4ca95642d5c2bbd0fc5a796c460243e5d2f74e
 
 
 var loginPage = "/api-b/login.html";
