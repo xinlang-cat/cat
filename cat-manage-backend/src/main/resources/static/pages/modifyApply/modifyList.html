@@ -133,11 +133,15 @@
                                 if (modify == 1){
                                     data="项目基本信息";
                                 }else if (status == 2){
-                                    data="项目指标";
+                                    data="项目总体目标";
                                 }else if (status == 3){
-                                    data="项目预算";
+                                    data="主要研究内容";
                                 }else if (status == 4){
                                     data="项目人员";
+                                }else if (status == 5){
+                                    data="项目指标";
+                                }else if (status == 6){
+                                    data="项目经费";
                                 }
 
                                 $.ajaxSettings.async = true;
@@ -198,7 +202,7 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['id'] + ','+row['modify'] +')" ><i class="layui-icon">查定报告</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['item_id'] +','+row['id'] + ','+row['modify'] +')" ><i class="layui-icon">更改信息</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
@@ -247,15 +251,14 @@
         });
     }
 
-    function report(id,modify) {
-        alert(modify);
+    function report(id,modifyId,modify) {
         layer.open({
             title:"添加",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['addResult.html?id='+id+'&userId='+userId],
+            content: ['addResult.html?id='+id+'&modifyId='+modifyId+'&modify='+modify],
             end : function() {
 
             }
