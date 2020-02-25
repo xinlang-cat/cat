@@ -26,6 +26,7 @@ public class ItemFundUse {
     private Float money;
     private String remark;
     private Integer status;
+    private Date disbursement_date;
     private Date edit_date;
     private Integer edit_userid;
     private Integer check_userid;
