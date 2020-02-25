@@ -1,21 +1,20 @@
 package com.xinlang.zly_xyx.cat_file_server.controller;
 
 import com.xinlang.zly_xyx.cat_common.utils.PageUtil;
+import com.xinlang.zly_xyx.cat_file_server.bean.Album;
 import com.xinlang.zly_xyx.cat_file_server.bean.File;
 import com.xinlang.zly_xyx.cat_file_server.config.FileServiceFactory;
 import com.xinlang.zly_xyx.cat_file_server.mapper.FileMapper;
 import com.xinlang.zly_xyx.cat_file_server.service.IFileService;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -121,5 +120,11 @@ public class FileController {
     @GetMapping("/{id}")
     public File findById(@PathVariable String id) {
         return fileMapper.getById(id);
+    }
+
+    @GetMapping("/list")
+    @ApiOperation(value = "根据ids查询文件")
+    public List<File> findByIds(@RequestParam("ids") Set<String> ids) {
+        return fileMapper.getByIds(new ArrayList<>(ids));
     }
 }

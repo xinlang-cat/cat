@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>验收申请表</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
+    <style>
+        .layui-table thead tr {
+            text-align: center;
+        }
+
+        .layui-table th {
+            text-align: center;
+            font-weight: 400;
+        }
+
+        tbody td {
+            text-align: left;
+            border: 1px solid #000;
+        }
+
+        span {
+            float: left;
+        }
+
+        .table-info {
+            background-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .td-text {
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        .td-text1 {
+            text-align: right;
+            font-size: 14px;
+            font-weight: bolder;
+        }
+        .layui-input-block {
+            margin-left: 0px;
+        }
+        .layui-form-radio {
+            width: 220px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="content" style="margin-bottom: 100px;">
+
+        <div><h1 style="text-align: center;margin-top: 40px;margin-bottom: 20px;">执行报告</h1></div>
+        <div style="text-align: center;margin-bottom: 20px;"><h3>（科技重大专项、重点研发计划、技术创新引导专项、基地与人才专项类别适用）</h3></div>
+    </form>
+
+    <form class="layui-form" id="form1">
+        <div style="margin:40px;">
+            <h2>填报说明:</h2>
+            <span style="margin-left: 40px;">
+                一、制表目的：本套调查表是为掌握广西科技计划项目的执行情况，加强科技计划项目的管理，促进科技计 划管理的规范化、科学化而设计。</br>
+                二、调查范围：报告期内仍在实施的广西科技计划项目(课题)。调查表由项目（课题）负责人填报，项目（ 课题）第一承担单位审核。</br>
+                三、报告期： 2018年01月01日 至 2019年12月31日</br>
+                四、填报要求：</br>
+                1.调查表上报时，必须由项目负责人签章确认并盖填表单位公章。</br>
+                2.要按调查表所规定的指标含义、计算方法、分类标准、编号代码等认真填报。未经同意，任何单位和个人 不得修改，不得虚报、瞒报、谎报数据。</br>
+                五、关于填报内容的说明</br>
+                1．项目的经费管理情况，指的是项目所有经费的情况（不仅指科技厅资助的经费）。</br>
+                2. 项目效益及成果情况，有则填，无则不填。</br>
+            </span>
+        </div>
+    </form>
+
+    <form class="layui-form" id="form2">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="34%">
+                    <col width="14%">
+                    <col width="34%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="4" class="table-info">基本信息</td>
+                    <td class="td-text1">项目名称:</td>
+                    <td>
+                        <span id="item_name"></span>
+                    </td>
+                    <td class="td-text1">合同编号:</td>
+                    <td>
+                        <span id="contract_no"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目类别:</td>
+                    <td>
+                        <span id="administrator"></span>
+                    </td>
+                    <td class="td-text1">承担单位:</td>
+                    <td>
+                        <span class="undertaker"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">填 报 人:</td>
+                    <td>
+                        <span id="createUser"></span>
+                    </td>
+                    <td class="td-text1">填报人电话:</td>
+                    <td>
+                        <span class="undertaker"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">填报人邮箱:</td>
+                    <td>
+                        <span class="undertaker"></span>
+                    </td>
+                    <td class="td-text1">填报日期:</td>
+                    <td>
+                <span > <input class="form-control date" placeholder="申请日期" type="text"
+                                               name="applicationDate" maxlength="50"
+                                               id="applicationDate" data-bv-notempty="true"
+                                               data-bv-notempty-message="申请日期 不能为空"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <form class="layui-form" id="form3">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="34%">
+                    <col width="14%">
+                    <col width="34%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="15" class="table-info">项目基本信息及执行进展情况</td>
+                    <td class="td-text1">合同规定起止时间:</td>
+                    <td colspan="3" style="text-align: center">
+                       2019-01-01至2020-12-31
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">是否申请延期:</td>
+                    <td>
+                            <input type="radio" name="sex" value="是" title="是">
+                            <input type="radio" name="sex" value="否" title="否">
+                    </td>
+                    <td class="td-text1">延期批复的截至时间</td>
+                    <td>
+                        <span > <input class="form-control date" placeholder="申请日期" type="text"
+                                       name="applicationDate" maxlength="50"
+                                       id="applicationDate1" data-bv-notempty="true"
+                                       data-bv-notempty-message="申请日期 不能为空"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">产学研联合:</td>
+                    <td colspan="3">
+                            <input type="radio" name="sex" value="是" title="是">
+                            <input type="radio" name="sex" value="否" title="否">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">创新类型:</td>
+                    <td colspan="3">
+                            <input type="radio" name="sex" value="是" title="原始创新">
+                            <input type="radio" name="sex" value="否" title="集成创新">
+                            <input type="radio" name="sex" value="否" title="引进消化吸收再创新">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">合作形式:</td>
+                    <td colspan="3">
+                            <input type="radio" name="sex" value="是" title="国外（境外）合作">
+                            <input type="radio" name="sex" value="否" title="区外合作">
+                            <input type="radio" name="sex" value="否" title="区内合作">
+                            <input type="radio" name="sex" value="否" title="自主研发">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">主要技术来源单位:</td>
+                    <td colspan="3">
+                            <input type="radio" name="sex2" value="否" title="区外科研院所">
+                            <input type="radio" name="sex2" value="否" title="区外大专院校">
+                            <input type="radio" name="sex2" value="否" title="区外企业及其所属科技机构">
+                            <input type="radio" name="sex2" value="否" title="区内科研院所">
+                            <input type="radio" name="sex2" value="否" title="区内大专院校">
+                            <input type="radio" name="sex2" value="否" title="区内企业及其所属科技机构">
+                            <input type="radio" name="sex2" value="否" title="国外（境外）">
+                            <input type="radio" name="sex2" value="否" title="自有技术">
+                            <input type="radio" name="sex2" value="否" title="其它">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目进展情况:</td>
+                    <td colspan="3">
+                            <input type="radio" name="sex1" value="否" title="按计划进度进行">
+                            <input type="radio" name="sex1" value="否" title="进度超前">
+                            <input type="radio" name="sex1" value="否" title="拖延">
+                            <input type="radio" name="sex1" value="否" title="停顿">
+                            <input type="radio" name="sex1" value="否" title="申请终止">
+                            <input type="radio" name="sex1" value="否" title="撤销">
+                            <input type="radio" name="sex1" value="否" title="已完成(未验收)">
+                            <input type="radio" name="sex1" value="否" title="已验收">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目拖延、停顿、终止 、撤销的主要原因（最 多选三项）:</td>
+                    <td>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="0.技术变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="1.计划性调整"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="2.设备、材料不落实"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="3.协作关系影响"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="4.资金不到位"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="5.市场变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="6.技术骨干变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="7.立题不当"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="8.不可抗拒因素"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="9.合作方变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="sex1" value="否" title="10.其他原因"></div>
+                    </td>
+                    <td colspan="2">
+                        <span>
+                            勾选项目进展受阻的主要原因，最多选三项：</br>    
+                            0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br>    
+                            1.计划性调整：由项目组织部门或主管部门审定对合同书 的计划进度进行的调整。</br>  
+                            2.设备、材料不落实：由于设备紧张、材料短缺等原因而 影响计划进度的完成。</br>     
+                            3.协作关系影响：由于协作单位拖延加工、检验、测试以 及依托工程拖延等影响计划进度的完成。</br>     
+                            4.资金不到位：由于在报告期内项目资金不到位而影响计 划进度的完成。</br>     
+                            5.市场变化：由于市场的供求状况发生改变，而使该项目 不能或不宜按原计划进度进行。</br>     
+                            6.技术骨干变动：由于项目组技术骨干调动或较长时间脱 离项目活动等原因而影响计划进度完成。</br>     
+                            7.立题不当：由于可行性研究不够、制定的指标过高、技 术不成熟、技术力量不足，导致项目难以进行而影响计划进度 的完成。</br>     
+                            8.不可抗拒因素：人力不可抗拒因素，例如自然灾害等。</br>     
+                            9.合作方变动：国际或区域科技合作项目的合作方发生变 动，导致项目难以按计划完成。</br>     
+                            10.其他原因：除上述原因以外，影响计划进度完成的其 他各种原因。论文发表周期较长、项目建设场地问题。</br>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;"><h3>考核指标完成情况</h3></td>
+                </tr>
+                <tr>
+                    <td>技术指标：</td>
+                    <td>
+                        （1）建成星创天地及相关服务、产品展示宣 传和技术培训网站。</br>
+                        （2）建设番茄大棚育苗基地，年培育提供番 茄800万株，可供1000户种植4000亩。</br>
+                        （3）开展番茄高效种植示范200亩，示范种植 拉菲尔、凯隆、大粉罗拉、莎拉、粉宝902、 粉泰、金泰等优新品种，示范应用嫁接苗和持 续保水保肥等高效种植管理技术，年平均亩产 番茄5吨。
+                    </td>
+                    <td>全部完成</td>
+                    <td>
+                        1.建成技术服务网站1个。</br>
+                        2.建设21亩番茄大棚育苗基地， 年培育番茄1596.24万株，可供20 00户种植8000亩。</br>
+                        3.开展番茄高效种植示范420亩， 示范种植拉菲尔、凯隆、大粉罗 拉、莎拉、粉宝902、粉泰、金泰 等优新品种。经现场测产，粉泰 年平均单季亩产番茄5467.2公斤 。
+                    </td>
+                </tr>
+                <tr>
+                    <td>经济指标：</td>
+                    <td>
+                        （1）建成星创天地及相关服务、产品展示宣 传和技术培训网站。</br>
+                        （2）建设番茄大棚育苗基地，年培育提供番 茄800万株，可供1000户种植4000亩。</br>
+                        （3）开展番茄高效种植示范200亩，示范种植 拉菲尔、凯隆、大粉罗拉、莎拉、粉宝902、 粉泰、金泰等优新品种，示范应用嫁接苗和持 续保水保肥等高效种植管理技术，年平均亩产 番茄5吨。
+                    </td>
+                    <td>全部完成</td>
+                    <td>
+                        1.建成技术服务网站1个。</br>
+                        2.建设21亩番茄大棚育苗基地， 年培育番茄1596.24万株，可供20 00户种植8000亩。</br>
+                        3.开展番茄高效种植示范420亩， 示范种植拉菲尔、凯隆、大粉罗 拉、莎拉、粉宝902、粉泰、金泰 等优新品种。经现场测产，粉泰 年平均单季亩产番茄5467.2公斤 。
+                    </td>
+                </tr>
+                <tr>
+                    <td>人才队伍建设指标：</td>
+                    <td>
+                        （1）建成星创天地及相关服务、产品展示宣 传和技术培训网站。</br>
+                        （2）建设番茄大棚育苗基地，年培育提供番 茄800万株，可供1000户种植4000亩。</br>
+                        （3）开展番茄高效种植示范200亩，示范种植 拉菲尔、凯隆、大粉罗拉、莎拉、粉宝902、 粉泰、金泰等优新品种，示范应用嫁接苗和持 续保水保肥等高效种植管理技术，年平均亩产 番茄5吨。
+                    </td>
+                    <td>全部完成</td>
+                    <td>
+                        1.建成技术服务网站1个。</br>
+                        2.建设21亩番茄大棚育苗基地， 年培育番茄1596.24万株，可供20 00户种植8000亩。</br>
+                        3.开展番茄高效种植示范420亩， 示范种植拉菲尔、凯隆、大粉罗 拉、莎拉、粉宝902、粉泰、金泰 等优新品种。经现场测产，粉泰 年平均单季亩产番茄5467.2公斤 。
+                    </td>
+                </tr>
+                <tr>
+                    <td>其他指标：</td>
+                    <td>
+                        （1）建成星创天地及相关服务、产品展示宣 传和技术培训网站。</br>
+                        （2）建设番茄大棚育苗基地，年培育提供番 茄800万株，可供1000户种植4000亩。</br>
+                        （3）开展番茄高效种植示范200亩，示范种植 拉菲尔、凯隆、大粉罗拉、莎拉、粉宝902、 粉泰、金泰等优新品种，示范应用嫁接苗和持 续保水保肥等高效种植管理技术，年平均亩产 番茄5吨。
+                    </td>
+                    <td>全部完成</td>
+                    <td>
+                        1.建成技术服务网站1个。</br>
+                        2.建设21亩番茄大棚育苗基地， 年培育番茄1596.24万株，可供20 00户种植8000亩。</br>
+                        3.开展番茄高效种植示范420亩， 示范种植拉菲尔、凯隆、大粉罗 拉、莎拉、粉宝902、粉泰、金泰 等优新品种。经现场测产，粉泰 年平均单季亩产番茄5467.2公斤 。
+                    </td>
+                </tr>
+                <tr>
+                    <td>项目重要进展情况描述：</td>
+                    <td colspan="3">
+                        <textarea placeholder="项目重要进展情况描述" class="layui-textarea form-control"
+                                  lay-verify="required"
+                                  id="manageDeptOpinion1" name="manageDeptOpinion"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <form class="layui-form" id="form4">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="25%">
+                    <col width="24%">
+                    <col width="24%">
+                    <col width="24%">
+                </colgroup>
+                <tbody id="userinfo">
+                <tr class="td-text">
+                    <td rowspan="6" class="table-info">项目经费管理情况</td>
+                </tr>
+                <tr>
+                    <td>项目资金是否单独核算 :</td>
+                    <td colspan="3">
+                        <input type="radio" name="sex" value="是" title="是">
+                        <input type="radio" name="sex" value="否" title="否">
+                    </td>
+                </tr>
+                <tr>
+                    <td>单独核算形式：</td>
+                    <td colspan="3">
+                        <input type="radio" name="sex" value="是" title="专账核算">
+                        <input type="radio" name="sex" value="是" title="往来账核算">
+                        <input type="radio" name="sex" value="否" title="辅助账核算">
+                        <input type="radio" name="sex" value="否" title="其他">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">项目资金收支情况（截至报告期限）</td>
+                </tr>
+                <tr>
+                    <td>收入</td>
+                    <td>支出</td>
+                    <td>其中劳务费支出</td>
+                    <td>其中缴费支出</td>
+                </tr>
+                <tr>
+                    <td>111</td>
+                    <td>111</td>
+                    <td>111</td>
+                    <td>111</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <form class="layui-form" id="form5">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="9%">
+                    <col width="9%">
+                    <col width="9%">
+                </colgroup>
+                <tbody id="userinf">
+                <tr class="td-text">
+                    <td rowspan="7" class="table-info">项目经费使用情况</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">科目</td>
+                    <td rowspan="2">支出金额</td>
+                    <td colspan="2">其中：广西科技厅资助经费 （如为先验收后补助项目，则此处经费 为乙方自筹经费中的科技经费） </td>
+                    <td rowspan="2" colspan="4">开支内容</td>
+                </tr>
+                <tr>
+                    <td>合同原始预算</td>
+                    <td>已支出金额</td>
+                </tr>
+                <tr>
+                    <td colspan="2">合计</td>
+                    <td>123</td>
+                    <td>2332</td>
+                    <td>wewe</td>
+                    <td colspan="4">内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊内容啊</td>
+                </tr>
+                <tr>
+                    <td colspan="9"><h3>项目其他经费支出情况（如为先验收后补助项目，则此处经费不包含自筹经费中的科技经费）</h3></td>
+                </tr>
+                <tr>
+                    <td>国家科技部 门拨款</td>
+                    <td>国家其他部 门拨款</td>
+                    <td>区级部门拨款</td>
+                    <td>市级部门拨款</td>
+                    <td>县级部门拨款</td>
+                    <td>自筹资金</td>
+                    <td>银行贷款</td>
+                    <td>国外资金</td>
+                    <td>其他资金</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>200000</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="13%">
+                </colgroup>
+                <tbody>
+                <tr style="font-size: 14px;font-weight: bolder;">
+                    <td rowspan="33" class="table-info">项目效益及成果情况</td>
+                    <td colspan="8"><h3>（一）项目效益及成果基本情况</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align: center;">效益/成果名称</td>
+                    <td style="text-align: center;" colspan="2">数量</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">1．直接经济效益</td>
+                    <td class="td-text" colspan="4">新增产值</td>
+                    <td class="td-text" colspan="2">730.00万元</td>
+                </tr>
+                <tr>
+                    <td colspan="4">出口创汇</td>
+                    <td colspan="2">1</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <h3 style="float: left">（二）专著、论文目录</h3>
+                        <button class="layui-btn layui-btn-sm" style="float: right" onclick="addHtml('paper')">
+                        <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>序号</td>
+                    <td>专利、论文标题</td>
+                    <td>完成人</td>
+                    <td>项目负责人排位</td>
+                    <td>发表时间</td>
+                    <td>论文收录类别</td>
+                    <td>论文他人引用次数</td>
+                    <td>有关说明</td>
+                </tr>
+                <tr>
+                    <form class="layui-form" id="form6">
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>1</td>
+                    </form>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <h3 style="float: left">（三）授权专利目录</h3><span style="color: #ac2925">(注：填写的专利必须为该项目研究产生的专利，且项目组人员必须为专利完成人.)</span>
+                        <button class="layui-btn layui-btn-sm" style="float: right" onclick="addHtml('patent')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>序号</td>
+                    <td>专利编号</td>
+                    <td>专利名称</td>
+                    <td>完成人</td>
+                    <td>专利类型</td>
+                    <td>申请专利时间</td>
+                    <td>专利授权时间</td>
+                    <td>有关说明</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <h3 style="float: left">（四）科技成果奖励目录</h3>
+                        <button class="layui-btn layui-btn-sm" style="float: right" onclick="addHtml('scienceAchievementAward')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>                    </td>
+                </tr>
+                <tr>
+                    <td>序号</td>
+                    <td colspan="2">成果名称</td>
+                    <td>完成人</td>
+                    <td>项目负责人排位</td>
+                    <td>获奖时间</td>
+                    <td>奖励类别</td>
+                    <td>有关说明</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <h3 style="float: left">（五）科技成果登记目录</h3>
+                        <button class="layui-btn layui-btn-sm" style="float: right" onclick="addHtml('scienceAchievementRegister')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>序号</td>
+                    <td colspan="2">登记号</td>
+                    <td colspan="2">成果名称</td>
+                    <td colspan="2">第一完成单位</td>
+                    <td>第一完成人</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td colspan="8">
+                        <h3 style="float: left">（六）技术合同认定登记目录</h3>
+                        <button class="layui-btn layui-btn-sm" style="float: right" onclick="addHtml('technologyPactRegister')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>序号</td>
+                    <td colspan="2">技术合同编号</td>
+                    <td>技术合同名称</td>
+                    <td>卖方单位</td>
+                    <td>合同成交金额</td>
+                    <td>技术交易金额</td>
+                    <td>技术合同类型</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    <form class="layui-form" id="form7">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="97%">
+                </colgroup>
+                <tbody id="userinfo11">
+                <tr class="td-text">
+                    <td rowspan="6" class="table-info">项目负责人承诺及单位意见</td>
+                </tr>
+                <tr>
+                    <td>
+                        项目负责人承诺：
+                        <textarea placeholder="项目重要进展情况描述" class="layui-textarea form-control"
+                                          lay-verify="required"
+                                          id="manageDeptOpinion111" name="manageDeptOpinion"></textarea>
+                         </br>
+                        项目负责人（签章）： </br>
+                        日期：
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        项目第一承担单位对项目完成质量评价意见</br>
+                        1.项目完成情况
+                        <div class="layui-input-block"><input type="radio" lay-skin="primary" name="sex1" value="否" title="按计划进度实施"></div>
+                        <div class="layui-input-block"><input type="radio" lay-skin="primary" name="sex1" value="否" title="基本按计划进度实施"></div>
+                        <div class="layui-input-block"><input type="radio" lay-skin="primary" name="sex1" value="否" title="未按计划进度实施"></div>
+                        2.其他意见：
+                        <textarea placeholder="项目重要进展情况描述" class="layui-textarea form-control"
+                                  lay-verify="required"
+                                  id="manageDeptOpinion11" name="manageDeptOpinion"></textarea>
+                        经办人（签章）：</br>
+                        单位公章：
+                        日期：2019年12月13日
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <form class="layui-form" id="form8">
+        <div class="module" >
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="30%">
+                    <col width="52%">
+                    <col width="15">
+                </colgroup>
+                <tbody id="file_table">
+                    <tr class="td-text">
+                        <td rowspan="100" class="table-info" >附件清单</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: right">
+                            <button type="button" class="layui-btn" id="upload_file" >
+                                <i class="layui-icon">&#xe67c;</i>上传附件
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">附件名称</td>
+                        <td style="text-align: center;">附件说明</td>
+                        <td style="text-align: center;">操作</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <div class="form-actions" style="margin-bottom: 50px;">
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                <button class="btn btn-primary" type="button"  onclick="save();">
+                    <i class="fa fa-save"></i> 保存
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src='../../../../js/constant.js'></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src='../../js/serializeJson.js'></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script type="text/javascript" src='../../js/saveData.js'></script>
+<script>
+
+    var itemId = getUrlParam("itemId");
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , form = layui.form
+            , laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_file' //绑定元素
+            ,accept: 'file'
+            ,multiple:true
+            ,url: domainName + '/zuul/api-f/files'
+            ,allDone: function(obj){ //当文件全部被提交后，才触发
+                console.log(obj.total); //得到总文件数
+                console.log(obj.successful); //请求成功的文件数
+                console.log(obj.aborted); //请求失败的文件数
+            }
+            ,done: function(res, index, upload){
+                layer.msg("上传成功");
+                var url = res['url'];
+                var id = res['id'];
+                var str = '';
+                str += '<tr id="' + id + '"><input type="hidden" name="files" value="' + id + '" ><td>'+ res.name +'</td><td>';
+                str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="remarks"></textarea></td>';
+                str += '<td><button class="layui-btn layui-btn-xs" onclick="deleteFile('+ id +')"><i class="layui-icon">&#xe705;</i>删除</button>';
+                str += '<a class="layui-btn layui-btn-xs" href="'+url +'"><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
+                $("#file_table").append(str);
+            }
+        });
+    });
+
+
+     function save() {
+         var formdata = $("#form").serializeObject();
+         $.ajax({
+             type: 'post',
+             url: domainName + '/api-summary/check-table',
+             contentType: "application/json; charset=utf-8",
+             data: JSON.stringify(formdata),
+             success: function (data) {
+                  alert("成功");
+             }
+         })
+     }
+
+    function deleteFile(id){
+        layer.confirm('确定要删除吗？', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            $.ajax({
+                type : 'delete',
+                url : domainName + '/api-f/files/'+id,
+                success : function(data) {
+                    layer.msg("删除成功");
+                }
+            });
+
+            $("#"+id).remove();
+            layer.close(1);
+        });
+    }
+
+    function addHtml(type) {
+
+    }
+</script>
+</html>
