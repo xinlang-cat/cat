@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
+        <fieldset>
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">所需审查指标:</label>
+                <div class="col-md-2">
+                    <input class="form-control" placeholder="开始时间" type="text" name="name" maxlength="50"
+                           id="name" readonly>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">内容:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="content" name="content" readonly></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" type="submit" onclick="pass()">
+                            <i class="fa fa-save"></i> 申请通过
+                        </button>
+                        <button class="btn btn-primary" type="submit" onclick="unPass()">
+                            <i class="fa fa-save"></i> 申请未通过
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+
+
+<script type="text/javascript">
+    var layedit, index;
+
+    var id = getUrlParam("id");
+    var h = $(window).height() - 100;
+    layui.use(['layedit','upload', 'laydate'], function(){
+        layedit = layui.layedit;
+        laydate = layui.laydate;
+        index = layedit.build('demo',{tool:[], height:h});
+    });
+    initData();
+
+    function initData(){
+        var data = {
+            id:id,
+        }
+        $.ajax({
+            type : 'get',
+            data:data,
+            url : domainName + '/project-item/item/basic/modifyApply/list',
+            async : false,
+            success : function(data) {
+                $(data).each(function () {
+                    $("#content").val(data[0].content);
+
+                        getType(data[0].modify);
+
+                });
+
+            }
+        });
+    }
+
+
+    function getType(modify) {
+        var data;
+        if (modify == 1){
+            data="项目基本信息";
+        }else if (status == 2){
+            data="项目指标";
+        }else if (status == 3){
+            data="项目预算";
+        }else if (status == 4){
+            data="项目人员";
+        }
+        $("#name").val(data);
+    }
+    function pass() {
+        $.ajax({
+            type : 'put',
+            url : domainName + '/project-item/item/basic/modifyApply',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({id: id,status : 1}),
+            success : function(data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+    function unPass() {
+        $.ajax({
+            type : 'put',
+            url : domainName + '/project-item/item/basic/modifyApply',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({id: id,status : 2}),
+            success : function(data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

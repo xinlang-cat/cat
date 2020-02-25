@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <header style="height: 100%">
+            <div align="left">
+                <table style="width: 100%">
+                    <tr>
+                        <td align="right">
+                            <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt">
+                                <i class="layui-icon">&#xe608;</i> 添加
+                            </button>
+                            <button class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">
+                                <i class="layui-icon">&#xe65c;</i> 返回
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </header>
+
+        <div>
+            <div class="widget-body no-padding">
+                <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th style="width:20%;">项目名称</th>
+                        <th style="width:20%;">更改内容</th>
+                        <th style="width:15%">提交时间</th>
+                        <th style="width:10%;">提交人</th>
+                        <th style="width:10%;">状态</th>
+                        <th style="width:5%;">查看</th>
+                        <th style="width:5%;">修改</th>
+                        <th style="width:5%;">查定结果</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+
+    var pers = checkPermission();
+    var itemId = getUrlParam("item_id");
+    var userId = getUrlParam("userId");
+    var example;
+    layui.use(['layer', 'util'], function () {
+        var layer = layui.layer;
+        var util = layui.util;
+
+        function init() {
+            example =
+                $('#dt-table').DataTable({
+                    "searching": false,
+                    "processing": false,
+                    "serverSide": true,
+                    "info": false,
+                    "paging": false, // 禁止分页
+                    "ordering": false,
+                    "language": {
+                        "url": "../../js/plugin/datatables/Chinese.lang"
+                    },
+                    "ajax": {
+                        "url": domainName + "/project-item/item/basic/modifyApply/list",
+                        "data": {item_id: itemId},
+                        "type": "get",
+                        "dataSrc": function (json) {
+                            return json;
+                        },
+                        "error": function (xhr, textStatus, errorThrown) {
+                            var msg = xhr.responseText;
+                            console.log(msg);
+                            if (xhr.status == 400) {
+                                layer.msg(JSON.parse(msg).message);
+                            } else if (xhr.status == 401) {
+                                localStorage.removeItem("token");
+                                layer.msg("token过期，请重新登录", {shift: -1, time: 1000}, function () {
+                                    location.href = loginPage;
+                                });
+                            } else if (xhr.status == 403) {
+                                layer.msg('未授权');
+                            } else if (xhr.status == 500) {
+                                var info = JSON.parse(msg);
+                                var exception = info.exception;
+                                var message = info.message;
+                                layer.msg('系统错误：' + (exception ? exception : message));
+                            }
+                        }
+                    },
+                    "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                    "columns": [
+                        {
+                            "data": "item_name",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var id =row['item_id'];
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
+                                    data =  res[0]['item_name'];
+                                })
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "modify",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var modify =row['modify'];
+                                $.ajaxSettings.async = false;
+                                if (modify == 1){
+                                    data="项目基本信息";
+                                }else if (status == 2){
+                                    data="项目指标";
+                                }else if (status == 3){
+                                    data="项目预算";
+                                }else if (status == 4){
+                                    data="项目人员";
+                                }
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "apply_time",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var start = formatDate3(data);
+                                return start ;
+                            }
+                        },
+                        {
+                            "data": "userName",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-user/user-anon/" + row['user_id'], function (res) {
+                                    data =  res[0]['name'];
+                                })
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "status",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var status =row['status'];
+                                $.ajaxSettings.async = false;
+                               if (status == 0){
+                                   data="待审核";
+                               }else if (status == 1){
+                                   data="更改中";
+                               }else if (status == 2){
+                                   data="审核未通过";
+                               }else if (status == 3){
+                                   data="更改成功";
+                               }
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ')" ><i class="layui-icon">申请详情</i></button>');
+                                var showDetail = btn.prop("outerHTML");
+                                return showDetail;
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['id'] + ','+row['modify'] +')" ><i class="layui-icon">查定报告</i></button>');
+                                var showDetail = btn.prop("outerHTML");
+                                return showDetail;
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="checkResult(' + row['id'] + ')" ><i class="layui-icon">查定报告结果</i></button>');
+                                var showDetail = btn.prop("outerHTML");
+                                return showDetail;
+                            }
+                        }
+
+                    ],
+                });
+        }
+        init();
+    });
+    var h = $(window).height()-100;
+    var w = $(window).width()-200;
+    function add() {
+        layer.open({
+            title:"添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['addAuditApply.html?item_id='+itemId+'&userId='+userId],
+            end : function() {
+
+            }
+        });
+    }
+    function read(id) {
+        layer.open({
+            title:"查看查定申请",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkApply.html?id='+id],
+            end : function() {
+
+            }
+        });
+    }
+
+    function report(id,modify) {
+        alert(modify);
+        layer.open({
+            title:"添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['addResult.html?id='+id+'&userId='+userId],
+            end : function() {
+
+            }
+        });
+    }
+    function checkResult(id) {
+        layer.open({
+            title:"添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkResult.html?id='+id],
+            end : function() {
+
+            }
+        });
+    }
+
+
+</script>
+</html>

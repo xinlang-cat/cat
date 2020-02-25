@@ -42,4 +42,5 @@ public class ItemBasic implements Serializable {
     private Date edit_date;
     private Integer edit_userid;
     private Integer status;
+    private String modify;
 }
