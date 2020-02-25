@@ -185,7 +185,7 @@ function del_indicators() {
             '</div></div><div class="layui-form-item"><label class="layui-form-label" style="width: 120px">指标条数：</label>\n' +
             '<div class="layui-input-block" style="margin-left: 120px;"><span style="line-height: 36px;font-size: 16px;margin-left: 10px;" id="count"></span>\n' +
             '</div></div></div>';
-        var arr;
+        var  targetType;
         layer.open({
             title: "删除指标",
             btn: ['确定', '关闭'],
@@ -193,6 +193,7 @@ function del_indicators() {
             area: ['800px', '500px'],
             content: str,
             yes: function (index, layero) {
+                var arr = $('#indicators').find('input[name=type][value=' + targetType + ']');
                 arr.last().parent().parent().remove();//删除
                 //改变单元格跨的行数
                 $('#indicators').children().first().children().first().attr('rowspan', $('#indicators').children().length);
@@ -207,7 +208,8 @@ function del_indicators() {
         form.render();
         //监听指标类型选择，统计条数
         form.on('select(targetType)', function (data) {
-            arr = $('#indicators').find('input[name=type][value=' + data.value + ']');
+            targetType = data.value;
+            var arr = $('#indicators').find('input[name=type][value=' + data.value + ']');
             $('#count').text(arr.length + '条');
         });
     });
@@ -246,10 +248,14 @@ function add_fund() {
             content: str,
             yes: function (index, layero) {
                 var subject = $("#subject").val();
+                var type = 0;
+                if(subject =='PERFORMANCE_OF_THE_SPENDING'||subject =='OTHER_CHARGES'){
+                    type = 1;
+                }
                 var str = '<tr>\n' +
                     '                    <td>\n' +
                     '                        <input type="hidden" name="item_id">\n' +
-                    '                        <input type="hidden" name="type" value="0">\n' +
+                    '                        <input type="hidden" name="type" value="'+type+'">\n' +
                     '                        <input type="hidden" name="subject" value="' + subject + '">\n' +
                     '                        <select class="form-control input-sm" lay-verify="required" lay-ignore name="source">\n' +
                     '                            <option value=\'\'>请选择</option>\n' +
