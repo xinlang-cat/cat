@@ -245,17 +245,18 @@
         });
     }
     function checkResult(id) {
-        layer.open({
-            title:"添加",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['checkResult.html?id='+id],
-            end : function() {
+            layer.open({
+                title:"添加",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkResult.html?id='+id],
+                end : function() {
 
-            }
-        });
+                }
+            });
+
     }
 
 
