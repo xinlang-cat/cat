@@ -1,5 +1,5 @@
 
-var domainName = "http://192.168.5.38";
+var domainName = "http://xinlangxfpt.mynatapp.cc";
 
 
 var loginPage = "/api-b/login.html";
