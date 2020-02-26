@@ -10,36 +10,20 @@
 <body>
 <div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <header style="height: 100%">
-            <div align="left">
-                <table style="width: 100%">
-                    <tr>
-                        <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt">
-                                <i class="layui-icon">&#xe608;</i> 添加
-                            </button>
-                            <button class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">
-                                <i class="layui-icon">&#xe65c;</i> 返回
-                            </button>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </header>
 
         <div>
             <div class="widget-body no-padding">
                 <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                     <thead>
                     <tr>
-                        <th style="width:20%;">项目名称</th>
+                        <th style="width:30%;">项目名称</th>
                         <th style="width:20%;">更改内容</th>
                         <th style="width:15%">提交时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
-                        <th style="width:5%;">修改</th>
-                        <th style="width:5%;">查定结果</th>
+                        <!--<th style="width:5%;">修改</th>
+                        <th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -62,8 +46,7 @@
 <script type="text/javascript">
 
     var pers = checkPermission();
-    var itemId = getUrlParam("item_id");
-    var userId = getUrlParam("userId");
+
     var example;
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
@@ -82,8 +65,8 @@
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url": domainName + "/project-item/item/basic/modifyApply/list",
-                        "data": {item_id: itemId},
+                        "url": domainName + "/project-item/item/basic/modifyApply/lists",
+                        "data": {status: ""},
                         "type": "get",
                         "dataSrc": function (json) {
                             return json;
@@ -196,7 +179,7 @@
                                 return showDetail;
                             }
                         },
-                        {
+                       /* {
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
@@ -204,8 +187,8 @@
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
-                        },
-                        {
+                        },*/
+                       /* {
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
@@ -213,7 +196,7 @@
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
-                        }
+                        }*/
 
                     ],
                 });

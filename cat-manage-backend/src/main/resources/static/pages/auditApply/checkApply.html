@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <style>
+        .btn-group{
+            display: none;
+
+        }
+    </style>
+
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -55,17 +62,17 @@
                               id="content" name="content" readonly></textarea>
                 </div>
             </div>
-            <div class="form-actions">
-                <div class="row" align="center">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary" type="submit" onclick="pass()">
-                            <i class="fa fa-save"></i> 申请通过
+            <div class="layui-btn-group btn-group" style="text-align: center">
+
+                        <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                                onclick="pass();">
+                            申请通过
                         </button>
-                        <button class="btn btn-primary" type="submit" onclick="unPass()">
-                            <i class="fa fa-save"></i> 申请未通过
+                        <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                                onclick="unPass();">
+                            申请未通过
                         </button>
-                    </div>
-                </div>
+
             </div>
 
         </fieldset>
@@ -83,6 +90,7 @@
     var layedit, index;
 
     var id = getUrlParam("id");
+    var userType = getUrlParam("userType");
     var h = $(window).height() - 100;
     layui.use(['layedit','upload', 'laydate'], function(){
         layedit = layui.layedit;
@@ -108,12 +116,20 @@
                         city(data[0].cityCode);
                         area(data[0].areaCode);
                         street(data[0].streetCode);
+                        status(data[0].status);
                         $("#start_date").val(formatDate3(data[0].start_date));
                         $("#end_date").val(formatDate3(data[0].end_date));
                 });
 
             }
         });
+    }
+    function status(status) {
+        if(status==1&&userType==2){
+            var obj=document.getElementsByClassName("btn-group");
+            obj[0].style.display = "block";
+        }
+
     }
     function province(provinceCode) {
         $.ajax({
@@ -164,7 +180,13 @@
             contentType: "application/json; charset=utf-8",
             data: {id: id},
             success : function(data) {
-                $("#name").val(data[0].content);
+                if (data[0]['count']!=null){
+                    $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
+                        $("#name").val(res[0].content);
+                    })
+                }else {
+                    $("#name").val(data[0].content);
+                }
             }
         });
     }

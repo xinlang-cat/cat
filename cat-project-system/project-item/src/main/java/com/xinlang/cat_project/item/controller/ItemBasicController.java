@@ -3,6 +3,7 @@ package com.xinlang.cat_project.item.controller;
 import com.xinlang.cat_project.item.pojo.ItemBasic;
 import com.xinlang.cat_project.item.pojo.PageResult;
 import com.xinlang.cat_project.item.pojo.modifyApply;
+import com.xinlang.cat_project.item.service.IAuditApplyService;
 import com.xinlang.cat_project.item.service.IItemBasicService;
 import com.xinlang.cat_project.item.service.IModifyApplyService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
@@ -130,13 +131,20 @@ public class ItemBasicController {
         return ResponseEntity.ok(targets);
     }
 
-    @ApiOperation(value = "查询更改申请")
-    @LogAnnotation(module = "查询更改申请")
+    @ApiOperation(value = "修改更改申请")
+    @LogAnnotation(module = "修改更改申请")
     @PutMapping("/modifyApply")
     public ResponseEntity<Void> updateApply(@RequestBody modifyApply modifyApply){
         modifyApplyService.update(modifyApply);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
-
+    @ApiOperation(value = "查询更改申请")
+    @LogAnnotation(module = "查询更改申请")
+    @GetMapping("/modifyApply/lists")
+    public ResponseEntity<List<modifyApply>> getApplyCheck(@RequestParam Map<String, Object> params){
+        List<modifyApply> targets = modifyApplyService.findApplyList(params,modifyApply.class);
+        System.out.println(targets);
+        return ResponseEntity.ok(targets);
     }
 }

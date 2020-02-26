@@ -37,8 +37,8 @@
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
-                        <th style="width:5%;">修改</th>
-                        <th style="width:5%;">查定结果</th>
+                        <!--<th style="width:5%;">修改</th>
+                        <th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -116,6 +116,11 @@
                                 $.ajaxSettings.async = false;
                                     $.get(domainName + "/project-item/item/target/list?id=" + row['target_id'], function (res) {
                                         data =  res[0]['content'];
+                                        if (res[0]['count']!=null){
+                                            $.get(domainName + "/api-label/label/tree/" + res[0]['target'], function (res) {
+                                                data =  res[0]['content'];
+                                            })
+                                        }
                                     })
 
                                 $.ajaxSettings.async = true;
@@ -171,12 +176,12 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ')" ><i class="layui-icon">申请详情</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',1'+')" ><i class="layui-icon">申请详情</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
                         },
-                        {
+                /*        {
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
@@ -193,7 +198,7 @@
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
-                        }
+                        }*/
 
                     ],
                 });
@@ -215,14 +220,14 @@
             }
         });
     }
-    function read(id) {
+    function read(id,userType) {
         layer.open({
             title:"查看查定申请",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['checkApply.html?id='+id],
+            content: ['checkApply.html?id='+id+'&userType='+userType],
             end : function() {
 
             }
