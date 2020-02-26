@@ -103,7 +103,6 @@ public class ItemTargetController {
 
     @ApiOperation(value = "添加指标查定")
     @LogAnnotation(module = "添加指标查定")
-    @PreAuthorize("hasAnyAuthority('project:auditApply:save')")
     @PostMapping("/auditApply/one")
     public ResponseEntity<Void> saveAuditApply(@RequestBody auditApply auditApply){
         auditApply.setEdit_date(new Date());
@@ -126,7 +125,6 @@ public class ItemTargetController {
 
     @ApiOperation(value = "修改指标查定")
     @LogAnnotation(module = "修改指标查定")
-    @PreAuthorize("hasAnyAuthority('project:auditApply:update')")
     @PutMapping("/auditApply/update")
     public ResponseEntity<Void> updateAuditApply(@RequestBody auditApply auditApply){
         auditApplyService.update(auditApply);
