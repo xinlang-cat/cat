@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
+        <fieldset>
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">所需修改内容:</label>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="modify" id="modify">
+                        <option value=1>项目基本信息</option>
+                        <option value=2>项目指标</option>
+                        <option value=3>项目预算</option>
+                        <option value=4>项目人员</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">更改原因:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="content" name="content"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" type="submit" onclick="add(this)">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+    var itemId = getUrlParam("item_id");
+    var userId = getUrlParam("userId");
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'layer'], function () {
+        layer = layui.layer;
+        laydate = layui.laydate;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+
+    });
+
+
+    function add(obj) {
+        $(obj).attr("disabled", true);
+        var formdata = $("#form").serializeObject();
+        formdata.item_id = itemId;
+        formdata.user_id = userId;
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/basic/modifyApply',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

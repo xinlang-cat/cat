@@ -2,7 +2,9 @@ package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemBasic;
 import com.xinlang.cat_project.item.pojo.PageResult;
+import com.xinlang.cat_project.item.pojo.modifyApply;
 import com.xinlang.cat_project.item.service.IItemBasicService;
+import com.xinlang.cat_project.item.service.IModifyApplyService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +29,8 @@ public class ItemBasicController {
 
     @Autowired
     private IItemBasicService itemBasicService;
+    @Autowired
+    private IModifyApplyService modifyApplyService;
 
     /**
      * 查询项目，分页查询
@@ -104,5 +108,35 @@ public class ItemBasicController {
     public ResponseEntity<Void> discardItem(@PathVariable Integer id){
         itemBasicService.discardItem(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "添加更改申请")
+    @LogAnnotation(module = "添加更改申请")
+    @PostMapping("/modifyApply")
+    public ResponseEntity<modifyApply> ModifyApply(@RequestBody modifyApply modifyApply) {
+
+        modifyApply.setApply_time(new Date());
+        modifyApply.setStatus(0);
+        modifyApplyService.save(modifyApply);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(modifyApply);
+    }
+
+    @ApiOperation(value = "查询更改申请")
+    @LogAnnotation(module = "查询更改申请")
+    @GetMapping("/modifyApply/list")
+    public ResponseEntity<List<modifyApply>> getApplyById(@RequestParam Map<String, Object> params){
+        List<modifyApply> targets = modifyApplyService.findListByParams(params,modifyApply.class);
+
+        return ResponseEntity.ok(targets);
+    }
+
+    @ApiOperation(value = "查询更改申请")
+    @LogAnnotation(module = "查询更改申请")
+    @PutMapping("/modifyApply")
+    public ResponseEntity<Void> updateApply(@RequestBody modifyApply modifyApply){
+        modifyApplyService.update(modifyApply);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+
     }
 }

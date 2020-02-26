@@ -6,41 +6,43 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import tk.mybatis.mapper.annotation.KeySql;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 项目
- * @author 梁应昌
- * 2019/9/20
+ * @author 杨珣
+ * 2020/2/4
  */
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "item_basic")
-public class ItemBasic implements Serializable {
+@Table(name = "audit_apply")
+public class auditApply implements Serializable {
 
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-    private String contract_no;
-    private String category;
-    private String item_name;
-    private String consignor;
-    private String undertaker;
-    private String administrator;
-    private String item_number;
-    private String outline;
-    private String contract_file;
+    private String item_id;
+    private String target_id;
+    private String content;
+    private String provinceCode;
+    private String cityCode;
+    private String areaCode;
+    private String streetCode;
+    private String description;
+    private String accessory;
+
     private Date start_date;
     private Date end_date;
+    private Date start_date_true;
+    private Date end_date_true;
     private Date edit_date;
+    private Date check_date;
     private Integer edit_userid;
+    private Integer check_userid;
     private Integer status;
-    private String modify;
 }

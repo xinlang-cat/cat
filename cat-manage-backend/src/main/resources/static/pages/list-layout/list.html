@@ -134,7 +134,7 @@
         var layer = layui.layer;
     });
     var userId;//当前用户ID
-    var deptCode;//当前用户的公司代码
+    var deptCode;//当前用户的公司代码r
     getCompanryCode();
     initData();
     function initData() {
@@ -162,6 +162,8 @@
                         '                        <li><a href="pages/UserFund/userFund.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
                         '                        <li><a href="pages/details/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +
+                        '                        <li><a href="../auditApply/applyList.html?item_id='+this.id+'&userId='+userId+'">查定申请</a></li>\n' +
+                        '                        <li><a href="../modifyApply/modifyList.html?item_id='+this.id+'&userId='+userId+'">更改申请</a></li>\n' +
                         '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
                         '                    </ul>\n' +
                         '                </figcaption>\n' +

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
+        <fieldset>
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">所需审查指标:</label>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="target_id" id="target_id">
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">预计开始时间</label>
+                <div class="col-md-2">
+                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date" maxlength="50"
+                           id="start_date" data-bv-notempty="true"
+                           data-bv-notempty-message="开始时间 不能为空">
+                </div>
+                <label class="col-md-1 control-label">预计结束时间</label>
+                <div class="col-md-2">
+                    <input class="form-control date" placeholder="结束时间" type="text" name="end_date" maxlength="50"
+                           id="end_date" data-bv-notempty="true"
+                           data-bv-notempty-message="结束时间 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">指标所在地域</label>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="provinceCode" id="provinceCode">
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="cityCode" id="cityCode">
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="areaCode" id="areaCode">
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="streetCode" id="streetCode">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">内容:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="content" name="content"></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" type="submit" onclick="add(this)">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+    var itemId = getUrlParam("item_id");
+    var userId = getUrlParam("userId");
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'laydate','layer'], function () {
+        layer = layui.layer;
+        laydate = layui.laydate;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        lay('.date').each(function(){
+            laydate.render({
+                elem: this
+                ,format:'yyyy-MM-dd'
+                ,trigger: 'click'
+            });
+        });
+
+    });
+
+
+    $(function () {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/project-item/item/target/list',
+            contentType: "application/json; charset=utf-8",
+            data: {item_id: itemId},
+            success : function(data) {
+                var select = $("#target_id");
+                select.append("<option value=''>请选择指标</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.id;
+                    var name = d.content;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    })
+
+    function add(obj) {
+        $(obj).attr("disabled", true);
+        var formdata = $("#form").serializeObject();
+        formdata.item_id = itemId;
+        formdata.edit_userid = userId;
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/target/auditApply/one',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
