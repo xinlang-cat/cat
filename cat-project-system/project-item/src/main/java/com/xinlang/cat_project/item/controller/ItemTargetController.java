@@ -108,8 +108,6 @@ public class ItemTargetController {
         auditApply.setEdit_date(new Date());
         auditApply.setStatus(1);
         auditApplyService.save(auditApply);
-
-
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -127,8 +125,21 @@ public class ItemTargetController {
     @LogAnnotation(module = "修改指标查定")
     @PutMapping("/auditApply/update")
     public ResponseEntity<Void> updateAuditApply(@RequestBody auditApply auditApply){
+        Integer userId =AppUserUtil.getLoginAppUser().getId().intValue();
+        auditApply.setCheck_userid(userId);
         auditApplyService.update(auditApply);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "查询指标查定")
+    @LogAnnotation(module = "查询指标查定")
+    @Transactional
+    @GetMapping("/applyList/list")
+    public ResponseEntity<List<auditApply>> getApplyCheck(@RequestParam Map<String, Object> params){
+        /*List<auditApply> targets = auditApplyService.findListByParams(params,auditApply.class);*/
+        List<auditApply> targets = auditApplyService.findApplyList(params,auditApply.class);
+        System.out.println(targets);
+        return ResponseEntity.ok(targets);
     }
 
 }
