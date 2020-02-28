@@ -5,8 +5,10 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -22,6 +24,13 @@ public class Stage implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;//id
     private Integer itemId;//项目id
+    private String itemName;//项目名称
+    private String contractNo;//合同编号
+    private String category;//项目类别
+    private String undertaker;//承担单位
+    private String createUserEmail;//填报人邮箱
+    private String createUserPhone;//填报人电话
+    private String startAndEndTime;//起止时间
     private Integer createUserId;//填表人id
     private String createUserName;//填表人姓名
     private Date createTime;//填报时间
@@ -55,5 +64,20 @@ public class Stage implements Serializable {
     private String deptCheckUser;//经办人
     private Date deptCheckTime;//单位审核时间
     private boolean enable;//状态
-
+    @Transient
+    private List<StageAffixFile> stageAffixFiles;//附件
+    @Transient
+    private List<StageFundUse> stageFundUses;//资金使用情况
+    @Transient
+    private List<StageKpi> stageKpis;//考核指标
+    @Transient
+    private List<StagePaperCatalogue> stagePaperCatalogues;//专著、论文目录
+    @Transient
+    private List<StagePatentCatalogue> stagePatentCatalogues;//专利目录
+    @Transient
+    private List<StageScienceAchievementAwardCatalogue> stageScienceAchievementAwardCatalogues;//科技成果获得奖励目录
+    @Transient
+    private List<StageScienceAchievementRegisterCatalogue> stageScienceAchievementRegisterCatalogues;//科技成果登记目录
+    @Transient
+    private List<StageTechnologyPactRegisterCatalogue> stageTechnologyPactRegisterCatalogues;//技术合同目录
 }

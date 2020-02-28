@@ -52,9 +52,7 @@ public class WechatController {
             throw new IllegalArgumentException("state不能为空");
         }
 
-
-        String toUrl = "http://192.168.5.13/api-b/pages/wechat/index.html";
-
+        String toUrl = "192.168.5.38/api-b/pages/wechat/index.html";
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
 
         toUrl = wechatService.getToUrl(toUrl, wechatUserInfo);
