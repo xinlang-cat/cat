@@ -25,14 +25,45 @@ public class modifyApply implements Serializable {
 
     @Id
     @KeySql(useGeneratedKeys = true)
+
     private Integer id;
     private String item_id;
+    /**
+     *修改原因说明
+     */
     private String content;
     private Integer user_id;
+    /**
+     *修改人id
+     */
     private Integer change_user;
+    /**
+     * 修改类型
+     * 1 "项目基本信息";
+     * 2 "项目研究内容";
+     * 3 "项目人员";
+     * 4 "项目指标";
+     * 5 "项目经费";
+     */
     private Integer modify;
+    /**
+     *申请时间
+     */
     private Date apply_time;
+    /**
+     *修改时间
+     */
     private Date modify_time;
+    /**
+     *审核人id
+     */
     private Integer check_user;
+    /**
+     *修改状态
+     * 0 "待审核";
+     * 1 "更改中";
+     * 2 "审核未通过";
+     * 3 "更改成功";
+     */
     private Integer status;
 }

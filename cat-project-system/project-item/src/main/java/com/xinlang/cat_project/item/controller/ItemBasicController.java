@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -146,5 +147,31 @@ public class ItemBasicController {
         List<modifyApply> targets = modifyApplyService.findApplyList(params,modifyApply.class);
         System.out.println(targets);
         return ResponseEntity.ok(targets);
+    }
+
+    @LogAnnotation(module = "获取更改申请列表")
+    @GetMapping("/modifyApply/page")
+    public ResponseEntity<PageResult<modifyApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                                                            @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                            @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                            @RequestParam(required = false) Map<String, Object> params){
+        String name = (String) params.get("item_name");
+        if (name == "" || name == null ){
+
+        }else {
+            List<ItemBasic> itemBasics = itemBasicService.findByName(name);
+            List<Integer> itemIds =new ArrayList<>();
+            if (itemIds.size()==0){
+                itemIds.add(0);
+            }else {
+                for (int i=0;i<itemBasics.size();i++){
+                    itemIds.add(itemBasics.get(i).getId());
+                }
+            }
+            params.put("itemIds",itemIds);
+        }
+        PageResult<modifyApply> result = modifyApplyService.queryList(page,rows,sortBy,desc,params);
+        return ResponseEntity.ok(result);
     }
 }

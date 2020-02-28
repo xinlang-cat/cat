@@ -7,12 +7,13 @@
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
         <fieldset>
             <div class="form-group" style="margin-top: 40px">
                 <label class="col-md-2 control-label">所需审查指标:</label>
                 <div class="col-md-2">
-                    <select class="form-control input-sm" name="target_id" id="target_id">
+                    <select class="form-control input-sm" name="target_id" id="target_id" >
                     </select>
                 </div>
                 <label class="col-md-1 control-label">预计开始时间</label>
@@ -31,7 +32,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">指标所在地域</label>
                 <div class="col-md-2">
-                    <select class="form-control input-sm" name="provinceCode" id="provinceCode">
+                    <select class="form-control input-sm" name="provinceCode" id="provinceCode" >
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -52,7 +53,8 @@
                 <div class="col-md-8">
                     <textarea placeholder="内容简介。"
                               class="layui-textarea form-control" lay-verify="required"
-                              id="content" name="content"></textarea>
+                              id="content" name="content" data-bv-notempty="true"
+                              data-bv-notempty-message="内容简介 不能为空"></textarea>
                 </div>
             </div>
 
@@ -71,6 +73,7 @@
 
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../layui/layui.all.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
@@ -138,6 +141,17 @@
     }
 
     function add(obj) {
+        if ($("#target_id").val()=='') {
+            layer.msg("请选择指标");
+            return;
+        }
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         $(obj).attr("disabled", true);
         var formdata = $("#form").serializeObject();
         formdata.item_id = itemId;

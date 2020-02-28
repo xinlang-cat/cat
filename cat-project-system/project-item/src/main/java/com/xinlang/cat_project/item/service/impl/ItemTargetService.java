@@ -7,6 +7,7 @@ import com.xinlang.cat_project.item.mapper.ItemContentMapper;
 import com.xinlang.cat_project.item.mapper.ItemTargetMapper;
 import com.xinlang.cat_project.item.mapper.ItemUserMapper;
 import com.xinlang.cat_project.item.pojo.ItemTarget;
+import com.xinlang.cat_project.item.pojo.modifyApply;
 import com.xinlang.cat_project.item.service.IItemTargetService;
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
@@ -15,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +67,19 @@ public class ItemTargetService extends BaseService<ItemTarget> implements IItemT
     @Override
     public List<Integer> findTargetUsers(Integer target_id, Integer item_id) {
         return itemUserMapper.selectTargetUserByTarget(target_id,item_id);
+    }
+
+    @Override
+    public List<ItemTarget> findQuantity(Integer weth) {
+        Example example = new Example(ItemTarget.class);
+        if (weth==1){
+            //数量指标
+            example.createCriteria().andIsNotNull("count");
+        }else if (weth==2){
+            //非数量指标
+            example.createCriteria().andIsNull("count");
+        }
+        List<ItemTarget> list = itemTargetMapper.selectByExample(example);
+        return list;
     }
 }

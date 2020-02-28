@@ -1,8 +1,8 @@
 package com.xinlang.cat_project.item.controller;
 
-import com.xinlang.cat_project.item.pojo.ItemTarget;
-import com.xinlang.cat_project.item.pojo.auditApply;
+import com.xinlang.cat_project.item.pojo.*;
 import com.xinlang.cat_project.item.service.IAuditApplyService;
+import com.xinlang.cat_project.item.service.IItemBasicService;
 import com.xinlang.cat_project.item.service.IItemTargetService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,8 @@ public class ItemTargetController {
     private IItemTargetService targetService;
     @Autowired
     private IAuditApplyService auditApplyService;
+    @Autowired
+    private IItemBasicService itemBasicService;
 
     @ApiOperation(value = "添加一条指标")
     @LogAnnotation(module = "添一条加指标")
@@ -136,10 +139,52 @@ public class ItemTargetController {
     @Transactional
     @GetMapping("/applyList/list")
     public ResponseEntity<List<auditApply>> getApplyCheck(@RequestParam Map<String, Object> params){
-        /*List<auditApply> targets = auditApplyService.findListByParams(params,auditApply.class);*/
         List<auditApply> targets = auditApplyService.findApplyList(params,auditApply.class);
         System.out.println(targets);
         return ResponseEntity.ok(targets);
+    }
+
+    @LogAnnotation(module = "获取更改申请列表")
+    @GetMapping("/applyList/page")
+    public ResponseEntity<PageResult<auditApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                                     @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                                     @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                                     @RequestParam(required = false) Map<String, Object> params){
+        String count = (String) params.get("count");
+        if (count == "" || count == null ){
+        }else {
+            Integer weth = Integer.parseInt(count);
+            List<ItemTarget> targets = targetService.findQuantity(weth);
+            List<Integer> ids =new ArrayList<>();
+            if (targets.size()==0){
+               ids.add(0);
+            }else {
+                for (int i=0;i<targets.size();i++){
+                    ids.add(targets.get(i).getId());
+                }
+                params.put("ids",ids);
+            }
+        }
+
+        String name = (String) params.get("item_name");
+        if (name == "" || name == null ){
+
+        }else {
+            List<ItemBasic> itemBasics = itemBasicService.findByName(name);
+            List<Integer> itemIds =new ArrayList<>();
+            if (itemIds.size()==0){
+                itemIds.add(0);
+            }else {
+                for (int i=0;i<itemBasics.size();i++){
+                    itemIds.add(itemBasics.get(i).getId());
+                }
+            }
+            params.put("itemIds",itemIds);
+        }
+
+        PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
+        return ResponseEntity.ok(result);
     }
 
 }
