@@ -30,6 +30,7 @@
             </div>
             <div class="form-group">
                 <input style="display: none" id="check_userid" name="check_userid" value="">
+
                 <input style="display: none" id="id" name="id" value="">
                 <label class="col-md-2 control-label">实际开始时间</label>
                 <div class="col-md-3">
@@ -134,8 +135,6 @@
     var layedit, index;
 
     var id = getUrlParam("id");
-    var userId = getUrlParam("userId");
-    $("#check_userid").val(userId);
     $("#id").val(id);
     var h = $(window).height() - 100;
     layui.use(['layedit','upload', 'laydate'], function(){
@@ -222,7 +221,6 @@
             success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
-                    alert(data[0].provinceCode);
                     province(data[0].provinceCode);
                     getTargetName(data[0].target_id);
                     city(data[0].cityCode);
@@ -236,7 +234,6 @@
         });
     }
     function province(provinceCode) {
-        alert(provinceCode);
         $.ajax({
             type : 'get',
             url : domainName + '/map/province/one/'+provinceCode,
@@ -285,7 +282,13 @@
             contentType: "application/json; charset=utf-8",
             data: {id: id},
             success : function(data) {
-                $("#name").val(data[0].content);
+                if (data[0]['count']!=null){
+                    $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
+                        $("#name").val(res[0].content);
+                    })
+                }else {
+                    $("#name").val(data[0].content);
+                }
             }
         });
     }
@@ -294,7 +297,6 @@
         formdata.accessory = formdata.accessory.join(',');
         formdata.start_date="";
         formdata.end_date="";
-        alert(JSON.stringify(formdata));
         $.ajax({
             type : 'put',
             url : domainName + '/project-item/item/target/auditApply/update',

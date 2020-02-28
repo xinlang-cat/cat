@@ -108,11 +108,34 @@
                     var d = data[i];
                     var code = d.id;
                     var name = d.content;
-                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                    var count = d.count;
+                    if (count!=null){
+                        var sign = d.target;
+                        var asd = getName(sign);
+
+                        select.append("<option value='"+ code +"'>" +asd+"</option>");
+                    }else {
+                        select.append("<option value='"+ code +"'>" +name+"</option>");
+                    }
+
                 }
             }
         });
     })
+    function getName(sign) {
+        var name=[];
+        $.ajax({
+            type : 'get',
+            url : domainName + '/api-label/label/tree/'+sign,
+            async : false,
+            success : function(data) {
+                 var code =  data[0]['content'];
+                name.push(code)
+
+            }
+        });
+        return name[0];
+    }
 
     function add(obj) {
         $(obj).attr("disabled", true);
