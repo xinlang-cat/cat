@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <style>
+        .btn-group{
+            display: none;
+
+        }
+    </style>
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -26,17 +32,17 @@
                               id="content" name="content" readonly></textarea>
                 </div>
             </div>
-            <div class="form-actions">
-                <div class="row" align="center">
-                    <div class="col-md-12">
-                        <button class="btn btn-primary" type="submit" onclick="pass()">
-                            <i class="fa fa-save"></i> 申请通过
-                        </button>
-                        <button class="btn btn-primary" type="submit" onclick="unPass()">
-                            <i class="fa fa-save"></i> 申请未通过
-                        </button>
-                    </div>
-                </div>
+            <div class="layui-btn-group btn-group" style="text-align: center">
+
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="pass();">
+                    申请通过
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="unPass();">
+                    申请未通过
+                </button>
+
             </div>
 
         </fieldset>
@@ -52,7 +58,7 @@
 
 <script type="text/javascript">
     var layedit, index;
-
+    var userType = getUrlParam("userType");
     var id = getUrlParam("id");
     var h = $(window).height() - 100;
     layui.use(['layedit','upload', 'laydate'], function(){
@@ -74,26 +80,34 @@
             success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
-
-                        getType(data[0].modify);
+                    status(data[0].status);
+                    getType(data[0].modify);
 
                 });
 
             }
         });
     }
+    function status(status) {
+        if(status==0&&userType==2){
+            var obj=document.getElementsByClassName("btn-group");
+            obj[0].style.display = "block";
+        }
 
+    }
 
     function getType(modify) {
         var data;
         if (modify == 1){
             data="项目基本信息";
-        }else if (status == 2){
-            data="项目指标";
-        }else if (status == 3){
-            data="项目预算";
-        }else if (status == 4){
+        }else if (modify == 3){
             data="项目人员";
+        }else if (modify == 4){
+            data="项目指标";
+        }else if (modify == 5){
+            data="项目经费";
+        }else if (modify == 2){
+            data="项目研究内容";
         }
         $("#name").val(data);
     }
