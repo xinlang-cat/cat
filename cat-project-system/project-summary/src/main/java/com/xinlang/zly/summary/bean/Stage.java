@@ -22,6 +22,13 @@ public class Stage implements Serializable {
     @KeySql(useGeneratedKeys = true)
     private Integer id;//id
     private Integer itemId;//项目id
+    private String itemName;//项目名称
+    private String contractNo;//合同编号
+    private String category;//项目类别
+    private String undertaker;//承担单位
+    private String createUserEmail;//填报人邮箱
+    private String createUserPhone;//填报人电话
+    private String startAndEndTime;//起止时间
     private Integer createUserId;//填表人id
     private String createUserName;//填表人姓名
     private Date createTime;//填报时间
