@@ -40,12 +40,16 @@ public class Stage implements Serializable {
     private Integer skillSourceDept;//主要技术来源单位
     private Integer progress;//项目进展情况
     private String cause;//项目拖延、停顿、终止、撤销的主要原因
+    private String skillTarget;//技术指标
     private String skillTargetSchedule;//技术指标进度
     private String skillTargetDescribe;//技术指标描述
+    private String economyTarget;//经济指标
     private String economyTargetSchedule;//经济指标进度
     private String economyTargetDescribe;//经济指标描述
+    private String personTarget;//人才队伍建设指标进度
     private String personTargetSchedule;//人才队伍建设指标进度
     private String personTargetDescribe;//人才队伍建设指标描述
+    private String otherTarget;//其他指标进度
     private String otherTargetSchedule;//其他指标进度
     private String otherTargetDescribe;//其他指标描述
     private String importanceDescribe;//项目重要进展情况描述
@@ -55,6 +59,15 @@ public class Stage implements Serializable {
     private double allExpend;//支出
     private double labourExpend;//劳务支出
     private double performanceExpend;//缴费支出
+    private double stateSkillDeptAppropriation;//国家科技部门拨款
+    private double stateOtherDeptAppropriation;//国家其他部门拨款
+    private double districtDeptAppropriation;//区级部门拨款
+    private double cityDeptAppropriation;//市级部门拨款
+    private double countyDeptAppropriation;//县级部门拨款
+    private double selfRaisedFund;//自筹资金
+    private double bankLoan;//银行贷款
+    private double foreignFund;//国外资金
+    private double otherFund;//其他资金
     private String principalCheck;//负责人审核意见
     private Date principalCheckTime ;//负责人审核时间
     private Integer projectCompletion;//项目完成情况
