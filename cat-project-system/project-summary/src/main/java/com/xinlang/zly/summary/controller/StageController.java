@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +28,22 @@ public class StageController {
     private IStageService stageService;
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
+    @Autowired
+    private IStageFundUseService stageFundUseService;
+    @Autowired
+    private IStageKpiService stageKpiService;
+    @Autowired
+    private IStageAffixFileService stageAffixFileService;
+    @Autowired
+    private IStagePaperCatalogueService stagePaperCatalogueService;
+    @Autowired
+    private IStagePatentCatalogueService stagePatentCatalogueService;
+    @Autowired
+    private IStageScienceAchievementAwardCatalogueService stageScienceAchievementAwardCatalogueService;
+    @Autowired
+    private IStageScienceAchievementRegisterCatalogueService stageScienceAchievementRegisterCatalogueService;
+    @Autowired
+    private IStageTechnologyPactRegisterCatalogueService stageTechnologyPactRegisterCatalogueService;
 
     @PostMapping
     @LogAnnotation(module = "添加阶段总结")
@@ -36,8 +53,42 @@ public class StageController {
         ProjectUser projectUser = consumeProjectUser.findByUserId(appUser.getId().intValue()).get(0);
         stage.setCreateUserId(appUser.getId().intValue());
         stage.setCreateUserName(projectUser.getName());
+        stage.setCreateTime(new Date());
         //保存基础信息
         stageService.save(stage);
+        Integer stageId = stage.getId();
+        stage.getStageFundUses().forEach(stageFundUse->{
+            stageFundUse.setStageId(stageId);
+            stageFundUseService.save(stageFundUse);
+        });
+        stage.getStageKpis().forEach(stageKpi -> {
+            stageKpi.setStageId(stageId);
+            stageKpiService.save(stageKpi);
+        });
+        stage.getStageAffixFiles().forEach(stageAffixFile -> {
+            stageAffixFile.setStageId(stageId);
+            stageAffixFileService.save(stageAffixFile);
+        });
+        stage.getStagePaperCatalogues().forEach(stagePaperCatalogue -> {
+            stagePaperCatalogue.setStageId(stageId);
+            stagePaperCatalogueService.save(stagePaperCatalogue);
+        });
+        stage.getStagePatentCatalogues().forEach(stagePatentCatalogue -> {
+            stagePatentCatalogue.setStageId(stageId);
+            stagePatentCatalogueService.save(stagePatentCatalogue);
+        });
+        stage.getStageScienceAchievementAwardCatalogues().forEach(stageScienceAchievementAwardCatalogue -> {
+            stageScienceAchievementAwardCatalogue.setStageId(stageId);
+            stageScienceAchievementAwardCatalogueService.save(stageScienceAchievementAwardCatalogue);
+        });
+        stage.getStageScienceAchievementRegisterCatalogues().forEach(stageScienceAchievementRegisterCatalogue -> {
+            stageScienceAchievementRegisterCatalogue.setStageId(stageId);
+            stageScienceAchievementRegisterCatalogueService.save(stageScienceAchievementRegisterCatalogue);
+        });
+        stage.getStageTechnologyPactRegisterCatalogues().forEach(stageTechnologyPactRegisterCatalogue -> {
+            stageTechnologyPactRegisterCatalogue.setStageId(stageId);
+            stageTechnologyPactRegisterCatalogueService.save(stageTechnologyPactRegisterCatalogue);
+        });
         return stage;
     }
 

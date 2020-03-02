@@ -138,4 +138,14 @@ public class ItemBasicService extends BaseService<ItemBasic> implements IItemBas
         }
     }
 
+    @Override
+    public List<ItemBasic> findByName(String name) {
+        Example example = new Example(ItemBasic.class);
+
+        example.createCriteria().andLike("item_name",name);
+
+        List<ItemBasic> list = itemBasicMapper.selectByExample(example);
+        return list;
+    }
+
 }

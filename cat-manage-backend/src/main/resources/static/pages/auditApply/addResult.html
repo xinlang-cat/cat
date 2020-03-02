@@ -78,7 +78,8 @@
                 <div class="col-md-8">
                     <textarea placeholder="内容简介。"
                               class="layui-textarea form-control" lay-verify="required"
-                              id="description" name="description" ></textarea>
+                              id="description" name="description" data-bv-notempty="true"
+                              data-bv-notempty-message="情况简述 不能为空"></textarea>
                 </div>
             </div>
 
@@ -293,6 +294,17 @@
         });
     }
     function pass() {
+        if ($("#status").val()=='') {
+            layer.msg("请选择是否通过");
+            return;
+        }
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         var formdata = $("#form").serializeObject();
         formdata.accessory = formdata.accessory.join(',');
         formdata.start_date="";
