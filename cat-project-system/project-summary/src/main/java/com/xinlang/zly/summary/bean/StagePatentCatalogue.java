@@ -18,8 +18,8 @@ public class StagePatentCatalogue implements Serializable {
     private Integer id;
     private Integer stageId;//报告id
     private String patentNumber;//专利编号
+    private String patentName;//专利名称
     private String patentPersonCharge;//完成人
-    private String patentLeaderRank;//项目负责人排位
     private String patentType;//专利类型
     private Date patentApplicationTime;//申请专利时间
     private Date patentAuthorizeTime;//专利授权时间
