@@ -19,7 +19,6 @@ import java.util.List;
 public class Stage implements Serializable {
 
     private static final long serialVersionUID = -4349370566893021101L;
-
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;//id
@@ -34,13 +33,13 @@ public class Stage implements Serializable {
     private Integer createUserId;//填表人id
     private String createUserName;//填表人姓名
     private Date createTime;//填报时间
-    private Integer applicantExtension;//是否申请延期
+    private String applicantExtension;//是否申请延期
     private Date extensionTime;//延期批复截止时间
-    private Integer produceLearnResearch;//产学研联合
-    private Integer innovateType;//创新类型
-    private Integer collaborate;//合作形式
-    private Integer skillSourceDept;//主要技术来源单位
-    private Integer progress;//项目进展情况
+    private String produceLearnResearch;//产学研联合
+    private String innovateType;//创新类型
+    private String collaborate;//合作形式
+    private String skillSourceDept;//主要技术来源单位
+    private String progress;//项目进展情况
     private String cause;//项目拖延、停顿、终止、撤销的主要原因
     private String skillTarget;//技术指标
     private String skillTargetSchedule;//技术指标进度
@@ -55,34 +54,38 @@ public class Stage implements Serializable {
     private String otherTargetSchedule;//其他指标进度
     private String otherTargetDescribe;//其他指标描述
     private String importanceDescribe;//项目重要进展情况描述
-    private Integer isOneCheck;//项目资金是否单独核算
-    private Integer  oneCheckType;//单独核算形式
-    private double allIncome;//收入
-    private double allExpend;//支出
-    private double labourExpend;//劳务支出
-    private double performanceExpend;//缴费支出
-    private double stateSkillDeptAppropriation;//国家科技部门拨款
-    private double stateOtherDeptAppropriation;//国家其他部门拨款
-    private double districtDeptAppropriation;//区级部门拨款
-    private double cityDeptAppropriation;//市级部门拨款
-    private double countyDeptAppropriation;//县级部门拨款
-    private double selfRaisedFund;//自筹资金
-    private double bankLoan;//银行贷款
-    private double foreignFund;//国外资金
-    private double otherFund;//其他资金
+    private String isOneCheck;//项目资金是否单独核算
+    private String  oneCheckType;//单独核算形式
+    private String allIncome;//收入 
+    private String allExpend;//支出
+    private String labourExpend;//劳务支出
+    private String performanceExpend;//缴费支出
+    private String stateSkillDeptAppropriation;//国家科技部门拨款
+    private String stateOtherDeptAppropriation;//国家其他部门拨款
+    private String districtDeptAppropriation;//区级部门拨款
+    private String cityDeptAppropriation;//市级部门拨款
+    private String countyDeptAppropriation;//县级部门拨款
+    private String selfRaisedFund;//自筹资金
+    private String bankLoan;//银行贷款
+    private String foreignFund;//国外资金
+    private String otherFund;//其他资金
     private String principalCheck;//负责人审核意见
     private Date principalCheckTime ;//负责人审核时间
-    private Integer projectCompletion;//项目完成情况
+    private String projectCompletion;//项目完成情况
     private String deptCheck;//单位审核意见
     private String deptCheckUser;//经办人
     private Date deptCheckTime;//单位审核时间
     private boolean enable;//状态
+    @Transient
+    private List<String> causes;//项目拖延、停顿、终止、撤销的主要原因
     @Transient
     private List<StageAffixFile> stageAffixFiles;//附件
     @Transient
     private List<StageFundUse> stageFundUses;//资金使用情况
     @Transient
     private List<StageKpi> stageKpis;//考核指标
+    @Transient
+    private List<StageTarget> stageTargets;//项目效益及成果基本情况
     @Transient
     private List<StagePaperCatalogue> stagePaperCatalogues;//专著、论文目录
     @Transient

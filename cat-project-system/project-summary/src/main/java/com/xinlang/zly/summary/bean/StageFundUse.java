@@ -15,8 +15,8 @@ public class StageFundUse implements Serializable {
     private Integer id;
     private Integer stageId;
     private String fundUseSubject;//科目
-    private float fundUseExpenditure;//支出金额
-    private float fundUseOriginalBudget;//原始合同预算
-    private float fundUseExpenditureOut;//已经支出金额
+    private String fundUseExpenditure;//支出金额
+    private String fundUseOriginalBudget;//原始合同预算
+    private String fundUseExpenditureOut;//已经支出金额
     private String fundUseRemark;//开支内容
 }
