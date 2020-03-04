@@ -83,6 +83,7 @@ public class AuditApplyService extends BaseService<auditApply> implements IAudit
         List<auditApply> list =auditApplyMapper.selectByExample(example);
         //解析分页结果
         PageInfo<auditApply> info = new PageInfo<>(list);
+
         return  new PageResult<>(200, info.getTotal(), list);
 
     }
