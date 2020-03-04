@@ -1,7 +1,7 @@
 package com.xinlang.zly.summary.controller;
 
 import com.xinlang.bean.project_user.ProjectUser;
-import com.xinlang.zly.summary.bean.Stage;
+import com.xinlang.zly.summary.bean.*;
 import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.*;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
@@ -10,8 +10,11 @@ import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +34,7 @@ public class StageController {
     @Autowired
     private IStageFundUseService stageFundUseService;
     @Autowired
-    private IStageKpiService stageKpiService;
+    private IStageTargetService stageTargetService;
     @Autowired
     private IStageAffixFileService stageAffixFileService;
     @Autowired
@@ -45,14 +48,19 @@ public class StageController {
     @Autowired
     private IStageTechnologyPactRegisterCatalogueService stageTechnologyPactRegisterCatalogueService;
 
+    @InitBinder
+    public void InitBinder (ServletRequestDataBinder binder){
+        binder.registerCustomEditor(java.util.Date.class,new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
+
     @PostMapping
     @LogAnnotation(module = "添加阶段总结")
     @ApiOperation(value = "添加阶段总结")
     public Stage save(@RequestBody Stage stage) {
         AppUser appUser = AppUserUtil.getLoginAppUser();
         ProjectUser projectUser = consumeProjectUser.findByUserId(appUser.getId().intValue()).get(0);
-        stage.setCreateUserId(appUser.getId().intValue());
         stage.setCreateUserName(projectUser.getName());
+        stage.setCreateUserId(appUser.getId().intValue());
         stage.setCreateTime(new Date());
         //保存基础信息
         stageService.save(stage);
@@ -60,10 +68,6 @@ public class StageController {
         stage.getStageFundUses().forEach(stageFundUse->{
             stageFundUse.setStageId(stageId);
             stageFundUseService.save(stageFundUse);
-        });
-        stage.getStageKpis().forEach(stageKpi -> {
-            stageKpi.setStageId(stageId);
-            stageKpiService.save(stageKpi);
         });
         stage.getStageAffixFiles().forEach(stageAffixFile -> {
             stageAffixFile.setStageId(stageId);
@@ -88,6 +92,10 @@ public class StageController {
         stage.getStageTechnologyPactRegisterCatalogues().forEach(stageTechnologyPactRegisterCatalogue -> {
             stageTechnologyPactRegisterCatalogue.setStageId(stageId);
             stageTechnologyPactRegisterCatalogueService.save(stageTechnologyPactRegisterCatalogue);
+        });
+        stage.getStageTargets().forEach(stageTarget -> {
+            stageTarget.setStageId(stageId);
+            stageTargetService.save(stageTarget);
         });
         return stage;
     }
