@@ -1,7 +1,6 @@
 package com.xinlang.cat_project.item.service;
 
 import com.xinlang.cat_project.item.pojo.ItemBasic;
-import com.xinlang.cat_project.item.pojo.ItemContent;
 import com.xinlang.cat_project.item.pojo.PageResult;
 import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
@@ -28,4 +27,6 @@ public interface IItemBasicService extends IBaseService<ItemBasic> {
     List<ItemBasic> queryCompanyItem();
 
     void discardItem(Integer id);
+
+    List<ItemBasic> findByName(String name);
 }

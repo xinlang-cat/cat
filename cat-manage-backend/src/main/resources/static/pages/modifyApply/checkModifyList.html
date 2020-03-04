@@ -10,6 +10,39 @@
 <body>
 <div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <header style="height: 100%">
+            <div align="left">
+                <table style="width: 100%">
+                    <tr>
+                        <td>
+                            <form class="form-inline" onsubmit="return false">
+                                <div class="form-group">
+                                    项目名称(支持模糊搜索)：
+                                    <input id="item_name" type="text" class="form-control" placeholder="项目名">
+                                    更改内容：
+                                    <select class="form-control input-sm" id="modify">
+                                        <option value="">全部</option>
+                                        <option value=1>项目基本信息</option>
+                                        <option value=2>项目研究内容</option>
+                                        <option value=3>项目人员</option>
+                                        <option value=4>项目指标</option>
+                                        <option value=5>项目经费</option>
+                                    </select>
+                                    状态：
+                                    <select class="form-control input-sm" id="status">
+                                        <option value="">全部</option>
+                                        <option value=1>更改中</option>
+                                        <option value=2>审核未通过</option>
+                                        <option value=3>更改成功</option>
+                                    </select>
+                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </header>
 
         <div>
             <div class="widget-body no-padding">
@@ -40,6 +73,7 @@
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
@@ -58,18 +92,25 @@
                     "searching": false,
                     "processing": false,
                     "serverSide": true,
-                    "info": false,
-                    "paging": false, // 禁止分页
+                   /* "info": false,
+                    "paging": true, // 禁止分页*/
                     "ordering": false,
                     "language": {
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url": domainName + "/project-item/item/basic/modifyApply/lists",
-                        "data": {status: ""},
+                        "url": domainName + "/project-item/item/basic/modifyApply/page",
+                        "data":function(d){
+                            d.status = $('#status').val();
+                            d.modify = $('#modify').val();
+                            d.item_name = $('#item_name').val();
+                        },
                         "type": "get",
                         "dataSrc": function (json) {
-                            return json;
+                            console.log(json)
+                            json.recordsTotal=json.total;
+                            json.recordsFiltered=json.total;
+                            return json.data;
                         },
                         "error": function (xhr, textStatus, errorThrown) {
                             var msg = xhr.responseText;
@@ -258,6 +299,9 @@
             }
         });
     }
+    $("#searchBt").click(function(){
+        example.ajax.reload();
+    });
 
 
 </script>

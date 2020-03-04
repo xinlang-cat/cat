@@ -78,7 +78,8 @@
                 <div class="col-md-8">
                     <textarea placeholder="内容简介。"
                               class="layui-textarea form-control" lay-verify="required"
-                              id="description" name="description" ></textarea>
+                              id="description" name="description" data-bv-notempty="true"
+                              data-bv-notempty-message="情况简述 不能为空"></textarea>
                 </div>
             </div>
 
@@ -128,6 +129,7 @@
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/chooseArea.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 
 
@@ -221,11 +223,11 @@
             success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
-                    province(data[0].provinceCode);
+                    getProvince(data[0].provinceCode);
                     getTargetName(data[0].target_id);
-                    city(data[0].cityCode);
-                    area(data[0].areaCode);
-                    street(data[0].streetCode);
+                    getCity(data[0].cityCode);
+                    getArea(data[0].areaCode);
+                    getStreet(data[0].streetCode);
                     $("#start_date").val(formatDate3(data[0].start_date));
                     $("#end_date").val(formatDate3(data[0].end_date));
                 });
@@ -233,48 +235,8 @@
             }
         });
     }
-    function province(provinceCode) {
-        $.ajax({
-            type : 'get',
-            url : domainName + '/map/province/one/'+provinceCode,
-            async : false,
-            success : function(data) {
-                $("#province").val(data.provinceName);
-            }
-        });
-    }
-    function city(cityCode) {
-        $.ajax({
-            type : 'get',
-            url : domainName + '/map/city/one/'+cityCode,
-            async : false,
-            success : function(data) {
-                $("#city").val(data.cityName);
-            }
-        });
-    }
 
-    function area(areaCode) {
-        $.ajax({
-            type : 'get',
-            url : domainName + '/map/area/one/'+areaCode,
-            async : false,
-            success : function(data) {
-                var name = data.areaName;
-                $("#area").val(name);
-            }
-        });
-    }
-    function street(streetCode) {
-        $.ajax({
-            type : 'get',
-            url : domainName + '/map/street/one/'+streetCode,
-            async : false,
-            success : function(data) {
-                $("#street").val(data.streetName);
-            }
-        });
-    }
+
     function getTargetName(id) {
         $.ajax({
             type : 'get',
@@ -293,6 +255,17 @@
         });
     }
     function pass() {
+        if ($("#status").val()=='') {
+            layer.msg("请选择是否通过");
+            return;
+        }
+
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
         var formdata = $("#form").serializeObject();
         formdata.accessory = formdata.accessory.join(',');
         formdata.start_date="";

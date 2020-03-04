@@ -16,6 +16,7 @@ public class StageAffixFile implements Serializable {
     private Integer id;
     private Integer stageId;//报告id
     private String fileId;//文件id
+    private String fileName;
     private String fileUrl;//文件路径
     private String fileRemark;//文件说明
 }

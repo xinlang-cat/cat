@@ -1,7 +1,7 @@
 package com.xinlang.zly.summary.controller;
 
 import com.xinlang.bean.project_user.ProjectUser;
-import com.xinlang.zly.summary.bean.Stage;
+import com.xinlang.zly.summary.bean.*;
 import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.*;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
@@ -10,8 +10,12 @@ import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +31,27 @@ public class StageController {
     private IStageService stageService;
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
+    @Autowired
+    private IStageFundUseService stageFundUseService;
+    @Autowired
+    private IStageTargetService stageTargetService;
+    @Autowired
+    private IStageAffixFileService stageAffixFileService;
+    @Autowired
+    private IStagePaperCatalogueService stagePaperCatalogueService;
+    @Autowired
+    private IStagePatentCatalogueService stagePatentCatalogueService;
+    @Autowired
+    private IStageScienceAchievementAwardCatalogueService stageScienceAchievementAwardCatalogueService;
+    @Autowired
+    private IStageScienceAchievementRegisterCatalogueService stageScienceAchievementRegisterCatalogueService;
+    @Autowired
+    private IStageTechnologyPactRegisterCatalogueService stageTechnologyPactRegisterCatalogueService;
+
+    @InitBinder
+    public void InitBinder (ServletRequestDataBinder binder){
+        binder.registerCustomEditor(java.util.Date.class,new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true));
+    }
 
     @PostMapping
     @LogAnnotation(module = "添加阶段总结")
@@ -34,10 +59,44 @@ public class StageController {
     public Stage save(@RequestBody Stage stage) {
         AppUser appUser = AppUserUtil.getLoginAppUser();
         ProjectUser projectUser = consumeProjectUser.findByUserId(appUser.getId().intValue()).get(0);
-        stage.setCreateUserId(appUser.getId().intValue());
         stage.setCreateUserName(projectUser.getName());
+        stage.setCreateUserId(appUser.getId().intValue());
+        stage.setCreateTime(new Date());
         //保存基础信息
         stageService.save(stage);
+        Integer stageId = stage.getId();
+        stage.getStageFundUses().forEach(stageFundUse->{
+            stageFundUse.setStageId(stageId);
+            stageFundUseService.save(stageFundUse);
+        });
+        stage.getStageAffixFiles().forEach(stageAffixFile -> {
+            stageAffixFile.setStageId(stageId);
+            stageAffixFileService.save(stageAffixFile);
+        });
+        stage.getStagePaperCatalogues().forEach(stagePaperCatalogue -> {
+            stagePaperCatalogue.setStageId(stageId);
+            stagePaperCatalogueService.save(stagePaperCatalogue);
+        });
+        stage.getStagePatentCatalogues().forEach(stagePatentCatalogue -> {
+            stagePatentCatalogue.setStageId(stageId);
+            stagePatentCatalogueService.save(stagePatentCatalogue);
+        });
+        stage.getStageScienceAchievementAwardCatalogues().forEach(stageScienceAchievementAwardCatalogue -> {
+            stageScienceAchievementAwardCatalogue.setStageId(stageId);
+            stageScienceAchievementAwardCatalogueService.save(stageScienceAchievementAwardCatalogue);
+        });
+        stage.getStageScienceAchievementRegisterCatalogues().forEach(stageScienceAchievementRegisterCatalogue -> {
+            stageScienceAchievementRegisterCatalogue.setStageId(stageId);
+            stageScienceAchievementRegisterCatalogueService.save(stageScienceAchievementRegisterCatalogue);
+        });
+        stage.getStageTechnologyPactRegisterCatalogues().forEach(stageTechnologyPactRegisterCatalogue -> {
+            stageTechnologyPactRegisterCatalogue.setStageId(stageId);
+            stageTechnologyPactRegisterCatalogueService.save(stageTechnologyPactRegisterCatalogue);
+        });
+        stage.getStageTargets().forEach(stageTarget -> {
+            stageTarget.setStageId(stageId);
+            stageTargetService.save(stageTarget);
+        });
         return stage;
     }
 
