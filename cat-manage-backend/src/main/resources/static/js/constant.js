@@ -1,5 +1,5 @@
 
-var domainName = "http://192.168.5.13";
+var domainName = "http://192.168.1.7";
 var loginPage = "/api-b/login.html";
 
 function   formatDate(now)   {
