@@ -109,7 +109,7 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 $.ajaxSettings.async = false;
-                                if (jQuery.isEmptyObject(data.trim(" "))) {
+                                if (!data) {
                                     $.get(domainName + "/api-label/label/tree/" + row['target'], function (res) {
                                         data =  res[0]['content'];
                                     })

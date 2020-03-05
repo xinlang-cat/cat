@@ -130,7 +130,7 @@
                     </td>
                     <td>合同文件：</td>
                     <td>
-                        <a id="contract_file_text" href=""></a>
+                        <p><a id="contract_file_text" href=""></a></p>
                         <input class="form-control hidden" placeholder="合同文件" type="text" id="contract" name=""
                                readonly>
                         <input type="hidden" name="contract_file" id="contract_file">
@@ -153,7 +153,7 @@
                 <tr>
                     <td>总体目标</td>
                     <td>
-                        <p id="outline_text"></p>
+                        <p id="outline_text" style="white-space: pre-wrap"></p>
                         <textarea placeholder="总体目标" class="layui-textarea form-control hidden" lay-verify="required"
                                   name="outline" id="outline"></textarea>
                     </td>
@@ -167,7 +167,7 @@
     <!--主要研究内容-->
     <div class="module">
         <form class="layui-form" id="form2">
-            <!--<div class="layui-btn-group btn-group">
+            <div class="layui-btn-group btn-group">
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
                         onclick="editData(this);">
                     <i class="layui-icon">&#xe642;</i>
@@ -178,7 +178,7 @@
                 <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
                     <i class="layui-icon">&#x1006;</i>
                 </button>
-            </div>-->
+            </div>
             <table class="layui-table" lay-skin="line">
                 <colgroup>
                     <col width="3%">
@@ -200,7 +200,7 @@
                         <input type="hidden" name="item_id">
                     </td>
                     <td>
-                        <p id="content_text"></p>
+                        <p id="content_text" style="white-space: pre-wrap"></p>
                         <textarea placeholder="主要研究内容" class="layui-textarea form-control hidden" lay-verify="required"
                                   name="content" id="content"></textarea>
                     </td>
