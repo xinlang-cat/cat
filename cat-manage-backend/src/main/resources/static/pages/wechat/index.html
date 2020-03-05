@@ -41,8 +41,7 @@
                         localStorage.setItem("access_token", data.access_token);
                         localStorage.setItem("refresh_token", data.refresh_token);
 
-                        //showUserInfo(data.access_token);
-                        location.href = 'src/views/index.html';
+                        showUserInfo(data.access_token);
                     }, error: function (xhr, textStatus, errorThrown) {
                         if (xhr.status == 401) {
                             location.href = toUrl;
@@ -69,6 +68,7 @@
                     url = headimgurl;
                 }
                 $("#headimgurl").attr("src", url);
+                location.href = 'src/views/index.html';
             },
             error: function (xhr, textStatus, errorThrown) {
                 if (xhr.status == 401) {
