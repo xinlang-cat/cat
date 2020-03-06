@@ -111,11 +111,11 @@ public class WechatService implements IWechatService {
         UserCredential userCredential = new UserCredential(openid,CredentialType.WECHAT_OPENID.name(),appUser.getId());
         userCredentialsMapper.save(userCredential);
         log.info("保存微信登录凭证:{}",userCredential);
-        if(StringUtils.isBlank(appUser.getHeadImgUrl())){
+        /*if(appUser.getHeadImgUrl()==null||"".equals(appUser.getHeadImgUrl())){
             appUser.setHeadImgUrl(wechatUserInfo.getHeadimgurl());
-            appUser.setUpdateTime(new Date());
+            appUser.setUpdateTime(new Date());;
             appUserMapper.update(appUser);
-        }
+        }*/
         wechatUserInfo.setUserId(appUser.getId());
         wechatUserInfo.setUpdateTime(new Date());
         wechatMapper.update(wechatUserInfo);

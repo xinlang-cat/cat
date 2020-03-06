@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -79,21 +80,21 @@ public class Stage implements Serializable {
     @Transient
     private List<String> causes;//项目拖延、停顿、终止、撤销的主要原因
     @Transient
-    private List<StageAffixFile> stageAffixFiles;//附件
+    private List<StageAffixFile> stageAffixFiles = new ArrayList<>();//附件
     @Transient
-    private List<StageFundUse> stageFundUses;//资金使用情况
+    private List<StageFundUse> stageFundUses = new ArrayList<>();//资金使用情况
     @Transient
     private List<StageKpi> stageKpis;//考核指标
     @Transient
-    private List<StageTarget> stageTargets;//项目效益及成果基本情况
+    private List<StageTarget> stageTargets = new ArrayList<>();//项目效益及成果基本情况
     @Transient
-    private List<StagePaperCatalogue> stagePaperCatalogues;//专著、论文目录
+    private List<StagePaperCatalogue> stagePaperCatalogues = new ArrayList<>();//专著、论文目录
     @Transient
-    private List<StagePatentCatalogue> stagePatentCatalogues;//专利目录
+    private List<StagePatentCatalogue> stagePatentCatalogues = new ArrayList<>();//专利目录
     @Transient
-    private List<StageScienceAchievementAwardCatalogue> stageScienceAchievementAwardCatalogues;//科技成果获得奖励目录
+    private List<StageScienceAchievementAwardCatalogue> stageScienceAchievementAwardCatalogues = new ArrayList<>();//科技成果获得奖励目录
     @Transient
-    private List<StageScienceAchievementRegisterCatalogue> stageScienceAchievementRegisterCatalogues;//科技成果登记目录
+    private List<StageScienceAchievementRegisterCatalogue> stageScienceAchievementRegisterCatalogues = new ArrayList<>();//科技成果登记目录
     @Transient
-    private List<StageTechnologyPactRegisterCatalogue> stageTechnologyPactRegisterCatalogues;//技术合同目录
+    private List<StageTechnologyPactRegisterCatalogue> stageTechnologyPactRegisterCatalogues = new ArrayList<>();//技术合同目录
 }

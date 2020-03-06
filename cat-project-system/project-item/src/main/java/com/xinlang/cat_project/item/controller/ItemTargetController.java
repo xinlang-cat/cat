@@ -1,5 +1,6 @@
 package com.xinlang.cat_project.item.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.xinlang.cat_project.item.pojo.*;
 import com.xinlang.cat_project.item.service.IAuditApplyService;
 import com.xinlang.cat_project.item.service.IItemBasicService;
@@ -152,13 +153,17 @@ public class ItemTargetController {
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params){
         String count = (String) params.get("count");
+        String name = (String) params.get("item_name");
+        Boolean search =true;
         if (count == "" || count == null ){
+
         }else {
             Integer weth = Integer.parseInt(count);
             List<ItemTarget> targets = targetService.findQuantity(weth);
             List<Integer> ids =new ArrayList<>();
             if (targets.size()==0){
-               ids.add(0);
+                ids.add(0);
+                search=false;
             }else {
                 for (int i=0;i<targets.size();i++){
                     ids.add(targets.get(i).getId());
@@ -167,7 +172,7 @@ public class ItemTargetController {
             }
         }
 
-        String name = (String) params.get("item_name");
+
         if (name == "" || name == null ){
 
         }else {
@@ -182,9 +187,14 @@ public class ItemTargetController {
             }
             params.put("itemIds",itemIds);
         }
-
+        System.err.println("查询");
         PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
+
+
+
+
+
     }
 
 }

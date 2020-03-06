@@ -51,6 +51,11 @@ public class BaseService<T> implements IBaseService<T> {
     }
 
     @Override
+    public T findById(Integer id) {
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public void delete(Integer id) {
             mapper.deleteByPrimaryKey(id);
     }
