@@ -736,6 +736,7 @@
     $("#today").html(formatDate1(new Date()));
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("user_id");
+    //初始化项目信息
     $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
         for (var key in res[0]) {
             if (key == 'undertaker' || key == 'category') continue;
@@ -755,6 +756,7 @@
         $(".startAndEndTime").html(startAndEndTime);
     });
 
+    //初始化创建者信息
     $.get(domainName + "/project-user/users", {id: userId}, function (res) {
         $("#createUserName").val(res.data[0].name);
         $(".createUserName").html(res.data[0].name);
@@ -763,10 +765,8 @@
         $("#createUserPhone").val(res.data[0].phone);
         $(".createUserPhone").html(res.data[0].phone);
     });
-
-
-    // if ($.inArray('principalCheckStage', pers) < 0) {
-    if (true) {
+    //负责填写的部分
+     if ($.inArray('principalCheckStage', pers) < 0) {
         var str = '';
         str += '<td><label>项目负责人承诺：</label>';
         str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck"></textarea> </br>';
@@ -774,8 +774,8 @@
         str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
         $(".principalCheckStage").append(str);
     }
-    // if ($.inArray('deptCheckStage', pers) < 0) {
-    if (true) {
+     //单位填写的部分
+     if ($.inArray('deptCheckStage', pers) < 0) {
         var str = '';
         str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
         str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施"></div>';
@@ -787,6 +787,7 @@
         str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
         $(".deptCheckStage").append(str);
     }
+    //初始化指标
     $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (res) {
         var BE_TECHNICAL_INDICATORS = false;
         var BE_ECONOMIC_INDICATORS = false;
@@ -920,6 +921,7 @@
     });
 
     function save() {
+        //处理附表数据
         var stagePatents = setObjectProperty('.stagePatentCatalogue');
         var stageAffixFiles = setObjectProperty('.stageAffixFile');
         var stageFundUses = setObjectProperty('.stageFundUse');
@@ -947,10 +949,13 @@
             data: JSON.stringify(formData),
             success: function (res) {
                 alert("成功");
+                $("#form").find("input,textarea").each(function(){
+                    $(this).attr('disabled',false);
+                });
             },
             error :function (res) {
                 $("#form").find("input,textarea").each(function(){
-                    this.attr('disabled',false);
+                    $(this).attr('disabled',false);
                 });
             }
         })
@@ -994,15 +999,18 @@
         });
     }
 
+    //删除当前tr表格
     function delTr(obj) {
         $(obj).parents('tr').remove();
     }
 
+    ///序号
     var paperIndex = 0;
     var patentIndex = 0;
     var scienceAchievementAwardIndex = 0;
     var scienceAchievementRegisterIndex = 0;
     var technologyPactRegisterIndex = 0;
+    //添加一个tr表格
     function addTr(type) {
         if (type == 'stagePaperCatalogue') {
             paperIndex++;
@@ -1104,9 +1112,9 @@
             str += '</tr>';
             $("tr.stageTechnologyPactRegisterCatalogue:last").after(str);
         }
-
     }
 
+    //初始化数量指标
     function addStageTarget(data) {
         var str = '';
         str += '<tr class="stageTarget">';
