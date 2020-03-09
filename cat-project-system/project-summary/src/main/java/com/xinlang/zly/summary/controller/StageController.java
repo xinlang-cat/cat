@@ -15,10 +15,7 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -135,5 +132,23 @@ public class StageController {
         ids.forEach(id->{
             stageService.delete(id);
         });
+    }
+
+    @GetMapping("/{id}")
+    @LogAnnotation(module = "查询阶段总结")
+    @ApiOperation(value = "查询阶段总结")
+    public Stage findListByParams(@PathVariable Integer id) {
+        Map<String,Object> params = new HashMap<String,Object>();
+        Stage stage = stageService.findById(id);
+        params.put("stageId",id);
+        stage.setStageAffixFiles(stageAffixFileService.findListByParams(params,StageAffixFile.class));
+        stage.setStagePaperCatalogues(stagePaperCatalogueService.findListByParams(params,StagePaperCatalogue.class));
+        stage.setStagePatentCatalogues(stagePatentCatalogueService.findListByParams(params,StagePatentCatalogue.class));
+        stage.setStageFundUses(stageFundUseService.findListByParams(params,StageFundUse.class));
+        stage.setStageScienceAchievementAwardCatalogues(stageScienceAchievementAwardCatalogueService.findListByParams(params,StageScienceAchievementAwardCatalogue.class));
+        stage.setStageScienceAchievementRegisterCatalogues(stageScienceAchievementRegisterCatalogueService.findListByParams(params,StageScienceAchievementRegisterCatalogue.class));
+        stage.setStageTargets(stageTargetService.findListByParams(params,StageTarget.class));
+        stage.setStageTechnologyPactRegisterCatalogues(stageTechnologyPactRegisterCatalogueService.findListByParams(params,StageTechnologyPactRegisterCatalogue.class));
+        return stage;
     }
 }

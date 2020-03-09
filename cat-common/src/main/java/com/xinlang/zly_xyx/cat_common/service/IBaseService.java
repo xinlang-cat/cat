@@ -14,5 +14,6 @@ public interface IBaseService<T>{
     void update(T t);//修改
     List<T> findListByParams(Map<String,Object> params,Class<T> beanClazz);//查询list
     Page<T> findPageByParams(Map<String,Object> params,Class<T> beanClazz);//查询page
+    T findById(Integer id);//根据id查询
     void delete(Integer id);//删除
 }

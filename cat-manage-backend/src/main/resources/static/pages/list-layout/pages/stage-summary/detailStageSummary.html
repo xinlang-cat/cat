@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>验收申请表</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
+    <style>
+        .layui-table thead tr {
+            text-align: center;
+        }
+
+        .layui-table th {
+            text-align: center;
+            font-weight: 400;
+        }
+
+        tbody td {
+            text-align: left;
+            border: 1px solid #000;
+        }
+
+        span {
+            float: left;
+        }
+
+        .table-info {
+            background-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .td-text {
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        .td-text1 {
+            text-align: right;
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        .layui-input-block {
+            margin-left: 0px;
+        }
+        .layui-checkbox-disbaled[lay-skin=primary] span{
+            color: #0C0C0C;
+        }
+    </style>
+</head>
+
+<body>
+<div class="content" style="margin-bottom: 100px;">
+
+    <div><h1 style="text-align: center;margin-top: 40px;margin-bottom: 20px;">执行报告</h1></div>
+
+    <div style="text-align: center;margin-bottom: 20px;"><h3>（科技重大专项、重点研发计划、技术创新引导专项、基地与人才专项类别适用）</h3></div>
+
+    <div style="margin:40px;">
+        <h2>填报说明:</h2>
+        <span style="margin-left: 40px;">
+                一、制表目的：本套调查表是为掌握广西科技计划项目的执行情况，加强科技计划项目的管理，促进科技计 划管理的规范化、科学化而设计。</br>
+            二、调查范围：报告期内仍在实施的广西科技计划项目(课题)。调查表由项目（课题）负责人填报，项目（ 课题）第一承担单位审核。</br>
+            三、报告期： 2018年01月01日 至 2019年12月31日</br>
+            四、填报要求：</br>
+            1.调查表上报时，必须由项目负责人签章确认并盖填表单位公章。</br>
+            2.要按调查表所规定的指标含义、计算方法、分类标准、编号代码等认真填报。未经同意，任何单位和个人 不得修改，不得虚报、瞒报、谎报数据。</br>
+            五、关于填报内容的说明</br>
+            1．项目的经费管理情况，指的是项目所有经费的情况（不仅指科技厅资助的经费）。</br>
+            2. 项目效益及成果情况，有则填，无则不填。</br>
+            </span>
+    </div>
+
+    <form class="layui-form">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="34%">
+                    <col width="14%">
+                    <col width="34%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="4" class="table-info">基本信息</td>
+                    <td class="td-text1">项目名称:</td>
+                    <td>
+                        <span class="itemName"></span>
+                    </td>
+                    <td class="td-text1">合同编号:</td>
+                    <td>
+                        <span class="contractNo"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目类别:</td>
+                    <td>
+                        <span class="category"></span>
+                    </td>
+                    <td class="td-text1">承担单位:</td>
+                    <td>
+                        <span class="undertaker"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">填 报 人:</td>
+                    <td>
+                        <span class="createUserName"></span>
+                    </td>
+                    <td class="td-text1">填报人电话:</td>
+                    <td>
+                        <span class="createUserPhone"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">填报人邮箱:</td>
+                    <td>
+                        <span class="createUserEmail"></span>
+                    </td>
+                    <td class="td-text1">填报日期:</td>
+                    <td>
+                        <span class="createTime"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="38%">
+                    <col width="16%">
+                    <col width="28%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="100" class="table-info">项目基本信息及执行进展情况</td>
+                    <td class="td-text1">合同规定起止时间:</td>
+                    <td colspan="3" style="text-align: center">
+                        <span class="startAndEndTime"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">是否申请延期:</td>
+                    <td>
+                        <span class="applicantExtension"></span>
+                    </td>
+                    <td class="td-text1">延期批复的截至时间</td>
+                    <td>
+                        <span class="extensionTime"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">产学研联合:</td>
+                    <td colspan="3">
+                        <span class="produceLearnResearch"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">创新类型:</td>
+                    <td colspan="3">
+                        <span class="innovateType"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">合作形式:</td>
+                    <td colspan="3">
+                        <span class="collaborate"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">主要技术来源单位:</td>
+                    <td colspan="3">
+                        <span class="skillSourceDept"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目进展情况:</td>
+                    <td colspan="3">
+                        <span class="progress"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目拖延、停顿、终止 、撤销的主要原因（最 多选三项）:</td>
+                    <td>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="0.技术变化"
+                                                              title="0.技术变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="1.计划性调整"
+                                                              title="1.计划性调整"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="2.设备、材料不落实"
+                                                              title="2.设备、材料不落实"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="3.协作关系影响"
+                                                              title="3.协作关系影响"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="4.资金不到位"
+                                                              title="4.资金不到位"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="5.市场变化"
+                                                              title="5.市场变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="6.技术骨干变动"
+                                                              title="6.技术骨干变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="7.立题不当"
+                                                              title="7.立题不当"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8.不可抗拒因素"
+                                                              title="8.不可抗拒因素"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="9.合作方变动"
+                                                              title="9.合作方变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="10.其他原因"
+                                                              title="10.其他原因"></div>
+                    </td>
+                    <td colspan="2">
+                        <span>
+                            勾选项目进展受阻的主要原因，最多选三项：</br>    
+                            0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br>    
+                            1.计划性调整：由项目组织部门或主管部门审定对合同书 的计划进度进行的调整。</br>  
+                            2.设备、材料不落实：由于设备紧张、材料短缺等原因而 影响计划进度的完成。</br>     
+                            3.协作关系影响：由于协作单位拖延加工、检验、测试以 及依托工程拖延等影响计划进度的完成。</br>     
+                            4.资金不到位：由于在报告期内项目资金不到位而影响计 划进度的完成。</br>     
+                            5.市场变化：由于市场的供求状况发生改变，而使该项目 不能或不宜按原计划进度进行。</br>     
+                            6.技术骨干变动：由于项目组技术骨干调动或较长时间脱 离项目活动等原因而影响计划进度完成。</br>     
+                            7.立题不当：由于可行性研究不够、制定的指标过高、技 术不成熟、技术力量不足，导致项目难以进行而影响计划进度 的完成。</br>     
+                            8.不可抗拒因素：人力不可抗拒因素，例如自然灾害等。</br>     
+                            9.合作方变动：国际或区域科技合作项目的合作方发生变 动，导致项目难以按计划完成。</br>     
+                            10.其他原因：除上述原因以外，影响计划进度完成的其 他各种原因。论文发表周期较长、项目建设场地问题。</br>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;"><h3>考核指标完成情况</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">考核指标</td>
+                    <td style="text-align: center;">完成情况</td>
+                    <td style="text-align: center;">完成情况描述</td>
+                </tr>
+
+                <tr id="TECHNICAL_INDICATORS" class="stageKpi">
+
+                </tr>
+
+                <tr id="ECONOMIC_INDICATORS" class="stageKpi">
+                </tr>
+
+                <tr id="INDICATORS_OF_TALENT_TEAM_CONS" class="stageKpi">
+                </tr>
+
+                <tr id="OTHER_INDICATORS" class="stageKpi">
+                </tr>
+
+                <tr>
+                    <td>项目重要进展情况描述：</td>
+                    <td colspan="3">
+                        <span class="importanceDescribe"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="25%">
+                    <col width="24%">
+                    <col width="24%">
+                    <col width="24%">
+                </colgroup>
+                <tbody id="userinfo">
+                <tr class="td-text">
+                    <td rowspan="6" class="table-info">项目经费管理情况</td>
+                </tr>
+                <tr>
+                    <td>项目资金是否单独核算 :</td>
+                    <td colspan="3">
+                        <span class="isOneCheck"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>单独核算形式：</td>
+                    <td colspan="3">
+                        <span class="oneCheckType"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">项目资金收支情况（截至报告期限）</td>
+                </tr>
+                <tr>
+                    <td>收入</td>
+                    <td>支出</td>
+                    <td>其中劳务费支出</td>
+                    <td>其中缴费支出</td>
+                </tr>
+                <tr>
+                    <td><span class="allIncome"></span></td>
+                    <td><span class="allExpend"></span></td>
+                    <td><span class="labourExpend"></span></td>
+                    <td><span class="performanceExpend"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="9%">
+                    <col width="9%">
+                    <col width="9%">
+                </colgroup>
+                <tbody id="userinf">
+                <tr class="td-text">
+                    <td rowspan="100" class="table-info">项目经费使用情况</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">科目</td>
+                    <td rowspan="2">支出金额</td>
+                    <td colspan="2">其中：广西科技厅资助经费 （如为先验收后补助项目，则此处经费 为乙方自筹经费中的科技经费）</td>
+                    <td rowspan="2" colspan="4">开支内容</td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td>合同原始预算</td>
+                    <td>已支出金额</td>
+                </tr>
+                <tr>
+                    <td colspan="9"><h3>项目其他经费支出情况（如为先验收后补助项目，则此处经费不包含自筹经费中的科技经费）</h3></td>
+                </tr>
+                <tr>
+                    <td>国家科技部 门拨款</td>
+                    <td>国家其他部 门拨款</td>
+                    <td>区级部门拨款</td>
+                    <td>市级部门拨款</td>
+                    <td>县级部门拨款</td>
+                    <td>自筹资金</td>
+                    <td>银行贷款</td>
+                    <td>国外资金</td>
+                    <td>其他资金</td>
+                </tr>
+                <tr>
+                    <td><span class="stateSkillDeptAppropriation"></span></td>
+                    <td><span class="stateOtherDeptAppropriation"></span></td>
+                    <td><span class="districtDeptAppropriation"></span></td>
+                    <td><span class="cityDeptAppropriation"></span></td>
+                    <td><span class="countyDeptAppropriation"></span></td>
+                    <td><span class="selfRaisedFund"></span></td>
+                    <td><span class="bankLoan"></span></td>
+                    <td><span class="foreignFund"></span></td>
+                    <td><span class="otherFund"></span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="3%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="11%">
+                    <col width="28%">
+                </colgroup>
+                <tbody>
+                <tr style="font-size: 14px;font-weight: bolder;">
+                    <td rowspan="100" class="table-info">项目效益及成果情况</td>
+                    <td colspan="8"><h3>（一）项目效益及成果基本情况</h3></td>
+                </tr>
+                <tr class="stageTarget">
+                    <td colspan="6" style="text-align: center;">效益/成果名称</td>
+                    <td style="text-align: center;" colspan="2">数量</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr class="stagePaperCatalogue">
+                    <td colspan="8">
+                        <h3 style="float: left">（二）专著、论文目录</h3>
+                    </td>
+                </tr>
+                <tr class="stagePaperCatalogue">
+                    <td>序号</td>
+                    <td>专利、论文标题</td>
+                    <td>完成人</td>
+                    <td>项目负责人排位</td>
+                    <td>发表时间</td>
+                    <td>论文收录类别</td>
+                    <td>论文他人引用次数</td>
+                    <td>有关说明</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr class="stagePatentCatalogue">
+                    <td colspan="8">
+                        <h3 style="float: left">（三）授权专利目录</h3><span style="color: #ac2925">(注：填写的专利必须为该项目研究产生的专利，且项目组人员必须为专利完成人.)</span>
+                    </td>
+                </tr>
+                <tr class="stagePatentCatalogue">
+                    <td>序号</td>
+                    <td>专利编号</td>
+                    <td>专利名称</td>
+                    <td>完成人</td>
+                    <td>专利类型</td>
+                    <td>申请专利时间</td>
+                    <td>专利授权时间</td>
+                    <td>有关说明</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr class="stageScienceAchievementAwardCatalogue">
+                    <td colspan="8">
+                        <h3 style="float: left">（四）科技成果奖励目录</h3>
+                    </td>
+                </tr>
+                <tr class="stageScienceAchievementAwardCatalogue">
+                    <td>序号</td>
+                    <td colspan="2">成果名称</td>
+                    <td>完成人</td>
+                    <td>项目负责人排位</td>
+                    <td>获奖时间</td>
+                    <td>奖励类别</td>
+                    <td>有关说明</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr class="stageScienceAchievementRegisterCatalogue">
+                    <td colspan="8">
+                        <h3 style="float: left">（五）科技成果登记目录</h3>
+                    </td>
+                </tr>
+                <tr class="stageScienceAchievementRegisterCatalogue">
+                    <td>序号</td>
+                    <td colspan="2">登记号</td>
+                    <td colspan="2">成果名称</td>
+                    <td colspan="2">第一完成单位</td>
+                    <td>第一完成人</td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr class="stageTechnologyPactRegisterCatalogue">
+                    <td colspan="8">
+                        <h3 style="float: left">（六）技术合同认定登记目录</h3>
+                    </td>
+                </tr>
+                <tr class="stageTechnologyPactRegisterCatalogue">
+                    <td>序号</td>
+                    <td colspan="2">技术合同编号</td>
+                    <td>技术合同名称</td>
+                    <td>卖方单位</td>
+                    <td>合同成交金额</td>
+                    <td>技术交易金额</td>
+                    <td>技术合同类型</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="97%">
+                </colgroup>
+                <tbody id="userinfo11">
+                <tr class="td-text">
+                    <td rowspan="6" class="table-info">项目负责人承诺及单位意见</td>
+                </tr>
+                <tr class="principalCheckStage">
+                    <td >
+                        <span style="font-weight: bold">项目负责人承诺：</span>
+                        <span class="principalCheck"></span></br>
+                        <span style="font-weight: bold">项目负责人（签章）：</span></br>
+                        <span class="principalCheckTime"></span>
+                    </td>
+                </tr>
+                <tr class="deptCheckStage">
+                    <td>
+                        项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>
+                        <div class="layui-input-block"><span class="projectCompletion"></span></div>
+                        <span style="font-weight: bold">2.其他意见：</span>
+                        <span class="deptCheck"></span></br>
+                        <span style="font-weight: bold">经办人（签章）：</span></br>
+                        <span style="font-weight: bold">单位公章：</span></br>
+                        <span class="deptCheckTime"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="30%">
+                    <col width="52%">
+                    <col width="15">
+                </colgroup>
+                <tbody id="file_table">
+                    <tr class="td-text">
+                        <td rowspan="100" class="table-info">附件清单</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">附件名称</td>
+                        <td style="text-align: center;">附件说明</td>
+                        <td style="text-align: center;">操作</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-actions" style="margin-bottom: 50px;">
+        <div class="row" align="center">
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="button" onclick=" history.back(-1);">返回</button>
+            </div>
+        </div>
+    </div>
+    </form>
+
+</div>
+</body>
+<script type="text/javascript" src='../../../../js/constant.js'></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src='../../js/serializeJson.js'></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script>
+    var stageId = getUrlParam("id");
+
+    layui.use([ 'form'], function () {
+        var form = layui.form;
+        //初始化项目信息
+        $.get(domainName+"/api-summary/stage/"+stageId,function (res) {
+            for (var key in res) {
+                $("." + key).html(res[key]);
+            }
+            $('.deptCheckTime').html( formatDate4(res.deptCheckTime));
+            $('.principalCheckTime').html( formatDate4(res.principalCheckTime));
+            $('.createTime').html(formatDate4(res.createTime));
+            $('.extensionTime').html(formatDate4(res.extensionTime));
+
+            var causesInput = $('input[name=causes]');
+            var causesVal = (res.cause).split(',');
+            for(var i=0;i<causesInput.length;i++){
+                for(var j=0;j<causesVal.length;j++){
+                    if($(causesInput[i]).val() == causesVal[j]){
+                        $(causesInput[i]).prop('checked',true);
+                    }
+                }
+                $(causesInput[i]).prop('disabled',true);
+            }
+            form.render();
+            if (res.otherTarget != null) {
+                var str = '';
+                str += '<td>其他指标</td><td><span>' + res.otherTarget + '</span></td>';
+                str += '<td><span>' + res.otherTargetSchedule + '</span></td>';
+                str += '<td><span>' + res.otherTargetDescribe + '</span></td>';
+                $("#OTHER_INDICATORS").append(str);
+            }
+            if(res.skillTarget != null){
+                var str = '';
+                str += '<td>其他指标</td><td><span>' + res.skillTarget + '</span></td>';
+                str += '<td><span>' + res.skillTargetSchedule + '</span></td>';
+                str += '<td><span>' + res.skillTargetDescribe + '</span></td>';
+                $("#TECHNICAL_INDICATORS").append(str);
+            }
+            if(res.economyTarget != null){
+                var str = '';
+                str += '<td>其他指标</td><td><span>' + res.economyTarget + '</span></td>';
+                str += '<td><span>' + res.economyTargetSchedule + '</span></td>';
+                str += '<td><span>' + res.economyTargetDescribe + '</span></td>';
+                $("#ECONOMIC_INDICATORS").append(str);
+            }
+            if(res.personTarget != null){
+                var str = '';
+                str += '<td>其他指标</td><td><span>' + res.personTarget + '</span></td>';
+                str += '<td><span>' + res.personTargetSchedule + '</span></td>';
+                str += '<td><span>' + res.personTargetDescribe + '</span></td>';
+                $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
+            }
+            var stageFundUses = res.stageFundUses;
+            var STR_stageFundUses = '';
+            for(var i= 0;i<stageFundUses.length;i++){
+                STR_stageFundUses += '<tr><td colspan="2"><span>' + stageFundUses[i].fundUseSubject +'</span></td>';
+                STR_stageFundUses += '<td><span>' + stageFundUses[i].fundUseExpenditure+'</span></td>';
+                STR_stageFundUses += '<td><span>' + stageFundUses[i].fundUseOriginalBudget+'</span></td>';
+                STR_stageFundUses += '<td><span>' + stageFundUses[i].fundUseExpenditureOut+'</span></td>';
+                STR_stageFundUses += '<td colspan="4"><span>' + stageFundUses[i].fundUseRemark+'</span></td></tr>';
+            }
+            $('.stageFundUse').after(STR_stageFundUses);
+            var stageAffixFiles = res.stageAffixFiles;
+            var STR_stageAffixFiles = '';
+            for(var i=0;i<stageAffixFiles.length;i++){
+                STR_stageAffixFiles += '<tr><td><span>' + stageAffixFiles[i].fileName + '</span></td>';
+                STR_stageAffixFiles += '<td><span>'+ stageAffixFiles[i].fileRemark +'</span></td>';
+                STR_stageAffixFiles += '<td><a class="layui-btn layui-btn-xs" href="' + stageAffixFiles[i].url + '"><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
+            }
+            $("#file_table").append(STR_stageAffixFiles);
+            var stagePaperCatalogues = res.stagePaperCatalogues;
+            var STR_stagePaperCatalogues = '';
+            for(var i=0;i<stagePaperCatalogues.length;i++){
+                STR_stagePaperCatalogues += '<tr>';
+                STR_stagePaperCatalogues += '<td>' + (i+1) + '</td>';
+                STR_stagePaperCatalogues += '<td><span>'+ stagePaperCatalogues[i].paperTitle +'</span></td>';
+                STR_stagePaperCatalogues += '<td><span>'+ stagePaperCatalogues[i].paperPersonCharge +'</span></td>';
+                STR_stagePaperCatalogues += '<td><span>'+ stagePaperCatalogues[i].paperLeaderRank +'</span></td>';
+                STR_stagePaperCatalogues += '<td><span>'+ formatDate4(stagePaperCatalogues[i].paperPostedTime) +'</span></td>';
+                STR_stagePaperCatalogues += '<td><span>'+ stagePaperCatalogues[i].paperCategory +'</span></td>';
+                STR_stagePaperCatalogues += '<td><span>'+ stagePaperCatalogues[i].paperCitationsSum +'</span></td>';
+                STR_stagePaperCatalogues += '<td><span>'+ stagePaperCatalogues[i].paperRemark +'</span></td>';
+                STR_stagePaperCatalogues += '</tr>';
+            }
+            $("tr.stagePaperCatalogue:last").after(STR_stagePaperCatalogues);
+            var stagePatentCatalogues = res.stagePatentCatalogues;
+            var STR_stagePatentCatalogues = '';
+            for(var i=0;i<stagePatentCatalogues.length;i++){
+                STR_stagePatentCatalogues += '<tr>';
+                STR_stagePatentCatalogues += '<td>' + (i+1) + '</td>';
+                STR_stagePatentCatalogues += '<td><span>'+ stagePatentCatalogues[i].patentNumber +'</span></td>';
+                STR_stagePatentCatalogues += '<td><span>'+ stagePatentCatalogues[i].patentName +'</span></td>';
+                STR_stagePatentCatalogues += '<td><span>'+ stagePatentCatalogues[i].patentPersonCharge +'</span></td>';
+                STR_stagePatentCatalogues += '<td><span>'+ stagePatentCatalogues[i].patentType +'</span></td>';
+                STR_stagePatentCatalogues += '<td><span>'+ formatDate4(stagePatentCatalogues[i].patentApplicationTime) +'</span></td>';
+                STR_stagePatentCatalogues += '<td><span>'+ formatDate4(stagePatentCatalogues[i].patentAuthorizeTime) +'</span></td>';
+                STR_stagePatentCatalogues += '<td><span>'+ stagePatentCatalogues[i].patentRemark +'</span></td>';
+                STR_stagePatentCatalogues += '</tr>';
+            }
+            $("tr.stagePatentCatalogue:last").after(STR_stagePatentCatalogues);
+            var stageScienceAchievementAwardCatalogues = res.stageScienceAchievementAwardCatalogues;
+            var STR_stageScienceAchievementAwardCatalogues = '';
+            for(var i=0;i<stageScienceAchievementAwardCatalogues.length;i++){
+                STR_stageScienceAchievementAwardCatalogues += '<tr>';
+                STR_stageScienceAchievementAwardCatalogues += '<td>' + (i+1) + '</td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td colspan="2"><span>'+ stageScienceAchievementAwardCatalogues[i].scienceAwardAchievementName +'</span></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><span>'+ stageScienceAchievementAwardCatalogues[i].scienceAwardPersonCharge +'</span></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><span>'+ stageScienceAchievementAwardCatalogues[i].scienceAwardLeaderRank +'</span></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><span>'+ formatDate4(stageScienceAchievementAwardCatalogues[i].scienceAwardGetTime) +'</span></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><span>'+ stageScienceAchievementAwardCatalogues[i].scienceAwardType +'</span></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><span>'+ stageScienceAchievementAwardCatalogues[i].scienceAwardRemark +'</span></td>';
+                STR_stageScienceAchievementAwardCatalogues += '</tr>';
+            }
+            $("tr.stageScienceAchievementAwardCatalogue:last").after(STR_stageScienceAchievementAwardCatalogues);
+            var stageScienceAchievementRegisterCatalogues = res.stageScienceAchievementRegisterCatalogues;
+            var STR_stageScienceAchievementRegisterCatalogues = '';
+            for(var i=0;i<stageScienceAchievementRegisterCatalogues.length;i++){
+                STR_stageScienceAchievementRegisterCatalogues += '<tr>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td>' + (i+1) + '</td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td colspan="2"><span>'+ stageScienceAchievementRegisterCatalogues[i].scienceRegisterNumber +'</span></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td colspan="2"><span>'+ stageScienceAchievementRegisterCatalogues[i].scienceRegisterAchievementName +'</span></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td colspan="2"><span>'+ stageScienceAchievementRegisterCatalogues[i].scienceRegisterAccomplishDept +'</span></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td><span>'+ stageScienceAchievementRegisterCatalogues[i].scienceRegisterPersonCharge +'</span></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '</tr>';
+            }
+            $("tr.stageScienceAchievementRegisterCatalogue:last").after(STR_stageScienceAchievementRegisterCatalogues);
+            var stageTechnologyPactRegisterCatalogues = res.stageTechnologyPactRegisterCatalogues;
+            var STR_stageTechnologyPactRegisterCatalogues = '';
+            for(var i=0;i<stageTechnologyPactRegisterCatalogues.length;i++){
+                STR_stageTechnologyPactRegisterCatalogues += '<tr>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td>' + (i+1) + '</td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td colspan="2"><span>'+ stageTechnologyPactRegisterCatalogues[i].technologyPactNumber +'</span></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><span>'+ stageTechnologyPactRegisterCatalogues[i].technologyPactName +'</span></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><span>'+ stageTechnologyPactRegisterCatalogues[i].technologySellerDept +'</span></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><span>'+ stageTechnologyPactRegisterCatalogues[i].technologyPactVolumeTransaction +'</span></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><span>'+ stageTechnologyPactRegisterCatalogues[i].technologyVolumeTransaction +'</span></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><span>'+ stageTechnologyPactRegisterCatalogues[i].technologyPactType +'</span></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '</tr>';
+            }
+            $("tr.stageTechnologyPactRegisterCatalogue:last").after(STR_stageTechnologyPactRegisterCatalogues);
+            var stageTargets = res.stageTargets;
+            var STR_stageTargets = '';
+            for(var i=0;i<stageTargets.length;i++){
+                STR_stageTargets += '<tr>';
+                STR_stageTargets += '<td colspan="6"><span>'+ stageTargets[i].targetName +'</span></td>';
+                STR_stageTargets += '<td colspan="2" ><span>'+ stageTargets[i].targetSum +'</span></td>';
+                STR_stageTargets += '</tr>';
+            }
+            $("tr.stageTarget:last").after(STR_stageTargets);
+        });
+    });
+
+</script>
+</html>

@@ -27,7 +27,7 @@ public class ExampleUtil {
                 if (null == writeMethod) {
                     continue;
                 }
-                String value = (String)beanMap.get(properName);
+                Object value = beanMap.get(properName);
                 if(value != null){
                     criteria.andLike(properName,previous + value + behind);
                 }
