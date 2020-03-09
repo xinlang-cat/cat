@@ -1,0 +1,5 @@
+.weui-grid {padding: 4px 0px;width: 25%;}
+.weui-grid:after {border: 0px none;}
+.weui-grid:before {border: 0px none;}
+.weui-cell__bd{font-weight: bold}
+.weui-interval{height: 5px;width: 100%;background-color: #e5e5e5}
