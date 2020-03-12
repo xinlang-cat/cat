@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<style>
+    .weui-label {
+        text-align: right;
+        padding-right: 5px;
+    }
+</style>
+
+<body ontouchstart>
+<div class='demos-content-padded'>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form class="form-horizontal" onsubmit="return false" id="form">
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="用户名">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="昵称">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex" type="text" value="" placeholder="性别">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="date" type="text" placeholder="出生时间">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="姓名">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="民族">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex1" type="text" value="" placeholder="身份类型">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex2" type="text" value="" placeholder="证件类型">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="证件号码">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="单位/公司代码">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="单位/公司名称" disabled>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="单位/公司类型" disabled>
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="邮政编码">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="职称">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="职称级别">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="职务">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex3" type="text" value="" placeholder="政治面貌">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="毕业院校">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="学位">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="学历">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="date2" type="text" placeholder="学位授予时间">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="学位授予国家/地区">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="学位授予学校">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="邮箱">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex4" type="text" value="" placeholder="所学专业">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="手机号码">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="办公电话">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex5" type="text" value="" placeholder="现从事专业">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex6" type="text" value="" placeholder="主要研究领域">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="传真">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="start" type="text" value="" placeholder="所在地域">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="通信地址">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex7" type="text" value="" placeholder="服务的产业或者领域">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="sex8" type="text" value="" placeholder="技术专长及提供的服务">
+                </div>
+            </div>
+
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" value="" placeholder="承担的科技项目">
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="工作成就案例" rows="10"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="获得科技成果/奖励/荣誉" rows="10"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/city-picker.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script>
+    //出生年月日
+    $("#date").calendar({
+        title: "出生时间",
+        onChange: function (p, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
+    //学位获得时间
+    $("#date2").calendar({
+        title: "学位获得时间",
+        onChange: function (p, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
+    //性别
+    $("#sex").select({
+        title: "性别",
+        items: [
+            {
+                title: "男",
+                value: "0",
+            },
+            {
+                title: "女",
+                value: "1",
+            }
+        ]
+    });
+    //性别
+    $("#sex1").select({
+        title: "身份类型",
+        items: [
+            {
+                title: "甲方",
+                value: "0",
+            },
+            {
+                title: "乙方",
+                value: "1",
+            }
+        ]
+    });
+    //证件类型
+    $("#sex2").select({
+        title: "证件类型",
+        items: [
+            {
+                title: "身份证",
+                value: "0",
+            },
+            {
+                title: "护照",
+                value: "1",
+            }
+        ]
+    });
+    //政治面貌
+    $("#sex2").select({
+        title: "政治面貌",
+        items: [
+            {
+                title: "共产党员",
+                value: "0",
+            },
+            {
+                title: "共青团员",
+                value: "1",
+            }
+        ]
+    });
+    //所学专业
+    $("#sex4").select({
+        title: "所学专业",
+        items: [
+            {
+                title: "农业",
+                value: "0",
+            },
+            {
+                title: "工业",
+                value: "1",
+            }
+        ]
+    });
+    //现从事专业
+    $("#sex5").select({
+        title: "现从事专业",
+        items: [
+            {
+                title: "农业",
+                value: "0",
+            },
+            {
+                title: "工业",
+                value: "1",
+            }
+        ]
+    });
+    //主要研究领域
+    $("#sex6").select({
+        title: "主要研究领域",
+        items: [
+            {
+                title: "农业",
+                value: "0",
+            },
+            {
+                title: "工业",
+                value: "1",
+            }
+        ]
+    });
+    //服务的产业或领域
+    $("#sex7").select({
+        title: "服务的产业或领域",
+        items: [
+            {
+                title: "农业",
+                value: "0",
+            },
+            {
+                title: "工业",
+                value: "1",
+            }
+        ]
+    });
+    //技术专长及提供的服务
+    $("#sex8").select({
+        title: "技术专长及提供的服务",
+        items: [
+            {
+                title: "农业",
+                value: "0",
+            },
+            {
+                title: "工业",
+                value: "1",
+            }
+        ]
+    });
+
+    //所在地域
+    $("#start").cityPicker({
+        title: "所在地域",
+        onChange: function (picker, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
+
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'layer', 'slider'], function () {
+        layer = layui.layer;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        // upload.render({
+        //     elem: '#upload_file' //绑定元素
+        //     , accept: 'file'
+        //     , multiple: true
+        //     , url: domainName + '/zuul/api-f/files'
+        //     , allDone: function (obj) { //当文件全部被提交后，才触发
+        //         layer.msg("上传成功");
+        //     }
+        //     , done: function (res, index, upload) {
+        //         addfile(res);
+        //     }
+        // });
+        // upload.render({
+        //     elem: '#upload_video' //绑定元素
+        //     , accept: 'video'
+        //     , multiple: true
+        //     , url: domainName + '/zuul/api-f/files'
+        //     , allDone: function (obj) { //当文件全部被提交后，才触发
+        //         layer.msg("上传成功");
+        //     }
+        //     , done: function (res, index, upload) {
+        //         addvideo(res);
+        //     }
+        // });
+        // upload.render({
+        //     elem: '#upload_img' //绑定元素
+        //     , accept: 'images'
+        //     , multiple: true
+        //     , url: domainName + '/zuul/api-f/files'
+        //     , allDone: function (obj) { //当文件全部被提交后，才触发
+        //         layer.msg("上传成功");
+        //     }
+        //     , done: function (res, index, upload) {
+        //         addimg(res,'#accessory_imgs');
+        //     }
+        // });
+        //
+        // //插入视频
+        // function addvideo(item) {
+        //     var str = '';
+        //     var val = item.name.substring(0, item.name.indexOf("."));
+        //     if (val.length > 10) {
+        //         val = val.substring(0, 20) + '...';
+        //     }
+        //     str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;margin-left: 20px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+        //     str += '<video controls style="width: 250px;height: 250px;" src="'+ item.url +'">' + item.name + '</video>';
+        //     str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        //     $('#accessory_videos').append(str);
+        //     $(".close-a1").hide();
+        // }
+        //
+        // //插入文件
+        // function addfile(item) {
+        //     var val = item.name.substring(0, item.name.indexOf("."));
+        //     if (val.length > 10) {
+        //         val = val.substring(0, 8) + '...';
+        //     }
+        //     var str = '<tr id="'+ item.id +'"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
+        //     str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile('+ item.id +')"><i class="layui-icon">&#xe640;</i></button></td>';
+        //     str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
+        //     $('#accessory_files').append(str);
+        // }
+        //
+        // //插入一张图片
+        // function addimg(item) {
+        //     var str = '';
+        //     var val = item.name.substring(0, item.name.indexOf("."));
+        //     if (val.length > 10) {
+        //         val = val.substring(0, 8) + '...';
+        //     }
+        //     str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+        //     str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
+        //     str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        //     $("#accessory_imgs").append(str);
+        //     $(".close-a").hide();
+        // }
+
+    });
+
+</script>
+</body>
+</html>
