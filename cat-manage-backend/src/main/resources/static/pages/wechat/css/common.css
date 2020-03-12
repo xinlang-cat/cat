@@ -1,0 +1,8 @@
+.weui-interval{height: 10px;width: 100%;background-color: #e5e5e5;}
+.weui-underline {height:1px;border-bottom: 1px solid black;width: 100%;}
+.weui-line{height: 1px;margin: 0 15px;background-color: #e5e5e5;}
+.weui-cells__title{color: black;}
+.weui-cells:after, .weui-cells:before{border: none;}
+.weui-max-title{font-size: 18px;font-weight: bold;}
+label >div.weui-cell__bd >p{font-size: 14px;font-weight: normal;}
+label.weui-check__label,div.weui-cells__title{font-weight: bold;}
