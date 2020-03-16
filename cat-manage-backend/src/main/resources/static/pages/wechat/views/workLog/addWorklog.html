@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+
+<body ontouchstart>
+<form class="form-horizontal" onsubmit="return false" id="form">
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <label class="weui-label">当前进度</label>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <input id="plan" type="hidden" name="plan" value="">
+            <div id="slideTest6" class="demo-slider" style="margin: 2px 0px;"></div>
+        </div>
+    </div>
+    <div class="weui-line" style="margin-top: 15px;"></div>
+    <div class="weui-cells__title">进度描述</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="10"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title" style="font-weight: bold">图片上传</p>
+                    <div class="weui-uploader__info">0/2</div>
+                </div>
+                <div class="weui-uploader__bd">
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/*"
+                               multiple="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title" style="font-weight: bold">视频上传</p>
+                    <div class="weui-uploader__info">0/2</div>
+                </div>
+                <div class="weui-uploader__bd">
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput2" class="weui-uploader__input" type="file" accept="video/*"
+                               multiple="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title" style="font-weight: bold">文件上传</p>
+                    <div class="weui-uploader__info">0/2</div>
+                </div>
+                <div class="weui-uploader__bd">
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput3" class="weui-uploader__input" type="file"
+                               accept="application/**" multiple="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</form>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script>
+    layui.use('upload', function(){
+        var upload = layui.upload;
+
+        upload.render({
+            elem: '#uploaderInput2' //绑定元素
+            ,accept: 'file' //允许上传的文件类型
+            ,url: domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val()
+            ,done: function(res, index, upload){
+                layer.msg("上传成功");
+                example.ajax.reload();
+            }
+        });
+
+
+        $("#fileSource").change(function(){
+            var url = domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val();
+            $("#test1").attr("lay-data", "{url: '" + url + "'}");
+        });
+    });
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'layer', 'slider'], function () {
+        layer = layui.layer;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        // upload.render({
+        //     elem: '#upload_file' //绑定元素
+        //     , accept: 'file'
+        //     , multiple: true
+        //     , url: domainName + '/zuul/api-f/files'
+        //     , allDone: function (obj) { //当文件全部被提交后，才触发
+        //         layer.msg("上传成功");
+        //     }
+        //     , done: function (res, index, upload) {
+        //         addfile(res);
+        //     }
+        // });
+        // upload.render({
+        //     elem: '#upload_video' //绑定元素
+        //     , accept: 'video'
+        //     , multiple: true
+        //     , url: domainName + '/zuul/api-f/files'
+        //     , allDone: function (obj) { //当文件全部被提交后，才触发
+        //         layer.msg("上传成功");
+        //     }
+        //     , done: function (res, index, upload) {
+        //         addvideo(res);
+        //     }
+        // });
+        // upload.render({
+        //     elem: '#upload_img' //绑定元素
+        //     , accept: 'images'
+        //     , multiple: true
+        //     , url: domainName + '/zuul/api-f/files'
+        //     , allDone: function (obj) { //当文件全部被提交后，才触发
+        //         layer.msg("上传成功");
+        //     }
+        //     , done: function (res, index, upload) {
+        //         addimg(res,'#accessory_imgs');
+        //     }
+        // });
+        //
+        // //插入视频
+        // function addvideo(item) {
+        //     var str = '';
+        //     var val = item.name.substring(0, item.name.indexOf("."));
+        //     if (val.length > 10) {
+        //         val = val.substring(0, 20) + '...';
+        //     }
+        //     str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;margin-left: 20px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+        //     str += '<video controls style="width: 250px;height: 250px;" src="'+ item.url +'">' + item.name + '</video>';
+        //     str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        //     $('#accessory_videos').append(str);
+        //     $(".close-a1").hide();
+        // }
+        //
+        // //插入文件
+        // function addfile(item) {
+        //     var val = item.name.substring(0, item.name.indexOf("."));
+        //     if (val.length > 10) {
+        //         val = val.substring(0, 8) + '...';
+        //     }
+        //     var str = '<tr id="'+ item.id +'"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
+        //     str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile('+ item.id +')"><i class="layui-icon">&#xe640;</i></button></td>';
+        //     str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
+        //     $('#accessory_files').append(str);
+        // }
+        //
+        // //插入一张图片
+        // function addimg(item) {
+        //     var str = '';
+        //     var val = item.name.substring(0, item.name.indexOf("."));
+        //     if (val.length > 10) {
+        //         val = val.substring(0, 8) + '...';
+        //     }
+        //     str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+        //     str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
+        //     str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        //     $("#accessory_imgs").append(str);
+        //     $(".close-a").hide();
+        // }
+        //
+        //
+        // $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 1}, function (res) {
+        //     if (!jQuery.isEmptyObject(res.plan)) {
+        //         min = parseInt(res.plan);
+        //         $("#plan").val(res.plan)
+        //     }
+        //     var flag = min >= 100 ? true : false;
+        //     var value = min;
+        //     if (flag) {
+        //         min = 0;
+        //         value = 100;
+        //     }
+        //     var min = 0;
+        slider.render({
+            elem: '#slideTest6'
+            , value: 54
+            , min: 0
+            , max: 100
+            , setTips: function (value) { //自定义提示文本
+                return '指标当前进度:' + value + '%';
+            }
+            , input: true
+            , change: function (value) {
+                $('#plan').val(value);
+            }
+            , disabled: false
+        });
+        // });
+
+    });
+
+</script>
+</body>
+</html>
