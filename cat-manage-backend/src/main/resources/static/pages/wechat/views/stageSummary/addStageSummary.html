@@ -12,16 +12,9 @@
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="//at.alicdn.com/t/font_1682849_3q8aaf8z15b.css">
 </head>
 <body ontouchstart>
-
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="../../images/swiper-1.jpg" style="height: 150px;width: 100%"/></div>
-        <div class="swiper-slide"><img src="../../images/swiper-2.jpg" style="height: 150px;width: 100%"/></div>
-        <div class="swiper-slide"><img src="../../images/swiper-3.jpg" style="height: 150px;width: 100%"/></div>
-    </div>
-</div>
 
 
 <div>
@@ -69,17 +62,16 @@
             <label class="weui-label">项目名称</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="项目名称">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="项目名称">
         </div>
     </div>
     <div class="weui-line"></div>
-
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">合同编号</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="合同编号">
+            <input class="weui-input" id="contractNo" name="contractNo" type="text" value="" placeholder="合同编号">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -88,7 +80,7 @@
             <label class="weui-label">项目类别</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="项目类别">
+            <input class="weui-input" id="category" name="category" type="text" value="" placeholder="项目类别">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -97,7 +89,7 @@
             <label class="weui-label">承担单位</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="承担单位">
+            <input class="weui-input" id="undertaker" name="undertaker" type="text" value="" placeholder="承担单位">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -106,7 +98,7 @@
             <label class="weui-label">填报人</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="填报人">
+            <input class="weui-input" id="createUserName" name="createUserName" type="text" value="" placeholder="填报人">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -115,7 +107,8 @@
             <label class="weui-label">填报人电话</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="填报人电话">
+            <input class="weui-input" id="createUserPhone" name="createUserPhone" type="text" value=""
+                   placeholder="填报人电话">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -124,7 +117,8 @@
             <label class="weui-label">报人邮箱</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="填报人邮箱">
+            <input class="weui-input" id="createUserEmail" name="createUserEmail" type="text" value=""
+                   placeholder="填报人邮箱">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -133,7 +127,7 @@
             <label class="weui-label">填报日期</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="填报日期">
+            <input class="weui-input" id="createTime" name="createTime" type="text" value="" placeholder="填报日期">
         </div>
     </div>
 </div>
@@ -155,7 +149,8 @@
             <label class="weui-label">合同规定起止时间</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="合同规定起止时间">
+            <input class="weui-input" id="startAndEndTime" name="startAndEndTime" type="text" value=""
+                   placeholder="合同规定起止时间">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -163,7 +158,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox" value="是" checked="checked">
+                <input type="radio" class="weui-check" name="applicantExtension" value="是" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -172,7 +167,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox" class="weui-check" value="否">
+                <input type="radio" name="applicantExtension" class="weui-check" value="否">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -186,7 +181,7 @@
             <label class="weui-label">批复截止时间</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" placeholder="延期批复截止时间">
+            <input class="weui-input date" id="extensionTime" name="extensionTime" type="text" placeholder="延期批复截止时间">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -194,7 +189,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox2" value="是" checked="checked">
+                <input type="radio" class="weui-check" name="produceLearnResearch" value="是" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -203,7 +198,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox2" class="weui-check" value="否">
+                <input type="radio" name="produceLearnResearch" class="weui-check" value="否">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -216,7 +211,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox3" value="原始创新" checked="checked">
+                <input type="radio" class="weui-check" name="innovateType" value="原始创新" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -225,7 +220,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="集成创新">
+                <input type="radio" name="innovateType" class="weui-check" value="集成创新">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -234,7 +229,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="引进消化吸收再创新">
+                <input type="radio" name="innovateType" class="weui-check" value="引进消化吸收再创新">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -247,7 +242,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="国外（境外）合作" checked="checked">
+                <input type="radio" class="weui-check" name="collaborate" value="国外（境外）合作" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -256,7 +251,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="区外合作">
+                <input type="radio" name="collaborate" class="weui-check" value="区外合作">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -265,7 +260,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="区内合作">
+                <input type="radio" name="collaborate" class="weui-check" value="区内合作">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -274,7 +269,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="自主研发">
+                <input type="radio" name="collaborate" class="weui-check" value="自主研发">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -287,7 +282,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox5" value="区外科研院所" checked="checked">
+                <input type="radio" class="weui-check" name="skillSourceDept" value="区外科研院所" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -296,7 +291,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="区外大专院校">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="区外大专院校">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -305,7 +300,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="区外企业及其所属科技机构">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="区外企业及其所属科技机构">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -314,7 +309,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="区内科研院所">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="区内科研院所">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -323,7 +318,7 @@
         </label>
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox5" value="区内大专院校">
+                <input type="radio" class="weui-check" name="skillSourceDept" value="区内大专院校">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -332,7 +327,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="区内企业及其所属科技机构">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="区内企业及其所属科技机构">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -341,7 +336,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="国外（境外）">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="国外（境外）">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -350,7 +345,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="自有技术">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="自有技术">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -359,7 +354,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox5" class="weui-check" value="其他">
+                <input type="radio" name="skillSourceDept" class="weui-check" value="其他">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -372,7 +367,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="按计划进度进行" checked="checked">
+                <input type="radio" name="progress" class="weui-check" value="按计划进度进行" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -381,7 +376,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="进度超前">
+                <input type="radio" name="progress" class="weui-check" value="进度超前">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -390,7 +385,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="区拖延">
+                <input type="radio" name="progress" class="weui-check" value="区拖延">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -399,7 +394,7 @@
         </label>
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox6" value="申请终止">
+                <input type="radio" class="weui-check" name="progress" value="申请终止">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -408,7 +403,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="停顿">
+                <input type="radio" name="progress" class="weui-check" value="停顿">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -417,7 +412,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="撤销">
+                <input type="radio" name="progress" class="weui-check" value="撤销">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -426,7 +421,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="已完成(未验收)">
+                <input type="radio" name="progress" class="weui-check" value="已完成(未验收)">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -435,7 +430,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox6" class="weui-check" value="已验收">
+                <input type="radio" name="progress" class="weui-check" value="已验收">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -452,7 +447,7 @@
     <div class="weui-cells weui-cells_checkbox" style="width: 100%;">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkboxq" value="0" checked="checked">
+                <input type="checkbox" class="weui-check" name="cause" value="0" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -461,7 +456,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="1">
+                <input type="checkbox" name="cause" class="weui-check" value="1">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -470,7 +465,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="2">
+                <input type="checkbox" name="cause" class="weui-check" value="2">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -479,7 +474,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="3">
+                <input type="checkbox" name="cause" class="weui-check" value="3">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -488,7 +483,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="4">
+                <input type="checkbox" name="cause" class="weui-check" value="4">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -497,7 +492,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="5">
+                <input type="checkbox" name="cause" class="weui-check" value="5">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -506,7 +501,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="6">
+                <input type="checkbox" name="cause" class="weui-check" value="6">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -515,7 +510,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="7">
+                <input type="checkbox" name="cause" class="weui-check" value="7">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -524,7 +519,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="8">
+                <input type="checkbox" name="cause" class="weui-check" value="8">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -533,7 +528,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="9">
+                <input type="checkbox" name="cause" class="weui-check" value="9">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -542,7 +537,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="checkbox" name="checkboxq" class="weui-check" value="10">
+                <input type="checkbox" name="cause" class="weui-check" value="10">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -594,83 +589,46 @@
         </div>
     </a>
 
-
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">
-                <p style="font-weight: bold">技术指标-指标内容：</p>
+    <div id="skillTarget">
+        <div class="weui-imaginary-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">
+                    <p style="font-weight: bold">技术指标-指标内容：</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="weui-line"></div>
-
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
         <span style="font-size: 14px;">   
             0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br> 
             1.计划性调整：由项目组织部门或主管部门审定对合同书 的计划进度进行的调整。</br>
             2.设备、材料不落实：由于设备紧张、材料短缺等原因而 影响计划进度的完成。</br>
         </span>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">完成情况</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="完成情况">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="完成情况描述" rows="5"></textarea>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">
-                <p style="font-weight: bold">技术指标-指标内容：</p>
-            </div>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-        <span style="font-size: 14px;">   
-            0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br> 
-            1.计划性调整：由项目组织部门或主管部门审定对合同书 的计划进度进行的调整。</br>
-            2.设备、材料不落实：由于设备紧张、材料短缺等原因而 影响计划进度的完成。</br>
-        </span>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">完成情况</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="完成情况">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="完成情况描述" rows="5"></textarea>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <div class="weui-cell__bd weui-cell_primary">
-                <p>项目重要进展情况描述</p>
             </div>
         </div>
         <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">完成情况</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="完成情况">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">完成情况描述</label>
+                <textarea class="weui-textarea" placeholder="完成情况描述" rows="5"></textarea>
+            </div>
+        </div>
     </div>
-
+    <div class="weui-imaginary-line"></div>
+    <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
+            <label class="weui-min-title">项目重要进展情况描述</label>
             <textarea class="weui-textarea" placeholder="项目重要进展情况描述" rows="10"></textarea>
         </div>
     </div>
@@ -808,90 +766,418 @@
 
     <div class="weui-cell">
         <div class="weui-cell__bd">
-        <span style="font-size: 12px;">   
+        <span style="font-size: 14px;">   
             其中：广西科技厅资助经费(如为先验收后补助项目，则【合同原始预算】和【已支出金额】为乙方自筹经费中的科技经费)
         </span>
         </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-interval-min"></div>
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__bd weui-cell_primary">
-            <p>设备费</p>
+    <div class="weui-imaginary-line"></div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">设备费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
         </div>
-    </a>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">材料费费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">测试化验加工费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">燃料及动力费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">差旅/会议国际合作及交流费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">出版/文献/信息传播/知识产权事务费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">劳务费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">专家咨询费</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">缴费支出</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-title">其他费用</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">合同原始预算</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="合同原始预算">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">已支出金额</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" value="" placeholder="已支出金额">
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd"><label class="weui-min-title">开支内容</label>
+                <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
+            </div>
+        </div>
+        <div class="weui-imaginary-line"></div>
+    </div>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">支出金额</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="支出金额">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">合同原始预算</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="合同原始预算">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">已支出金额</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="已支出金额">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
-        </div>
-    </div>
-    <div class="weui-interval-min"></div>
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__bd weui-cell_primary">
-            <p>材料费</p>
-        </div>
-    </a>
-
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">支出金额</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="支出金额">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">合同原始预算</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="合同原始预算">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">已支出金额</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="已支出金额">
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" placeholder="开支内容" rows="5"></textarea>
-        </div>
-    </div>
     <a class="weui-cell weui-cell_access" href="javascript:;">
         <div class="weui-cell__bd weui-cell_primary">
             <p>项目其他经费支出(如为先验收后补助项目，则此处经费不包含自筹经费中的科技经费)</p>
@@ -996,8 +1282,8 @@
             <label class="weui-centre-title">项目效益及基本情况</label>
         </div>
         <div class="weui-cell__bd">
-            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full1"
-               style="float: right;">项目效益及基本情况</a>
+            <a href="javascript:;" class="open-popup" data-target="#full1"
+               style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -1006,8 +1292,8 @@
             <label class="weui-centre-title">专注、论文目录</label>
         </div>
         <div class="weui-cell__bd">
-            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full2"
-               style="float: right;">专注、论文目录</a>
+            <a href="javascript:;" class="open-popup" data-target="#full2"
+               style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -1016,8 +1302,8 @@
             <label class="weui-centre-title">授权专利目录</label>
         </div>
         <div class="weui-cell__bd">
-            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full3"
-               style="float: right;">授权专利目录</a>
+            <a href="javascript:;" class="open-popup" data-target="#full3"
+               style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -1026,8 +1312,8 @@
             <label class="weui-centre-title">科技成果奖励目录</label>
         </div>
         <div class="weui-cell__bd">
-            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full4"
-               style="float: right;">科技成果奖励目录</a>
+            <a href="javascript:;" class="open-popup" data-target="#full4"
+               style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -1036,8 +1322,8 @@
             <label class="weui-centre-title">科技成果登记目录</label>
         </div>
         <div class="weui-cell__bd">
-            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full5"
-               style="float: right;">科技成果登记目录</a>
+            <a href="javascript:;" class="open-popup" data-target="#full5"
+               style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -1046,8 +1332,8 @@
             <label class="weui-centre-title">技术合同认定目录</label>
         </div>
         <div class="weui-cell__bd">
-            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full6"
-               style="float: right;">技术合同认定目录</a>
+            <a href="javascript:;" class="open-popup" data-target="#full6"
+               style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
         </div>
     </div>
 </div>
@@ -1168,7 +1454,7 @@
     </a>
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <label class="weui-label">项目负责人承诺</label>
+            <label class="weui-min-title">项目负责人承诺</label>
             <textarea class="weui-textarea" placeholder="项目负责人承诺" rows="5"></textarea>
         </div>
     </div>
@@ -1186,7 +1472,7 @@
             <label class="weui-label">日期</label>
         </div>
         <div class="weui-cell__bd">
-            <p>2020-03-12</p>
+            <p style="margin-left: 10px">2020-03-12</p>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -1223,7 +1509,7 @@
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <label class="weui-label">单位意见</label>
+            <label class="weui-min-title">单位意见</label>
             <textarea class="weui-textarea" placeholder="单位意见" rows="5"></textarea>
         </div>
     </div>
@@ -1250,39 +1536,120 @@
             <label class="weui-label">日期</label>
         </div>
         <div class="weui-cell__bd">
-            <p>2020-03-12</p>
+            <p style="margin-left: 10px;">2020-03-12</p>
         </div>
     </div>
 </div>
 
 
+<div>
+    <div class="weui-interval"></div>
+    <div class="weui-cells__title">
+        <div class="weui-cell__hd">
+            <img src="../../images/green.png" alt=""
+                 style="height:20px;margin-right:5px;display:block;float: left;">
+            <p style="float: left">附件清单</p>
+            <a id="upload-file-btn" href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" style="float: right;touch-action: none; ">上传附件</a>
+        </div>
+    </div>
+    <div class="weui-cell file" style="margin-bottom: 15px;"></div>
+    <div class="weui-imaginary-line" style="margin-bottom: 30px;"></div>
+</div>
+
+
 <div class="weui-interval"></div>
-<div style="height: 60px;background-color: white;"></div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+</div>
+<div style="height: 100px;background-color: white;width: 100%;"></div>
 
 
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
-<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
 </script>
 <script>
-    $(".swiper-container").swiper({
-        loop: true,
-        autoplay: 3000
+    layui.use('upload', function(){
+        var upload = layui.upload;
+        upload.render({
+            elem: '#upload-file-btn' //绑定元素
+            ,accept: 'file' //允许上传的文件类型
+            ,url: domainName + '/zuul/api-f/files'
+            ,done: function(res, index, upload){
+                layer.msg("上传成功");
+                var str = '<div class="file">\n' +
+                    '        <div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">附件名称</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p style="margin-left: 10px;">' + res['name'] + '</p>' +
+                    '                <input type="hidden" name="fileId" value="' + res['id'] + '">'+
+                    '                <input type="hidden" name="fileName" value="' + res['name'] + '">'+
+                    '                <input type="hidden" name="fileUrl" value="' + res['url'] + '">'+
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">文件说明</label>\n' +
+                    '                <textarea class="weui-textarea" name="fileRemark" placeholder="附件说明" rows="5"></textarea>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <a href="javascript:;" class="stage-summary-a" onclick="delFileHtml(this)">删除</a>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+                $('div.file:last').after(str);
+            }
+        });
     });
-</script>
-<script>
+
+    function delFileHtml(obj) {
+        $(obj).parents('div[class=file]').remove();
+    }
     //延期批复截止时间
     $(".date").calendar({
         title: "延期批复截止时间",
         onChange: function (p, values, displayValues) {
             console.log(values, displayValues);
         }
+    });
+
+    $("#today").html(formatDate1(new Date()));
+    var itemId = getUrlParam("item_id");
+    var userId = getUrlParam("user_id");
+    //初始化项目信息
+    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
+        for (var key in res[0]) {
+            if (key == 'undertaker' || key == 'category') continue;
+            $("#" + key).val(res[0][key]);
+            $("." + key).html(res[0][key]);
+        }
+        $.get(domainName + "/api-c/company/" + res[0]['undertaker'], function (data) {
+            $('#undertaker').val(data['signName']);
+            $('.undertaker').html(data['signName']);
+        });
+        $.get(domainName + "/api-label/label/tree/" + res[0]['category'], function (data) {
+            $('#category').val(data[0]['content']);
+            $('.category').html(data[0]['content']);
+        });
+        var startAndEndTime = formatDate1(res[0].start_date) + "---" + formatDate1(res[0].end_date);
+        $("#startAndEndTime").val(startAndEndTime);
+        $(".startAndEndTime").html(startAndEndTime);
     });
 
     function addListHtml(obj) {
@@ -1384,7 +1751,7 @@
                 '            <div class="weui-line"></div>\n' +
                 '            <div class="weui-cell">\n' +
                 '                <div class="weui-cell__bd">\n' +
-                '                    <label class="weui-label">有关说明</label>\n' +
+                '                    <label class="weui-min-title">有关说明</label>\n' +
                 '                    <textarea class="weui-textarea" placeholder="有关说明" rows="5"></textarea>\n' +
                 '                </div>\n' +
                 '            </div>\n' +
@@ -1464,7 +1831,7 @@
                 '        <div class="weui-line"></div>\n' +
                 '        <div class="weui-cell">\n' +
                 '            <div class="weui-cell__bd">\n' +
-                '                <label class="weui-label">有关说明</label>\n' +
+                '                <label class="weui-min-title">有关说明</label>\n' +
                 '                <textarea class="weui-textarea" placeholder="有关说明" rows="5"></textarea>\n' +
                 '            </div>\n' +
                 '        </div>\n' +
@@ -1535,7 +1902,7 @@
                 '           <div class="weui-line"></div>\n' +
                 '           <div class="weui-cell">\n' +
                 '               <div class="weui-cell__bd">\n' +
-                '                   <label class="weui-label">有关说明</label>\n' +
+                '                   <label class="weui-min-title">有关说明</label>\n' +
                 '                   <textarea class="weui-textarea" placeholder="有关说明" rows="5"></textarea>\n' +
                 '               </div>\n' +
                 '           </div>\n' +
@@ -1595,6 +1962,7 @@
                 '                    <input class="weui-input" type="text" value="" placeholder="第一完成人">\n' +
                 '                </div>\n' +
                 '            </div>\n' +
+                '            <div class="weui-line"></div>\n' +
                 '            <div class="weui-cell">\n' +
                 '                <div class="weui-cell__bd">\n' +
                 '                    <a href="javascript:;" class="stage-summary-a" onclick="delListHtml(this)">删除</a>\n' +
@@ -1669,6 +2037,7 @@
                 '                    <input class="weui-input" type="text" value="" placeholder="技术合同类型">\n' +
                 '                </div>\n' +
                 '            </div>\n' +
+                '            <div class="weui-line"></div>\n' +
                 '            <div class="weui-cell">\n' +
                 '                <div class="weui-cell__bd">\n' +
                 '                    <a href="javascript:;" class="stage-summary-a" onclick="delListHtml(this)">删除</a>\n' +
