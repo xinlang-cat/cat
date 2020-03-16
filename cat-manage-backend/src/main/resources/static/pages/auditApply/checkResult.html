@@ -142,23 +142,23 @@
 
     var id = getUrlParam("id");
     var h = $(window).height() - 100;
-    layui.use(['layedit', 'upload', 'laydate'], function () {
+    layui.use(['layedit','upload', 'laydate'], function(){
         layedit = layui.layedit;
         laydate = layui.laydate;
-        index = layedit.build('demo', {tool: [], height: h});
+        index = layedit.build('demo',{tool:[], height:h});
     });
     initData();
 
-    function initData() {
+    function initData(){
         var data = {
-            id: id,
+            id:id,
         }
         $.ajax({
-            type: 'get',
-            data: data,
-            url: domainName + '/project-item/item/target/applyList',
-            async: false,
-            success: function (data) {
+            type : 'get',
+            data:data,
+            url : domainName + '/project-item/item/target/applyList',
+            async : false,
+            success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
                     $("#purpose").val(data[0].purpose);
@@ -193,7 +193,6 @@
             }
         });
     }
-
     function addImgHtml(item) {
         var str = '';
         var val = item.name.substring(0, item.name.indexOf("."));
@@ -205,10 +204,8 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
-
     var h = $(window).height() - 100;
     var w = $(window).width() - 200;
-
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({
@@ -226,46 +223,44 @@
 
     function getTargetName(id) {
         $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/target/list',
+            type : 'get',
+            url : domainName + '/project-item/item/target/list',
             contentType: "application/json; charset=utf-8",
             data: {id: id},
-            success: function (data) {
-                if (data[0]['count'] != null) {
+            success : function(data) {
+                if (data[0]['count']!=null){
                     $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
                         $("#name").val(res[0].content);
                     })
-                } else {
+                }else {
                     $("#name").val(data[0].content);
                 }
             }
         });
     }
-
     function pass() {
         $.ajax({
-            type: 'put',
-            url: domainName + '/project-item/item/target/auditApply/update',
+            type : 'put',
+            url : domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id, status: 2}),
-            success: function (data) {
+            data: JSON.stringify({id: id,status : 2}),
+            success : function(data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                layer.msg(msg, {shift: -1, time: 1000}, function(){
                     parent.location.reload();
                 });
             }
         });
     }
-
     function unPass() {
         $.ajax({
-            type: 'put',
-            url: domainName + '/project-item/item/target/auditApply/update',
+            type : 'put',
+            url : domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id, status: 5}),
-            success: function (data) {
+            data: JSON.stringify({id: id,status : 5}),
+            success : function(data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                layer.msg(msg, {shift: -1, time: 1000}, function(){
                     parent.location.reload();
                 });
             }
