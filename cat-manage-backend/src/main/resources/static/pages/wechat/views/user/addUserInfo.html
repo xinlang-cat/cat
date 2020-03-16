@@ -13,246 +13,512 @@
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
 </head>
-<style>
-    .weui-label {
-        text-align: right;
-        padding-right: 5px;
-    }
-</style>
 
 <body ontouchstart>
-<div class='demos-content-padded'>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <form class="form-horizontal" onsubmit="return false" id="form">
 
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="用户名">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="昵称">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex" type="text" value="" placeholder="性别">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="date" type="text" placeholder="出生时间">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="姓名">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="民族">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex1" type="text" value="" placeholder="身份类型">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex2" type="text" value="" placeholder="证件类型">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="证件号码">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="单位/公司代码">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="单位/公司名称" disabled>
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="单位/公司类型" disabled>
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="邮政编码">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="职称">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="职称级别">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="职务">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex3" type="text" value="" placeholder="政治面貌">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="毕业院校">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="学位">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="学历">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="date2" type="text" placeholder="学位授予时间">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="学位授予国家/地区">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="学位授予学校">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="邮箱">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex4" type="text" value="" placeholder="所学专业">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="手机号码">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="办公电话">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex5" type="text" value="" placeholder="现从事专业">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex6" type="text" value="" placeholder="主要研究领域">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="传真">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="start" type="text" value="" placeholder="所在地域">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="通信地址">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex7" type="text" value="" placeholder="服务的产业或者领域">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" id="sex8" type="text" value="" placeholder="技术专长及提供的服务">
-                </div>
-            </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" value="" placeholder="承担的科技项目">
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="工作成就案例" rows="10"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/200</div>
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="获得科技成果/奖励/荣誉" rows="10"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/200</div>
-                </div>
-            </div>
-            <div class="weui-btn-area">
-                <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
-            </div>
-        </form>
+<form id="form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">用户名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="用户名">
+        </div>
     </div>
-</div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">昵称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="昵称">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">性别</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox1" value="男" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>男</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox1" class="weui-check" value="女">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>女</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">出生时间</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="date" type="text" placeholder="出生时间">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">姓名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="姓名">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">民族</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="民族">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">身份类别</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox2" value="甲方" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>甲方</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox2" class="weui-check" value="乙方">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>乙方</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox2" class="weui-check" value="丙方">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>丙方</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">证件类型</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox3" value="身份证" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>身份证</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox3" class="weui-check" value="护照">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>护照</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">证件号码</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="证件号码">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">单位/公司代码</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="单位/公司代码">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">单位/公司名称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="单位/公司名称" disabled>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">单位/公司类型</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="单位/公司类型" disabled>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">邮政编码</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="邮政编码">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">职称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="职称">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">职称级别</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="职称级别">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">职务</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="职务">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">政治面貌</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="sex3" type="text" value="" placeholder="政治面貌">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">毕业院校</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="毕业院校">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">学位</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="学士" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>学士</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="研究生" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>研究生</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox4" class="weui-check" value="硕士">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>硕士</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox4" class="weui-check" value="博士">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>博士</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">学历</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="高中/技校" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>高中/技校</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="中专" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>中专</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox4" class="weui-check" value="大专">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>大专</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox4" class="weui-check" value="大学">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>大学</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">学位授予时间</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="date2" type="text" placeholder="学位授予时间">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">授予国家/地区</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="学位授予国家/地区">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">学位授予学校</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="学位授予学校">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">邮箱</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="邮箱">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">所学专业</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="农业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>农业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="工业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>工业</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">手机号码</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="手机号码">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">办公电话</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="办公电话">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">现在从事专业</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="农业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>农业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox4" value="工业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>工业</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">主要研究领域</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox5" value="农业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>农业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox5" value="工业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>工业</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">传真</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="传真">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">所在地域</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="start" type="text" value="" placeholder="所在地域">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <label class="weui-label">通信地址</label>
+            <textarea class="weui-textarea" placeholder="通信地址" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="weui-cells__title">服务的产业或者领域</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox5" value="农业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>农业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox5" value="工业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>工业</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">技术专长及提供的服务</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox5" value="农业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>农业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="checkbox" class="weui-check" name="checkbox5" value="工业" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>工业</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <label class="weui-label">承担的科技项目</label>
+            <textarea class="weui-textarea" placeholder="承担的科技项目" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <label class="weui-label">工作成就案例</label>
+            <textarea class="weui-textarea" placeholder="工作成就案例" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <label class="weui-label" style="width: 55%">获得科技成果/奖励/荣誉</label>
+            <textarea class="weui-textarea" placeholder="获得科技成果/奖励/荣誉" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</form>
 
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
