@@ -85,6 +85,42 @@
                               id="description" name="description" readonly></textarea>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">查定目的:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="purpose" name="purpose" data-bv-notempty="true"
+                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">查定依据:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="depand" name="depand" data-bv-notempty="true"
+                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">查定内容:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="details" name="details" data-bv-notempty="true"
+                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">查定方法:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="内容简介。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="means" name="means" data-bv-notempty="true"
+                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                </div>
+            </div>
 
             <di id="accessory_files"></di>
 
@@ -124,7 +160,13 @@
             success : function(data) {
                 $(data).each(function () {
                         $("#content").val(data[0].content);
+                        $("#purpose").val(data[0].purpose);
+
+                        $("#depand").val(data[0].depand);
+                        $("#details").val(data[0].details);
+                        $("#means").val(data[0].means);
                         $("#description").val(data[0].description);
+
                         getProvince(data[0].provinceCode);
                         getTargetName(data[0].target_id);
                         $("#result").val(data[0].status==3?"查定合格":"查定不合格");
