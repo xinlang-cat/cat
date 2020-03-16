@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link rel="stylesheet" href="../../weui/css/weui.css" />
+		<link rel="stylesheet" href="../../weui/css/weuix.css" />
+
+		<script src="../../weui/js/zepto.min.js"></script>
+		<script src="../../weui/js/zepto.weui.js"></script>
+		<style>
+			.weui-loadmore_line {
+				margin: 10px 0;
+			}
+		</style>
+	</head>
+	<body ontouchstart class="page-bg">
+		<div class="page-hd padding15 bg-white">
+			<h1 class="page-hd-title" style="text-align: center;">
+				项目信息
+			</h1>
+			<!-- <div class="weui-loadmore_line"></div> -->
+		</div>
+		<!-- 基本信息 -->
+		<div class="weui-cells__title page-bg">基本信息</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">合同编号</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">项目类别</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">项目名称</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+		</div>
+		<!-- 总体目标和主要研究内容 -->
+		<div class="weui-cells__title page-bg">总体目标和主要研究内容</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">总体目标</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+			<div class="weui-loadmore_line"></div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">研究内容</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+		</div>
+		<!-- 考核指标 -->
+		<div class="weui-cells__title page-bg">考核指标1<a style="float: right;">删除</a></div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">指标类型</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">指标内容</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">实施人员</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title page-bg">考核指标2<a style="float: right;">删除</a></div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">指标类型</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">指标内容</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">实施人员</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title page-bg">如有多个指标，请点击“新增指标”</div>
+		<div class="bg-white">
+			<a href="javascript:;" class="weui-btn" style="color:dodgerblue;border: none;r"><i class="icon icon-34"></i>增加指标</a>
+		</div>
+		<!-- 项目及课题进度 -->
+		<div class="weui-cells__title page-bg">进度安排1<a style="float: right;">删除</a></div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">年度</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">年度目标</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title page-bg">如有多个进度安排，请点击“新增进度安排”</div>
+		<div class="bg-white">
+			<a href="javascript:;" class="weui-btn" style="color:dodgerblue;border: none;r"><i class="icon icon-34"></i>增加进度安排</a>
+		</div>
+		<!-- 主要研究、开发人员 -->
+		<div class="weui-cells__title page-bg">主要研究、开发人员1<a style="float: right;">删除</a></div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">姓名</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">负责分工 </label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells__title page-bg">如有多个进度安排，请点击“新增进度安排”</div>
+		<div class="bg-white">
+			<a href="javascript:;" class="weui-btn" style="color:dodgerblue;border: none;r"><i class="icon icon-34"></i>增加进度安排</a>
+		</div>
+		<!-- 经费预算 -->
+		<div class="weui-cells__title page-bg">甲方提供的科技经费用途预算</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">设备费</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">金额</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">开支内容</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">备注</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">材料费</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">金额</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input" pattern="[0-9]*" placeholder="请输入" type="number">
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">开支内容</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+			<div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+				<div class="weui-cell__hd"><label class="weui-label -bold">备注</label></div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" placeholder="请输入" rows="3" onkeyup="textarea(this);"></textarea>
+				</div>
+			</div>
+		</div>
+		<!-- 其余经费 -->
+		<div class="weui-cells__title page-bg">除甲方提供的科技经费外的其余经费用途预算</div>
+	</body>
+</html>

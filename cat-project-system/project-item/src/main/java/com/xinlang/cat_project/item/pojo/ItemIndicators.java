@@ -10,28 +10,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.Date;
-import java.util.List;
+
+/*项目考核指标*/
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "item_target")
-public class ItemTarget {
-
+@Table(name = "item_indicators")
+public class ItemIndicators {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer item_id;
-    private String target;
-    private Integer count;
+    private String type;
     private String content;
-    private Integer district;
+    private String site;
     private Date start_date;
     private Date end_date;
-    private String type;
     private Integer status;
-    private String plan;
+
     @Transient
-    private String userIds;
+    private String period;
 }
