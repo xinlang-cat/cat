@@ -1,5 +1,5 @@
 
-var domainName = "http://xinlangxfpt.mynatapp.cc";
+var domainName = "http://192.168.1.7";
 var loginPage = "/api-b/login.html";
 
 function   formatDate(now)   {
@@ -32,14 +32,6 @@ function   formatDate3(now)   {
     var   month=now.getMonth()+1;
     var   date=now.getDate();
     return   year+"/"+fixZero(month,2)+"/"+fixZero(date,2);
-}
-
-function   formatDate4(now)   {
-    var   now= new Date(now);
-    var   year=now.getFullYear();
-    var   month=now.getMonth()+1;
-    var   date=now.getDate();
-    return   year+"-"+fixZero(month,2)+"-"+fixZero(date,2);
 }
 
 //时间如果为单位数补0

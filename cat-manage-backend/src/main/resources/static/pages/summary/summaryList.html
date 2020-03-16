@@ -14,15 +14,6 @@
                     <div align="left">
 	                    <table style="width: 100%">
 	                   		<tr>
-	                   			<td>
-		                   			<form class="form-inline" onsubmit="return false">
-										<div class="form-group">
-											姓名：
-											<input id="name" type="text" class="form-control" placeholder="姓名">
-											<button id="searchBt" class="layui-btn layui-btn-sm" permission="mail:query"><i class="layui-icon">&#xe615;</i>搜索</button>
-										</div>
-									</form>
-	                   			</td>
 	                   			<td align="right">
                                     <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showWork()">
                                         <i class="layui-icon">&#xe615;</i>查看工作总结
@@ -90,7 +81,6 @@ layui.use(['layer','util'], function(){
             		"url" : domainName + "/api-summary/skill/page",
             		"type":"get",
             		"data":function(d){
-                        d.name = $('#name').val();
                         d.itemId = item_id;
             		},
             		"dataSrc": function (json) {
@@ -120,8 +110,31 @@ layui.use(['layer','util'], function(){
             	},
             	"dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",	
                 "columns": [
-                    { "data": "name", "defaultContent": ""},
-                    { "data": "itemName", "defaultContent": ""},
+                    { "data": "createUserName",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            $.ajaxSettings.async = false;
+                            $.get(domainName + "/project-user/user-anon/" + row['createUserId'], function (res) {
+                                data =  res[0]['name'];
+
+                            })
+                            $.ajaxSettings.async = true;
+                            return data;
+                        }
+                    },
+                    { "data": "itemName",
+                        "defaultContent": "",
+                        "render": function (data, type, row) {
+                            var id =row['itemId'];
+                            $.ajaxSettings.async = false;
+                            $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
+                                data =  res[0]['item_name'];
+                            })
+
+                            $.ajaxSettings.async = true;
+                            return data;
+                        }
+                    },
                     {
                         "data": "createTime",
                         "defaultContent": "",
@@ -145,7 +158,7 @@ layui.use(['layer','util'], function(){
                             var showDetail = btn.prop("outerHTML");
                             var showReport = report.prop("outerHTML");
                             var del = buttonDel(id,"",pers);
-                            return  edit+showDetail +del+showReport;
+                            return  edit+del+showReport;
                       	}
                     },
                 ],

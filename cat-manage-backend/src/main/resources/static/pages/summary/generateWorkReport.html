@@ -16,33 +16,30 @@
             <input type="hidden" id="itemId" name="itemId" value="">
             <table class="layui-table">
                 <colgroup>
-                    <col width="3%">
+
                     <col width="10%">
-                    <col width="37%">
+                    <col width="40%">
                     <col width="10%">
                     <col width="40%">
                 </colgroup>
-                <thead>
                 <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th colspan="4"><br></th>
+                    <th colspan="4" class="table-info" style="text-align: center">基本信息<br></th>
+
                 </tr>
-                </thead>
                 <tbody>
                 <tr>
-                    <td rowspan="9" class="table-info">基本信息</td>
                     <td>合同编号：</td>
                     <td>
-                        <input type="hidden" name="id" id="item_id">
                         <p id="contract_no_text"></p>
                         <input class="form-control hidden" lay-verify="required" placeholder="请输入合同编号" type="text"
-                               id="contract_no" name="contract_no">
+                               name="contract_no" id="contract_no">
                     </td>
                     <td>计划类别：</td>
                     <td>
                         <p id="category_text"></p>
-                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="category"
-                                name="category">
+                        <select class="form-control hidden" lay-verify="required" lay-ignore name="category"
+                                id="category">
+                            <option value="">请选择计划类别</option>
                         </select>
                     </td>
                 </tr>
@@ -51,30 +48,27 @@
                     <td>
                         <p id="item_name_text"></p>
                         <input class="form-control hidden" lay-verify="required" placeholder="请输入项目名称" type="text"
-                               id="item_name" name="item_name">
+                               name="item_name" id="item_name">
                     </td>
                     <td>委托单位：</td>
                     <td>
                         <p id="consignor_text"></p>
-                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="consignor"
-                                name="consignor">
-                        </select>
+                        <input class="form-control hidden" lay-verify="required" placeholder="请输入委托单位" type="text"
+                               name="consignor" id="consignor">
                     </td>
                 </tr>
                 <tr>
                     <td>承担单位：</td>
                     <td>
                         <p id="undertaker_text"></p>
-                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="undertaker"
-                                name="undertaker">
-                        </select>
+                        <input class="form-control hidden" lay-verify="required" placeholder="请输入承担单位" type="text"
+                               name="undertaker" id="undertaker" readonly>
                     </td>
                     <td>管理单位：</td>
                     <td>
                         <p id="administrator_text"></p>
-                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="administrator"
-                                name="administrator">
-                        </select>
+                        <input class="form-control hidden" lay-verify="required" placeholder="请输入管理单位" type="text"
+                               name="administrator" id="administrator">
                     </td>
                 </tr>
                 <tr>
@@ -82,13 +76,13 @@
                     <td>
                         <p id="start_date_text"></p>
                         <input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"
-                               id="start_date" name="start_date" readonly>
+                               name="start_date" id="start_date" readonly>
                     </td>
                     <td>结束时间：</td>
                     <td>
                         <p id="end_date_text"></p>
                         <input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"
-                               id="end_date" name="end_date" readonly>
+                               name="end_date" id="end_date" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -96,13 +90,14 @@
                     <td>
                         <p id="item_number_text"></p>
                         <input class="form-control hidden" lay-verify="required" placeholder="请输入下达文号" type="text"
-                               id="item_number" name="item_number">
+                               name="item_number" id="item_number">
                     </td>
                     <td colspan="2"></td>
 
                 </tr>
                 </tbody>
             </table>
+
             <table class="layui-table">
                 <colgroup>
 
@@ -131,121 +126,261 @@
             </table>
             <table class="layui-table">
                 <colgroup>
-                    <col width="3%">
                     <col width="10%">
-                    <col width="87%">
+                    <col width="90%">
                 </colgroup>
                 <thead>
-                </thead>
                 <tbody>
                 <tr>
-                    <td rowspan="2" class="table-info">总体目标</td>
-                    <td>总体目标</td>
+                    <td class="table-info">主要研究内容</td>
                     <td>
-                        <p id="outline_text"></p>
-                        <textarea placeholder="总体目标" class="layui-textarea form-control hidden" lay-verify="required"
-                                  id="outline" name="outline"readonly="readonly"></textarea>
+					<textarea placeholder="请输入内容" class="layui-textarea" name="content" id="content" data-bv-notempty="true"
+                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" readonly="readonly"></textarea>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <table class="layui-table">
-                <colgroup>
-                    <col width="3%">
-                    <col width="10%">
-                    <col width="87%">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th>序号</th>
-                    <th>标题和内容</th>
-                </tr>
-                </thead>
-                <tbody id="mian-content">
-                <tr>
-                    <td rowspan="1" class="table-info">主要研究内容</td>
 
-                </tr>
-                </tbody>
-            </table>
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
                     <col width="10%">
                     <col width="20%">
                     <col width="7%">
-                    <col width="17%">
-                    <col width="17%">
+                    <col width="12%">
+                    <col width="12%">
                     <col width="26%">
+                    <col width="10%">
                 </colgroup>
                 <thead>
                 <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th colspan="6"><br></th>
-                </tr>
-                <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+                    <th class="table-info"></th>
                     <th>类型</th>
-                    <th>内容</th>
-                    <th>数量</th>
+                    <th colspan="2">内容</th>
                     <th>开始时间</th>
                     <th>结束时间</th>
                     <th>地点</th>
+                    <th>实施人员</th>
                 </tr>
                 </thead>
-                <tbody id="INDICATORS">
+                <tbody id="indicators">
                 <tr>
                     <td rowspan="1" class="table-info">考核指标</td>
                 </tr>
                 </tbody>
             </table>
-            <table class="layui-table" id="basis">
+            <table class="layui-table">
                 <colgroup>
                     <col width="3%">
                     <col width="10%">
-                    <col width="20%">
-                    <col width="10%">
-                    <col width="20%">
                     <col width="37%">
+                    <col width="20%">
+                    <col width="15%">
+                    <col width="15%">
                 </colgroup>
                 <thead>
                 <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th colspan="5"><br></th>
-                </tr>
-                <tr>
-                    <th class="table-info" style="border-bottom-color: #4FAAA2"></th>
-                    <th>费用</th>
+                    <th class="table-info"></th>
                     <th>科目</th>
-                    <th>金额（万元）</th>
-                    <th>经费来源</th>
                     <th>开支内容</th>
+                    <th>经费来源</th>
+                    <th>金额（万元）</th>
+                    <th>小计（万元）</th>
                 </tr>
                 </thead>
-                <tbody id="EXPENDITURE">
+                <tbody id="expenditure">
                 <tr>
-                    <td rowspan="8" class="table-info" id="thead">经费用途预算</td>
-                    <td>合计</td>
+                    <td rowspan="14" class="table-info">经费用途预算</td>
+                    <td colspan="5">（一）直接费用</td>
+                </tr>
+                <tr>
+                    <td>设备费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="INSTALLATION_COST">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td>材料费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="MATERIALS_EXPENSES">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>测试化验加工费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="COST_OF_TESTING_AND_PROCESSING">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>燃料及动力费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="FUEL_AND_POWER_CHARGRS">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>差旅/会议/国际合作与交流费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="TRAVEL_ON_BUSINESS">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>出版/文献/信息传播/知识产权事务费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="PUBLISH">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>劳务费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="SERVICE_FEE">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>专家咨询费</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="EXPERT_CONSULTATION_FEE">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>其他支出</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="0">
+                        <input type="hidden" name="subject" value="OTHER_EXPENSES">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5">（二）间接费用</td>
+                </tr>
+                <tr>
+                    <td>绩效支出</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="1">
+                        <input type="hidden" name="subject" value="PERFORMANCE_OF_THE_SPENDING">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>其他费用</td>
+                    <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
+                                         lay-verify="required"></textarea>
+                    </td>
+                    <td><p></p>
+                        <input type="hidden" name="item_id">
+                        <input type="hidden" name="type" value="1">
+                        <input type="hidden" name="subject" value="OTHER_CHARGES">
+                        <select class="form-control input-sm hidden" lay-verify="required" lay-ignore name="source">
+                            <option value=''>请选择</option>
+                        </select></td>
+                    <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
+                                      name="money"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="4">合计</td>
                     <td id="total"></td>
-                    <td></td>
-                    <td></td>
                 </tr>
-                <tr>
-                    <td colspan="5"></td>
-                </tr>
-
-                <tr id="interval">
-                    <td colspan="5"></td>
-                </tr>
-
                 </tbody>
             </table>
 
             <table class="layui-table">
                 <colgroup>
-
                     <col width="10%">
                     <col width="90%">
                 </colgroup>
@@ -305,13 +440,22 @@
         </div>
     </div>
 </div>
-<script src="../../js/constant.js"></script>
+
+
+
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src='../../js/constant.js'></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+<script type="text/javascript" src='../../js/common.js'></script>
+<script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../list-layout/js/saveData.js'></script>
+<script type="text/javascript" src='../list-layout/js/addTable.js'></script>
 <script type="text/javascript" src="../list-layout/js/projecDetailst.js"></script>
+<script type="text/javascript" src='../list-layout/js/updateProject.js'></script>
 
 <script type="text/javascript">
     var layedit, index;
@@ -322,6 +466,20 @@
     getContent(itemId);
     getTarget(itemId);
     getFund(itemId);
+
+    var ref = setInterval(function () {
+        var total = 0;
+        $('input[name=money]').each(function () {
+            if ($(this).val() != '') {
+                total += $(this).val() - 0;
+            }
+        })
+        if (total != 0) {
+            $('#total').text(total);
+        } else {
+            $('#total').text('');
+        }
+    }, 1000);
 
     var h = $(window).height() - 100;
     layui.use(['layedit','upload'], function(){

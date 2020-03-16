@@ -35,15 +35,6 @@ CREATE TABLE `app_user` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='用户表';
 
--- ----------------------------
--- Records of app_user
--- ----------------------------
-<<<<<<< HEAD
-INSERT INTO `app_user` VALUES ('1', 'admin', '$2a$10$3uOoX1ps14CxuotogUoDreW8zXJOZB9XeGdrC/xDV36hhaE8Rn9HO', '测试1', 'http://192.168.5.48/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif', '', '1', '1', 'APP', '2019-07-17 16:57:01', '2019-07-30 10:50:48');
-=======
-INSERT INTO `app_user` VALUES ('1', 'admin', '$2a$10$3uOoX1ps14CxuotogUoDreW8zXJOZB9XeGdrC/xDV36hhaE8Rn9HO', '测试1', 'http://192.168.5.48/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif', '', '1', '1', 'APP', '2019-07-17 16:57:01', '2019-07-30 10:50:48');
->>>>>>> fa4ca95642d5c2bbd0fc5a796c460243e5d2f74e
-INSERT INTO `app_user` VALUES ('2', 'superadmin', '$2a$10$.gLkG0j2kM0stWoOvPBvqu0H9uSD0HUlpErI.PTKyZQkSUZIV2wFq', '超级管理员', null, null, '1', '1', 'BACKEND', '2019-07-19 20:30:11', '2019-07-19 20:30:11');
 
 -- ----------------------------
 -- Table structure for black_ip
@@ -342,9 +333,9 @@ CREATE TABLE `t_log` (
 INSERT INTO `t_log` VALUES ('1', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-07-30 10:45:19');
 INSERT INTO `t_log` VALUES ('2', 'admin', '文件上传', null, null, '1', '2019-07-30 10:50:48');
 <<<<<<< HEAD
-INSERT INTO `t_log` VALUES ('3', 'admin', '修改个人信息', '{\"appUser\":{\"headImgUrl\":\"http://192.168.5.48/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif\"}}', null, '1', '2019-07-30 10:50:48');
+INSERT INTO `t_log` VALUES ('3', 'admin', '修改个人信息', '{\"appUser\":{\"headImgUrl\":\"http://192.168.1.7/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif\"}}', null, '1', '2019-07-30 10:50:48');
 =======
-INSERT INTO `t_log` VALUES ('3', 'admin', '修改个人信息', '{\"appUser\":{\"headImgUrl\":\"http://192.168.5.48/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif\"}}', null, '1', '2019-07-30 10:50:48');
+INSERT INTO `t_log` VALUES ('3', 'admin', '修改个人信息', '{\"appUser\":{\"headImgUrl\":\"http://192.168.5.38/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif\"}}', null, '1', '2019-07-30 10:50:48');
 >>>>>>> fa4ca95642d5c2bbd0fc5a796c460243e5d2f74e
 INSERT INTO `t_log` VALUES ('4', 'admin', '文件上传', null, null, '1', '2019-07-30 10:59:52');
 INSERT INTO `t_log` VALUES ('5', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-07-30 16:44:29');
