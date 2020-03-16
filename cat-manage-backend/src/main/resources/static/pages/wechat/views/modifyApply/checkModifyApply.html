@@ -151,7 +151,7 @@
 				}
 
 				function post() {
-					var status = $('input[name="status"]:checked').val(); 
+					var status = $('input[name="status"]:checked').val();
 					alert(status);
 					$.ajax({
 						type: 'put',
@@ -164,7 +164,7 @@
 						success: function(data) {
 							 $.toptip('操作成功', 'success');
 							parent.location.reload();
-							
+
 						}
 					});
 				}

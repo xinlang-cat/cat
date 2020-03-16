@@ -19,8 +19,8 @@
 </head>
 
 <body ontouchstart>
-	
-	
+
+
 <div class="page__bd">
     <div class="weui-panel" id="list">
       <!-- <div class="weui-panel__hd">文字列表附来源</div> -->
@@ -98,7 +98,7 @@
 		  }
 		return data;
 	}
-	
+
 	function getUserName(user_id){
 		var data='';
 		$.get(domainName + "/project-user/user-anon/" + row['user_id'], function (res) {
@@ -123,7 +123,7 @@
             data="审核未通过";
         }else if (status == 3){
             data="更改成功";
-        }	
+        }
 		return data;
 	}
 </script>
