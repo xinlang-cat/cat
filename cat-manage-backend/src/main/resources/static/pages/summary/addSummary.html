@@ -149,7 +149,6 @@
 
 		function add_content(obj) {
 		    var formdata = $("#form").serializeObject();
-		    alert(JSON.stringify(formdata));
 			$.ajax({
 				type : 'post',
 				url : domainName + '/api-summary/skill',

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>更改申请</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/stageSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+
+</head>
+<body ontouchstart>
+
+<div style="z-index: 999999">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="../../images/swiper-1.jpg" style="height: 150px;width: 100%"/></div>
+            <div class="swiper-slide"><img src="../../images/swiper-2.jpg" style="height: 150px;width: 100%"/></div>
+            <div class="swiper-slide"><img src="../../images/swiper-3.jpg" style="height: 150px;width: 100%"/></div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-interval"></div>
+
+
+
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__hd">
+            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <p class="weui-max-title">所需更改内容</p>
+        </div>
+    </a>
+
+
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">选择更改内容</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox3" value="是" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>项目基本信息</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>项目研究内容</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>项目人员</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>项目指标</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>项目经费</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__hd">
+            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <p class="weui-max-title">更改申请详情</p>
+        </div>
+    </a>
+
+
+
+
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <label class="weui-label">更改原因:</label>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea"  rows="5"></textarea>
+            <div class="weui-textarea-counter"><span>0</span>/200</div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</div>
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+
+<script>
+    $(".swiper-container").swiper({
+        loop: true,
+        autoplay: 3000
+    });
+</script>
+</body>
+
+</html>

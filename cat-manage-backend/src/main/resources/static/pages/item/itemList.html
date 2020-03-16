@@ -210,7 +210,8 @@
                                 var href = "updateItem.html?id=" + id;
                                 var edit = buttonEdit(href, "back:user:update", pers);
                                 var del = buttonDel(id, "back:permission:delete", pers);
-                                var detailsHref ="details.html?id="+id;
+                               /* var detailsHref ="details.html?id="+id;*/
+                                var detailsHref ="../list-layout/pages/projectDetails/projectInfo.html?id="+id;
                                 var expert = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>匹配专家</i></button>");
                                 expert.attr("onclick", "matchExpert(" +id+")")
                                 var showReport = expert.prop("outerHTML");
@@ -234,7 +235,7 @@
                                     btn.attr("onclick", 'setRoles(' +id+')');
                                     setRoles = btn.prop("outerHTML");
                                 }*/
-                                return edit +details+del+showReport;
+                                return details+showReport;
                             }
                         },
                     ],
@@ -253,6 +254,7 @@
             maxmin: true,
             shadeClose: true,
             content: ['../projectUser/matchExpert.html?itemId='+id]
+
 
 
         });

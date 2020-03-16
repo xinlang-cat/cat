@@ -14,15 +14,7 @@
             <div align="left">
                 <table style="width: 100%">
                     <tr>
-                        <td>
-                            <form class="form-inline" onsubmit="return false">
-                                <div class="form-group">
-                                    姓名：
-                                    <input id="name" type="text" class="form-control" placeholder="姓名">
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="mail:query"><i class="layui-icon">&#xe615;</i>搜索</button>
-                                </div>
-                            </form>
-                        </td>
+
                         <td align="right">
 
                             <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showSkill()">
@@ -121,16 +113,33 @@
                     },
                     "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                     "columns": [
-                        { "data": "createUserName", "defaultContent": ""},
-                        {
-                            "data": "createTime",
+                        { "data": "createUserName",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                return util.toDateString(data);
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-user/user-anon/" + row['createUserId'], function (res) {
+                                    data =  res[0]['name'];
+
+                                })
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        { "data": "itemName",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var id =row['itemId'];
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
+                                    data =  res[0]['item_name'];
+                                })
+
+                                $.ajaxSettings.async = true;
+                                return data;
                             }
                         },
                         {
-                            "data": "updateTime",
+                            "data": "createTime",
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 return util.toDateString(data);
@@ -147,12 +156,12 @@
                                 var edit =  buttonEdit(href, "", pers);
                                 var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
                                 var report = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
-                                report.attr("onclick", "generate(" +id+","+itemId+")")
+                                report.attr("onclick", "generate(" +id+","+itemId+")");
                                 var showReport = report.prop("outerHTML");
                                 btn.attr("onclick", "showDetail(" +id+")");
                                 var showDetail = btn.prop("outerHTML");
                                 var del = buttonDel(id,"",pers);
-                                return  edit+showDetail +del+showReport;
+                                return  edit+del+showReport;
                             }
                         },
                     ],

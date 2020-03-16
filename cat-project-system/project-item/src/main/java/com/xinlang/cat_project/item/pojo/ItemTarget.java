@@ -17,8 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "item_target")
-public
-class ItemTarget {
+public class ItemTarget {
 
     @Id
     @KeySql(useGeneratedKeys = true)

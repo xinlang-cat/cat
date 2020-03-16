@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>指标查定</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/stageSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+
+</head>
+<body ontouchstart>
+
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="../../images/swiper-1.jpg" style="height: 150px;width: 100%"/></div>
+        <div class="swiper-slide"><img src="../../images/swiper-2.jpg" style="height: 150px;width: 100%"/></div>
+        <div class="swiper-slide"><img src="../../images/swiper-3.jpg" style="height: 150px;width: 100%"/></div>
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-interval"></div>
+
+
+
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div class="weui-cell__hd">
+        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+    </div>
+    <div class="weui-cell__bd weui-cell_primary">
+        <p class="weui-max-title">指标详情</p>
+    </div>
+</a>
+
+
+
+<div class="weui-cell">
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" value="认定登记的技术合同数(输出）">
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+    <div class="weui-cell__bd">
+        <textarea class="weui-textarea" rows="5">项目指标认定登记的技术合同总金额已达到指定值，现申请指标查定。</textarea>
+    </div>
+</div>
+<div class="weui-line"></div>
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div class="weui-cell__hd">
+        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+    </div>
+    <div class="weui-cell__bd weui-cell_primary">
+        <p class="weui-max-title">查定申请详情</p>
+    </div>
+</a>
+
+<div class="weui-cell">
+    <div class="weui-cell__hd">
+        <label class="weui-label">项目名称:</label>
+    </div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" value="八角提质增效栽培技术研究与示范" placeholder="">
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+    <div class="weui-cell__hd">
+        <label class="weui-label">提交人:</label>
+    </div>
+    <div class="weui-cell__bd">
+        <input class="weui-input" type="text" value="杨珣" placeholder="">
+    </div>
+</div>
+<div class="weui-line"></div>
+
+<div class="weui-line"></div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-label">查定时间:</label>
+	</div>
+    <div class="weui-cell__bd">
+        <input class="weui-input date" type="text" value="2020/02/03">
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-label">所在地域:</label>
+	</div>
+     <div class="weui-cell__bd">
+        <input class="weui-input" id="start" type="text" value="内蒙古自治区赤峰市松山区" >
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-label">通信地址:</label>
+	</div>
+     <div class="weui-cell__bd">
+        <input class="weui-input" type="text" value="初头朗镇">
+      </div>
+</div>
+<div class="weui-line"></div>
+<!-- 
+<div class="weui-cell">
+	<div class="weui-cell__bd">
+		<label class="weui-check__label">申请详情:</label>
+	</div>
+</div>
+<div class="weui-cell">
+	<div class="weui-cell__bd">
+		<textarea class="weui-textarea"  rows="5">&nbsp;&nbsp;原始创新已经完成，情况描述达到合同要求，现申请指标查定。</textarea>
+		<div class="weui-textarea-counter"><span>0</span>/200</div>
+	</div>
+</div> -->
+<div class="weui-line"></div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-check__label">申请内容:</label>
+	</div>
+</div>
+<article class="weui-article">
+	<section>
+        <section>
+          <p>
+           &nbsp;&nbsp;原始创新已经完成，情况描述达到合同要求，现申请指标查定。
+          </p>
+        </section>
+     </section>
+</article>
+	
+<div class="weui-cells weui-cells_form">
+	<div class="weui-cell">
+		<div class="weui-cell__bd">
+			<div class="weui-uploader">
+				<div class="weui-uploader__bd">
+					<ul class="weui-uploader__files" id="uploaderFiles">
+						<li class="weui-uploader__file" style="background-image:url(../../images/swiper-1.jpg)" id="pb1" onclick="see(0);"></li>
+						<li class="weui-uploader__file" style="background-image:url(../../images/swiper-2.jpg)" id="pb2" onclick="see(1);"></li>
+						<li class="weui-uploader__file" style="background-image:url(../../images/swiper-3.jpg)" id="pb3" onclick="see(2);"></li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<div class="weui-line"></div>
+<a class="weui-cell weui-cell_access" href="javascript:;">
+    <div class="weui-cell__hd">
+        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+    </div>
+    <div class="weui-cell__bd weui-cell_primary">
+        <p class="weui-max-title">审核结果</p>
+    </div>
+</a>
+
+
+
+
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-label">查定时间:</label>
+	</div>
+    <div class="weui-cell__bd">
+        <input class="weui-input date" type="text" value="2020/02/29">
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-label">所在地域:</label>
+	</div>
+     <div class="weui-cell__bd">
+        <input class="weui-input" id="start" type="text" value="内蒙古自治区赤峰市松山区" >
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+	<div class="weui-cell__hd">
+	    <label class="weui-label">通信地址:</label>
+	</div>
+     <div class="weui-cell__bd">
+        <input class="weui-input" type="text" value="初头朗镇">
+      </div>
+</div>
+<div class="weui-line"></div> 
+<div class="weui-cell">
+	<div class="weui-cell__bd">
+		<label class="weui-label">查定目的:</label>
+	</div>
+</div>
+<div class="weui-cell">
+	<div class="weui-cell__bd">
+		<textarea class="weui-textarea"  rows="5">对指标进行实地查定，确认是否达到项目要求</textarea>
+		<div class="weui-textarea-counter"><span>0</span>/200</div>
+	</div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+<div class="weui-cell__hd">
+	    <label class="weui-label">查定依据:</label>
+	</div>
+</div>
+
+<div class="weui-cell">
+    <div class="weui-cell__bd">
+        <textarea class="weui-textarea" rows="5">根据项目合同所描述、指标详情所补充，结合实际情况进行查定</textarea>
+		<div class="weui-textarea-counter"><span>0</span>/200</div>
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+<div class="weui-cell__hd">
+	    <label class="weui-label">查定内容:</label>
+	</div>
+</div>
+
+<div class="weui-cell">
+    <div class="weui-cell__bd">
+        <textarea class="weui-textarea" rows="5">对多亩农作物进行抽样调查</textarea>
+		<div class="weui-textarea-counter"><span>0</span>/200</div>
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cell">
+<div class="weui-cell__hd">
+	    <label class="weui-label">查定方法:</label>
+	</div>
+</div>
+<div class="weui-cell">
+    <div class="weui-cell__bd">
+        <textarea class="weui-textarea" rows="5">预估农作物亩产量，结合市场销售价格，进行查定</textarea>
+		<div class="weui-textarea-counter"><span>0</span>/200</div>
+    </div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-cells weui-cells_form">
+	<div class="weui-cell">
+		<div class="weui-cell__bd">
+			<div class="weui-uploader">
+				<div class="weui-uploader__bd">
+					<ul class="weui-uploader__files" id="uploaderFiles">
+						<li class="weui-uploader__file" style="background-image:url(../../images/swiper-1.jpg)" id="pb1" onclick="see(0);"></li>
+						<li class="weui-uploader__file" style="background-image:url(../../images/swiper-2.jpg)" id="pb2" onclick="see(1);"></li>
+						<li class="weui-uploader__file" style="background-image:url(../../images/swiper-3.jpg)" id="pb3" onclick="see(2);"></li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="weui-line"></div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:history.back(-1)" id="showTooltips">关闭</a>
+</div>
+
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../weui/js/city-picker.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    $(".swiper-container").swiper({
+        loop: true,
+        autoplay: 3000
+    });
+</script>
+<script>
+	$("#start").cityPicker({
+	    title: "所在地域",
+	    onChange: function (picker, values, displayValues) {
+	        console.log(values, displayValues);
+	    }
+	});
+    //查定时间
+    $(".date").calendar({
+        title: "查定时间",
+        onChange: function (p, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
+	
+   function see(num){
+	  var pb = $.photoBrowser({
+	    items: [
+	      "../../images/swiper-1.jpg",
+	      "../../images/swiper-2.jpg",
+	      "../../images/swiper-3.jpg"
+	    ],
+	  initIndex:num,
+	    onSlideChange: function(index) {
+	      console.log(this, index);
+	    },
+	  
+	    onOpen: function() {
+	      console.log("onOpen", this);
+	    },
+	    onClose: function() {
+	      console.log("onClose", this);
+	    }
+	  });
+	  
+	    pb.open();
+	  
+   }
+    
+</script>
+</body>
+
+</html>

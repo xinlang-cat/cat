@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+
+<body ontouchstart>
+<form class="form-horizontal" onsubmit="return false" id="form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">公司名称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="公司名称">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">负责人</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="负责人">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">负责人手机</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="负责人手机">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">法人姓名</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="法人姓名">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">法人身份证</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="法人身份证">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">法人手机</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="法人手机">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">公司固话</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="公司固话">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">注册资金</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="注册资金">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                    <p class="weui-uploader__title" style="font-weight: bold">营业执照上传</p>
+                    <div class="weui-uploader__info">0/1</div>
+                </div>
+                <div class="weui-uploader__bd">
+                    <div class="weui-uploader__input-box">
+                        <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/*"
+                               multiple="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">信用代码</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="信用代码">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">公司/机构角色</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="checkbox2" value="甲方" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>甲方</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox2" class="weui-check" value="乙方">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>乙方</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="checkbox2" class="weui-check" value="丙方">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>丙方</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">公司/机构类型</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" placeholder="单位/公司类型" disabled>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">所在地域</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="start" type="text" value="" placeholder="所在地域">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">详细地址</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+    </div>
+</form>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script src="../../weui/js/city-picker.js"></script>
+<script>
+    $("#start").cityPicker({
+        title: "所在地域",
+        onChange: function (picker, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
+    layui.use('upload', function(){
+        var upload = layui.upload;
+
+        upload.render({
+            elem: '#uploaderInput2' //绑定元素
+            ,accept: 'file' //允许上传的文件类型
+            ,url: domainName + '/zuul/api-f/files'
+            ,done: function(res, index, upload){
+                layer.msg("上传成功");
+                example.ajax.reload();
+            }
+        });
+        });
+    });
+
+</script>
+</body>
+</html>

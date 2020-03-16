@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/newProjecy.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+    </style>
+</head>
+
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit();">提交</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="save();">保存</button>
+    </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+    <form id="form1">
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>项目信息</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 基本信息</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>合同编号</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="contract_no" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目类别</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="type" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目名称</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="name" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>委托单位（甲方）</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="entrusting_party" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目承担单位（乙方）</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="responsible_unit" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>受委托管理单位（丙方）</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="management_unit" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>下达文号</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="document_number" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>实施期限</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="end_date" placeholder="请输入">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--总体目标和主要研究内容-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 总体目标和主要研究内容（包括研究解决的问题、技术关键及创新内容）</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目总体目标</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <div class="field">
+                    <textarea name="overall_objective" placeholder="请输入" class="layui-textarea"></textarea>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>主要研究开发内容</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <div class="field">
+                    <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--项目考核指标-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 项目考核指标</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="30%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="5">
+                                <div class="field">
+                                    <span>技术指标</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">指标内容</th>
+                            <th class="tdDorder">完成期限</th>
+                            <th class="tdDorder">实施地点</th>
+                            <th class="tdDorder">实施人员</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- <tr>
+                        <td class="tdDorder mainTd_1">
+                            <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
+                        </td>
+                        <td class="mainTd_1 tdDorder">1</td>
+                        <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                            <div class="field">
+                                <input type="text" placeholder="请输入标题">
+                            </div>
+                        </td>
+                        <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                            <div class="field">
+                                <input type="text" placeholder="请输入标题">
+                            </div>
+                        </td>
+                        <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                            <div class="field">
+                                <input type="text" placeholder="请输入标题">
+                            </div>
+                        </td>
+                        <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                            <div class="field">
+                                <input type="text" placeholder="请输入标题">
+                            </div>
+                        </td>
+                    </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="30%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="5">
+                                <div class="field">
+                                    <span>经济指标</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">指标内容</th>
+                            <th class="tdDorder">完成期限</th>
+                            <th class="tdDorder">实施地点</th>
+                            <th class="tdDorder">实施人员</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--项目及课题进度-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 项目及课题进度</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="80%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="3">
+                                <div class="field">
+                                    <span>进度安排</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">年度</th>
+                            <th class="tdDorder">年度目标</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--主要研究、开发人员及责任分工-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 主要研究、开发人员及责任分工</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="10%">
+                            <col width="15%">
+                            <col width="15%">
+                            <col width="15%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="8">
+                                <div class="field">
+                                    <span>进度安排</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">姓名</th>
+                            <th class="tdDorder">性别</th>
+                            <th class="tdDorder">年龄</th>
+                            <th class="tdDorder">职称</th>
+                            <th class="tdDorder">从事专业</th>
+                            <th class="tdDorder">工作单位</th>
+                            <th class="tdDorder">研究开发中的责任分工</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="tdDorder mainTd_1">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
+                            </td>
+                            <td class="mainTd_1 tdDorder">1</td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--经费用途预算-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 经费用途预算</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="10%">
+                            <col width="25%">
+                            <col width="25%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="5">
+                                <div class="field">
+                                    <span>甲方提供的科技经费用途预算</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">科目</th>
+                            <th class="tdDorder">金额</th>
+                            <th class="tdDorder">开支内容</th>
+                            <th class="tdDorder">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="tdDorder mainTd_1">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
+                            </td>
+                            <td class="mainTd_1 tdDorder">1</td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="10%">
+                            <col width="25%">
+                            <col width="25%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="5">
+                                <div class="field">
+                                    <span>除甲方提供科技经费之外的其余经费</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">科目</th>
+                            <th class="tdDorder">金额</th>
+                            <th class="tdDorder">开支内容</th>
+                            <th class="tdDorder">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="tdDorder mainTd_1">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
+                            </td>
+                            <td class="mainTd_1 tdDorder">1</td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--各方联系方式及联系地址-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 各方联系方式及联系地址</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="10%">
+                            <col width="25%">
+                            <col width="25%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder" rowspan="1" colspan="5">
+                                <div class="field">
+                                    <span>除甲方提供科技经费之外的其余经费</span>
+                                </div>
+                            </th>
+                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="addTr">
+                                        <i class="layui-icon">&#xe654;</i>
+                                    </button>
+                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" name="delTr">
+                                        <i class="layui-icon">&#xe640;</i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                       name="c_all">
+                            </th>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">科目</th>
+                            <th class="tdDorder">金额</th>
+                            <th class="tdDorder">开支内容</th>
+                            <th class="tdDorder">备注</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="tdDorder mainTd_1">
+                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
+                            </td>
+                            <td class="mainTd_1 tdDorder">1</td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                <div class="field">
+                                    <input type="text" placeholder="请输入标题">
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 22px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+
+        </tr>
+        </tbody>
+    </table>
+    <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
+    </form>
+</div>
+</body>
+
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script>
+    //Demo
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            element = layui.element,
+            $ = layui.jquery;
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            console.log($('#form1').serialize())
+            console.log($('#form1').serializeArray())
+            $.ajax({
+                type: 'post',
+                url: domainName + '/project-item/item/information',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify(data.field),
+                success: function (data) {
+
+                }
+            });
+            //return false;
+        });
+        //添加tr
+        $(document).on('click', 'button[name=addTr]', function () {
+            var serial = $(this).parent().parent().parent().parent().next().children().length + 1;
+            var str = '<tr>' +
+                '<td class="tdDorder mainTd_1">' +
+                ' <input type="checkbox" title="" lay-skin="primary">' +
+                '  </td>' +
+                '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
+                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                ' <div class="field">' +
+                ' <input type="text" placeholder="请输入" name="content">' +
+                ' </div>' +
+                ' </td>' +
+                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                ' <div class="field">' +
+                '   <input type="text" placeholder="请输入" name="period">' +
+                '  </div>' +
+                ' </td>' +
+                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                ' <div class="field">' +
+                ' <input type="text" placeholder="请输入" name="site">' +
+                ' </div>' +
+                ' </td>' +
+                ' <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                ' <div class="field">' +
+                '  <input type="text" placeholder="请输入" name="">' +
+                '  </div>' +
+                '  </td>' +
+                '  </tr>';
+            $(this).parent().parent().parent().parent().next().append(str);
+            form.render();
+        });
+        //移除tr
+        $(document).on('click', 'button[name=delTr]', function () {
+            //移除选中的tr
+            var serial = $(this).parent().parent().parent().parent().next().find("input[type=checkbox]:checked");
+            serial.each(function () {
+                $(this).parent().parent().remove();
+            })
+            //重新排序
+            var serial2 = $(this).parent().parent().parent().parent().next().find("input[type=checkbox]");
+            serial2.each(function (i) {
+                $(this).parent().next().text(i + 1);
+            })
+            //如果全部移除则全选取消选中
+            if (serial2.length == 0) {
+                $(this).parent().parent().parent().next().find("input[type=checkbox]").prop("checked", false);
+            }
+            //重新渲染
+            form.render();
+        });
+        //全选
+        form.on('checkbox(c_all)', function (data) {
+            var elem = $(data.elem).parent().parent().parent().next().find('input[type=checkbox]');
+            //如果没有选项全选不可选中
+            if (elem.length == 0) {
+                $(data.elem).prop("checked", false);
+                form.render('checkbox');
+                return;
+            }
+            elem.prop("checked", data.elem.checked);
+            //$(":checkbox[name='ids']").prop("checked", data.elem.checked);
+            form.render('checkbox');
+        })
+        //有一个未选中全选取消选中
+        form.on('checkbox(c_one)', function (data) {
+
+            var item = $(data.elem).parent().parent().parent().find('input[type=checkbox]');
+            for (var i = 0; i < item.length; i++) {
+                if (item[i].checked == false) {
+                    $(data.elem).parent().parent().parent().prev().find('input[type=checkbox]').prop("checked", false);
+                    form.render('checkbox');
+                    break;
+                }
+            }
+            //如果都勾选了  勾上全选
+            var all = item.length;
+            for (var i = 0; i < item.length; i++) {
+                if (item[i].checked == true) {
+                    all--;
+                }
+            }
+            if (all == 0) {
+                $(data.elem).parent().parent().parent().prev().find('input[type=checkbox]').prop("checked", true);
+                form.render('checkbox');
+            }
+        });
+    });
+</script>
+
+</html>

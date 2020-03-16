@@ -35,6 +35,23 @@ public class auditApply implements Serializable {
     private String streetCode;
     private String description;
     private String accessory;
+    /**
+     * 查定目的
+     */
+    private String purpose;
+    /**
+     * 查定依据
+     */
+    private String depand;
+    /**
+     * 查定内容
+     */
+    private String details;
+    /**
+     * 查定方法
+     */
+    private String means;
+
 
     private Date start_date;
     private Date end_date;
