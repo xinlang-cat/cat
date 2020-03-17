@@ -798,6 +798,12 @@
         var SIGN_ECONOMIC_INDICATORS = '';
         var SIGN_INDICATORS_OF_TALENT_TEAM_CONS = '';
         var index = 1;
+        var TECHNICAL_INDICATORS_INDEX = 0;
+        var ECONOMIC_INDICATORS_INDEX = 0;
+        var INDICATORS_OF_TALENT_TEAM_CONS_INDEX = 0;
+        var STR_TECHNICAL_INDICATORS = '';
+        var STR_ECONOMIC_INDICATORS = '';
+        var STR_INDICATORS_OF_TALENT_TEAM_CONS = '';
         for (var i = 0; i < res.length; i++) {
             var data = res[i];
             if (data.type == 'OTHER_INDICATORS') {
@@ -808,6 +814,9 @@
             }
             if (data.type == 'TECHNICAL_INDICATORS') {
                 BE_TECHNICAL_INDICATORS = true;
+                if(data.content != null && data.content != ''){
+
+                }
                 SIGN_TECHNICAL_INDICATORS += data.target + ',';
                 continue;
             }
@@ -913,7 +922,7 @@
                 var str = '';
                 str += '<tr id="' + id + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + res['name'] + '" ><input type="hidden" name="fileId" value="' + id + '" ><td>' + res.name + '</td><td>';
                 str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark"></textarea></td>';
-                str += '<td><button class="layui-btn layui-btn-xs" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
+                str += '<td><button class="layui-btn layui-btn-xs" type="button" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
                 str += '<a class="layui-btn layui-btn-xs" href="' + url + '"><input type="hidden" name="fileUrl" value="' + url + '" ><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
                 $("#file_table").append(str);
             }
