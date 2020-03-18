@@ -112,7 +112,7 @@
                 </colgroup>
                 <tbody>
                 <tr>
-                    <td rowspan="7" class="table-info">申请验收单位信息</td>
+                    <td rowspan="100" class="table-info">申请验收单位信息</td>
                     <td class="td-text1">单位名称:</td>
                     <td>
                         <span class="undertaker"></span>
@@ -194,7 +194,7 @@
                 </colgroup>
                 <tbody id="userinfo">
                 <tr class="td-text">
-                    <td rowspan="7" class="table-info">主要完成人员名单</td>
+                    <td rowspan="100" class="table-info">主要完成人员名单</td>
                     <td>序号</td>
                     <td>姓名</td>
                     <td>性别</td>
@@ -223,14 +223,15 @@
                 </colgroup>
                 <tbody>
                 <tr style="font-size: 14px;font-weight: bolder;">
-                    <td rowspan="33" class="table-info">项目投入产出基本情况表</td>
+                    <td rowspan="100" class="table-info">项目投入产出基本情况表</td>
                     <td style="text-align: right;font-size: 14px;font-weight: bolder; ">参加单位数(个)</td>
                     <td colspan="7">5</td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
                 </tr>
-                <tr>
+                <tbody id="countInfo">
+                <tr class="td-text">
                     <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目组人员情况(人)</td>
                     <td class="td-text">合计</td>
                     <td class="td-text">高级职称</td>
@@ -240,15 +241,17 @@
                     <td class="td-text">硕士</td>
                     <td class="td-text">学士</td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                </tr>
+               </tbody>
+              <!-- <tr>
+                    <td id="countMan">1</td>
+                    <td id="advanced">1</td>
+                    <td id="middle">1</td>
+                    <td id="elementary">1</td>
+                    <td id="doctor">1</td>
+                    <td id="postgraduate">1</td>
+                    <td id="bachelor">1</td>
+
+                </tr>-->
                 <tr>
                     <td colspan="8"></td>
                 </tr>
@@ -285,13 +288,13 @@
                     <td class="td-text">新装置(新装备)(套)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="THE_IMPORTED _TECHNOLOGY" name="THE_IMPORTED _TECHNOLOGY"></td>
+                    <td><input id="INTEGRATED_APPLICATION_TECHNOLOGY" name="INTEGRATED_APPLICATION_TECHNOLOGY"></td>
+                    <td><input id="NEW_INDUSTRIAL_PRODUCT" name="NEW_INDUSTRIAL_PRODUCT"></td>
+                    <td><input id="NEW_AGRICULTURAL_VARIETY" name="NEW_AGRICULTURAL_VARIETY"></td>
+                    <td><input id="THE_NEW_TECHNOLOGY" name="THE_NEW_TECHNOLOGY"></td>
+                    <td><input id="THE_NEW_MATERIAL" name="THE_NEW_MATERIAL"></td>
+                    <td><input id="THE_NEW_DEVICE" name="THE_NEW_DEVICE"></td>
                 </tr>
                 <tr>
                     <td class="td-text">申请登记计算软件(套)</td>
@@ -303,13 +306,13 @@
                     <td class="td-text">试验基地(个)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="REGISTER_COMPUTER_SOFTWARE" name="REGISTER_COMPUTER_SOFTWARE"></td>
+                    <td><input id="RESEARCH_AND_DEVELOPMENT_PLATFORM" name="RESEARCH_AND_DEVELOPMENT_PLATFORM"></td>
+                    <td><input id="SCIENCE_INFORMATION_PLATFORM" name="SCIENCE_INFORMATION_PLATFORM"></td>
+                    <td><input id="PILOT_STUDIES" name="PILOT_STUDIES"></td>
+                    <td><input id="PILOT_LINE" name="PILOT_LINE"></td>
+                    <td><input id="THE_PRODUCTION_LINE" name="THE_PRODUCTION_LINE"></td>
+                    <td><input id="EXPERIMENTAL_BASE" name="EXPERIMENTAL_BASE"></td>
                 </tr>
                 <tr>
                     <td class="td-text">专利申请(项)</td>
@@ -321,13 +324,13 @@
                     <td class="td-text">参与制定技术标准(个)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="APPLICATION_FOR_PATENT" name="APPLICATION_FOR_PATENT"></td>
+                    <td><input id="APPLICATION_FOR_INVENTION_PATENT" name="APPLICATION_FOR_INVENTION_PATENT"></td>
+                    <td><input id="APPLICATION_FOR_UTILITY_PATEN" name="APPLICATION_FOR_UTILITY_PATEN"></td>
+                    <td><input id="AUTHORIZED_PATENT" name="AUTHORIZED_PATENT"></td>
+                    <td><input id="AUTHORIZED_INVENTION_PATENT" name="AUTHORIZED_INVENTION_PATENT"></td>
+                    <td><input id="AUTHORIZED_UTILITY_PATENT" name="AUTHORIZED_UTILITY_PATENT"></td>
+                    <td><input id="COUNT_STANDARD" name="COUNT_STANDARD"></td>
                 </tr>
                 <tr>
                     <td class="td-text">国家标准(个)</td>
@@ -339,13 +342,13 @@
                     <td class="td-text">国内发表(篇)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="THE_NATIONAL_STANDARD" name="THE_NATIONAL_STANDARD"></td>
+                    <td><input id="THE_INTERNATIONAL_STANDARD" name="THE_INTERNATIONAL_STANDARD"></td>
+                    <td><input id="THE_INDUSTRY_STANDARD" name="THE_INDUSTRY_STANDARD"></td>
+                    <td><input id="LOCAL_STANDARD" name="LOCAL_STANDARD"></td>
+                    <td><input id="THE_ENTERPRISE_STANDARD" name="THE_ENTERPRISE_STANDARD"></td>
+                    <td><input id="COUNT_THESIS" name="COUNT_THESIS"></td>
+                    <td><input id="DOMESTIC_PAPERS" name="DOMESTIC_PAPERS"></td>
                 </tr>
                 <tr>
                     <td class="td-text">国外发表(篇)</td>
@@ -357,12 +360,13 @@
                     <td rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="FOREIGN_PAPERS" name="FOREIGN_PAPERS"></td>
+                    <td><input id="MAKE_POSTDOCTOR" name="MAKE_POSTDOCTOR"></td>
+                    <td><input id="MAKE_DOCTOR" name="MAKE_DOCTOR"></td>
+                    <td><input id="MAKE_POSTGRADUATE" name="MAKE_POSTGRADUATE"></td>
+                    <td><input id="HOLD_TRAINING_COURSES" name="HOLD_TRAINING_COURSES"></td>
+                    <td><input id="NUMBER_OF_PARTICIPANTS" name="NUMBER_OF_PARTICIPANTS"></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -376,10 +380,11 @@
                     <td colspan="3" rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="CONVERT_THE_NUMBER_OF_APPLICATIONS" name="CONVERT_THE_NUMBER_OF_APPLICATIONS"></td>
+                    <td><input id="RESULTS_OF_INDUSTRIALIZATION" name="RESULTS_OF_INDUSTRIALIZATION"></td>
+                    <td><input id="ACHIEVEMENT_TRANSFER_CONTRACT" name="ACHIEVEMENT_TRANSFER_CONTRACT"></td>
+                    <td><input id="TOTAL_AMOUNT_OF_ACHIEVEMENT_TRANSFER_CONTRACT" name="TOTAL_AMOUNT_OF_ACHIEVEMENT_TRANSFER_CONTRACT"></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -395,17 +400,18 @@
                 </tr>
                 <tr>
                     <td class="td-text">直接经济效益</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="ALL_PRODUCTION_A" name="ALL_PRODUCTION_A"></td>
+                    <td><input id="THE_NEW_PRODUCTION_A" name="THE_NEW_PRODUCTION_A"></td>
+                    <td><input id="THE_NEW_TAX_A" name="THE_NEW_TAX_A"></td>
+                    <td><input id="NET_AMOUNT_A" name="NET_AMOUNT_A"></td>
+
                 </tr>
                 <tr>
                     <td class="td-text">间接经济效益</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="ALL_PRODUCTION_B" name="ALL_PRODUCTION_B"></td>
+                    <td><input id="THE_NEW_PRODUCTION_B" name="THE_NEW_PRODUCTION_B"></td>
+                    <td><input id="THE_NEW_TAX_B" name="THE_NEW_TAX_B"></td>
+                    <td><input id="NET_AMOUNT_B" name="NET_AMOUNT_B"></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -419,10 +425,11 @@
                     <td rowspan="2" colspan="3"></td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="ALL_PRODUCTION_YEAR" name="ALL_PRODUCTION_YEAR"></td>
+                    <td><input id="THE_NEW_PRODUCTION_YEAR" name="THE_NEW_PRODUCTION_YEAR"></td>
+                    <td><input id="THE_NEW_TAX_YEAR" name="THE_NEW_TAX_YEAR"></td>
+                    <td><input id="NET_AMOUNT_YEAR" name="NET_AMOUNT_YEAR"></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -484,7 +491,7 @@
 <script type="text/javascript" src='../../js/saveData.js'></script>
 <script type="text/javascript" src="../../js/acceptance.js"></script>
 <script>
-    var id = getUrlParam("id");
+    var id = getUrlParam("item_id");
     $("#item_id").val(id);
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer
@@ -522,7 +529,15 @@
     }
     getbasic(id);
     getCompanyInfo(id);
+
+    var advanced = 0;
+    var middle = 0;
+    var elementary = 0;
+    var doctor =0;
+    var postgraduate = 0;
+    var bachelor = 0;
     getItem_user(id);
+    getFund(id);
      function add_ACC() {
          var formdata = $("#form").serializeObject();
          $.ajax({
