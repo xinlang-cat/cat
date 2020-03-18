@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>jQuery WeUI</title>
+    <title>公司资料</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -23,7 +23,7 @@
             <label class="weui-label">公司名称</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="公司名称">
+            <input class="weui-input" type="text" id="signName" name="signName" value="" placeholder="公司名称">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -32,7 +32,7 @@
             <label class="weui-label">负责人</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="负责人">
+            <input class="weui-input" type="text" id="principal" name="principal" value="" placeholder="负责人">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -41,7 +41,7 @@
             <label class="weui-label">负责人手机</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="负责人手机">
+            <input class="weui-input" type="text" id="principalPhone" name="principalPhone" value="" placeholder="负责人手机">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -50,7 +50,7 @@
             <label class="weui-label">法人姓名</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="法人姓名">
+            <input class="weui-input" type="text" id="legalPerson" name="legalPerson" value="" placeholder="法人姓名">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -59,7 +59,7 @@
             <label class="weui-label">法人身份证</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="法人身份证">
+            <input class="weui-input" type="text" id="legalPersonCard" name="legalPersonCard" value="" placeholder="法人身份证">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -68,7 +68,7 @@
             <label class="weui-label">法人手机</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="法人手机">
+            <input class="weui-input" type="text" id="legalPersonPhone" name="legalPersonPhone" value="" placeholder="法人手机">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -77,7 +77,7 @@
             <label class="weui-label">公司固话</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="公司固话">
+            <input class="weui-input" type="text" id="telephone" name="telephone" value="" placeholder="公司固话">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -86,7 +86,7 @@
             <label class="weui-label">注册资金</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="注册资金">
+            <input class="weui-input" type="text" id="registeredCapital" name="registeredCapital" value="" placeholder="注册资金">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -99,7 +99,7 @@
                 </div>
                 <div class="weui-uploader__bd">
                     <div class="weui-uploader__input-box">
-                        <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/*"
+                        <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/vnd.sealedmedia.softseal.jpg"
                                multiple="">
                     </div>
                 </div>
@@ -112,7 +112,7 @@
             <label class="weui-label">信用代码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="itemName" name="itemName" value="" placeholder="信用代码">
+            <input class="weui-input" type="text" id="deptCode" name="deptCode" value="" placeholder="信用代码">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -120,7 +120,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox2" value="甲方" checked="checked">
+                <input type="radio" class="weui-check" name="identity" value="PARTY_A" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -129,7 +129,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox2" class="weui-check" value="乙方">
+                <input type="radio" name="identity" class="weui-check" value="PARTY_B">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -138,22 +138,72 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox2" class="weui-check" value="丙方">
+                <input type="radio" name="identity" class="weui-check" value="PARTY_C">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
-                <p>丙方</p>
+                <p>监理</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="identity" class="weui-check" value="PARTY_D">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>验收</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="identity" class="weui-check" value="EXPERT">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>专家</p>
             </div>
         </label>
     </div>
+
     <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">公司/机构类型</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="单位/公司类型" disabled>
-        </div>
+    <div class="weui-cells__title">公司/机构类型</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="type" value="ACADEMY" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>大专院校</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="type" class="weui-check" value="FIRM">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>企业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="type" class="weui-check" value="UNIT">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>事业单位</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="type" class="weui-check" value="RESTS">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>其他</p>
+            </div>
+        </label>
     </div>
     <div class="weui-line"></div>
     <div class="weui-cell">
@@ -169,7 +219,7 @@
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" rows="3"></textarea>
+                <textarea class="weui-textarea" id="address" name="address" placeholder="请输入文本" rows="3"></textarea>
             </div>
         </div>
     </div>
@@ -188,6 +238,7 @@
 <script src="../../weui/js/jquery-weui.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.all.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/constant.js"></script>
 <script src="../../weui/js/city-picker.js"></script>
 <script>
     $("#start").cityPicker({
@@ -198,16 +249,13 @@
     });
     layui.use('upload', function(){
         var upload = layui.upload;
-
         upload.render({
-            elem: '#uploaderInput2' //绑定元素
-            ,accept: 'file' //允许上传的文件类型
+            elem: '#uploaderInput1' //绑定元素
+            ,accept: '*.jpg' //允许上传的文件类型
             ,url: domainName + '/zuul/api-f/files'
             ,done: function(res, index, upload){
                 layer.msg("上传成功");
-                example.ajax.reload();
             }
-        });
         });
     });
 
