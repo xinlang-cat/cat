@@ -766,7 +766,7 @@
         $(".createUserPhone").html(res.data[0].phone);
     });
     //负责填写的部分
-     if ($.inArray('principalCheckStage', pers) < 0) {
+    if ($.inArray('principalCheckStage', pers) > 0) {
         var str = '';
         str += '<td><label>项目负责人承诺：</label>';
         str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck"></textarea> </br>';
@@ -774,8 +774,8 @@
         str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
         $(".principalCheckStage").append(str);
     }
-     //单位填写的部分
-     if ($.inArray('deptCheckStage', pers) < 0) {
+    //单位填写的部分
+    if ($.inArray('deptCheckStage', pers) > 0) {
         var str = '';
         str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
         str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施"></div>';
@@ -793,34 +793,55 @@
         var BE_ECONOMIC_INDICATORS = false;
         var BE_INDICATORS_OF_TALENT_TEAM_CONS = false;
         var BE_OTHER_INDICATORS = false;
+
+        var STR_TECHNICAL_INDICATORS = '';
+        var STR_ECONOMIC_INDICATORS = '';
+        var STR_INDICATORS_OF_TALENT_TEAM_CONS = '';
         var STR_OTHER_INDICATORS = '';
-        var SIGN_TECHNICAL_INDICATORS = '';
-        var SIGN_ECONOMIC_INDICATORS = '';
-        var SIGN_INDICATORS_OF_TALENT_TEAM_CONS = '';
-        var index = 1;
+
+        var SIGNS = '';
+
+        var TECHNICAL_INDICATORS_INDEX = 1;
+        var ECONOMIC_INDICATORS_INDEX = 1;
+        var INDICATORS_OF_TALENT_TEAM_CONS_INDEX = 1;
+        var OTHER_INDICATORS_INDEX = 1;
         for (var i = 0; i < res.length; i++) {
             var data = res[i];
-            if (data.type == 'OTHER_INDICATORS') {
-                BE_OTHER_INDICATORS = true;
-                STR_OTHER_INDICATORS += index + '.' + data.content + '</br>';
-                index++;
-                continue;
+            if (data.count == null) {
+                if (data.type == 'OTHER_INDICATORS') {
+                    BE_OTHER_INDICATORS = true;
+                    STR_OTHER_INDICATORS += OTHER_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    OTHER_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'TECHNICAL_INDICATORS') {
+                    BE_TECHNICAL_INDICATORS = true;
+                    STR_TECHNICAL_INDICATORS += TECHNICAL_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    TECHNICAL_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'ECONOMIC_INDICATORS') {
+                    BE_ECONOMIC_INDICATORS = true;
+                    STR_ECONOMIC_INDICATORS += ECONOMIC_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    ECONOMIC_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    BE_INDICATORS_OF_TALENT_TEAM_CONS = true;
+                    STR_INDICATORS_OF_TALENT_TEAM_CONS += INDICATORS_OF_TALENT_TEAM_CONS_INDEX + '.' + data.content + '</br>';
+                    INDICATORS_OF_TALENT_TEAM_CONS_INDEX++;
+                    continue
+                }
             }
-            if (data.type == 'TECHNICAL_INDICATORS') {
-                BE_TECHNICAL_INDICATORS = true;
-                SIGN_TECHNICAL_INDICATORS += data.target + ',';
-                continue;
-            }
-            if (data.type == 'ECONOMIC_INDICATORS') {
-                BE_ECONOMIC_INDICATORS = true;
-                SIGN_ECONOMIC_INDICATORS += data.target + ',';
-                continue;
-            }
-            if (data.type == 'INDICATORS_OF_TALENT_TEAM_CONS') {
-                BE_INDICATORS_OF_TALENT_TEAM_CONS = true;
-                SIGN_INDICATORS_OF_TALENT_TEAM_CONS += data.target + ',';
-            }
+            SIGNS += data.target + ',';
         }
+        var url = domainName + "/api-label/label/tree/";
+        $.get(url + SIGNS.trim(","), function (res) {
+            for (var i = 0; i < res.length; i++) {
+                var data = res[i];
+                addStageTarget(data);
+            }
+        });
         if (BE_OTHER_INDICATORS) {
             var str1 = '';
             str1 += '<td>其他指标</td><td><span>' + STR_OTHER_INDICATORS + '</span><input type="hidden" name="otherTarget" value="' + STR_OTHER_INDICATORS + '"></td>';
@@ -830,57 +851,33 @@
             str1 += 'id="otherTargetDescribe" name="otherTargetDescribe"></textarea></td>';
             $("#OTHER_INDICATORS").append(str1);
         }
-        var url = domainName + "/api-label/label/tree/";
         if (BE_ECONOMIC_INDICATORS) {
-            $.get(url + SIGN_ECONOMIC_INDICATORS.trim(","), function (res) {
-                var content = '';
-                for (var i = 0; i < res.length; i++) {
-                    var data = res[i];
-                    content += (i + 1) + '.' + data.content + '</br>';
-                    addStageTarget(data);
-                }
-                var str = '';
-                str += '<td>经济指标</td><td><span>' + content + '</span><input type="hidden" name="economyTarget" value="' + content + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="economyTargetSchedule" name="economyTargetSchedule"></textarea></td>';
-                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="economyTargetDescribe" name="economyTargetDescribe"></textarea></td>';
-                $("#ECONOMIC_INDICATORS").append(str);
-            })
+            var str = '';
+            str += '<td>经济指标</td><td><span>' + STR_ECONOMIC_INDICATORS + '</span><input type="hidden" name="economyTarget" value="' + STR_ECONOMIC_INDICATORS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="economyTargetSchedule" name="economyTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="economyTargetDescribe" name="economyTargetDescribe"></textarea></td>';
+            $("#ECONOMIC_INDICATORS").append(str);
         }
         if (BE_TECHNICAL_INDICATORS) {
-            $.get(url + SIGN_TECHNICAL_INDICATORS.trim(","), function (res) {
-                var content = '';
-                for (var i = 0; i < res.length; i++) {
-                    var data = res[i];
-                    content += (i + 1) + '.' + data.content + '</br>';
-                    addStageTarget(data);
-                }
-                var str = '';
-                str += '<td>技术指标</td><td><span>' + content + '</span><input type="hidden" name="skillTarget" value="' + content + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="skillTargetSchedule" name="skillTargetSchedule"></textarea></td>';
-                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="skillTargetDescribe" name="skillTargetDescribe"></textarea></td>';
-                $("#TECHNICAL_INDICATORS").append(str);
-            })
+            var str = '';
+            str += '<td>技术指标</td><td><span>' + STR_TECHNICAL_INDICATORS + '</span><input type="hidden" name="skillTarget" value="' + STR_TECHNICAL_INDICATORS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="skillTargetSchedule" name="skillTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="skillTargetDescribe" name="skillTargetDescribe"></textarea></td>';
+            $("#TECHNICAL_INDICATORS").append(str);
+
         }
         if (BE_INDICATORS_OF_TALENT_TEAM_CONS) {
-            $.get(url + SIGN_INDICATORS_OF_TALENT_TEAM_CONS.trim(","), function (res) {
-                var content = '';
-                for (var i = 0; i < res.length; i++) {
-                    var data = res[i];
-                    content += (i + 1) + '.' + data.content + '</br>';
-                    addStageTarget(data);
-                }
-                var str = '';
-                str += '<td>人才队伍建设指标</td><td><span>' + content + '</span><input type="hidden" name="personTarget" value="' + content + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="personTargetSchedule" name="personTargetSchedule"></textarea></td>';
-                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="personTargetDescribe" name="personTargetDescribe"></textarea></td>';
-                $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
-            })
+            var str = '';
+            str += '<td>人才队伍建设指标</td><td><span>' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '</span><input type="hidden" name="personTarget" value="' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="personTargetSchedule" name="personTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="personTargetDescribe" name="personTargetDescribe"></textarea></td>';
+            $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
         }
     });
     var laydate;
@@ -888,7 +885,7 @@
         var layer = layui.layer
             , upload = layui.upload
             , form = layui.form;
-            laydate = layui.laydate;
+        laydate = layui.laydate;
         lay('.date').each(function () {
             laydate.render({
                 elem: this
@@ -949,13 +946,13 @@
             data: JSON.stringify(formData),
             success: function (res) {
                 alert("成功");
-                $("#form").find("input,textarea").each(function(){
-                    $(this).attr('disabled',false);
+                $("#form").find("input,textarea").each(function () {
+                    $(this).attr('disabled', false);
                 });
             },
-            error :function (res) {
-                $("#form").find("input,textarea").each(function(){
-                    $(this).attr('disabled',false);
+            error: function (res) {
+                $("#form").find("input,textarea").each(function () {
+                    $(this).attr('disabled', false);
                 });
             }
         })
@@ -966,16 +963,16 @@
     function setObjectProperty(attribute) {
         var target = $(attribute);
         var arr = new Array();
-        for(var i=0;i<target.length;i++){
+        for (var i = 0; i < target.length; i++) {
             var obj = {};
             var input = $(target[i]).find('input,textarea');
             var falg = false;
-            for(var j=0;j<input.length;j++){
+            for (var j = 0; j < input.length; j++) {
                 falg = true;
                 obj[$(input[j]).attr('name')] = $(input[j]).val();
-                $(input[j]).attr('disabled',true)
+                $(input[j]).attr('disabled', true)
             }
-            if(falg){
+            if (falg) {
                 arr.push(obj);
             }
             falg = false;
@@ -1010,6 +1007,7 @@
     var scienceAchievementAwardIndex = 0;
     var scienceAchievementRegisterIndex = 0;
     var technologyPactRegisterIndex = 0;
+
     //添加一个tr表格
     function addTr(type) {
         if (type == 'stagePaperCatalogue') {
