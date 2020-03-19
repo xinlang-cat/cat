@@ -493,11 +493,11 @@
                 <div class="col-md-12">
                     <button class="btn btn-primary"  onclick=" history.back(-1);">返回</button>
                     <button class="btn btn-primary"  onclick="add_ACC();">
-                        <i class="fa fa-save"></i> 保存
-                    </button>
-                    <button class="btn btn-primary"  onclick="send_ACC();">
                         <i class="fa fa-save"></i> 提交
                     </button>
+                    <!--<button class="btn btn-primary"  onclick="send_ACC();">
+                        <i class="fa fa-save"></i> 提交
+                    </button>-->
                 </div>
             </div>
         </div>
@@ -524,11 +524,12 @@
 <script>
     var item_id = getUrlParam("item_id");
     $("#item_id").val(item_id);
+    var layer,upload,form,laydate;
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
-        var layer = layui.layer
-            , upload = layui.upload
-            , form = layui.form
-            , laydate = layui.laydate;
+        layer = layui.layer;
+        upload = layui.upload;
+        form = layui.form;
+        laydate = layui.laydate;
         lay('.date').each(function () {
             laydate.render({
                 elem: this

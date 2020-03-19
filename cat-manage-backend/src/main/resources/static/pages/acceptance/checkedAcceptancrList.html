@@ -177,15 +177,68 @@
                             "render": function (data, type, row) {
                                 var id = row['itemId'];
                                 /**
-                                 * 监理类型为1
-                                 * 甲方类型为2
+                                 * 甲方类型为1
+                                 * 监理类型为2
+                                 * 专家类型为3
+                                 * 验收类型为4
+                                 * 管理员类型为5
                                  * @type {string}
                                  */
                                 var detailsHref ="show_acceptance.html?item_id="+id+"&userType="+2;
                                 var details = "";
                                 var btn = $("<a  href="+detailsHref+" class=\"layui-btn layui-btn-xs\"> 详情</a>");
                                 details = btn.prop("outerHTML");
-                                return details;
+                                /*return details;*/
+
+                                var href = "updateRole.html?id=" + id;
+                                var edit = buttonEdit(href, "back:role:update", pers);
+                                var del = buttonDel(id, "back:role:delete", pers);
+
+                                //甲方审核
+                                var PARTY_A = "";
+                                var userType="";
+                                if($.inArray("check:acceptance:PARTY_A", pers) >= 0){
+                                    /*var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>甲方审核</i></button>");
+                                    btn.attr("onclick", 'check(' +id+',1)');
+                                    setPermission = btn.prop("outerHTML");*/
+                                    userType=1;
+                                }
+
+                                //监理审核
+                                var PARTY_C = "";
+                                if($.inArray("check:acceptance:PARTY_C", pers) >= 0){
+                                    /*var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>监理审核</i></button>");
+                                    btn.attr("onclick", 'check(' +id+',2)');
+                                    setMenu = btn.prop("outerHTML");*/
+                                    userType=2;
+                                }
+                                //验收审核
+                                var PARTY_D = "";
+                                if($.inArray("check:acceptance:PARTY_D", pers) >= 0){
+                                    /*var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收审核</i></button>");
+                                    btn.attr("onclick", 'check(' +id+',3)');
+                                    setMenu = btn.prop("outerHTML");*/
+                                    userType=3;
+                                }
+                                //专家审核
+                                var EXPERT = "";
+                                if($.inArray("check:acceptance:EXPERT", pers) >= 0){
+                                   /* var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>专家审核</i></button>");
+                                    btn.attr("onclick", 'check(' +id+',4)');
+                                    setMenu = btn.prop("outerHTML");*/
+                                    userType=4;
+                                }
+                                var admin = "";
+                                if($.inArray("check:acceptance:admin", pers) >= 0){
+                                   /* var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>查看</i></button>");
+                                    btn.attr("onclick", 'check(' +id+',5)');
+                                    setPermission = btn.prop("outerHTML");*/
+                                    userType=5;
+                                }
+                                var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收审核</i></button>");
+                                   btn.attr("onclick", 'check(' +id+','+userType+')');
+                                   setMenu = btn.prop("outerHTML");
+                                return  details + setMenu;
                             }
                         },
                         /* {
@@ -226,6 +279,9 @@
 
             }
         });
+    }
+    function setMenu(id,userType) {
+        alert(id+","+userType);
     }
     function read(id,userType) {
         layer.open({
