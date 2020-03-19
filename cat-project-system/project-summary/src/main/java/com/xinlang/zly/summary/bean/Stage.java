@@ -70,13 +70,16 @@ public class Stage implements Serializable {
     private String bankLoan;//银行贷款
     private String foreignFund;//国外资金
     private String otherFund;//其他资金
+    private String principal;//负责人
     private String principalCheck;//负责人审核意见
+    private Integer principalCheckEnable;//负责人审核结果
     private Date principalCheckTime ;//负责人审核时间
     private String projectCompletion;//项目完成情况
     private String deptCheck;//单位审核意见
+    private Integer deptCheckEnable;//单位审核结果
     private String deptCheckUser;//经办人
     private Date deptCheckTime;//单位审核时间
-    private boolean enable;//状态
+    private Integer enable;//状态
     @Transient
     private List<String> causes;//项目拖延、停顿、终止、撤销的主要原因
     @Transient

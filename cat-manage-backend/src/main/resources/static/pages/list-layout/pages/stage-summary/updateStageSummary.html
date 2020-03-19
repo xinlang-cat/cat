@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>修改阶段报告</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
+    <style>
+        .layui-table thead tr {
+            text-align: center;
+        }
+
+        .layui-table th {
+            text-align: center;
+            font-weight: 400;
+        }
+
+        tbody td {
+            text-align: left;
+            border: 1px solid #000;
+        }
+
+        span {
+            float: left;
+        }
+
+        .table-info {
+            background-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .td-text {
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        .td-text1 {
+            text-align: right;
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        .layui-input-block {
+            margin-left: 0px;
+        }
+
+        .layui-form-radio {
+            width: 220px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="content" style="margin-bottom: 100px;">
+
+    <div><h1 style="text-align: center;margin-top: 40px;margin-bottom: 20px;">执行报告</h1></div>
+    <div style="text-align: center;margin-bottom: 20px;"><h3>（科技重大专项、重点研发计划、技术创新引导专项、基地与人才专项类别适用）</h3></div>
+    <div style="margin:40px;">
+        <h2>填报说明:</h2>
+        <span style="margin-left: 40px;">
+                一、制表目的：本套调查表是为掌握广西科技计划项目的执行情况，加强科技计划项目的管理，促进科技计 划管理的规范化、科学化而设计。</br>
+            二、调查范围：报告期内仍在实施的广西科技计划项目(课题)。调查表由项目（课题）负责人填报，项目（ 课题）第一承担单位审核。</br>
+            三、报告期： 2018年01月01日 至 2019年12月31日</br>
+            四、填报要求：</br>
+            1.调查表上报时，必须由项目负责人签章确认并盖填表单位公章。</br>
+            2.要按调查表所规定的指标含义、计算方法、分类标准、编号代码等认真填报。未经同意，任何单位和个人 不得修改，不得虚报、瞒报、谎报数据。</br>
+            五、关于填报内容的说明</br>
+            1．项目的经费管理情况，指的是项目所有经费的情况（不仅指科技厅资助的经费）。</br>
+            2. 项目效益及成果情况，有则填，无则不填。</br>
+            </span>
+    </div>
+
+    <form class="layui-form" id="form">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="34%">
+                    <col width="14%">
+                    <col width="34%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="4" class="table-info">基本信息</td>
+                    <td class="td-text1">项目名称:</td>
+                    <td>
+                        <span class="item_name"></span>
+                        <input type="hidden" id="item_name" name="itemName" value="">
+                    </td>
+                    <td class="td-text1">合同编号:</td>
+                    <td>
+                        <span class="contract_no"></span>
+                        <input type="hidden" id="contract_no" name="contractNo" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目类别:</td>
+                    <td>
+                        <span class="category"></span>
+                        <input type="hidden" id="category" name="category" value="">
+                    </td>
+                    <td class="td-text1">承担单位:</td>
+                    <td>
+                        <span class="undertaker"></span>
+                        <input type="hidden" id="undertaker" name="undertaker" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">填 报 人:</td>
+                    <td>
+                        <span class="createUserName"></span>
+                        <input type="hidden" id="createUserName" name="createUserName" value="">
+                    </td>
+                    <td class="td-text1">填报人电话:</td>
+                    <td>
+                        <span class="createUserPhone"></span>
+                        <input type="hidden" id="createUserPhone" name="createUserPhone" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">填报人邮箱:</td>
+                    <td>
+                        <span class="createUserEmail"></span>
+                        <input type="hidden" id="createUserEmail" name="createUserEmail" value="">
+                    </td>
+                    <td class="td-text1">填报日期:</td>
+                    <td>
+                        <span id="today"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="38%">
+                    <col width="16%">
+                    <col width="28%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="100" class="table-info">项目基本信息及执行进展情况</td>
+                    <td class="td-text1">合同规定起止时间:</td>
+                    <td colspan="3" style="text-align: center">
+                        <span class="startAndEndTime"></span>
+                        <input type="hidden" id="startAndEndTime" name="startAndEndTime">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">是否申请延期:</td>
+                    <td>
+                        <input type="radio" name="applicantExtension" value="是" title="是">
+                        <input type="radio" name="applicantExtension" value="否" title="否">
+                    </td>
+                    <td class="td-text1">延期批复的截至时间</td>
+                    <td>
+                        <span> <input class="form-control date" placeholder="申请日期" type="text"
+                                      name="extensionTime" maxlength="50"
+                                      id="extensionTime" data-bv-notempty="true"
+                                      data-bv-notempty-message="申请日期 不能为空"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">产学研联合:</td>
+                    <td colspan="3">
+                        <input type="radio" name="produceLearnResearch" value="是" title="是">
+                        <input type="radio" name="produceLearnResearch" value="否" title="否">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">创新类型:</td>
+                    <td colspan="3">
+                        <input type="radio" name="innovateType" value="原始创新" title="原始创新">
+                        <input type="radio" name="innovateType" value="集成创新" title="集成创新">
+                        <input type="radio" name="innovateType" value="引进消化吸收再创新" title="引进消化吸收再创新">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">合作形式:</td>
+                    <td colspan="3">
+                        <input type="radio" name="collaborate" value="国外（境外）合作" title="国外（境外）合作">
+                        <input type="radio" name="collaborate" value="区外合作" title="区外合作">
+                        <input type="radio" name="collaborate" value="区内合作" title="区内合作">
+                        <input type="radio" name="collaborate" value="自主研发" title="自主研发">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">主要技术来源单位:</td>
+                    <td colspan="3">
+                        <input type="radio" name="skillSourceDept" value="区外科研院所" title="区外科研院所">
+                        <input type="radio" name="skillSourceDept" value="区外大专院校" title="区外大专院校">
+                        <input type="radio" name="skillSourceDept" value="区外企业及其所属科技机构" title="区外企业及其所属科技机构">
+                        <input type="radio" name="skillSourceDept" value="区内科研院所" title="区内科研院所">
+                        <input type="radio" name="skillSourceDept" value="区内大专院校" title="区内大专院校">
+                        <input type="radio" name="skillSourceDept" value="区内企业及其所属科技机构" title="区内企业及其所属科技机构">
+                        <input type="radio" name="skillSourceDept" value="国外（境外）" title="国外（境外）">
+                        <input type="radio" name="skillSourceDept" value="自有技术" title="自有技术">
+                        <input type="radio" name="skillSourceDept" value="其它" title="其它">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目进展情况:</td>
+                    <td colspan="3">
+                        <input type="radio" name="progress" value="按计划进度进行" title="按计划进度进行">
+                        <input type="radio" name="progress" value="进度超前" title="进度超前">
+                        <input type="radio" name="progress" value="拖延" title="拖延">
+                        <input type="radio" name="progress" value="停顿" title="停顿">
+                        <input type="radio" name="progress" value="申请终止" title="申请终止">
+                        <input type="radio" name="progress" value="撤销" title="撤销">
+                        <input type="radio" name="progress" value="已完成(未验收)" title="已完成(未验收)">
+                        <input type="radio" name="progress" value="已验收" title="已验收">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目拖延、停顿、终止 、撤销的主要原因（最 多选三项）:</td>
+                    <td>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="0"
+                                                              title="0.技术变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="1"
+                                                              title="1.计划性调整"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="2"
+                                                              title="2.设备、材料不落实"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="3"
+                                                              title="3.协作关系影响"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="4"
+                                                              title="4.资金不到位"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="5"
+                                                              title="5.市场变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="6"
+                                                              title="6.技术骨干变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="7"
+                                                              title="7.立题不当"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8"
+                                                              title="8.不可抗拒因素"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="9"
+                                                              title="9.合作方变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="10"
+                                                              title="10.其他原因"></div>
+                    </td>
+                    <td colspan="2">
+                        <span>
+                            勾选项目进展受阻的主要原因，最多选三项：</br>    
+                            0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br>    
+                            1.计划性调整：由项目组织部门或主管部门审定对合同书 的计划进度进行的调整。</br>  
+                            2.设备、材料不落实：由于设备紧张、材料短缺等原因而 影响计划进度的完成。</br>     
+                            3.协作关系影响：由于协作单位拖延加工、检验、测试以 及依托工程拖延等影响计划进度的完成。</br>     
+                            4.资金不到位：由于在报告期内项目资金不到位而影响计 划进度的完成。</br>     
+                            5.市场变化：由于市场的供求状况发生改变，而使该项目 不能或不宜按原计划进度进行。</br>     
+                            6.技术骨干变动：由于项目组技术骨干调动或较长时间脱 离项目活动等原因而影响计划进度完成。</br>     
+                            7.立题不当：由于可行性研究不够、制定的指标过高、技 术不成熟、技术力量不足，导致项目难以进行而影响计划进度 的完成。</br>     
+                            8.不可抗拒因素：人力不可抗拒因素，例如自然灾害等。</br>     
+                            9.合作方变动：国际或区域科技合作项目的合作方发生变 动，导致项目难以按计划完成。</br>     
+                            10.其他原因：除上述原因以外，影响计划进度完成的其 他各种原因。论文发表周期较长、项目建设场地问题。</br>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;"><h3>考核指标完成情况</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">考核指标</td>
+                    <td style="text-align: center;">完成情况</td>
+                    <td style="text-align: center;">完成情况描述</td>
+                </tr>
+
+                <tr id="TECHNICAL_INDICATORS" class="stageKpi">
+
+                </tr>
+
+                <tr id="ECONOMIC_INDICATORS" class="stageKpi">
+                </tr>
+
+                <tr id="INDICATORS_OF_TALENT_TEAM_CONS" class="stageKpi">
+                </tr>
+
+                <tr id="OTHER_INDICATORS" class="stageKpi">
+                </tr>
+
+                <tr>
+                    <td>项目重要进展情况描述：</td>
+                    <td colspan="3">
+                        <textarea placeholder="项目重要进展情况描述" class="layui-textarea form-control"
+                                  lay-verify="required"
+                                  id="importanceDescribe" name="importanceDescribe"></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="25%">
+                    <col width="24%">
+                    <col width="24%">
+                    <col width="24%">
+                </colgroup>
+                <tbody id="userinfo">
+                <tr class="td-text">
+                    <td rowspan="6" class="table-info">项目经费管理情况</td>
+                </tr>
+                <tr>
+                    <td>项目资金是否单独核算 :</td>
+                    <td colspan="3">
+                        <input type="radio" name="isOneCheck" value="是" title="是">
+                        <input type="radio" name="isOneCheck" value="否" title="否">
+                    </td>
+                </tr>
+                <tr>
+                    <td>单独核算形式：</td>
+                    <td colspan="3">
+                        <input type="radio" name="oneCheckType" value="专账核算" title="专账核算">
+                        <input type="radio" name="oneCheckType" value="往来账核算" title="往来账核算">
+                        <input type="radio" name="oneCheckType" value="辅助账核算" title="辅助账核算">
+                        <input type="radio" name="oneCheckType" value="其他" title="其他">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">项目资金收支情况（截至报告期限）</td>
+                </tr>
+                <tr>
+                    <td>收入</td>
+                    <td>支出</td>
+                    <td>其中劳务费支出</td>
+                    <td>其中缴费支出</td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" placeholder="收入" type="text" name="allIncome" id="allIncome"
+                               data-bv-notempty="true"></td>
+                    <td><input class="form-control" placeholder="支出" type="text" name="allExpend" id="allExpend"
+                               data-bv-notempty="true"></td>
+                    <td><input class="form-control" placeholder="其中劳务费支出" type="text" name="labourExpend"
+                               id="labourExpend" data-bv-notempty="true"></td>
+                    <td><input class="form-control" placeholder="其中缴费支出" type="text" name="performanceExpend"
+                               id="performanceExpend" data-bv-notempty="true"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="9%">
+                    <col width="9%">
+                    <col width="9%">
+                </colgroup>
+                <tbody id="userinf">
+                <tr class="td-text">
+                    <td rowspan="100" class="table-info">项目经费使用情况</td>
+                </tr>
+                <tr>
+                    <td rowspan="2" colspan="2">科目</td>
+                    <td rowspan="2">支出金额</td>
+                    <td colspan="2">其中：广西科技厅资助经费 （如为先验收后补助项目，则此处经费 为乙方自筹经费中的科技经费）</td>
+                    <td rowspan="2" colspan="4">开支内容</td>
+                </tr>
+                <tr>
+                    <td>合同原始预算</td>
+                    <td>已支出金额</td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">合计<input class="form-control" type="hidden" name="fundUseSubject" value="合计"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><input class="form-control" type="hidden" name="fundUseRemark" value="/"></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">(一)直接费用<input class="form-control" type="hidden" name="fundUseSubject" value="直接费用">
+                    </td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><input class="form-control" type="hidden" name="fundUseRemark" value="/"></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">设备费<input class="form-control" type="hidden" name="fundUseSubject" value="设备费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">材料费<input class="form-control" type="hidden" name="fundUseSubject" value="材料费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">测试化验加工费<input class="form-control" type="hidden" name="fundUseSubject"
+                                                  value="测试化验加工费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">燃料及动力费<input class="form-control" type="hidden" name="fundUseSubject"
+                                                 value="燃料及动力费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">差旅/会议/国际合作及交流费<input class="form-control" type="hidden" name="fundUseSubject"
+                                                         value="差旅/会议/国际合作及交流费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">出版/文献/信息传播/知识产权事务费<input class="form-control" type="hidden" name="fundUseSubject"
+                                                             value="出版/文献/信息传播/知识产权事务费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">劳务费<input class="form-control" type="hidden" name="fundUseSubject" value="劳务费"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">专家咨询费<input class="form-control" type="hidden" name="fundUseSubject" value="专家咨询费">
+                    </td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">其他支出<input class="form-control" type="hidden" name="fundUseSubject" value="其他支出">
+                    </td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">(二)间接费用<input class="form-control" type="hidden" name="fundUseSubject"
+                                                  value="(二)间接费用"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><input class="form-control" type="hidden" name="fundUseRemark" value="/"></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">缴费支出<input class="form-control" type="hidden" name="fundUseSubject" value="缴费支出">
+                    </td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr class="stageFundUse">
+                    <td colspan="2">其他费用<input class="form-control" type="hidden" name="fundUseSubject" value="其他费用">
+                    </td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
+                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
+                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
+                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="9"><h3>项目其他经费支出情况（如为先验收后补助项目，则此处经费不包含自筹经费中的科技经费）</h3></td>
+                </tr>
+                <tr>
+                    <td>国家科技部门拨款</td>
+                    <td>国家其他部门拨款</td>
+                    <td>区级部门拨款</td>
+                    <td>市级部门拨款</td>
+                    <td>县级部门拨款</td>
+                    <td>自筹资金</td>
+                    <td>银行贷款</td>
+                    <td>国外资金</td>
+                    <td>其他资金</td>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="text" name="stateSkillDeptAppropriation"
+                               id="stateSkillDeptAppropriation"></td>
+                    <td><input class="form-control" type="text" name="stateOtherDeptAppropriation"
+                               id="stateOtherDeptAppropriation"></td>
+                    <td><input class="form-control" type="text" name="districtDeptAppropriation"
+                               id="districtDeptAppropriation"></td>
+                    <td><input class="form-control" type="text" name="cityDeptAppropriation" id="cityDeptAppropriation">
+                    </td>
+                    <td><input class="form-control" type="text" name="countyDeptAppropriation"
+                               id="countyDeptAppropriation"></td>
+                    <td><input class="form-control" type="text" name="selfRaisedFund" id="selfRaisedFund"></td>
+                    <td><input class="form-control" type="text" name="bankLoan" id="bankLoan"></td>
+                    <td><input class="form-control" type="text" name="foreignFund" id="foreignFund"></td>
+                    <td><input class="form-control" type="text" name="otherFund" id="otherFund"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="3%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="27%">
+                    <col width="7%">
+                </colgroup>
+                <tbody>
+                <tr style="font-size: 14px;font-weight: bolder;">
+                    <td rowspan="100" class="table-info">项目效益及成果情况</td>
+                    <td colspan="9"><h3>（一）项目效益及成果基本情况</h3></td>
+                </tr>
+                <tr class="stageTarget">
+                    <td colspan="7" style="text-align: center;">效益/成果名称</td>
+                    <td style="text-align: center;" colspan="2">数量</td>
+                </tr>
+                <tr>
+                    <td colspan="9"></td>
+                </tr>
+                <tr class="stagePaperCatalogue">
+                    <td colspan="9">
+                        <h3 style="float: left">（二）专著、论文目录</h3>
+                        <button class="layui-btn layui-btn-sm" type="button" style="float: right"
+                                onclick="addTr('stagePaperCatalogue')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr class="stagePaperCatalogue">
+                    <td>序号</td>
+                    <td>专利、论文标题</td>
+                    <td>完成人</td>
+                    <td>项目负责人排位</td>
+                    <td>发表时间</td>
+                    <td>论文收录类别</td>
+                    <td>论文他人引用次数</td>
+                    <td>有关说明</td>
+                    <td>操作</td>
+                </tr>
+                <tr>
+                    <td colspan="9"></td>
+                </tr>
+                <tr class="stagePatentCatalogue">
+                    <td colspan="9">
+                        <h3 style="float: left">（三）授权专利目录</h3><span style="color: #ac2925">(注：填写的专利必须为该项目研究产生的专利，且项目组人员必须为专利完成人.)</span>
+                        <button class="layui-btn layui-btn-sm" type="button" style="float: right"
+                                onclick="addTr('stagePatentCatalogue')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr class="stagePatentCatalogue">
+                    <td>序号</td>
+                    <td>专利编号</td>
+                    <td>专利名称</td>
+                    <td>完成人</td>
+                    <td>专利类型</td>
+                    <td>申请专利时间</td>
+                    <td>专利授权时间</td>
+                    <td>有关说明</td>
+                    <td>操作</td>
+                </tr>
+                <tr>
+                    <td colspan="9"></td>
+                </tr>
+                <tr class="stageScienceAchievementAwardCatalogue">
+                    <td colspan="9">
+                        <h3 style="float: left">（四）科技成果奖励目录</h3>
+                        <button class="layui-btn layui-btn-sm" type="button" style="float: right"
+                                onclick="addTr('stageScienceAchievementAwardCatalogue')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr class="stageScienceAchievementAwardCatalogue">
+                    <td>序号</td>
+                    <td colspan="2">成果名称</td>
+                    <td>完成人</td>
+                    <td>项目负责人排位</td>
+                    <td>获奖时间</td>
+                    <td>奖励类别</td>
+                    <td>有关说明</td>
+                    <td>操作</td>
+                </tr>
+                <tr>
+                    <td colspan="9"></td>
+                </tr>
+                <tr class="stageScienceAchievementRegisterCatalogue">
+                    <td colspan="9">
+                        <h3 style="float: left">（五）科技成果登记目录</h3>
+                        <button class="layui-btn layui-btn-sm" type="button" style="float: right"
+                                onclick="addTr('stageScienceAchievementRegisterCatalogue')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr class="stageScienceAchievementRegisterCatalogue">
+                    <td>序号</td>
+                    <td colspan="2">登记号</td>
+                    <td colspan="2">成果名称</td>
+                    <td colspan="2">第一完成单位</td>
+                    <td>第一完成人</td>
+                    <td>操作</td>
+                </tr>
+                <tr>
+                    <td colspan="9"></td>
+                </tr>
+                <tr class="stageTechnologyPactRegisterCatalogue">
+                    <td colspan="9">
+                        <h3 style="float: left">（六）技术合同认定登记目录</h3>
+                        <button class="layui-btn layui-btn-sm" type="button" style="float: right"
+                                onclick="addTr('stageTechnologyPactRegisterCatalogue')">
+                            <i class="layui-icon">&#xe608;</i> 添加
+                        </button>
+                    </td>
+                </tr>
+                <tr class="stageTechnologyPactRegisterCatalogue">
+                    <td>序号</td>
+                    <td colspan="2">技术合同编号</td>
+                    <td>技术合同名称</td>
+                    <td>卖方单位</td>
+                    <td>合同成交金额</td>
+                    <td>技术交易金额</td>
+                    <td>技术合同类型</td>
+                    <td>操作</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module" id="checkHtml">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="97%">
+                </colgroup>
+                <tbody id="userinfo11">
+                <tr class="td-text">
+                    <td rowspan="6" class="table-info">项目负责人承诺及单位意见</td>
+                </tr>
+                <tr class="principalCheckStage">
+
+                </tr>
+                <tr class="deptCheckStage">
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="30%">
+                    <col width="52%">
+                    <col width="15">
+                </colgroup>
+                <tbody id="file_table">
+                <tr class="td-text">
+                    <td rowspan="100" class="table-info">附件清单</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right">
+                        <button type="button" class="layui-btn" id="upload_file">
+                            <i class="layui-icon">&#xe67c;</i>上传附件
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">附件名称</td>
+                    <td style="text-align: center;">附件说明</td>
+                    <td style="text-align: center;">操作</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-actions" style="margin-bottom: 50px;">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="button" onclick=" history.back(-1);">返回</button>
+                    <button class="btn btn-primary" type="button" onclick="save();">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+<script type="text/javascript" src='../../../../js/constant.js'></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src='../../js/serializeJson.js'></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script type="text/javascript" src='../../js/saveData.js'></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script>
+    var pers = checkPermission();
+    $('#checkHtml').hide();
+    $("#today").html(formatDate1(new Date()));
+    var itemId = getUrlParam("item_id");
+    var userId = getUrlParam("user_id");
+
+    var laydate, form;
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload;
+        form = layui.form;
+        laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_file' //绑定元素
+            , accept: 'file'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                console.log(obj.total); //得到总文件数
+                console.log(obj.successful); //请求成功的文件数
+                console.log(obj.aborted); //请求失败的文件数
+            }
+            , done: function (res, index, upload) {
+                layer.msg("上传成功");
+                var url = res['url'];
+                var id = res['id'];
+                var str = '';
+                str += '<tr id="' + id + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + res['name'] + '" ><input type="hidden" name="fileId" value="' + id + '" ><td>' + res.name + '</td><td>';
+                str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark"></textarea></td>';
+                str += '<td><button class="layui-btn layui-btn-xs" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
+                str += '<a class="layui-btn layui-btn-xs" href="' + url + '"><input type="hidden" name="fileUrl" value="' + url + '" ><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
+                $("#file_table").append(str);
+            }
+        });
+    });
+
+    //初始化项目信息
+    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
+        for (var key in res[0]) {
+            if (key == 'undertaker' || key == 'category') continue;
+            $("#" + key).val(res[0][key]);
+            $("." + key).html(res[0][key]);
+        }
+        $.get(domainName + "/api-c/company/" + res[0]['undertaker'], function (data) {
+            $('#undertaker').val(data['signName']);
+            $('.undertaker').html(data['signName']);
+        });
+        $.get(domainName + "/api-label/label/tree/" + res[0]['category'], function (data) {
+            $('#category').val(data[0]['content']);
+            $('.category').html(data[0]['content']);
+        });
+        var startAndEndTime = formatDate1(res[0].start_date) + "---" + formatDate1(res[0].end_date);
+        $("#startAndEndTime").val(startAndEndTime);
+        $(".startAndEndTime").html(startAndEndTime);
+    });
+
+    //初始化创建者信息
+    $.get(domainName + "/project-user/users", {id: userId}, function (res) {
+        $("#createUserName").val(res.data[0].name);
+        $(".createUserName").html(res.data[0].name);
+        $("#createUserEmail").val(res.data[0].email);
+        $(".createUserEmail").html(res.data[0].email);
+        $("#createUserPhone").val(res.data[0].phone);
+        $(".createUserPhone").html(res.data[0].phone);
+        //负责人填写的部分
+        if ($.inArray('html:principal:check:stage', pers) > 0) {
+            $('#checkHtml').show();
+            var str = '';
+            str += '<td><label>项目负责人承诺：</label>';
+            str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck" >';
+            str += '我所填写的项目执行情况调查表实事求是，数据详实。在下一步研究中，我将认真工作并及时报告重大变动情况。</textarea> </br>';
+            str += '<div class="layui-input-block"><input name="principalCheckEnable" value="1" title="同意" checked="" type="radio"><input name="principalCheckEnable" value="0" title="驳回" type="radio"></div>';
+            str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate1(new Date());
+            str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
+            $(".principalCheckStage").append(str);
+        }
+        //单位填写的部分
+        if ($.inArray('html:dept:check:stage', pers) > 0) {
+            $('#checkHtml').show();
+            var str = '';
+            str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
+            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施"></div>';
+            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施"></div>';
+            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施"></div>';
+            str += '<label>2.其他意见：</label>';
+            str += '<textarea placeholder="其他意见" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
+            str += '<div class="layui-input-block"><input name="deptCheckEnable" value="1" title="同意" checked="" type="radio"><input name="deptCheckEnable" value="0" title="驳回" type="radio"></div>';
+            str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate1(new Date());
+            str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
+            $(".deptCheckStage").append(str);
+        }
+
+    });
+
+    //初始化指标
+    $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (res) {
+        var BE_TECHNICAL_INDICATORS = false;
+        var BE_ECONOMIC_INDICATORS = false;
+        var BE_INDICATORS_OF_TALENT_TEAM_CONS = false;
+        var BE_OTHER_INDICATORS = false;
+
+        var STR_TECHNICAL_INDICATORS = '';
+        var STR_ECONOMIC_INDICATORS = '';
+        var STR_INDICATORS_OF_TALENT_TEAM_CONS = '';
+        var STR_OTHER_INDICATORS = '';
+
+        var SIGNS = '';
+
+        var TECHNICAL_INDICATORS_INDEX = 1;
+        var ECONOMIC_INDICATORS_INDEX = 1;
+        var INDICATORS_OF_TALENT_TEAM_CONS_INDEX = 1;
+        var OTHER_INDICATORS_INDEX = 1;
+        for (var i = 0; i < res.length; i++) {
+            var data = res[i];
+            if (data.count == null) {
+                if (data.type == 'OTHER_INDICATORS') {
+                    BE_OTHER_INDICATORS = true;
+                    STR_OTHER_INDICATORS += OTHER_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    OTHER_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'TECHNICAL_INDICATORS') {
+                    BE_TECHNICAL_INDICATORS = true;
+                    STR_TECHNICAL_INDICATORS += TECHNICAL_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    TECHNICAL_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'ECONOMIC_INDICATORS') {
+                    BE_ECONOMIC_INDICATORS = true;
+                    STR_ECONOMIC_INDICATORS += ECONOMIC_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    ECONOMIC_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    BE_INDICATORS_OF_TALENT_TEAM_CONS = true;
+                    STR_INDICATORS_OF_TALENT_TEAM_CONS += INDICATORS_OF_TALENT_TEAM_CONS_INDEX + '.' + data.content + '</br>';
+                    INDICATORS_OF_TALENT_TEAM_CONS_INDEX++;
+                    continue
+                }
+            }
+            SIGNS += data.target + ',';
+        }
+        var url = domainName + "/api-label/label/tree/";
+        $.get(url + SIGNS.trim(","), function (res) {
+            for (var i = 0; i < res.length; i++) {
+                var data = res[i];
+                addStageTarget(data);
+            }
+        });
+        if (BE_OTHER_INDICATORS) {
+            var str1 = '';
+            str1 += '<td>其他指标</td><td><span>' + STR_OTHER_INDICATORS + '</span><input type="hidden" name="otherTarget" value="' + STR_OTHER_INDICATORS + '"></td>';
+            str1 += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str1 += 'id="otherTargetSchedule" name="otherTargetSchedule"></textarea></td>';
+            str1 += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str1 += 'id="otherTargetDescribe" name="otherTargetDescribe"></textarea></td>';
+            $("#OTHER_INDICATORS").append(str1);
+        }
+        if (BE_ECONOMIC_INDICATORS) {
+            var str = '';
+            str += '<td>经济指标</td><td><span>' + STR_ECONOMIC_INDICATORS + '</span><input type="hidden" name="economyTarget" value="' + STR_ECONOMIC_INDICATORS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="economyTargetSchedule" name="economyTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="economyTargetDescribe" name="economyTargetDescribe"></textarea></td>';
+            $("#ECONOMIC_INDICATORS").append(str);
+        }
+        if (BE_TECHNICAL_INDICATORS) {
+            var str = '';
+            str += '<td>技术指标</td><td><span>' + STR_TECHNICAL_INDICATORS + '</span><input type="hidden" name="skillTarget" value="' + STR_TECHNICAL_INDICATORS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="skillTargetSchedule" name="skillTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="skillTargetDescribe" name="skillTargetDescribe"></textarea></td>';
+            $("#TECHNICAL_INDICATORS").append(str);
+
+        }
+        if (BE_INDICATORS_OF_TALENT_TEAM_CONS) {
+            var str = '';
+            str += '<td>人才队伍建设指标</td><td><span>' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '</span><input type="hidden" name="personTarget" value="' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="personTargetSchedule" name="personTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="personTargetDescribe" name="personTargetDescribe"></textarea></td>';
+            $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
+        }
+    });
+
+    function save() {
+        //处理附表数据
+        var stagePatents = setObjectProperty('.stagePatentCatalogue');
+        var stageAffixFiles = setObjectProperty('.stageAffixFile');
+        var stageFundUses = setObjectProperty('.stageFundUse');
+        var stagePaperCatalogues = setObjectProperty('.stagePaperCatalogue');
+        var stageScienceAchievementAwardCatalogues = setObjectProperty('.stageScienceAchievementAwardCatalogue');
+        var stageScienceAchievementRegisterCatalogues = setObjectProperty('.stageScienceAchievementRegisterCatalogue');
+        var stageTechnologyPactRegisterCatalogues = setObjectProperty('.stageTechnologyPactRegisterCatalogue');
+        var stageTargets = setObjectProperty('.stageTarget');
+        var formData = $("#form").serializeObject();
+        formData.stagePatentCatalogues = stagePatents;
+        formData.stageAffixFiles = stageAffixFiles;
+        formData.stageFundUses = stageFundUses;
+        formData.stagePaperCatalogues = stagePaperCatalogues;
+        formData.stageScienceAchievementAwardCatalogues = stageScienceAchievementAwardCatalogues;
+        formData.stageScienceAchievementRegisterCatalogues = stageScienceAchievementRegisterCatalogues;
+        formData.stageTechnologyPactRegisterCatalogues = stageTechnologyPactRegisterCatalogues;
+        formData.stageTargets = stageTargets;
+        formData.itemId = itemId;
+        formData.createUserId = userId;
+        $.ajax({
+            type: 'post',
+            url: domainName + '/api-summary/stage',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formData),
+            success: function (res) {
+                alert("成功");
+                $("#form").find("input,textarea").each(function () {
+                    $(this).attr('disabled', false);
+                });
+            },
+            error: function (res) {
+                $("#form").find("input,textarea").each(function () {
+                    $(this).attr('disabled', false);
+                });
+            }
+        })
+    }
+
+
+    //处理List类型数据
+    function setObjectProperty(attribute) {
+        var target = $(attribute);
+        var arr = new Array();
+        for (var i = 0; i < target.length; i++) {
+            var obj = {};
+            var input = $(target[i]).find('input,textarea');
+            var falg = false;
+            for (var j = 0; j < input.length; j++) {
+                falg = true;
+                obj[$(input[j]).attr('name')] = $(input[j]).val();
+                $(input[j]).attr('disabled', true)
+            }
+            if (falg) {
+                arr.push(obj);
+            }
+            falg = false;
+        }
+        return arr;
+    }
+
+    function deleteFile(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/api-f/files/' + id,
+                success: function (data) {
+                    layer.msg("删除成功");
+                }
+            });
+            $("#" + id).remove();
+            layer.close(1);
+        });
+    }
+
+    //删除当前tr表格
+    function delTr(obj) {
+        $(obj).parents('tr').remove();
+    }
+
+    ///序号
+    var paperIndex = 0;
+    var patentIndex = 0;
+    var scienceAchievementAwardIndex = 0;
+    var scienceAchievementRegisterIndex = 0;
+    var technologyPactRegisterIndex = 0;
+
+    //添加一个tr表格
+    function addTr(type) {
+        if (type == 'stagePaperCatalogue') {
+            paperIndex++;
+            var str = '';
+            str += '<tr class="stagePaperCatalogue">';
+            str += '<td>' + paperIndex + '</td>';
+            str += '<td><input class="form-control" type="text" name="paperTitle"></td>';
+            str += '<td><input class="form-control" type="text" name="paperPersonCharge"></td>';
+            str += '<td><input class="form-control" type="text" name="paperLeaderRank"></td>';
+            str += '<td><input class="form-control date" type="text" name="paperPostedTime"></td>';
+            str += '<td><input class="form-control" type="text" name="paperCategory"></td>';
+            str += '<td><input class="form-control" type="text" name="paperCitationsSum"></td>';
+            str += '<td><textarea class="layui-textarea form-control" name="paperRemark"></textarea></td>';
+            str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+            str += '</tr>';
+            $("tr.stagePaperCatalogue:last").after(str);
+            lay('.date').each(function () {
+                laydate.render({
+                    elem: this
+                    , showBottom: false
+                    , trigger: 'click'
+                });
+            });
+            return;
+        }
+        if (type == 'stagePatentCatalogue') {
+            patentIndex++;
+            var str = '';
+            str += '<tr class="stagePatentCatalogue">';
+            str += '<td>' + patentIndex + '</td>';
+            str += '<td><input class="form-control" type="text" name="patentNumber"></td>';
+            str += '<td><input class="form-control" type="text" name="patentName"></td>';
+            str += '<td><input class="form-control" type="text" name="patentPersonCharge"></td>';
+            str += '<td><input class="form-control" type="text" name="patentType"></td>';
+            str += '<td><input class="form-control date" type="text" name="patentApplicationTime"></td>';
+            str += '<td><input class="form-control date" type="text" name="patentAuthorizeTime"></td>';
+            str += '<td><textarea class="layui-textarea form-control" name="patentRemark"></textarea></td>';
+            str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+            str += '</tr>';
+            $("tr.stagePatentCatalogue:last").after(str);
+            lay('.date').each(function () {
+                laydate.render({
+                    elem: this
+                    , showBottom: false
+                    , trigger: 'click'
+                });
+            });
+            return;
+        }
+        if (type == 'stageScienceAchievementAwardCatalogue') {
+            scienceAchievementAwardIndex++;
+            var str = '';
+            str += '<tr class="stageScienceAchievementAwardCatalogue">';
+            str += '<td>' + scienceAchievementAwardIndex + '</td>';
+            str += '<td colspan="2"><input class="form-control" type="text" name="scienceAwardAchievementName"></td>';
+            str += '<td><input class="form-control" type="text" name="scienceAwardPersonCharge"></td>';
+            str += '<td><input class="form-control" type="text" name="scienceAwardLeaderRank"></td>';
+            str += '<td><input class="form-control date" type="text" name="scienceAwardGetTime"></td>';
+            str += '<td><input class="form-control" type="text" name="scienceAwardType"></td>';
+            str += '<td><textarea class="layui-textarea form-control" name="scienceAwardRemark"></textarea></td>';
+            str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+            str += '</tr>';
+            $("tr.stageScienceAchievementAwardCatalogue:last").after(str);
+            lay('.date').each(function () {
+                laydate.render({
+                    elem: this
+                    , showBottom: false
+                    , trigger: 'click'
+                });
+            });
+            return;
+        }
+        if (type == 'stageScienceAchievementRegisterCatalogue') {
+            scienceAchievementRegisterIndex++;
+            var str = '';
+            str += '<tr class="stageScienceAchievementRegisterCatalogue">';
+            str += '<td>' + scienceAchievementRegisterIndex + '</td>';
+            str += '<td colspan="2"><input class="form-control" type="text" name="scienceRegisterNumber"></td>';
+            str += '<td colspan="2"><input class="form-control" type="text" name="scienceRegisterAchievementName"></td>';
+            str += '<td colspan="2"><input class="form-control" type="text" name="scienceRegisterAccomplishDept"></td>';
+            str += '<td><input class="form-control" type="text" name="scienceRegisterPersonCharge"></td>';
+            str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+            str += '</tr>';
+            $("tr.stageScienceAchievementRegisterCatalogue:last").after(str);
+            return;
+        }
+        if (type == 'stageTechnologyPactRegisterCatalogue') {
+            technologyPactRegisterIndex++;
+            var str = '';
+            str += '<tr class="stageTechnologyPactRegisterCatalogue">';
+            str += '<td>' + technologyPactRegisterIndex + '</td>';
+            str += '<td colspan="2"><input class="form-control" type="text" name="technologyPactNumber"></td>';
+            str += '<td><input class="form-control" type="text" name="technologyPactName"></td>';
+            str += '<td><input class="form-control layui-transfer-data" type="text" name="technologySellerDept"></td>';
+            str += '<td><input class="form-control" type="text" name="technologyPactVolumeTransaction"></td>';
+            str += '<td><input class="form-control" type="text" name="technologyVolumeTransaction"></td>';
+            str += '<td><input class="form-control" type="text" name="technologyPactType"></td>';
+            str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+            str += '</tr>';
+            $("tr.stageTechnologyPactRegisterCatalogue:last").after(str);
+        }
+    }
+
+    //初始化数量指标
+    function addStageTarget(data) {
+        var str = '';
+        str += '<tr class="stageTarget">';
+        str += '<td class="td-text" colspan="7">' + data.content + '(' + data.unit + ')<input type="hidden" name="targetSign" value="' + data.sign + '"></td>';
+        str += '<input class="form-control" type="hidden" name="targetName" value="' + data.content + '">';
+        str += '<td class="td-text" colspan="2"><input class="form-control" type="text" name="targetSum" value=""></td></tr>';
+        $("tr.stageTarget:last").after(str);
+    }
+
+</script>
+</html>
