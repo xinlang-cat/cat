@@ -58,7 +58,7 @@
 		    type : 'get',
 		     url: domainName + "/project-item/item/target/applyList",
 		     contentType: "application/json; charset=utf-8",
-		     data: {item_id: itemId},
+		     data: {item_id: itemId,status: 3},
 		     success : function(data) {
 		         var str = '';
 		         for(var i=0; i<data.length; i++){

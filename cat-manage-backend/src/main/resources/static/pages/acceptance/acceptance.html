@@ -491,8 +491,8 @@
         <div class="form-actions" id="new">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary"  onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary"  onclick="add_ACC();">
+                    <button class="btn btn-primary"  onclick="location.href='../list-layout/list.html'">返回</button>
+                    <button class="btn btn-primary" type="button" onclick="add_ACC();">
                         <i class="fa fa-save"></i> 提交
                     </button>
                     <!--<button class="btn btn-primary"  onclick="send_ACC();">
@@ -504,7 +504,7 @@
         <div class="form-actions" id="old">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary"  onclick=" history.back(-1);">返回</button>
+                    <button class="btn btn-primary"  onclick="location.href='../list-layout/list.html'">返回</button>
                 </div>
             </div>
         </div>
@@ -515,29 +515,71 @@
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
 <script type="text/javascript" src='../../js/common.js'></script>
 <script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='../list-layout/js/saveData.js'></script>
 <script type="text/javascript" src="../list-layout/js/acceptance.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
-<script>
+
+<script type="text/javascript">
+
     var item_id = getUrlParam("item_id");
     $("#item_id").val(item_id);
-    var layer,upload,form,laydate;
-    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'laydate','layer'], function () {
         layer = layui.layer;
-        upload = layui.upload;
-        form = layui.form;
         laydate = layui.laydate;
-        lay('.date').each(function () {
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        lay('.date').each(function(){
             laydate.render({
                 elem: this
-                , showBottom: false
-                , trigger: 'click'
+                ,format:'yyyy-MM-dd'
+                ,trigger: 'click'
             });
         });
-    })
+
+    });
+    function add_ACC() {
+        var tableId =  parseInt($("#id").val());
+        var formdata = $("#form").serializeObject();
+        formdata.itemId = item_id;
+        alert("1")
+        if(!tableId){
+            layer.msg("2");
+            formdata.status = 1;
+            $.ajax({
+                type: 'post',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function(){
+                        location.reload();
+                    });
+                }
+            });
+        }else {
+            alert("3");
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "保存成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function(){
+                        location.reload();
+                    });
+                }
+            });
+        }
+
+    }
     getdata(item_id);
     function getdata(item_id) {
         $.ajax({
@@ -546,9 +588,7 @@
             data: "item_id=" + item_id,
             async: false,
             success: function (data) {
-
                 var arr = Object.keys(data);
-
                 if (arr.length == 0){
                     document.getElementById('new').style.display='block';
                     $("textarea").attr('readonly', true);
@@ -583,6 +623,8 @@
             $("input").attr('readonly', true);
             $("input").attr("style", "text-align: center;border: 0px;");
             $("textarea").attr('readonly', true);
+            $("#applicationDate").attr('disabled', true);
+            $("#suggestDate").attr('disabled', true);
             document.getElementById('old').style.display='block';
         }
     }
@@ -598,36 +640,8 @@
     getItem_user(item_id);
     getFund(item_id);
 
-    function add_ACC() {
-         var tableId =  parseInt($("#id").val());
-         var formdata = $("#form").serializeObject();
-         formdata.itemId = item_id;
-        alert("1");
-         if(!tableId){
-             alert("2");
-             $.ajax({
-                 type: 'post',
-                 url: domainName + '/api-summary/check-table',
-                 contentType: "application/json; charset=utf-8",
-                 data: JSON.stringify(formdata),
-                 success: function (data) {
-                     alert("成功");
-                     layer.msg("成功");
-                 }
-             });
-         }else {
-             alert("3");
-             $.ajax({
-                 type: 'put',
-                 url: domainName + '/api-summary/check-table',
-                 contentType: "application/json; charset=utf-8",
-                 data: JSON.stringify(formdata),
-                 success: function (data) {
-                     layer.msg("成功");
-                 }
-             });
-         }
-     }
+
+
      function send_ACC() {
          var formdata = $("#form").serializeObject();
          formdata.status = 1;
@@ -637,7 +651,10 @@
              contentType: "application/json; charset=utf-8",
              data: JSON.stringify(formdata),
              success: function (data) {
-                 layer.msg("成功");
+                 var msg = "保存成功";
+                 layer.msg(msg, {shift: -1, time: 1000}, function(){
+
+                 });
              }
          });
 

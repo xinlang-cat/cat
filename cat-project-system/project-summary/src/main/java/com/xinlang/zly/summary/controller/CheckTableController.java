@@ -36,7 +36,6 @@ public class CheckTableController {
     @ApiOperation(value = "添加结题申请表")
     public CheckTable save(@RequestBody CheckTable checkTable){
         checkTable.setApplicationDate(new Date());
-        checkTable.setStatus(0);
         checkTableService.save(checkTable);
         return checkTable;
     }

@@ -9,6 +9,48 @@
 </head>
 <body>
 <div>
+    <header style="height: 100%">
+        <div align="left">
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <form class="form-inline" onsubmit="return false">
+                            <div class="form-group">
+                               <!-- 项目名称：
+                                <input id="username" type="text" class="form-control" placeholder="项目名">
+                                开始时间：
+                                <input class="form-control date" lay-verify="required" placeholder="开始时间" type="text"
+                                       id="startDate" name="start_date" >
+                                结束时间：
+                                <input class="form-control date" lay-verify="required" placeholder="结束时间" type="text"
+                                       id="endDate" name="end_date" >-->
+                                状态：
+                                <select class="form-control input-sm" id="status">
+                                    <option value="">全部</option>
+                                    <option value="1">待监理审核</option>
+                                    <option value="2">待甲方审核</option>
+                                    <option value="3">已结题</option>
+                                    <option value="4">审核未通过</option>
+                                </select>
+                                <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+                            </div>
+                        </form>
+                    </td>
+
+                    <td align="right">
+                        <!--待甲方审核-->
+                        <button class="layui-btn layui-btn-sm" onclick="myCheck(1)" permission="check:acceptance:PARTY_A">
+                            <i class="layui-icon">&#xe615;</i> 待我审核
+                        </button>
+                        <!--待监理/丙方审核-->
+                        <button class="layui-btn layui-btn-sm" onclick="myCheck(2)" permission="check:acceptance:PARTY_C">
+                            <i class="layui-icon">&#xe615;</i> 待我审核
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div>
             <div class="widget-body no-padding">
@@ -68,8 +110,7 @@
                     "ajax": {
                         "url": domainName + "/api-summary/check-table/page",
                         "data":function(d){
-                            d.status = 2;
-
+                            d.status = $("#status").val();
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -190,55 +231,35 @@
                                 details = btn.prop("outerHTML");
                                 /*return details;*/
 
-                                var href = "updateRole.html?id=" + id;
-                                var edit = buttonEdit(href, "back:role:update", pers);
-                                var del = buttonDel(id, "back:role:delete", pers);
-
-                                //甲方审核
-                                var PARTY_A = "";
                                 var userType="";
+                                //甲方审核
                                 if($.inArray("check:acceptance:PARTY_A", pers) >= 0){
-                                    /*var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>甲方审核</i></button>");
-                                    btn.attr("onclick", 'check(' +id+',1)');
-                                    setPermission = btn.prop("outerHTML");*/
                                     userType=1;
                                 }
 
                                 //监理审核
-                                var PARTY_C = "";
                                 if($.inArray("check:acceptance:PARTY_C", pers) >= 0){
-                                    /*var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>监理审核</i></button>");
-                                    btn.attr("onclick", 'check(' +id+',2)');
-                                    setMenu = btn.prop("outerHTML");*/
+
                                     userType=2;
                                 }
                                 //验收审核
-                                var PARTY_D = "";
                                 if($.inArray("check:acceptance:PARTY_D", pers) >= 0){
-                                    /*var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收审核</i></button>");
-                                    btn.attr("onclick", 'check(' +id+',3)');
-                                    setMenu = btn.prop("outerHTML");*/
                                     userType=3;
                                 }
                                 //专家审核
-                                var EXPERT = "";
                                 if($.inArray("check:acceptance:EXPERT", pers) >= 0){
-                                   /* var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>专家审核</i></button>");
-                                    btn.attr("onclick", 'check(' +id+',4)');
-                                    setMenu = btn.prop("outerHTML");*/
+
                                     userType=4;
                                 }
-                                var admin = "";
                                 if($.inArray("check:acceptance:admin", pers) >= 0){
-                                   /* var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>查看</i></button>");
-                                    btn.attr("onclick", 'check(' +id+',5)');
-                                    setPermission = btn.prop("outerHTML");*/
                                     userType=5;
                                 }
-                                var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收审核</i></button>");
-                                   btn.attr("onclick", 'check(' +id+','+userType+')');
-                                   setMenu = btn.prop("outerHTML");
-                                return  details + setMenu;
+                                var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收申请表</i></button>");
+                                btn.attr("onclick", 'check(' +id+','+userType+')');
+                                /*btn.attr("onclick", location.href='show_acceptance.html?id='+id+'&userType='+userType);
+*/
+                                setMenu = btn.prop("outerHTML");
+                                return setMenu;
                             }
                         },
                         /* {
@@ -280,8 +301,19 @@
             }
         });
     }
-    function setMenu(id,userType) {
-        alert(id+","+userType);
+    function check(id,userType) {
+        window.location.href="show_acceptance.html?item_id="+id+"&userType="+userType;
+       /* layer.open({
+            title:"查看验收申请",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['show_acceptance.html?id='+id+'&userType='+userType],
+            end : function() {
+
+            }
+        });*/
     }
     function read(id,userType) {
         layer.open({
@@ -296,7 +328,14 @@
             }
         });
     }
-
+    function myCheck(userType) {
+        if (userType==1){
+            $("#status").val(2);
+        }else if (userType==2){
+            $("#status").val(1);
+        }
+        example.ajax.reload();
+    }
     function report(id,modifyId,modify) {
         layer.open({
             title:"添加",

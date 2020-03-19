@@ -482,9 +482,22 @@
                                                id="burgFinanceOpinion" name="burgFinanceOpinion" readonly></textarea>
                     </td>
                 </tr>
+                <tr id="check">
+                    <td class="td-text">审核结果:</td>
+                    <td colspan="7">
+                        <div class="layui-input-block">
+                            <input type="radio" name="status" value="3" title="通过" checked="">
+                            <input type="radio" name="status" value="4" title="不通过">
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
+            <div class="layui-form-item">
+
+            </div>
         </div>
+
         <div class="form-actions" id="new">
             <div class="row" align="center">
                 <div class="col-md-12">
@@ -494,9 +507,9 @@
         </div>
         <div class="form-actions" id="old">
             <div class="row" align="center">
-                <div class="col-md-12">
+                <div class="col-md-12" disabled>
                     <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary"  onclick="add_ACC();">
+                    <button class="btn btn-primary"  type="button"  onclick="add_ACC();">
                         <i class="fa fa-save"></i> 提交
                     </button>
                 </div>
@@ -518,20 +531,21 @@
 <script>
     var item_id = getUrlParam("item_id");
     var userType = getUrlParam("userType");
-    $("#item_id").val(item_id);
-    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
-        var layer = layui.layer
-            , upload = layui.upload
-            , form = layui.form
-            , laydate = layui.laydate;
-        lay('.date').each(function () {
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'laydate','layer'], function () {
+        layer = layui.layer;
+        laydate = layui.laydate;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        lay('.date').each(function(){
             laydate.render({
                 elem: this
-                , showBottom: false
-                , trigger: 'click'
+                ,format:'yyyy-MM-dd'
+                ,trigger: 'click'
             });
         });
-    })
+
+    });
     getdata(item_id);
     function getdata(item_id) {
         $.ajax({
@@ -571,16 +585,18 @@
     getItem_user(item_id);
 
     function whitchType(status) {
-        if (status==1&&userType==1){
+        if (status==1&&userType==2){
             $("#manageDeptOpinion").removeAttr("readonly");
             document.getElementById('old').style.display='block';
-
-        }else if (status==2&&userType==2){
+            document.getElementById('check').style.display='none';
+        }else if (status==2&&userType==1){
             $("#burgLeaderOpinion").removeAttr("readonly");
             $("#burgFinanceOpinion").removeAttr("readonly");
             document.getElementById('old').style.display='block';
+
         }else {
             document.getElementById('new').style.display='block';
+            document.getElementById('check').style.display='none';
         }
 
     }
@@ -591,11 +607,10 @@
 
         }else if (userType==1){
             $("#manageDeptOpinion").removeAttr("readonly");
-            formdata.status=2;
         }else if (userType==2){
             $("#burgLeaderOpinion").removeAttr("readonly");
             $("#burgFinanceOpinion").removeAttr("readonly");
-            formdata.status=3;
+            formdata.status=2;
         }
 
             $.ajax({
@@ -604,7 +619,10 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(formdata),
                 success: function (data) {
-                    layer.msg("成功");
+                    var msg = "成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        location.href = "checkedAcceptancrList.html";
+                    });
                 }
             });
 
