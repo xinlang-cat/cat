@@ -8,8 +8,16 @@ function checkPermission() {
 		success : function(data) {
 			pers = data.permissions;
 			$("[permission]").each(function() {
-				var per = $(this).attr("permission");
-				if ($.inArray(per, pers) < 0) {
+				var arr = $(this).attr("permission").split(',');
+				var index = -1;
+				for(var i=0;i<arr.length;i++){
+					if($.inArray(arr[i], pers) > -1){
+						index++;
+						break;
+					}
+				}
+				if (index < 0) {
+
 					$(this).hide();
 				}
 			});

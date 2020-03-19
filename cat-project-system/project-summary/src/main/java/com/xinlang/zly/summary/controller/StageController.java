@@ -102,6 +102,30 @@ public class StageController {
     @ApiOperation(value = "修改阶段总结")
     public Stage update(@RequestBody Stage stage) {
         stageService.update(stage);
+        stage.getStageFundUses().forEach(stageFundUse->{
+            stageFundUseService.update(stageFundUse);
+        });
+        stage.getStageAffixFiles().forEach(stageAffixFile -> {
+            stageAffixFileService.update(stageAffixFile);
+        });
+        stage.getStagePaperCatalogues().forEach(stagePaperCatalogue -> {
+            stagePaperCatalogueService.update(stagePaperCatalogue);
+        });
+        stage.getStagePatentCatalogues().forEach(stagePatentCatalogue -> {
+            stagePatentCatalogueService.update(stagePatentCatalogue);
+        });
+        stage.getStageScienceAchievementAwardCatalogues().forEach(stageScienceAchievementAwardCatalogue -> {
+            stageScienceAchievementAwardCatalogueService.update(stageScienceAchievementAwardCatalogue);
+        });
+        stage.getStageScienceAchievementRegisterCatalogues().forEach(stageScienceAchievementRegisterCatalogue -> {
+            stageScienceAchievementRegisterCatalogueService.update(stageScienceAchievementRegisterCatalogue);
+        });
+        stage.getStageTechnologyPactRegisterCatalogues().forEach(stageTechnologyPactRegisterCatalogue -> {
+            stageTechnologyPactRegisterCatalogueService.update(stageTechnologyPactRegisterCatalogue);
+        });
+        stage.getStageTargets().forEach(stageTarget -> {
+            stageTargetService.update(stageTarget);
+        });
         return stage;
     }
 
