@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>项目信息</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
     <style>
         .table-info {
             background-color: #4FAAA2;
@@ -24,10 +24,6 @@
         .hidden {
             display: none;
         }
-        .btn-group{
-            display: none;
-
-        }
     </style>
 </head>
 <body>
@@ -36,18 +32,6 @@
     <div class="module">
         <div><h2 style="text-align: center;margin: 40px;">项目信息</h2></div>
         <form class="layui-form" id="form1">
-            <div class="layui-btn-group btn-group" style="top: 68px;">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -134,7 +118,7 @@
                     </td>
                     <td>合同文件：</td>
                     <td>
-                        <a id="contract_file_text" href=""></a>
+                        <p><a id="contract_file_text" href=""></a></p>
                         <input class="form-control hidden" placeholder="合同文件" type="text" id="contract" name=""
                                readonly>
                         <input type="hidden" name="contract_file" id="contract_file">
@@ -157,7 +141,7 @@
                 <tr>
                     <td>总体目标</td>
                     <td>
-                        <p id="outline_text"></p>
+                        <p id="outline_text" style="white-space: pre-wrap"></p>
                         <textarea placeholder="总体目标" class="layui-textarea form-control hidden" lay-verify="required"
                                   name="outline" id="outline"></textarea>
                     </td>
@@ -171,18 +155,6 @@
     <!--主要研究内容-->
     <div class="module">
         <form class="layui-form" id="form2">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
             <table class="layui-table" lay-skin="line">
                 <colgroup>
                     <col width="3%">
@@ -204,38 +176,18 @@
                         <input type="hidden" name="item_id">
                     </td>
                     <td>
-                        <p id="content_text"></p>
+                        <p id="content_text" style="white-space: pre-wrap"></p>
                         <textarea placeholder="主要研究内容" class="layui-textarea form-control hidden" lay-verify="required"
                                   name="content" id="content"></textarea>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <!--提交按钮-->
-            <button class="layui-btn sub" lay-submit lay-filter="sub2" id="sub2">提交</button>
         </form>
     </div>
     <!--项目成员-->
     <div class="module">
         <form class="layui-form" id="form3">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="add_personnel();">
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="del_personnel();">
-                    <i class="layui-icon">&#xe640;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -271,31 +223,11 @@
                 </tr>
                 </tbody>
             </table>
-            <!--提交按钮-->
-            <button class="layui-btn sub" lay-submit lay-filter="sub3" id="sub3">提交</button>
         </form>
     </div>
     <!--考核指标-->
     <div class="module">
         <form class="layui-form" id="form4">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="add_indicators();">
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="del_indicators();">
-                    <i class="layui-icon">&#xe640;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -324,36 +256,16 @@
                 </thead>
                 <tbody id="indicators">
                 <tr>
-                    <td rowspan="13" class="table-info">考核指标</td>
+                    <td rowspan="1" class="table-info">考核指标</td>
                 </tr>
                 </tbody>
             </table>
-            <!--提交按钮-->
-            <button class="layui-btn sub" lay-submit lay-filter="sub4" id="sub4">提交</button>
         </form>
     </div>
     <!--科技经费用途预算-->
     <div class="module">
         <form class="layui-form" id="form5">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="add_fund()();">
-                    <i class="layui-icon">&#xe654;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="del_fund();">
-                    <i class="layui-icon">&#xe640;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
-            <table class="layui-table" id="basis">
+            <table class="layui-table">
                 <colgroup>
                     <col width="3%">
                     <col width="10%">
@@ -384,7 +296,7 @@
                 <tr>
                     <td>设备费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -394,13 +306,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>材料费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -410,13 +322,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>测试化验加工费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -426,13 +338,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>燃料及动力费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -442,13 +354,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>差旅/会议/国际合作与交流费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -458,13 +370,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>出版/文献/信息传播/知识产权事务费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -474,13 +386,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>劳务费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -490,13 +402,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>专家咨询费</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -506,13 +418,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>其他支出</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -522,7 +434,7 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -531,7 +443,7 @@
                 <tr>
                     <td>绩效支出</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -541,13 +453,13 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>其他费用</td>
                     <td><p></p><textarea placeholder="开支内容" class="layui-textarea form-control remark hidden"
-                                         lay-verify="required"></textarea>
+                                  lay-verify="required"></textarea>
                     </td>
                     <td><p></p>
                         <input type="hidden" name="item_id">
@@ -557,7 +469,7 @@
                             <option value=''>请选择</option>
                         </select></td>
                     <td><p></p><input class="form-control hidden" lay-verify="required" placeholder="金额（万元）" type="text"
-                                      name="money"></td>
+                               name="money"></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -566,25 +478,11 @@
                 </tr>
                 </tbody>
             </table>
-            <!--提交按钮-->
-            <button class="layui-btn sub" lay-submit lay-filter="sub5" id="sub5">提交</button>
         </form>
     </div>
     <!--签订合同各方-->
     <div class="module">
         <form class="layui-form" id="form6">
-            <div class="layui-btn-group btn-group">
-                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="editData(this);">
-                    <i class="layui-icon">&#xe642;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="saveData(this);">
-                    <i class="layui-icon">&#xe605;</i>
-                </button>
-                <button type="button" class="layui-btn layui-btn-sm hidden" onclick="cancelEdit(this);">
-                    <i class="layui-icon">&#x1006;</i>
-                </button>
-            </div>
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -736,33 +634,31 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="layui-btn sub" lay-submit lay-filter="sub6" id="sub6">提交</button>
+
         </form>
         <div class="form-actions" style="margin: 40px auto;">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary" onclick=" closeThis();" >关闭</button>
-                   <button class="btn btn-primary" type="submit" onclick="finish();" >
-                        <i class="fa fa-save"></i> 更改完成
-                    </button>
+                    <button class="btn btn-primary" onclick=" history.back(-1);">返回</button>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
-<script type="text/javascript" src='../../js/constant.js'></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="application/javascript" src="../../layui/xm-select.js"></script>
-<script type="text/javascript" src='../../js/common.js'></script>
-<script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
-<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
-<script type="text/javascript" src='../list-layout/js/saveData.js'></script>
-<script type="text/javascript" src='../list-layout/js/addTable.js'></script>
-<script type="text/javascript" src="../list-layout/js/projecDetailst.js"></script>
-<script type="text/javascript" src='../list-layout/js/updateProject.js'></script>
+<script type="text/javascript" src='../../../../js/constant.js'></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="application/javascript" src="../../../../layui/xm-select.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script type="text/javascript" src='../../js/serializeJson.js'></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script type="text/javascript" src='../../js/saveData.js'></script>
+<script type="text/javascript" src='../../js/addTable.js'></script>
+<script type="text/javascript" src="../../js/projecDetailst.js"></script>
+<script type="text/javascript" src='../../js/updateProject.js'></script>
 <script>
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
         var layer = layui.layer,
@@ -827,23 +723,6 @@
 
     //获取项目数据项目
     var id = getUrlParam("id");
-    var modify = getUrlParam("modify");
-    var modifyId = getUrlParam("modifyId");
-    var status = getUrlParam("status");
-    showBut(modify);
-    function showBut(modify){
-        if (status==1){
-            var obj=document.getElementsByClassName("btn-group");
-            obj[modify-1].style.display = "block";
-        }else {
-            var obj=document.getElementsByClassName("btn-primary");
-            obj[1].style.display = "none";
-
-        }
-
-
-    }
-
     $('#item_id').val(id);
     $("input[name='item_id']").val(id);
     getBasic(id);
@@ -968,40 +847,13 @@
         }
     }, 1000);
 
-    //编辑
-    function editData(e) {
-        $(e).parent().parent().find('.hidden').removeClass('hidden');
-        $(e).parent().parent().find('p').addClass('hidden');
-        $(e).addClass('hidden');
-    }
 
-    //保存
-    function saveData(e) {
-        $(e).parent().parent().children('button').trigger('click');
-    }
+
+
 
     //取消
     function cancelEdit(e) {
         window.location.reload();
-    }
-    
-    function finish() {
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/basic/modifyApply',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: modifyId,status : 3}),
-            success : function(data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    parent.location.reload();
-                });
-            }
-        });
-    }
-    function closeThis() {
-        var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
     }
 </script>
 </html>

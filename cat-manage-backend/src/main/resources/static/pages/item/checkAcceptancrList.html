@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <div class="widget-body no-padding">
+                <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th style="width:30%;">项目名称</th>
+                        <th style="width:30%;">项目类型</th>
+                        <th style="width:15%">提交时间</th>
+                        <th style="width:10%;">提交人</th>
+                        <th style="width:10%;">状态</th>
+
+                        <th style="width:5%;">查看</th>
+                        <!--<th style="width:5%;">修改</th>
+                        <th style="width:5%;">查定结果</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript">
+
+    var pers = checkPermission();
+
+    var example;
+    layui.use(['layer', 'util'], function () {
+        var layer = layui.layer;
+        var util = layui.util;
+
+        function init() {
+            example =
+                $('#dt-table').DataTable({
+                    "searching": false,
+                    "processing": false,
+                    "serverSide": true,
+                    /* "info": false,
+                     "paging": true, // 禁止分页*/
+                    "ordering": false,
+                    "language": {
+                        "url": "../../js/plugin/datatables/Chinese.lang"
+                    },
+                    "ajax": {
+                        "url": domainName + "/api-summary/check-table/page",
+                        "data":function(d){
+                            d.status = 1;
+
+                        },
+                        "type": "get",
+                        "dataSrc": function (json) {
+                            console.log(json)
+                            json.recordsTotal=json.total;
+                            json.recordsFiltered=json.total;
+                            return json.data;
+                        },
+                        "error": function (xhr, textStatus, errorThrown) {
+                            var msg = xhr.responseText;
+                            console.log(msg);
+                            if (xhr.status == 400) {
+                                layer.msg(JSON.parse(msg).message);
+                            } else if (xhr.status == 401) {
+                                localStorage.removeItem("token");
+                                layer.msg("token过期，请重新登录", {shift: -1, time: 1000}, function () {
+                                    location.href = loginPage;
+                                });
+                            } else if (xhr.status == 403) {
+                                layer.msg('未授权');
+                            } else if (xhr.status == 500) {
+                                var info = JSON.parse(msg);
+                                var exception = info.exception;
+                                var message = info.message;
+                                layer.msg('系统错误：' + (exception ? exception : message));
+                            }
+                        }
+                    },
+                    "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                    "columns": [
+                        {
+                            "data": "item_id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var item_id =row['itemId'];
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/basic/list?id=" + item_id, function (res) {
+                                    data =  res[0]['item_name'];
+                                })
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "item_id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var item_id =row['itemId'];
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/basic/list?id=" + item_id, function (res) {
+                                    var category =  res[0]['category'];
+                                    $.get(domainName + "/api-label/label/tree/" + category, function (res) {
+                                        data =  res[0]['content'];
+
+                                    })
+                                })
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "applicationDate",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var start = formatDate3(data);
+                                return start ;
+                            }
+                        },
+                        {
+                            "data": "userName",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-user/user-anon/" + row['createUserId'], function (res) {
+                                    data =  res[0]['name'];
+                                })
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "status",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                $.ajaxSettings.async = false;
+                                if (status==1){
+                                    data="监理审核中";
+                                }else if (status==2){
+                                    data="甲方审核中";
+                                }else if (status==3){
+                                    data="已结题";
+                                }else if (status==4){
+                                    data="审核未通过";
+                                }
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var id = row['itemId'];
+                                /**
+                                 * 监理类型为1
+                                 * 甲方类型为2
+                                 * @type {string}
+                                 */
+                                var detailsHref ="show_acceptance.html?item_id="+id+"&userType="+1;
+                                var details = "";
+                                var btn = $("<a  href="+detailsHref+" class=\"layui-btn layui-btn-xs\"> 详情</a>");
+                                details = btn.prop("outerHTML");
+                                return details;
+                            }
+                        },
+                        /* {
+                             "data": "id",
+                             "defaultContent": "",
+                             "render": function (data, type, row) {
+                                 var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['item_id'] +','+row['id'] + ','+row['modify'] +')" ><i class="layui-icon">更改信息</i></button>');
+                                 var showDetail = btn.prop("outerHTML");
+                                 return showDetail;
+                             }
+                         },*/
+                        /* {
+                             "data": "id",
+                             "defaultContent": "",
+                             "render": function (data, type, row) {
+                                 var btn = $('<button class="layui-btn layui-btn-xs" onclick="checkResult(' + row['id'] + ')" ><i class="layui-icon">查定报告结果</i></button>');
+                                 var showDetail = btn.prop("outerHTML");
+                                 return showDetail;
+                             }
+                         }*/
+
+                    ],
+                });
+        }
+        init();
+    });
+    var h = $(window).height()-100;
+    var w = $(window).width()-200;
+    function add() {
+        layer.open({
+            title:"添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['addAuditApply.html?item_id='+itemId+'&userId='+userId],
+            end : function() {
+
+            }
+        });
+    }
+    function read(id,userType) {
+        layer.open({
+            title:"查看查定申请",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkApply.html?id='+id+'&userType='+userType],
+            end : function() {
+
+            }
+        });
+    }
+
+    function report(id,modifyId,modify) {
+        layer.open({
+            title:"添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['addResult.html?id='+id+'&modifyId='+modifyId+'&modify='+modify],
+            end : function() {
+
+            }
+        });
+    }
+    function checkResult(id) {
+        layer.open({
+            title:"添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkResult.html?id='+id],
+            end : function() {
+
+            }
+        });
+    }
+    $("#searchBt").click(function(){
+        example.ajax.reload();
+    });
+
+
+</script>
+</html>

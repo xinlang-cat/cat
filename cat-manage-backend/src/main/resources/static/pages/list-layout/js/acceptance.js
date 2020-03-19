@@ -90,7 +90,7 @@ function getItem_user(id) {
             var countMan = 0;
 
             var str = '';
-            var str1 = '';
+
             var count = 1;
             $(data).each(function () {
                 var names = [];
@@ -105,14 +105,14 @@ function getItem_user(id) {
                 degree= userInfo.degree;
 
                 if(academicTitleRank=="高级"){
-                    doctor++;
+                    advanced++;
                 }else if (academicTitleRank=="中级"){
                     middle++;
                 }else if (academicTitleRank=="初级"){
                     elementary++;
                 }
                 if(degree=="博士"){
-                    advanced++;
+                    doctor++;
                 }else if (degree=="硕士"){
                     postgraduate++;
                 }else if (degree=="学士"){
@@ -130,7 +130,7 @@ function getItem_user(id) {
                     '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.name + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + sex + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.birthDate.substring(0, 10) + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicTitle + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicTitleRank + userInfo.academicTitle + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicDiplomas + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.deptName + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + names + '</td>' +
@@ -141,18 +141,16 @@ function getItem_user(id) {
 
             })
             count--;
-            str1 += '<tr>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + count + '</td>' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + doctor + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + middle + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + elementary + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + advanced + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + postgraduate + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + bachelor + '</td>\n' +
-                '</tr>';
+            $("#countMan").val(count);
+            $("#doctor").val(doctor);
+            $("#middle").val(middle);
+            $("#elementary").val(elementary);
+            $("#advanced").val(advanced);
+            $("#postgraduate").val(postgraduate);
+            $("#bachelor").val(bachelor);
 
             $("#userinfo").append(str);
-            $("#countInfo").append(str1);
+
         }
     })
 }
@@ -215,75 +213,32 @@ function getUserId() {
     return datas;
 }
 function getFund(id) {
+    var valued=  0;
+    var value = 0;
+    var count = 0;
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/fund/list',
         data: "item_id=" + id,
         async: false,
+
         success: function (data) {
-
-
-            var str = '';
-            var str1 = '';
-            var count = 1;
             $(data).each(function () {
+                var name = this.source;
+                value = this.money;
 
-                var academicTitleRank;
-                var degree;
-                academicTitleRank = userInfo.academicTitleRank;
-                degree= userInfo.degree;
+                valued=  parseInt($('#'+name).val());
+                count = count+parseInt(value);
+                if(!valued){
+                    $('#'+name).val(value);
+                }else {
+                    $('#'+name).val(valued+parseInt(value));
 
-
-
-                if(academicTitleRank=="高级"){
-                    doctor++;
-                }else if (academicTitleRank=="中级"){
-                    middle++;
-                }else if (academicTitleRank=="初级"){
-                    elementary++;
                 }
-                if(degree=="博士"){
-                    advanced++;
-                }else if (degree=="硕士"){
-                    postgraduate++;
-                }else if (degree=="学士"){
-                    bachelor++;
-                }
-
-                var sex;
-                if (userInfo.sex == 0) {
-                    sex = '女';
-                } else {
-                    sex = '男';
-                }
-                str += '<tr>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + count + '</td>' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.name + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + sex + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.birthDate.substring(0, 10) + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicTitle + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicDiplomas + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.deptName + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + names + '</td>' +
-                    '</tr>'
-                count++;
-
-
 
             })
-            count--;
-            str1 += '<tr>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + count + '</td>' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + doctor + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + middle + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + elementary + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + advanced + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + postgraduate + '</td>\n' +
-                '<td style="font-size: 14px;font-weight: bolder;">' + bachelor + '</td>\n' +
-                '</tr>';
-
-            $("#userinfo").append(str);
-            $("#countInfo").append(str1);
+            $("#countMoney").val(count);
         }
     })
 }
+

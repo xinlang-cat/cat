@@ -12,8 +12,10 @@ import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class CheckTableController {
     @ApiOperation(value = "添加结题申请表")
     public CheckTable save(@RequestBody CheckTable checkTable){
         checkTable.setApplicationDate(new Date());
+        checkTable.setStatus(0);
         checkTableService.save(checkTable);
         return checkTable;
     }
@@ -66,5 +69,6 @@ public class CheckTableController {
     public void delete(@PathVariable Integer id){
         checkTableService.delete(id);
     }
+
 
 }

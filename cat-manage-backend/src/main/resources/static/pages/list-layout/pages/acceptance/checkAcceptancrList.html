@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
 </head>
 <body>
 <div>
@@ -50,9 +50,9 @@
                             <button class="layui-btn layui-btn-sm" onclick="location.href='projectList.html'">
                                 <i class="layui-icon">&#xe608;</i> 测试
                             </button>
-                           <!-- <button class="layui-btn layui-btn-sm" onclick="matchExpert()">
-                                <i class="layui-icon">&#xe608;</i> 匹配专家
-                            </button>-->
+                            <!-- <button class="layui-btn layui-btn-sm" onclick="matchExpert()">
+                                 <i class="layui-icon">&#xe608;</i> 匹配专家
+                             </button>-->
                         </td>
                     </tr>
                 </table>
@@ -85,13 +85,13 @@
 </body>
 
 
-<script src="../../js/constant.js"></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
 
 <script type="text/javascript">
     var pers = checkPermission();
@@ -210,7 +210,7 @@
                                 var href = "updateItem.html?id=" + id;
                                 var edit = buttonEdit(href, "back:user:update", pers);
                                 var del = buttonDel(id, "back:permission:delete", pers);
-                               /* var detailsHref ="details.html?id="+id;*/
+                                /* var detailsHref ="details.html?id="+id;*/
                                 var detailsHref ="../list-layout/pages/projectDetails/checkProjectInfo.html?id="+id;
                                 var expert = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>匹配专家</i></button>");
                                 expert.attr("onclick", "matchExpert(" +id+")")
