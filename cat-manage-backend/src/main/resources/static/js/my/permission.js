@@ -17,7 +17,6 @@ function checkPermission() {
 					}
 				}
 				if (index < 0) {
-
 					$(this).hide();
 				}
 			});

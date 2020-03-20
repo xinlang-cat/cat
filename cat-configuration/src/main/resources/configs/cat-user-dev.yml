@@ -32,10 +32,10 @@ mybatis:
 security:
   oauth2:
     resource:
-      user-info-uri: http://192.168.1.7/api-o/user-me
+      user-info-uri: http://xinlangxfpt.mynatapp.cc/api-o/user-me
       prefer-token-info: false
 wechat:
-  domain:  192.168.1.7/api-u
+  domain: http://xinlangxfpt.mynatapp.cc/api-u
   infos:
     app1:
       appid: wxc0db13c13e39ec9f
