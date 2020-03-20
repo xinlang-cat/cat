@@ -29,7 +29,7 @@
                 </div>
                 <label class="col-md-2 control-label">预计结束时间</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="结束时间" type="text"  maxlength="50"
+                    <input class="form-control" placeholder="结束时间" type="text" maxlength="50"
                            id="end_date" readonly>
                 </div>
             </div>
@@ -38,7 +38,8 @@
                 <input style="display: none" id="id" name="id" value="">
                 <label class="col-md-2 control-label">实际开始时间</label>
                 <div class="col-md-3">
-                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date_true" maxlength="50"
+                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date_true"
+                           maxlength="50"
                            id="start_date2" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空" readonly>
                 </div>
@@ -141,53 +142,58 @@
 
     var id = getUrlParam("id");
     var h = $(window).height() - 100;
-    layui.use(['layedit','upload', 'laydate'], function(){
+    layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
         laydate = layui.laydate;
-        index = layedit.build('demo',{tool:[], height:h});
+        index = layedit.build('demo', {tool: [], height: h});
     });
     initData();
 
-    function initData(){
+    function initData() {
         var data = {
-            id:id,
+            id: id,
         }
         $.ajax({
-            type : 'get',
-            data:data,
-            url : domainName + '/project-item/item/target/applyList',
-            async : false,
-            success : function(data) {
+            type: 'get',
+            data: data,
+            url: domainName + '/project-item/item/target/applyList',
+            async: false,
+            success: function (data) {
                 $(data).each(function () {
-                        $("#content").val(data[0].content);
-                        $("#purpose").val(data[0].purpose);
+                    $("#content").val(data[0].content);
+                    $("#purpose").val(data[0].purpose);
 
-                        $("#depand").val(data[0].depand);
-                        $("#details").val(data[0].details);
-                        $("#means").val(data[0].means);
-                        $("#description").val(data[0].description);
+                    $("#depand").val(data[0].depand);
+                    $("#details").val(data[0].details);
+                    $("#means").val(data[0].means);
+                    $("#description").val(data[0].description);
 
-                        getProvince(data[0].provinceCode);
-                        getTargetName(data[0].target_id);
-                        $("#result").val(data[0].status==3?"查定合格":"查定不合格");
-                        getCity(data[0].cityCode);
-                        getArea(data[0].areaCode);
+                    getProvince(data[0].provinceCode);
+                    getTargetName(data[0].target_id);
+                    $("#result").val(data[0].status == 3 ? "查定合格" : "查定不合格");
+                    getCity(data[0].cityCode);
+                    getArea(data[0].areaCode);
+                    if (data[0].postType == 2) {
+                        $("#street").val(data[0].street);
+                    } else {
                         getStreet(data[0].streetCode);
-                        $("#start_date").val(formatDate3(data[0].start_date));
-                        $("#end_date").val(formatDate3(data[0].end_date));
-                        $("#start_date2").val(formatDate3(data[0].start_date_true));
-                        $("#end_date2").val(formatDate3(data[0].end_date_true));
-                        $.get(domainName+"/api-f/albums/list",{ids:data[0].accessory},function (data1) {
-                            $.each(data1,function (i,item) {
-                                addImgHtml(item)
-                            });
-                        })
+                    }
+                    $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#end_date").val(formatDate3(data[0].end_date));
+                    $("#start_date2").val(formatDate3(data[0].start_date_true));
+                    $("#end_date2").val(formatDate3(data[0].end_date_true));
+                    $.get(domainName + "/api-f/albums/list", {ids: data[0].accessory}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            addImgHtml(item)
+                        });
+                    })
 
                 });
 
             }
         });
     }
+
     function addImgHtml(item) {
         var str = '';
         var val = item.name.substring(0, item.name.indexOf("."));
@@ -199,8 +205,10 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
+
     var h = $(window).height() - 100;
     var w = $(window).width() - 200;
+
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({
@@ -218,44 +226,46 @@
 
     function getTargetName(id) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/project-item/item/target/list',
+            type: 'get',
+            url: domainName + '/project-item/item/target/list',
             contentType: "application/json; charset=utf-8",
             data: {id: id},
-            success : function(data) {
-                if (data[0]['count']!=null){
+            success: function (data) {
+                if (data[0]['count'] != null) {
                     $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
                         $("#name").val(res[0].content);
                     })
-                }else {
+                } else {
                     $("#name").val(data[0].content);
                 }
             }
         });
     }
+
     function pass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 2}),
-            success : function(data) {
+            data: JSON.stringify({id: id, status: 2}),
+            success: function (data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     parent.location.reload();
                 });
             }
         });
     }
+
     function unPass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 5}),
-            success : function(data) {
+            data: JSON.stringify({id: id, status: 5}),
+            success: function (data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     parent.location.reload();
                 });
             }

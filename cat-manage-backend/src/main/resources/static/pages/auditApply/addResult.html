@@ -259,11 +259,17 @@
             success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
-                    getProvince(data[0].provinceCode);
+                    if (data[0].postType==2){
+                        $("#province").val(data[0].province);
+                        $("#city").val(data[0].city);
+                        $("#area").val(data[0].area);
+                        $("#street").val(data[0].street);
+                    }else {
+
+                        getStreet(data[0].streetCode);
+                    }
                     getTargetName(data[0].target_id);
-                    getCity(data[0].cityCode);
-                    getArea(data[0].areaCode);
-                    getStreet(data[0].streetCode);
+
                     $("#start_date").val(formatDate3(data[0].start_date));
                     $("#end_date").val(formatDate3(data[0].end_date));
                 });
@@ -311,7 +317,6 @@
             url : domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
             data : JSON.stringify(formdata),
-
             success : function(data) {
                 var msg = "成功";
                 layer.msg(msg, {shift: -1, time: 1000}, function(){
