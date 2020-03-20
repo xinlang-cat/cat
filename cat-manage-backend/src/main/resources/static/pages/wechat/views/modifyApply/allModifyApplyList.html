@@ -56,7 +56,7 @@
 	$(function () {
 		 $.ajax({
 		    type : 'get',
-		     url: domainName + "/project-item/item/target/applyList",
+		     url: domainName + "/project-item/item/basic/modifyApply/list",
 		     contentType: "application/json; charset=utf-8",
 		     data: {item_id: itemId,status: 3},
 		     success : function(data) {
@@ -65,7 +65,7 @@
 	                str += '<div class="weui-panel__bd">\n' +
 	                        '   <a class="weui-cell weui-cell_access" href="checkModifyApply.html?id='+this.id+'">\n' +
 	                        '      <div class="weui-media-box weui-media-box_text">\n' +
-	                        '          <h2 style="max-width: 400px;">'+this.item_name+'</h2>\n' +
+	                        '          <h2 style="max-width: 400px;">'+itemName(this.item_name)+'</h2>\n' +
 	                        '          <p class="date" style="max-width: 400px;">\n' +
 	                        '            <h4 class="weui-media-box__title">'+getType(this.modify)+'</h4>\n' +
 	                        '            <p class="weui-media-box__desc" >'+this.content+'</p>\n' +
@@ -78,8 +78,8 @@
 	                        '       <span class="weui-cell__ft"></span>\n' +
 	                        '     </a>\n' +
 	                        '</div>' ;
-					$("#list").append(str);
 	                }
+					$("#list").append(str);
 		    }
 		});
 	})
@@ -107,7 +107,7 @@
 		return data;
 	}
 	function getTime(apply_time){
-		var   now= new Date(now);
+		var   now= new Date(apply_time);
 		var   year=now.getFullYear();
 		var   month=now.getMonth()+1;
 		var   date=now.getDate();
@@ -124,6 +124,19 @@
         }else if (status == 3){
             data="更改成功";
         }	
+		return data;
+	}
+	function itemName(status){
+		var data='';
+		if (status == 0){
+	        data="待审核";
+	    }else if (status == 1){
+	        data="更改中";
+	    }else if (status == 2){
+	        data="审核未通过";
+	    }else if (status == 3){
+	        data="更改成功";
+	    }	
 		return data;
 	}
 </script>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2020-03-16 19:40:45
+Date: 2020-03-20 14:51:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,5 +43,6 @@ CREATE TABLE `audit_apply` (
   `depand` longtext COMMENT '查定依据',
   `details` longtext COMMENT '查定内容',
   `means` longtext COMMENT '查定方法',
+  `postType` int(3) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
