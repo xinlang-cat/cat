@@ -25,3 +25,17 @@ function checkPermission() {
 	
 	return pers;
 }
+
+function currentUser() {
+	var currentUser = {};
+	$.ajax({
+		type : 'get',
+		url : domainName + '/api-u/users/current',
+		contentType : "application/json; charset=utf-8",
+		async : false,
+		success : function(data) {
+			currentUser = data;
+		}
+	});
+	return currentUser;
+}

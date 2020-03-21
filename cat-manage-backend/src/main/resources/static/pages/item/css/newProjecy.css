@@ -15,7 +15,7 @@
     word-wrap: break-word;
     word-break: break-word;
     text-align: left;
-    vertical-align: top;
+    /*vertical-align: top;*/
 }
 .headline {
     color: 
@@ -36,9 +36,10 @@
     font-size: 9pt;
     font-family: Microsoft YaHei;
 }
-.field input,.field textarea{
+.field input,.field textarea,.field select{
     width: 100%;
     height: 100%;
+    padding-left: 0;
     border: none;
 }
 .tdDorder {
