@@ -51,7 +51,7 @@ public class StagePaperCatalogueController {
     public void delete(@PathVariable Integer id) { stagePaperCatalogueService.delete(id);
     }
 
-    @DeleteMapping("/{ids}")
+    @DeleteMapping
     @LogAnnotation(module = "删除专著、论文目录")
     @ApiOperation(value = "删除专著、论文目录")
     public void deleteByIds(@PathVariable Set<Integer> ids) {

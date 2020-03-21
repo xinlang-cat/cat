@@ -588,21 +588,21 @@
             }
             if (res.skillTarget != null) {
                 var str = '';
-                str += '<td>其他指标</td><td><span>' + res.skillTarget + '</span></td>';
+                str += '<td>技术指标</td><td><span>' + res.skillTarget + '</span></td>';
                 str += '<td><span>' + res.skillTargetSchedule + '</span></td>';
                 str += '<td><span>' + res.skillTargetDescribe + '</span></td>';
                 $("#TECHNICAL_INDICATORS").append(str);
             }
             if (res.economyTarget != null) {
                 var str = '';
-                str += '<td>其他指标</td><td><span>' + res.economyTarget + '</span></td>';
+                str += '<td>经济指标</td><td><span>' + res.economyTarget + '</span></td>';
                 str += '<td><span>' + res.economyTargetSchedule + '</span></td>';
                 str += '<td><span>' + res.economyTargetDescribe + '</span></td>';
                 $("#ECONOMIC_INDICATORS").append(str);
             }
             if (res.personTarget != null) {
                 var str = '';
-                str += '<td>其他指标</td><td><span>' + res.personTarget + '</span></td>';
+                str += '<td>人才队伍建设指标</td><td><span>' + res.personTarget + '</span></td>';
                 str += '<td><span>' + res.personTargetSchedule + '</span></td>';
                 str += '<td><span>' + res.personTargetDescribe + '</span></td>';
                 $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
@@ -742,7 +742,7 @@
         formData.id = stageId;
         if ($.inArray('html:principal:check:stage', pers) > 0) {
             var principalCheckEnable = formData.principalCheckEnable;
-            if (principalCheckEnable <= 0) {
+            if (principalCheckEnable < 0) {
                 formData.enable = principalCheckEnable;
             }
         }
@@ -757,7 +757,6 @@
             data: JSON.stringify(formData),
             success: function (res) {
                 layer.msg("成功");
-                layer.closeAll();
             }
         })
     }
