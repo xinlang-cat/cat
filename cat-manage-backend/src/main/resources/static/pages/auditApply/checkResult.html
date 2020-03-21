@@ -29,7 +29,7 @@
                 </div>
                 <label class="col-md-2 control-label">预计结束时间</label>
                 <div class="col-md-3">
-                    <input class="form-control" placeholder="结束时间" type="text"  maxlength="50"
+                    <input class="form-control" placeholder="结束时间" type="text" maxlength="50"
                            id="end_date" readonly>
                 </div>
             </div>
@@ -38,7 +38,8 @@
                 <input style="display: none" id="id" name="id" value="">
                 <label class="col-md-2 control-label">实际开始时间</label>
                 <div class="col-md-3">
-                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date_true" maxlength="50"
+                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date_true"
+                           maxlength="50"
                            id="start_date2" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空" readonly>
                 </div>
@@ -159,29 +160,33 @@
             async : false,
             success : function(data) {
                 $(data).each(function () {
-                        $("#content").val(data[0].content);
-                        $("#purpose").val(data[0].purpose);
+                    $("#content").val(data[0].content);
+                    $("#purpose").val(data[0].purpose);
 
-                        $("#depand").val(data[0].depand);
-                        $("#details").val(data[0].details);
-                        $("#means").val(data[0].means);
-                        $("#description").val(data[0].description);
+                    $("#depand").val(data[0].depand);
+                    $("#details").val(data[0].details);
+                    $("#means").val(data[0].means);
+                    $("#description").val(data[0].description);
 
-                        getProvince(data[0].provinceCode);
-                        getTargetName(data[0].target_id);
-                        $("#result").val(data[0].status==3?"查定合格":"查定不合格");
-                        getCity(data[0].cityCode);
-                        getArea(data[0].areaCode);
+                    getProvince(data[0].provinceCode);
+                    getTargetName(data[0].target_id);
+                    $("#result").val(data[0].status == 3 ? "查定合格" : "查定不合格");
+                    getCity(data[0].cityCode);
+                    getArea(data[0].areaCode);
+                    if (data[0].postType == 2) {
+                        $("#street").val(data[0].street);
+                    } else {
                         getStreet(data[0].streetCode);
-                        $("#start_date").val(formatDate3(data[0].start_date));
-                        $("#end_date").val(formatDate3(data[0].end_date));
-                        $("#start_date2").val(formatDate3(data[0].start_date_true));
-                        $("#end_date2").val(formatDate3(data[0].end_date_true));
-                        $.get(domainName+"/api-f/albums/list",{ids:data[0].accessory},function (data1) {
-                            $.each(data1,function (i,item) {
-                                addImgHtml(item)
-                            });
-                        })
+                    }
+                    $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#end_date").val(formatDate3(data[0].end_date));
+                    $("#start_date2").val(formatDate3(data[0].start_date_true));
+                    $("#end_date2").val(formatDate3(data[0].end_date_true));
+                    $.get(domainName + "/api-f/albums/list", {ids: data[0].accessory}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            addImgHtml(item)
+                        });
+                    })
 
                 });
 

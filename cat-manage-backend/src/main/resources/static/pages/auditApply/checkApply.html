@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
     <style>
-        .btn-group{
+        .btn-group {
             display: none;
 
         }
@@ -64,14 +64,14 @@
             </div>
             <div class="layui-btn-group btn-group" style="text-align: center">
 
-                        <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                                onclick="pass();">
-                            申请通过
-                        </button>
-                        <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                                onclick="unPass();">
-                            申请未通过
-                        </button>
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="pass();">
+                    申请通过
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="unPass();">
+                    申请未通过
+                </button>
 
             </div>
 
@@ -92,61 +92,68 @@
     var id = getUrlParam("id");
     var userType = getUrlParam("userType");
     var h = $(window).height() - 100;
-    layui.use(['layedit','upload', 'laydate'], function(){
+    layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
         laydate = layui.laydate;
-        index = layedit.build('demo',{tool:[], height:h});
+        index = layedit.build('demo', {tool: [], height: h});
     });
     initData();
 
-    function initData(){
+    function initData() {
         var data = {
-            id:id,
+            id: id,
         }
         $.ajax({
-            type : 'get',
-            data:data,
-            url : domainName + '/project-item/item/target/applyList',
-            async : false,
-            success : function(data) {
+            type: 'get',
+            data: data,
+            url: domainName + '/project-item/item/target/applyList',
+            async: false,
+            success: function (data) {
                 $(data).each(function () {
+                    getProvince(data[0].provinceCode);
+                    getCity(data[0].cityCode);
+                    getArea(data[0].areaCode);
+                    if (data[0].postType == 2) {
+                        $("#street").val(data[0].street);
+                    } else {
+                        getStreet(data[0].streetCode);
+                    }
+                    getTargetName(data[0].target_id);
                     $("#content").val(data[0].content);
-                        province(data[0].provinceCode);
-                        getTargetName(data[0].target_id);
-                        city(data[0].cityCode);
-                        area(data[0].areaCode);
-                        street(data[0].streetCode);
-                        status(data[0].status);
-                        $("#start_date").val(formatDate3(data[0].start_date));
-                        $("#end_date").val(formatDate3(data[0].end_date));
+                    status(data[0].status);
+                    $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#end_date").val(formatDate3(data[0].end_date));
                 });
 
             }
         });
     }
+
     function status(status) {
-        if(status==1&&userType==2){
-            var obj=document.getElementsByClassName("btn-group");
+        if (status == 1 && userType == 2) {
+            var obj = document.getElementsByClassName("btn-group");
             obj[0].style.display = "block";
         }
 
     }
+
     function province(provinceCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/province/one/'+provinceCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/province/one/' + provinceCode,
+            async: false,
+            success: function (data) {
                 $("#provinceCode").val(data.provinceName);
             }
         });
     }
+
     function city(cityCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/city/one/'+cityCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/city/one/' + cityCode,
+            async: false,
+            success: function (data) {
                 $("#cityCode").val(data.cityName);
             }
         });
@@ -154,65 +161,69 @@
 
     function area(areaCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/area/one/'+areaCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/area/one/' + areaCode,
+            async: false,
+            success: function (data) {
                 var name = data.areaName;
                 $("#areaCode").val(name);
             }
         });
     }
+
     function street(streetCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/street/one/'+streetCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/street/one/' + streetCode,
+            async: false,
+            success: function (data) {
                 $("#streetCode").val(data.streetName);
             }
         });
     }
+
     function getTargetName(id) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/project-item/item/target/list',
+            type: 'get',
+            url: domainName + '/project-item/item/target/list',
             contentType: "application/json; charset=utf-8",
             data: {id: id},
-            success : function(data) {
-                if (data[0]['count']!=null){
+            success: function (data) {
+                if (data[0]['count'] != null) {
                     $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
                         $("#name").val(res[0].content);
                     })
-                }else {
+                } else {
                     $("#name").val(data[0].content);
                 }
             }
         });
     }
+
     function pass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 2}),
-            success : function(data) {
+            data: JSON.stringify({id: id, status: 2}),
+            success: function (data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     parent.location.reload();
                 });
             }
         });
     }
+
     function unPass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 5}),
-            success : function(data) {
+            data: JSON.stringify({id: id, status: 5}),
+            success: function (data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     parent.location.reload();
                 });
             }

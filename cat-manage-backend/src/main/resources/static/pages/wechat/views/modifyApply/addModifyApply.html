@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>变更申请起草</title>
+    <title>更改申请</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -19,18 +19,8 @@
 <body ontouchstart>
 
 <div style="z-index: 999999">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="../../images/swiper-1.jpg" style="height: 150px;width: 100%"/></div>
-            <div class="swiper-slide"><img src="../../images/swiper-2.jpg" style="height: 150px;width: 100%"/></div>
-            <div class="swiper-slide"><img src="../../images/swiper-3.jpg" style="height: 150px;width: 100%"/></div>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-interval"></div>
 
-
-
+<form id="form">
     <a class="weui-cell weui-cell_access" href="javascript:;">
         <div class="weui-cell__hd">
             <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
@@ -46,7 +36,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox3" value="是" checked="checked">
+                <input type="radio" class="weui-check" name="type" value="1" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -55,7 +45,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <input type="radio" name="type" class="weui-check" value="2">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -64,7 +54,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <input type="radio" name="type" class="weui-check" value="3">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -73,7 +63,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <input type="radio" name="type" class="weui-check" value="4">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -82,7 +72,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="否">
+                <input type="radio" name="type" class="weui-check" value="5">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -101,8 +91,6 @@
     </a>
 
 
-
-
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
@@ -111,20 +99,23 @@
     </div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <textarea class="weui-textarea"  rows="5"></textarea>
+            <textarea class="weui-textarea" id="content" name="content" rows="5"></textarea>
 
         </div>
     </div>
     <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
     </div>
+	</form>
 </div>
 
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
 <script src="../../weui/js/swiper.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script src="../../js/common.js"></script>
+<script src="../../js/constant.js"></script>
+
 
 <script>
     $(function () {
@@ -133,10 +124,24 @@
 </script>
 
 <script>
+	var itemId = getUrlParam("item_id");
     $(".swiper-container").swiper({
         loop: true,
         autoplay: 3000
     });
+	function add(){
+		var formdata = $("#form").serializeObject();
+		formdata.item_id = itemId;
+		$.ajax({
+		    type: 'post',
+		    url: domainName + '/project-item/item/basic/modifyApply',
+		    contentType: "application/json; charset=utf-8",
+		    data: JSON.stringify(formdata),
+		    success: function (data) {
+		       $.toptip('操作成功', 'success');
+		    }
+		 });
+	}
 </script>
 </body>
 

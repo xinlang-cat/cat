@@ -116,7 +116,8 @@ public class ItemBasicController {
     @LogAnnotation(module = "添加更改申请")
     @PostMapping("/modifyApply")
     public ResponseEntity<modifyApply> ModifyApply(@RequestBody modifyApply modifyApply) {
-
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        modifyApply.setUser_id(userId);
         modifyApply.setApply_time(new Date());
         modifyApply.setStatus(0);
         modifyApplyService.save(modifyApply);
