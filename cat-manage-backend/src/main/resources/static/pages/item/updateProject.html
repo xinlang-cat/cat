@@ -21,6 +21,7 @@
     <div style="position: absolute;right: 30px;top: 15px;">
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);">提交</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);">保存</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
 <div class="layui-form" style="margin-top: 60px;">
@@ -101,6 +102,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
+                        <input type="hidden" name="id" id="item_id">
                         <input type="text" name="contract_no" placeholder="请输入">
                     </div>
                 </td>
@@ -620,46 +622,46 @@
             <td class="mainTd_1" rowspan="1" colspan="6">
                 <div class="scheduling">
                     <form>
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="5%">
-                            <col width="5%">
-                            <col width="10%">
-                            <col width="80%">
-                        </colgroup>
-                        <thead>
-                        <tr style="background-color: #ffffff;">
-                            <th class="tdDorder" rowspan="1" colspan="3">
-                                <div class="field">
-                                    <span>进度安排</span>
-                                </div>
-                            </th>
-                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                <div class="layui-btn-group">
-                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                            name="scheduling">
-                                        <i class="layui-icon">&#xe654;</i>
-                                    </button>
-                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                            name="delTr">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </button>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="tdDorder">
-                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                       name="c_all">
-                            </th>
-                            <th class="tdDorder">序号</th>
-                            <th class="tdDorder">年度</th>
-                            <th class="tdDorder">年度目标</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="80%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="3">
+                                    <div class="field">
+                                        <span>进度安排</span>
+                                    </div>
+                                </th>
+                                <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                    <div class="layui-btn-group">
+                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
+                                                name="scheduling">
+                                            <i class="layui-icon">&#xe654;</i>
+                                        </button>
+                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
+                                                name="delTr">
+                                            <i class="layui-icon">&#xe640;</i>
+                                        </button>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">
+                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                           name="c_all">
+                                </th>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">年度</th>
+                                <th class="tdDorder">年度目标</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </td>
@@ -699,97 +701,97 @@
             <td class="mainTd_1" rowspan="1" colspan="6">
                 <div class="personnel">
                     <form>
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="5%">
-                            <col width="5%">
-                            <col width="10%">
-                            <col width="5%">
-                            <col width="5%">
-                            <col width="10%">
-                            <col width="15%">
-                            <col width="15%">
-                            <col width="15%">
-                        </colgroup>
-                        <thead>
-                        <tr style="background-color: #ffffff;">
-                            <th class="tdDorder" rowspan="1" colspan="8">
-                                <div class="field">
-                                    <span>主要研究、开发人员及责任分工</span>
-                                </div>
-                            </th>
-                            <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                <div class="layui-btn-group">
-                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                            name="personnel">
-                                        <i class="layui-icon">&#xe654;</i>
-                                    </button>
-                                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                            name="delTr">
-                                        <i class="layui-icon">&#xe640;</i>
-                                    </button>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="tdDorder">
-                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                       name="c_all">
-                            </th>
-                            <th class="tdDorder">序号</th>
-                            <th class="tdDorder">姓名</th>
-                            <th class="tdDorder">性别</th>
-                            <th class="tdDorder">年龄</th>
-                            <th class="tdDorder">职称</th>
-                            <th class="tdDorder">从事专业</th>
-                            <th class="tdDorder">工作单位</th>
-                            <th class="tdDorder">研究开发中的责任分工</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!--<tr>
-                            <td class="tdDorder mainTd_1">
-                                <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                            </td>
-                            <td class="mainTd_1 tdDorder">1</td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入标题">
-                                </div>
-                            </td>
-                        </tr>-->
-                        </tbody>
-                    </table>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="8">
+                                    <div class="field">
+                                        <span>主要研究、开发人员及责任分工</span>
+                                    </div>
+                                </th>
+                                <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                    <div class="layui-btn-group">
+                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
+                                                name="personnel">
+                                            <i class="layui-icon">&#xe654;</i>
+                                        </button>
+                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
+                                                name="delTr">
+                                            <i class="layui-icon">&#xe640;</i>
+                                        </button>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">
+                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                           name="c_all">
+                                </th>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">姓名</th>
+                                <th class="tdDorder">性别</th>
+                                <th class="tdDorder">年龄</th>
+                                <th class="tdDorder">职称</th>
+                                <th class="tdDorder">从事专业</th>
+                                <th class="tdDorder">工作单位</th>
+                                <th class="tdDorder">研究开发中的责任分工</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr>
+                                <td class="tdDorder mainTd_1">
+                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
+                                </td>
+                                <td class="mainTd_1 tdDorder">1</td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入标题">
+                                    </div>
+                                </td>
+                            </tr>-->
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </td>
@@ -829,284 +831,31 @@
             <td class="mainTd_1" rowspan="1" colspan="6">
                 <div class="fundBudget">
                     <form>
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="30%">
-                            <col width="10%">
-                            <col width="30%">
-                            <col width="30%">
-                        </colgroup>
-                        <thead>
-                        <tr style="background-color: #ffffff;">
-                            <th class="tdDorder" rowspan="1" colspan="4">
-                                <div class="field">
-                                    <span>甲方提供的科技经费用途预算</span>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="tdDorder">科目</th>
-                            <th class="tdDorder">金额（万元）</th>
-                            <th class="tdDorder">开支内容</th>
-                            <th class="tdDorder">备注</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="设备费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="材料费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="测试化验加工费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="燃料动力费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="差旅/会议/国际合作与交流费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="出版/文献/信息传播/知识产权事务费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="劳务费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="专家咨询费" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="其他支出" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="绩效支出" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="subject" value="其他费用" readonly>
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="money">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="content">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="remark">
-                                    <input type="hidden" name="type" value="">
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="30%">
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="4">
+                                    <div class="field">
+                                        <span>甲方提供的科技经费用途预算</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">科目</th>
+                                <th class="tdDorder">金额（万元）</th>
+                                <th class="tdDorder">开支内容</th>
+                                <th class="tdDorder">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fundBudget">
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </td>
@@ -1119,95 +868,95 @@
             <td class="mainTd_1" rowspan="1" colspan="6">
                 <div class="fundSource">
                     <form>
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="28%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                            <col width="8%">
-                        </colgroup>
-                        <thead>
-                        <tr style="background-color: #ffffff;">
-                            <th class="tdDorder" rowspan="1" colspan="10">
-                                <div class="field">
-                                    <span>除甲方提供科技经费之外的其余经费</span>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="tdDorder">承担单位名称</th>
-                            <th class="tdDorder">国家科技部门拨款</th>
-                            <th class="tdDorder">国家其他部门拨款</th>
-                            <th class="tdDorder">区级部门拨款</th>
-                            <th class="tdDorder">市级部门拨款</th>
-                            <th class="tdDorder">县级部门拨款</th>
-                            <th class="tdDorder">自有资金</th>
-                            <th class="tdDorder">银行贷款</th>
-                            <th class="tdDorder">国外资金</th>
-                            <th class="tdDorder">其他资金</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="responsible_unit">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="state_science_and_technology_department">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="state_other_department">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="area_department">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="city_department">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="county_department">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="own_fund">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="bank_loan">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="offshore_fund">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="other_fund">
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="28%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="10">
+                                    <div class="field">
+                                        <span>除甲方提供科技经费之外的其余经费</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">承担单位名称</th>
+                                <th class="tdDorder">国家科技部门拨款</th>
+                                <th class="tdDorder">国家其他部门拨款</th>
+                                <th class="tdDorder">区级部门拨款</th>
+                                <th class="tdDorder">市级部门拨款</th>
+                                <th class="tdDorder">县级部门拨款</th>
+                                <th class="tdDorder">自有资金</th>
+                                <th class="tdDorder">银行贷款</th>
+                                <th class="tdDorder">国外资金</th>
+                                <th class="tdDorder">其他资金</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="responsible_unit">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="state_science_and_technology_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="state_other_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="area_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="city_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="county_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="own_fund">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="bank_loan">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="offshore_fund">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="other_fund">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </td>
@@ -1247,175 +996,19 @@
             <td class="mainTd_1" rowspan="1" colspan="6">
                 <div class="contactWay">
                     <form>
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="10%">
-                            <col width="15%">
-                            <col width="30%">
-                            <col width="15%">
-                            <col width="30%">
-                        </colgroup>
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="tdDorder mainTd_1" rowspan="3">
-                                <span>甲方</span>
-                                <input type="hidden" name="type" value="1">
-                            </td>
-                            <td class="mainTd_1 tdDorder"><span>联系人</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="linkman">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>电话</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="phone">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder"><span>传真</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="fax">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>邮编</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="postcode">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder"><span>地址</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="site">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>E-mail（电子邮件）</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="e_mail">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tdDorder mainTd_1" rowspan="3">
-                                <span>乙方</span>
-                                <input type="hidden" name="type" value="2">
-                            </td>
-                            <td class="mainTd_1 tdDorder"><span>联系人</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="linkman">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>电话</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="phone">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder"><span>传真</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="fax">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>邮编</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="postcode">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder"><span>地址</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="site">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>E-mail（电子邮件）</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="e_mail">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tdDorder mainTd_1" rowspan="3">
-                                <span>丙方</span>
-                                <input type="hidden" name="type" value="3">
-                            </td>
-                            <td class="mainTd_1 tdDorder"><span>联系人</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="linkman">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>电话</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="phone">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder"><span>传真</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="fax">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>邮编</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="postcode">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="mainTd_1 tdDorder"><span>地址</span></td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="site">
-                                </div>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <span>E-mail（电子邮件）</span>
-                            </td>
-                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                <div class="field">
-                                    <input type="text" placeholder="请输入" name="e_mail">
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="30%">
+                                <col width="15%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            </thead>
+                            <tbody id="contactWay">
+                            </tbody>
+                        </table>
                     </form>
                 </div>
             </td>
@@ -1449,6 +1042,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='js/queryData.js'></script>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
         var form = layui.form,
@@ -1625,6 +1219,19 @@
     /*初始化数据*/
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
     initCompanySelect($('#responsible_unit'));//当前用户公司
+
+    //获取项目数据项目
+    var id = getUrlParam("id");
+    $('#item_id').val(id);
+
+    queryInformation(id);
+    queryIndicators(id);
+    queryScheduling(id);
+    queryPersonnel(id);
+    queryFundBudget(id);
+    queryFundSource(id);
+    queryContactWay(id);
+
     function submit(status) {
         var information = $('#form1').serializeObject();
         information.status=status;
