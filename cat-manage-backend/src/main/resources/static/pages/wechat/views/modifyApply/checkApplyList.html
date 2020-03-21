@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>更改申请列表</title>
+    <title>变更申请列表</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -37,7 +37,7 @@
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 
 <script>
-    var itemId = getUrlParam("item_id");
+    var status = getUrlParam("status");
     $(function () {
         FastClick.attach(document.body);
     });
@@ -46,26 +46,47 @@
             type: 'get',
             url: domainName + "/project-item/item/basic/modifyApply/list",
             contentType: "application/json; charset=utf-8",
-            data: {item_id:itemId,status:0},
+            data: {status:status},
             success: function (data) {
                 var str = '';
-                $(data).each(function () {
-                    str += '<div class="weui-panel__bd">\n' +
-                        '   <a class="weui-cell weui-cell_access" href="checkModifyApply.html?id=' + this.id + '">\n' +
-                        '       <div class="weui-media-box weui-media-box_text">\n' +
-                        '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-                        '           <p class="weui-media-box__desc" >修改' +getType(this.modify)+'</p>\n' +
-                        '           <ul class="weui-media-box__info">\n' +
-                        '               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
-                        '               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
-                        '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-                        '           </ul>\n' +
-                        '      </div>\n' +
-                        '       <span class="weui-cell__ft"></span>\n' +
-                        '     </a>\n' +
-                        '</div>';
+                if (status==3){
+                    $(data).each(function () {
+                        str += '<div class="weui-panel__bd">\n' +
+                            '   <a class="weui-cell weui-cell_access" href="checkedModifyApply.html?id=' + this.id + '">\n' +
+                            '       <div class="weui-media-box weui-media-box_text">\n' +
+                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '           <p class="weui-media-box__desc" >修改' +getType(this.modify)+'</p>\n' +
+                            '           <ul class="weui-media-box__info">\n' +
+                            '               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
+                            '           </ul>\n' +
+                            '      </div>\n' +
+                            '       <span class="weui-cell__ft"></span>\n' +
+                            '     </a>\n' +
+                            '</div>';
 
-                });
+                    });
+                }else {
+                    $(data).each(function () {
+                        str += '<div class="weui-panel__bd">\n' +
+                            '   <a class="weui-cell weui-cell_access" href="checkModifyApply.html?id=' + this.id + '">\n' +
+                            '       <div class="weui-media-box weui-media-box_text">\n' +
+                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '           <p class="weui-media-box__desc" >修改' +getType(this.modify)+'</p>\n' +
+                            '           <ul class="weui-media-box__info">\n' +
+                            '               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
+                            '           </ul>\n' +
+                            '      </div>\n' +
+                            '       <span class="weui-cell__ft"></span>\n' +
+                            '     </a>\n' +
+                            '</div>';
+
+                    });
+                }
+
                 $("#list").append(str);
             }
         });

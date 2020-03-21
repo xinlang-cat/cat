@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>项目列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all"/>
+
+</head>
+
+<body ontouchstart>
+
+
+<div class="page__bd">
+    <div class="weui-panel" id="list">
+
+
+    </div>
+</div>
+</div>
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+
+
+<script>
+    var userId; //当前用户ID
+    var deptCode; //当前用户的公司代码
+    $(function () {
+        FastClick.attach(document.body);
+    });
+    //获取当前用户的ID
+    $(function() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                userId = data.id;
+
+            }
+        });
+    });
+    function getCompanryCode() {
+        getUser();
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company-anon/' + userId,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                deptCode = data.deptCode;
+            }
+        });
+    }
+
+
+
+    $(function () {
+        getCompanryCode();
+
+        $.ajax({
+            type: 'get',
+            url: domainName + "/project-item/item/basic/company",
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                var str = '';
+                $(data).each(function () {
+                    str += '<div class="weui-panel__bd">\n' +
+                        '   <a class="weui-cell weui-cell_access" href="addModifyApply.html?item_id=' + this.id + '">\n' +
+                        '      <div class="weui-media-box weui-media-box_text">\n' +
+                        '      	<h4 class="weui-media-box__title">' + this.item_name + '</h4>\n' +
+                        '      	<p class="weui-media-box__desc" >' + getType(this.category) + '</p>\n' +
+                        '      	<ul class="weui-media-box__info">\n' +
+                        '       	<li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                        '       	<li class="weui-media-box__info__meta">' + getTime(this.start_date) + '-' + getTime(this.end_date) +
+                        '</li>\n' +
+                        '        	<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) +
+                        '</li>\n' +
+                        '        </ul>\n' +
+                        '      </div>\n' +
+                        '       <span class="weui-cell__ft"></span>\n' +
+                        '     </a>\n' +
+                        '</div>';
+                });
+                $("#list").append(str);
+            }
+        });
+    })
+
+    function getUser() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                userId = data.id;
+            }
+        });
+    }
+
+    function getType(category) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + category,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+
+    }
+
+    function getUserName(user_id) {
+        var data = '';
+        $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
+            data = res[0]['name'];
+        })
+        return data;
+    }
+
+    function getTime(apply_time) {
+        var now = new Date(apply_time);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var date = now.getDate();
+        return year + "/" + fixZero(month, 2) + "/" + fixZero(date, 2);
+    }
+
+    function getStatus(status) {
+        if (status == 0) {
+            return "就绪";
+        } else if (status == 1) {
+            return "进行中";
+        } else if (status == 2) {
+            return "结题中";
+        } else if (status == 3) {
+            return "已结题";
+        }
+        return "废弃";
+    }
+</script>
+
+
+</body>
+</html>

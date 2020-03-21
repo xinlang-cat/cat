@@ -63,27 +63,16 @@
 
 			</div>
 		</div>
-		<div class="weui-cells__title">是否允许更改</div>
-		<div class="weui-cells weui-cells_checkbox">
-			<label class="weui-cell weui-check__label " style="float: left;">
-				<div class="weui-cell__hd">
-					<input type="radio" class="weui-check" name="status" value="1">
-					<i class="weui-icon-checked"></i>
-				</div>
-				<div class="weui-cell__bd">
-					<p>是</p>
-				</div>
-			</label>
-			<label class="weui-cell weui-check__label" style="float: left;">
-				<div class="weui-cell__hd">
-					<input type="radio" name="status" class="weui-check" value="2">
-					<i class="weui-icon-checked"></i>
-				</div>
-				<div class="weui-cell__bd">
-					<p>否</p>
-				</div>
-			</label>
+		<div class="weui-line"></div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">是否允许更改:</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="status" name="status" type="text" value="">
+			</div>
 		</div>
+
 		<div class="weui-btn-area">
 			<a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
 		</div>
@@ -125,12 +114,26 @@
 				$(data).each(function () {
 					$("#content").val(data[0].content);
 					$("#type").val(getType(data[0].modify));
+					$("#status").val(data[0].status);
+
 				});
 
 			}
 		});
 	}
-
+	function getStatus(status) {
+		var data = '';
+		if (status == 0) {
+			data = "待审核";
+		} else if (status == 1) {
+			data = "更改中";
+		} else if (status == 2) {
+			data = "审核未通过";
+		} else if (status == 3) {
+			data = "更改成功";
+		}
+		return data;
+	}
 	function getType(modify) {
 		var data = '';
 		if (modify == 1) {
