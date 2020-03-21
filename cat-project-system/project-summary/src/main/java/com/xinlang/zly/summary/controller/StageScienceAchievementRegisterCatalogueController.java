@@ -50,7 +50,7 @@ public class StageScienceAchievementRegisterCatalogueController {
     public void delete(@PathVariable Integer id) { stageScienceAchievementRegisterCatalogueService.delete(id);
     }
 
-    @DeleteMapping("/{ids}")
+    @DeleteMapping
     @LogAnnotation(module = "删除科技成果登记目录")
     @ApiOperation(value = "删除科技成果登记目录")
     public void deleteByIds(@PathVariable Set<Integer> ids) {

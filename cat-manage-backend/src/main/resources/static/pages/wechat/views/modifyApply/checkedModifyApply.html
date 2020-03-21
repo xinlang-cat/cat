@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>审核更改申请</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+	<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+	<link rel="stylesheet" href="../../weui/lib/weui.min.css">
+	<link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+	<link rel="stylesheet" href="../../weui/css/demos.css">
+	<link rel="stylesheet" href="../../css/stageSummary.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+
+</head>
+<body ontouchstart>
+
+<div style="z-index: 999999">
+
+	<form id="form">
+		<a class="weui-cell weui-cell_access" href="javascript:;">
+			<div class="weui-cell__hd">
+				<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+			</div>
+			<div class="weui-cell__bd weui-cell_primary">
+				<p class="weui-max-title">所需更改内容</p>
+			</div>
+		</a>
+
+
+		<div class="weui-line"></div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">更改内容:</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="type" name="type" type="text" value="">
+			</div>
+		</div>
+		<div class="weui-line"></div>
+		<a class="weui-cell weui-cell_access" href="javascript:;">
+			<div class="weui-cell__hd">
+				<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+			</div>
+			<div class="weui-cell__bd weui-cell_primary">
+				<p class="weui-max-title">更改申请详情</p>
+			</div>
+		</a>
+
+
+		<div class="weui-line"></div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<label class="weui-label">更改原因:</label>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<textarea class="weui-textarea" id="content" name="content" rows="5"></textarea>
+
+			</div>
+		</div>
+		<div class="weui-line"></div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">是否允许更改:</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="status" name="status" type="text" value="">
+			</div>
+		</div>
+
+		<div class="weui-btn-area">
+			<a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
+		</div>
+	</form>
+</div>
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+
+<script>
+	$(function () {
+		FastClick.attach(document.body);
+	});
+</script>
+
+<script>
+	var id = getUrlParam("id");
+	$(".swiper-container").swiper({
+		loop: true,
+		autoplay: 3000
+	});
+	initData();
+
+	function initData(){
+		var data = {
+			id:id,
+		}
+		$.ajax({
+			type : 'get',
+			data:data,
+			url : domainName + '/project-item/item/basic/modifyApply/list',
+			async : false,
+			success : function(data) {
+				$(data).each(function () {
+					$("#content").val(data[0].content);
+					$("#type").val(getType(data[0].modify));
+					$("#status").val(data[0].status);
+
+				});
+
+			}
+		});
+	}
+	function getStatus(status) {
+		var data = '';
+		if (status == 0) {
+			data = "待审核";
+		} else if (status == 1) {
+			data = "更改中";
+		} else if (status == 2) {
+			data = "审核未通过";
+		} else if (status == 3) {
+			data = "更改成功";
+		}
+		return data;
+	}
+	function getType(modify) {
+		var data = '';
+		if (modify == 1) {
+			data = "项目基本信息";
+		} else if (modify == 2) {
+			data = "项目研究内容";
+		} else if (modify == 3) {
+			data = "项目人员";
+		} else if (modify == 4) {
+			data = "项目指标";
+		} else if (modify == 5) {
+			data = "项目经费";
+		}
+		return data;
+	}
+	function add(){
+		var formdata = $("#form").serializeObject();
+		formdata.id = id;
+		$.ajax({
+			type: 'put',
+			url: domainName + '/project-item/item/basic/modifyApply',
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(formdata),
+			success: function (data) {
+				$.toptip('操作成功', 'success');
+			}
+		});
+	}
+</script>
+</body>
+
+</html>

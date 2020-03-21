@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href=../../"weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/menu.css">
+
+</head>
+
+<body ontouchstart>
+
+
+<div class="weui-content">
+    <div class="weui-interval"></div>
+    <div class="weui-panel weui-panel_access">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_access" href="javascript:;">
+                        <div class="weui-cell__hd">
+                            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>变更申请</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-grids" id="list">
+
+        </div>
+
+        <div class="weui-interval"></div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <div class="weui-cells">
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd">
+                                <img src="../../images/green.png" alt=""
+                                     style="height:20px;margin-right:5px;display:block">
+                            </div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>查定申请</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-grids" id="list1">
+
+            </div>
+
+        </div>
+
+        <div class="weui-interval"></div>
+        <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <div class="weui-cells">
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd">
+                                <img src="../../images/green.png" alt=""
+                                     style="height:20px;margin-right:5px;display:block">
+                            </div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>结题总结</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-grids" id="list2">
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="weui-interval"></div>
+    <div class="weui-footer">
+        <p class="weui-footer__links">
+            <a href="http://jqweui.com" class="weui-footer__link">jQuery-WeUI 首页</a>
+        </p>
+        <p class="weui-footer__text">Copyright © 2016 jqweui.io</p>
+    </div>
+</div>
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script>
+
+    $(function () {
+        FastClick.attach(document.body);
+    });
+    $(".swiper-container").swiper({
+        loop: true,
+        autoplay: 3000
+    });
+</script>
+<script>
+    var itemId = getUrlParam("item_id");
+    $(function () {
+        var str = '';
+        str += '<a href="../modifyApply/addModifyApply.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '变更起草\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str += '<a href="../modifyApply/checkApplyList.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '变更审核\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str += '<a href="../modifyApply/allModifyApplyList.html" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '所有变更\n' +
+            ' </p>\n' +
+            '</a>';
+        $("#list").append(str);
+
+        var str1 = '';
+        str1 += '<a href="../auditfyApply/addAuditfyApply.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '查定申请起草\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str1 += '<a href="../auditfyApply/auditfyApplyList.html?item_id=' + itemId + '&status=1" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '查定申请审核\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str1 += '<a href="../auditfyApply/auditfyApplyList.html?item_id=' + itemId + '&status=2" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '所有查定申请\n' +
+            ' </p>\n' +
+            '</a>';
+        str1 += '<a href="../modifyApply/allModifyApplyList.html" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '查定报告\n' +
+            ' </p>\n' +
+            '</a>';
+        $("#list1").append(str1);
+
+        var str2 = '';
+        str2 += '<a href="../skillSummary/addSkillSummary.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '技术总结起草\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str2 += '<a href="../skillSummary/skillSummaryList.html" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '技术总结列表\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str2 += '<a href="../workSummary/addWorkSummary.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '工作总结起草\n' +
+            ' </p>\n' +
+            '</a>';
+
+        str2 += '<a href="../workSummary/workSummaryList.html" class="weui-grid js_grid">\n' +
+            '<div class="weui-grid__icon">\n' +
+            '<img src="../../images/icon_nav_new.png" alt="">\n' +
+            '</div>\n' +
+            ' <p class="weui-grid__label">\n' +
+            '工作总结列表\n' +
+            ' </p>\n' +
+            '</a>';
+        $("#list2").append(str2);
+
+
+    });
+
+</script>
+</body>
+
+</html>

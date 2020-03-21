@@ -50,7 +50,7 @@ public class StagePatentCatalogueController {
     public void delete(@PathVariable Integer id) { stagePatentCatalogueService.delete(id);
     }
 
-    @DeleteMapping("/{ids}")
+    @DeleteMapping
     @LogAnnotation(module = "删除授权专利目录")
     @ApiOperation(value = "删除授权专利目录")
     public void deleteByIds(@PathVariable Set<Integer> ids) {

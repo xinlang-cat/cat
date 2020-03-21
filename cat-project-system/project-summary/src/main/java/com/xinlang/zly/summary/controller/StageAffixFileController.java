@@ -48,7 +48,7 @@ public class StageAffixFileController {
     public void delete(@PathVariable Integer id) { stageAffixFileService.delete(id);
     }
 
-    @DeleteMapping("/{ids}")
+    @DeleteMapping
     @LogAnnotation(module = "删除阶段总结的附件")
     @ApiOperation(value = "删除阶段总结的附件")
     public void deleteByIds(@PathVariable Set<Integer> ids) {

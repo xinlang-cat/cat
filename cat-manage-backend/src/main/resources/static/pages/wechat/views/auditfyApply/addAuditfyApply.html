@@ -1,162 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>指标查定</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>指标查定</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+	<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
-    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
-    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
-    <link rel="stylesheet" href="../../weui/css/demos.css">
-    <link rel="stylesheet" href="../../css/stageSummary.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+	<link rel="stylesheet" href="../../weui/lib/weui.min.css">
+	<link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+	<link rel="stylesheet" href="../../weui/css/demos.css">
+	<link rel="stylesheet" href="../../css/stageSummary.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
 
 </head>
 <body ontouchstart>
 
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="../../images/swiper-1.jpg" style="height: 150px;width: 100%"/></div>
-        <div class="swiper-slide"><img src="../../images/swiper-2.jpg" style="height: 150px;width: 100%"/></div>
-        <div class="swiper-slide"><img src="../../images/swiper-3.jpg" style="height: 150px;width: 100%"/></div>
-    </div>
-</div>
-<div class="weui-line"></div>
-<div class="weui-interval"></div>
+<form id="form">
+	<a class="weui-cell weui-cell_access" href="javascript:;">
+		<div class="weui-cell__hd">
+			<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+		</div>
+		<div class="weui-cell__bd weui-cell_primary">
+			<p class="weui-max-title">所需查定指标</p>
+		</div>
+	</a>
+
+
+	<div class="weui-line"></div>
+	<div class="weui-cells__title">选择查定指标</div>
+	<div class="weui-cells weui-cells_checkbox" id="chooseTargrt">
 
 
 
-<a class="weui-cell weui-cell_access" href="javascript:;">
-    <div class="weui-cell__hd">
-        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-    </div>
-    <div class="weui-cell__bd weui-cell_primary">
-        <p class="weui-max-title">所需查定指标</p>
-    </div>
-</a>
+	</div>
+	<div class="weui-line"></div>
+	<a class="weui-cell weui-cell_access" href="javascript:;">
+		<div class="weui-cell__hd">
+			<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+		</div>
+		<div class="weui-cell__bd weui-cell_primary">
+			<p class="weui-max-title">查定申请详情</p>
+		</div>
+	</a>
 
+	<div class="weui-line"></div>
+	<div class="weui-cell">
+		<div class="weui-cell__hd">
+			<label class="weui-label">查定时间:</label>
+		</div>
+		<div class="weui-cell__bd">
+			<input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date" name="start_date">
+		</div>
+	</div>
+	<div class="weui-line"></div>
+	<div class="weui-cell">
+		<div class="weui-cell__hd">
+			<label class="weui-label">所在地域:</label>
+		</div>
+		<div class="weui-cell__bd">
+			<input class="weui-input" id="place" name="place" type="text" value="" placeholder="所在地域">
+		</div>
+	</div>
+	<div class="weui-line"></div>
+	<div class="weui-cell">
+		<div class="weui-cell__hd">
+			<label class="weui-label">所在街道:</label>
+		</div>
+		<div class="weui-cell__bd">
+			<input class="weui-input" id="streetCode" name="streetCode" type="text" value="" placeholder="所在街道名称">
+		</div>
+	</div>
+	<div class="weui-line"></div>
+	<div class="weui-cell">
+		<div class="weui-cell__bd">
+			<label class="weui-label">申请详情:</label>
+		</div>
+	</div>
+	<div class="weui-cell">
+		<div class="weui-cell__bd">
+			<textarea class="weui-textarea" rows="5" id="content" name="content"></textarea>
+		</div>
+	</div>
+</form>
 
-<div class="weui-line"></div>
-<div class="weui-cells__title">选择查定指标</div>
-<div class="weui-cells weui-cells_checkbox">
-    <label class="weui-cell weui-check__label " style="float: left;">
-        <div class="weui-cell__hd">
-            <input type="radio" class="weui-check" name="checkbox3" value="是" checked="checked">
-            <i class="weui-icon-checked"></i>
-        </div>
-        <div class="weui-cell__bd">
-            <p>原始创新</p>
-        </div>
-    </label>
-    <label class="weui-cell weui-check__label" style="float: left;">
-        <div class="weui-cell__hd">
-            <input type="radio" name="checkbox3" class="weui-check" value="否">
-            <i class="weui-icon-checked"></i>
-        </div>
-        <div class="weui-cell__bd">
-            <p>集成创新</p>
-        </div>
-    </label>
-    <label class="weui-cell weui-check__label" style="float: left;">
-        <div class="weui-cell__hd">
-            <input type="radio" name="checkbox3" class="weui-check" value="否">
-            <i class="weui-icon-checked"></i>
-        </div>
-        <div class="weui-cell__bd">
-            <p>引进消化吸收再创新</p>
-        </div>
-    </label>
-</div>
-<div class="weui-line"></div>
-<a class="weui-cell weui-cell_access" href="javascript:;">
-    <div class="weui-cell__hd">
-        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-    </div>
-    <div class="weui-cell__bd weui-cell_primary">
-        <p class="weui-max-title">查定申请详情</p>
-    </div>
-</a>
-<div class="weui-line"></div>
-<div class="weui-cell">
-	<div class="weui-cell__hd">
-	    <label class="weui-label">查定时间:</label>
-	</div>
-    <div class="weui-cell__bd">
-        <input class="weui-input date" type="text" value="" placeholder="查定时间">
-    </div>
-</div>
-<div class="weui-line"></div>
-<div class="weui-cell">
-	<div class="weui-cell__hd">
-	    <label class="weui-label">所在地域:</label>
-	</div>
-     <div class="weui-cell__bd">
-        <input class="weui-input" id="start" type="text" value="" placeholder="所在地域">
-    </div>
-</div>
-<div class="weui-line"></div>
-<div class="weui-cell">
-	<div class="weui-cell__hd">
-	    <label class="weui-label">通信地址:</label>
-	</div>
-     <div class="weui-cell__bd">
-        <input class="weui-input" type="text" value="" placeholder="通信地址">
-      </div>
-</div>
-<div class="weui-line"></div>
-<div class="weui-cell">
-	<div class="weui-cell__bd">
-		<label class="weui-label">申请详情:</label>
-	</div>
-</div>
-<div class="weui-cell">
-	<div class="weui-cell__bd">
-		<textarea class="weui-textarea"  rows="5"></textarea>
-		<div class="weui-textarea-counter"><span>0</span>/200</div>
-	</div>
-</div>
-<div class="weui-line"></div>
-<a class="weui-cell weui-cell_access" href="javascript:;">
-    <div class="weui-cell__hd">
-        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-    </div>
-    <div class="weui-cell__bd weui-cell_primary">
-        <p class="weui-max-title">图片上传</p>
-    </div>
-</a>
-<div class="weui-line"></div>
-<div class="weui-gallery" id="gallery">
-    <span class="weui-gallery__img" id="galleryImg"></span>
-    <div class="weui-gallery__opr">
-        <a href="javascript:" class="weui-gallery__del">
-             <i class="weui-icon-delete weui-icon_gallery-delete"></i>
-        </a>
-     </div>
-</div>
-<div class="weui-cells weui-cells_form">
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <div class="weui-uploader">
-                <div class="weui-uploader__hd">
-                    <p class="weui-uploader__title">图片上传</p>
-                </div>
-                <div class="weui-uploader__bd">
-                    <ul class="weui-uploader__files" id="uploaderFiles"></ul>
-                    <div class="weui-uploader__input-box">
-                        <input id="uploaderInput" class="weui-uploader__input zjxfjs_file" type="file" accept="image/*" multiple="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="weui-line"></div>
 <div class="weui-btn-area">
-    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+	<a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
 </div>
 
 
@@ -165,73 +97,109 @@
 <script src="../../weui/js/jquery-weui.js"></script>
 <script src="../../weui/js/swiper.js"></script>
 <script src="../../weui/js/city-picker.js"></script>
-
-<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
 <script src="../../js/jquery-weui.min.js"></script>
-<script>
-    $(function () {
-        FastClick.attach(document.body);
-    });
-</script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
 <script>
 	$(function() {
-		var tmpl = '<li class="weui-uploader__file" style="background-image:url(#url#)"></li>',
-		$gallery = $("#gallery"),
-		$galleryImg = $("#galleryImg"),
-		$uploaderInput = $("#uploaderInput"),
-		$uploaderFiles = $("#uploaderFiles");
-		 
-		$uploaderInput.on("change", function(e) {
-		    var src, url = window.URL || window.webkitURL || window.mozURL,
-		    files = e.target.files;
-		    for(var i = 0, len = files.length; i < len; ++i) {
-		        var file = files[i];
-				if(url) {
-		            src = url.createObjectURL(file);
-		        } else {
-		             src = e.target.result;
-		        }
-		 
-		    $uploaderFiles.append($(tmpl.replace('#url#', src)));
-		    }
-		});
-		var index; //第几张图片
-		 $uploaderFiles.on("click", "li", function() {
-		    index = $(this).index();
-		    $galleryImg.attr("style", this.getAttribute("style"));
-		    $gallery.fadeIn(100);
-		});
-		$gallery.on("click", function() {
-		    $gallery.fadeOut(100);
-		});
-		//删除图片
-		$(".weui-gallery__del").click(function() {
-		    $uploaderFiles.find("li").eq(index).remove();
+		FastClick.attach(document.body);
+	});
+	var itemId = getUrlParam("item_id");
+	$(function() {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/target/list',
+			contentType: "application/json; charset=utf-8",
+			data: {
+				item_id: itemId
+			},
+			success: function(data) {
+				var str = '';
+				$(data).each(function () {
+
+					var code = this.id;
+					var name = this.content;
+					var count = this.count;
+
+					if (count != null) {
+						var sign = this.target;
+						name = getName(sign);
+					}
+
+					str += '<label class="weui-cell weui-check__label " style="float: left;">\n'+
+							'<div class="weui-cell__hd">\n'+
+							'<input type="radio" class="weui-check" name="target_id" value="'+code+'">\n'+
+							'<i class="weui-icon-checked"></i>\n'+
+							'</div>\n'+
+							'<div class="weui-cell__bd">\n'+
+							'<p>'+name+'</p>\n'+
+							'</div>\n'+
+							'</label>';
+				});
+				$("#chooseTargrt").append(str);
+			}
 		});
 	});
 
-</script>
-<script>
-    $(".swiper-container").swiper({
-        loop: true,
-        autoplay: 3000
-    });
-</script>
-<script>
-$("#start").cityPicker({
-	title: "所在地域",
-	onChange: function (picker, values, displayValues) {
-	    console.log(values, displayValues);
+
+
+	$(".swiper-container").swiper({
+		loop: true,
+		autoplay: 3000
+	});
+
+	function add() {
+		var sign = $("#place").data("codes");
+		var province = sign.substring(0, 6);
+		var city = sign.substring(7, 13);
+		var area = sign.substring(14, 20);
+
+		var formdata = $("#form").serializeObject();
+		formdata.item_id = itemId;
+		formdata.provinceCode = province;
+		formdata.cityCode = city;
+		formdata.areaCode = area;
+		formdata.post_type=2;
+		$.ajax({
+			type: 'post',
+			url: domainName + '/project-item/item/target/auditApply/one',
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(formdata),
+			success: function(data) {
+				$.toptip('操作成功', 'success');
+
+			}
+		});
 	}
-});
-//延期批复截止时间
-$(".date").calendar({
-    title: "延期批复截止时间",
-    onChange: function (p, values, displayValues) {
-        console.log(values, displayValues);
-    }
-});
-   
+	function getName(sign) {
+		var name=[];
+		$.ajax({
+			type : 'get',
+			url : domainName + '/api-label/label/tree/'+sign,
+			async : false,
+			success : function(data) {
+				var code =  data[0]['content'];
+				name.push(code)
+
+			}
+		});
+		return name[0];
+	}
+
+	$("#place").cityPicker({
+		title: "所在地域",
+		onChange: function(picker, values, displayValues) {
+			console.log(values, displayValues);
+		}
+	});
+	//延期批复截止时间
+	$(".date").calendar({
+		title: "延期批复截止时间",
+		onChange: function(p, values, displayValues) {
+			console.log(values, displayValues);
+		}
+	});
 </script>
 </body>
 

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>变更申请列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all"/>
+
+</head>
+
+<body ontouchstart>
+
+
+<div class="page__bd">
+    <div class="weui-panel" id="list">
+
+
+    </div>
+</div>
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+
+<script>
+    var status = getUrlParam("status");
+    $(function () {
+        FastClick.attach(document.body);
+    });
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + "/project-item/item/basic/modifyApply/list",
+            contentType: "application/json; charset=utf-8",
+            data: {status:status},
+            success: function (data) {
+                var str = '';
+                if (status==3){
+                    $(data).each(function () {
+                        str += '<div class="weui-panel__bd">\n' +
+                            '   <a class="weui-cell weui-cell_access" href="checkedModifyApply.html?id=' + this.id + '">\n' +
+                            '       <div class="weui-media-box weui-media-box_text">\n' +
+                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '           <p class="weui-media-box__desc" >修改' +getType(this.modify)+'</p>\n' +
+                            '           <ul class="weui-media-box__info">\n' +
+                            '               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
+                            '           </ul>\n' +
+                            '      </div>\n' +
+                            '       <span class="weui-cell__ft"></span>\n' +
+                            '     </a>\n' +
+                            '</div>';
+
+                    });
+                }else {
+                    $(data).each(function () {
+                        str += '<div class="weui-panel__bd">\n' +
+                            '   <a class="weui-cell weui-cell_access" href="checkModifyApply.html?id=' + this.id + '">\n' +
+                            '       <div class="weui-media-box weui-media-box_text">\n' +
+                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '           <p class="weui-media-box__desc" >修改' +getType(this.modify)+'</p>\n' +
+                            '           <ul class="weui-media-box__info">\n' +
+                            '               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
+                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
+                            '           </ul>\n' +
+                            '      </div>\n' +
+                            '       <span class="weui-cell__ft"></span>\n' +
+                            '     </a>\n' +
+                            '</div>';
+
+                    });
+                }
+
+                $("#list").append(str);
+            }
+        });
+    })
+
+    function getType(modify) {
+        var data = '';
+        if (modify == 1) {
+            data = "项目基本信息";
+        } else if (modify == 2) {
+            data = "项目研究内容";
+        } else if (modify == 3) {
+            data = "项目人员";
+        } else if (modify == 4) {
+            data = "项目指标";
+        } else if (modify == 5) {
+            data = "项目经费";
+        }
+        return data;
+    }
+    function getItemName(id) {
+        var data = '';
+        $.ajaxSettings.async = false;
+        $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
+            data =  res[0]['item_name'];
+        })
+        $.ajaxSettings.async = true;
+        return data;
+    }
+    function getUserName(user_id) {
+        var data = '';
+        $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
+            data = res[0]['name'];
+        })
+        return data;
+    }
+
+    function getTime(apply_time) {
+        var now = new Date(apply_time);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var date = now.getDate();
+        return year + "/" + fixZero(month, 2) + "/" + fixZero(date, 2);
+    }
+
+    function getStatus(status) {
+        var data = '';
+        if (status == 0) {
+            data = "待审核";
+        } else if (status == 1) {
+            data = "更改中";
+        } else if (status == 2) {
+            data = "审核未通过";
+        } else if (status == 3) {
+            data = "更改成功";
+        }
+        return data;
+    }
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
     <style>
-        .btn-group{
+        .btn-group {
             display: none;
 
         }
@@ -22,36 +22,30 @@
                     <input class="form-control" placeholder="开始时间" type="text" name="name" maxlength="50"
                            id="name" readonly>
                 </div>
-                <label class="col-md-1 control-label">预计开始时间</label>
+                <label class="col-md-1 control-label">建议开始时间</label>
                 <div class="col-md-2">
                     <input class="form-control date" placeholder="开始时间" type="text" name="start_date" maxlength="50"
                            id="start_date" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空" readonly>
                 </div>
-                <label class="col-md-1 control-label">预计结束时间</label>
-                <div class="col-md-2">
-                    <input class="form-control date" placeholder="结束时间" type="text" name="end_date" maxlength="50"
-                           id="end_date" data-bv-notempty="true"
-                           data-bv-notempty-message="结束时间 不能为空" readonly>
-                </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">指标所在地域</label>
                 <div class="col-md-2">
-                    <input class="form-control" type="text" name="provinceCode" maxlength="50"
-                           id="provinceCode" readonly>
+                    <input class="form-control" type="text" name="province" maxlength="50"
+                           id="province" readonly>
                 </div>
                 <div class="col-md-2">
-                    <input class="form-control" type="text" name="cityCode" maxlength="50"
-                           id="cityCode" readonly>
+                    <input class="form-control" type="text" name="city" maxlength="50"
+                           id="city" readonly>
                 </div>
                 <div class="col-md-2">
-                    <input class="form-control" type="text" name="areaCode" maxlength="50"
-                           id="areaCode" readonly>
+                    <input class="form-control" type="text" name="area" maxlength="50"
+                           id="area" readonly>
                 </div>
                 <div class="col-md-2">
-                    <input class="form-control" type="text" name="streetCode" maxlength="50"
-                           id="streetCode" readonly>
+                    <input class="form-control" type="text" name="street" maxlength="50"
+                           id="street" readonly>
                 </div>
             </div>
             <div class="form-group">
@@ -64,14 +58,14 @@
             </div>
             <div class="layui-btn-group btn-group" style="text-align: center">
 
-                        <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                                onclick="pass();">
-                            申请通过
-                        </button>
-                        <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                                onclick="unPass();">
-                            申请未通过
-                        </button>
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="pass();">
+                    申请通过
+                </button>
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        onclick="unPass();">
+                    申请未通过
+                </button>
 
             </div>
 
@@ -83,6 +77,7 @@
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/chooseArea.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 
 
@@ -92,61 +87,68 @@
     var id = getUrlParam("id");
     var userType = getUrlParam("userType");
     var h = $(window).height() - 100;
-    layui.use(['layedit','upload', 'laydate'], function(){
+    layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
         laydate = layui.laydate;
-        index = layedit.build('demo',{tool:[], height:h});
+        index = layedit.build('demo', {tool: [], height: h});
     });
     initData();
 
-    function initData(){
+    function initData() {
         var data = {
-            id:id,
+            id: id,
         }
         $.ajax({
-            type : 'get',
-            data:data,
-            url : domainName + '/project-item/item/target/applyList',
-            async : false,
-            success : function(data) {
+            type: 'get',
+            data: data,
+            url: domainName + '/project-item/item/target/applyList',
+            async: false,
+            success: function (data) {
                 $(data).each(function () {
+                    getProvince(data[0].provinceCode);
+                    getCity(data[0].cityCode);
+                    getArea(data[0].areaCode);
+                    if (data[0].post_type == 2) {
+                        $("#street").val(data[0].streetCode);
+                    } else {
+                        getStreet(data[0].streetCode);
+                    }
+                    getTargetName(data[0].target_id);
                     $("#content").val(data[0].content);
-                        province(data[0].provinceCode);
-                        getTargetName(data[0].target_id);
-                        city(data[0].cityCode);
-                        area(data[0].areaCode);
-                        street(data[0].streetCode);
-                        status(data[0].status);
-                        $("#start_date").val(formatDate3(data[0].start_date));
-                        $("#end_date").val(formatDate3(data[0].end_date));
+                    status(data[0].status);
+                    $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#end_date").val(formatDate3(data[0].end_date));
                 });
 
             }
         });
     }
+
     function status(status) {
-        if(status==1&&userType==2){
-            var obj=document.getElementsByClassName("btn-group");
+        if (status == 1 && userType == 2) {
+            var obj = document.getElementsByClassName("btn-group");
             obj[0].style.display = "block";
         }
 
     }
+
     function province(provinceCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/province/one/'+provinceCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/province/one/' + provinceCode,
+            async: false,
+            success: function (data) {
                 $("#provinceCode").val(data.provinceName);
             }
         });
     }
+
     function city(cityCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/city/one/'+cityCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/city/one/' + cityCode,
+            async: false,
+            success: function (data) {
                 $("#cityCode").val(data.cityName);
             }
         });
@@ -154,65 +156,69 @@
 
     function area(areaCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/area/one/'+areaCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/area/one/' + areaCode,
+            async: false,
+            success: function (data) {
                 var name = data.areaName;
                 $("#areaCode").val(name);
             }
         });
     }
+
     function street(streetCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/street/one/'+streetCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/street/one/' + streetCode,
+            async: false,
+            success: function (data) {
                 $("#streetCode").val(data.streetName);
             }
         });
     }
+
     function getTargetName(id) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/project-item/item/target/list',
+            type: 'get',
+            url: domainName + '/project-item/item/target/list',
             contentType: "application/json; charset=utf-8",
             data: {id: id},
-            success : function(data) {
-                if (data[0]['count']!=null){
+            success: function (data) {
+                if (data[0]['count'] != null) {
                     $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
                         $("#name").val(res[0].content);
                     })
-                }else {
+                } else {
                     $("#name").val(data[0].content);
                 }
             }
         });
     }
+
     function pass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 2}),
-            success : function(data) {
+            data: JSON.stringify({id: id, status: 2}),
+            success: function (data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     parent.location.reload();
                 });
             }
         });
     }
+
     function unPass() {
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 5}),
-            success : function(data) {
+            data: JSON.stringify({id: id, status: 5}),
+            success: function (data) {
                 var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     parent.location.reload();
                 });
             }
