@@ -504,7 +504,7 @@
         <div class="form-actions" id="old">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary"  onclick="location.href='../list-layout/list.html'">返回</button>
+                    <button class="btn btn-primary"  onclick="history.back(-1);">返回</button>
                 </div>
             </div>
         </div>
@@ -547,9 +547,7 @@
         var tableId =  parseInt($("#id").val());
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
-        alert("1")
         if(!tableId){
-            layer.msg("2");
             formdata.status = 1;
             $.ajax({
                 type: 'post',
@@ -557,14 +555,13 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(formdata),
                 success: function (data) {
-                    var msg = "成功";
+                    var msg = "添加成功";
                     layer.msg(msg, {shift: -1, time: 1000}, function(){
-                        location.reload();
+                        location.href='../list-layout/list.html';
                     });
                 }
             });
         }else {
-            alert("3");
             $.ajax({
                 type: 'put',
                 url: domainName + '/api-summary/check-table',

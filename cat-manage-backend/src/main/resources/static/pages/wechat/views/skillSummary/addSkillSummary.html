@@ -114,7 +114,6 @@
     function add() {
         var formdata = $("#form").serializeObject();
         formdata.itemId = itemId;
-        alert(JSON.stringify(formdata));
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/skill',

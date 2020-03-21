@@ -213,13 +213,10 @@
         var name='';
         $.get(domainName + "/project-item/item/target/list?id=" + id, function (res) {
             name =  res[0]['content'];
-            alert(name);
-            alert(res['content']);
             $("#name").val(name);
             if (res[0]['count']!=null){
                 $.get(domainName + "/api-label/label/tree/" + res[0]['target'], function (res) {
                     name =  res[0]['content'];
-                    alert(name);
                     $("#name").val(name);
                 })
             }

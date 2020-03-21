@@ -249,9 +249,9 @@
             success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
-                    $("#province").val(data[0].provinceCode);
-                    $("#city").val(data[0].cityCode);
-                    $("#area").val(data[0].areaCode);
+                    getProvince(data[0].provinceCode);
+                    getCity(data[0].cityCode);
+                    getArea(data[0].areaCode);
                     if (data[0].post_type==2){
                         $("#street").val(data[0].streetCode);
                     }else {
