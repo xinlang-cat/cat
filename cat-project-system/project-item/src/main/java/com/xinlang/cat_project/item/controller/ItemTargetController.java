@@ -109,6 +109,8 @@ public class ItemTargetController {
     @LogAnnotation(module = "添加指标查定")
     @PostMapping("/auditApply/one")
     public ResponseEntity<Void> saveAuditApply(@RequestBody auditApply auditApply){
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        auditApply.setEdit_userid(userId);
         auditApply.setEdit_date(new Date());
         auditApply.setStatus(1);
         auditApplyService.save(auditApply);

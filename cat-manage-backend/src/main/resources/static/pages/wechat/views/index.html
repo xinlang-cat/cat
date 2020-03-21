@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>工作日志起草</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+</head>
+
+<body>
+
+<canvas id="myChart" style="float: left;width: 100%;"></canvas>
+<div style="width: 100%;float: left;"></div>
+<canvas id="container" style="float: left;width: 100%;"></canvas>
+<div style="width: 100%;float: left;"></div>
+<canvas id="container1" style="float: left;width: 100%;"></canvas>
+
+</body>
+<script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
+<script>
+    const data = [
+        { genre: 'Sports', sold: 275 },
+        { genre: 'Strategy', sold: 115 },
+        { genre: 'Action', sold: 120 },
+        { genre: 'Shooter', sold: 350 },
+        { genre: 'Other', sold: 150 },
+    ];
+
+    // Step 1: 创建 Chart 对象
+    const chart = new F2.Chart({
+        id: 'myChart',
+        pixelRatio: window.devicePixelRatio, // 指定分辨率
+    });
+
+    // Step 2: 载入数据源
+    chart.source(data);
+
+    // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+    chart
+        .interval()
+        .position('genre*sold')
+        .color('genre');
+
+    // Step 4: 渲染图表
+    chart.render();
+
+//====================================================================================================
+
+
+    const data1 = [{
+        name: '股票类',
+        percent: 83.59,
+        a: '1'
+    }, {
+        name: '债券类',
+        percent: 2.17,
+        a: '1'
+    }, {
+        name: '现金类',
+        percent: 14.24,
+        a: '1'
+    }];
+
+    const map = {};
+    data1.forEach(function(obj) {
+        map[obj.name] = obj.percent + '%';
+    });
+
+    const chart1 = new F2.Chart({
+        id: 'container',
+        pixelRatio: window.devicePixelRatio,
+        padding: [ 20, 'auto' ]
+    });
+    chart1.source(data1, {
+        percent: {
+            formatter: function formatter(val) {
+                return val + '%';
+            }
+        }
+    });
+    chart1.tooltip(false);
+    chart1.legend({
+        position: 'right',
+        itemFormatter: function itemFormatter(val) {
+            return val + '    ' + map[val];
+        }
+    });
+    chart1.coord('polar', {
+        transposed: true,
+        innerRadius: 0.7,
+        radius: 0.85
+    });
+    chart1.axis(false);
+    chart1.interval()
+        .position('a*percent')
+        .color('name', [ '#FE5D4D', '#3BA4FF', '#737DDE' ])
+        .adjust('stack');
+
+    chart1.guide().html({
+        position: [ '50%', '45%' ],
+        html: `<div style="width: 250px;height: 40px;text-align: center;">
+      <div style="font-size: 16px">总资产</div>
+      <div style="font-size: 24px">133.08 亿</div>
+    </div>`
+    });
+    chart1.render();
+
+    //====================================================================================================
+
+    const data2 = [{
+        year: '1951 年',
+        sales: 38
+    }, {
+        year: '1952 年',
+        sales: 52
+    }, {
+        year: '1956 年',
+        sales: 61
+    }, {
+        year: '1957 年',
+        sales: 145
+    }, {
+        year: '1958 年',
+        sales: 48
+    }, {
+        year: '1959 年',
+        sales: 38
+    }, {
+        year: '1960 年',
+        sales: 38
+    }, {
+        year: '1962 年',
+        sales: 38
+    }];
+    const chart2 = new F2.Chart({
+        id: 'container1',
+        pixelRatio: window.devicePixelRatio
+    });
+
+    chart2.source(data2, {
+        sales: {
+            tickCount: 5
+        }
+    });
+    chart2.coord({
+        transposed: true
+    });
+    chart2.tooltip({
+        showItemMarker: false,
+        onShow: function onShow(ev) {
+            const items = ev.items;
+            items[0].name = null;
+            items[0].name = items[0].title;
+            items[0].value = '¥ ' + items[0].value;
+        }
+    });
+    chart2.interval().position('year*sales');
+    chart2.render();
+
+</script>
+</html>

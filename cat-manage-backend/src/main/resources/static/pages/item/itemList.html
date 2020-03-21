@@ -28,7 +28,7 @@
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
-                                        <!--<option value="0">就绪</option>-->
+                                        <option value="0">就绪</option>
                                         <option value="1">进行中</option>
                                         <option value="2">结题中</option>
                                         <option value="3">已结题</option>
@@ -206,12 +206,7 @@
                             "data": "",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var id = row['id'];
-                                var href = "updateItem.html?id=" + id;
-                                var edit = buttonEdit(href, "back:user:update", pers);
-                                var del = buttonDel(id, "back:permission:delete", pers);
-                               /* var detailsHref ="details.html?id="+id;*/
-                                var detailsHref ="../list-layout/pages/projectDetails/projectInfo.html?id="+id;
+                                var detailsHref ="../list-layout/pages/projectDetails/checkProjectInfo.html?id="+id;
                                 var expert = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>匹配专家</i></button>");
                                 expert.attr("onclick", "matchExpert(" +id+")")
                                 var showReport = expert.prop("outerHTML");
@@ -254,7 +249,6 @@
             maxmin: true,
             shadeClose: true,
             content: ['../projectUser/matchExpert.html?itemId='+id]
-
 
 
         });

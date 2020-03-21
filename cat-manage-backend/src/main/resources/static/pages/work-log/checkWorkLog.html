@@ -168,7 +168,7 @@
             $("#accessory_imgs").append(str);
         }
         if(item.contentType.substring(1,0)=='v'){
-            str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;">';
+            str = '<div style="float: left;position: relative;text-align: center;height: 250px;">';
             str += '<video controls style="width: 250px;height: 250px;" src="'+ item.url +'">' + item.name + '</video>';
             str += '<p style="color: #aea9a9;">' + val + '</p></div>';
             $('#accessory_videos').append(str);

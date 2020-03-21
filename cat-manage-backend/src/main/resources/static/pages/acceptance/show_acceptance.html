@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>验收申请表</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/projectInfo.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
     <style>
         .layui-table thead tr {
             text-align: center;
@@ -43,7 +43,14 @@
             font-size: 14px;
             font-weight: bolder;
         }
+        #old{
+            display: none;
 
+        }
+        #new{
+            display: none;
+
+        }
     </style>
 </head>
 
@@ -62,8 +69,10 @@
                 </colgroup>
                 <tbody>
                 <tr>
-             <input type="hidden" id="createUserId" name="createUserId" value="">
-                    <input type="hidden" id="item_id" name="itemId" value="">
+                    <input type="hidden" id="createUserId" name="createUserId" value="">
+                    <input type="hidden" id="item_id" name="item_id" value="">
+                    <input type="hidden" id="id" name="id" value="">
+
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
                     <td>
@@ -91,10 +100,7 @@
                     </td>
                     <td class="td-text1">申请日期:</td>
                     <td>
-                <span > <input class="form-control date" placeholder="申请日期" type="text"
-                                               name="applicationDate" maxlength="50"
-                                               id="applicationDate" data-bv-notempty="true"
-                                               data-bv-notempty-message="申请日期 不能为空"></span>
+                        <span id="applicationDate"></span>
                     </td>
                 </tr>
                 </tbody>
@@ -112,7 +118,7 @@
                 </colgroup>
                 <tbody>
                 <tr>
-                    <td rowspan="7" class="table-info">申请验收单位信息</td>
+                    <td rowspan="100" class="table-info">申请验收单位信息</td>
                     <td class="td-text1">单位名称:</td>
                     <td>
                         <span class="undertaker"></span>
@@ -145,13 +151,13 @@
                 <tr>
                     <td class="td-text1">单位性质:</td>
                     <td>
-                       <span>企业</span>
+                        <span>企业</span>
                     </td>
                     <td class="td-text1">申请验收单位建议的验收日期:</td>
-                    <td ><input class="form-control date" placeholder="申请日期" type="text"
-                               name="suggestDate" maxlength="50"
-                               id="suggestDate" data-bv-notempty="true"
-                               data-bv-notempty-message="申请日期 不能为空"></td>
+                    <td>
+                        <span id="suggestDate"></span>
+                    </td>
+
                 </tr>
                 <tr>
                     <td class="td-text1">项目合同(或课件任务书)约定的项目实施开始时间:</td>
@@ -167,13 +173,13 @@
                     <td class="td-text1">项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况:</td>
                     <td colspan="3"> <textarea placeholder="项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况"
                                                class="layui-textarea form-control" lay-verify="required"
-                                               id="cean" name="cean"></textarea></td>
+                                               id="cean" name="cean" readonly></textarea></td>
                 </tr>
                 <tr>
                     <td class="td-text1">提交的验收文件和资料目录:</td>
                     <td colspan="3"> <textarea placeholder="提交的验收文件和资料目录" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="katalog" name="katalog"></textarea></td>
+                                               id="katalog" name="katalog" readonly></textarea></td>
                 </tr>
                 </tbody>
             </table>
@@ -194,7 +200,7 @@
                 </colgroup>
                 <tbody id="userinfo">
                 <tr class="td-text">
-                    <td rowspan="7" class="table-info">主要完成人员名单</td>
+                    <td rowspan="100" class="table-info">主要完成人员名单</td>
                     <td>序号</td>
                     <td>姓名</td>
                     <td>性别</td>
@@ -223,14 +229,15 @@
                 </colgroup>
                 <tbody>
                 <tr style="font-size: 14px;font-weight: bolder;">
-                    <td rowspan="33" class="table-info">项目投入产出基本情况表</td>
+                    <td rowspan="100" class="table-info">项目投入产出基本情况表</td>
                     <td style="text-align: right;font-size: 14px;font-weight: bolder; ">参加单位数(个)</td>
-                    <td colspan="7">5</td>
+                    <td colspan="7"><input id="the_company_number" style="text-align: center;border: 0px;" readonly></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
                 </tr>
-                <tr>
+
+                <tr class="td-text">
                     <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目组人员情况(人)</td>
                     <td class="td-text">合计</td>
                     <td class="td-text">高级职称</td>
@@ -241,35 +248,48 @@
                     <td class="td-text">学士</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="countMan" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="advanced" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="middle" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="elementary" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="doctor" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="postgraduate" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="bachelor" style="text-align: center;border: 0px;"  readonly></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
                 </tr>
                 <tr>
-                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目经费情况(万元)</td>
+                    <td rowspan="4" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目经费情况(万元)</td>
                     <td class="td-text">合计</td>
                     <td class="td-text">自治区财政科技经费</td>
+                    <td class="td-text">科技经费</td>
+                    <td class="td-text">国家科技部门拨款</td>
+                    <td class="td-text">国家其他部门拨款</td>
                     <td class="td-text">市县财政科技经费</td>
                     <td class="td-text">其他拨款</td>
+
+                </tr>
+                <tr>
+                    <td><input id="countMoney" name="countMoney" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="MUNICIPALITY" name="MUNICIPALITY" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="SCIENCE_ND_TECHNOLOGY_FUNDING" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="STATE_SCIENCE_AND_TECHNOLOGY_DEPARTMENTS" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="APPROPRIATIONS_FROM_OTHER_DEPARTMENTS_OF_THE_STATE" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="MUNICIPAL_ALLOCATION" name="MUNICIPAL_ALLOCATION" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="OTHER_FUNDS" name="OTHER_FUNDS" style="text-align: center;border: 0px;" readonly></td>
+
+                </tr>
+                <tr>
                     <td class="td-text">单位自筹</td>
                     <td class="td-text">银行贷款</td>
                     <td class="td-text">其他</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="ITS_OWN_FUNDS" name="ITS_OWN_FUNDS" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="BANK_LOAN" name="BANK_LOAN" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="other" name="other" style="text-align: center;border: 0px;" readonly></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -285,13 +305,13 @@
                     <td class="td-text">新装置(新装备)(套)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="the_imported_technology" style="text-align: center;border: 0px;" readonly name="the_imported_technology"></td>
+                    <td><input id="integrated_application_technology"  style="text-align: center;border: 0px;" readonly name="integrated_application_technology"></td>
+                    <td><input id="new_industrial_product" style="text-align: center;border: 0px;" readonly  name="new_industrial_product"></td>
+                    <td><input id="new_agricultural_variety" style="text-align: center;border: 0px;" readonly  name="new_agricultural_variety"></td>
+                    <td><input id="the_new_technology" style="text-align: center;border: 0px;" readonly  name="the_new_technology"></td>
+                    <td><input id="the_new_material" style="text-align: center;border: 0px;" readonly  name="the_new_material"></td>
+                    <td><input id="the_new_device" style="text-align: center;border: 0px;" readonly  name="the_new_device"></td>
                 </tr>
                 <tr>
                     <td class="td-text">申请登记计算软件(套)</td>
@@ -303,13 +323,13 @@
                     <td class="td-text">试验基地(个)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="register_computer_software" style="text-align: center;border: 0px;" readonly  name="register_computer_software"></td>
+                    <td><input id="research_and_development_platform" style="text-align: center;border: 0px;" readonly  name="research_and_development_platform"></td>
+                    <td><input id="science_information_platform" style="text-align: center;border: 0px;" readonly  name="science_information_platform"></td>
+                    <td><input id="pilot_studies" style="text-align: center;border: 0px;" readonly  name="pilot_studies"></td>
+                    <td><input id="pilot_line" style="text-align: center;border: 0px;" readonly  name="pilot_line"></td>
+                    <td><input id="the_production_line" style="text-align: center;border: 0px;" readonly  name="the_production_line"></td>
+                    <td><input id="experimental_base" style="text-align: center;border: 0px;" readonly  name="experimental_base"></td>
                 </tr>
                 <tr>
                     <td class="td-text">专利申请(项)</td>
@@ -321,13 +341,13 @@
                     <td class="td-text">参与制定技术标准(个)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="application_for_patent" style="text-align: center;border: 0px;" readonly  name="application_for_patent"></td>
+                    <td><input id="application_for_invention_patent" style="text-align: center;border: 0px;" readonly  name="application_for_invention_patent"></td>
+                    <td><input id="application_for_utility_paten" style="text-align: center;border: 0px;" readonly  name="application_for_utility_paten"></td>
+                    <td><input id="authorized_patent" style="text-align: center;border: 0px;" readonly  name="authorized_patent"></td>
+                    <td><input id="authorized_invention_patent" style="text-align: center;border: 0px;" readonly  name="authorized_invention_patent"></td>
+                    <td><input id="authorized_utility_patent" style="text-align: center;border: 0px;" readonly  name="authorized_utility_patent"></td>
+                    <td><input id="count_standard" style="text-align: center;border: 0px;" readonly  name="count_standard"></td>
                 </tr>
                 <tr>
                     <td class="td-text">国家标准(个)</td>
@@ -339,13 +359,13 @@
                     <td class="td-text">国内发表(篇)</td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="the_national_standard" style="text-align: center;border: 0px;" readonly  name="the_national_standard"></td>
+                    <td><input id="the_international_standard" style="text-align: center;border: 0px;" readonly  name="the_international_standard"></td>
+                    <td><input id="the_industry_standard" style="text-align: center;border: 0px;" readonly  name="the_industry_standard"></td>
+                    <td><input id="local_standard" style="text-align: center;border: 0px;" readonly  name="local_standard"></td>
+                    <td><input id="the_enterprise_standard" style="text-align: center;border: 0px;" readonly  name="the_enterprise_standard"></td>
+                    <td><input id="count_thesis" style="text-align: center;border: 0px;" readonly  name="count_thesis"></td>
+                    <td><input id="domestic_papers" style="text-align: center;border: 0px;" readonly  name="domestic_papers"></td>
                 </tr>
                 <tr>
                     <td class="td-text">国外发表(篇)</td>
@@ -357,12 +377,13 @@
                     <td rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="foreign_papers" style="text-align: center;border: 0px;" readonly  name="foreign_papers"></td>
+                    <td><input id="make_postdoctor" style="text-align: center;border: 0px;" readonly  name="make_postdoctor"></td>
+                    <td><input id="make_doctor" style="text-align: center;border: 0px;" readonly  name="make_doctor"></td>
+                    <td><input id="make_postgraduate" style="text-align: center;border: 0px;" readonly  name="make_postgraduate"></td>
+                    <td><input id="hold_training_courses" style="text-align: center;border: 0px;" readonly  name="hold_training_courses"></td>
+                    <td><input id="number_of_participants" style="text-align: center;border: 0px;" readonly  name="number_of_participants"></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -376,10 +397,11 @@
                     <td colspan="3" rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="convert_the_number_of_applications" style="text-align: center;border: 0px;" readonly  name="convert_the_number_of_applications"></td>
+                    <td><input id="results_of_industrialization" style="text-align: center;border: 0px;" readonly  name="results_of_industrialization"></td>
+                    <td><input id="achievement_transfer_contract" style="text-align: center;border: 0px;" readonly  name="achievement_transfer_contract"></td>
+                    <td><input id="total_amount_of_achievement_transfer_contract" style="text-align: center;border: 0px;" readonly  name="total_amount_of_achievement_transfer_contract"></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -395,17 +417,18 @@
                 </tr>
                 <tr>
                     <td class="td-text">直接经济效益</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="all_production_a" style="text-align: center;border: 0px;" readonly  name="all_production_a"></td>
+                    <td><input id="the_new_production_a" style="text-align: center;border: 0px;" readonly  name="the_new_production_a"></td>
+                    <td><input id="the_new_tax_a" style="text-align: center;border: 0px;" readonly  name="the_new_tax_a"></td>
+                    <td><input id="net_amount_a" style="text-align: center;border: 0px;" readonly  name="net_amount_a"></td>
+
                 </tr>
                 <tr>
                     <td class="td-text">间接经济效益</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="all_production_b" style="text-align: center;border: 0px;" readonly  name="all_production_b"></td>
+                    <td><input id="the_new_production_b" style="text-align: center;border: 0px;" readonly  name="the_new_production_b"></td>
+                    <td><input id="the_new_tax_b" style="text-align: center;border: 0px;" readonly  name="the_new_tax_b"></td>
+                    <td><input id="net_amount_b" style="text-align: center;border: 0px;" readonly  name="net_amount_b"></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -419,10 +442,11 @@
                     <td rowspan="2" colspan="3"></td>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
+                    <td><input id="all_production_year" style="text-align: center;border: 0px;" readonly  name="all_production_year"></td>
+                    <td><input id="the_new_production_year" style="text-align: center;border: 0px;" readonly  name="the_new_production_year"></td>
+                    <td><input id="the_new_tax_year" style="text-align: center;border: 0px;" readonly  name="the_new_tax_year"></td>
+                    <td><input id="net_amount_year" style="text-align: center;border: 0px;" readonly  name="net_amount_year"></td>
+
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -432,7 +456,7 @@
                     <td class="td-text">申请验收单位意见:</td>
                     <td colspan="7"> <textarea placeholder="申请验收单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="applicationDeptOpinion" name="applicationDeptOpinion"></textarea>
+                                               id="applicationDeptOpinion" name="applicationDeptOpinion" readonly></textarea>
                     </td>
                 </tr>
 
@@ -440,7 +464,7 @@
                     <td class="td-text">受委托管理单位或项目牵头承担单位意见:</td>
                     <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
+                                               id="manageDeptOpinion" name="manageDeptOpinion" readonly></textarea>
                     </td>
                 </tr>
 
@@ -448,25 +472,45 @@
                     <td class="td-text">自治区科技厅项目主管处意见:</td>
                     <td colspan="7"> <textarea placeholder="自治区科技同项目主管处意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
+                                               id="burgLeaderOpinion" name="burgLeaderOpinion" readonly></textarea>
                     </td>
                 </tr>
                 <tr >
                     <td class="td-text">自治区科技厅条件财务处意见:</td>
                     <td colspan="7"> <textarea placeholder="自治区科技厅条件财务处意见" class="layui-textarea form-control"
                                                lay-verify="required"
-                                               id="burgFinanceOpinion" name="burgFinanceOpinion"></textarea>
+                                               id="burgFinanceOpinion" name="burgFinanceOpinion" readonly></textarea>
+                    </td>
+                </tr>
+                <tr id="check">
+                    <td class="td-text">审核结果:</td>
+                    <td colspan="7">
+                        <div class="layui-input-block">
+                            <input type="radio" name="status" value="3" title="通过" checked="">
+                            <input type="radio" name="status" value="4" title="不通过">
+                        </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <div class="layui-form-item">
+
+            </div>
         </div>
-        <div class="form-actions">
+
+        <div class="form-actions" id="new">
             <div class="row" align="center">
                 <div class="col-md-12">
                     <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary" type="submit"  onclick="add_ACC();">
-                        <i class="fa fa-save"></i> 保存
+                </div>
+            </div>
+        </div>
+        <div class="form-actions" id="old">
+            <div class="row" align="center">
+                <div class="col-md-12" disabled>
+                    <button class="btn btn-primary"onclick=" history.back(-1);">返回</button>
+                    <button class="btn btn-primary"  type="button"  onclick="add_ACC();">
+                        <i class="fa fa-save"></i> 提交
                     </button>
                 </div>
             </div>
@@ -474,42 +518,51 @@
     </form>
 </div>
 </body>
-<script type="text/javascript" src='../../../../js/constant.js'></script>
-<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../../../js/jq.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script type="text/javascript" src='../../../../js/common.js'></script>
-<script type="text/javascript" src='../../js/serializeJson.js'></script>
-<script type="text/javascript" src='../../js/initSelectData.js'></script>
-<script type="text/javascript" src='../../js/saveData.js'></script>
-<script type="text/javascript" src="../../js/acceptance.js"></script>
+<script type="text/javascript" src='../../js/constant.js'></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src='../../js/common.js'></script>
+<script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../list-layout/js/saveData.js'></script>
+<script type="text/javascript" src="../list-layout/js/acceptance.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 <script>
-    var id = getUrlParam("id");
-    $("#item_id").val(id);
-    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
-        var layer = layui.layer
-            , upload = layui.upload
-            , form = layui.form
-            , laydate = layui.laydate;
-        lay('.date').each(function () {
+    var item_id = getUrlParam("item_id");
+    var userType = getUrlParam("userType");
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'laydate','layer'], function () {
+        layer = layui.layer;
+        laydate = layui.laydate;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        lay('.date').each(function(){
             laydate.render({
                 elem: this
-                , showBottom: false
-                , trigger: 'click'
+                ,format:'yyyy-MM-dd'
+                ,trigger: 'click'
             });
         });
-    })
-    getdata(id);
-    function getdata(id) {
+
+    });
+    getdata(item_id);
+    function getdata(item_id) {
         $.ajax({
             type: 'get',
             url: domainName + '/api-summary/check-table/list',
-            data: "item_id=" + id,
+            data: "item_id=" + item_id,
             async: false,
             success: function (data) {
+                for(var key in data[0]){
+                    var date= data[0][key];
+                    $('#'+key).val(date);
+
+                }
                 $(data).each(function () {
-                    $("#applicationDate").val(this.applicationDate.substring(0, 10));
-                   $("#suggestDate").val(this.suggestDate.substring(0, 10));
+                    whitchType(this.status);
+                    $("#applicationDate").text(this.applicationDate.substring(0, 10));
+                    $("#suggestDate").text(this.suggestDate.substring(0, 10));
                     $("#cean").text(this.cean);
                     $("#katalog").text(this.katalog);
                     $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
@@ -520,20 +573,59 @@
             }
         })
     }
-    getbasic(id);
-    getCompanyInfo(id);
-    getItem_user(id);
-     function add_ACC() {
-         var formdata = $("#form").serializeObject();
-         $.ajax({
-             type: 'post',
-             url: domainName + '/api-summary/check-table',
-             contentType: "application/json; charset=utf-8",
-             data: JSON.stringify(formdata),
-             success: function (data) {
-                  alert("成功");
-             }
-         })
-     }
+    getbasic(item_id);
+    getCompanyInfo(item_id);
+
+    var advanced = 0;
+    var middle = 0;
+    var elementary = 0;
+    var doctor =0;
+    var postgraduate = 0;
+    var bachelor = 0;
+    getItem_user(item_id);
+
+    function whitchType(status) {
+        if (status==1&&userType==2){
+            $("#manageDeptOpinion").removeAttr("readonly");
+            document.getElementById('old').style.display='block';
+            document.getElementById('check').style.display='none';
+        }else if (status==2&&userType==1){
+            $("#burgLeaderOpinion").removeAttr("readonly");
+            $("#burgFinanceOpinion").removeAttr("readonly");
+            document.getElementById('old').style.display='block';
+
+        }else {
+            document.getElementById('new').style.display='block';
+            document.getElementById('check').style.display='none';
+        }
+
+    }
+    getFund(item_id);
+    function add_ACC() {
+        var formdata = $("#form").serializeObject();
+        if(!userType){
+
+        }else if (userType==1){
+            $("#manageDeptOpinion").removeAttr("readonly");
+        }else if (userType==2){
+            $("#burgLeaderOpinion").removeAttr("readonly");
+            $("#burgFinanceOpinion").removeAttr("readonly");
+            formdata.status=2;
+        }
+
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        location.href = "checkedAcceptancrList.html";
+                    });
+                }
+            });
+
+    }
 </script>
 </html>

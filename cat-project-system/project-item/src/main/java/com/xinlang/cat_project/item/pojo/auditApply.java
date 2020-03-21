@@ -51,6 +51,12 @@ public class auditApply implements Serializable {
      * 查定方法
      */
     private String means;
+    /**
+     * 提交方法
+     * 1 pc
+     * 2 微信
+     */
+    private Integer post_type;
 
 
     private Date start_date;

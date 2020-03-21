@@ -51,6 +51,29 @@
         .layui-form-radio {
             width: 220px;
         }
+        .layui-form-radio {
+            margin: 0;
+        }
+
+        .layui-form-label {
+            width: 120px;
+            font-weight: bold;
+            text-align: left;
+            padding: 0;
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+
+        .layui-input-block {
+            min-height: auto;
+        }
+
+        .layui-form-item {
+            margin-bottom: 0;
+        }
+        .layui-disabled > div{
+            color: #666;
+        }
     </style>
 </head>
 
@@ -74,7 +97,7 @@
             </span>
     </div>
 
-    <form class="layui-form" id="form">
+    <form class="layui-form" onsubmit="return false" id="form">
         <div class="module">
             <table class="layui-table">
                 <colgroup>
@@ -89,48 +112,41 @@
                     <td rowspan="4" class="table-info">基本信息</td>
                     <td class="td-text1">项目名称:</td>
                     <td>
-                        <span class="item_name"></span>
-                        <input type="hidden" id="item_name" name="itemName" value="">
+                        <span class="itemName"></span>
                     </td>
                     <td class="td-text1">合同编号:</td>
                     <td>
-                        <span class="contract_no"></span>
-                        <input type="hidden" id="contract_no" name="contractNo" value="">
+                        <span class="contractNo"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">项目类别:</td>
                     <td>
                         <span class="category"></span>
-                        <input type="hidden" id="category" name="category" value="">
                     </td>
                     <td class="td-text1">承担单位:</td>
                     <td>
                         <span class="undertaker"></span>
-                        <input type="hidden" id="undertaker" name="undertaker" value="">
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">填 报 人:</td>
                     <td>
                         <span class="createUserName"></span>
-                        <input type="hidden" id="createUserName" name="createUserName" value="">
                     </td>
                     <td class="td-text1">填报人电话:</td>
                     <td>
                         <span class="createUserPhone"></span>
-                        <input type="hidden" id="createUserPhone" name="createUserPhone" value="">
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">填报人邮箱:</td>
                     <td>
                         <span class="createUserEmail"></span>
-                        <input type="hidden" id="createUserEmail" name="createUserEmail" value="">
                     </td>
                     <td class="td-text1">填报日期:</td>
                     <td>
-                        <span id="today"></span>
+                        <span class="createTime"></span>
                     </td>
                 </tr>
                 </tbody>
@@ -152,7 +168,6 @@
                     <td class="td-text1">合同规定起止时间:</td>
                     <td colspan="3" style="text-align: center">
                         <span class="startAndEndTime"></span>
-                        <input type="hidden" id="startAndEndTime" name="startAndEndTime">
                     </td>
                 </tr>
                 <tr>
@@ -223,27 +238,38 @@
                 <tr>
                     <td class="td-text1">项目拖延、停顿、终止 、撤销的主要原因（最 多选三项）:</td>
                     <td>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="0"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="0.技术变化"
                                                               title="0.技术变化"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="1"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="1.计划性调整"
                                                               title="1.计划性调整"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="2"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="2.设备、材料不落实"
                                                               title="2.设备、材料不落实"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="3"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="3.协作关系影响"
                                                               title="3.协作关系影响"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="4"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="4.资金不到位"
                                                               title="4.资金不到位"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="5"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="5.市场变化"
                                                               title="5.市场变化"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="6"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="6.技术骨干变动"
                                                               title="6.技术骨干变动"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="7"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="7.立题不当"
                                                               title="7.立题不当"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="8.不可抗拒因素"
                                                               title="8.不可抗拒因素"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="9"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="9.合作方变动"
                                                               title="9.合作方变动"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="10"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="10.其他原因"
                                                               title="10.其他原因"></div>
                     </td>
                     <td colspan="2">
@@ -376,118 +402,11 @@
                     <td colspan="2">其中：广西科技厅资助经费 （如为先验收后补助项目，则此处经费 为乙方自筹经费中的科技经费）</td>
                     <td rowspan="2" colspan="4">开支内容</td>
                 </tr>
-                <tr>
+                <tr class="stageFundUse">
                     <td>合同原始预算</td>
                     <td>已支出金额</td>
                 </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">合计<input class="form-control" type="hidden" name="fundUseSubject" value="合计"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><input class="form-control" type="hidden" name="fundUseRemark" value="/"></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">(一)直接费用<input class="form-control" type="hidden" name="fundUseSubject" value="直接费用">
-                    </td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><input class="form-control" type="hidden" name="fundUseRemark" value="/"></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">设备费<input class="form-control" type="hidden" name="fundUseSubject" value="设备费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">材料费<input class="form-control" type="hidden" name="fundUseSubject" value="材料费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">测试化验加工费<input class="form-control" type="hidden" name="fundUseSubject"
-                                                  value="测试化验加工费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">燃料及动力费<input class="form-control" type="hidden" name="fundUseSubject"
-                                                 value="燃料及动力费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">差旅/会议/国际合作及交流费<input class="form-control" type="hidden" name="fundUseSubject"
-                                                         value="差旅/会议/国际合作及交流费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">出版/文献/信息传播/知识产权事务费<input class="form-control" type="hidden" name="fundUseSubject"
-                                                             value="出版/文献/信息传播/知识产权事务费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">劳务费<input class="form-control" type="hidden" name="fundUseSubject" value="劳务费"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">专家咨询费<input class="form-control" type="hidden" name="fundUseSubject" value="专家咨询费">
-                    </td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">其他支出<input class="form-control" type="hidden" name="fundUseSubject" value="其他支出">
-                    </td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">(二)间接费用<input class="form-control" type="hidden" name="fundUseSubject"
-                                                  value="(二)间接费用"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><input class="form-control" type="hidden" name="fundUseRemark" value="/"></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">缴费支出<input class="form-control" type="hidden" name="fundUseSubject" value="缴费支出">
-                    </td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
-                <tr class="stageFundUse">
-                    <td colspan="2">其他费用<input class="form-control" type="hidden" name="fundUseSubject" value="其他费用">
-                    </td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditure"></td>
-                    <td><input class="form-control" type="text" name="fundUseOriginalBudget"></td>
-                    <td><input class="form-control" type="text" name="fundUseExpenditureOut"></td>
-                    <td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark"></textarea></td>
-                </tr>
+
                 <tr>
                     <td colspan="9"><h3>项目其他经费支出情况（如为先验收后补助项目，则此处经费不包含自筹经费中的科技经费）</h3></td>
                 </tr>
@@ -659,7 +578,7 @@
             </table>
         </div>
 
-        <div class="module" id="checkHtml">
+        <div class="module">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -670,10 +589,47 @@
                     <td rowspan="6" class="table-info">项目负责人承诺及单位意见</td>
                 </tr>
                 <tr class="principalCheckStage">
-
+                    <td>
+                        <span style="font-weight: bold">项目负责人承诺/意见：</span>
+                        <span class="principalCheck"></span></br>
+<!--                        <div class="layui-form-item">-->
+<!--                            <label class="layui-form-label">负责人审核结果:</label>-->
+<!--                            <div class="layui-input-block">-->
+<!--                                <input type="radio" name="principalCheckEnable" value="1" title="同意">-->
+<!--                                <input type="radio" name="principalCheckEnable" value="-1" title="驳回">-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <span style="font-weight: bold">项目负责人：</span><span class="principal"></span></br>
+                        <span style="font-weight: bold">审核时间：</span>
+                        <span class="principalCheckTime"></span>
+                    </td>
                 </tr>
                 <tr class="deptCheckStage">
-
+                    <td>
+                        项目第一承担单位对项目完成质量评价意见</br>
+<!--                        <label>1.项目完成情况</label>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施" >-->
+<!--                        </div>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施">-->
+<!--                        </div>-->
+<!--                        <div class="layui-input-block">-->
+<!--                            <input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施">-->
+<!--                        </div>-->
+                        <span style="font-weight: bold">单位意见：</span>
+                        <span class="deptCheck"></span></br>
+<!--                        <div class="layui-form-item">-->
+<!--                            <label class="layui-form-label">单位审核结果:</label>-->
+<!--                            <div class="layui-input-block">-->
+<!--                                <input type="radio" name="deptCheckEnable" value="1" title="同意">-->
+<!--                                <input type="radio" name="deptCheckEnable" value="-1" title="驳回">-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <span style="font-weight: bold">经办人：</span><span class="deptCheckUser"></span></br>
+                        <span style="font-weight: bold">审核时间：</span>
+                        <span class="deptCheckTime"></span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -711,14 +667,13 @@
             <div class="row" align="center">
                 <div class="col-md-12">
                     <button class="btn btn-primary" type="button" onclick=" history.back(-1);">返回</button>
-                    <button class="btn btn-primary" type="button" onclick="save();">
-                        <i class="fa fa-save"></i> 保存
+                    <button class="btn btn-primary" type="button" onclick="update();">
+                        <i class="fa fa-save"></i> 保存修改
                     </button>
                 </div>
             </div>
         </div>
     </form>
-
 </div>
 </body>
 <script type="text/javascript" src='../../../../js/constant.js'></script>
@@ -732,15 +687,21 @@
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script>
     var pers = checkPermission();
-    $('#checkHtml').hide();
-    $("#today").html(formatDate1(new Date()));
-    var itemId = getUrlParam("item_id");
+    var stageId = getUrlParam("id");
     var userId = getUrlParam("user_id");
+    ///序号
+    var paperIndex = 0;
+    var patentIndex = 0;
+    var scienceAchievementAwardIndex = 0;
+    var scienceAchievementRegisterIndex = 0;
+    var technologyPactRegisterIndex = 0;
 
-    var laydate, form;
+
+
+    var laydate, form,layer;
     layui.use(['layer', 'form', 'laydate', 'upload'], function () {
-        var layer = layui.layer
-            , upload = layui.upload;
+        var upload = layui.upload;
+        layer = layui.layer;
         form = layui.form;
         laydate = layui.laydate;
         lay('.date').each(function () {
@@ -767,166 +728,214 @@
                 var str = '';
                 str += '<tr id="' + id + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + res['name'] + '" ><input type="hidden" name="fileId" value="' + id + '" ><td>' + res.name + '</td><td>';
                 str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark"></textarea></td>';
-                str += '<td><button class="layui-btn layui-btn-xs" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
+                str += '<td><button class="layui-btn layui-btn-xs" type="button" onclick="deleteFile(\'' + id + '\')"><i class="layui-icon">&#xe705;</i>删除</button>';
                 str += '<a class="layui-btn layui-btn-xs" href="' + url + '"><input type="hidden" name="fileUrl" value="' + url + '" ><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
                 $("#file_table").append(str);
             }
         });
-    });
+        //初始化项目信息
+        $.get(domainName + "/api-summary/stage/" + stageId, function (res) {
+            for (var key in res) {
+                $("." + key).html(res[key]);
+                $("#" + key).val(res[key]);
+            }
 
-    //初始化项目信息
-    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
-        for (var key in res[0]) {
-            if (key == 'undertaker' || key == 'category') continue;
-            $("#" + key).val(res[0][key]);
-            $("." + key).html(res[0][key]);
-        }
-        $.get(domainName + "/api-c/company/" + res[0]['undertaker'], function (data) {
-            $('#undertaker').val(data['signName']);
-            $('.undertaker').html(data['signName']);
-        });
-        $.get(domainName + "/api-label/label/tree/" + res[0]['category'], function (data) {
-            $('#category').val(data[0]['content']);
-            $('.category').html(data[0]['content']);
-        });
-        var startAndEndTime = formatDate1(res[0].start_date) + "---" + formatDate1(res[0].end_date);
-        $("#startAndEndTime").val(startAndEndTime);
-        $(".startAndEndTime").html(startAndEndTime);
-    });
+            $('.deptCheckTime').html(formatDate4(res.deptCheckTime));
+            $('.principalCheckTime').html(formatDate4(res.principalCheckTime));
+            $('.createTime').html(formatDate4(res.createTime));
+            $('#extensionTime').val(formatDate4(res.extensionTime));
 
-    //初始化创建者信息
-    $.get(domainName + "/project-user/users", {id: userId}, function (res) {
-        $("#createUserName").val(res.data[0].name);
-        $(".createUserName").html(res.data[0].name);
-        $("#createUserEmail").val(res.data[0].email);
-        $(".createUserEmail").html(res.data[0].email);
-        $("#createUserPhone").val(res.data[0].phone);
-        $(".createUserPhone").html(res.data[0].phone);
-        //负责人填写的部分
-        if ($.inArray('html:principal:check:stage', pers) > 0) {
-            $('#checkHtml').show();
-            var str = '';
-            str += '<td><label>项目负责人承诺：</label>';
-            str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck" >';
-            str += '我所填写的项目执行情况调查表实事求是，数据详实。在下一步研究中，我将认真工作并及时报告重大变动情况。</textarea> </br>';
-            str += '<div class="layui-input-block"><input name="principalCheckEnable" value="1" title="同意" checked="" type="radio"><input name="principalCheckEnable" value="0" title="驳回" type="radio"></div>';
-            str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate1(new Date());
-            str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
-            $(".principalCheckStage").append(str);
-        }
-        //单位填写的部分
-        if ($.inArray('html:dept:check:stage', pers) > 0) {
-            $('#checkHtml').show();
-            var str = '';
-            str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
-            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施"></div>';
-            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施"></div>';
-            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施"></div>';
-            str += '<label>2.其他意见：</label>';
-            str += '<textarea placeholder="其他意见" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
-            str += '<div class="layui-input-block"><input name="deptCheckEnable" value="1" title="同意" checked="" type="radio"><input name="deptCheckEnable" value="0" title="驳回" type="radio"></div>';
-            str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate1(new Date());
-            str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
-            $(".deptCheckStage").append(str);
-        }
-
-    });
-
-    //初始化指标
-    $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (res) {
-        var BE_TECHNICAL_INDICATORS = false;
-        var BE_ECONOMIC_INDICATORS = false;
-        var BE_INDICATORS_OF_TALENT_TEAM_CONS = false;
-        var BE_OTHER_INDICATORS = false;
-
-        var STR_TECHNICAL_INDICATORS = '';
-        var STR_ECONOMIC_INDICATORS = '';
-        var STR_INDICATORS_OF_TALENT_TEAM_CONS = '';
-        var STR_OTHER_INDICATORS = '';
-
-        var SIGNS = '';
-
-        var TECHNICAL_INDICATORS_INDEX = 1;
-        var ECONOMIC_INDICATORS_INDEX = 1;
-        var INDICATORS_OF_TALENT_TEAM_CONS_INDEX = 1;
-        var OTHER_INDICATORS_INDEX = 1;
-        for (var i = 0; i < res.length; i++) {
-            var data = res[i];
-            if (data.count == null) {
-                if (data.type == 'OTHER_INDICATORS') {
-                    BE_OTHER_INDICATORS = true;
-                    STR_OTHER_INDICATORS += OTHER_INDICATORS_INDEX + '.' + data.content + '</br>';
-                    OTHER_INDICATORS_INDEX++;
-                    continue;
-                }
-                if (data.type == 'TECHNICAL_INDICATORS') {
-                    BE_TECHNICAL_INDICATORS = true;
-                    STR_TECHNICAL_INDICATORS += TECHNICAL_INDICATORS_INDEX + '.' + data.content + '</br>';
-                    TECHNICAL_INDICATORS_INDEX++;
-                    continue;
-                }
-                if (data.type == 'ECONOMIC_INDICATORS') {
-                    BE_ECONOMIC_INDICATORS = true;
-                    STR_ECONOMIC_INDICATORS += ECONOMIC_INDICATORS_INDEX + '.' + data.content + '</br>';
-                    ECONOMIC_INDICATORS_INDEX++;
-                    continue;
-                }
-                if (data.type == 'INDICATORS_OF_TALENT_TEAM_CONS') {
-                    BE_INDICATORS_OF_TALENT_TEAM_CONS = true;
-                    STR_INDICATORS_OF_TALENT_TEAM_CONS += INDICATORS_OF_TALENT_TEAM_CONS_INDEX + '.' + data.content + '</br>';
-                    INDICATORS_OF_TALENT_TEAM_CONS_INDEX++;
-                    continue
+            var causesInput = $('input[name=causes]');
+            var causesVal = (res.cause).split(',');
+            for (var i = 0; i < causesInput.length; i++) {
+                for (var j = 0; j < causesVal.length; j++) {
+                    if ($(causesInput[i]).val() == causesVal[j]) {
+                        $(causesInput[i]).prop('checked', true);
+                    }
                 }
             }
-            SIGNS += data.target + ',';
-        }
-        var url = domainName + "/api-label/label/tree/";
-        $.get(url + SIGNS.trim(","), function (res) {
-            for (var i = 0; i < res.length; i++) {
-                var data = res[i];
-                addStageTarget(data);
+            setRadio($('input[name=applicantExtension]'),res.applicantExtension);
+            setRadio($('input[name=produceLearnResearch]'),res.produceLearnResearch);
+            setRadio($('input[name=innovateType]'),res.innovateType);
+            setRadio($('input[name=collaborate]'),res.collaborate);
+            setRadio($('input[name=skillSourceDept]'),res.skillSourceDept);
+            setRadio($('input[name=progress]'),res.progress);
+            setRadio($('input[name=isOneCheck]'),res.isOneCheck);
+            setRadio($('input[name=oneCheckType]'),res.oneCheckType);
+
+            form.render();
+            if (res.otherTarget != null) {
+                var str1 = '';
+                str1 += '<td>其他指标</td><td><span>' + res.otherTarget + '</span><input type="hidden" name="otherTarget" value="' + res.otherTarget + '"></td>';
+                str1 += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+                str1 += 'id="otherTargetSchedule" name="otherTargetSchedule">'+ res.otherTargetSchedule +'</textarea></td>';
+                str1 += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+                str1 += 'id="otherTargetDescribe" name="otherTargetDescribe">'+ res.otherTargetDescribe +'</textarea></td>';
+                $("#OTHER_INDICATORS").append(str1);
             }
+            if (res.skillTarget != null) {
+                var str = '';
+                str += '<td>技术指标</td><td><span>' + res.skillTarget + '</span><input type="hidden" name="skillTarget" value="' + res.skillTarget + '"></td>';
+                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+                str += 'id="skillTargetSchedule" name="skillTargetSchedule">'+ res.skillTargetSchedule +'</textarea></td>';
+                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+                str += 'id="skillTargetDescribe" name="skillTargetDescribe">'+ res.skillTargetDescribe +'</textarea></td>';
+                $("#TECHNICAL_INDICATORS").append(str);
+            }
+            if (res.economyTarget != null) {
+                var str = '';
+                str += '<td>经济指标</td><td><span>' + res.economyTarget + '</span><input type="hidden" name="economyTarget" value="' + res.economyTarget + '"></td>';
+                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+                str += 'id="economyTargetSchedule" name="economyTargetSchedule">'+ res.economyTargetSchedule +'</textarea></td>';
+                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+                str += 'id="economyTargetDescribe" name="economyTargetDescribe">'+ res.economyTargetDescribe +'</textarea></td>';
+                $("#ECONOMIC_INDICATORS").append(str);
+            }
+            if (res.personTarget != null) {
+                var str = '';
+                str += '<td>人才队伍建设指标</td><td><span>' + res.personTarget + '</span><input type="hidden" name="personTarget" value="' + res.personTarget + '"></td>';
+                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+                str += 'id="personTargetSchedule" name="personTargetSchedule">'+ res.personTargetSchedule +'</textarea></td>';
+                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+                str += 'id="personTargetDescribe" name="personTargetDescribe">'+ res.personTargetDescribe +'</textarea></td>';
+                $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
+            }
+            var stageFundUses = res.stageFundUses;
+            var STR_stageFundUses = '';
+            for (var i = 0; i < stageFundUses.length; i++) {
+                STR_stageFundUses += '<tr class="stageFundUse">';
+                STR_stageFundUses += '<td colspan="2">'+stageFundUses[i].fundUseSubject+'<input class="form-control" type="hidden" name="fundUseSubject" value="'+stageFundUses[i].fundUseSubject+'"></td>';
+                STR_stageFundUses += '<td><input class="form-control" type="text" name="fundUseExpenditure" value="' + stageFundUses[i].fundUseExpenditure + '">';
+                STR_stageFundUses += '<input class="form-control" type="hidden" name="id" value="'+stageFundUses[i].id+'"></td>';
+                STR_stageFundUses += '<td><input class="form-control" type="text" name="fundUseOriginalBudget" value="' + stageFundUses[i].fundUseOriginalBudget + '"></td>';
+                STR_stageFundUses += '<td><input class="form-control" type="text" name="fundUseExpenditureOut" value="' + stageFundUses[i].fundUseExpenditureOut + '"></td>';
+               if(stageFundUses[i].fundUseRemark == '/'){
+                   STR_stageFundUses += '<td colspan="4">' + stageFundUses[i].fundUseRemark + '</td></tr>';
+               }else{
+                   STR_stageFundUses += '<td colspan="4"><textarea class="layui-textarea form-control" name="fundUseRemark">' + stageFundUses[i].fundUseRemark + '</textarea></td></tr>';
+               }
+            }
+            $('.stageFundUse').after(STR_stageFundUses);
+            var stageAffixFiles = res.stageAffixFiles;
+            var STR_stageAffixFiles = '';
+            for (var i = 0; i < stageAffixFiles.length; i++) {
+                STR_stageAffixFiles += '<tr id="' + stageAffixFiles[i].fileId + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + stageAffixFiles[i].fileName +'" >';
+                STR_stageAffixFiles += '<input type="hidden" name="id" value="' + stageAffixFiles[i].id + '" >';
+                STR_stageAffixFiles += '<input type="hidden" name="fileId" value="' + stageAffixFiles[i].fileId + '" ><td>' + stageAffixFiles[i].fileName  + '</td><td>';
+                STR_stageAffixFiles += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark">'+ stageAffixFiles[i].fileRemark +'</textarea></td>';
+                STR_stageAffixFiles += '<td><button class="layui-btn layui-btn-xs" type="button" onclick="delStageAffixFile(\'' + stageAffixFiles[i].fileId + '\','+ stageAffixFiles[i].id +');">';
+                STR_stageAffixFiles += '<i class="layui-icon">&#xe705;</i>删除</button>';
+                STR_stageAffixFiles += '<a class="layui-btn layui-btn-xs" href="' + stageAffixFiles[i].fileUrl + '"><input type="hidden" name="fileUrl" value="' + stageAffixFiles[i].fileUrl + '" >';
+                STR_stageAffixFiles += '<i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
+            }
+            $("#file_table").append(STR_stageAffixFiles);
+            var stagePaperCatalogues = res.stagePaperCatalogues;
+            paperIndex = stagePaperCatalogues.length;
+            var STR_stagePaperCatalogues = '';
+            for (var i = 0; i < stagePaperCatalogues.length; i++) {
+                STR_stagePaperCatalogues += '<tr class="stagePaperCatalogue">';
+                STR_stagePaperCatalogues += '<td>' + (i + 1) + '<input class="form-control" type="hidden" name="id" value="'+stagePaperCatalogues[i].id+'"></td>';
+                STR_stagePaperCatalogues += '<td><input class="form-control" type="text" name="paperTitle" value="' + stagePaperCatalogues[i].paperTitle + '"></td>';
+                STR_stagePaperCatalogues += '<td><input class="form-control" type="text" name="paperPersonCharge" value="' + stagePaperCatalogues[i].paperPersonCharge + '"></td>';
+                STR_stagePaperCatalogues += '<td><input class="form-control" type="text" name="paperLeaderRank" value="' + stagePaperCatalogues[i].paperLeaderRank + '"></td>';
+                STR_stagePaperCatalogues += '<td><input class="form-control date" type="text" name="paperPostedTime" value="' + formatDate4(stagePaperCatalogues[i].paperPostedTime) + '"></td>';
+                STR_stagePaperCatalogues += '<td><input class="form-control" type="text" name="paperCategory" value="' + stagePaperCatalogues[i].paperCategory + '"></td>';
+                STR_stagePaperCatalogues += '<td><input class="form-control" type="text" name="paperCitationsSum" value="' + stagePaperCatalogues[i].paperCitationsSum + '"></td>';
+                STR_stagePaperCatalogues += '<td><textarea class="layui-textarea form-control" name="paperRemark">' + stagePaperCatalogues[i].paperRemark + '</textarea></td>';
+                STR_stagePaperCatalogues += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+                STR_stagePaperCatalogues += '</tr>';
+            }
+            $("tr.stagePaperCatalogue:last").after(STR_stagePaperCatalogues);
+            var stagePatentCatalogues = res.stagePatentCatalogues;
+            stagePatentCatalogues.length;
+            var STR_stagePatentCatalogues = '';
+            for (var i = 0; i < stagePatentCatalogues.length; i++) {
+                STR_stagePatentCatalogues += '<tr class="stagePatentCatalogue">';
+                STR_stagePatentCatalogues += '<td>' + (i + 1) + '<input class="form-control" type="hidden" name="id" value="' + stagePatentCatalogues[i].id + '"></td>';
+                STR_stagePatentCatalogues += '<td><input class="form-control" type="text" name="patentNumber" value="' + stagePatentCatalogues[i].patentNumber + '"></td>';
+                STR_stagePatentCatalogues += '<td><input class="form-control" type="text" name="patentName" value="' + stagePatentCatalogues[i].patentName + '"></td>';
+                STR_stagePatentCatalogues += '<td><input class="form-control" type="text" name="patentPersonCharge" value="' + stagePatentCatalogues[i].patentPersonCharge + '"></td>';
+                STR_stagePatentCatalogues += '<td><input class="form-control" type="text" name="patentType" value="' + stagePatentCatalogues[i].patentType + '"></td>';
+                STR_stagePatentCatalogues += '<td><input class="form-control date" type="text" name="patentApplicationTime" value="' + formatDate4(stagePatentCatalogues[i].patentApplicationTime) + '"></td>';
+                STR_stagePatentCatalogues += '<td><input class="form-control date" type="text" name="patentAuthorizeTime" value="' + formatDate4(stagePatentCatalogues[i].patentAuthorizeTime) + '"></td>';
+                STR_stagePatentCatalogues += '<td><textarea class="layui-textarea form-control" name="patentRemark">' + stagePatentCatalogues[i].patentRemark + '</textarea></td>';
+                STR_stagePatentCatalogues += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+                STR_stagePatentCatalogues += '</tr>';
+            }
+            $("tr.stagePatentCatalogue:last").after(STR_stagePatentCatalogues);
+            var stageScienceAchievementAwardCatalogues = res.stageScienceAchievementAwardCatalogues;
+            scienceAchievementAwardIndex = stageScienceAchievementAwardCatalogues.length;
+            var STR_stageScienceAchievementAwardCatalogues = '';
+            for (var i = 0; i < stageScienceAchievementAwardCatalogues.length; i++) {
+                STR_stageScienceAchievementAwardCatalogues += '<tr class="stageScienceAchievementAwardCatalogue">';
+                STR_stageScienceAchievementAwardCatalogues += '<td>' + (i + 1) + '<input class="form-control" type="hidden" name="id" value="' + stageScienceAchievementAwardCatalogues[i].id + '"></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td colspan="2"><input class="form-control" type="text" name="scienceAwardAchievementName" value="' + stageScienceAchievementAwardCatalogues[i].scienceAwardAchievementName + '"></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><input class="form-control" type="text" name="scienceAwardPersonCharge" value="' + stageScienceAchievementAwardCatalogues[i].scienceAwardPersonCharge + '"></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><input class="form-control" type="text" name="scienceAwardLeaderRank" value="' + stageScienceAchievementAwardCatalogues[i].scienceAwardLeaderRank + '"></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><input class="form-control date" type="text" name="scienceAwardGetTime" value="' + formatDate4(stageScienceAchievementAwardCatalogues[i].scienceAwardGetTime) + '"></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><input class="form-control" type="text" name="scienceAwardType" value="' + stageScienceAchievementAwardCatalogues[i].scienceAwardType + '"></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><textarea class="layui-textarea form-control" name="scienceAwardRemark">' + stageScienceAchievementAwardCatalogues[i].scienceAwardRemark + '</textarea></td>';
+                STR_stageScienceAchievementAwardCatalogues += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+                STR_stageScienceAchievementAwardCatalogues += '</tr>';
+            }
+            $("tr.stageScienceAchievementAwardCatalogue:last").after(STR_stageScienceAchievementAwardCatalogues);
+            var stageScienceAchievementRegisterCatalogues = res.stageScienceAchievementRegisterCatalogues;
+            scienceAchievementRegisterIndex = stageScienceAchievementRegisterCatalogues.length;
+            var STR_stageScienceAchievementRegisterCatalogues = '';
+            for (var i = 0; i < stageScienceAchievementRegisterCatalogues.length; i++) {
+                STR_stageScienceAchievementRegisterCatalogues += '<tr class="stageScienceAchievementRegisterCatalogue">';
+                STR_stageScienceAchievementRegisterCatalogues += '<td>' + (i + 1) + '<input class="form-control" type="hidden" name="id" value="' + stageScienceAchievementRegisterCatalogues[i].id + '"></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td colspan="2"><input class="form-control" type="text" name="scienceRegisterNumber"value="' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterNumber + '"></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td colspan="2"><input class="form-control" type="text" name="scienceRegisterAchievementName"value="' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterAchievementName + '"></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td colspan="2"><input class="form-control" type="text" name="scienceRegisterAccomplishDept"value="' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterAccomplishDept + '"></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td><input class="form-control" type="text" name="scienceRegisterPersonCharge" value="' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterPersonCharge + '"></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+                STR_stageScienceAchievementRegisterCatalogues += '</tr>';
+            }
+            $("tr.stageScienceAchievementRegisterCatalogue:last").after(STR_stageScienceAchievementRegisterCatalogues);
+            var stageTechnologyPactRegisterCatalogues = res.stageTechnologyPactRegisterCatalogues;
+            technologyPactRegisterIndex = stageTechnologyPactRegisterCatalogues.length;
+            var STR_stageTechnologyPactRegisterCatalogues = '';
+            for (var i = 0; i < stageTechnologyPactRegisterCatalogues.length; i++) {
+                STR_stageTechnologyPactRegisterCatalogues += '<tr class="stageTechnologyPactRegisterCatalogue">';
+                STR_stageTechnologyPactRegisterCatalogues += '<td>' + (i + 1) + '<input class="form-control" type="hidden" name="id" value="' + stageTechnologyPactRegisterCatalogues[i].id + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td colspan="2"><input class="form-control" type="text" name="technologyPactNumber" value="' + stageTechnologyPactRegisterCatalogues[i].technologyPactNumber + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><input class="form-control" type="text" name="technologyPactName" value="' + stageTechnologyPactRegisterCatalogues[i].technologyPactName + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><input class="form-control layui-transfer-data" type="text" name="technologySellerDept" value="' + stageTechnologyPactRegisterCatalogues[i].technologySellerDept + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><input class="form-control" type="text" name="technologyPactVolumeTransaction" value="' + stageTechnologyPactRegisterCatalogues[i].technologyPactVolumeTransaction + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><input class="form-control" type="text" name="technologyVolumeTransaction" value="' + stageTechnologyPactRegisterCatalogues[i].technologyVolumeTransaction + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><input class="form-control" type="text" name="technologyPactType" value="' + stageTechnologyPactRegisterCatalogues[i].technologyPactType + '"></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
+                STR_stageTechnologyPactRegisterCatalogues += '</tr>';
+            }
+            $("tr.stageTechnologyPactRegisterCatalogue:last").after(STR_stageTechnologyPactRegisterCatalogues);
+            var stageTargets = res.stageTargets;
+            var STR_stageTargets = '';
+            for (var i = 0; i < stageTargets.length; i++) {
+                STR_stageTargets += '<tr class="stageTarget">';
+                STR_stageTargets += '<td class="td-text" colspan="7">' + stageTargets[i].targetName + '<input type="hidden" name="id" value="' + stageTargets[i].id + '"></td>';
+                STR_stageTargets += '<td class="td-text" colspan="2"><input class="form-control" type="text" name="targetSum" value="' + stageTargets[i].targetSum + '"></td></tr>';
+            }
+            $("tr.stageTarget:last").after(STR_stageTargets);
+
+            lay('.date').each(function () {
+                laydate.render({
+                    elem: this
+                    , showBottom: false
+                    , trigger: 'click'
+                });
+            });
         });
-        if (BE_OTHER_INDICATORS) {
-            var str1 = '';
-            str1 += '<td>其他指标</td><td><span>' + STR_OTHER_INDICATORS + '</span><input type="hidden" name="otherTarget" value="' + STR_OTHER_INDICATORS + '"></td>';
-            str1 += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-            str1 += 'id="otherTargetSchedule" name="otherTargetSchedule"></textarea></td>';
-            str1 += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-            str1 += 'id="otherTargetDescribe" name="otherTargetDescribe"></textarea></td>';
-            $("#OTHER_INDICATORS").append(str1);
-        }
-        if (BE_ECONOMIC_INDICATORS) {
-            var str = '';
-            str += '<td>经济指标</td><td><span>' + STR_ECONOMIC_INDICATORS + '</span><input type="hidden" name="economyTarget" value="' + STR_ECONOMIC_INDICATORS + '"></td>';
-            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-            str += 'id="economyTargetSchedule" name="economyTargetSchedule"></textarea></td>';
-            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-            str += 'id="economyTargetDescribe" name="economyTargetDescribe"></textarea></td>';
-            $("#ECONOMIC_INDICATORS").append(str);
-        }
-        if (BE_TECHNICAL_INDICATORS) {
-            var str = '';
-            str += '<td>技术指标</td><td><span>' + STR_TECHNICAL_INDICATORS + '</span><input type="hidden" name="skillTarget" value="' + STR_TECHNICAL_INDICATORS + '"></td>';
-            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-            str += 'id="skillTargetSchedule" name="skillTargetSchedule"></textarea></td>';
-            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-            str += 'id="skillTargetDescribe" name="skillTargetDescribe"></textarea></td>';
-            $("#TECHNICAL_INDICATORS").append(str);
-
-        }
-        if (BE_INDICATORS_OF_TALENT_TEAM_CONS) {
-            var str = '';
-            str += '<td>人才队伍建设指标</td><td><span>' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '</span><input type="hidden" name="personTarget" value="' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '"></td>';
-            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-            str += 'id="personTargetSchedule" name="personTargetSchedule"></textarea></td>';
-            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-            str += 'id="personTargetDescribe" name="personTargetDescribe"></textarea></td>';
-            $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
-        }
     });
-
-    function save() {
+    //设置单选框
+    function setRadio(inputs,data) {
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() == data) {
+                $(inputs[i]).prop('checked', true);
+            }
+        }
+    }
+    function update() {
         //处理附表数据
         var stagePatents = setObjectProperty('.stagePatentCatalogue');
         var stageAffixFiles = setObjectProperty('.stageAffixFile');
@@ -945,16 +954,18 @@
         formData.stageScienceAchievementRegisterCatalogues = stageScienceAchievementRegisterCatalogues;
         formData.stageTechnologyPactRegisterCatalogues = stageTechnologyPactRegisterCatalogues;
         formData.stageTargets = stageTargets;
-        formData.itemId = itemId;
-        formData.createUserId = userId;
+        formData.principalCheckEnable = 0;
+        formData.deptCheckEnable = 0;
+        formData.enable = 0;
+        formData.id = stageId;
         $.ajax({
-            type: 'post',
+            type: 'put',
             url: domainName + '/api-summary/stage',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formData),
             success: function (res) {
-                alert("成功");
+                layer.msg("成功");
                 $("#form").find("input,textarea").each(function () {
                     $(this).attr('disabled', false);
                 });
@@ -989,6 +1000,28 @@
         return arr;
     }
 
+    function delStageAffixFile(fileId,id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/api-f/files/' + fileId,
+                success: function (data) {
+                    layer.msg("成功");
+                }
+            });
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/api-summary/stageAffixFile/' + id,
+                success: function (data) {
+                }
+            });
+            $("#" + fileId).remove();
+            layer.close(1);
+        });
+    }
+
     function deleteFile(id) {
         layer.confirm('确定要删除吗？', {
             btn: ['确定', '取消']
@@ -997,7 +1030,7 @@
                 type: 'delete',
                 url: domainName + '/api-f/files/' + id,
                 success: function (data) {
-                    layer.msg("删除成功");
+                    layer.msg("成功");
                 }
             });
             $("#" + id).remove();
@@ -1007,15 +1040,24 @@
 
     //删除当前tr表格
     function delTr(obj) {
-        $(obj).parents('tr').remove();
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            var tr = $(obj).parents('tr');
+            var input = $(tr).find('input[name=id]');
+            if (input != null && input != undefined) {
+                $.ajax({
+                    type: 'delete',
+                    url: domainName + '/api-summary/' + $(tr).attr('class') + '/' + $(input).val(),
+                    success: function (data) {
+                        layer.msg("成功");
+                    }
+                });
+            }
+            tr.remove();
+            layer.close(1);
+        });
     }
-
-    ///序号
-    var paperIndex = 0;
-    var patentIndex = 0;
-    var scienceAchievementAwardIndex = 0;
-    var scienceAchievementRegisterIndex = 0;
-    var technologyPactRegisterIndex = 0;
 
     //添加一个tr表格
     function addTr(type) {
@@ -1119,16 +1161,6 @@
             str += '</tr>';
             $("tr.stageTechnologyPactRegisterCatalogue:last").after(str);
         }
-    }
-
-    //初始化数量指标
-    function addStageTarget(data) {
-        var str = '';
-        str += '<tr class="stageTarget">';
-        str += '<td class="td-text" colspan="7">' + data.content + '(' + data.unit + ')<input type="hidden" name="targetSign" value="' + data.sign + '"></td>';
-        str += '<input class="form-control" type="hidden" name="targetName" value="' + data.content + '">';
-        str += '<td class="td-text" colspan="2"><input class="form-control" type="text" name="targetSum" value=""></td></tr>';
-        $("tr.stageTarget:last").after(str);
     }
 
 </script>
