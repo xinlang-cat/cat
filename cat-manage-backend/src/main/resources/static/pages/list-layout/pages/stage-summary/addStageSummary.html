@@ -659,7 +659,7 @@
             </table>
         </div>
 
-        <div class="module">
+        <div class="module" id="checkHtml">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -732,10 +732,48 @@
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script>
     var pers = checkPermission();
-
+    $('#checkHtml').hide();
     $("#today").html(formatDate1(new Date()));
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("user_id");
+
+    var laydate, form;
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload;
+        form = layui.form;
+        laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_file' //绑定元素
+            , accept: 'file'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                console.log(obj.total); //得到总文件数
+                console.log(obj.successful); //请求成功的文件数
+                console.log(obj.aborted); //请求失败的文件数
+            }
+            , done: function (res, index, upload) {
+                layer.msg("上传成功");
+                var url = res['url'];
+                var id = res['id'];
+                var str = '';
+                str += '<tr id="' + id + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + res['name'] + '" ><input type="hidden" name="fileId" value="' + id + '" ><td>' + res.name + '</td><td>';
+                str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark"></textarea></td>';
+                str += '<td><button class="layui-btn layui-btn-xs" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
+                str += '<a class="layui-btn layui-btn-xs" href="' + url + '"><input type="hidden" name="fileUrl" value="' + url + '" ><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
+                $("#file_table").append(str);
+            }
+        });
+    });
+
     //初始化项目信息
     $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
         for (var key in res[0]) {
@@ -764,72 +802,91 @@
         $(".createUserEmail").html(res.data[0].email);
         $("#createUserPhone").val(res.data[0].phone);
         $(".createUserPhone").html(res.data[0].phone);
+        //负责人填写的部分
+        if ($.inArray('html:principal:check:stage', pers) > 0) {
+            $('#checkHtml').show();
+            var str = '';
+            str += '<td><label>项目负责人承诺：</label>';
+            str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck" >';
+            str += '我所填写的项目执行情况调查表实事求是，数据详实。在下一步研究中，我将认真工作并及时报告重大变动情况。</textarea> </br>';
+            str += '<div class="layui-input-block"><input name="principalCheckEnable" value="1" title="同意" checked="" type="radio"><input name="principalCheckEnable" value="0" title="驳回" type="radio"></div>';
+            str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate1(new Date());
+            str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
+            $(".principalCheckStage").append(str);
+        }
+        //单位填写的部分
+        if ($.inArray('html:dept:check:stage', pers) > 0) {
+            $('#checkHtml').show();
+            var str = '';
+            str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
+            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施"></div>';
+            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施"></div>';
+            str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施"></div>';
+            str += '<label>2.其他意见：</label>';
+            str += '<textarea placeholder="其他意见" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
+            str += '<div class="layui-input-block"><input name="deptCheckEnable" value="1" title="同意" checked="" type="radio"><input name="deptCheckEnable" value="0" title="驳回" type="radio"></div>';
+            str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate1(new Date());
+            str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
+            $(".deptCheckStage").append(str);
+        }
+
     });
-    //负责填写的部分
-     if ($.inArray('principalCheckStage', pers) < 0) {
-        var str = '';
-        str += '<td><label>项目负责人承诺：</label>';
-        str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck"></textarea> </br>';
-        str += '<label>项目负责人（签章）：</label> </br> <label>日期：</label> ' + formatDate1(new Date());
-        str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
-        $(".principalCheckStage").append(str);
-    }
-     //单位填写的部分
-     if ($.inArray('deptCheckStage', pers) < 0) {
-        var str = '';
-        str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
-        str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施"></div>';
-        str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施"></div>';
-        str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施"></div>';
-        str += '<label>2.其他意见：</label>';
-        str += '<textarea placeholder="项目重要进展情况描述" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
-        str += '经办人（签章）：</br>单位公章：</br><label>日期：</label> ' + formatDate1(new Date());
-        str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
-        $(".deptCheckStage").append(str);
-    }
+
     //初始化指标
     $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (res) {
         var BE_TECHNICAL_INDICATORS = false;
         var BE_ECONOMIC_INDICATORS = false;
         var BE_INDICATORS_OF_TALENT_TEAM_CONS = false;
         var BE_OTHER_INDICATORS = false;
-        var STR_OTHER_INDICATORS = '';
-        var SIGN_TECHNICAL_INDICATORS = '';
-        var SIGN_ECONOMIC_INDICATORS = '';
-        var SIGN_INDICATORS_OF_TALENT_TEAM_CONS = '';
-        var index = 1;
-        var TECHNICAL_INDICATORS_INDEX = 0;
-        var ECONOMIC_INDICATORS_INDEX = 0;
-        var INDICATORS_OF_TALENT_TEAM_CONS_INDEX = 0;
+
         var STR_TECHNICAL_INDICATORS = '';
         var STR_ECONOMIC_INDICATORS = '';
         var STR_INDICATORS_OF_TALENT_TEAM_CONS = '';
+        var STR_OTHER_INDICATORS = '';
+
+        var SIGNS = '';
+
+        var TECHNICAL_INDICATORS_INDEX = 1;
+        var ECONOMIC_INDICATORS_INDEX = 1;
+        var INDICATORS_OF_TALENT_TEAM_CONS_INDEX = 1;
+        var OTHER_INDICATORS_INDEX = 1;
         for (var i = 0; i < res.length; i++) {
             var data = res[i];
-            if (data.type == 'OTHER_INDICATORS') {
-                BE_OTHER_INDICATORS = true;
-                STR_OTHER_INDICATORS += index + '.' + data.content + '</br>';
-                index++;
-                continue;
-            }
-            if (data.type == 'TECHNICAL_INDICATORS') {
-                BE_TECHNICAL_INDICATORS = true;
-                if(data.content != null && data.content != ''){
-
+            if (data.count == null) {
+                if (data.type == 'OTHER_INDICATORS') {
+                    BE_OTHER_INDICATORS = true;
+                    STR_OTHER_INDICATORS += OTHER_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    OTHER_INDICATORS_INDEX++;
+                    continue;
                 }
-                SIGN_TECHNICAL_INDICATORS += data.target + ',';
-                continue;
+                if (data.type == 'TECHNICAL_INDICATORS') {
+                    BE_TECHNICAL_INDICATORS = true;
+                    STR_TECHNICAL_INDICATORS += TECHNICAL_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    TECHNICAL_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'ECONOMIC_INDICATORS') {
+                    BE_ECONOMIC_INDICATORS = true;
+                    STR_ECONOMIC_INDICATORS += ECONOMIC_INDICATORS_INDEX + '.' + data.content + '</br>';
+                    ECONOMIC_INDICATORS_INDEX++;
+                    continue;
+                }
+                if (data.type == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    BE_INDICATORS_OF_TALENT_TEAM_CONS = true;
+                    STR_INDICATORS_OF_TALENT_TEAM_CONS += INDICATORS_OF_TALENT_TEAM_CONS_INDEX + '.' + data.content + '</br>';
+                    INDICATORS_OF_TALENT_TEAM_CONS_INDEX++;
+                    continue
+                }
             }
-            if (data.type == 'ECONOMIC_INDICATORS') {
-                BE_ECONOMIC_INDICATORS = true;
-                SIGN_ECONOMIC_INDICATORS += data.target + ',';
-                continue;
-            }
-            if (data.type == 'INDICATORS_OF_TALENT_TEAM_CONS') {
-                BE_INDICATORS_OF_TALENT_TEAM_CONS = true;
-                SIGN_INDICATORS_OF_TALENT_TEAM_CONS += data.target + ',';
-            }
+            SIGNS += data.target + ',';
         }
+        var url = domainName + "/api-label/label/tree/";
+        $.get(url + SIGNS.trim(","), function (res) {
+            for (var i = 0; i < res.length; i++) {
+                var data = res[i];
+                addStageTarget(data);
+            }
+        });
         if (BE_OTHER_INDICATORS) {
             var str1 = '';
             str1 += '<td>其他指标</td><td><span>' + STR_OTHER_INDICATORS + '</span><input type="hidden" name="otherTarget" value="' + STR_OTHER_INDICATORS + '"></td>';
@@ -839,94 +896,34 @@
             str1 += 'id="otherTargetDescribe" name="otherTargetDescribe"></textarea></td>';
             $("#OTHER_INDICATORS").append(str1);
         }
-        var url = domainName + "/api-label/label/tree/";
         if (BE_ECONOMIC_INDICATORS) {
-            $.get(url + SIGN_ECONOMIC_INDICATORS.trim(","), function (res) {
-                var content = '';
-                for (var i = 0; i < res.length; i++) {
-                    var data = res[i];
-                    content += (i + 1) + '.' + data.content + '</br>';
-                    addStageTarget(data);
-                }
-                var str = '';
-                str += '<td>经济指标</td><td><span>' + content + '</span><input type="hidden" name="economyTarget" value="' + content + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="economyTargetSchedule" name="economyTargetSchedule"></textarea></td>';
-                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="economyTargetDescribe" name="economyTargetDescribe"></textarea></td>';
-                $("#ECONOMIC_INDICATORS").append(str);
-            })
+            var str = '';
+            str += '<td>经济指标</td><td><span>' + STR_ECONOMIC_INDICATORS + '</span><input type="hidden" name="economyTarget" value="' + STR_ECONOMIC_INDICATORS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="economyTargetSchedule" name="economyTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="economyTargetDescribe" name="economyTargetDescribe"></textarea></td>';
+            $("#ECONOMIC_INDICATORS").append(str);
         }
         if (BE_TECHNICAL_INDICATORS) {
-            $.get(url + SIGN_TECHNICAL_INDICATORS.trim(","), function (res) {
-                var content = '';
-                for (var i = 0; i < res.length; i++) {
-                    var data = res[i];
-                    content += (i + 1) + '.' + data.content + '</br>';
-                    addStageTarget(data);
-                }
-                var str = '';
-                str += '<td>技术指标</td><td><span>' + content + '</span><input type="hidden" name="skillTarget" value="' + content + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="skillTargetSchedule" name="skillTargetSchedule"></textarea></td>';
-                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="skillTargetDescribe" name="skillTargetDescribe"></textarea></td>';
-                $("#TECHNICAL_INDICATORS").append(str);
-            })
+            var str = '';
+            str += '<td>技术指标</td><td><span>' + STR_TECHNICAL_INDICATORS + '</span><input type="hidden" name="skillTarget" value="' + STR_TECHNICAL_INDICATORS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="skillTargetSchedule" name="skillTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="skillTargetDescribe" name="skillTargetDescribe"></textarea></td>';
+            $("#TECHNICAL_INDICATORS").append(str);
+
         }
         if (BE_INDICATORS_OF_TALENT_TEAM_CONS) {
-            $.get(url + SIGN_INDICATORS_OF_TALENT_TEAM_CONS.trim(","), function (res) {
-                var content = '';
-                for (var i = 0; i < res.length; i++) {
-                    var data = res[i];
-                    content += (i + 1) + '.' + data.content + '</br>';
-                    addStageTarget(data);
-                }
-                var str = '';
-                str += '<td>人才队伍建设指标</td><td><span>' + content + '</span><input type="hidden" name="personTarget" value="' + content + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="personTargetSchedule" name="personTargetSchedule"></textarea></td>';
-                str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="personTargetDescribe" name="personTargetDescribe"></textarea></td>';
-                $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
-            })
+            var str = '';
+            str += '<td>人才队伍建设指标</td><td><span>' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '</span><input type="hidden" name="personTarget" value="' + STR_INDICATORS_OF_TALENT_TEAM_CONS + '"></td>';
+            str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="personTargetSchedule" name="personTargetSchedule"></textarea></td>';
+            str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
+            str += 'id="personTargetDescribe" name="personTargetDescribe"></textarea></td>';
+            $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
         }
-    });
-    var laydate;
-    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
-        var layer = layui.layer
-            , upload = layui.upload
-            , form = layui.form;
-            laydate = layui.laydate;
-        lay('.date').each(function () {
-            laydate.render({
-                elem: this
-                , showBottom: false
-                , trigger: 'click'
-            });
-        });
-        upload.render({
-            elem: '#upload_file' //绑定元素
-            , accept: 'file'
-            , multiple: true
-            , url: domainName + '/zuul/api-f/files'
-            , allDone: function (obj) { //当文件全部被提交后，才触发
-                console.log(obj.total); //得到总文件数
-                console.log(obj.successful); //请求成功的文件数
-                console.log(obj.aborted); //请求失败的文件数
-            }
-            , done: function (res, index, upload) {
-                layer.msg("上传成功");
-                var url = res['url'];
-                var id = res['id'];
-                var str = '';
-                str += '<tr id="' + id + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + res['name'] + '" ><input type="hidden" name="fileId" value="' + id + '" ><td>' + res.name + '</td><td>';
-                str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark"></textarea></td>';
-                str += '<td><button class="layui-btn layui-btn-xs" type="button" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
-                str += '<a class="layui-btn layui-btn-xs" href="' + url + '"><input type="hidden" name="fileUrl" value="' + url + '" ><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
-                $("#file_table").append(str);
-            }
-        });
     });
 
     function save() {
@@ -958,13 +955,13 @@
             data: JSON.stringify(formData),
             success: function (res) {
                 alert("成功");
-                $("#form").find("input,textarea").each(function(){
-                    $(this).attr('disabled',false);
+                $("#form").find("input,textarea").each(function () {
+                    $(this).attr('disabled', false);
                 });
             },
-            error :function (res) {
-                $("#form").find("input,textarea").each(function(){
-                    $(this).attr('disabled',false);
+            error: function (res) {
+                $("#form").find("input,textarea").each(function () {
+                    $(this).attr('disabled', false);
                 });
             }
         })
@@ -975,16 +972,16 @@
     function setObjectProperty(attribute) {
         var target = $(attribute);
         var arr = new Array();
-        for(var i=0;i<target.length;i++){
+        for (var i = 0; i < target.length; i++) {
             var obj = {};
             var input = $(target[i]).find('input,textarea');
             var falg = false;
-            for(var j=0;j<input.length;j++){
+            for (var j = 0; j < input.length; j++) {
                 falg = true;
                 obj[$(input[j]).attr('name')] = $(input[j]).val();
-                $(input[j]).attr('disabled',true)
+                $(input[j]).attr('disabled', true)
             }
-            if(falg){
+            if (falg) {
                 arr.push(obj);
             }
             falg = false;
@@ -1019,6 +1016,7 @@
     var scienceAchievementAwardIndex = 0;
     var scienceAchievementRegisterIndex = 0;
     var technologyPactRegisterIndex = 0;
+
     //添加一个tr表格
     function addTr(type) {
         if (type == 'stagePaperCatalogue') {

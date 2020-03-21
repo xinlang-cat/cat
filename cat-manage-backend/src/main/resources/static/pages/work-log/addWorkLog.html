@@ -191,7 +191,8 @@
         }
 
 
-        $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 1}, function (res) {
+        $.get(domainName + "/api-summary/work-log/lately", {itemId: itemId, targetId: targetId}, function (res) {
+            var min = 0;
             if (!jQuery.isEmptyObject(res.plan)) {
                 min = parseInt(res.plan);
                 $("#plan").val(res.plan)
@@ -202,7 +203,6 @@
                 min = 0;
                 value = 100;
             }
-            var min = 0;
             slider.render({
                 elem: '#slideTest6'
                 , value: value

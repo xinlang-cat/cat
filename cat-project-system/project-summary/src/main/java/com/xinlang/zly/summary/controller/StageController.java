@@ -103,28 +103,68 @@ public class StageController {
     public Stage update(@RequestBody Stage stage) {
         stageService.update(stage);
         stage.getStageFundUses().forEach(stageFundUse->{
-            stageFundUseService.update(stageFundUse);
+            if(stageFundUse.getId()==null){
+                stageFundUse.setStageId(stage.getId());
+                stageFundUseService.save(stageFundUse);
+            }else{
+                stageFundUseService.update(stageFundUse);
+            }
         });
         stage.getStageAffixFiles().forEach(stageAffixFile -> {
-            stageAffixFileService.update(stageAffixFile);
+            if(stageAffixFile.getId()==null){
+                stageAffixFile.setStageId(stage.getId());
+                stageAffixFileService.save(stageAffixFile);
+            }else{
+                stageAffixFileService.update(stageAffixFile);
+            }
         });
         stage.getStagePaperCatalogues().forEach(stagePaperCatalogue -> {
-            stagePaperCatalogueService.update(stagePaperCatalogue);
+            if(stagePaperCatalogue.getId()==null){
+                stagePaperCatalogue.setStageId(stage.getId());
+                stagePaperCatalogueService.save(stagePaperCatalogue);
+            }else{
+                stagePaperCatalogueService.update(stagePaperCatalogue);
+            }
         });
         stage.getStagePatentCatalogues().forEach(stagePatentCatalogue -> {
-            stagePatentCatalogueService.update(stagePatentCatalogue);
+            if(stagePatentCatalogue.getId()==null){
+                stagePatentCatalogue.setStageId(stage.getId());
+                stagePatentCatalogueService.save(stagePatentCatalogue);
+            }else{
+                stagePatentCatalogueService.update(stagePatentCatalogue);
+            }
         });
         stage.getStageScienceAchievementAwardCatalogues().forEach(stageScienceAchievementAwardCatalogue -> {
-            stageScienceAchievementAwardCatalogueService.update(stageScienceAchievementAwardCatalogue);
+            if(stageScienceAchievementAwardCatalogue.getId()==null){
+                stageScienceAchievementAwardCatalogue.setStageId(stage.getId());
+                stageScienceAchievementAwardCatalogueService.save(stageScienceAchievementAwardCatalogue);
+            }else{
+                stageScienceAchievementAwardCatalogueService.update(stageScienceAchievementAwardCatalogue);
+            }
         });
         stage.getStageScienceAchievementRegisterCatalogues().forEach(stageScienceAchievementRegisterCatalogue -> {
-            stageScienceAchievementRegisterCatalogueService.update(stageScienceAchievementRegisterCatalogue);
+            if(stageScienceAchievementRegisterCatalogue.getId()==null){
+                stageScienceAchievementRegisterCatalogue.setStageId(stage.getId());
+                stageScienceAchievementRegisterCatalogueService.save(stageScienceAchievementRegisterCatalogue);
+            }else{
+                stageScienceAchievementRegisterCatalogueService.update(stageScienceAchievementRegisterCatalogue);
+            }
         });
         stage.getStageTechnologyPactRegisterCatalogues().forEach(stageTechnologyPactRegisterCatalogue -> {
-            stageTechnologyPactRegisterCatalogueService.update(stageTechnologyPactRegisterCatalogue);
+            if(stageTechnologyPactRegisterCatalogue.getId()==null){
+                stageTechnologyPactRegisterCatalogue.setStageId(stage.getId());
+                stageTechnologyPactRegisterCatalogueService.save(stageTechnologyPactRegisterCatalogue);
+            }else{
+                stageTechnologyPactRegisterCatalogueService.update(stageTechnologyPactRegisterCatalogue);
+            }
         });
         stage.getStageTargets().forEach(stageTarget -> {
-            stageTargetService.update(stageTarget);
+            if(stageTarget.getId()==null){
+                stageTarget.setStageId(stage.getId());
+                stageTargetService.save(stageTarget);
+            }else{
+                stageTargetService.update(stageTarget);
+            }
         });
         return stage;
     }

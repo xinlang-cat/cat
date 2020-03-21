@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>工作日志列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/common.css">
+
+</head>
+
+<body ontouchstart>
+<!--<div style="padding: 10px 5px;background-color: #efeff4;height: 50px;">-->
+<!--    <div class="form-group">-->
+<!--        <select class="input-sm" style="width: 19%;">-->
+<!--            <option value="LOCAL">全部</option>-->
+<!--            <option value="ALIYUN">我的</option>-->
+<!--        </select>-->
+<!--        <select class="input-sm" style="width: 55%;">-->
+<!--            <option value="LOCAL">本地上传</option>-->
+<!--            <option value="ALIYUN">项目名很长很长很长很长很长很长很长很长很长很长很长很长</option>-->
+<!--        </select>-->
+<!--        <button id="searchBt" class="layui-btn layui-btn-sm" permission="file:query" style="float: right"><i-->
+<!--                class="layui-icon">&#xe615;</i>搜索-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="page__bd">
+
+</div>
+<form href="#" onsubmit="return false" id="form">
+    <div id="full" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white;">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <label class="weui-label">当前进度</label>
+                </div>
+            </div>
+            <div class="weui-slider-box" id='slider2' disabled>
+                <div class="weui-slider">
+                    <div id="sliderInner" class="weui-slider__inner">
+                        <div id="sliderTrack" class="weui-slider__track"></div>
+                        <div id="sliderHandler" class="weui-slider__handler"></div>
+                    </div>
+                </div>
+                <div id="sliderValue" class="weui-slider-box__value" style="margin-right: 10px;"></div>
+            </div>
+            <div class="weui-line" style="margin-top: 15px;"></div>
+            <div class="weui-cells__title">进度描述</div>
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__bd">
+                        <textarea class="weui-textarea" placeholder="请输入文本" id="content" name="content" rows="10"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd">
+                            <p class="weui-uploader__title" style="font-weight: bold">图片</p>
+                            <div class="weui-uploader__info">0/6</div>
+                        </div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="image">
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <input class="weui-uploader__input" type="file"
+                                       accept="image/*" multiple="" onchange="uploader(this)" data-sum="6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd">
+                            <p class="weui-uploader__title" style="font-weight: bold">视频</p>
+                            <div class="weui-uploader__info">0/6</div>
+                        </div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="vedio">
+                            </ul>
+
+                            <div class="weui-uploader__input-box">
+                                <input class="weui-uploader__input" type="file"
+                                       accept="vedio/*" multiple="" onchange="uploader(this)" data-sum="6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd">
+                            <p class="weui-uploader__title" style="font-weight: bold">文件</p>
+                            <div class="weui-uploader__info">0/6</div>
+                        </div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="files">
+                            </ul>
+                            <div class="weui-uploader__input-box">
+                                <input class="weui-uploader__input" type="file"
+                                       accept="application/*" multiple="" onchange="uploader(this)" data-sum="6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <label class="weui-min-title">驳回原因</label>
+                    <span id="remark"></span>
+                </div>
+            </div>
+            <input type="hidden" name="status" value="0" >
+            <input type="hidden" name="accessory" id="accessory" >
+            <input type="hidden" name="plan" id="plan" value="">
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary">保存修改</a>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
+    var targetId = getUrlParam("targetId");
+
+    $(function () {
+        $("#saveBt").hide();
+        var params = {
+            status: 1,
+            itemId: 1,
+            targetId: 1
+        };
+        $.get(domainName + "/api-summary/work-log/list", params, function (data) {
+            var str = '';
+            for (var i = data.length - 1; i >= 0; i--) {
+                var outline = data[i].content.length > 20 ? data[i].content.substring(0, 20) + '...' : data[i].content;
+                str += '<a href="javascript:;" class="open-popup" data-target="#full" onclick="detail(' + data[i].id + ')"><div class="weui-panel">';
+                str += '        <div class="weui-panel__bd">';
+                str += '            <div class="weui-media-box weui-media-box_text">';
+                str += '               <p class="weui-media-box__desc">' + outline + '</p>';
+                str += '               <ul class="weui-media-box__info">';
+                str += '                    <li class="weui-media-box__info__meta">' + data[i].createUserName + '</li>';
+                str += '                    <li class="weui-media-box__info__meta">' + formatDate1(data[i].createTime) + '</li>';
+                str += '               </ul>';
+                str += '          </div>';
+                str += '     </div>';
+                str += ' </div></a><div class="weui-interval"></div>';
+            }
+            $(".page__bd").append(str);
+        });
+    });
+
+    function uploader(obj) {
+        if ($(obj).val() == "") {
+            $.toast("请选择上传的目标文件!", "forbidden");
+            return false;
+        }
+        var size1 = $(obj)[0].files[0].size;
+        if (size1 > 104857600) {
+            $.toast("上传文件不能大于100M!", "forbidden");
+            return false;
+        }
+        var div = $(obj).parents('div[class=weui-uploader__bd]');
+        var formData = new FormData();
+        formData.append("file", $(obj)[0].files[0]);
+        $.ajax({
+            type: "post",
+            url: domainName + '/zuul/api-f/files',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                $.toast('上传成功');
+                var type = res.contentType;
+                if (res.isImg) {
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(' + res.url + ')"></li>');
+                }
+                if (type.substring(0, 11) == 'application') {
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + res.name + '</li>');
+                }
+                if (type.substring(0, 5) == 'video') {
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
+                        '<video class="weui-uploader__file" controls  src="' + res.url + '">' + res.name + '</video></li>');
+                }
+                var sum = $(obj).attr('data-sum');
+                var li = $(div).find('li[class=weui-uploader__file]');
+                if (li.length >= sum) {
+                    $($(obj).parents('div[class=weui-uploader__input-box]')).remove();
+                }
+                var accessory = $('#accessory').val();
+                if (jQuery.isEmptyObject(accessory)) {
+                    $('#accessory').val(res.id);
+                } else {
+                    $('#accessory').val(accessory+ ',' + res.id);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $.toast('上传失败', 'forbidden');
+            }
+        });
+    }
+
+    function setPlan(plan) {
+        $("#sliderTrack").css('min-width', plan);
+        $("#sliderHandler").css('left', plan);
+        $("#sliderValue").html(plan);
+        $("#plan").val(plan)
+    }
+
+    function detail(id) {
+        $('#image,#files,#vedio').empty();
+        var url = domainName + '/api-summary/work-log/list';
+        $.get(url, {id: id}, function (data) {
+            for (var key in data[0]) {
+                $("#" + key).val(data[0][key]);
+            }
+            $("#remark").html(data[0].remark);
+            setPlan(data[0].plan);
+            $(".weui-btn_primary").attr('onclick', 'update(' + data[0].id + ')');
+            $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
+                $.each(data1, function (i, item) {
+                    var type = item.contentType;
+                    if (item.isImg) {
+                        $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
+                    }
+                    if (type.substring(0, 11) == 'application') {
+                        $('#files').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + item.name + '</li>');
+                    }
+                    if (type.substring(0, 5) == 'video') {
+                        $('#vedio').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
+                            '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
+                    }
+                });
+            })
+        });
+    }
+
+    function update(id) {
+        var params = $("#form").serializeObject();
+        params.id = id;
+        $.ajax({
+            url: domainName + "/api-summary/work-log",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(params),
+            type: "PUT",
+            success: function (data) {
+                $.closePopup();
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>

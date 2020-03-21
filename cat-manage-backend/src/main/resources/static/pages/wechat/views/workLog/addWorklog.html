@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../../weui/lib/weui.min.css">
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
     <link rel="stylesheet" href="../../css/common.css">
 </head>
 
@@ -23,18 +22,21 @@
             <label class="weui-label">当前进度</label>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <input id="plan" type="hidden" name="plan" value="">
-            <div id="slideTest6" class="demo-slider" style="margin: 2px 0px;"></div>
+    <div class="weui-slider-box" id='slider2'>
+        <div class="weui-slider">
+            <div id="sliderInner" class="weui-slider__inner">
+                <div id="sliderTrack" class="weui-slider__track"></div>
+                <div id="sliderHandler"  class="weui-slider__handler"></div>
+            </div>
         </div>
+        <div id="sliderValue" class="weui-slider-box__value" style="margin-right: 10px;"></div>
     </div>
     <div class="weui-line" style="margin-top: 15px;"></div>
     <div class="weui-cells__title">进度描述</div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" rows="10"></textarea>
+                <textarea class="weui-textarea" placeholder="请输入文本" id="content" name="content" rows="10"></textarea>
             </div>
         </div>
     </div>
@@ -44,12 +46,14 @@
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
                     <p class="weui-uploader__title" style="font-weight: bold">图片上传</p>
-                    <div class="weui-uploader__info">0/2</div>
+                    <div class="weui-uploader__info">0/6</div>
                 </div>
                 <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                    </ul>
                     <div class="weui-uploader__input-box">
-                        <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/*"
-                               multiple="">
+                        <input class="weui-uploader__input" type="file" accept="image/*"
+                               multiple="" onchange="uploader(this)" data-sum="6">
                     </div>
                 </div>
             </div>
@@ -61,12 +65,14 @@
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
                     <p class="weui-uploader__title" style="font-weight: bold">视频上传</p>
-                    <div class="weui-uploader__info">0/2</div>
+                    <div class="weui-uploader__info">0/6</div>
                 </div>
                 <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                    </ul>
                     <div class="weui-uploader__input-box">
-                        <input id="uploaderInput2" class="weui-uploader__input" type="file" accept="video/*"
-                               multiple="">
+                        <input class="weui-uploader__input" type="file" accept="video/mp4"
+                               multiple="" onchange="uploader(this)" data-sum="6">
                     </div>
                 </div>
             </div>
@@ -78,168 +84,129 @@
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
                     <p class="weui-uploader__title" style="font-weight: bold">文件上传</p>
-                    <div class="weui-uploader__info">0/2</div>
+                    <div class="weui-uploader__info">0/6</div>
                 </div>
                 <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                    </ul>
                     <div class="weui-uploader__input-box">
-                        <input id="uploaderInput3" class="weui-uploader__input" type="file"
-                               accept="application/**" multiple="">
+                        <input class="weui-uploader__input" type="file"
+                               accept="application/*" multiple="" onchange="uploader(this)" data-sum="6">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <input type="hidden" name="accessory" id="accessory" >
+    <input type="hidden" name="plan" id="plan" value="">
     <div class="weui-line"></div>
     <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="save(this)">提交</a>
     </div>
 </form>
 
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+
 <script>
+
+    function uploader(obj) {
+        if ($(obj).val() == "") {
+            $.toast("请选择上传的目标文件!", "forbidden");
+            return false;
+        }
+        var size1 = $(obj)[0].files[0].size;
+        if (size1 > 104857600) {
+            $.toast("上传文件不能大于100M!", "forbidden");
+            return false;
+        }
+        var div = $(obj).parents('div[class=weui-uploader__bd]');
+        var formData = new FormData();
+        formData.append("file", $(obj)[0].files[0]);
+        $.ajax({
+            type: "post",
+            url: domainName + '/zuul/api-f/files',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                $.toast('上传成功');
+                var type = res.contentType;
+                if (res.isImg) {
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(' + res.url + ')"></li>');
+                }
+                if (type.substring(0, 11) == 'application') {
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + res.name + '</li>');
+                }
+                if (type.substring(0, 5) == 'video') {
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
+                        '<video class="weui-uploader__file" controls  src="' + res.url + '">' + res.name + '</video></li>');
+                }
+                var sum = $(obj).attr('data-sum');
+                var li = $(div).find('li[class=weui-uploader__file]');
+                if (li.length >= sum) {
+                    $($(obj).parents('div[class=weui-uploader__input-box]')).remove();
+                }
+                var accessory = $('#accessory').val();
+                if (jQuery.isEmptyObject(accessory)) {
+                    $('#accessory').val(res.id);
+                } else {
+                    $('#accessory').val(accessory+ ',' + res.id);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $.toast('上传失败', 'forbidden');
+            }
+        });
+    }
+
     $(function () {
         FastClick.attach(document.body);
     });
-</script>
-<script src="../../weui/js/jquery-weui.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.all.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script>
-    layui.use('upload', function(){
-        var upload = layui.upload;
-
-        upload.render({
-            elem: '#uploaderInput2' //绑定元素
-            ,accept: 'file' //允许上传的文件类型
-            ,url: domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val()
-            ,done: function(res, index, upload){
-                layer.msg("上传成功");
-                example.ajax.reload();
-            }
-        });
-
-
-        $("#fileSource").change(function(){
-            var url = domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val();
-            $("#test1").attr("lay-data", "{url: '" + url + "'}");
-        });
+    var plan = 0;
+    $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 1}, function (res) {
+        if (!jQuery.isEmptyObject(res.plan)) {
+            plan = parseInt(res.plan);
+        }
+        setPlan(plan);
     });
-
-    var index, layer, upload;
-    layui.use(['layedit', 'upload', 'layer', 'slider'], function () {
-        layer = layui.layer;
-        upload = layui.upload;
-        var $ = layui.$, slider = layui.slider;
-        // upload.render({
-        //     elem: '#upload_file' //绑定元素
-        //     , accept: 'file'
-        //     , multiple: true
-        //     , url: domainName + '/zuul/api-f/files'
-        //     , allDone: function (obj) { //当文件全部被提交后，才触发
-        //         layer.msg("上传成功");
-        //     }
-        //     , done: function (res, index, upload) {
-        //         addfile(res);
-        //     }
-        // });
-        // upload.render({
-        //     elem: '#upload_video' //绑定元素
-        //     , accept: 'video'
-        //     , multiple: true
-        //     , url: domainName + '/zuul/api-f/files'
-        //     , allDone: function (obj) { //当文件全部被提交后，才触发
-        //         layer.msg("上传成功");
-        //     }
-        //     , done: function (res, index, upload) {
-        //         addvideo(res);
-        //     }
-        // });
-        // upload.render({
-        //     elem: '#upload_img' //绑定元素
-        //     , accept: 'images'
-        //     , multiple: true
-        //     , url: domainName + '/zuul/api-f/files'
-        //     , allDone: function (obj) { //当文件全部被提交后，才触发
-        //         layer.msg("上传成功");
-        //     }
-        //     , done: function (res, index, upload) {
-        //         addimg(res,'#accessory_imgs');
-        //     }
-        // });
-        //
-        // //插入视频
-        // function addvideo(item) {
-        //     var str = '';
-        //     var val = item.name.substring(0, item.name.indexOf("."));
-        //     if (val.length > 10) {
-        //         val = val.substring(0, 20) + '...';
-        //     }
-        //     str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;margin-left: 20px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
-        //     str += '<video controls style="width: 250px;height: 250px;" src="'+ item.url +'">' + item.name + '</video>';
-        //     str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
-        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
-        //     $('#accessory_videos').append(str);
-        //     $(".close-a1").hide();
-        // }
-        //
-        // //插入文件
-        // function addfile(item) {
-        //     var val = item.name.substring(0, item.name.indexOf("."));
-        //     if (val.length > 10) {
-        //         val = val.substring(0, 8) + '...';
-        //     }
-        //     var str = '<tr id="'+ item.id +'"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
-        //     str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile('+ item.id +')"><i class="layui-icon">&#xe640;</i></button></td>';
-        //     str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
-        //     $('#accessory_files').append(str);
-        // }
-        //
-        // //插入一张图片
-        // function addimg(item) {
-        //     var str = '';
-        //     var val = item.name.substring(0, item.name.indexOf("."));
-        //     if (val.length > 10) {
-        //         val = val.substring(0, 8) + '...';
-        //     }
-        //     str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
-        //     str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
-        //     str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
-        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
-        //     $("#accessory_imgs").append(str);
-        //     $(".close-a").hide();
-        // }
-        //
-        //
-        // $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 1}, function (res) {
-        //     if (!jQuery.isEmptyObject(res.plan)) {
-        //         min = parseInt(res.plan);
-        //         $("#plan").val(res.plan)
-        //     }
-        //     var flag = min >= 100 ? true : false;
-        //     var value = min;
-        //     if (flag) {
-        //         min = 0;
-        //         value = 100;
-        //     }
-        //     var min = 0;
-        slider.render({
-            elem: '#slideTest6'
-            , value: 54
-            , min: 0
-            , max: 100
-            , setTips: function (value) { //自定义提示文本
-                return '指标当前进度:' + value + '%';
-            }
-            , input: true
-            , change: function (value) {
-                $('#plan').val(value);
-            }
-            , disabled: false
-        });
-        // });
-
+    $('#slider2').slider(function (per) {
+       if(per<plan){
+           setPlan(plan);
+       }else {
+           $("#plan").val(per);
+       }
     });
+    function setPlan(plan) {
+        $("#sliderTrack").css('min-width',plan + '%');
+        $("#sliderHandler").css('left',plan + '%');
+        $("#sliderValue").html(plan + '%');
+        $("#plan").val(plan + '%')
+    }
+
+    function save(obj) {
+        $(obj).attr("disabled", true);
+        var formdata = $("#form").serializeObject();
+        formdata.itemId = 1;
+        formdata.targetId = 1;
+        $.ajax({
+            type: 'post',
+            url: domainName + '/api-summary/work-log',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    $(obj).attr("disabled", false);
+                });
+            }
+        });
+    }
 
 </script>
 </body>
