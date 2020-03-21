@@ -17,15 +17,10 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">预计开始时间</label>
+                <label class="col-md-2 control-label">建议开始时间</label>
                 <div class="col-md-3">
                     <input class="form-control" placeholder="开始时间" type="text" name="start_date" maxlength="50"
                            id="start_date" readonly>
-                </div>
-                <label class="col-md-2 control-label">预计结束时间</label>
-                <div class="col-md-3">
-                    <input class="form-control " placeholder="结束时间" type="text" name="end_date" maxlength="50"
-                           id="end_date" readonly>
                 </div>
             </div>
             <div class="form-group">
@@ -38,12 +33,7 @@
                            id="start_date2" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空" readonly>
                 </div>
-                <label class="col-md-2 control-label">实际结束时间</label>
-                <div class="col-md-3">
-                    <input class="form-control date" placeholder="结束时间" type="text" name="end_date_true" maxlength="50"
-                           id="end_date2" data-bv-notempty="true"
-                           data-bv-notempty-message="结束时间 不能为空" readonly>
-                </div>
+
             </div>
 
             <div class="form-group">
@@ -259,13 +249,12 @@
             success : function(data) {
                 $(data).each(function () {
                     $("#content").val(data[0].content);
-                    if (data[0].postType==2){
-                        $("#province").val(data[0].province);
-                        $("#city").val(data[0].city);
-                        $("#area").val(data[0].area);
-                        $("#street").val(data[0].street);
+                    $("#province").val(data[0].province);
+                    $("#city").val(data[0].city);
+                    $("#area").val(data[0].area);
+                    if (data[0].post_type==2){
+                        $("#street").val(data[0].streetCode);
                     }else {
-
                         getStreet(data[0].streetCode);
                     }
                     getTargetName(data[0].target_id);

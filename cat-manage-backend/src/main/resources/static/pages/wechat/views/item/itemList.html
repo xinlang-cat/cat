@@ -27,7 +27,7 @@
 
     </div>
 </div>
-
+</div>
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
@@ -35,66 +35,102 @@
 <script src="../../../../js/constant.js"></script>
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+
 
 <script>
-    var itemId = getUrlParam("item_id");
+    var userId; //当前用户ID
+    var deptCode; //当前用户的公司代码
     $(function () {
         FastClick.attach(document.body);
     });
-    $(function () {
+    //获取当前用户的ID
+    $(function() {
         $.ajax({
             type: 'get',
-            url: domainName + "/project-item/item/basic/modifyApply/list",
+            url: domainName + '/api-u/users/current',
+            async: false,
             contentType: "application/json; charset=utf-8",
-            data: {item_id:itemId,status:0},
+            success: function (data) {
+                userId = data.id;
+
+            }
+        });
+    });
+    function getCompanryCode() {
+        getUser();
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company-anon/' + userId,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                deptCode = data.deptCode;
+            }
+        });
+    }
+
+
+
+    $(function () {
+        getCompanryCode();
+
+        $.ajax({
+            type: 'get',
+            url: domainName + "/project-item/item/basic/company",
+            contentType: "application/json; charset=utf-8",
+            async: false,
             success: function (data) {
                 var str = '';
                 $(data).each(function () {
                     str += '<div class="weui-panel__bd">\n' +
-                        '   <a class="weui-cell weui-cell_access" href="checkModifyApply.html?id=' + this.id + '">\n' +
-                        '       <div class="weui-media-box weui-media-box_text">\n' +
-                        '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-                        '           <p class="weui-media-box__desc" >修改' +getType(this.modify)+'</p>\n' +
-                        '           <ul class="weui-media-box__info">\n' +
-                        '               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
-                        '               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
-                        '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-                        '           </ul>\n' +
+                        '   <a class="weui-cell weui-cell_access" href="menu.html?item_id=' + this.id + '">\n' +
+                        '      <div class="weui-media-box weui-media-box_text">\n' +
+                        '      	<h4 class="weui-media-box__title">' + this.item_name + '</h4>\n' +
+                        '      	<p class="weui-media-box__desc" >' + getType(this.category) + '</p>\n' +
+                        '      	<ul class="weui-media-box__info">\n' +
+                        '       	<li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                        '       	<li class="weui-media-box__info__meta">' + getTime(this.start_date) + '-' + getTime(this.end_date) +
+                        '</li>\n' +
+                        '        	<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) +
+                        '</li>\n' +
+                        '        </ul>\n' +
                         '      </div>\n' +
                         '       <span class="weui-cell__ft"></span>\n' +
                         '     </a>\n' +
                         '</div>';
-
                 });
                 $("#list").append(str);
             }
         });
     })
 
-    function getType(modify) {
-        var data = '';
-        if (modify == 1) {
-            data = "项目基本信息";
-        } else if (modify == 2) {
-            data = "项目研究内容";
-        } else if (modify == 3) {
-            data = "项目人员";
-        } else if (modify == 4) {
-            data = "项目指标";
-        } else if (modify == 5) {
-            data = "项目经费";
-        }
-        return data;
+    function getUser() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                userId = data.id;
+            }
+        });
     }
-    function getItemName(id) {
-        var data = '';
-        $.ajaxSettings.async = false;
-        $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-            data =  res[0]['item_name'];
-        })
-        $.ajaxSettings.async = true;
-        return data;
+
+    function getType(category) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + category,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+
     }
+
     function getUserName(user_id) {
         var data = '';
         $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
@@ -112,18 +148,19 @@
     }
 
     function getStatus(status) {
-        var data = '';
         if (status == 0) {
-            data = "待审核";
+            return "就绪";
         } else if (status == 1) {
-            data = "更改中";
+            return "进行中";
         } else if (status == 2) {
-            data = "审核未通过";
+            return "结题中";
         } else if (status == 3) {
-            data = "更改成功";
+            return "已结题";
         }
-        return data;
+        return "废弃";
     }
 </script>
+
+
 </body>
 </html>

@@ -14,7 +14,6 @@ $.ajaxSetup({
 		} else {
 			//跳转pc端页面
 			if(msg != undefined && msg != ""){
-				console.log(msg)
 				var response = JSON.parse(msg);
 				var exception = response.exception;
 				if(exception){
