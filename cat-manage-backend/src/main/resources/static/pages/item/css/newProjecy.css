@@ -45,3 +45,9 @@
 .tdDorder {
     border: 1px solid #dadcde !important;
 }
+.border-right-none{
+    border-right: none !important;
+}
+.border-left-none{
+    border-left: none !important;
+}

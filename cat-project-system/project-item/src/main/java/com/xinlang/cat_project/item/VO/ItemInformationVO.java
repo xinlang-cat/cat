@@ -16,6 +16,7 @@ public class ItemInformationVO {
 
     private ItemInformation information;
     private List<ItemIndicators> indicators;
+    private List<ItemIndicators> achievements;
     private List<ItemScheduling> scheduling;
     private List<ItemPersonnel> personnels;
     private List<ItemFundBudget> fundBudgets;

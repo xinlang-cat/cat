@@ -24,12 +24,6 @@
                                         <option value="">全部</option>
                                         <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
                                     </select>
-                                    状态：
-                                    <select class="form-control input-sm" id="status">
-                                        <option value="">全部</option>
-                                        <option value="0">草稿</option>
-                                        <option value="1">已提交</option>
-                                    </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 </div>
                             </form>
@@ -107,14 +101,8 @@
                             d.name = $('#name').val();
                             d.type = $('#type').val();
                             d.userId = currentUser.id;
-
-                            if($('#status').val()==''){
-                                d.status1 = 0;
-                                d.status2 = 1;
-                            }else if ($('#status').val()!='') {
-                                d.status1 = $('#status').val();
-                                d.status2 = $('#status').val();
-                            }
+                            d.status1 = 1;
+                            d.status2 = 1;
                         },
                         "dataSrc": function (json) {
                             console.log(json)
@@ -169,24 +157,19 @@
                                 if(data==0){
                                     return "草稿";
                                 }else if(data==1){
-                                    return "已提交";
+                                    return "待审核";
                                 }
                             }
                         },
                         {
-                            "data": "status",
+                            "data": "",
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var id = row['id'];
-                                var href = "updateProject.html?id=" + id;
+                                var href = "projectInfo.html?id=" + id;
                                 var edit = buttonEdit(href, "back:user:update", pers);
                                 var del = buttonDel(id, "back:permission:delete", pers);
-
-                                if(data==0){
-                                    return edit+del;
-                                }else if(data==1){
-                                    return edit;
-                                }
+                                return edit+del;
                             }
                         },
                     ],
