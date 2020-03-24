@@ -176,11 +176,14 @@ function getResponsibilityName(id) {
         async: false,
         success: function (data) {
             var d = data[0];
-            if(d.count!=undefined){
-                name = getLablename(d.target);
-            }else {
-                name= d.content;
+            if (d){
+                if(d.count!=undefined){
+                    name = getLablename(d.target);
+                }else {
+                    name= d.content;
+                }
             }
+
 
         }
     })

@@ -8,6 +8,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -35,4 +36,7 @@ public class ItemInformation implements Serializable {
     private Date edit_date;             //编辑时间
     private Integer edit_user_id;        //编辑人ID
     private Integer status;             //状态，默认为0
+
+    @Transient
+    private String period;
 }
