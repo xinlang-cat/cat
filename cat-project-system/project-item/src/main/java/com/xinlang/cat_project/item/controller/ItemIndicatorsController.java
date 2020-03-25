@@ -24,6 +24,15 @@ public class ItemIndicatorsController {
     @Autowired
     private IItemIndicatorsService itemIndicatorsService;
 
+    @ApiOperation(value = "添加指标")
+    @LogAnnotation(module = "添加指标")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping
+    public ResponseEntity<ItemIndicators> save(@RequestBody ItemIndicators itemIndicator) {
+        itemIndicatorsService.save(itemIndicator);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(itemIndicator);
+    }
+
     @ApiOperation(value = "添加多条指标")
     @LogAnnotation(module = "添加多条指标")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
@@ -39,5 +48,32 @@ public class ItemIndicatorsController {
     public ResponseEntity<List<ItemIndicators>> getIndicators(@RequestParam Map<String, Object> params){
         List<ItemIndicators> indicators = itemIndicatorsService.findListByParams(params,ItemIndicators.class);
         return ResponseEntity.ok(indicators);
+    }
+
+    @ApiOperation(value = "修改指标")
+    @LogAnnotation(module = "修改指标")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping
+    public ResponseEntity<Void> updateIndicators(@RequestBody ItemIndicators indicator){
+        itemIndicatorsService.update(indicator);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "删除指标")
+    @LogAnnotation(module = "删除指标")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteIndicator(@PathVariable Integer id){
+        itemIndicatorsService.delete(id);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "通过属性删除指标")
+    @LogAnnotation(module = "通过属性删除指标")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping
+    public ResponseEntity<Void> deleteIndicators(@RequestBody ItemIndicators indicator){
+        itemIndicatorsService.deleteByAttribute(indicator);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

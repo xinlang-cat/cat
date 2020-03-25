@@ -753,48 +753,7 @@
                                 <th class="tdDorder">研究开发中的责任分工</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <!--<tr>
-                                <td class="tdDorder mainTd_1">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                                </td>
-                                <td class="mainTd_1 tdDorder">1</td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                            </tr>-->
+                            <tbody id="personnel">
                             </tbody>
                         </table>
                     </form>
@@ -969,6 +928,15 @@
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div style="color: #0C0C0C;" id="total"></div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
         <!--各方联系方式及联系地址-->
         <tr style="height: 25px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -1048,7 +1016,9 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
-<script type="text/javascript" src='js/queryData.js'></script>
+<script type="text/javascript" src='js/updateProject.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
         var form = layui.form,
@@ -1141,47 +1111,144 @@
                     ' </td>' +
                     '  </tr>';
             } else if (name = 'personnel') {
-                str = '<tr>\n' +
-                    '                            <td class="tdDorder mainTd_1">\n' +
-                    '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder">1</td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="name">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="sex">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="age">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="professional_title">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="specialty">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="organization">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="responsibilities">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                        </tr>';
+                var content = '<div class="layui-form" style="margin: 20px auto;width: 80%;">' +
+                    '<blockquote class="layui-elem-quote layui-text">\n' +
+                    '  选择或搜索选择\n' +
+                    '</blockquote>' +
+                    '  <div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">姓名</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <div id="user_select" class="xm-select-demo"></div>\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '</div>';
+
+                layer.open({
+                    type: 1,
+                    area: ['800px', '400px'],
+                    btn: ['确定', '关闭'],
+                    scrollbar: false,
+                    content: content,
+                    success: function (layero, index) {
+                        var user_select = xmSelect.render({
+                            el: '#user_select',
+                            radio: true,
+                            clickClose: true,
+                            filterable: true,
+                            delay: 1000,
+                            remoteSearch: true,
+                            remoteMethod: function (val, cb, show) {
+                                if (!val) {
+                                    $.ajax({
+                                        type: 'get',
+                                        url: domainName + '/project-user/users',
+                                        contentType: "application/json; charset=utf-8",
+                                        async: false,
+                                        data: 'dept=' + $('responsible_unit').val(),
+                                        success: function (data) {
+                                            var d = [];
+                                            $(data.data).each(function () {
+                                                var obj = {
+                                                    name: this.name + '_' + this.idCard,
+                                                    value: packUserInfo(this)
+                                                };
+                                                d.push(obj);
+                                            })
+                                            cb(d);
+                                        }
+                                    });
+                                } else {
+                                    $.ajax({
+                                        type: 'get',
+                                        url: domainName + '/project-user/users',
+                                        contentType: "application/json; charset=utf-8",
+                                        async: false,
+                                        data: 'name=' + val,
+                                        success: function (data) {
+                                            var d = [];
+                                            $(data.data).each(function () {
+                                                var obj = {
+                                                    name: this.name + '_' + this.idCard,
+                                                    value: packUserInfo(this)
+                                                };
+                                                d.push(obj);
+                                            })
+                                            cb(d);
+                                        }
+                                    });
+                                }
+                            },
+                            model: {
+                                label: {
+                                    type: 'text',
+                                    text: {
+                                        left: '',
+                                        right: '',
+                                        separator: ', ',
+                                    },
+                                }
+                            },
+                        })
+                    },
+                    yes: function (index, layero) {
+                        var select = xmSelect.get('#user_select', true);
+                        var data = select.getValue();
+                        var arr = data[0].value.split(',');
+                        var input = '';
+                        if (serial == 1) {
+                            input = '<input type="text" placeholder="请输入" name="responsibilities" value="项目负责人" readonly>';
+                        } else {
+                            input = '<input type="text" placeholder="请输入" name="responsibilities">';
+                        }
+                        str = '<tr>\n' +
+                            '                            <td class="tdDorder mainTd_1">\n' +
+                            '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">' +
+                            '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + arr[0] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="name" value="' + arr[1] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="sex" value="' + arr[2] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="age" value="' + arr[3] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="organization" value="' + arr[8] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' + input +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                        </tr>';
+                        $('#personnel').append(str);
+                        form.render();
+                        layer.close(index);
+                    },
+                    btn2: function (index, layero) {
+                        layer.close(index);
+                    }
+                });
             }
             $(this).parent().parent().parent().parent().next().append(str);
             form.render();
@@ -1290,5 +1357,51 @@
             }
         });
     }
+    /*处理人员数据*/
+    function packUserInfo(d) {
+        var sex = d.sex || '',
+            birthDate = d.birthDate || '',
+            idType = d.idType || '',
+            idCard = d.idCard || '',
+            academicTitle = d.academicTitle || '',
+            nowMajor = d.nowMajor || '',
+            deptName = d.deptName || '',
+            name = d.name || '';
+        if (sex == 1) {
+            sex = '男';
+        } else {
+            sex = '女';
+        }
+        // 获得今天的时间，计算年龄
+        var date = new Date();
+        var startDate = new Date(birthDate);
+        var newDate = date.getTime() - startDate.getTime();
+        var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 / 365);
+        if (isNaN(age)) {
+            age = "";
+        }
+        return d.userId + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
+    }
+
+    //定时任务,监听预算的合计
+    var ref = setInterval(function () {
+        var total = 0;
+        $('input[name=money]').each(function () {
+            if ($(this).val() != '') {
+                total += $(this).val() - 0;
+            }
+        })
+        var sourceInput = $('.fundSource').find('input');
+        $(sourceInput).each(function (i, d) {
+            if ($(d).val() != '' && i != 0) {
+                total += $(d).val() - 0;
+            }
+        })
+        if (total != 0) {
+            $('#total').text('项目总投资：' + total + '万元');
+        } else {
+            $('#total').text('');
+        }
+    }, 1000);
 </script>
 </html>

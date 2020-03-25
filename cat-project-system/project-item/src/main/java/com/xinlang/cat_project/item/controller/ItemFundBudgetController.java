@@ -20,6 +20,15 @@ public class ItemFundBudgetController {
     @Autowired
     private IItemFundBudgetService itemFundBudgetService;
 
+    @ApiOperation(value = "添加资金预算")
+    @LogAnnotation(module = "添加资金预算")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping
+    public ResponseEntity<ItemFundBudget> save(@RequestBody ItemFundBudget itemFundBudget) {
+        itemFundBudgetService.save(itemFundBudget);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(itemFundBudget);
+    }
+
     @ApiOperation(value = "添加多条资金预算")
     @LogAnnotation(module = "添加多条资金预算")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
@@ -29,11 +38,38 @@ public class ItemFundBudgetController {
         return  ResponseEntity.status(HttpStatus.CREATED).body(itemFundBudgets);
     }
 
-    @ApiOperation(value = "查询进度安排")
-    @LogAnnotation(module = "查询进度安排")
+    @ApiOperation(value = "查询资金预算")
+    @LogAnnotation(module = "查询资金预算")
     @GetMapping("list")
     public ResponseEntity<List<ItemFundBudget>> getFundBudget(@RequestParam Map<String, Object> params){
         List<ItemFundBudget> FundBudgets = itemFundBudgetService.findListByParams(params,ItemFundBudget.class);
         return ResponseEntity.ok(FundBudgets);
+    }
+
+    @ApiOperation(value = "修改资金预算")
+    @LogAnnotation(module = "修改资金预算")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping
+    public ResponseEntity<Void> updateFundBudget(@RequestBody ItemFundBudget itemFundBudget){
+        itemFundBudgetService.update(itemFundBudget);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "删除资金预算")
+    @LogAnnotation(module = "删除资金预算")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFundBudget(@PathVariable Integer id){
+        itemFundBudgetService.delete(id);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "通过属性删除资金预算")
+    @LogAnnotation(module = "通过属性删除资金预算")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping
+    public ResponseEntity<Void> deleteFundBudgets(@RequestBody ItemFundBudget itemFundBudget){
+        itemFundBudgetService.deleteByAttribute(itemFundBudget);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

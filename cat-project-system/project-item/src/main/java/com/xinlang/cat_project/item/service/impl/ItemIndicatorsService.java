@@ -20,4 +20,9 @@ public class ItemIndicatorsService extends BaseService<ItemIndicators> implement
     public void saveIndicators(List<ItemIndicators> itemIndicators) {
         int count = itemIndicatorsMapper.insertList(itemIndicators);
     }
+
+    @Override
+    public void deleteByAttribute(ItemIndicators indicator) {
+        int i = itemIndicatorsMapper.delete(indicator);
+    }
 }

@@ -51,6 +51,31 @@ public class ItemInformationController {
 
         if(information.getId()!=null){
             itemInformationService.delete(information.getId());
+
+            ItemIndicators indicator = new ItemIndicators();
+            indicator.setItem_id(information.getId());
+            itemIndicatorsService.deleteByAttribute(indicator);
+
+            ItemScheduling scheduling = new ItemScheduling();
+            scheduling.setItem_id(information.getId());
+            itemSchedulingService.deleteByAttribute(scheduling);
+
+            ItemPersonnel personnel = new ItemPersonnel();
+            personnel.setItem_id(information.getId());
+            itemPersonnelService.deleteByAttribute(personnel);
+
+            ItemFundBudget fundBudget = new ItemFundBudget();
+            fundBudget.setItem_id(information.getId());
+            itemFundBudgetService.deleteByAttribute(fundBudget);
+
+            ItemFundSource fundSource = new ItemFundSource();
+            fundSource.setItem_id(information.getId());
+            itemFundSourceService.deleteByAttribute(fundSource);
+
+            ItemContactWay contactWay = new ItemContactWay();
+            contactWay.setItem_id(information.getId());
+            itemContactWayService.deleteByAttribute(contactWay);
+
             information.setId(null);
         }
 
@@ -140,6 +165,23 @@ public class ItemInformationController {
     public ResponseEntity<List<ItemInformation>> getItemById(@RequestParam Map<String, Object> params){
         List<ItemInformation> information = itemInformationService.findListByParams(params,ItemInformation.class);
         return ResponseEntity.ok(information);
+    }
+
+    @ApiOperation(value = "查询当前用户相关的项目")
+    @LogAnnotation(module = "查询当前用户相关的项目")
+    @GetMapping("/my")
+    public ResponseEntity<List<ItemInformation>> getMyItem(){
+        List<ItemInformation> information = itemInformationService.queryMyItem();
+        return ResponseEntity.ok(information);
+    }
+
+    @ApiOperation(value = "修改项目信息")
+    @LogAnnotation(module = "修改项目信息")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping
+    public ResponseEntity<Void> updateItem(@RequestBody ItemInformation information){
+        itemInformationService.update(information);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "删除项目")

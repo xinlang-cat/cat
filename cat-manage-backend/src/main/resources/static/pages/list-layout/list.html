@@ -140,6 +140,42 @@
     function initData() {
         $.ajax({
             type: 'get',
+            url: domainName + '/project-item/item/information/my',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                var str = '';
+                getUser();
+                $(data).each(function(){
+                    str += '<div class="masonry__item">\n' +
+                        '            <figure>\n' +
+                        '                <figcaption class="content">\n' +
+                        '                    <h2 style="max-width: 400px;">'+this.name+'</h2>\n' +
+                        '                    <p class="date" style="max-width: 400px;">' +
+                        '                        <span style="margin-right: 10px;">开始时间：'+this.start_date.substring(0, 10)+'</span>' +
+                        '                        <span>结束时间：'+this.end_date.substring(0, 10)+'</span></p>\n' +
+                        '                        <ul class="tags">\n' +
+                        '                        <li><a href="../item/projectInfo.html?id='+this.id+'">项目信息</a></li>\n' +
+                        '                        <li><a href="../indicator/indicatorList.html?itemId='+this.id+'&userId='+userId+'">项目指标</a></li>\n' +
+                        '                        <li><a href="pages/stage-summary/stageSummaryList.html?item_id='+ this.id +'&user_id='+userId+'">阶段总结</a></li>\n'+
+                        '                        <li><a href="pages/fundUse/fundBudget.html?id='+this.id+'"">经费使用</a></li>\n' +
+                        '                        <li><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
+                        '                        <li><a href="../acceptance/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +
+                        '                        <li><a href="../auditApply/applyList.html?item_id='+this.id+'&userId='+userId+'">查定申请</a></li>\n' +
+                        '                        <li><a href="../modifyApply/modifyList.html?item_id='+this.id+'&userId='+userId+'">更改申请</a></li>\n' +
+                        '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
+                        '                    </ul>\n' +
+                        '                </figcaption>\n' +
+                        '            </figure>\n' +
+                        '        </div>';
+                });
+                $("#list").append(str);
+            }
+        });
+    }
+    /*function initData() {
+        $.ajax({
+            type: 'get',
             url: domainName + '/project-item/item/basic/company',
             contentType: "application/json; charset=utf-8",
             async: false,
@@ -157,13 +193,13 @@
                         '                        <ul class="tags">\n' +
                         '                        <li><a href="pages/projectDetails/projectInfo.html?id='+this.id+'">项目信息</a></li>\n' +
                         '                        <li><a href="../indicator/indicatorList.html?itemId='+this.id+'&userId='+userId+'">项目指标</a></li>\n' +
-/*                        '                        <li><a href="../work-log/workLogList.html?id='+this.id+'&userId='+userId+'">实施日志</a></li>\n' +*/
+/!*                        '                        <li><a href="../work-log/workLogList.html?id='+this.id+'&userId='+userId+'">实施日志</a></li>\n' +*!/
                         '                        <li><a href="pages/stage-summary/stageSummaryList.html?item_id='+ this.id +'&user_id='+userId+'">阶段总结</a></li>\n'+
                         '                        <li><a href="pages/fundUse/fundUseInfo.html?id='+this.id+'"">经费使用</a></li>\n' +
                         '                        <li><a href="../summary/summaryList.html?item_id='+this.id+'&item_name='+this.item_name+'">结题总结</a></li>\n' +
                         '                        <li><a href="../acceptance/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +
-/*                        '                        <li><a href="pages/acceptance/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +*/
-/*                        '                        <li><a href="pages/acceptance/show_acceptance.html?item_id='+this.id+'">查看结题申请</a></li>\n' +*/
+/!*                        '                        <li><a href="pages/acceptance/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +*!/
+/!*                        '                        <li><a href="pages/acceptance/show_acceptance.html?item_id='+this.id+'">查看结题申请</a></li>\n' +*!/
                         '                        <li><a href="../auditApply/applyList.html?item_id='+this.id+'&userId='+userId+'">查定申请</a></li>\n' +
                         '                        <li><a href="../modifyApply/modifyList.html?item_id='+this.id+'&userId='+userId+'">更改申请</a></li>\n' +
                         '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
@@ -175,7 +211,7 @@
                 $("#list").append(str);
             }
         });
-    }
+    }*/
     function submit(id,status) {
         if(status==3){layer.msg("申请已提交过了！");return}
         status++

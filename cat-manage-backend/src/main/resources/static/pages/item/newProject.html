@@ -1225,6 +1225,15 @@
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div style="color: #0C0C0C;" id="total"></div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
         <!--各方联系方式及联系地址-->
         <tr style="height: 25px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -1649,33 +1658,33 @@
                             '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">' +
-                            '                                    <input type="hidden" placeholder="请输入" name="user_id" value="'+arr[0]+'">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="name" value="'+arr[1]+'">\n' +
+                            '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + arr[0] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="name" value="' + arr[1] + '">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="sex" value="'+arr[2]+'">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="sex" value="' + arr[2] + '">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="age" value="'+arr[3]+'">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="age" value="' + arr[3] + '">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="'+arr[6]+'">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="specialty" value="'+arr[7]+'">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="organization" value="'+arr[8]+'">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="organization" value="' + arr[8] + '">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -1753,6 +1762,7 @@
     /*初始化数据*/
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
     initCompanySelect($('#responsible_unit'));//当前用户公司
+    /*保存或提交*/
     function submit(status) {
         var information = $('#form1').serializeObject();
         information.status = status;
@@ -1811,7 +1821,28 @@
         if (isNaN(age)) {
             age = "";
         }
-        return d.id + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
+        return d.userId + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
     }
+
+    //定时任务,监听预算的合计
+    var ref = setInterval(function () {
+        var total = 0;
+        $('input[name=money]').each(function () {
+            if ($(this).val() != '') {
+                total += $(this).val() - 0;
+            }
+        })
+        var sourceInput = $('.fundSource').find('input');
+        $(sourceInput).each(function (i, d) {
+            if ($(d).val() != '' && i != 0) {
+                total += $(d).val() - 0;
+            }
+        })
+        if (total != 0) {
+            $('#total').text('项目总投资：' + total + '万元');
+        } else {
+            $('#total').text('');
+        }
+    }, 1000);
 </script>
 </html>

@@ -20,4 +20,9 @@ public class ItemFundBudgetService extends BaseService<ItemFundBudget> implement
     public void saveFundBudgets(List<ItemFundBudget> itemFundBudgets) {
         int i = itemFundBudgetMapper.insertList(itemFundBudgets);
     }
+
+    @Override
+    public void deleteByAttribute(ItemFundBudget itemFundBudget) {
+        int i = itemFundBudgetMapper.delete(itemFundBudget);
+    }
 }

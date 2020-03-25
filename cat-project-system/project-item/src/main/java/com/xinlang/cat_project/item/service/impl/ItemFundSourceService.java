@@ -13,4 +13,9 @@ import org.springframework.stereotype.Service;
 public class ItemFundSourceService extends BaseService<ItemFundSource> implements IItemFundSourceService {
     @Autowired
     private ItemFundSourceMapper itemFundSourceMapper;
+
+    @Override
+    public void deleteByAttribute(ItemFundSource itemFundSource) {
+        int i = itemFundSourceMapper.delete(itemFundSource);
+    }
 }
