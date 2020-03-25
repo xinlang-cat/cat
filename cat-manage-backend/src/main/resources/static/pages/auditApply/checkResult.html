@@ -63,51 +63,52 @@
                 <div class="col-md-8">
                     <textarea placeholder="内容简介。"
                               class="layui-textarea form-control" lay-verify="required"
-                              id="content" name="content" readonly></textarea>
+                              id="content" name="content" readonly ></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定情况简述:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定情况简述"
                               class="layui-textarea form-control" lay-verify="required"
-                              id="description" name="description" readonly></textarea>
+                              id="description" name="description" readonly data-bv-notempty="true"
+                              data-bv-notempty-message="查定情况简述 不能为空"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定目的:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定目的"
                               class="layui-textarea form-control" lay-verify="required"
                               id="purpose" name="purpose" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定目的 不能为空" readonly ></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定依据:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定依据"
                               class="layui-textarea form-control" lay-verify="required"
                               id="depand" name="depand" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定依据 不能为空" readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定内容:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定内容"
                               class="layui-textarea form-control" lay-verify="required"
                               id="details" name="details" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定内容 不能为空" readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定方法:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定方法"
                               class="layui-textarea form-control" lay-verify="required"
                               id="means" name="means" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定方法 不能为空" readonly></textarea>
                 </div>
             </div>
 
@@ -221,51 +222,9 @@
                 })
             }
         })
-        // $.ajax({
-        //     type : 'get',
-        //     url : domainName + '/project-item/item/target/list',
-        //     contentType: "application/json; charset=utf-8",
-        //     data: {id: id},
-        //     success : function(data) {
-        //         alert(data[0]['content']);
-        //         if (data[0]['count']!=null){
-        //             $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
-        //                 $("#name").val(res[0].content);
-        //             })
-        //         }else {
-        //             $("#name").val(data[0].content);
-        //         }
-        //     }
-        // });
+
     }
-    function pass() {
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 2}),
-            success : function(data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    parent.location.reload();
-                });
-            }
-        });
-    }
-    function unPass() {
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 5}),
-            success : function(data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    parent.location.reload();
-                });
-            }
-        });
-    }
+
 
 </script>
 </body>

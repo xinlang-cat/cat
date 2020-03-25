@@ -7,6 +7,8 @@ function getbasic(id) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var d = data[0];
+            $("#skillContent").text(d.content);
+            $("#workContent").text(d.content);
             $("#contract_no").text(d.contract_no);
             $("#item_name").text(d.item_name);
             $("#item_number").text(d.item_number);

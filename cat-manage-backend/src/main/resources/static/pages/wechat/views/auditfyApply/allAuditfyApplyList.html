@@ -34,9 +34,6 @@
 		<script src="../../../../js/common.js"></script>
 		<script type="text/javascript" src="../../../../js/jq.js"></script>
 		<script>
-			var status = " ";
-			status = getUrlParam("status");
-			alert(status);
 			$(function() {
 				FastClick.attach(document.body);
 			});
@@ -46,11 +43,10 @@
 					url: domainName + "/project-item/item/target/applyList",
 					contentType: "application/json; charset=utf-8",
 					data: {
-						status: status
+
 					},
 					success: function(data) {
 						var str = '';
-						if (status==2){
 							$(data).each(function () {
 								str += '<div class="weui-panel__bd">\n' +
 										'   <a class="weui-cell weui-cell_access" href="auditfyApplyResult.html?id=' + this.id + '">\n' +
@@ -68,43 +64,6 @@
 										'</div>';
 
 							});
-						}else if (status==3 || status==4){
-							$(data).each(function () {
-								str += '<div class="weui-panel__bd">\n' +
-										'   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n' +
-										'       <div class="weui-media-box weui-media-box_text">\n' +
-										'           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-										'           <p class="weui-media-box__desc" >' +getTargetName(this.target_id)+ '</p>\n' +
-										'           <ul class="weui-media-box__info">\n' +
-										'               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
-										'               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
-										'               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-										'           </ul>\n' +
-										'      </div>\n' +
-										'       <span class="weui-cell__ft"></span>\n' +
-										'     </a>\n' +
-										'</div>';
-
-							});
-						}else if (status==1 || status==5){
-							$(data).each(function () {
-								str += '<div class="weui-panel__bd">\n' +
-										'   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n' +
-										'       <div class="weui-media-box weui-media-box_text">\n' +
-										'           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-										'           <p class="weui-media-box__desc" >' +getTargetName(this.target_id)+ '</p>\n' +
-										'           <ul class="weui-media-box__info">\n' +
-										'               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
-										'               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
-										'               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-										'           </ul>\n' +
-										'      </div>\n' +
-										'       <span class="weui-cell__ft"></span>\n' +
-										'     </a>\n' +
-										'</div>';
-
-							});
-						}
 
 						$("#list").append(str);
 					}

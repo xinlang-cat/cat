@@ -29,7 +29,6 @@
         </div>
     </a>
 
-
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">指标名称:</label>
@@ -53,7 +52,7 @@
             <label class="weui-label">项目名称:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="">
+            <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -62,7 +61,7 @@
             <label class="weui-label">提交人:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="杨珣" id="userName" name="userName" placeholder="">
+            <input class="weui-input" type="text" value="杨珣" id="userName" name="userName" placeholder="" readonly>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -71,7 +70,7 @@
             <label class="weui-label">查定时间:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" id="sendTime">
+            <input class="weui-input date" type="text" value="" id="sendTime" readonly>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -80,7 +79,7 @@
             <label class="weui-label">所在地域:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="place" type="text" value="" name="place">
+            <input class="weui-input" id="place" type="text" value="" name="place" readonly>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -89,7 +88,7 @@
             <label class="weui-label">所在街道:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="初头朗镇" id="streetCode" name="streetCode">
+            <input class="weui-input" type="text" value="初头朗镇" id="streetCode" name="streetCode" readonly>
         </div>
     </div>
 
@@ -113,35 +112,42 @@
     </a>
 
 
-    <div class="weui-cells__title">是否进行查定</div>
-    <form id="form">
-        <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label " style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" class="weui-check" name="status" value="2">
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>是</p>
-                </div>
-            </label>
-            <label class="weui-cell weui-check__label" style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" name="status" class="weui-check" value="5">
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>否</p>
-                </div>
-            </label>
-        </div>
 
-        <div class="weui-line"></div>
-        <div class="weui-btn-area">
-           <!-- <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" oncancel="postResult()">提交</a>-->
-            <button onclick="postResult()" type="button" class="weui-btn weui-btn_primary">提交</button>
-        </div>
-    </form>
+    <div class="weui-cell__bd">
+        <input class="weui-input" id="wethpass" type="text" value="" name="wethpass" readonly style="display: none">
+    </div>
+    <div id="check">
+        <div class="weui-cells__title">是否进行查定</div>
+        <form id="form">
+            <div class="weui-cells weui-cells_checkbox">
+                <label class="weui-cell weui-check__label " style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="radio" class="weui-check" name="status" value="2">
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>是</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="radio" name="status" class="weui-check" value="5">
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>否</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="weui-line"></div>
+            <div class="weui-btn-area">
+                <!-- <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" oncancel="postResult()">提交</a>-->
+                <button onclick="postResult()" type="button" class="weui-btn weui-btn_primary">提交</button>
+            </div>
+
+        </form>
+    </div>
 </div>
 
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
@@ -193,6 +199,7 @@
                     $("#targetName").val(getTargetName(data[0].target_id));
                     $("#content").val(data[0].content);
                     $("#sendTime").val(formatDate3(data[0].start_date));
+                    status(data[0].status);
 
                 });
 
@@ -200,6 +207,23 @@
         });
     }
 
+    function status(status) {
+        if (status != 1) {
+            document.getElementById('check').style.display = 'none';
+            var con='';
+            if (status == 2){
+                con="查定中";
+            }else if (status == 3){
+                con="查定合格";
+            }else if (status == 4){
+                con="查定不合格";
+            }else if (status == 5){
+                con="查定申请未通过";
+            }
+            $("#wethpass").val(con);
+            document.getElementById('wethpass').style.display = 'block';
+        }
+    }
 
     function getTargetName(id) {
         var name = '';
@@ -238,15 +262,15 @@
     function postResult() {
         var formdata = $("#form").serializeObject();
         formdata.id = id;
-         $.ajax({
-             type: 'put',
-             url: domainName + '/project-item/item/target/auditApply/update',
-             contentType: "application/json; charset=utf-8",
-             data: JSON.stringify(formdata),
-             success: function (data) {
-                 $.toptip('操作成功', 'success');
-             }
-         });
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                $.toptip('操作成功', 'success');
+            }
+        });
     }
 
 </script>

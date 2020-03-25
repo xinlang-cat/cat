@@ -79,6 +79,8 @@
 <script type="text/javascript">
 
     var pers = checkPermission();
+    var itemId="";
+    itemId = getUrlParam("item_id");
     var example;
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
@@ -102,6 +104,7 @@
                             d.item_name = $('#item_name').val();
                             d.status = $('#status').val();
                             d.count = $('#count').val();
+                            d.item_id = itemId;
                         },
                         "type": "get",
                         "dataSrc": function (json) {

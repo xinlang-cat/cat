@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
-	<!--<link rel="stylesheet" type="text/css" media="screen" href="../list-layout/pages/css/details.css">
 	<style>
 		.table-info {
 			background-color: #4FAAA2;
@@ -31,7 +30,7 @@
 		.hidden {
 			display: none;
 		}
-	</style>-->
+	</style>
 </head>
 <body>
 
@@ -44,33 +43,33 @@
 
 	<table class="layui-table">
 		<colgroup>
-
+			<col width="3%">
 			<col width="10%">
-			<col width="40%">
+			<col width="37%">
 			<col width="10%">
 			<col width="40%">
 		</colgroup>
 		<thead>
 		<tr>
-			<th colspan="4" class="table-info" style="text-align: center">基本信息<br></th>
-
+			<th class="table-info" style="border-bottom-color: #4FAAA2"></th>
+			<th colspan="4"><br></th>
 		</tr>
 		</thead>
 		<tbody>
-
 		<tr>
+			<td rowspan="9" class="table-info">项目基本信息</td>
 			<td>合同编号：</td>
 			<td>
+				<input type="hidden" name="id" id="item_id">
 				<p id="contract_no_text"></p>
 				<input class="form-control hidden" lay-verify="required" placeholder="请输入合同编号" type="text"
-					   name="contract_no" id="contract_no">
+					   id="contract_no" name="contract_no">
 			</td>
 			<td>计划类别：</td>
 			<td>
 				<p id="category_text"></p>
-				<select class="form-control hidden" lay-verify="required" lay-ignore name="category"
-						id="category">
-					<option value="">请选择计划类别</option>
+				<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="category"
+						name="category">
 				</select>
 			</td>
 		</tr>
@@ -79,27 +78,30 @@
 			<td>
 				<p id="item_name_text"></p>
 				<input class="form-control hidden" lay-verify="required" placeholder="请输入项目名称" type="text"
-					   name="item_name" id="item_name">
+					   id="item_name" name="item_name">
 			</td>
 			<td>委托单位：</td>
 			<td>
 				<p id="consignor_text"></p>
-				<input class="form-control hidden" lay-verify="required" placeholder="请输入委托单位" type="text"
-					   name="consignor" id="consignor">
+				<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="consignor"
+						name="consignor">
+				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>承担单位：</td>
 			<td>
 				<p id="undertaker_text"></p>
-				<input class="form-control hidden" lay-verify="required" placeholder="请输入承担单位" type="text"
-					   name="undertaker" id="undertaker" readonly>
+				<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="undertaker"
+						name="undertaker">
+				</select>
 			</td>
 			<td>管理单位：</td>
 			<td>
 				<p id="administrator_text"></p>
-				<input class="form-control hidden" lay-verify="required" placeholder="请输入管理单位" type="text"
-					   name="administrator" id="administrator">
+				<select class="form-control input-sm hidden" lay-verify="required" lay-ignore id="administrator"
+						name="administrator">
+				</select>
 			</td>
 		</tr>
 		<tr>
@@ -107,13 +109,13 @@
 			<td>
 				<p id="start_date_text"></p>
 				<input class="form-control date hidden" lay-verify="required" placeholder="开始时间" type="text"
-					   name="start_date" id="start_date" readonly>
+					   id="start_date" name="start_date" readonly>
 			</td>
 			<td>结束时间：</td>
 			<td>
 				<p id="end_date_text"></p>
 				<input class="form-control date hidden" lay-verify="required" placeholder="结束时间" type="text"
-					   name="end_date" id="end_date" readonly>
+					   id="end_date" name="end_date" readonly>
 			</td>
 		</tr>
 		<tr>
@@ -121,16 +123,17 @@
 			<td>
 				<p id="item_number_text"></p>
 				<input class="form-control hidden" lay-verify="required" placeholder="请输入下达文号" type="text"
-					   name="item_number" id="item_number">
+					   id="item_number" name="item_number">
 			</td>
-			<td colspan="2"></td>
+			<td></td>
+			<td></td>
 		</tr>
 		</tbody>
 	</table>
 			<table class="layui-table">
 				<colgroup>
-					<col width="10%">
-					<col width="90%">
+					<col width="3%">
+					<col width="97%">
 				</colgroup>
 				<thead>
 				<tbody>
@@ -145,31 +148,24 @@
 			</table>
 			<table class="layui-table">
 				<colgroup>
-
+					<col width="3%">
 					<col width="10%">
-					<col width="90%">
+					<col width="87%">
 				</colgroup>
 				<thead>
 				</thead>
 				<tbody>
 				<tr>
-					<td class="table-info">项目背景</td>
+					<td rowspan="9" class="table-info">技术总结</td>
+					<td>项目背景</td>
 					<td>
 
 					<textarea placeholder="请输入内容" class="layui-textarea" name="projectContent" id="projectContent" data-bv-notempty="true"
 							  data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" readonly="readonly"></textarea>
 					</td>
 				</tr>
-				<!--<tr>
-					<td class="table-info">研究内容</td>
-					<td>
-
-					 <textarea placeholder="请输入内容" class="layui-textarea" name="researchContents" id="researchContents" data-bv-notempty="true"
-							   data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;border: 0px;" readonly="readonly"></textarea>
-					</td>
-				</tr>-->
 				<tr>
-					<td class="table-info">技术路线</td>
+					<td>技术路线</td>
 					<td>
 
 					<textarea placeholder="请输入内容" class="layui-textarea" name="skillRoute" id="skillRoute" data-bv-notempty="true"
@@ -177,7 +173,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="table-info">技术创新点</td>
+					<td>技术创新点</td>
 					<td>
 
 					 <textarea placeholder="请输入内容" class="layui-textarea" name="skillInnovate" id="skillInnovate" data-bv-notempty="true"
@@ -185,7 +181,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="table-info">项目技术指标完成情况</td>
+					<td>项目技术指标完成情况</td>
 					<td>
 
 				  <textarea placeholder="请输入内容" class="layui-textarea" name="skillIndicator" id="skillIndicator" data-bv-notempty="true"
@@ -193,7 +189,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="table-info">项目技术评价</td>
+					<td>项目技术评价</td>
 					<td>
 
 					 <textarea placeholder="请输入内容" class="layui-textarea" name="skillEvaluate" id="skillEvaluate" data-bv-notempty="true"
@@ -201,7 +197,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="table-info">项目实施对企业的影响</td>
+					<td>项目实施对企业的影响</td>
 					<td>
 
 					 <textarea placeholder="请输入内容" class="layui-textarea" name="projectEffect" id="projectEffect" data-bv-notempty="true"
@@ -233,7 +229,7 @@
 
 <script type="text/javascript">
 	var layedit, index;
-	var id = getUrlParam("id");
+
 	var itemId = getUrlParam("itemId");
 	getBasic(itemId);
 	getContent(itemId);
@@ -249,7 +245,7 @@
 	});
 	function initData(){
 		var data = {
-			id:id
+			itemId:itemId
 		}
 		$.ajax({
 			type: 'get',

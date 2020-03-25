@@ -104,7 +104,7 @@
 <script type="text/javascript">
     var layedit, index;
 
-    var id = getUrlParam("id");
+    var itemId = getUrlParam("itemId");
     var h = $(window).height() - 100;
     layui.use(['layedit','upload'], function(){
         layedit = layui.layedit;
@@ -117,7 +117,7 @@
     });
     function initData(){
         var data = {
-            id:id,
+            itemId:itemId,
         }
         $.ajax({
             type : 'get',
