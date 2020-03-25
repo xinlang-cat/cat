@@ -37,6 +37,7 @@ public class ProjectUserDomainController {
     public void save(String userType,@RequestBody Set<String> signs) {
         AppUser appUser = AppUserUtil.getLoginAppUser();
         Integer userId = appUser.getId().intValue();
+        projectUserDomainService.delete(userId);
         ProjectUserDomain domain = new ProjectUserDomain();
         domain.setCreateTime(new Date());
         domain.setUserId(userId);

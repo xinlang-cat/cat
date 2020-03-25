@@ -62,7 +62,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="item_name weui-set-hide-val"></p>
-                <input type="hidden" id="item_name" name="itemName">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -72,7 +71,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="contract_no weui-set-hide-val"></p>
-                <input id="contract_no" name="contractNo" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -82,7 +80,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="category weui-set-hide-val"></p>
-                <input id="category" name="category" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -92,7 +89,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="undertaker weui-set-hide-val"></p>
-                <input id="undertaker" name="undertaker" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -102,7 +98,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="name weui-set-hide-val"></p>
-                <input id="name" name="createUserName" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -112,7 +107,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="phone weui-set-hide-val"></p>
-                <input id="phone" name="createUserPhone" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -122,7 +116,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="email weui-set-hide-val"></p>
-                <input id="email" name="createUserEmail" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -132,7 +125,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="createTime weui-set-hide-val"></p>
-                <input id="createTime" name="createTime" type="hidden">
             </div>
         </div>
     </div>
@@ -155,7 +147,6 @@
             </div>
             <div class="weui-cell__bd">
                 <p class="startAndEndTime weui-set-hide-val"></p>
-                <input id="startAndEndTime" name="startAndEndTime" type="hidden">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -1717,14 +1708,14 @@
 
     initDate();
     //延期批复截止时间
-   function initDate() {
-       $(".date").calendar({
-           title: "延期批复截止时间",
-           onChange: function (p, values, displayValues) {
-               console.log(values, displayValues);
-           }
-       });
-   }
+    function initDate() {
+        $(".date").calendar({
+            title: "延期批复截止时间",
+            onChange: function (p, values, displayValues) {
+                console.log(values, displayValues);
+            }
+        });
+    }
 
     //初始化创建时间
     var toDay = new Date();
@@ -2152,7 +2143,7 @@
                 '               <a href="javascript:;" class="stage-summary-a" onclick="delListHtml(this)">删除</a>\n' +
                 '               <a href="javascript:;" class="stage-summary-a" onclick="addListHtml(\'stagePatentCatalogue\')">添加</a>\n' +
                 '            </div>\n' +
-                '        </div></div>';
+                '        </div></div>'
             $('div.stagePatentCatalogue:last').after(str);
         }
         if (obj == 'stageScienceAchievementAwardCatalogue') {
@@ -2388,6 +2379,7 @@
         formData.stageTargets = stageTargets;
         formData.itemId = itemId;
         formData.createUserId = userId;
+        console.log(JSON.stringify(formData));
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/stage',
