@@ -22,228 +22,55 @@ public class ProjectUser implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
-
-    /**
-     * 系统用户表id
-     */
-    private Integer userId;
-
-    /**
-     * 性别
-     */
-    private String sex;
-
-    /**
-     * 姓名
-     */
-    private String name;
-
-    /**
-     * 出生日期
-     */
-    private Date birthDate;
-
-    /**
-     * 民族
-     */
-    private String nation;
-
-    /**
-     * 证件类型
-     */
-    private String idType;
-
-    /**
-     * 证件号码
-     */
-    private String idCard;
-
-    /**
-     * 国家地区编码
-     */
-    private String stateCode;
-
-    /**
-     * 省份编码
-     */
-    private String provinceCode;
-
-    /**
-     * 城市编码
-     */
-    private String cityCode;
-
-    /**
-     * 区县编码
-     */
-    private String areaCode;
-
-    /**
-     * 街道镇编码
-     */
-    private String streetCode;
-
-    /**
-     * 所在单位公司编码
-     */
-    private String deptCode;
-
-    /**
-     * 单位公司名称
-     */
-    private String deptName;
-
-    /**
-     * 单位公司级别(标签库编码)
-     */
-    private String deptType;
-
-    /**
-     * 职称
-     */
-    private String academicTitle;
-
-    /**
-     * 政治面貌
-     */
-    private String politics;
-
-    /**
-     * 职务
-     */
-    private String job;
-
-    /**
-     * 职称级别
-     */
-    private String academicTitleRank;
-
-    /**
-     * 毕业院校
-     */
-    private String graduatedFrom;
-
-    /**
-     * 通讯地址
-     */
-    private String address;
-
-    /**
-     * 学位
-     */
-    private String degree;
-
-    /**
-     * 学历
-     */
-    private String academicDiplomas;
-
-    /**
-     * 学位授予年份
-     */
-    private Date lastYear;
-
-    /**
-     * 学位授予国别，及地区
-     */
-    private String degreeState;
-
-    /**
-     * 最高学位授予学校
-     */
-    private String degreeSchool;
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-    /**
-     * 所学专业
-     */
-    private String major;
-
-    /**
-     * 办公电话
-     */
-    private String telephone;
-
-    /**
-     * 现在从事专业
-     */
-    private String nowMajor;
-
-    /**
-     * 手机号码
-     */
-    private String phone;
-
-    /**
-     * 主要研究领域
-     */
-    private String mainDomain;
-
-    /**
-     * 传真
-     */
-    private String fax;
-
-    /**
-     * 服务的产业或领域
-     */
+    private Integer userId;//系统用户表id
+    private String sex;//性别
+    private String name;//姓名
+    private Date birthDate;//出生日期
+    private String nation;//民族
+    private String idType;//证件类型
+    private String idCard;//证件号码
+    private String stateCode;//国家地区编码
+    private String provinceCode;//省份编码
+    private String cityCode;//城市编码
+    private String areaCode;//区县编码
+    private String streetCode;//街道镇编码
+    private String deptCode;//所在单位公司编码
+    private String deptName;//单位公司名称
+    private String deptType;//单位公司级别(标签库编码)
+    private String academicTitle;//职称
+    private String politics;//政治面貌
+    private String job;//职务
+    private String academicTitleRank;//职称级别
+    private String graduatedFrom;//毕业院校
+    private String address;//通讯地址
+    private String degree;//学位
+    private String academicDiplomas;//学历
+    private Date lastYear;//学位授予年份
+    private String degreeState;//学位授予国别，及地区
+    private String degreeSchool;//最高学位授予学校
+    private String email;//邮箱
+    private String major;//所学专业
+    private String telephone;//办公电话
+    private String nowMajor;//现在从事专业
+    private String phone;//手机号码
+    private String mainDomain;//主要研究领域
+    private String fax;//传真
     @Transient
-    private List<ProjectUserDomain> domains;
-
-    /**
-     * 邮政编码
-     */
-    private String postcode;
-
-    /**
-     * 技术专长及提供的服务
-     */
+    private List<ProjectUserDomain> domains;//服务的产业或领域
+    private String postcode;//邮政编码
     @Transient
-    private List<ProjectUserSkill> skills;
-
-    /**
-     * 承担的科技项目
-     */
-    private String projects;
-
-    /**
-     * 获得的科技成果，奖励，荣誉
-     */
-    private String achievement;
-
-    /**
-     * 工作成就案例
-     */
-    private String accomplishment;
-
+    private List<ProjectUserSkill> skills;//技术专长及提供的服务
+    private String projects;//承担的科技项目
+    private String achievement;//获得的科技成果，奖励，荣誉
+    private String accomplishment;//工作成就案例
     private Date createTime;
-
     private Date updateTime;
-
-    /**
-     * 是否可用/0不可用/1可用
-     */
-    private Boolean enable;
-
-    /**
-     * 用户类型
-     */
-    private String userType;
-
-    /**
-     * 选中次数
-     */
+    private Boolean enable;//是否可用/0不可用/1可用
+    private String userType;//用户类型
     @Transient
-    private Integer time;
-    /**
-     * 最后一次服务时间
-     */
+    private Integer time;//选中次数
     @Transient
-    private Date endServerTime;
+    private Date endServerTime;//最后一次服务时间
 
 
 }

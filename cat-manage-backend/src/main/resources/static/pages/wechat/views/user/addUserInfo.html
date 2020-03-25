@@ -11,20 +11,18 @@
 
     <link rel="stylesheet" href="../../weui/lib/weui.min.css">
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
-    <link rel="stylesheet" href="../../weui/css/demos.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
     <link rel="stylesheet" href="../../css/common.css">
 </head>
 
 <body ontouchstart>
 
-<form id="form">
+<form onsubmit="return false" id="form">
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">用户名</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="用户名">
+            <input class="weui-input" id="username" name="username" type="text" value="" placeholder="用户名" disabled>
         </div>
     </div>
     <div class="weui-line"></div>
@@ -33,7 +31,7 @@
             <label class="weui-label">昵称</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="昵称">
+            <input class="weui-input" id="nickname" name="nickname" type="text" value="" placeholder="昵称">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -41,7 +39,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox1" value="男" checked="checked">
+                <input type="radio" class="weui-check" name="sex" value="1" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -50,7 +48,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox1" class="weui-check" value="女">
+                <input type="radio" name="sex" class="weui-check" value="0">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -64,7 +62,7 @@
             <label class="weui-label">出生时间</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="date" type="text" placeholder="出生时间">
+            <input class="weui-input" id="birthDate" type="text" name="birthDate" placeholder="出生时间">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -73,7 +71,7 @@
             <label class="weui-label">姓名</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="姓名">
+            <input class="weui-input" id="name" name="name" type="text" value="" placeholder="姓名">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -82,7 +80,7 @@
             <label class="weui-label">民族</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="民族">
+            <input class="weui-input" id="nation" name="nation" type="text" value="" placeholder="民族">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -90,7 +88,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox2" value="甲方" checked="checked">
+                <input type="radio" class="weui-check" name="userType" value="PARTY_A" disabled>
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -99,7 +97,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox2" class="weui-check" value="乙方">
+                <input type="radio" name="userType" class="weui-check" value="PARTY_B" disabled>
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -108,11 +106,29 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox2" class="weui-check" value="丙方">
+                <input type="radio" name="userType" class="weui-check" value="PARTY_C" disabled>
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
                 <p>丙方</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="userType" class="weui-check" value="PARTY_D" disabled>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>验收</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="userType" class="weui-check" value="EXPERT" disabled>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>专家</p>
             </div>
         </label>
     </div>
@@ -121,7 +137,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox3" value="身份证" checked="checked">
+                <input type="radio" class="weui-check" name="idType" value="身份证" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -130,7 +146,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox3" class="weui-check" value="护照">
+                <input type="radio" name="idType" class="weui-check" value="护照">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -144,7 +160,7 @@
             <label class="weui-label">证件号码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="证件号码">
+            <input class="weui-input" id="idCard" name="idCard" type="text" value="" placeholder="证件号码">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -153,7 +169,7 @@
             <label class="weui-label">单位/公司代码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="单位/公司代码">
+            <input class="weui-input" id="deptCode" name="deptCode" type="text" value="" placeholder="单位/公司代码">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -162,25 +178,58 @@
             <label class="weui-label">单位/公司名称</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="单位/公司名称" disabled>
+            <input class="weui-input" id="deptName" name="deptName" type="text" value="" placeholder="单位/公司名称" disabled>
         </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">单位/公司类型</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="单位/公司类型" disabled>
-        </div>
+
+    <div class="weui-cells__title">公司/机构类型</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="deptType" value="ACADEMY" disabled>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>大专院校</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="deptType" class="weui-check" value="FIRM" disabled>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>企业</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="deptType" class="weui-check" value="UNIT" disabled>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>事业单位</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" name="deptType" class="weui-check" value="RESTS" disabled>
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>其他</p>
+            </div>
+        </label>
     </div>
+
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">邮政编码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="邮政编码">
+            <input class="weui-input" id="postcode" name="postcode" type="text" value="" placeholder="邮政编码">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -189,7 +238,7 @@
             <label class="weui-label">职称</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="职称">
+            <input class="weui-input" id="academicTitle" name="academicTitle" type="text" value="" placeholder="职称">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -198,7 +247,8 @@
             <label class="weui-label">职称级别</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="职称级别">
+            <input class="weui-input" id="academicTitleRank" name="academicTitleRank" type="text" value=""
+                   placeholder="职称级别">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -207,7 +257,7 @@
             <label class="weui-label">职务</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="职务">
+            <input class="weui-input" id="job" name="job" type="text" value="" placeholder="职务">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -216,7 +266,7 @@
             <label class="weui-label">政治面貌</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="sex3" type="text" value="" placeholder="政治面貌">
+            <input class="weui-input" id="politics" name="politics" type="text" value="" placeholder="政治面貌">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -225,7 +275,7 @@
             <label class="weui-label">毕业院校</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="毕业院校">
+            <input class="weui-input" id="graduatedFrom" name="graduatedFrom" type="text" value="" placeholder="毕业院校">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -233,7 +283,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="学士" checked="checked">
+                <input type="radio" class="weui-check" name="degree" value="学士" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -242,7 +292,7 @@
         </label>
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="研究生" checked="checked">
+                <input type="radio" class="weui-check" name="degree" value="研究生">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -251,7 +301,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="硕士">
+                <input type="radio" name="degree" class="weui-check" value="硕士">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -260,7 +310,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="博士">
+                <input type="radio" name="degree" class="weui-check" value="博士">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -273,7 +323,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="高中/技校" checked="checked">
+                <input type="radio" class="weui-check" name="academicDiplomas" value="高中/技校" checked="checked">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -282,7 +332,7 @@
         </label>
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="中专" checked="checked">
+                <input type="radio" class="weui-check" name="academicDiplomas" value="中专">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -291,7 +341,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="大专">
+                <input type="radio" name="academicDiplomas" class="weui-check" value="大专">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -300,7 +350,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" name="checkbox4" class="weui-check" value="大学">
+                <input type="radio" name="academicDiplomas" class="weui-check" value="大学">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -314,7 +364,7 @@
             <label class="weui-label">学位授予时间</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="date2" type="text" placeholder="学位授予时间">
+            <input class="weui-input" id="lastYear" name="lastYear" type="text" placeholder="学位授予时间">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -323,7 +373,7 @@
             <label class="weui-label">授予国家/地区</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="学位授予国家/地区">
+            <input class="weui-input" id="degreeState" name="degreeState" type="text" value="" placeholder="学位授予国家/地区">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -332,7 +382,7 @@
             <label class="weui-label">学位授予学校</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="学位授予学校">
+            <input class="weui-input" id="degreeSchool" name="degreeSchool" type="text" value="" placeholder="学位授予学校">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -341,38 +391,28 @@
             <label class="weui-label">邮箱</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="邮箱">
+            <input class="weui-input" id="email" name="email" type="text" value="" placeholder="邮箱">
         </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-cells__title">所学专业</div>
-    <div class="weui-cells weui-cells_checkbox">
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="农业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>农业</p>
-            </div>
-        </label>
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="工业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>工业</p>
-            </div>
-        </label>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">所学专业</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="major" type="text" value="" data-type="radio" placeholder="所学专业">
+            <input type="hidden" name="major" value="">
+        </div>
     </div>
+
+
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">手机号码</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="手机号码">
+            <input class="weui-input" id="phone" name="phone" type="text" value="" placeholder="手机号码">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -381,52 +421,28 @@
             <label class="weui-label">办公电话</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="办公电话">
+            <input class="weui-input" id="telephone" name="telephone" type="text" value="" placeholder="办公电话">
         </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-cells__title">现在从事专业</div>
-    <div class="weui-cells weui-cells_checkbox">
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="农业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>农业</p>
-            </div>
-        </label>
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="checkbox4" value="工业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>工业</p>
-            </div>
-        </label>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">现从事专业</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="nowMajor" type="text" data-type="radio" value="" placeholder="现从事专业">
+            <input type="hidden" name="nowMajor" value="">
+        </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-cells__title">主要研究领域</div>
-    <div class="weui-cells weui-cells_checkbox">
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox5" value="农业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>农业</p>
-            </div>
-        </label>
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox5" value="工业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>工业</p>
-            </div>
-        </label>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">主要研究领域</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="mainDomain" type="text" data-type="radio" value="" placeholder="主要研究领域">
+            <input type="hidden" name="mainDomain" value="">
+        </div>
     </div>
     <div class="weui-line"></div>
     <div class="weui-cell">
@@ -434,7 +450,7 @@
             <label class="weui-label">传真</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" placeholder="传真">
+            <input class="weui-input" id="fax" name="fax" type="text" value="" placeholder="传真">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -450,90 +466,81 @@
     <div class="weui-cell">
         <div class="weui-cell__bd">
             <label class="weui-label">通信地址</label>
-            <textarea class="weui-textarea" placeholder="通信地址" rows="3"></textarea>
+            <textarea class="weui-textarea" id="address" name="address" placeholder="通信地址" rows="3"></textarea>
         </div>
     </div>
-    <div class="weui-cells__title">服务的产业或者领域</div>
-    <div class="weui-cells weui-cells_checkbox">
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox5" value="农业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>农业</p>
-            </div>
-        </label>
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox5" value="工业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>工业</p>
-            </div>
-        </label>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">服务的产业或者领域</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="domains" type="text" data-type="checkbox" value="" placeholder="服务的产业或者领域">
+            <input type="hidden" disabled name="domains" value="">
+        </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-cells__title">技术专长及提供的服务</div>
-    <div class="weui-cells weui-cells_checkbox">
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox5" value="农业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>农业</p>
-            </div>
-        </label>
-        <label class="weui-cell weui-check__label " style="float: left;">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox5" value="工业" checked="checked">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>工业</p>
-            </div>
-        </label>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">技术专长及提供的服务</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="skills" type="text" data-type="checkbox" value="" placeholder="技术专长及提供的服务">
+            <input type="hidden" disabled name="skills" value="">
+        </div>
     </div>
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
             <label class="weui-label">承担的科技项目</label>
-            <textarea class="weui-textarea" placeholder="承担的科技项目" rows="3"></textarea>
+            <textarea class="weui-textarea" id="projects" name="projects" placeholder="承担的科技项目" rows="3"></textarea>
         </div>
     </div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
             <label class="weui-label">工作成就案例</label>
-            <textarea class="weui-textarea" placeholder="工作成就案例" rows="10"></textarea>
+            <textarea class="weui-textarea" id="accomplishment" name="accomplishment" placeholder="工作成就案例"
+                      rows="10"></textarea>
         </div>
     </div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
-            <label class="weui-label" style="width: 55%">获得科技成果/奖励/荣誉</label>
-            <textarea class="weui-textarea" placeholder="获得科技成果/奖励/荣誉" rows="10"></textarea>
+            <label class="weui-label" style="width: 55%;text-align-last: left;">获得科技成果/奖励/荣誉</label>
+            <textarea class="weui-textarea" id="achievement" name="achievement" placeholder="获得科技成果/奖励/荣誉"
+                      rows="10"></textarea>
         </div>
     </div>
+    <input type="hidden" id="provinceCode" name="provinceCode">
+    <input type="hidden" id="cityCode" name="cityCode">
+    <input type="hidden" id="areaCode" name="areaCode">
     <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="submit()">提交</a>
     </div>
 </form>
 
-<script src="../../weui/lib/jquery-2.1.4.js"></script>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../weui/js/city-picker.js"></script>
+<script src="../../weui/js/label.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
-</script>
-<script src="../../weui/js/jquery-weui.js"></script>
-<script src="../../weui/js/city-picker.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.all.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script>
+
+    $("#start").cityPicker({
+        title: "所在地域",
+        onChange: function (picker, values, displayValues) {
+            $('#provinceCode').val(values[0]);
+            $('#cityCode').val(values[1]);
+            $('#areaCode').val(values[2]);
+        }
+    });
     //出生年月日
-    $("#date").calendar({
+    $("#birthDate").calendar({
         title: "出生时间",
         onChange: function (p, values, displayValues) {
             console.log(values, displayValues);
@@ -546,227 +553,169 @@
             console.log(values, displayValues);
         }
     });
-    //性别
-    $("#sex").select({
-        title: "性别",
-        items: [
-            {
-                title: "男",
-                value: "0",
-            },
-            {
-                title: "女",
-                value: "1",
-            }
-        ]
-    });
-    //性别
-    $("#sex1").select({
-        title: "身份类型",
-        items: [
-            {
-                title: "甲方",
-                value: "0",
-            },
-            {
-                title: "乙方",
-                value: "1",
-            }
-        ]
-    });
-    //证件类型
-    $("#sex2").select({
-        title: "证件类型",
-        items: [
-            {
-                title: "身份证",
-                value: "0",
-            },
-            {
-                title: "护照",
-                value: "1",
-            }
-        ]
-    });
-    //政治面貌
-    $("#sex2").select({
-        title: "政治面貌",
-        items: [
-            {
-                title: "共产党员",
-                value: "0",
-            },
-            {
-                title: "共青团员",
-                value: "1",
-            }
-        ]
-    });
-    //所学专业
-    $("#sex4").select({
-        title: "所学专业",
-        items: [
-            {
-                title: "农业",
-                value: "0",
-            },
-            {
-                title: "工业",
-                value: "1",
-            }
-        ]
-    });
-    //现从事专业
-    $("#sex5").select({
-        title: "现从事专业",
-        items: [
-            {
-                title: "农业",
-                value: "0",
-            },
-            {
-                title: "工业",
-                value: "1",
-            }
-        ]
-    });
-    //主要研究领域
-    $("#sex6").select({
-        title: "主要研究领域",
-        items: [
-            {
-                title: "农业",
-                value: "0",
-            },
-            {
-                title: "工业",
-                value: "1",
-            }
-        ]
-    });
-    //服务的产业或领域
-    $("#sex7").select({
-        title: "服务的产业或领域",
-        items: [
-            {
-                title: "农业",
-                value: "0",
-            },
-            {
-                title: "工业",
-                value: "1",
-            }
-        ]
-    });
-    //技术专长及提供的服务
-    $("#sex8").select({
-        title: "技术专长及提供的服务",
-        items: [
-            {
-                title: "农业",
-                value: "0",
-            },
-            {
-                title: "工业",
-                value: "1",
-            }
-        ]
-    });
 
-    //所在地域
-    $("#start").cityPicker({
-        title: "所在地域",
-        onChange: function (picker, values, displayValues) {
-            console.log(values, displayValues);
+    var userId = null;
+    var projectUserId = null;
+
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-u/users/current',
+        async: false,
+        success: function (data) {
+            userId = data.id;
+            for (var key in data) {
+                $("#" + key).val(data[key]);
+            }
+            setRadio($("input[name=sex]"), data.sex);
+            getProjectUser(userId);
         }
     });
+    var domainSigns = null;
+    var skillSigns = null;
+
+    function getProjectUser(userId) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-user/user-anon/' + userId,
+            async: false,
+            success: function (res) {
+                if (!jQuery.isEmptyObject(res[0])) {
+                    projectUserId = res[0].id;
+                    for (var key in res[0]) {
+                        $("#" + key).val(res[0][key]);
+                    }
+                    $('#birthDate').val(formatDate1(res[0].birthDate));
+                    $('#lastYear').val(formatDate1(res[0].lastYear));
+                    $('#address').html(res[0].address);
+                    setRadio($('input[name=userType]'), res[0].userType);
+                    setRadio($('input[name=idType]'), res[0].idType);
+                    setRadio($('input[name=deptType]'), res[0].deptType);
+                    setRadio($('input[name=academicDiplomas]'), res[0].academicDiplomas);
+                    setRadio($('input[name=degree]'), res[0].degree);
+                    getLabelContent('major', res[0].major);
+                    getLabelContent('nowMajor', res[0].nowMajor);
+                    getLabelContent('mainDomain', res[0].mainDomain);
+                    var arr1 = new Array();
+                    $.each(res[0].domains, function (i, item) {
+                        arr1.push(item.labelSign);
+                    });
+                    domainSigns = arr1.join(',');
+                    getLabelContent('domains', domainSigns);
+                    var arr2 = new Array();
+                    $.each(res[0].skills, function (i, item) {
+                        arr2.push(item.labelSign);
+                    });
+                    skillSigns = arr2.join(',');
+                    getLabelContent('skills', skillSigns);
+                }
+            }
+        });
+
+    }
+
+    function setRadio(inputs, data) {
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() == data) {
+                $(inputs[i]).prop('checked', true);
+                return;
+            }
+        }
+    }
 
 
-    var index, layer, upload;
-    layui.use(['layedit', 'upload', 'layer', 'slider'], function () {
-        layer = layui.layer;
-        upload = layui.upload;
-        var $ = layui.$, slider = layui.slider;
-        // upload.render({
-        //     elem: '#upload_file' //绑定元素
-        //     , accept: 'file'
-        //     , multiple: true
-        //     , url: domainName + '/zuul/api-f/files'
-        //     , allDone: function (obj) { //当文件全部被提交后，才触发
-        //         layer.msg("上传成功");
-        //     }
-        //     , done: function (res, index, upload) {
-        //         addfile(res);
-        //     }
-        // });
-        // upload.render({
-        //     elem: '#upload_video' //绑定元素
-        //     , accept: 'video'
-        //     , multiple: true
-        //     , url: domainName + '/zuul/api-f/files'
-        //     , allDone: function (obj) { //当文件全部被提交后，才触发
-        //         layer.msg("上传成功");
-        //     }
-        //     , done: function (res, index, upload) {
-        //         addvideo(res);
-        //     }
-        // });
-        // upload.render({
-        //     elem: '#upload_img' //绑定元素
-        //     , accept: 'images'
-        //     , multiple: true
-        //     , url: domainName + '/zuul/api-f/files'
-        //     , allDone: function (obj) { //当文件全部被提交后，才触发
-        //         layer.msg("上传成功");
-        //     }
-        //     , done: function (res, index, upload) {
-        //         addimg(res,'#accessory_imgs');
-        //     }
-        // });
-        //
-        // //插入视频
-        // function addvideo(item) {
-        //     var str = '';
-        //     var val = item.name.substring(0, item.name.indexOf("."));
-        //     if (val.length > 10) {
-        //         val = val.substring(0, 20) + '...';
-        //     }
-        //     str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;margin-left: 20px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
-        //     str += '<video controls style="width: 250px;height: 250px;" src="'+ item.url +'">' + item.name + '</video>';
-        //     str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
-        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
-        //     $('#accessory_videos').append(str);
-        //     $(".close-a1").hide();
-        // }
-        //
-        // //插入文件
-        // function addfile(item) {
-        //     var val = item.name.substring(0, item.name.indexOf("."));
-        //     if (val.length > 10) {
-        //         val = val.substring(0, 8) + '...';
-        //     }
-        //     var str = '<tr id="'+ item.id +'"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
-        //     str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile('+ item.id +')"><i class="layui-icon">&#xe640;</i></button></td>';
-        //     str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
-        //     $('#accessory_files').append(str);
-        // }
-        //
-        // //插入一张图片
-        // function addimg(item) {
-        //     var str = '';
-        //     var val = item.name.substring(0, item.name.indexOf("."));
-        //     if (val.length > 10) {
-        //         val = val.substring(0, 8) + '...';
-        //     }
-        //     str =  '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
-        //     str += '<a href="#" onclick="seeImg(\'' + item.url +'\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
-        //     str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
-        //     str += '<p style="color: #aea9a9;">' + val + '</p></div>';
-        //     $("#accessory_imgs").append(str);
-        //     $(".close-a").hide();
-        // }
+    function submit() {
+        var formdata = $("#form").serializeObject();
+        if (!jQuery.isEmptyObject(formdata.deptName)) {
+            $.toast("公司信息不能为空", "forbidden");
+            return;
+        }
+        formdata.id = userId;
+        updateUser(formdata);
+        var flag = projectUserId == null;
+        formdata.userId = userId;
+        var type = null;
+        if (flag) {
+            type = 'post';
+            formdata.id = null;
+        } else {
+            type = 'put';
+            formdata.id = projectUserId;
+        }
+        formdata.birthDate = Date.parse(new Date(formdata.birthDate));
+        formdata.lastYear = Date.parse(new Date(formdata.lastYear));
+        $.ajax({
+            type: type,
+            url: domainName + '/project-user/user',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (res) {
+                $.toast('保存成功');
+                if (domainSigns != $('input[name=domains]').val()) {
+                    setDomains(formdata.userType,($('input[name=domains]').val()).split(','));
+                }
+                if (domainSigns != $('input[name=skills]').val()) {
+                    setSkills(formdata.userType,($('input[name=skills]').val()).split(','));
+                }
+            }
+        });
+    }
 
+    function setDomains(userType,data) {
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/toDomains?userType='+userType,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            success: function (res) {
+            }
+        });
+    }
+
+    function setSkills(userType,data) {
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/toSkills?userType='+userType,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            success: function (res) {
+            }
+        });
+    }
+
+    function updateUser(data) {
+        $.ajax({
+            type: 'put',
+            url: domainName + '/api-u/users/me',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            success: function (res) {
+            }
+        });
+    }
+
+    $("#deptCode").blur(function () {
+        var deptCode =$.trim( $(this).val());
+        $.ajax({
+            type : 'get',
+            url : domainName + '/api-c/company/'+deptCode,
+            success : function(data) {
+                if(jQuery.isEmptyObject(data)){
+                    $.modal({
+                        text: "没有查询到该公司/机构信息",
+                        buttons: [
+                            { text: "去添加", onClick: function(){ location.href=domainName + '/api-b/pages/wechat/views/company/addCompany.html';} },
+                            { text: "取消", className: "default", onClick: function(){ history.back()} }
+                        ]
+                    });
+                }else{
+                    $("#deptName").val(data.signName);
+                    setRadio($('input[name=userType]'),data.identity);
+                    setRadio($('input[name=deptType]'),data.type);
+                }
+            }
+        });
     });
+
 
 </script>
 </body>

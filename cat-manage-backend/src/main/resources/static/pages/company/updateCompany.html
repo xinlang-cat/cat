@@ -180,23 +180,6 @@
 <script type="text/javascript">
 	$.ajax({
 		type : 'get',
-		url : domainName + '/api-u/permissions',
-		async : false,
-		success : function(data) {
-			var ckb = $("#ckb");
-			$.each(data.data, function(i,item){
-				var id = item.id;
-				var name = item.name;
-				var input = $('<input type="checkbox" name="permission">');
-				input.attr("id", id);
-				input.attr("value", id);
-				input.attr("title", name);
-				ckb.append(input);
-			});
-		}
-	});
-	$.ajax({
-		type : 'get',
 		url : domainName + '/api-c/company/now-user',
 		async : false,
 		success : function(data) {
