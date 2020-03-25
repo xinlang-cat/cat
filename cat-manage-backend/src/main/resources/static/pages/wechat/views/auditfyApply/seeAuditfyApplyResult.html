@@ -117,7 +117,8 @@
                 <label class="weui-label">查定时间:</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true" name="start_date_true">
+                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true"
+                       name="start_date_true">
             </div>
         </div>
         <div class="weui-line"></div>
@@ -175,16 +176,12 @@
             <div class="weui-cell__bd">
                 <div class="weui-uploader">
                     <div class="weui-uploader__hd">
-                        <p class="weui-uploader__title" style="font-weight: bold">图片上传</p>
+                        <p class="weui-uploader__title" style="font-weight: bold">图片</p>
                         <div class="weui-uploader__info">0/6</div>
                     </div>
                     <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files">
+                        <ul class="weui-uploader__files" id="image">
                         </ul>
-                        <div class="weui-uploader__input-box">
-                            <input class="weui-uploader__input" type="file" accept="image/*"
-                                   multiple="" onchange="uploader(this)" data-sum="6">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -192,35 +189,12 @@
 
         <div class="weui-cells__title">查定结果</div>
 
-        <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label " style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" class="weui-check" name="status" value="3">
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>合格</p>
-                </div>
-            </label>
-            <label class="weui-cell weui-check__label" style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" name="status" class="weui-check" value="4">
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>不合格</p>
-                </div>
-            </label>
-        </div>
-        <input type="hidden" name="accessory" id="accessory" value="" >
-        <div class="weui-line"></div>
-        <div class="weui-btn-area">
-            <button onclick="postResult()" type="button" class="weui-btn weui-btn_primary">提交</button>
-        </div>
+
+        <input type="hidden" name="accessory" id="accessory" value="">
+
 
     </form>
 </div>
-
 
 
 </div>
@@ -246,55 +220,6 @@
     });
     initData();
 
-    function uploader(obj) {
-        if ($(obj).val() == "") {
-            $.toast("请选择上传的目标文件!", "forbidden");
-            return false;
-        }
-        var size1 = $(obj)[0].files[0].size;
-        if (size1 > 104857600) {
-            $.toast("上传文件不能大于100M!", "forbidden");
-            return false;
-        }
-        var div = $(obj).parents('div[class=weui-uploader__bd]');
-        var formData = new FormData();
-        formData.append("file", $(obj)[0].files[0]);
-        $.ajax({
-            type: "post",
-            url: domainName + '/zuul/api-f/files',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (res) {
-                $.toast('上传成功');
-                var type = res.contentType;
-                if (res.isImg) {
-                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(' + res.url + ')"></li>');
-                }
-                if (type.substring(0, 11) == 'application') {
-                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + res.name + '</li>');
-                }
-                if (type.substring(0, 5) == 'video') {
-                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
-                        '<video class="weui-uploader__file" controls  src="' + res.url + '">' + res.name + '</video></li>');
-                }
-                var sum = $(obj).attr('data-sum');
-                var li = $(div).find('li[class=weui-uploader__file]');
-                if (li.length >= sum) {
-                    $($(obj).parents('div[class=weui-uploader__input-box]')).remove();
-                }
-                var accessory = $('#accessory').val();
-                if (jQuery.isEmptyObject(accessory)) {
-                    $('#accessory').val(res.id);
-                } else {
-                    $('#accessory').val(accessory+ ',' + res.id);
-                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                $.toast('上传失败', 'forbidden');
-            }
-        });
-    }
 
     function initData() {
         var data = {
@@ -324,6 +249,7 @@
                     $("#targetName").val(getTargetName(data[0].target_id));
                     $("#content").val(data[0].content);
                     $("#start_date").val(formatDate3(data[0].start_date));
+                    file(data[0].accessory);
                     status(data[0].status);
 
                 });
@@ -331,6 +257,15 @@
             }
         });
     }
+    function file(accessory) {
+        $.get(domainName + "/api-f/files/list", {ids: accessory}, function (data1) {
+            $.each(data1, function (i, item) {
+                $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
+
+            });
+        })
+    }
+
 
     function status(status) {
         if (status != 1) {
@@ -384,19 +319,6 @@
         return data;
     }
 
-    function postResult() {
-        var formdata = $("#form").serializeObject();
-        formdata.id = id;
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
-            contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(formdata),
-            success : function(data) {
-                $.toptip('操作成功', 'success');
-            }
-        });
-    }
 
 </script>
 </body>
