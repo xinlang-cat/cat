@@ -35,18 +35,18 @@ public class ItemInformationService extends BaseService<ItemInformation> impleme
             example.createCriteria().andLike("name", "%" + params.get("name") + "%")
                                     .andEqualTo("type", params.get("type"))
                                     .andEqualTo("edit_user_id", params.get("userId"))
-                                    .andEqualTo("status", params.get("status"));
+                                    .andBetween("status", params.get("status1"), params.get("status2"));
         } else if (params.get("name") != "") {
             example.createCriteria().andLike("name", "%" + params.get("name") + "%")
                                     .andEqualTo("edit_user_id", params.get("userId"))
-                                    .andEqualTo("status", params.get("status"));
+                    .andBetween("status", params.get("status1"), params.get("status2"));
         } else if (params.get("type") != "") {
             example.createCriteria().andEqualTo("type", params.get("type"))
                                     .andEqualTo("edit_user_id", params.get("userId"))
-                                    .andEqualTo("status", params.get("status"));
+                    .andBetween("status", params.get("status1"), params.get("status2"));
         } else {
             example.createCriteria().andEqualTo("edit_user_id", params.get("userId"))
-                                    .andEqualTo("status", params.get("status"));
+                    .andBetween("status", params.get("status1"), params.get("status2"));
         }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序

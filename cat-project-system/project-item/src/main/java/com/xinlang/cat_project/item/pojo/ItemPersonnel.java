@@ -19,6 +19,7 @@ public class ItemPersonnel {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer item_id;
+    private Integer user_id;
     private String name;
     private String sex;
     private Integer age;

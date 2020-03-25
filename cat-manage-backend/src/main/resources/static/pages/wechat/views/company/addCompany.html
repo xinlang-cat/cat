@@ -17,7 +17,7 @@
 </head>
 
 <body ontouchstart>
-<form class="form-horizontal" onsubmit="return false" id="form">
+<form onsubmit="return false" id="form">
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">公司名称</label>
@@ -41,7 +41,8 @@
             <label class="weui-label">负责人手机</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="principalPhone" name="principalPhone" value="" placeholder="负责人手机">
+            <input class="weui-input" type="text" id="principalPhone" name="principalPhone" value=""
+                   placeholder="负责人手机">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -59,7 +60,8 @@
             <label class="weui-label">法人身份证</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="legalPersonCard" name="legalPersonCard" value="" placeholder="法人身份证">
+            <input class="weui-input" type="text" id="legalPersonCard" name="legalPersonCard" value=""
+                   placeholder="法人身份证">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -68,7 +70,8 @@
             <label class="weui-label">法人手机</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="legalPersonPhone" name="legalPersonPhone" value="" placeholder="法人手机">
+            <input class="weui-input" type="text" id="legalPersonPhone" name="legalPersonPhone" value=""
+                   placeholder="法人手机">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -86,7 +89,8 @@
             <label class="weui-label">注册资金</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="registeredCapital" name="registeredCapital" value="" placeholder="注册资金">
+            <input class="weui-input" type="text" id="registeredCapital" name="registeredCapital" value=""
+                   placeholder="注册资金">
         </div>
     </div>
     <div class="weui-line"></div>
@@ -94,13 +98,15 @@
         <div class="weui-cell__bd">
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
-                    <p class="weui-uploader__title" style="font-weight: bold">营业执照上传</p>
+                    <p class="weui-uploader__title" style="font-weight: bold">营业执照</p>
                     <div class="weui-uploader__info">0/1</div>
                 </div>
                 <div class="weui-uploader__bd">
+                    <ul class="weui-uploader__files">
+                    </ul>
                     <div class="weui-uploader__input-box">
-                        <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/vnd.sealedmedia.softseal.jpg"
-                               multiple="">
+                        <input class="weui-uploader__input" type="file" accept="image/*"
+                               multiple="" onchange="uploader(this)" data-sum="1">
                     </div>
                 </div>
             </div>
@@ -120,7 +126,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="identity" value="PARTY_A" checked="checked">
+                <input type="radio" class="weui-check" name="identity" value="PARTY_A">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -170,7 +176,7 @@
     <div class="weui-cells weui-cells_checkbox">
         <label class="weui-cell weui-check__label " style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="type" value="ACADEMY" checked="checked">
+                <input type="radio" class="weui-check" name="type" value="ACADEMY">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -223,41 +229,140 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="provinceCode" name="provinceCode">
+    <input type="hidden" id="cityCode" name="cityCode">
+    <input type="hidden" id="areaCode" name="areaCode">
+    <input type="hidden" id="id" name="id">
     <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="save()">保存</a>
     </div>
 </form>
 
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../weui/js/city-picker.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
-</script>
-<script src="../../weui/js/jquery-weui.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.all.js"></script>
-<script type="text/javascript" src="../../../../layui/layui.js"></script>
-<script type="text/javascript" src="../../../../js/constant.js"></script>
-<script src="../../weui/js/city-picker.js"></script>
-<script>
+    var user = null;
+    $.get(domainName + '/api-u/users/current', function (data) {
+        user = data;
+    });
+
+    //所在地域
     $("#start").cityPicker({
         title: "所在地域",
         onChange: function (picker, values, displayValues) {
-            console.log(values, displayValues);
+            $('#provinceCode').val(values[0]);
+            $('#cityCode').val(values[1]);
+            $('#areaCode').val(values[2]);
         }
     });
-    layui.use('upload', function(){
-        var upload = layui.upload;
-        upload.render({
-            elem: '#uploaderInput1' //绑定元素
-            ,accept: '*.jpg' //允许上传的文件类型
-            ,url: domainName + '/zuul/api-f/files'
-            ,done: function(res, index, upload){
-                layer.msg("上传成功");
+
+    ///文件上传
+    function uploader(obj) {
+        if ($(obj).val() == "") {
+            $.toast("请选择上传的目标文件!", "forbidden");
+            return false;
+        }
+        var size1 = $(obj)[0].files[0].size;
+        if (size1 > 104857600) {
+            $.toast("上传文件不能大于100M!", "forbidden");
+            return false;
+        }
+        var div = $(obj).parents('div[class=weui-uploader__bd]');
+        var formData = new FormData();
+        formData.append("file", $(obj)[0].files[0]);
+        $.ajax({
+            type: "post",
+            url: domainName + '/zuul/api-f/files',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                $.toast('上传成功');
+                (div).find('ul').empty();
+                $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(' + res.url + ')"></li><input type="hidden" name="charter" value="' + res.url + '">');
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                $.toast('上传失败', 'forbidden');
             }
         });
+    }
+
+    //获取当前用户公司信息
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-c/company/now-user',
+        async: false,
+        success: function (data) {
+            for (var key in data) {
+                $("#" + key).val(data[key]);
+            }
+            setRadio($('input[name=identity]'),data.identity);
+            setRadio($('input[name=type]'),data.type);
+            if (jQuery.isEmptyObject(data)) {
+                $(".weui-btn_primary").attr('onclick', 'save()');
+            } else {
+                $(".weui-btn_primary").attr('onclick', 'update()');
+            }
+        }
     });
+
+    //添加
+    function save() {
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/api-c/company',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var params = {
+                    userId: user.id,
+                    deptCode: data.deptCode
+                };
+                $.ajax({
+                    type: 'post',
+                    url: domainName + '/api-c/user',
+                    contentType: "application/json; charset=utf-8",
+                    data: params,
+                    success: function (res) {
+                        $.toast('保存成功');
+                    }
+                });
+            }
+        });
+    }
+
+    //修改
+    function update() {
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'put',
+            url: domainName + '/api-c/company',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                $.toast('保存成功');
+            }
+        });
+    }
+
+
+    //设置单选框的值
+    function setRadio(inputs,data) {
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() == data) {
+                $(inputs[i]).prop('checked', true);
+            }
+        }
+    }
 
 </script>
 </body>

@@ -38,6 +38,7 @@ public class ProjectUserSkillController {
     public void save(String userType ,@RequestBody Set<String> signs) {
         AppUser appUser = AppUserUtil.getLoginAppUser();
         Integer userId = appUser.getId().intValue();
+        projectUserSkillService.delete(userId);
         ProjectUserSkill skill = new ProjectUserSkill();
         skill.setCreateTime(new Date());
         skill.setUserId(userId);

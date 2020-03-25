@@ -71,6 +71,11 @@ public class ItemInformationController {
             indicator.setItem_id(information.getId());
         }
         itemIndicatorsService.saveIndicators(indicators);
+        List<ItemIndicators> achievements = informationVO.getAchievements();
+        for (ItemIndicators achievement : achievements) {
+            achievement.setItem_id(information.getId());
+        }
+        itemIndicatorsService.saveIndicators(achievements);
         //计划
         List<ItemScheduling> schedulings = informationVO.getScheduling();
         for (ItemScheduling scheduling : schedulings) {

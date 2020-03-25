@@ -30,33 +30,57 @@ function queryIndicators(id) {
         success: function (data) {
 
             $(data).each(function () {
+                var content = this.content;
                 var serial = $('#'+this.type).parent().parent().parent().parent().next().children().length + 1;
-                var str = '<tr>' +
-                    '<td class="tdDorder mainTd_1">' +
-                    ' <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
-                    '  </td>' +
-                    '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="content" value="' + this.content + '" lay-verify="required">' +
-                    ' </div>' +
-                    ' </td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    '   <input type="text" placeholder="请输入" name="site" value="' + this.site + '">' +
-                    '  </div>' +
-                    ' </td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="start_date" value="' + this.start_date + '">' +
-                    ' </div>' +
-                    ' </td>' +
-                    ' <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    '  <input type="text" placeholder="请输入" name="end_date" value="' + this.end_date + '">' +
-                    '  </div>' +
-                    '  </td>' +
-                    '  </tr>';
+                var str = '';
+                if (this.type != 'QUANTITY_INDICATORS') {
+                    str = '<tr>' +
+                        '<td class="tdDorder mainTd_1">' +
+                        '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input type="text" placeholder="请输入" name="content" value="' + this.content + '" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        ' </tr>';
+                } else {
+                    var option = '';
+                    $.ajax({
+                        type: 'get',
+                        url: domainName + '/api-label/label/tree/' + 'INDICATORS_OF_LIBRARY',
+                        async: false,
+                        success: function (data) {
+                            var ds = data[0].child;
+                            $(ds).each(function () {
+                                if (this.sign==content){
+                                    option += '<option value=' + this.sign + ' selected>' + this.content + '</option>';
+                                }else {
+                                    option += '<option value=' + this.sign + ' >' + this.content + '</option>';
+                                }
+                            });
+                        }
+                    })
+                    str = '<tr>' +
+                        '<td class="tdDorder mainTd_1">' +
+                        '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<select name="content">\n' +
+                        '<option value=""></option>'+option+'\n' +
+                        '</select>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input type="text" placeholder="请输入" name="count" value="' + this.count + '" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        ' </tr>';
+                }
                 $('#'+this.type).parent().parent().parent().parent().next().append(str);
             })
         }
