@@ -33,7 +33,7 @@
                     <thead>
                     <tr>
                         <th style="width:30%;">指标</th>
-                        <th style="width:35%">起止时间</th>
+                        <th style="width:35%">建议查定时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
@@ -132,8 +132,7 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var start = formatDate3(data);
-                                var end = formatDate3(row['end_date']);
-                                return start + '---' + end;
+                                return start;
                             }
                         },
                         {

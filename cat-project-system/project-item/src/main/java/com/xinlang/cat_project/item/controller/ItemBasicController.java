@@ -146,7 +146,6 @@ public class ItemBasicController {
     @GetMapping("/modifyApply/lists")
     public ResponseEntity<List<modifyApply>> getApplyCheck(@RequestParam Map<String, Object> params){
         List<modifyApply> targets = modifyApplyService.findApplyList(params,modifyApply.class);
-        System.out.println(targets);
         return ResponseEntity.ok(targets);
     }
 

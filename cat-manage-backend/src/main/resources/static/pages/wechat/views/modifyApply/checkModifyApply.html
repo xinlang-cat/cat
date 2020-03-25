@@ -1,181 +1,165 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>更改申请</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<head>
+	<title>审核更改申请</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-		<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+	<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
-		<link rel="stylesheet" href="../../weui/lib/weui.min.css">
-		<link rel="stylesheet" href="../../weui/css/jquery-weui.css">
-		<link rel="stylesheet" href="../../weui/css/demos.css">
-		<link rel="stylesheet" href="../../css/stageSummary.css">
-		<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+	<link rel="stylesheet" href="../../weui/lib/weui.min.css">
+	<link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+	<link rel="stylesheet" href="../../weui/css/demos.css">
+	<link rel="stylesheet" href="../../css/stageSummary.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
 
-	</head>
-	<body ontouchstart>
+</head>
+<body ontouchstart>
 
-		<div class="swiper-container">
+<div style="z-index: 999999">
+
+	<form id="form">
+		<a class="weui-cell weui-cell_access" href="javascript:;">
+			<div class="weui-cell__hd">
+				<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+			</div>
+			<div class="weui-cell__bd weui-cell_primary">
+				<p class="weui-max-title">所需更改内容</p>
+			</div>
+		</a>
 
 
-			<div class="weui-line"></div>
-			<a class="weui-cell weui-cell_access" href="javascript:;">
+		<div class="weui-line"></div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd">
+				<label class="weui-label">更改内容:</label>
+			</div>
+			<div class="weui-cell__bd">
+				<input class="weui-input" id="type" name="type" type="text" value="">
+			</div>
+		</div>
+		<div class="weui-line"></div>
+		<a class="weui-cell weui-cell_access" href="javascript:;">
+			<div class="weui-cell__hd">
+				<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+			</div>
+			<div class="weui-cell__bd weui-cell_primary">
+				<p class="weui-max-title">更改申请详情</p>
+			</div>
+		</a>
+
+
+		<div class="weui-line"></div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<label class="weui-label">更改原因:</label>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__bd">
+				<textarea class="weui-textarea" id="content" name="content" rows="5"></textarea>
+
+			</div>
+		</div>
+		<div class="weui-cells__title">是否允许更改</div>
+		<div class="weui-cells weui-cells_checkbox">
+			<label class="weui-cell weui-check__label " style="float: left;">
 				<div class="weui-cell__hd">
-					<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-				</div>
-				<div class="weui-cell__bd weui-cell_primary">
-					<p class="weui-max-title">更改申请详情</p>
-				</div>
-			</a>
-			<div class="weui-line"></div>
-			<div class="weui-cell">
-				<div class="weui-cell__hd">
-					<label class="weui-label">更改内容:</label>
+					<input type="radio" class="weui-check" name="status" value="1">
+					<i class="weui-icon-checked"></i>
 				</div>
 				<div class="weui-cell__bd">
-					<input class="weui-input" type="text" value="" placeholder="" id="name">
+					<p>是</p>
 				</div>
-			</div>
-
-
-
-			<div class="weui-line"></div>
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<label class="weui-label">更改原因:</label>
-				</div>
-			</div>
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<textarea class="weui-textarea" id="content" rows="5"></textarea>
-				</div>
-			</div>
-
-			<a class="weui-cell weui-cell_access" href="javascript:;">
+			</label>
+			<label class="weui-cell weui-check__label" style="float: left;">
 				<div class="weui-cell__hd">
-					<img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+					<input type="radio" name="status" class="weui-check" value="2">
+					<i class="weui-icon-checked"></i>
 				</div>
-				<div class="weui-cell__bd weui-cell_primary">
-					<p class="weui-max-title">审核结果</p>
+				<div class="weui-cell__bd">
+					<p>否</p>
 				</div>
-			</a>
+			</label>
+		</div>
+		<div class="weui-btn-area">
+			<a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
+		</div>
+	</form>
+</div>
 
-			<div class="weui-cells__title">是否允许更改</div>
-			<div class="weui-cells weui-cells_checkbox">
-				<label class="weui-cell weui-check__label " style="float: left;">
-					<div class="weui-cell__hd">
-						<input type="radio" class="weui-check" name="status" value="1">
-						<i class="weui-icon-checked"></i>
-					</div>
-					<div class="weui-cell__bd">
-						<p>是</p>
-					</div>
-				</label>
-				<label class="weui-cell weui-check__label" style="float: left;">
-					<div class="weui-cell__hd">
-						<input type="radio" name="status" class="weui-check" value="2">
-						<i class="weui-icon-checked"></i>
-					</div>
-					<div class="weui-cell__bd">
-						<p>否</p>
-					</div>
-				</label>
-			</div>
-			<div class="weui-line"></div>
-			<div class="weui-btn-area">
-				<a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="post()">提交</a>
-			</div>
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
 
+<script>
+	$(function () {
+		FastClick.attach(document.body);
+	});
+</script>
 
-			<script src="../../weui/lib/jquery-2.1.4.js"></script>
-			<script src="../../weui/lib/fastclick.js"></script>
-			<script src="../../weui/js/jquery-weui.js"></script>
-			<script src="../../weui/js/swiper.js"></script>
-			<script src="../../js/common.js"></script>
-			<script src="../../js/constant.js"></script>
-			<script src="../../weui/js/jquery-weui.js"></script>
+<script>
+	var id = getUrlParam("id");
+	$(".swiper-container").swiper({
+		loop: true,
+		autoplay: 3000
+	});
+	initData();
 
-
-			<script>
-				$(function() {
-					FastClick.attach(document.body);
+	function initData(){
+		var data = {
+			id:id,
+		}
+		$.ajax({
+			type : 'get',
+			data:data,
+			url : domainName + '/project-item/item/basic/modifyApply/list',
+			async : false,
+			success : function(data) {
+				$(data).each(function () {
+					$("#content").val(data[0].content);
+					$("#type").val(getType(data[0].modify));
 				});
-				var id = getUrlParam("id");
 
-				function initData() {
-					var data = {
-						id: id,
-					}
-					$.ajax({
-						type: 'get',
-						data: data,
-						url: domainName + '/project-item/item/basic/modifyApply/list',
-						async: false,
-						success: function(data) {
-							$(data).each(function() {
-								$("#content").val(data[0].content);
-								status(data[0].status);
-								getType(data[0].modify);
+			}
+		});
+	}
 
-							});
-
-						}
-					});
-				}
-
-				function status(status) {
-					if (status == 0 && userType == 2) {
-						var obj = document.getElementsByClassName("weui-cells_checkbox");
-						obj[0].style.display = "block";
-					}
-
-				}
-
-				function getType(modify) {
-					var data;
-					if (modify == 1) {
-						data = "项目基本信息";
-					} else if (modify == 3) {
-						data = "项目人员";
-					} else if (modify == 4) {
-						data = "项目指标";
-					} else if (modify == 5) {
-						data = "项目经费";
-					} else if (modify == 2) {
-						data = "项目研究内容";
-					}
-					$("#name").val(data);
-				}
-
-				function post() {
-					var status = $('input[name="status"]:checked').val();
-					alert(status);
-					$.ajax({
-						type: 'put',
-						url: domainName + '/project-item/item/basic/modifyApply',
-						contentType: "application/json; charset=utf-8",
-						data: JSON.stringify({
-							id: id,
-							status: status
-						}),
-						success: function(data) {
-							 $.toptip('操作成功', 'success');
-							parent.location.reload();
-
-						}
-					});
-				}
-			</script>
-
-			<script>
-				$(".swiper-container").swiper({
-					loop: true,
-					autoplay: 3000
-				});
-			</script>
-	</body>
+	function getType(modify) {
+		var data = '';
+		if (modify == 1) {
+			data = "项目基本信息";
+		} else if (modify == 2) {
+			data = "项目研究内容";
+		} else if (modify == 3) {
+			data = "项目人员";
+		} else if (modify == 4) {
+			data = "项目指标";
+		} else if (modify == 5) {
+			data = "项目经费";
+		}
+		return data;
+	}
+	function add(){
+		var formdata = $("#form").serializeObject();
+		formdata.id = id;
+		$.ajax({
+			type: 'put',
+			url: domainName + '/project-item/item/basic/modifyApply',
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(formdata),
+			success: function (data) {
+				$.toptip('操作成功', 'success');
+			}
+		});
+	}
+</script>
+</body>
 
 </html>

@@ -4,18 +4,40 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <style>
+        .table-info {
+            background-color: #4FAAA2;
+            border-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+            text-align: center;
+        }
+
+        .sub {
+            display: none;
+        }
+        .layui-textarea {
+            min-height: 50px;
+            height: auto;
+            line-height: 20px;
+            padding: 6px 10px;
+            resize: vertical;
+        }
+    </style>
 </head>
 <body>
 <div class="content">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div><h2 style="text-align: center;margin: 40px;">添加工作总结</h2></div>
         <form class="layui-form" onsubmit="return false" id="form">
             <input type="hidden" id="itemId" name="itemId" value="">
 
             <table class="layui-table">
                 <colgroup>
-
                     <col width="10%">
-                    <col width="90%">
+                    <col width="87%">
                 </colgroup>
                 <thead>
                 </thead>
@@ -24,59 +46,124 @@
                     <td class="table-info">企业基本情况</td>
                     <td>
 
-					 <textarea placeholder="请输入内容" class="layui-textarea" name="deptInfo" data-bv-notempty="true"
-                               data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					 <textarea placeholder="请输入企业基本情况" class="layui-textarea" name="deptInfo" data-bv-notempty="true"
+                               data-bv-notempty-message="企业基本情况 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
-               <tr>
+               </tbody>
+            </table>
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
+                <tr>
                     <td class="table-info">项目背景</td>
                     <td>
 
-                     <textarea placeholder="请输入内容" class="layui-textarea" name="projectContent" data-bv-notempty="true"
-                               data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+                     <textarea placeholder="请输入项目背景" class="layui-textarea" name="projectContent" data-bv-notempty="true"
+                               data-bv-notempty-message="项目背景 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
                 <tr>
                     <td class="table-info">资金到位情况</td>
                     <td>
 
-					 <textarea placeholder="请输入内容" class="layui-textarea" name="fullyFunded" data-bv-notempty="true"
-                               data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					 <textarea placeholder="请输入资金到位情况" class="layui-textarea" name="fullyFunded" data-bv-notempty="true"
+                               data-bv-notempty-message="资金到位情况 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
                 <tr>
                     <td class="table-info">技术指标完成情况</td>
                     <td>
 
-					  <textarea placeholder="请输入内容" class="layui-textarea" name="skillIndicator" data-bv-notempty="true"
-                                data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					  <textarea placeholder="请输入技术指标完成情况" class="layui-textarea" name="skillIndicator" data-bv-notempty="true"
+                                data-bv-notempty-message="技术指标完成情况 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
                 <tr>
                     <td class="table-info">经济指标完成情况</td>
                     <td>
 
-				 <textarea placeholder="请输入内容" class="layui-textarea" name="economyIndicator" data-bv-notempty="true"
-                           data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+				 <textarea placeholder="请输入经济指标完成情况" class="layui-textarea" name="economyIndicator" data-bv-notempty="true"
+                           data-bv-notempty-message="经济指标完成情况 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
                 <tr>
                     <td class="table-info">项目的社会效益</td>
                     <td>
 
-					 <textarea placeholder="请输入内容" class="layui-textarea" name="socialBenefit" data-bv-notempty="true"
-                               data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					 <textarea placeholder="请输入项目的社会效益" class="layui-textarea" name="socialBenefit" data-bv-notempty="true"
+                               data-bv-notempty-message="项目的社会效益 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+
+            <table class="layui-table">
+                <colgroup>
+                    <col width="10%">
+                    <col width="87%">
+                </colgroup>
+                <thead>
+                </thead>
+                <tbody>
                 <tr>
                     <td class="table-info">科技经费支持对企业和项目的影响</td>
                     <td>
 
-					<textarea placeholder="请输入内容" class="layui-textarea" name="combinedInfluence" data-bv-notempty="true"
-                              data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>
+					<textarea placeholder="请输入科技经费支持对企业和项目的影响" class="layui-textarea" name="combinedInfluence" data-bv-notempty="true"
+                              data-bv-notempty-message="科技经费支持对企业和项目的影响 不能为空" style="width: 100%;height: 100px;"></textarea>
                     </td>
                 </tr>
-
                 </tbody>
             </table>
         </form>
@@ -103,6 +190,7 @@
 <script>
     var itemId = getUrlParam("itemId");
 
+    $("#itemId").val(itemId);
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
@@ -118,9 +206,7 @@
         if (!bootstrapValidator.isValid()) {
             return;
         }
-
         var formdata = $("#form").serializeObject();
-        formdata.itemId = itemId;
         $.ajax({
             type : 'post',
             url : domainName + '/api-summary/work',

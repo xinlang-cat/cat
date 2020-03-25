@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>指标查定列表</title>
+		<title>查定申请列表</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -19,56 +19,22 @@
 	</head>
 
 	<body ontouchstart>
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide"><img src="../../images/swiper-1.jpg" style="height: 150px;width: 100%" /></div>
-				<div class="swiper-slide"><img src="../../images/swiper-2.jpg" style="height: 150px;width: 100%" /></div>
-				<div class="swiper-slide"><img src="../../images/swiper-3.jpg" style="height: 150px;width: 100%" /></div>
-			</div>
-		</div>
-		<div class="weui-line"></div>
-		<div class="weui-interval"></div>
-
 
 		<div class="page__bd">
-			<div class="weui-panel">
-				<div class="weui-panel__bd">
-					<a class="weui-cell weui-cell_access" href="checkAuditfyApply.html">
-						<div class="weui-media-box weui-media-box_text">
-							<h4 class="weui-media-box__title">认定登记的技术合同数(输出）</h4>
-							<p class="weui-media-box__desc">项目指标认定登记的技术合同总金额已达到指定值，现申请指标查定。</p>
-							<ul class="weui-media-box__info">
-								<li class="weui-media-box__info__meta">杨珣</li>
-								<li class="weui-media-box__info__meta">2020年02月29日</li>
-								<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">待审核</li>
-							</ul>
-						</div>
-						<span class="weui-cell__ft"></span>
-					</a>
-				</div>
+			<div class="weui-panel" id="list">
 
-				<div class="weui-panel__bd">
-					<a class="weui-cell weui-cell_access" href="checkAuditfyApply.html">
-						<div class="weui-media-box weui-media-box_text">
-							<h4 class="weui-media-box__title">认定登记的技术合同数(输出）</h4>
-							<p class="weui-media-box__desc">项目指标认定登记的技术合同总金额已达到指定值，现申请指标查定。</p>
-							<ul class="weui-media-box__info">
-								<li class="weui-media-box__info__meta">杨珣</li>
-								<li class="weui-media-box__info__meta">2020年02月29日</li>
-								<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">待审核</li>
-							</ul>
-						</div>
-						<span class="weui-cell__ft"></span>
-					</a>
-				</div>
+
 			</div>
 		</div>
-		<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+		<script src="../../weui/lib/jquery-2.1.4.js"></script>
 		<script src="../../weui/lib/fastclick.js"></script>
-		<script type="text/javascript" src="../../../../layui/layui.js"></script>
-		<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-		<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+		<script src="../../weui/js/jquery-weui.js"></script>
+		<script src="../../weui/js/swiper.js"></script>
+		<script src="../../../../js/constant.js"></script>
+		<script src="../../../../js/common.js"></script>
+		<script type="text/javascript" src="../../../../js/jq.js"></script>
 		<script>
+			var status = getUrlParam("status");
 			$(function() {
 				FastClick.attach(document.body);
 			});
@@ -78,54 +44,49 @@
 					url: domainName + "/project-item/item/target/applyList",
 					contentType: "application/json; charset=utf-8",
 					data: {
-						item_id: itemId,
-						status: 3
+
+						status: status
 					},
 					success: function(data) {
 						var str = '';
-						for (var i = 0; i < data.length; i++) {
+						$(data).each(function () {
 							str += '<div class="weui-panel__bd">\n' +
-								'   <a class="weui-cell weui-cell_access" href="checkModifyApply.html?id=' + this.id + '">\n' +
-								'      <div class="weui-media-box weui-media-box_text">\n' +
-								'          <h2 style="max-width: 400px;">' + itemName(this.item_name) + '</h2>\n' +
-								'          <p class="date" style="max-width: 400px;">\n' +
-								'            <h4 class="weui-media-box__title">' + getTargetName(this.target_id) + '</h4>\n' +
-								'            <p class="weui-media-box__desc" >' + this.content + '</p>\n' +
-								'            <ul class="weui-media-box__info">\n' +
-								'               <li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
-								'               <li class="weui-media-box__info__meta">' + getTime(this.apply_time) + '</li>\n' +
-								'               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this
-									.status) + '</li>\n' +
-								'             </ul>\n' +
-								'      </div>\n' +
-								'       <span class="weui-cell__ft"></span>\n' +
-								'     </a>\n' +
-								'</div>';
-						}
+									'   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n' +
+									'       <div class="weui-media-box weui-media-box_text">\n' +
+									'           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+									'           <p class="weui-media-box__desc" >' +getTargetName(this.target_id)+ '</p>\n' +
+									'           <ul class="weui-media-box__info">\n' +
+									'               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
+									'               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
+									'               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
+									'           </ul>\n' +
+									'      </div>\n' +
+									'       <span class="weui-cell__ft"></span>\n' +
+									'     </a>\n' +
+									'</div>';
+
+						});
 						$("#list").append(str);
 					}
 				});
 			})
-
-			function itemName(status) {
+			function getItemName(id) {
+				$.ajaxSettings.async = false;
 				var data = '';
-				if (status == 0) {
-					data = "待审核";
-				} else if (status == 1) {
-					data = "更改中";
-				} else if (status == 2) {
-					data = "审核未通过";
-				} else if (status == 3) {
-					data = "更改成功";
-				}
+				$.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
+					data =  res[0]['item_name'];
+				})
+				$.ajaxSettings.async = true;
 				return data;
 			}
 
 			function getUserName(user_id) {
+				$.ajaxSettings.async = false;
 				var data = '';
-				$.get(domainName + "/project-user/user-anon/" + row['user_id'], function(res) {
+				$.get(domainName + "/project-user/user-anon/" + user_id, function(res) {
 					data = res[0]['name'];
 				})
+				$.ajaxSettings.async = true;
 				return data;
 			}
 
@@ -136,9 +97,24 @@
 				var date = now.getDate();
 				return year + "/" + fixZero(month, 2) + "/" + fixZero(date, 2);
 			}
-
+			function getStatus(status) {
+				var con='';
+				if (status == 1){
+					con="待查定";
+				}else if (status == 2){
+					con="查定中";
+				}else if (status == 3){
+					con="查定合格";
+				}else if (status == 4){
+					con="查定不合格";
+				}else if (status == 5){
+					con="查定申请未通过";
+				}
+				return con;
+			}
 			function getTargetName(id) {
-				var data = '';
+				var name = '';
+				$.ajaxSettings.async = false;
 				$.ajax({
 					type: 'get',
 					url: domainName + '/project-item/item/target/list',
@@ -149,14 +125,16 @@
 					success: function(data) {
 						if (data[0]['count'] != null) {
 							$.get(domainName + "/api-label/label/tree/" + data[0]['target'], function(res) {
-								data = res[0].content;
+								name = res[0].content;
 							})
 						} else {
-							data = data[0].content;
+							name = data[0].content;
 						}
 					}
 				});
-				return data;
+				$.ajaxSettings.async = true;
+
+				return name;
 			}
 		</script>
 		<script src="../../weui/js/jquery-weui.js"></script>

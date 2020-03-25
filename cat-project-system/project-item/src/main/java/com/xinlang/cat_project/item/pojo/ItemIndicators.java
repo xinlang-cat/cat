@@ -25,6 +25,7 @@ public class ItemIndicators {
     private Integer item_id;
     private String type;
     private String content;
+    private Integer count;
     private String site;
     private Date start_date;
     private Date end_date;

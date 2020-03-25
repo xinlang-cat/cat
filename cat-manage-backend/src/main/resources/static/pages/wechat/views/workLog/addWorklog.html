@@ -192,8 +192,8 @@
     function save(obj) {
         $(obj).attr("disabled", true);
         var formdata = $("#form").serializeObject();
-        formdata.itemId = 1;
-        formdata.targetId = 1;
+        formdata.itemId = 44;
+        formdata.targetId = 492;
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/work-log',
