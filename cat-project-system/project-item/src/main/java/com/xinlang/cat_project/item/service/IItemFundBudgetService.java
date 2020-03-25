@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IItemFundBudgetService extends IBaseService<ItemFundBudget> {
     void saveFundBudgets(List<ItemFundBudget> itemFundBudgets);
+
+    void deleteByAttribute(ItemFundBudget itemFundBudget);
 }

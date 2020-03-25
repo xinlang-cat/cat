@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IItemIndicatorsService extends IBaseService<ItemIndicators> {
     void saveIndicators(List<ItemIndicators> itemIndicators);
+
+    void deleteByAttribute(ItemIndicators indicator);
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IItemContactWayService extends IBaseService<ItemContactWay> {
     void saveContactWays(List<ItemContactWay> itemContactWays);
+
+    void deleteByAttribute(ItemContactWay itemContactWay);
 }

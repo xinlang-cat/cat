@@ -10,6 +10,7 @@
         .layui-table td {
             position: initial;
         }
+
         .layui-textarea {
             min-height: 60px;
         }
@@ -17,6 +18,13 @@
 </head>
 
 <body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="pass();" id="pass" style="display: none;">通过</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="reject();" id="reject" style="display: none;">驳回</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
+    </div>
+</div>
 <div class="layui-form" style="margin-top: 60px;">
     <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
         <colgroup>
@@ -96,7 +104,8 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
                         <input type="hidden" name="id" id="item_id">
-                        <input type="text" name="contract_no" placeholder="请输入">
+                        <input type="hidden" name="status" id="status">
+                        <input type="text" name="contract_no" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -107,10 +116,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <!--<input type="text" name="type" placeholder="请输入">-->
-                        <select name="type" id="type">
-                            <option value=""></option>
-                        </select>
+                        <input type="text" name="type" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -131,7 +137,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="name" placeholder="请输入">
+                        <input type="text" name="name" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -142,7 +148,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="entrusting_party" placeholder="请输入">
+                        <input type="text" name="entrusting_party" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -163,7 +169,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="responsible_unit" placeholder="请输入" id="responsible_unit" readonly>
+                        <input type="text" name="responsible_unit"  id="responsible_unit" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -174,7 +180,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="management_unit" placeholder="请输入">
+                        <input type="text" name="management_unit" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -195,7 +201,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="document_number" placeholder="请输入">
+                        <input type="text" name="document_number" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -206,7 +212,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="period" placeholder="请输入" class="date">
+                        <input type="text" name="period" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -249,7 +255,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="overall_objective" placeholder="请输入" class="layui-textarea"></textarea>
+                        <textarea name="overall_objective"  class="layui-textarea"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -312,151 +318,20 @@
                     <form>
                         <table class="layui-table">
                             <colgroup>
-                                <col width="5%">
-                                <col width="5%">
-                                <col width="30%">
-                                <col width="20%">
-                                <col width="20%">
-                                <col width="20%">
+                                <col width="10%">
+                                <col width="90%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="6">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
                                     <div class="field">
-                                        <span>技术指标</span>
+                                        <span id="TECHNICAL_INDICATORS">技术指标</span>
                                     </div>
                                 </th>
-                                <!--<th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="indicators" id="TECHNICAL_INDICATORS">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>-->
                             </tr>
                             <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" title="" lay-skin="primary" lay-filter="c_all">
-                                </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
-                                <th class="tdDorder">完成期限</th>
-                                <th class="tdDorder">实施地点</th>
-                                <th class="tdDorder">实施人员</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!--<tr>
-                                <td class="tdDorder mainTd_1">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                                </td>
-                                <td class="mainTd_1 tdDorder">1</td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题" name="en">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tdDorder mainTd_1">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                                </td>
-                                <td class="mainTd_1 tdDorder">1</td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题" name="en">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                            </tr>-->
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-
-        <tr style="height: 40px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="6">
-                <div class="indicators">
-                    <form>
-                        <table class="layui-table">
-                            <colgroup>
-                                <col width="5%">
-                                <col width="5%">
-                                <col width="30%">
-                                <col width="20%">
-                                <col width="20%">
-                                <col width="20%">
-                            </colgroup>
-                            <thead>
-                            <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="6">
-                                    <div class="field">
-                                        <span>经济指标</span>
-                                    </div>
-                                </th>
-                                <!--<th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="indicators" id="ECONOMIC_INDICATORS">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>-->
-                            </tr>
-                            <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                           name="c_all">
-                                </th>
-                                <th class="tdDorder">序号</th>
-                                <th class="tdDorder">指标内容</th>
-                                <th class="tdDorder">完成期限</th>
-                                <th class="tdDorder">实施地点</th>
-                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -477,43 +352,20 @@
                     <form>
                         <table class="layui-table">
                             <colgroup>
-                                <col width="5%">
-                                <col width="5%">
-                                <col width="30%">
-                                <col width="20%">
-                                <col width="20%">
-                                <col width="20%">
+                                <col width="10%">
+                                <col width="90%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="6">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
                                     <div class="field">
-                                        <span>人才建设指标</span>
+                                        <span id="ECONOMIC_INDICATORS">经济指标</span>
                                     </div>
                                 </th>
-                                <!--<th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="indicators" id="INDICATORS_OF_TALENT_TEAM_CONS">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>-->
                             </tr>
                             <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                           name="c_all">
-                                </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
-                                <th class="tdDorder">完成期限</th>
-                                <th class="tdDorder">实施地点</th>
-                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -534,43 +386,90 @@
                     <form>
                         <table class="layui-table">
                             <colgroup>
-                                <col width="5%">
-                                <col width="5%">
-                                <col width="30%">
-                                <col width="20%">
-                                <col width="20%">
-                                <col width="20%">
+                                <col width="10%">
+                                <col width="90%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="6">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
                                     <div class="field">
-                                        <span>其他指标</span>
+                                        <span id="INDICATORS_OF_TALENT_TEAM_CONS">人才建设指标</span>
                                     </div>
                                 </th>
-                                <!--<th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="indicators" id="OTHER_INDICATORS">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>-->
                             </tr>
                             <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                           name="c_all">
-                                </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
-                                <th class="tdDorder">完成期限</th>
-                                <th class="tdDorder">实施地点</th>
-                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="90%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                    <div class="field">
+                                        <span id="OTHER_INDICATORS">其他指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="achievement">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="50%">
+                                <col width="40%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="3">
+                                    <div class="field">
+                                        <span id="QUANTITY_INDICATORS">预估效益及成果</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">内容</th>
+                                <th class="tdDorder">数量</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -617,36 +516,19 @@
                     <form>
                         <table class="layui-table">
                             <colgroup>
-                                <col width="5%">
-                                <col width="5%">
+                                <col width="10%">
                                 <col width="10%">
                                 <col width="80%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="4">
+                                <th class="tdDorder" rowspan="1" colspan="3">
                                     <div class="field">
-                                        <span>进度安排</span>
+                                        <span id="scheduling">进度安排</span>
                                     </div>
                                 </th>
-                                <!--<th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="scheduling">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>-->
                             </tr>
                             <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                           name="c_all">
-                                </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">年度</th>
                                 <th class="tdDorder">年度目标</th>
@@ -696,8 +578,7 @@
                     <form>
                         <table class="layui-table">
                             <colgroup>
-                                <col width="5%">
-                                <col width="5%">
+                                <col width="10%">
                                 <col width="10%">
                                 <col width="5%">
                                 <col width="5%">
@@ -708,29 +589,13 @@
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="9">
+                                <th class="tdDorder" rowspan="1" colspan="8">
                                     <div class="field">
-                                        <span>主要研究、开发人员及责任分工</span>
+                                        <span id="personnel">主要研究、开发人员及责任分工</span>
                                     </div>
                                 </th>
-                                <!--<th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="personnel">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>-->
                             </tr>
                             <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                           name="c_all">
-                                </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">姓名</th>
                                 <th class="tdDorder">性别</th>
@@ -742,47 +607,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!--<tr>
-                                <td class="tdDorder mainTd_1">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                                </td>
-                                <td class="mainTd_1 tdDorder">1</td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <input type="text" placeholder="请输入标题">
-                                    </div>
-                                </td>
-                            </tr>-->
                             </tbody>
                         </table>
                     </form>
@@ -899,52 +723,53 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="responsible_unit">
+                                        <input type="text"  name="responsible_unit">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="state_science_and_technology_department">
+                                        <input type="text"
+                                               name="state_science_and_technology_department">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="state_other_department">
+                                        <input type="text"  name="state_other_department">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="area_department">
+                                        <input type="text"  name="area_department">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="city_department">
+                                        <input type="text"  name="city_department">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="county_department">
+                                        <input type="text"  name="county_department">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="own_fund">
+                                        <input type="text"  name="own_fund">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="bank_loan">
+                                        <input type="text"  name="bank_loan">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="offshore_fund">
+                                        <input type="text"  name="offshore_fund">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="other_fund">
+                                        <input type="text"  name="other_fund">
                                     </div>
                                 </td>
                             </tr>
@@ -952,6 +777,15 @@
                         </table>
                     </form>
                 </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div style="color: #0C0C0C;" id="total"></div>
             </td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -1035,7 +869,9 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
-<script type="text/javascript" src='js/queryData.js'></script>
+<script type="text/javascript" src='js/projectInfo.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
         var form = layui.form,
@@ -1043,14 +879,6 @@
             element = layui.element,
             laydate = layui.laydate,
             $ = layui.jquery;
-        lay('.date').each(function () {
-            laydate.render({
-                elem: this
-                ,type: 'month'
-                ,range: true
-                , trigger: 'click'
-            });
-        });
 
         //监听提交
         form.on('submit(submit)', function (data) {
@@ -1058,161 +886,7 @@
             submit();
             //return false;
         });
-
-        //添加tr
-        $(document).on('click', '.addTr', function () {
-            var serial = $(this).parent().parent().parent().parent().next().children().length + 1;
-            var name = $(this).attr('name');
-            var str = '';
-            if (name == 'indicators') {
-                var type = $(this).attr('id');
-                str = '<tr>' +
-                    '<td class="tdDorder mainTd_1">' +
-                    ' <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
-                    '  </td>' +
-                    '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + type + '"></td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="content" lay-verify="required">' +
-                    ' </div>' +
-                    ' </td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    '   <input type="text" placeholder="请输入" name="site">' +
-                    '  </div>' +
-                    ' </td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="start_date">' +
-                    ' </div>' +
-                    ' </td>' +
-                    ' <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    '  <input type="text" placeholder="请输入" name="end_date">' +
-                    '  </div>' +
-                    '  </td>' +
-                    '  </tr>';
-            }else if(name == 'scheduling'){
-                str = '<tr>' +
-                    '<td class="tdDorder mainTd_1">' +
-                    ' <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
-                    '  </td>' +
-                    '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="annual" lay-verify="required">' +
-                    ' </div>' +
-                    ' </td>' +
-                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                    ' <div class="field">' +
-                    '   <textarea name="objectives" placeholder="请输入内容" class="layui-textarea"></textarea>' +
-                    '  </div>' +
-                    ' </td>' +
-                    '  </tr>';
-            }else if(name = 'personnel'){
-                str = '<tr>\n' +
-                    '                            <td class="tdDorder mainTd_1">\n' +
-                    '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder">1</td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="name">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="sex">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="age">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="professional_title">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="specialty">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="organization">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="responsibilities">\n' +
-                    '                                </div>\n' +
-                    '                            </td>\n' +
-                    '                        </tr>';
-            }
-            $(this).parent().parent().parent().parent().next().append(str);
-            form.render();
-        });
-        //移除tr
-        $(document).on('click', 'button[name=delTr]', function () {
-            //移除选中的tr
-            var serial = $(this).parent().parent().parent().parent().next().find("input[type=checkbox]:checked");
-            serial.each(function () {
-                $(this).parent().parent().remove();
-            })
-            //重新排序
-            var serial2 = $(this).parent().parent().parent().parent().next().find("input[type=checkbox]");
-            serial2.each(function (i) {
-                $(this).parent().next().text(i + 1);
-            })
-            //如果全部移除则全选取消选中
-            if (serial2.length == 0) {
-                $(this).parent().parent().parent().next().find("input[type=checkbox]").prop("checked", false);
-            }
-            //重新渲染
-            form.render();
-        });
-        //全选
-        form.on('checkbox(c_all)', function (data) {
-            var elem = $(data.elem).parent().parent().parent().next().find('input[type=checkbox]');
-            //如果没有选项全选不可选中
-            if (elem.length == 0) {
-                $(data.elem).prop("checked", false);
-                form.render('checkbox');
-                return;
-            }
-            elem.prop("checked", data.elem.checked);
-            form.render('checkbox');
-        })
-        //有一个未选中全选取消选中
-        form.on('checkbox(c_one)', function (data) {
-            var item = $(data.elem).parent().parent().parent().find('input[type=checkbox]');
-            for (var i = 0; i < item.length; i++) {
-                if (item[i].checked == false) {
-                    $(data.elem).parent().parent().parent().prev().find('input[type=checkbox]').prop("checked", false);
-                    form.render('checkbox');
-                    break;
-                }
-            }
-            //如果都勾选了  勾上全选
-            var all = item.length;
-            for (var i = 0; i < item.length; i++) {
-                if (item[i].checked == true) {
-                    all--;
-                }
-            }
-            if (all == 0) {
-                $(data.elem).parent().parent().parent().prev().find('input[type=checkbox]').prop("checked", true);
-                form.render('checkbox');
-            }
-        });
     });
-    /*初始化数据*/
-    initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
-    initCompanySelect($('#responsible_unit'));//当前用户公司
-
     //获取项目数据项目
     var id = getUrlParam("id");
     $('#item_id').val(id);
@@ -1225,31 +899,95 @@
     queryFundSource(id);
     queryContactWay(id);
 
-    $('input').attr("readonly","readonly")
-    $('select').attr("readonly","readonly")
-    $('textarea').attr("readonly","readonly")
+    //定时任务,监听预算的合计
+    var ref = setInterval(function () {
+        var total = 0;
+        $('input[name=money]').each(function () {
+            if ($(this).val() != '') {
+                total += $(this).val() - 0;
+            }
+        })
+        var sourceInput = $('.fundSource').find('input');
+        $(sourceInput).each(function (i, d) {
+            if ($(d).val() != '' && i != 0) {
+                total += $(d).val() - 0;
+            }
+        })
+        if (total != 0) {
+            $('#total').text('项目总投资：' + total + '万元');
+        } else {
+            $('#total').text('');
+        }
+    }, 1000);
 
-    function submit(status) {
-        var information = $('#form1').serializeObject();
-        information.status=status;
-        var indicator = $('.indicators').find('form').serializeArrayObj();
-        var scheduling = $('.scheduling').find('form').serializeArrayObj();
-        var personnel = $('.personnel').find('form').serializeArrayObj();
-        var fundBudget = $('.fundBudget').find('form').serializeArrayObj();
-        var fundSource = $('.fundSource').find('form').serializeObject();
-        var contactWay = $('.contactWay').find('form').serializeArrayObj();
+    $('input').attr("readonly","readonly");
+    $('textarea').attr("readonly","readonly");
+    if($('#status').val()==1){
+        $('#pass').css("display"," inline");
+        $('#reject').css("display"," inline");
+    }
+    /*通过*/
+    function pass() {
+        layer.confirm('审核通过！', {
+            btn : [ '确定', '取消' ]
+        }, function() {
+            var data = {id:id,status:2};
+            $.ajax({
+                type: 'put',
+                url: domainName + '/project-item/item/information',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: JSON.stringify(data),
+                success: function (data) {
+                    layer.msg("成功", {shift: -1, time: 1000}, function () {
+                        history.back(-1);
+                    });
+                }
+            });
+            layer.close(1);
+        });
+    }
+    /*驳回*/
+    function reject() {
+        var content = '<div class="layui-form" style="margin: 20px auto;width: 80%;">' +
+            '<blockquote class="layui-elem-quote layui-text">\n' +
+            '  选择或搜索选择\n' +
+            '</blockquote>' +
+            '  <div class="layui-form-item">\n' +
+            '    <label class="layui-form-label">驳回原因或建议</label>\n' +
+            '    <div class="layui-input-block">\n' +
+            '      <textarea name="remark" placeholder="请输入内容" class="layui-textarea"></textarea>\n' +
+            '    </div>\n' +
+            '  </div>' +
+            '</div>';
+        layer.open({
+            type: 1,
+            area: ['800px', '400px'],
+            btn: ['确定', '关闭'],
+            scrollbar: false,
+            content: content,
+            success: function (layero, index) {
 
-        var data = {information: information, indicators: indicator,scheduling:scheduling, personnels:personnel, fundBudgets:fundBudget,fundSource:fundSource, contactWays:contactWay};
-        $.ajax({
-            type: 'post',
-            url: domainName + '/project-item/item/information',
-            contentType: "application/json; charset=utf-8",
-            async: false,
-            data: JSON.stringify(data),
-            success: function (data) {
-                layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    history.back(-1);
+            },
+            yes: function (index, layero) {
+                var data = {id:id,status:0};
+                $.ajax({
+                    type: 'put',
+                    url: domainName + '/project-item/item/information',
+                    contentType: "application/json; charset=utf-8",
+                    async: false,
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        layer.close(index);
+                        layer.msg("成功", {shift: -1, time: 2000}, function () {
+                            history.back(-1);
+                        });
+                    }
                 });
+
+            },
+            btn2: function (index, layero) {
+                layer.close(index);
             }
         });
     }

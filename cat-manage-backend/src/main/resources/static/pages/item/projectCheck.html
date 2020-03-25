@@ -167,9 +167,8 @@
                             "render": function (data, type, row) {
                                 var id = row['id'];
                                 var href = "projectInfo.html?id=" + id;
-                                var edit = buttonEdit(href, "back:user:update", pers);
-                                var del = buttonDel(id, "back:permission:delete", pers);
-                                return edit+del;
+                                var check = buttonBasic(href, "查看", "back:user:update", pers);
+                                return check;
                             }
                         },
                     ],

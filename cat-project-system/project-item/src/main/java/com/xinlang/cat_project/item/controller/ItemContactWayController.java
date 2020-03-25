@@ -21,6 +21,15 @@ public class ItemContactWayController {
     @Autowired
     private IItemContactWayService itemContactWayService;
 
+    @ApiOperation(value = "添加各方联系方式")
+    @LogAnnotation(module = "添加各方联系方式")
+    @PreAuthorize("hasAnyAuthority('project:item:save')")
+    @PostMapping
+    public ResponseEntity<ItemContactWay> save(@RequestBody ItemContactWay itemContactWay) {
+        itemContactWayService.save(itemContactWay);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(itemContactWay);
+    }
+
     @ApiOperation(value = "添加多条各方联系方式")
     @LogAnnotation(module = "添加多条各方联系方式")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
@@ -35,5 +44,32 @@ public class ItemContactWayController {
     public ResponseEntity<List<ItemContactWay>> getContactWay(@RequestParam Map<String, Object> params){
         List<ItemContactWay> ContactWays = itemContactWayService.findListByParams(params,ItemContactWay.class);
         return ResponseEntity.ok(ContactWays);
+    }
+
+    @ApiOperation(value = "修改各方联系方式")
+    @LogAnnotation(module = "修改各方联系方式")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody ItemContactWay itemContactWay){
+        itemContactWayService.update(itemContactWay);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "删除各方联系方式")
+    @LogAnnotation(module = "删除各方联系方式")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        itemContactWayService.delete(id);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "通过属性删除各方联系方式")
+    @LogAnnotation(module = "通过属性删除各方联系方式")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping
+    public ResponseEntity<Void> deleteByAttribute(@RequestBody ItemContactWay itemContactWay){
+        itemContactWayService.deleteByAttribute(itemContactWay);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

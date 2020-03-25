@@ -71,11 +71,21 @@ function buttonEdit(href, permission, pers){
 			return "";
 		}
 	}
-	
+
 	var btn = $("<button class='layui-btn layui-btn-xs' title='编辑' onclick='window.location=\"" + href +"\"'><i class='layui-icon'>&#xe642;</i></button>");
 	return btn.prop("outerHTML");
 }
 
+function buttonBasic(href, text, permission, pers){
+	if(permission != ""){
+		if ($.inArray(permission, pers) < 0) {
+			return "";
+		}
+	}
+
+	var btn = $("<button class='layui-btn layui-btn-xs' title='"+text+"' onclick='window.location=\"" + href +"\"'>"+text+"</button>");
+	return btn.prop("outerHTML");
+}
 
 function deleteCurrentTab(){
 	var lay_id = $(parent.document).find("ul.layui-tab-title").children("li.layui-this").attr("lay-id");

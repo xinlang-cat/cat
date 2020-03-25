@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>经费预算</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../item/css/newProjecy.css">
+    <link rel="stylesheet" href="css/pictureViewer.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+
+        .layui-textarea {
+            min-height: 60px;
+        }
+    </style>
+</head>
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);">提交</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);">保存</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
+    </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>经费预算</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--经费用途预算-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 经费用途预算</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="fundBudget">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="25%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="30%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span>甲方提供的科技经费用途预算</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">科目</th>
+                                <th class="tdDorder">预算金额（万元）</th>
+                                <th class="tdDorder">已支出金额（万元）</th>
+                                <th class="tdDorder">开支内容</th>
+                                <th class="tdDorder">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fundBudget">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 22px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/serializeJson.js"></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
+
+<script src="js/jquery.mousewheel.min.js"></script>
+<script src="js/pictureViewer.js"></script>
+<script>
+    layui.use(['layer', 'laydate', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload
+            , laydate = layui.laydate;
+
+        //录入
+        $('#fundBudget').on('click', '.edit', function () {
+            var budgetId = $(this).attr('id');
+            var accessory = '';
+            var content = '<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+                '    <form class="form-horizontal" onsubmit="return false" id="form">\n' +
+                '        <fieldset>\n' +
+                '            <input type="hidden" name="budget_id" value="' + budgetId + '">\n' +
+                '            <div class="form-group">\n' +
+                '                <label class="col-md-2 control-label">支出金额:</label>\n' +
+                '                <div class="col-md-8">\n' +
+                '                    <input class="form-control" placeholder="请输入" type="text" name="money"\n' +
+                '                           maxlength="50" data-bv-notempty="true" data-bv-notempty-message="支出金额 不能为空">\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '            <div class="form-group">\n' +
+                '                <label class="col-md-2 control-label">支出日期:</label>\n' +
+                '                <div class="col-md-8">\n' +
+                '                    <input class="form-control date" placeholder="支出日期" type="text" name="date"\n' +
+                '                           maxlength="50" data-bv-notempty="true" data-bv-notempty-message="支出日期 不能为空">\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '            <div class="form-group">\n' +
+                '                <label class="col-md-2 control-label">开支内容:</label>\n' +
+                '                <div class="col-md-8">\n' +
+                '                    <textarea placeholder="请输入" class="layui-textarea" name="remark" data-bv-notempty="true"\n' +
+                '                    data-bv-notempty-message="内容 不能为空" style="width: 100%;height: 100px;"></textarea>\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '            <div class="form-group">\n' +
+                '                <label class="col-md-2 control-label">\n' +
+                '                    <button id="file" type="button" class="layui-btn ">图片上传</button>\n' +
+                '                </label>\n' +
+                '                <div class="col-md-8">\n' +
+                '                    <div data-bv-notempty="true"\n' +
+                '                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 100%;"\n' +
+                '                         id="demo2"></div>\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '        </fieldset>\n' +
+                '    </form>' +
+                '</div>';
+            layer.open({
+                type: 1,
+                title: '经费使用录入',
+                area: ['1000px', '600px'],
+                btn: ['确定', '关闭'],
+                scrollbar: false,
+                content: content,
+                success: function (layero, index) {
+                    lay('.date').each(function () {
+                        laydate.render({
+                            elem: this
+                            , showBottom: false
+                            , trigger: 'click'
+                        });
+                    });
+
+                    //文件上传
+                    var uploadInst = upload.render({
+                        elem: '#file' //绑定元素
+                        , accept: 'images'
+                        , url: domainName + '/zuul/api-f/files' //上传接口
+                        , before: function (obj) {
+                            //预读本地文件示例，不支持ie8
+                            obj.preview(function (index, file, result) {
+                                $('#demo2').append('<img style="width: 23%;height:27%;margin-left: 10px;" src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                            });
+                        }
+                        , done: function (res) {
+                            //上传完毕回调
+                            accessory += ',' + res.url;
+                        }
+                        , error: function () {
+                            alert("失败");
+                            //请求异常回调
+                        }
+                    })
+                },
+                yes: function (index, layero) {
+                    var formdata = $("#form").serializeObject();
+                    formdata.accessory=accessory;
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-item/item/fundDetail',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formdata),
+                        success: function (data) {
+                            layer.msg("成功", {shift: -1, time: 1000}, function () {
+                                layer.close(index);
+                                location.reload();
+                            });
+                        }
+                    });
+
+                },
+                btn2: function (index, layero) {
+                    layer.close(index);
+                }
+            });
+        })
+        //明细
+        $('#fundBudget').on('click', '.detail', function () {
+            var budgetId = $(this).attr('id');
+            var fundDetail = queryFundDetail(budgetId);
+            var content = '<div style="margin-top: 57px;"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n' +
+                '        <form class="form-horizontal" onsubmit="return false" id="form">\n' +
+                '            <fieldset>\n' +
+                '                <ul class="layui-timeline">\n' +
+                '                </ul>\n' +
+                '            </fieldset>\n' +
+                '        </form>\n' +
+                '    </div>';
+            layer.open({
+                type: 1,
+                title: '经费使用明细',
+                area: ['1000px', '600px'],
+                btn: ['确定', '关闭'],
+                scrollbar: false,
+                content: content,
+                success: function (layero, index) {
+                            var str = '';
+                            $(fundDetail).each(function () {
+                                var imgs = '';
+                                $(this.accessory.split(',')).each(function (i,d) {
+                                    if(i!=0){
+                                        imgs += '<div class="cover"><img src="'+d+'" alt=""></div>'
+                                    }
+                                })
+                                str += '<li class="layui-timeline-item">\n' +
+                                    '                        <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                    '                        <div class="layui-timeline-content layui-text">\n' +
+                                    '                            <h3 class="layui-timeline-title">支出日期：'+this.date.substring(0, 10)+'</h3>\n' +
+                                    '                            <h3 class="layui-timeline-title">支出金额：'+this.money+'万</h3>\n' +
+                                    '                            <h3 class="layui-timeline-title"> 支出内容：'+this.remark+'</h3\n' +
+                                    '                            <div class="main-content">\n' +
+                                    '                                <div class="image-list">'+imgs+'</div>\n' +
+                                    '                            </div>\n' +
+                                    '                        </div>\n' +
+                                    '                    </li>';
+                            })
+                            $('.layui-timeline').append(str);
+
+                },
+                yes: function (index, layero) {
+                    layer.close(index);
+                },
+                btn2: function (index, layero) {
+                    layer.close(index);
+                }
+            });
+        })
+    })
+
+    //获取项目数据项目
+    var id = getUrlParam("id");
+    queryFundBudget(id);
+
+    function queryFundBudget(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundBudget/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $(data).each(function () {
+                   var fundDetail = queryFundDetail(this.id);
+                   var count = 0;
+                    $(fundDetail).each(function () {
+                        count += this.money
+                    });
+                    var str = '<tr>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" name="subject" value="' + this.subject + '" readonly>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" name="money" value="' + this.money + '" readonly>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" name="expenditure" value="'+count+'" readonly>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" name="content" value="' + this.content + '" readonly>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
+                        '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                            </tr>';
+                    $('#fundBudget').append(str);
+                })
+            }
+        })
+    }
+    /*明细*/
+    function queryFundDetail(id) {
+        var Detail = {};
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundDetail/list',
+            data: "budget_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                Detail = data;
+            }
+        })
+        return Detail;
+    }
+</script>
+</html>

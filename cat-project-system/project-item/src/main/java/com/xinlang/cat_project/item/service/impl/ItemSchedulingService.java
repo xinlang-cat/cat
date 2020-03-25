@@ -20,4 +20,9 @@ public class ItemSchedulingService extends BaseService<ItemScheduling> implement
     public void saveSchedulings(List<ItemScheduling> itemSchedulings) {
         int count = itemSchedulingMapper.insertList(itemSchedulings);
     }
+
+    @Override
+    public void deleteByAttribute(ItemScheduling itemScheduling) {
+        int i = itemSchedulingMapper.delete(itemScheduling);
+    }
 }

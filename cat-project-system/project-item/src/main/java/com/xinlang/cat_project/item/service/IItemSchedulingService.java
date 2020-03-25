@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IItemSchedulingService extends IBaseService<ItemScheduling> {
     void saveSchedulings(List<ItemScheduling> itemSchedulings);
+
+    void deleteByAttribute(ItemScheduling itemScheduling);
 }

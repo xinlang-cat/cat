@@ -20,4 +20,9 @@ public class ItemContactWayService extends BaseService<ItemContactWay> implement
     public void saveContactWays(List<ItemContactWay> itemContactWays) {
         int i = itemContactWayMapper.insertList(itemContactWays);
     }
+
+    @Override
+    public void deleteByAttribute(ItemContactWay itemContactWay) {
+        int i = itemContactWayMapper.delete(itemContactWay);
+    }
 }
