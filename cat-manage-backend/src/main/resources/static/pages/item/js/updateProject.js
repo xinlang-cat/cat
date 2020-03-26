@@ -185,7 +185,7 @@ function queryFundBudget(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/fundBudget/list',
-        data: "item_id=" + id,
+        data: "item_id=" + id+'&type=first_party_provide',
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
@@ -210,7 +210,7 @@ function queryFundBudget(id) {
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
                     '                                        <input type="text" placeholder="请输入" name="remark" value="' + this.remark + '">\n' +
-                    '                                        <input type="hidden" name="type" value="">\n' +
+                    '                                        <input type="hidden" name="type" value="' + this.type + '">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>';

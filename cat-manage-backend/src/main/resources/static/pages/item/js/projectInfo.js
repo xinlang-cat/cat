@@ -155,7 +155,7 @@ function queryFundBudget(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/fundBudget/list',
-        data: "item_id=" + id,
+        data: "item_id=" + id+'&type=first_party_provide',
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {

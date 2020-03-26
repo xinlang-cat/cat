@@ -20,8 +20,6 @@
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
     <div style="position: absolute;right: 30px;top: 15px;">
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);">提交</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);">保存</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
@@ -53,7 +51,7 @@
             <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
             <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
                 <div class="headline">
-                    <span>经费预算</span>
+                    <span>经费明细</span>
                 </div>
             </td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -81,7 +79,7 @@
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
                 <div class="subheading">
-                    <span>丨 经费用途预算</span>
+                    <span>丨 经费支出情况</span>
                 </div>
             </td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -110,7 +108,7 @@
                             <tr style="background-color: #ffffff;">
                                 <th class="tdDorder" rowspan="1" colspan="5">
                                     <div class="field">
-                                        <span>甲方提供的科技经费用途预算</span>
+                                        <span>甲方提供的科技经费支出</span>
                                     </div>
                                 </th>
                             </tr>
@@ -132,7 +130,52 @@
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
 
-
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="fundBudget">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="25%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="30%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span>甲方提供科技经费之外的其余经费支出</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder" colspan="2">科目</th>
+                                <th class="tdDorder" colspan="2">已支出金额（万元）</th>
+                                <th class="tdDorder">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fundUse">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div style="color: #0C0C0C;" id="total"></div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
         <tr style="height: 22px;">
             <td class="mainTd_0" colspan="1"></td>
             <td class="mainTd_0" colspan="1"></td>
@@ -167,7 +210,7 @@
             , laydate = layui.laydate;
 
         //录入
-        $('#fundBudget').on('click', '.edit', function () {
+        $(document).on('click', '.edit', function () {
             var budgetId = $(this).attr('id');
             var accessory = '';
             var content = '<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
@@ -247,7 +290,7 @@
                 },
                 yes: function (index, layero) {
                     var formdata = $("#form").serializeObject();
-                    formdata.accessory=accessory;
+                    formdata.accessory = accessory;
                     $.ajax({
                         type: 'post',
                         url: domainName + '/project-item/item/fundDetail',
@@ -268,7 +311,7 @@
             });
         })
         //明细
-        $('#fundBudget').on('click', '.detail', function () {
+        $(document).on('click', '.detail', function () {
             var budgetId = $(this).attr('id');
             var fundDetail = queryFundDetail(budgetId);
             var content = '<div style="margin-top: 57px;"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n' +
@@ -287,27 +330,27 @@
                 scrollbar: false,
                 content: content,
                 success: function (layero, index) {
-                            var str = '';
-                            $(fundDetail).each(function () {
-                                var imgs = '';
-                                $(this.accessory.split(',')).each(function (i,d) {
-                                    if(i!=0){
-                                        imgs += '<div class="cover"><img src="'+d+'" alt=""></div>'
-                                    }
-                                })
-                                str += '<li class="layui-timeline-item">\n' +
-                                    '                        <i class="layui-icon layui-timeline-axis"></i>\n' +
-                                    '                        <div class="layui-timeline-content layui-text">\n' +
-                                    '                            <h3 class="layui-timeline-title">支出日期：'+this.date.substring(0, 10)+'</h3>\n' +
-                                    '                            <h3 class="layui-timeline-title">支出金额：'+this.money+'万</h3>\n' +
-                                    '                            <h3 class="layui-timeline-title"> 支出内容：'+this.remark+'</h3\n' +
-                                    '                            <div class="main-content">\n' +
-                                    '                                <div class="image-list">'+imgs+'</div>\n' +
-                                    '                            </div>\n' +
-                                    '                        </div>\n' +
-                                    '                    </li>';
-                            })
-                            $('.layui-timeline').append(str);
+                    var str = '';
+                    $(fundDetail).each(function () {
+                        var imgs = '';
+                        $(this.accessory.split(',')).each(function (i, d) {
+                            if (i != 0) {
+                                imgs += '<div class="cover"><img src="' + d + '" alt=""></div>'
+                            }
+                        })
+                        str += '<li class="layui-timeline-item">\n' +
+                            '                        <i class="layui-icon layui-timeline-axis"></i>\n' +
+                            '                        <div class="layui-timeline-content layui-text">\n' +
+                            '                            <h3 class="layui-timeline-title">支出日期：' + this.date.substring(0, 10) + '</h3>\n' +
+                            '                            <h3 class="layui-timeline-title">支出金额：' + this.money + '万</h3>\n' +
+                            '                            <h3 class="layui-timeline-title"> 支出内容：' + this.remark + '</h3\n' +
+                            '                            <div class="main-content">\n' +
+                            '                                <div class="image-list">' + imgs + '</div>\n' +
+                            '                            </div>\n' +
+                            '                        </div>\n' +
+                            '                    </li>';
+                    })
+                    $('.layui-timeline').append(str);
 
                 },
                 yes: function (index, layero) {
@@ -332,12 +375,16 @@
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
+                var str1 = '';
+                var total = 0;
                 $(data).each(function () {
-                   var fundDetail = queryFundDetail(this.id);
-                   var count = 0;
+                    var fundDetail = queryFundDetail(this.id);
+                    var count = 0;
                     $(fundDetail).each(function () {
-                        count += this.money
+                        count += this.money;
+                        total += this.money;
                     });
+                    if(this.type=='first_party_provide'){
                     var str = '<tr>\n' +
                         '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                         '                                    <div class="field">\n' +
@@ -351,7 +398,7 @@
                         '                                </td>\n' +
                         '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                         '                                    <div class="field">\n' +
-                        '                                        <input type="text" name="expenditure" value="'+count+'" readonly>\n' +
+                        '                                        <input type="text" name="expenditure" value="' + count + '" readonly>\n' +
                         '                                    </div>\n' +
                         '                                </td>\n' +
                         '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -367,10 +414,33 @@
                         '                                </td>\n' +
                         '                            </tr>';
                     $('#fundBudget').append(str);
+                    }else {
+                        var str = '<tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" name="subject" value="' + this.subject + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" name="expenditure" value="' + count + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
+                            '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>';
+                        $('#fundUse').append(str);
+                    }
                 })
+                $('#total').text('累计支出：' + total + '万元');
             }
         })
     }
+
     /*明细*/
     function queryFundDetail(id) {
         var Detail = {};
