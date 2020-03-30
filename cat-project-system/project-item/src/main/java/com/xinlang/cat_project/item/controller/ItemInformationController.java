@@ -48,6 +48,7 @@ public class ItemInformationController {
     @PostMapping
     public ResponseEntity<ItemInformation> saveItemInformation(@RequestBody ItemInformationVO informationVO) throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         System.err.println(informationVO);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
         //获取当前用户ID,并SET编辑人
         Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         ItemInformation information = informationVO.getInformation();
@@ -85,7 +86,6 @@ public class ItemInformationController {
         information.setEdit_user_id(userId);
         information.setEdit_date(new Date());
         if (!information.getPeriod().equals("")) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
             Date date = null;
             date = simpleDateFormat.parse(information.getPeriod().substring(0, 7));
             information.setStart_date(date);
@@ -97,6 +97,11 @@ public class ItemInformationController {
         List<ItemIndicators> indicators = informationVO.getIndicators();
         for (ItemIndicators indicator : indicators) {
             indicator.setItem_id(information.getId());
+            Date date = null;
+            date = simpleDateFormat.parse(indicator.getPeriod().substring(0, 7));
+            indicator.setStart_date(date);
+            date = simpleDateFormat.parse(indicator.getPeriod().substring(10));
+            indicator.setEnd_date(date);
         }
         itemIndicatorsService.saveIndicators(indicators);
         List<ItemIndicators> achievements = informationVO.getAchievements();

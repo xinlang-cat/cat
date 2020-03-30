@@ -33,9 +33,10 @@ function queryIndicators(id) {
 
             $(data).each(function () {
                 var content = this.content;
-                var serial = $('#' + this.type).parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('#' + this.type).closest('thead').nextAll('tbody').children().length + 1;
                 var str = '';
                 if (this.type != 'QUANTITY_INDICATORS') {
+                    var text = getsuperior(this.site);
                     str = '<tr>' +
                         '<td class="tdDorder mainTd_1">' +
                         '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
@@ -46,7 +47,55 @@ function queryIndicators(id) {
                         '<input type="text" placeholder="请输入" name="content" value="' + this.content + '" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
-                        ' </tr>';
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input class="date" type="text" placeholder="请输入" name="period" value="'+this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7)+'" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field" style="position: relative;">' +
+                        '<select class="site" lay-verify="required" lay-filter="site">' +
+                        '<option value="'+this.site+'">'+text+'</option>\n' +
+                        '</select>\n' +
+                        '<input type="hidden" name="site" value="'+this.site+'">'+
+                        '<button type="button" class="layui-btn layui-btn-xs" name="refresh"\n' +
+                        ' style="position: absolute;right: 0;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
+                        '<i class="layui-icon">&#xe669;</i>\n' +
+                        '</button>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<div class="userIds"></div>' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
+
+                    $('#' + this.type).closest('thead').nextAll('tbody').append(str);
+                    //获取项目人员
+                    var d = [];
+                    $('input[name=user_id]').each(function () {
+                        var UId = $(this).val();
+                        if (UId != '') {
+                            var name = $(this).next().val();
+                            var data = {name: name, value: UId,};
+                            d.push(data)
+                        }
+                    });
+                    //渲染实施人员选择
+                    var xm = xmSelect.render({
+                        name: 'userIds',
+                        layVerify: 'required',
+                        layVerType: 'msg',
+                        el: $('#' + this.type).closest('thead').nextAll('tbody').children().last().find('.userIds')[0],
+                        model: {
+                            label: {
+                                type: 'text',
+                            }
+                        },
+                        data: d
+                    });
+                    xm.setValue(this.userIds.split(','))
                 } else {
                     var option = '';
                     $.ajax({
@@ -82,8 +131,8 @@ function queryIndicators(id) {
                         '</div>' +
                         '</td>' +
                         ' </tr>';
+                    $('#' + this.type).closest('thead').nextAll('tbody').append(str);
                 }
-                $('#' + this.type).parent().parent().parent().parent().next().append(str);
             })
         }
     })
@@ -99,7 +148,7 @@ function queryScheduling(id) {
         success: function (data) {
 
             $(data).each(function () {
-                var serial = $('button[name=scheduling]').parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('button[name=scheduling]').closest('thead').nextAll('tbody').children().length + 1;
                 var str = '<tr>' +
                     '<td class="tdDorder mainTd_1">' +
                     ' <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
@@ -116,7 +165,7 @@ function queryScheduling(id) {
                     '  </div>' +
                     ' </td>' +
                     '  </tr>';
-                $('button[name=scheduling]').parent().parent().parent().parent().next().append(str);
+                $('button[name=scheduling]').closest('thead').nextAll('tbody').append(str);
             })
         }
     })
@@ -132,7 +181,7 @@ function queryPersonnel(id) {
         success: function (data) {
 
             $(data).each(function () {
-                var serial = $('button[name=personnel]').parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('button[name=personnel]').closest('thead').nextAll('tbody').children().length + 1;
                 var str = '<tr>\n' +
                     '                            <td class="tdDorder mainTd_1">\n' +
                     '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
@@ -175,7 +224,7 @@ function queryPersonnel(id) {
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                        </tr>';
-                $('button[name=personnel]').parent().parent().parent().parent().next().append(str);
+                $('button[name=personnel]').closest('thead').nextAll('tbody').append(str);
             })
         }
     })

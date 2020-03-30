@@ -33,9 +33,21 @@ function queryIndicators(id) {
 
             $(data).each(function () {
                 var content = this.content;
-                var serial = $('#' + this.type).parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('#' + this.type).closest('thead').nextAll('tbody').children().length + 1;
                 var str = '';
                 if (this.type != 'QUANTITY_INDICATORS') {
+                    var text = getsuperior(this.site);
+                    var userIds = this.userIds.split(',');
+                    var userNames = [];
+                    $('input[name=user_id]').each(function (i,d) {
+                        var UId = $(d).val();
+                        $(userIds).each(function () {
+                            if (UId == this) {
+                                var name = $(d).next().val();
+                                userNames.push(name)
+                            }
+                        });
+                    })
                     str = '<tr>' +
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -43,7 +55,23 @@ function queryIndicators(id) {
                         '<input type="text"  name="content" value="' + this.content + '" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
-                        ' </tr>';
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input class="date" type="text" placeholder="请输入" name="period" value="'+this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7)+'" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field" style="position: relative;">' +
+                        '<input type="text" name="site" value="'+text+'">'+
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input type="text" placeholder="请输入" name="" value="'+userNames+'" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
                 } else {
                     str = '<tr>' +
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
@@ -59,7 +87,7 @@ function queryIndicators(id) {
                         '</td>' +
                         ' </tr>';
                 }
-                $('#' + this.type).parent().parent().parent().parent().next().append(str);
+                $('#' + this.type).closest('thead').nextAll('tbody').append(str);
             })
         }
     })
@@ -75,7 +103,7 @@ function queryScheduling(id) {
         success: function (data) {
 
             $(data).each(function () {
-                var serial = $('#scheduling').parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('#scheduling').closest('thead').nextAll('tbody').children().length + 1;
                 var str = '<tr>' +
                     '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -89,7 +117,7 @@ function queryScheduling(id) {
                     '  </div>' +
                     ' </td>' +
                     '  </tr>';
-                $('#scheduling').parent().parent().parent().parent().next().append(str);
+                $('#scheduling').closest('thead').nextAll('tbody').append(str);
             })
         }
     })
@@ -105,7 +133,7 @@ function queryPersonnel(id) {
         success: function (data) {
 
             $(data).each(function () {
-                var serial = $('#personnel').parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('#personnel').closest('thead').nextAll('tbody').children().length + 1;
                 var str = '<tr>\n' +
                     '                            <td class="mainTd_1 tdDorder">'+serial+'</td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -145,7 +173,7 @@ function queryPersonnel(id) {
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                        </tr>';
-                $('#personnel').parent().parent().parent().parent().next().append(str);
+                $('#personnel').closest('thead').nextAll('tbody').append(str);
             })
         }
     })
