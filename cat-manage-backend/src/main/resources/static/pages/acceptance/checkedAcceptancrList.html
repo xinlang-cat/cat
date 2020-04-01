@@ -147,8 +147,8 @@
                             "render": function (data, type, row) {
                                 var item_id =row['itemId'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + item_id, function (res) {
-                                    data =  res[0]['item_name'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + item_id, function (res) {
+                                    data =  res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -161,8 +161,8 @@
                             "render": function (data, type, row) {
                                 var item_id =row['itemId'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + item_id, function (res) {
-                                    var category =  res[0]['category'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + item_id, function (res) {
+                                    var category =  res[0]['type'];
                                     $.get(domainName + "/api-label/label/tree/" + category, function (res) {
                                         data =  res[0]['content'];
 

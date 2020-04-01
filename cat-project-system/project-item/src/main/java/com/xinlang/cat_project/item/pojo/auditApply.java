@@ -8,6 +8,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,10 +30,6 @@ public class auditApply implements Serializable {
     private String item_id;
     private String target_id;
     private String content;
-    private String provinceCode;
-    private String cityCode;
-    private String areaCode;
-    private String streetCode;
     private String description;
     private String accessory;
     /**
@@ -68,4 +65,12 @@ public class auditApply implements Serializable {
     private Integer edit_userid;
     private Integer check_userid;
     private Integer status;
+
+
+    @Transient
+    private String period;
+
+
+    @Transient
+    private String periods;
 }

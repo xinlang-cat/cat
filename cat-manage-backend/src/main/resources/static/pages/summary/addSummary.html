@@ -4,187 +4,463 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/pages/css/details.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
     <style>
-        .table-info {
-            background-color: #4FAAA2;
-            border-color: #4FAAA2;
-            margin: 40px;
-            color: white;
-            font-size: 18px;
-            font-weight: bolder;
-            text-align: center;
-        }
-
-        .sub {
-            display: none;
+        .layui-table td {
+            position: initial;
         }
 
         .layui-textarea {
-            min-height: 50px;
-            height: auto;
-            line-height: 20px;
-            padding: 6px 10px;
-            resize: vertical;
-        }
-
-        .hidden {
-            display: none;
+            min-height: 60px;
         }
     </style>
 </head>
 <body>
-<div class="content">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div><h2 style="text-align: center;margin: 40px;">添加技术总结</h2></div>
-        <form class="layui-form" onsubmit="return false" id="form">
-            <input type="hidden" id="itemId" name="itemId" value="">
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="toWork();">工作总结
+        </button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">返回
+        </button>
 
-            <table class="layui-table">
-                <colgroup>
-
-                    <col width="10%">
-                    <col width="90%">
-                </colgroup>
-                <thead>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="table-info">项目背景</td>
-                    <td>
-
-					<textarea placeholder="请输入项目背景" class="layui-textarea" name="projectContent" id="projectContent"
-                              data-bv-notempty="true"
-                              data-bv-notempty-message="项目背景 不能为空"
-                              style="width: 100%;height: 100px;border: 0px;"></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="layui-table">
-                <colgroup>
-
-                    <col width="10%">
-                    <col width="90%">
-                </colgroup>
-                <thead>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="table-info">技术路线</td>
-                    <td>
-
-					<textarea placeholder="请输入技术路线" class="layui-textarea" name="skillRoute" id="skillRoute"
-                              data-bv-notempty="true"
-                              data-bv-notempty-message="技术路线 不能为空"
-                              style="width: 100%;height: 100px;border: 0px;"></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="layui-table">
-                <colgroup>
-
-                    <col width="10%">
-                    <col width="90%">
-                </colgroup>
-                <thead>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="table-info">技术创新点</td>
-                    <td>
-
-					 <textarea placeholder="请输入技术创新点" class="layui-textarea" name="skillInnovate" id="skillInnovate"
-                               data-bv-notempty="true"
-                               data-bv-notempty-message="技术创新点 不能为空"
-                               style="width: 100%;height: 100px;border: 0px;"></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="layui-table">
-                <colgroup>
-
-                    <col width="10%">
-                    <col width="90%">
-                </colgroup>
-                <thead>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="table-info">项目技术指标完成情况</td>
-                    <td>
-
-				  <textarea placeholder="请输入项目技术指标完成情况" class="layui-textarea" name="skillIndicator" id="skillIndicator"
-                            data-bv-notempty="true"
-                            data-bv-notempty-message="项目技术指标完成情况 不能为空"
-                            style="width: 100%;height: 100px;border: 0px;"></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="layui-table">
-                <colgroup>
-
-                    <col width="10%">
-                    <col width="90%">
-                </colgroup>
-                <thead>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="table-info">项目技术评价</td>
-                    <td>
-
-					 <textarea placeholder="请输入项目技术评价" class="layui-textarea" name="skillEvaluate" id="skillEvaluate"
-                               data-bv-notempty="true"
-                               data-bv-notempty-message="项目技术评价 不能为空"
-                               style="width: 100%;height: 100px;border: 0px;"></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="layui-table">
-                <colgroup>
-
-                    <col width="10%">
-                    <col width="90%">
-                </colgroup>
-                <thead>
-                </thead>
-                <tbody>
-                <tr>
-                    <td class="table-info">项目实施对企业的影响</td>
-                    <td>
-
-					 <textarea placeholder="请输入项目实施对企业的影响" class="layui-textarea" name="projectEffect" id="projectEffect"
-                               data-bv-notempty="true"
-                               data-bv-notempty-message="项目实施对企业的影响 不能为空"
-                               style="width: 100%;height: 100px;border: 0px;"></textarea>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
     </div>
-    <div class="form-actions">
-        <div class="row" align="center">
-            <div class="col-md-12">
-                <button class="btn btn-primary" id="btn_return">返回</button>
-                <button class="btn btn-primary" type="submit" onclick="add_content()">
-                    <i class="fa fa-save"></i> 保存
-                </button>
-            </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>项目技术总结</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 基本信息</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>合同编号</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="hidden" name="id" id="item_id">
+                    <input type="hidden" name="status" id="status">
+                    <input type="text" name="contract_no">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目类别</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="type">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目名称</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="name">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>委托单位（甲方）</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="entrusting_party">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目承担单位（乙方）</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="responsible_unit" id="responsible_unit" readonly>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>受委托管理单位（丙方）</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="management_unit">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>下达文号</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="document_number">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>实施期限</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <div class="field">
+                    <input type="text" name="period">
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--总体目标和主要研究内容-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 总体目标和主要研究内容（包括研究解决的问题、技术关键及创新内容）</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>项目总体目标</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <div class="field">
+                    <textarea name="overall_objective" class="layui-textarea"></textarea>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>主要研究开发内容</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <div class="field">
+                    <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 技术总结</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <form id="form">
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目背景</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="projectContent" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>技术路线</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="skillRoute" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>技术创新点</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="skillInnovate" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目技术指标完成情况</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="skillIndicator" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目技术评价</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="skillEvaluate" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目实施对企业的影响</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="projectEffect" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+</div>
+<div class="form-actions">
+    <div class="row" align="center">
+        <div class="col-md-12">
+            <button class="btn btn-primary" type="submit" onclick="add_content()" id="add">
+                <i class="fa fa-save"></i> 保存
+            </button>
         </div>
     </div>
 </div>
+</div>
+</body>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../item/js/projectInfo.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
 <script type="text/javascript">
     var layedit, index;
     var h = $(window).height() - 100;
@@ -202,9 +478,7 @@
     });
     var itemId = getUrlParam("itemId");
     $("#itemId").val(itemId);
-    $("#btn_return").click(function () {
-        location.href = "summaryList.html?item_id=" + itemId;
-    });
+    queryInformation(itemId);
 
     function add_content(obj) {
         $('#form').bootstrapValidator();
@@ -214,6 +488,7 @@
             return;
         }
         var formdata = $("#form").serializeObject();
+        formdata.itemId=itemId;
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/skill',
@@ -222,11 +497,42 @@
             success: function (data) {
                 var msg = "保存成功";
                 layer.msg(msg, {shift: -1, time: 1000}, function () {
-                    location.href = "summaryList.html?item_id="+itemId;
+                    setTimeout('window.location.reload()',1000);
                 });
             }
         });
         $(obj).attr("disabled", false);
+    }
+
+    initData();
+    function toWork() {
+        location.href='addWorkSummary.html?itemId='+itemId;
+    }
+
+    function initData() {
+        var data = {
+            itemId: itemId,
+        }
+        $.ajax({
+            type: 'get',
+            data: data,
+            url: domainName + '/api-summary/skill/list',
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    for (var key in data[0]) {
+                        $("textarea[name=" + key + "]").val(data[0][key]);
+                    }
+                });
+                if(data.length>0){
+                    $("input").attr('readonly', true);
+                    $("input").attr("style", "text-align: center;border: 0px;");
+                    $("textarea").attr('readonly', true);
+                    document.getElementById('add').style.display='none';
+                }
+
+            }
+        });
     }
 
 </script>

@@ -29,13 +29,9 @@
         </div>
     </a>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">指标名称:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" id="targetName" name="targetName" type="text" value="">
-        </div>
+    <div class="weui-panel" id="list">
+
+
     </div>
 
     <a class="weui-cell weui-cell_access" href="javascript:;">
@@ -61,36 +57,28 @@
             <label class="weui-label">提交人:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="杨珣" id="userName" name="userName" placeholder="" readonly>
+            <input class="weui-input" type="text" id="userName" name="userName" placeholder="" readonly>
         </div>
     </div>
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">查定时间:</label>
+            <label class="weui-label">建议查定时间:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
+            <input class="weui-input" type="text" value="" id="start_date" readonly name="start_date">
         </div>
     </div>
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">所在地域:</label>
+            <label class="weui-label">预计结束时间:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="place" type="text" value="" name="place" readonly>
+            <input class="weui-input" type="text" value="" id="end_date" readonly name="end_date">
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">所在街道:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="初头朗镇" id="streetCode" name="streetCode" readonly>
-        </div>
-    </div>
+
 
     <div class="weui-line"></div>
     <div class="weui-cell">
@@ -114,12 +102,22 @@
         <div class="weui-line"></div>
         <div class="weui-cell">
             <div class="weui-cell__hd">
-                <label class="weui-label">查定时间:</label>
+                <label class="weui-label">实际查定时间:</label>
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true" name="start_date_true">
             </div>
         </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">实际结束时间:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true" name="end_date_true">
+            </div>
+        </div>
+
         <div class="weui-line"></div>
         <div class="weui-cell">
             <div class="weui-cell__hd">
@@ -212,7 +210,7 @@
                 </div>
             </label>
         </div>
-        <input type="hidden" name="accessory" id="accessory" value="" >
+        <input type="hidden" name="accessory" id="accessory" value="">
         <div class="weui-line"></div>
         <div class="weui-btn-area">
             <button onclick="postResult()" type="button" class="weui-btn weui-btn_primary">提交</button>
@@ -220,7 +218,6 @@
 
     </form>
 </div>
-
 
 
 </div>
@@ -233,6 +230,9 @@
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/chooseArea.js"></script>
+<script src="../../js/jquery-weui.min.js"></script>
+
+
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -287,7 +287,7 @@
                 if (jQuery.isEmptyObject(accessory)) {
                     $('#accessory').val(res.id);
                 } else {
-                    $('#accessory').val(accessory+ ',' + res.id);
+                    $('#accessory').val(accessory + ',' + res.id);
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -307,78 +307,85 @@
             async: false,
             success: function (data) {
                 $(data).each(function () {
-                    getWechatAddress(data[0].provinceCode, data[0].cityCode, data[0].areaCode);
-                    if (data[0].post_type == 2) {
-                        $("#streetCode").val(data[0].streetCode);
-                    } else {
-                        $.ajax({
-                            type: 'get',
-                            url: domainName + '/map/street/one/' + data[0].streetCode,
-                            async: false,
-                            success: function (data) {
-                                $("#streetCode").val(data.streetName);
-                            }
-                        });
-                    }
+                    $("#userName").val(getUserName(data[0].edit_userid));
                     $("#itemName").val(getItemName(data[0].item_id));
-                    $("#targetName").val(getTargetName(data[0].target_id));
                     $("#content").val(data[0].content);
-                    $("#start_date").val(formatDate3(data[0].start_date));
-                    status(data[0].status);
+                    $("#start_date").val(formatDate4(data[0].start_date));
+                    $("#end_date").val(formatDate4(data[0].end_date));
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                        var str = '<article class="weui-article">';
+                        var count = 1;
+                        $.each(data1, function (i, item) {
+
+                            str += ' <h2 class="title">' + count + '</h2>\n' +
+                                '   <section>\n' +
+                                '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
+                                '      	 <p>指标内容：' + item.content + '</p>\n' +
+                                '      	<p>指标地址：广西壮族自治区南宁市西乡塘区振华路</p>\n' +
+                                '   </section>\n' +
+                                '<div class="weui-line"></div>';
+                            count++;
+
+                        });
+                        str += '</article>';
+                        $("#list").append(str);
+                    })
 
                 });
 
             }
         });
     }
-
-    function status(status) {
-        if (status != 1) {
-            document.getElementById('check').style.display = 'none';
-            var con = '';
-            if (status == 2) {
-                con = "查定中";
-            } else if (status == 3) {
-                con = "查定合格";
-            } else if (status == 4) {
-                con = "查定不合格";
-            } else if (status == 5) {
-                con = "查定申请未通过";
+    function getType(type) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + type,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
             }
-            $("#wethpass").val(con);
-            document.getElementById('wethpass').style.display = 'block';
-        }
+        });
+        return text;
+    }
+
+    function getUserName(user_id) {
+        $.ajaxSettings.async = false;
+        var data = '';
+        $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
+            data = res[0]['name'];
+        })
+        $.ajaxSettings.async = true;
+        return data;
     }
 
     function getTargetName(id) {
-        var name = '';
-        $.ajaxSettings.async = false;
         $.ajax({
             type: 'get',
-            url: domainName + '/project-item/item/target/list',
+            url: domainName + '/project-item/item/indicators/list',
             contentType: "application/json; charset=utf-8",
-            data: {
-                id: id
-            },
+            data: {id: id},
             success: function (data) {
-                if (data[0]['count'] != null) {
-                    $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
-                        name = res[0].content;
-                    })
+                $.get(domainName + "/api-label/label/tree/" + data[0]['type'], function (res) {
+                    $("#name").val(res[0].content);
+                });
+                var count = data[0]['count'];
+                if (count != null) {
+                    $.get(domainName + "/api-label/label/tree/" + data[0]['content'], function (res) {
+                        $("#targetContent").val(res[0].content + "*" + count);
+                    });
                 } else {
-                    name = data[0].content;
+                    $("#targetContent").val(data[0].content);
                 }
             }
         });
-        $.ajaxSettings.async = true;
-        return name;
     }
 
     function getItemName(id) {
         $.ajaxSettings.async = false;
         var data = '';
-        $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-            data = res[0]['item_name'];
+        $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+            data = res[0]['name'];
         })
         $.ajaxSettings.async = true;
         return data;
@@ -388,16 +395,22 @@
         var formdata = $("#form").serializeObject();
         formdata.id = id;
         $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
+            type: 'put',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(formdata),
-            success : function(data) {
+            data: JSON.stringify(formdata),
+            success: function (data) {
                 $.toptip('操作成功', 'success');
             }
         });
     }
 
+    $(".date").calendar({
+        title: "延期批复截止时间",
+        onChange: function (p, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
 </script>
 </body>
 

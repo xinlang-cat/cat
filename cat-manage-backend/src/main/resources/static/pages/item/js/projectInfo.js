@@ -33,7 +33,7 @@ function queryIndicators(id) {
 
             $(data).each(function () {
                 var content = this.content;
-                var serial = $('#' + this.type).parent().parent().parent().parent().next().children().length + 1;
+                var serial = $('#' + this.type).parents('thead').next().children().length + 1;
                 var str = '';
                 if (this.type != 'QUANTITY_INDICATORS') {
                     str = '<tr>' +
@@ -59,7 +59,7 @@ function queryIndicators(id) {
                         '</td>' +
                         ' </tr>';
                 }
-                $('#' + this.type).parent().parent().parent().parent().next().append(str);
+                $('#' + this.type).parents('thead').next().append(str);
             })
         }
     })

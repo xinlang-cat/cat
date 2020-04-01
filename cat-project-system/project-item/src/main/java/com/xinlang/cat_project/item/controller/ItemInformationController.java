@@ -39,12 +39,27 @@ public class ItemInformationController {
     @Autowired
     private IItemContactWayService itemContactWayService;
 
+    @Autowired
+    private IItemInformationViceService itemInformationViceService;
+    @Autowired
+    private IItemIndicatorsViceService itemIndicatorsViceService;
+    @Autowired
+    private IItemSchedulingViceService itemSchedulingViceService;
+    @Autowired
+    private IItemPersonnelViceService itemPersonnelViceService;
+    @Autowired
+    private IItemFundBudgetViceService itemFundBudgetViceService;
+    @Autowired
+    private IItemFundSourceViceService itemFundSourceViceService;
+    @Autowired
+    private IItemContactWayViceService itemContactWayViceService;
+
     @ApiOperation(value = "添加项目信息")
     @LogAnnotation(module = "添加项目信息")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping
     public ResponseEntity<ItemInformation> saveItemInformation(@RequestBody ItemInformationVO informationVO) throws ParseException {
-        System.err.println(informationVO);
+
         //获取当前用户ID,并SET编辑人
         Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         ItemInformation information = informationVO.getInformation();
@@ -191,5 +206,13 @@ public class ItemInformationController {
     public ResponseEntity<Void> deleteItem(@PathVariable Integer id){
         itemInformationService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "查询项目信息")
+    @LogAnnotation(module = "查询项目信息")
+    @GetMapping("listVice")
+    public ResponseEntity<List<ItemInformationVice>> getItemVice(@RequestParam Map<String, Object> params){
+        List<ItemInformationVice> information = itemInformationViceService.findListByParams(params,ItemInformationVice.class);
+        return ResponseEntity.ok(information);
     }
 }

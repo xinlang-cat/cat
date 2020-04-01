@@ -28,13 +28,17 @@
             <p class="weui-max-title">指标详情</p>
         </div>
     </a>
+    <div class="weui-panel" id="list">
+
+
+    </div>
 
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">指标名称:</label>
+            <label class="weui-label">查定结果:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="targetName" name="targetName" type="text" value="">
+            <input class="weui-input" id="result" name="result" type="text" value="">
         </div>
     </div>
 
@@ -61,13 +65,13 @@
             <label class="weui-label">提交人:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="杨珣" id="userName" name="userName" placeholder="" readonly>
+            <input class="weui-input" type="text" value="" id="userName" name="userName" placeholder="" readonly>
         </div>
     </div>
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">查定时间:</label>
+            <label class="weui-label">建议开始时间:</label>
         </div>
         <div class="weui-cell__bd">
             <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
@@ -76,21 +80,13 @@
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">所在地域:</label>
+            <label class="weui-label">预计结束时间:</label>
         </div>
         <div class="weui-cell__bd">
-            <input class="weui-input" id="place" type="text" value="" name="place" readonly>
+            <input class="weui-input date" type="text" value="" id="end_date" readonly name="end_date">
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">所在街道:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="初头朗镇" id="streetCode" name="streetCode" readonly>
-        </div>
-    </div>
+
 
     <div class="weui-line"></div>
     <div class="weui-cell">
@@ -114,11 +110,21 @@
         <div class="weui-line"></div>
         <div class="weui-cell">
             <div class="weui-cell__hd">
-                <label class="weui-label">查定时间:</label>
+                <label class="weui-label">实际查定时间:</label>
             </div>
             <div class="weui-cell__bd">
                 <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true"
-                       name="start_date_true">
+                       name="start_date_true" readonly>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">实际技术时间:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true"
+                       name="end_date_true" readonly>
             </div>
         </div>
         <div class="weui-line"></div>
@@ -127,7 +133,7 @@
                 <label class="weui-label">查定情况简述:</label>
             </div>
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="description" name="description"></textarea>
+                <textarea class="weui-textarea" rows="5" id="description" name="description" readonly></textarea>
             </div>
         </div>
 
@@ -137,7 +143,7 @@
                 <label class="weui-label">查定目的:</label>
             </div>
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="purpose" name="purpose"></textarea>
+                <textarea class="weui-textarea" rows="5" id="purpose" name="purpose" readonly></textarea>
             </div>
         </div>
 
@@ -147,7 +153,7 @@
                 <label class="weui-label">查定依据:</label>
             </div>
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="depand" name="depand"></textarea>
+                <textarea class="weui-textarea" rows="5" id="depand" name="depand" readonly></textarea>
             </div>
         </div>
 
@@ -157,7 +163,7 @@
                 <label class="weui-label">查定内容:</label>
             </div>
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="details" name="details"></textarea>
+                <textarea class="weui-textarea" rows="5" id="details" name="details" readonly></textarea>
             </div>
         </div>
 
@@ -167,7 +173,7 @@
                 <label class="weui-label">查定方法:</label>
             </div>
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="means" name="means"></textarea>
+                <textarea class="weui-textarea" rows="5" id="means" name="means" readonly></textarea>
             </div>
         </div>
 
@@ -186,8 +192,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="weui-cells__title">查定结果</div>
 
 
         <input type="hidden" name="accessory" id="accessory" value="">
@@ -232,31 +236,48 @@
             async: false,
             success: function (data) {
                 $(data).each(function () {
-                    getWechatAddress(data[0].provinceCode, data[0].cityCode, data[0].areaCode);
-                    if (data[0].post_type == 2) {
-                        $("#streetCode").val(data[0].streetCode);
-                    } else {
-                        $.ajax({
-                            type: 'get',
-                            url: domainName + '/map/street/one/' + data[0].streetCode,
-                            async: false,
-                            success: function (data) {
-                                $("#streetCode").val(data.streetName);
-                            }
-                        });
-                    }
+                    $("#userName").val(getUserName(data[0].edit_userid));
                     $("#itemName").val(getItemName(data[0].item_id));
-                    $("#targetName").val(getTargetName(data[0].target_id));
-                    $("#content").val(data[0].content);
                     $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#start_date_true").val(formatDate3(data[0].start_date_true));
+                    $("#end_date").val(formatDate3(data[0].end_date));
+                    $("#end_date_true").val(formatDate3(data[0].end_date_true));
                     file(data[0].accessory);
                     status(data[0].status);
 
-                });
+                    $("#content").text(data[0].content);
+                    $("#purpose").text(data[0].purpose);
 
-            }
-        });
+                    $("#depand").text(data[0].depand);
+                    $("#details").text(data[0].details);
+                    $("#means").text(data[0].means);
+                    $("#description").text(data[0].description);
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                        var str = '<article class="weui-article">';
+                        var count = 1;
+                        $.each(data1, function (i, item) {
+
+                            str += ' <h2 class="title">' + count + '</h2>\n' +
+                                '   <section>\n' +
+                                '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
+                                '      	 <p>指标内容：' + item.content + '</p>\n' +
+                                '      	<p>指标地址：广西壮族自治区南宁市西乡塘区振华路</p>\n' +
+                                '   </section>\n' +
+                                '<div class="weui-line"></div>';
+                            count++;
+
+                        });
+                        str += '</article>';
+                        $("#list").append(str);
+                    })
+
+
+            });
+
     }
+    });
+    }
+
     function file(accessory) {
         $.get(domainName + "/api-f/files/list", {ids: accessory}, function (data1) {
             $.each(data1, function (i, item) {
@@ -265,11 +286,29 @@
             });
         })
     }
-
-
+    function getUserName(user_id) {
+        $.ajaxSettings.async = false;
+        var data = '';
+        $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
+            data = res[0]['name'];
+        })
+        $.ajaxSettings.async = true;
+        return data;
+    }
+    function getType(type) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + type,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+    }
     function status(status) {
         if (status != 1) {
-            document.getElementById('check').style.display = 'none';
             var con = '';
             if (status == 2) {
                 con = "查定中";
@@ -280,40 +319,37 @@
             } else if (status == 5) {
                 con = "查定申请未通过";
             }
-            $("#wethpass").val(con);
-            document.getElementById('wethpass').style.display = 'block';
+            $("#result").val(con);
         }
     }
 
     function getTargetName(id) {
-        var name = '';
-        $.ajaxSettings.async = false;
         $.ajax({
             type: 'get',
-            url: domainName + '/project-item/item/target/list',
+            url: domainName + '/project-item/item/indicators/list',
             contentType: "application/json; charset=utf-8",
-            data: {
-                id: id
-            },
+            data: {id: id},
             success: function (data) {
-                if (data[0]['count'] != null) {
-                    $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
-                        name = res[0].content;
-                    })
+                $.get(domainName + "/api-label/label/tree/" + data[0]['type'], function (res) {
+                    $("#name").val(res[0].content);
+                });
+                var count = data[0]['count'];
+                if (count != null) {
+                    $.get(domainName + "/api-label/label/tree/" + data[0]['content'], function (res) {
+                        $("#targetContent").val(res[0].content + "*" + count);
+                    });
                 } else {
-                    name = data[0].content;
+                    $("#targetContent").val(data[0].content);
                 }
             }
         });
-        $.ajaxSettings.async = true;
-        return name;
     }
 
     function getItemName(id) {
         $.ajaxSettings.async = false;
         var data = '';
-        $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-            data = res[0]['item_name'];
+        $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+            data = res[0]['name'];
         })
         $.ajaxSettings.async = true;
         return data;

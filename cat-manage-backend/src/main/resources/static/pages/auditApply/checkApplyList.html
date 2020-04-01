@@ -49,8 +49,7 @@
                     <thead>
                     <tr>
                         <th style="width:25%;">项目名称</th>
-                        <th style="width:25%;">指标</th>
-                        <th style="width:20%">起止时间</th>
+                        <th style="width:10%">起止时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
@@ -141,27 +140,9 @@
                             "render": function (data, type, row) {
                                 var id =row['item_id'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-                                    data =  res[0]['item_name'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                    data =  res[0]['name'];
                                 })
-
-                                $.ajaxSettings.async = true;
-                                return data;
-                            }
-                        },
-                        {
-                            "data": "content",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                $.ajaxSettings.async = false;
-                                    $.get(domainName + "/project-item/item/target/list?id=" + row['target_id'], function (res) {
-                                        data =  res[0]['content'];
-                                        if (res[0]['count']!=null){
-                                            $.get(domainName + "/api-label/label/tree/" + res[0]['target'], function (res) {
-                                                data =  res[0]['content'];
-                                            })
-                                        }
-                                    })
 
                                 $.ajaxSettings.async = true;
                                 return data;

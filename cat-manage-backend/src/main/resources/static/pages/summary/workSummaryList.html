@@ -131,8 +131,8 @@
                             "render": function (data, type, row) {
                                 var id =row['itemId'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-                                    data =  res[0]['item_name'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                    data =  res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;

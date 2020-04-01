@@ -7,48 +7,45 @@
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
         <fieldset>
-            <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-2 control-label">所需审查指标:</label>
-                <div class="col-md-2">
-                    <select class="form-control input-sm" name="target_id" id="target_id" >
-                    </select>
-                </div>
-                <label class="col-md-1 control-label">建议开始时间</label>
-                <div class="col-md-2">
-                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date" maxlength="50"
-                           id="start_date" data-bv-notempty="true"
-                           data-bv-notempty-message="开始时间 不能为空">
-                </div>
-            </div>
+
             <div class="form-group">
-                <label class="col-md-2 control-label">指标所在地域</label>
-                <div class="col-md-2">
-                    <select class="form-control input-sm" name="provinceCode" id="provinceCode" >
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select class="form-control input-sm" name="cityCode" id="cityCode">
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select class="form-control input-sm" name="areaCode" id="areaCode">
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <select class="form-control input-sm" name="streetCode" id="streetCode">
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">内容:</label>
+                <label class="col-md-2 control-label">所需审查指标</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <div class="input-group" id="target" data-status="true" data-type="1" data-sign="target">
+                        <input type="text" class="form-control" placeholder="所需审查指标" readonly="readonly" id="text5">
+                        <span class="input-group-addon"><a>选择</a></span>
+                    </div>
+                </div>
+            </div>
+
+            <input class="form-control" id="target_id" name="target_id" type="hidden">
+
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">建议查定时间</label>
+                <div class="col-md-4">
+                    <input type="text" name="period" placeholder="请输入" class="form-control date" readonly>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">指标内容:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="指标内容。"
+                              class="layui-textarea form-control" lay-verify="required"
+                              id="targetContent" name="targetContent" data-bv-notempty="true"
+                              data-bv-notempty-message=""></textarea>
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">申请说明:</label>
+                <div class="col-md-8">
+                    <textarea placeholder="申请说明。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="content" name="content" data-bv-notempty="true"
-                              data-bv-notempty-message="内容简介 不能为空"></textarea>
+                              data-bv-notempty-message="申请说明 不能为空"></textarea>
                 </div>
             </div>
 
@@ -75,65 +72,87 @@
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("userId");
 
-    var index, layer, upload;
-    layui.use(['layedit', 'upload', 'laydate','layer'], function () {
+    var index, layer, upload,laydate,form;
+    layui.use(['layedit', 'upload', 'laydate', 'layer','form'], function () {
         layer = layui.layer;
         laydate = layui.laydate;
         upload = layui.upload;
+       form = layui.form;
         var $ = layui.$, slider = layui.slider;
-        lay('.date').each(function(){
+        lay('.date').each(function () {
             laydate.render({
                 elem: this
-                ,format:'yyyy-MM-dd'
-                ,trigger: 'click'
+                , range: true
+                , trigger: 'click'
+            });
+        });
+        $($("div[data-sign]")).click(function () {
+            var signs= $("#target_id").val();
+            var name = $(this).attr("id");
+            var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="label">';
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-item/item/indicators/list',
+                contentType: "application/json; charset=utf-8",
+                data: {item_id: itemId},
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+                        var code = d.id;
+                        var count = d.count;
+                        var content = d.content;
+                        if (count!=null){
+
+                        }else {
+                            if (signs.includes(code)){
+                                element += '<input type="checkbox" name="' + name + '" id="' + code + '" value="' + code + '" title="' + content + ' "  checked="checked"><div class="layui-unselect layui-form-checkbox"><span>' + content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
+
+                            }else {
+                                element += '<input type="checkbox" name="' + name + '" id="' + code + '" value="' + code + '" title="' + content + '"><div class="layui-unselect layui-form-checkbox"><span>' + content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
+                            }
+                                                 }
+                    }
+                    element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'SaveLabel()">保存</button></div></div></form></div>';
+
+                    index = layer.open({
+                        title: "请选择",
+                        type: 1,
+                        area: ['800px', '400px'],
+                        maxmin: true,
+                        shadeClose: true,
+                        content: element
+                    });
+                    form.render('checkbox');
+
+                }
             });
         });
 
     });
-
-
-    $(function () {
-        $.ajax({
-            type : 'get',
-            url : domainName + '/project-item/item/target/list',
-            contentType: "application/json; charset=utf-8",
-            data: {item_id: itemId},
-            success : function(data) {
-                var select = $("#target_id");
-                select.append("<option value=''>请选择指标</option>");
-                for(var i=0; i<data.length; i++){
-                    var d = data[i];
-                    var code = d.id;
-                    var name = d.content;
-                    var count = d.count;
-                    if (count!=null){
-                        var sign = d.target;
-                        name = getName(sign);
-                    }
-                    select.append("<option value='"+ code +"'>" +name+"</option>");
-
-
-                }
+    function targetSaveLabel() {
+        var obj = document.getElementsByName('target');
+        var texts=[];
+        $("input[type='checkbox']:checked").each(function () {
+            texts.push($(this).attr('title'));
+        })
+        var length = obj.length;
+        var str = [];
+        for(var i=0; i<length; i++){
+            if (obj[i].checked) {
+                str.push(obj[i].value);
             }
+        }
+        $("#target_id").val(str);
+        $("#text5").val(texts);
+        $("#targetContent").val(texts);
+        layer.msg("成功", {shift: -1, time: 1000}, function(){
+            layer.close(index);
         });
-    })
-    function getName(sign) {
-        var name=[];
-        $.ajax({
-            type : 'get',
-            url : domainName + '/api-label/label/tree/'+sign,
-            async : false,
-            success : function(data) {
-                 var code =  data[0]['content'];
-                name.push(code)
 
-            }
-        });
-        return name[0];
     }
 
     function add(obj) {
-        if ($("#target_id").val()=='') {
+        if ($("#target_id").val() == '') {
             layer.msg("请选择指标");
             return;
         }

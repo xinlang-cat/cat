@@ -1,36 +1,24 @@
 function getbasic(id) {
     $.ajax({
         type: 'get',
-        url: domainName + '/project-item/item/basic/list',
+        url: domainName + '/project-item/item/information/list',
         data: "id=" + id,
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var d = data[0];
-            $("#skillContent").text(d.content);
-            $("#workContent").text(d.content);
             $("#contract_no").text(d.contract_no);
-            $("#item_name").text(d.item_name);
+            $("#item_name").text(d.name);
             $("#item_number").text(d.item_number);
             $("#start_date").text(d.start_date.substring(0, 10));
             $("#end_date").text(d.end_date.substring(0, 10));
             $("#outline").text(d.outline);
-            getDept(d.undertaker, $(".undertaker"));
-            getDept(d.administrator, $("#administrator"));
+            $(".responsible_unit").text(d.responsible_unit);
+            $(".management_unit").text(d.management_unit);
+            $("#entrusting_party").text(d.entrusting_party);
+
         }
     })
-}
-
-/*解析部门名称*/
-function getDept(sign, node) {
-    $.ajax({
-        type: 'get',
-        url: domainName + '/api-c/company/' + sign,
-        async: false,
-        success: function (data) {
-            node.text(data.signName);
-        }
-    });
 }
 function getCompanyInfo(id) {
     $.ajax({
@@ -85,27 +73,19 @@ function getCompanyInfo(id) {
 function getItem_user(id) {
     $.ajax({
         type: 'get',
-        url: domainName + '/project-item/item/user/list',
+        url: domainName + '/project-item/item/personnel/list',
         data: "item_id=" + id,
         async: false,
         success: function (data) {
-            var countMan = 0;
-
             var str = '';
 
             var count = 1;
             $(data).each(function () {
-                var names = [];
-                $(this.targetIds).each(function () {
-                    var name = getResponsibilityName(this);
-                    names.push(name);
-                })
                 var userInfo = getUserInfo(this.user_id);
                 var academicTitleRank;
                 var degree;
                 academicTitleRank = userInfo.academicTitleRank;
                 degree= userInfo.degree;
-
                 if(academicTitleRank=="高级"){
                     advanced++;
                 }else if (academicTitleRank=="中级"){
@@ -121,21 +101,15 @@ function getItem_user(id) {
                     bachelor++;
                 }
 
-                var sex;
-                if (userInfo.sex == 0) {
-                    sex = '女';
-                } else {
-                    sex = '男';
-                }
                 str += '<tr>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + count + '</td>' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.name + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + sex + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.birthDate.substring(0, 10) + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicTitleRank + userInfo.academicTitle + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.academicDiplomas + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + userInfo.deptName + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' + names + '</td>' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.name + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.sex + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.age + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.professional_title + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.specialty + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.organization + '</td>\n' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' +  this.responsibilities + '</td>' +
                     '</tr>'
                 count++;
 
@@ -150,12 +124,12 @@ function getItem_user(id) {
             $("#advanced").val(advanced);
             $("#postgraduate").val(postgraduate);
             $("#bachelor").val(bachelor);
-
             $("#userinfo").append(str);
 
         }
     })
 }
+
 function getUserInfo(id) {
     var userinfo;
     $.ajax({
