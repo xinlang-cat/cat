@@ -584,8 +584,8 @@
                     for (var key in res[0]) {
                         $("#" + key).val(res[0][key]);
                     }
-                    $('#birthDate').val(formatDate1(res[0].birthDate));
-                    $('#lastYear').val(formatDate1(res[0].lastYear));
+                    $('#birthDate').val(formatDate4(res[0].birthDate));
+                    $('#lastYear').val(formatDate4(res[0].lastYear));
                     $('#address').html(res[0].address);
                     setRadio($('input[name=userType]'), res[0].userType);
                     setRadio($('input[name=idType]'), res[0].idType);

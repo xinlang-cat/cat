@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <title>添加项目验收报告-专家</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-22 col-lg-12" >
+    <form class="form-horizontal layui-form" onsubmit="return false" id="form" style="padding-bottom: 30px">
+        <fieldset>
+
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">项目名称</label>
+                <div class="col-md-10">
+                    <p class="form-control itemName" style="border: none"></p>
+                    <input type="hidden" class="form-control" id="itemName" name="itemName">
+                    <input type="hidden" id="itemId" name="itemId">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">综合意见建议</label>
+                <div class="col-md-8">
+						<textarea class="layui-textarea" id="evaluateContent" name="evaluateContent" rows="15">
+						</textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">评审结果</label>
+                <div class="col-md-8">
+                    <input type="radio" name="isPass" value="1" title="通过">
+                    <input type="radio" name="isPass" value="0" title="待定">
+                    <input type="radio" name="isPass" value="-1" title="不通过">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">评审人</label>
+                <div class="col-md-10">
+                    <p class="form-control userName" style="border: none"></p>
+                    <input type="hidden" id="userName" name="userName"  class="form-control">
+                    <input type="hidden" id="userId"  name="userId">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">评审日期</label>
+                <div class="col-md-10">
+                    <p class="form-control createTime" style="border: none"></p>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12" id="div_submit">
+                        <button class="btn btn-primary" type="submit" onclick="save()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript">
+
+    var laydate, form;
+    layui.use(['layer', 'form', 'laydate', 'upload'], function () {
+        var layer = layui.layer, upload = layui.upload;
+        form = layui.form;
+        laydate = layui.laydate;
+    });
+
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
+    $('.createTime').html(formatDate4(new Date()));
+    $('#itemId').val(itemId);
+    $('#userId').val(userId);
+
+    //专家信息
+    $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
+        $('.userName').html(res[0].name);
+        $('#userName').val(res[0].name);
+    });
+
+    //初始化项目信息
+    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
+        $('.itemName').html(res[0].item_name);
+        $('#itemName').val(res[0].item_name);
+    });
+
+    //保存数据
+    function save() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if(!bootstrapValidator.isValid()){
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type : 'post',
+            url : domainName + '/api-summary/expert-evaluate',
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function(){
+                    //location.href = "userList.html";
+                });
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

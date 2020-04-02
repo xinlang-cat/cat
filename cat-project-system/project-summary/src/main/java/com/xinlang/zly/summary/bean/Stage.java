@@ -56,7 +56,7 @@ public class Stage implements Serializable {
     private String otherTargetDescribe;//其他指标描述
     private String importanceDescribe;//项目重要进展情况描述
     private String isOneCheck;//项目资金是否单独核算
-    private String  oneCheckType;//单独核算形式
+    private String oneCheckType;//单独核算形式
     private String allIncome;//收入 
     private String allExpend;//支出
     private String labourExpend;//劳务支出
@@ -80,8 +80,6 @@ public class Stage implements Serializable {
     private String deptCheckUser;//经办人
     private Date deptCheckTime;//单位审核时间
     private Integer enable;//状态
-    @Transient
-    private List<String> causes;//项目拖延、停顿、终止、撤销的主要原因
     @Transient
     private List<StageAffixFile> stageAffixFiles = new ArrayList<>();//附件
     @Transient

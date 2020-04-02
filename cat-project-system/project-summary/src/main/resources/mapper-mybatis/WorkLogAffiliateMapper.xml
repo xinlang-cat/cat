@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinlang.zly.summary.mapper.WorkLogAffiliateMapper">
+	<select id="findLatelyByItemId" parameterType="Integer" resultType="com.xinlang.zly.summary.bean.WorkLogAffiliate">
+		SELECT
+			original_count originalCount,content,old_count oldCount,now_count nowCount
+		FROM
+			project_work_log_affiliate
+		WHERE
+			item_id=#{itemId}
+		AND
+		 	create_time = (SELECT max(create_time) FROM project_work_log_affiliate WHERE item_id=#{itemId})
+	</select>
+</mapper>
