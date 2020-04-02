@@ -95,6 +95,43 @@ function getStreet(AreaCode,node){
         }
     });
 }
+/*获取地点*/
+function getsuperior(code) {
+    var text = '';
+    $.ajax({
+        type: 'get',
+        url: domainName + '/map/province/tree/' + code,
+        async: false,
+        success: function (data) {
+            var provinceName,
+                city,
+                area,
+                street;
+            var str;
+            if (data.street != undefined) {
+                provinceName = data.province.provinceName;
+                city = data.city.cityName;
+                area = data.area.areaName;
+                street = data.street.streetName;
+                str = provinceName + '-' + city + '-' + area + '-' + street + '-';
+            } else if (data.area != undefined) {
+                provinceName = data.province.provinceName;
+                city = data.city.cityName;
+                area = data.area.areaName;
+                str = provinceName + '-' + city + '-' + area + '-';
+            } else if (data.city != undefined) {
+                provinceName = data.province.provinceName;
+                city = data.city.cityName;
+                str = provinceName + '-' + city + '-';
+            } else if (data.province != undefined) {
+                provinceName = data.province.provinceName;
+                str = provinceName + '-';
+            }
+            text = str;
+        }
+    });
+    return text;
+}
 //查询当前用户所在的公司代码
 var deptCode;
 function queryDeptCode() {
