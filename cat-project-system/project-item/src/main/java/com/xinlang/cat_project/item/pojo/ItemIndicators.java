@@ -29,6 +29,7 @@ public class ItemIndicators {
     private String site;
     private Date start_date;
     private Date end_date;
+    private String userIds;
     private Integer status;
 
     @Transient
