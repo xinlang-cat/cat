@@ -89,8 +89,8 @@
                     <td rowspan="4" class="table-info">基本信息</td>
                     <td class="td-text1">项目名称:</td>
                     <td>
-                        <span class="item_name"></span>
-                        <input type="hidden" id="item_name" name="itemName" value="">
+                        <span class="name"></span>
+                        <input type="hidden" id="name" name="itemName" value="">
                     </td>
                     <td class="td-text1">合同编号:</td>
                     <td>
@@ -241,9 +241,9 @@
                                                               title="7.立题不当"></div>
                         <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8"
                                                               title="8.不可抗拒因素"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="9"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="9"
                                                               title="9.合作方变动"></div>
-                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="10"
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="10"
                                                               title="10.其他原因"></div>
                     </td>
                     <td colspan="2">
@@ -744,11 +744,11 @@
         form = layui.form;
         laydate = layui.laydate;
 
-            laydate.render({
-                elem: '.date'
-                , showBottom: false
-                , trigger: 'click'
-            });
+        laydate.render({
+            elem: '.date'
+            , showBottom: false
+            , trigger: 'click'
+        });
         upload.render({
             elem: '#upload_file' //绑定元素
             , accept: 'file'
@@ -774,17 +774,15 @@
     });
 
     //初始化项目信息
-    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
+    $.get(domainName + "/project-item/item/information/list", {id: itemId}, function (res) {
         for (var key in res[0]) {
-            if (key == 'undertaker' || key == 'category') continue;
+            if (key == 'responsible_unit' || key == 'type') continue;
             $("#" + key).val(res[0][key]);
             $("." + key).html(res[0][key]);
         }
-        $.get(domainName + "/api-c/company/" + res[0]['undertaker'], function (data) {
-            $('#undertaker').val(data['signName']);
-            $('.undertaker').html(data['signName']);
-        });
-        $.get(domainName + "/api-label/label/tree/" + res[0]['category'], function (data) {
+        $('#undertaker').val(res[0]['responsible_unit']);
+        $('.undertaker').html(res[0]['responsible_unit']);
+        $.get(domainName + "/api-label/label/tree/" + res[0]['type'], function (data) {
             $('#category').val(data[0]['content']);
             $('.category').html(data[0]['content']);
         });
@@ -832,7 +830,7 @@
     });
 
     //初始化指标
-    $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (res) {
+    $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
         var BE_TECHNICAL_INDICATORS = false;
         var BE_ECONOMIC_INDICATORS = false;
         var BE_INDICATORS_OF_TALENT_TEAM_CONS = false;
@@ -877,7 +875,7 @@
                     continue
                 }
             }
-            SIGNS += data.target + ',';
+            SIGNS += data.content + ',';
         }
         var url = domainName + "/api-label/label/tree/";
         $.get(url + SIGNS.trim(","), function (res) {

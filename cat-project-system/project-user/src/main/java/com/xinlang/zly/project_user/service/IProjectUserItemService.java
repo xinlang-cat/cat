@@ -1,6 +1,7 @@
 package com.xinlang.zly.project_user.service;
 
 import com.xinlang.bean.project_user.ProjectUserItem;
+import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * @author 张龙毅 18777811286@163.com
  * 2019-11-09
  */
-public interface IProjectUserItemService {
+public interface IProjectUserItemService extends IBaseService<ProjectUserItem> {
     void save(ProjectUserItem projectUserItem);
     List<ProjectUserItem> findByUserIdAndUserType(Integer userId,String userType);
     List<ProjectUserItem> findByItemIdAndUserType(Integer itemId,String userType);

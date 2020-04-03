@@ -220,13 +220,13 @@
                 });
                 $('#targetSum').append(str);
             } else {
-                $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (data) {
+                $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (data) {
                     var str = '';
                     $.each(data, function (i, item) {
                         if (item['count'] > 0) {
                             var content = '';
                             $.ajaxSettings.async = false;
-                            $.get(domainName + "/api-label/label/tree/" + item['target'], function (result) {
+                            $.get(domainName + "/api-label/label/tree/" + item['content'], function (result) {
                                 content = result[0]['content'];
                             });
                             $.ajaxSettings.async = true;
