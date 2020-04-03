@@ -192,31 +192,23 @@ function getUserId() {
     return datas;
 }
 function getFund(id) {
-    var valued=  0;
-    var value = 0;
     var count = 0;
     $.ajax({
         type: 'get',
-        url: domainName + '/project-item/item/fund/list',
+        url: domainName + '/project-item/item/fundSource/list',
         data: "item_id=" + id,
         async: false,
-
+        contentType: "application/json; charset=utf-8",
         success: function (data) {
-            $(data).each(function () {
-                var name = this.source;
-                value = this.money;
-
-                valued=  parseInt($('#'+name).val());
-                count = count+parseInt(value);
-                if(!valued){
-                    $('#'+name).val(value);
-                }else {
-                    $('#'+name).val(valued+parseInt(value));
-
+            for(var key in data[0]){
+                var date= data[0][key];
+                if(key != 'id' && key != 'item_id'&& key != 'responsible_unit'){
+                    $('#'+key).val(date);
+                    count +=  parseInt(date);
                 }
-
-            })
+            }
             $("#countMoney").val(count);
+
         }
     })
 }

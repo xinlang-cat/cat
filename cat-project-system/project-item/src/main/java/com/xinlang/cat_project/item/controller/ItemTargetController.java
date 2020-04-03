@@ -178,25 +178,10 @@ public class ItemTargetController {
                                                                      @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params){
-        String count = (String) params.get("count");
-       /* Integer item_id = Integer.parseInt((String) params.get("item_id"));*/
+
         String item_id = (String) params.get("item_id");
         String name = (String) params.get("item_name");
-        if (count == "" || count == null ){
-
-        }else {
-            Integer weth = Integer.parseInt(count);
-            List<ItemTarget> targets = targetService.findQuantity(weth);
-            List<Integer> ids =new ArrayList<>();
-            if (targets.size()==0){
-                ids.add(0);
-            }else {
-                for (int i=0;i<targets.size();i++){
-                    ids.add(targets.get(i).getId());
-                }
-                params.put("ids",ids);
-            }
-        }
+        String check_unit = (String) params.get("check_unit");
 
         if (name == "" || name == null &&  item_id == null ){
 

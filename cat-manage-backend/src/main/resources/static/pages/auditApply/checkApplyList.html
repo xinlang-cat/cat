@@ -19,12 +19,6 @@
                                 <div class="form-group">
                                     项目名称(支持模糊搜索)：
                                     <input id="item_name" type="text" class="form-control" placeholder="项目名">
-                                    指标类型：
-                                    <select class="form-control input-sm" id="count">
-                                        <option value="">全部</option>
-                                        <option value=1>数量指标</option>
-                                        <option value=2>非数量指标</option>
-                                    </select>
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
@@ -52,8 +46,8 @@
                         <th style="width:10%">起止时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
-                        <th style="width:5%;">查看</th>
-                        <th style="width:5%;">查定报告</th>
+                        <th style="width:5%;">操作</th>
+                       <!-- <th style="width:5%;">查定报告</th>-->
                         <!--<th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
@@ -78,13 +72,14 @@
 <script type="text/javascript">
 
     var pers = checkPermission();
-    var itemId="";
+    var unit;
+    var deptCode;//当前用户的公司代码r
     itemId = getUrlParam("item_id");
     var example;
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
-
+        getCompanryCode();
         function init() {
             example =
                 $('#dt-table').DataTable({
@@ -102,8 +97,8 @@
                         "data":function(d){
                             d.item_name = $('#item_name').val();
                             d.status = $('#status').val();
-                            d.count = $('#count').val();
                             d.item_id = itemId;
+                            d.check_unit=unit;
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -196,12 +191,13 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',2'+')" ><i class="layui-icon">申请详情</i></button>');
+                                var status =row['status']==1?"申请详情":"查定报告";
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] +','+row['status']+ ')" >'+status+'<i class="layui-icon"></i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
                         },
-                        {
+                       /* {
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
@@ -209,7 +205,7 @@
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
-                        },
+                        },*/
                         /*{
                             "data": "id",
                             "defaultContent": "",
@@ -240,21 +236,29 @@
             }
         });
     }
-    function read(id,userType) {
-        layer.open({
-            title:"查看查定申请",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['checkApply.html?id='+id+'&userType='+userType],
-            end : function() {
+
+
+    function getCompanryCode() {
+        $.ajax({
+            type: 'get',
+            url : domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var identity = data.identity;
+                if (identity=="PARTY_A"){
+
+                }else {
+                    unit = data.signName;
+                }
+
 
             }
         });
-    }
 
-    function report(id,status) {
+
+    }
+    function read(id,status) {
         if (status==2){
             layer.open({
                 title:"添加",
@@ -275,6 +279,18 @@
                 maxmin: true,
                 shadeClose: true,
                 content: ['checkResult.html?id='+id],
+                end : function() {
+
+                }
+            });
+        }else if (status==1){
+            layer.open({
+                title:"查看查定申请",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkApply.html?id='+id],
                 end : function() {
 
                 }

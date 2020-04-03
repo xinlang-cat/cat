@@ -21,6 +21,7 @@
             </div>
 
             <input class="form-control" id="target_id" name="target_id" type="hidden">
+            <input class="form-control" id="check_unit" name="check_unit" type="hidden">
 
             <div class="form-group" style="margin-top: 40px">
                 <label class="col-md-2 control-label">建议查定时间</label>
@@ -150,7 +151,15 @@
         });
 
     }
+    function getItemName(id) {
 
+        $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+            var name = res[0]['management_unit'];
+            $("#check_unit").val(name);
+        })
+
+    }
+    getItemName(itemId);
     function add(obj) {
         if ($("#target_id").val() == '') {
             layer.msg("请选择指标");

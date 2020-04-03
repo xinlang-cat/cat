@@ -206,6 +206,7 @@
                             "data": "",
                             "defaultContent": "",
                             "render": function (data, type, row) {
+                                var id= row['id'];
                                 var detailsHref ="../list-layout/pages/projectDetails/checkProjectInfo.html?id="+id;
                                 var expert = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>匹配专家</i></button>");
                                 expert.attr("onclick", "matchExpert(" +id+")")

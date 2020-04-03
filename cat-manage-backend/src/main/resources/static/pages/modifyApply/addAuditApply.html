@@ -1462,9 +1462,8 @@
         }
     }, 1000);
 
-    function closeThis() {
-        var index = parent.layer.getFrameIndex(window.name);
-        parent.layer.close(index);
+    function closeThis(index) {
+        layer.close(index);
     }
 </script>
 </html>

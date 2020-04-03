@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>结题申请</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <style>
+        .weui-loadmore_line {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<form class="layui-form" id="form">
+    <input type="hidden" id="item_id" name="item_id" value="">
+    <input type="hidden" id="id" name="id" value="">
+    <div class="page-hd padding15 bg-white">
+        <h1 class="page-hd-title" style="text-align: center;">
+            项目信息
+        </h1>
+        <!-- <div class="weui-loadmore_line"></div> -->
+    </div>
+    <!-- 基本信息 -->
+    <div class="weui-cells__title page-bg">基本信息</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">合同编号</label></div>
+            <div class="weui-cell__bd">
+                <span id="contract_no"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">项目名称</label></div>
+            <div class="weui-cell__bd">
+                <span id="item_name"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">承担单位</label></div>
+            <div class="weui-cell__bd">
+                <span class="responsible_unit"></span>
+            </div>
+        </div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">管理单位</label></div>
+            <div class="weui-cell__bd">
+                <span id="entrusting_party"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">验收单位</label></div>
+            <div class="weui-cell__bd">
+                <span class="management_unit"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">申请日期</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input date" name="applicationDate" id="applicationDate">
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-cells__title page-bg">申请验收单位信息</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">单位名称</label></div>
+            <div class="weui-cell__bd">
+                <span class="responsible_unit"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">通信地址</label></div>
+            <div class="weui-cell__bd">
+                <span id="site"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">联系人</label></div>
+            <div class="weui-cell__bd">
+                <span id="linkman"></span>
+            </div>
+        </div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">联系电话</label></div>
+            <div class="weui-cell__bd">
+                <span id="phone"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">邮政编码</label></div>
+            <div class="weui-cell__bd">
+                <span id="postal_code"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">电子邮箱</label></div>
+            <div class="weui-cell__bd">
+                <span id="email"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">单位性质</label></div>
+            <div class="weui-cell__bd">
+                <span>企业</span>
+            </div>
+        </div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">建议验收日期</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input date" name="suggestDate" id="suggestDate">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">项目开始时间</label></div>
+            <div class="weui-cell__bd">
+                <span id="start_date"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">项目结束时间</label></div>
+            <div class="weui-cell__bd">
+                <span id="end_date"></span>
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">指标完成情况</label></div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入指标完成情况" rows="3" onkeyup="textarea(this);" id="cean"
+                          name="cean"></textarea>
+            </div>
+        </div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">资料文件目录</label></div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入资料文件目录" rows="3" onkeyup="textarea(this);" id="katalog"
+                          name="katalog"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title page-bg">项目投入产出基本情况表</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">参加单位数(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_company_number"
+                       name="the_company_number">
+            </div>
+        </div>
+        <div class="weui-cells__title page-bg">项目主要成果情况</div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">引进技术(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_imported_technology"
+                       name="the_imported_technology">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">集成应用技术(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="integrated_application_technology"
+                       name="integrated_application_technology">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">工业新产品(种)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="new_industrial_product"
+                       name="new_industrial_product">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">农业新品种(种)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="new_agricultural_variety"
+                       name="new_agricultural_variety">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新工艺(新方法，新模式)(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_technology"
+                       name="the_new_technology">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新材料(种)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_material" name="the_new_material">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新装置(新装备(套))</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_device" name="the_new_device">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">申请登记计算软件(套)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="register_computer_software"
+                       name="register_computer_software">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">技术研发平台(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="research_and_development_platform"
+                       name="research_and_development_platform">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">科技信息服务平台(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="science_information_platform"
+                       name="science_information_platform">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">示范点(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="pilot_studies" name="pilot_studies">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">中试线</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="pilot_line" name="pilot_line">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">生产线(种)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_production_line"
+                       name="the_production_line">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">试验基地(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="experimental_base"
+                       name="experimental_base">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">专利申请(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="application_for_patent"
+                       name="application_for_patent">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">发明专利</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="application_for_invention_patent"
+                       name="application_for_invention_patent">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">实用新型</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="application_for_utility_paten"
+                       name="application_for_utility_paten">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">授权专利</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="authorized_patent"
+                       name="authorized_patent">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">发明专利</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="authorized_invention_patent"
+                       name="authorized_invention_patent">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">实用新型</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="authorized_utility_patent"
+                       name="authorized_utility_patent">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">参与制定技术标准(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="count_standard" name="count_standard">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">国家标准(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_national_standard"
+                       name="the_national_standard">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">国际标准(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_international_standard"
+                       name="the_international_standard">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">行业标准(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_industry_standard"
+                       name="the_industry_standard">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">地方标准(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="local_standard" name="local_standard">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">企业标准(个)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_enterprise_standard"
+                       name="the_enterprise_standard">
+            </div>
+        </div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+
+            <div class="weui-cell__hd"><label class="weui-label -bold">论文专著研究报告(篇)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="count_thesis" name="count_thesis">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">国内发表(篇)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="domestic_papers" name="domestic_papers">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">国外发表(篇)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="foreign_papers" name="foreign_papers">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">培养博士后(人)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="make_postdoctor" name="make_postdoctor">
+            </div>
+
+        </div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">培养博士(人)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="make_doctor" name="make_doctor">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">培养硕士(人)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="make_postgraduate"
+                       name="make_postgraduate">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">举办培训班(次)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="hold_training_courses"
+                       name="hold_training_courses">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">参与培训人数(人次)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="number_of_participants"
+                       name="number_of_participants">
+            </div>
+        </div>
+        <div class="weui-cells__title page-bg">项目成果应用情况</div>
+
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">实际应用成果数(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="convert_the_number_of_applications"
+                       name="convert_the_number_of_applications">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">已商品化成果数(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="results_of_industrialization"
+                       name="results_of_industrialization">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">成果转让合同数(项)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="achievement_transfer_contract"
+                       name="achievement_transfer_contract">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">成果转让合同金额(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number"
+                       id="total_amount_of_achievement_transfer_contract"
+                       name="total_amount_of_achievement_transfer_contract">
+            </div>
+        </div>
+        <div class="weui-cells__title page-bg">项目实施期间累积获取的经济效益</div>
+
+        <td class="td-text">直接经济效益</td>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增销售收入(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="all_production_a" name="all_production_a">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增产值(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_production_a"
+                       name="the_new_production_a">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增利润(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_tax_a" name="the_new_tax_a">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增出口创汇(万美元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="net_amount_a" name="net_amount_a">
+            </div>
+        </div>
+        <td class="td-text">间接经济效益</td>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增销售收入(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="all_production_b" name="all_production_b">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增产值(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_production_b"
+                       name="the_new_production_b">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增利润(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_tax_b" name="the_new_tax_b">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">新增出口创汇(万美元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="net_amount_b" name="net_amount_b">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title page-bg">预期项目完成后年增效益</div>
+
+    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+        <div class="weui-cell__hd"><label class="weui-label -bold">年增销售收入(万元)</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="number" id="all_production_year"
+                   name="all_production_year">
+        </div>
+    </div>
+    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+        <div class="weui-cell__hd"><label class="weui-label -bold">年增产值(万元）</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="number" id="the_new_production_year"
+                   name="the_new_production_year">
+        </div>
+    </div>
+    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+        <div class="weui-cell__hd"><label class="weui-label -bold">年增利税(万元)</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="number" id="the_new_tax_year" name="the_new_tax_year">
+        </div>
+    </div>
+    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+        <div class="weui-cell__hd"><label class="weui-label -bold">年增出口创汇(万美元)</label></div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="number" id="net_amount_year" name="net_amount_year">
+        </div>
+    </div>
+    </div>
+
+    <div class="weui-loadmore_line"></div>
+    <!-- 总体目标和主要研究内容 -->
+    <div class="weui-cells__title page-bg">总体目标和主要研究内容</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">申请验收单位意见</label></div>
+            <div class="weui-cell__bd">
+						<textarea class="weui-textarea" rows="3" onkeyup="textarea(this);"
+                                  id="applicationDeptOpinion"
+                                  name="applicationDeptOpinion"></textarea>
+            </div>
+        </div>
+        <div class="weui-loadmore_line"></div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">受委托管理单位或项目牵头承担单位意见</label></div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" rows="3" onkeyup="textarea(this);"
+                          id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="weui-line"></div>
+<div class="weui-btn-area">
+    <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
+</div>
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../weui/js/city-picker.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script src="../../js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+    var item_id = getUrlParam("item_id");
+    $("#item_id").val(item_id);
+    getdata(item_id);
+    getbasic(item_id);
+    getCompanyInfo(item_id);
+
+    function getbasic(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/information/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $("#contract_no").text(d.contract_no);
+                $("#item_name").text(d.name);
+                $("#item_number").text(d.item_number);
+                $("#start_date").text(d.start_date.substring(0, 10));
+                $("#end_date").text(d.end_date.substring(0, 10));
+                $("#outline").text(d.outline);
+                $(".responsible_unit").text(d.responsible_unit);
+                $(".management_unit").text(d.management_unit);
+                $("#entrusting_party").text(d.entrusting_party);
+
+            }
+        })
+    }
+
+    function getCompanyInfo(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/company/list',
+            data: "item_id=" + id,
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    var datas = getUserId();
+                    if (this.type == 1) {
+                        var name = this.linkman;
+                        if (name == datas) {
+                            $("#manageDeptOpinion").attr("readonly", true);
+                            $("#burgLeaderOpinion").attr("readonly", true);
+                            $("#burgFinanceOpinion").attr("readonly", true);
+                        }
+                        $("#phone").text(this.phone);
+                        $("#postal_code").text(this.postal_code);
+                        $("#site").text(this.site);
+                        $("#email").text(this.email);
+                        $("#fax").text(this.fax);
+                        $("#linkman").text(this.linkman);
+                    }
+                    if (this.type == 2) {
+                        var name = this.linkman;
+                        if (name == datas) {
+                            $("#burgLeaderOpinion").attr("readonly", true);
+                            $("#burgFinanceOpinion").attr("readonly", true);
+                            $("#applicationDeptOpinion").attr("readonly", true);
+                            $("#applicationDate").attr("readonly", true);
+                            $("#suggestDate").attr("readonly", true);
+                            $("#cean").attr("readonly", true);
+                            $("#katalog").attr("readonly", true);
+                        }
+                    }
+                    if (this.type == 0) {
+                        var name = this.linkman;
+                        if (name == datas) {
+                            $("#applicationDeptOpinion").attr("readonly", true);
+                            $("#manageDeptOpinion").attr("readonly", true);
+                            $("#applicationDate").attr("readonly", true);
+                            $("#suggestDate").attr("readonly", true);
+                            $("#cean").attr("readonly", true);
+                            $("#katalog").attr("readonly", true);
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    function getUserId() {
+        var datas;
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            async: false,
+            success: function (data) {
+                datas = data.username;
+                $("#createUserId").val(data.id);
+            }
+        })
+        return datas;
+    }
+
+    function getdata(item_id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-summary/check-table/list',
+            data: "item_id=" + item_id,
+            async: false,
+            success: function (data) {
+                var arr = Object.keys(data);
+                if (arr.length == 0) {
+                    $("textarea").attr('readonly', true);
+                    $("#applicationDeptOpinion").removeAttr("readonly");
+                    $("#cean").removeAttr("readonly");
+                    $("#katalog").removeAttr("readonly");
+                }
+                for (var key in data[0]) {
+                    var date = data[0][key];
+                    $('#' + key).val(date);
+                }
+                $(data).each(function () {
+                    $("#applicationDate").val(this.applicationDate.substring(0, 10));
+                    $("#suggestDate").val(this.suggestDate.substring(0, 10));
+                    $("#cean").text(this.cean);
+                    $("#katalog").text(this.katalog);
+                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
+                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
+                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
+                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
+                    change(this.status);
+                })
+            }
+        })
+    }
+
+    function change(status) {
+        if (status == 0) {
+            document.getElementById('new').style.display = 'block';
+        } else {
+            $("input").attr('readonly', true);
+            $("input").attr("style", "border: 0px;");
+            $("textarea").attr('readonly', true);
+            $("#applicationDate").attr('disabled', true);
+            $("#suggestDate").attr('disabled', true);
+            document.getElementById('showTooltips').style.display = 'none';
+        }
+    }
+
+    function add() {
+        var tableId = parseInt($("#id").val());
+        var formdata = $("#form").serializeObject();
+        formdata.itemId = item_id;
+        if (!tableId) {
+            formdata.status = 1;
+            $.ajax({
+                type: 'post',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "添加成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        $.toptip('操作成功', 'success');
+                    });
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "保存成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        $.toptip('操作成功', 'success');
+                    });
+                }
+            });
+        }
+
+    }
+
+    $(".date").calendar({
+        title: "延期批复截止时间",
+        onChange: function (p, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
+</script>
+</body>
+</html>

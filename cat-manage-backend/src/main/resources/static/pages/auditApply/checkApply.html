@@ -148,7 +148,7 @@
     var layedit, index;
 
     var id = getUrlParam("id");
-    var userType = getUrlParam("userType");
+    var userType ;
     var h = $(window).height() - 100;
     layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
@@ -195,10 +195,21 @@
     }
 
     function status(status) {
-        if (status == 1 && userType == 2) {
-            var obj = document.getElementsByClassName("btn-group");
-            obj[0].style.display = "block";
-        }
+        $.ajax({
+            type: 'get',
+            url : domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var identity = data.identity;
+                if (identity=="PARTY_C" && status == 1){
+                    var obj = document.getElementsByClassName("btn-group");
+                    obj[0].style.display = "block";
+                }
+
+            }
+        });
+
     }
 
 
