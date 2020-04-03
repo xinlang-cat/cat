@@ -35,9 +35,15 @@ public class ProjectUserItemController {
     @LogAnnotation(module = "添加用户与项目关系")
     public List<ProjectUserItem> saveList(@RequestBody List<ProjectUserItem> projectUserItems) {
         Date date = new Date();
+        Map<String, Object> map = new HashMap<>();
         for (ProjectUserItem projectUserItem : projectUserItems) {
-            projectUserItem.setCreateTime(date);
-            projectUserItemService.save(projectUserItem);
+            map.put("itemId", projectUserItem.getItemId());
+            map.put("userId", projectUserItem.getUserId());
+            List<ProjectUserItem> list = projectUserItemService.findListByParams(map, ProjectUserItem.class);
+            if (!list.isEmpty()) {
+                projectUserItem.setCreateTime(date);
+                projectUserItemService.save(projectUserItem);
+            }
         }
         return projectUserItems;
     }
@@ -127,7 +133,7 @@ public class ProjectUserItemController {
             });
             //查询出所有该类型专家
             List<ProjectUser> users = null;
-            if(!userIds.isEmpty()){
+            if (!userIds.isEmpty()) {
                 users = projectUserService.findByUserIds(userIds);
             }
             result.put(labelSign, users);

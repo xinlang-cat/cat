@@ -51,6 +51,29 @@
         .layui-checkbox-disbaled[lay-skin=primary] span {
             color: #0C0C0C;
         }
+        .layui-form-radio {
+            margin: 0;
+        }
+
+        .layui-form-label {
+            width: 120px;
+            font-weight: bold;
+            text-align: left;
+            padding: 0;
+            margin-bottom: 0;
+            margin-top: 5px;
+        }
+
+        .layui-input-block {
+            min-height: auto;
+        }
+
+        .layui-form-item {
+            margin-bottom: 0;
+        }
+        .layui-disabled > div{
+            color: #666;
+        }
     </style>
 </head>
 
@@ -131,6 +154,7 @@
         </table>
     </div>
 
+    <form class="layui-form">
     <div class="module">
         <table class="layui-table">
             <colgroup>
@@ -209,9 +233,9 @@
                                                           title="7.立题不当"></div>
                     <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8"
                                                           title="8.不可抗拒因素"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="9"
+                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="9"
                                                           title="9.合作方变动"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="cause" value="10"
+                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="10"
                                                           title="10.其他原因"></div>
                 </td>
                 <td colspan="2">
@@ -265,6 +289,7 @@
             </tbody>
         </table>
     </div>
+    </form>
 
     <div class="module">
         <table class="layui-table">
@@ -539,7 +564,9 @@
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
 <script type="text/javascript" src='../../../../js/common.js'></script>
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script type="text/javascript" src='../../js/initSelectData.js'></script>
 <script>
+
     var pers = checkPermission();
     var stageId = getUrlParam("id");
     var userId = getUrlParam("user_id");

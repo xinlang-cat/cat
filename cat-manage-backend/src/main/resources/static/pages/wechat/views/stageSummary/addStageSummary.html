@@ -1682,17 +1682,17 @@
     });
 
     //初始化项目信息
-    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
+    $.get(domainName + "/project-item/item/information/list", {id: itemId}, function (res) {
         for (var key in res[0]) {
-            if (key == 'undertaker' || key == 'category') continue;
+            if (key == 'responsible_unit' || key == 'type' || key == 'name') continue;
             $("#" + key).val(res[0][key]);
             $("." + key).html(res[0][key]);
         }
-        $.get(domainName + "/api-c/company/" + res[0]['undertaker'], function (data) {
-            $('#undertaker').val(data['signName']);
-            $('.undertaker').html(data['signName']);
-        });
-        $.get(domainName + "/api-label/label/tree/" + res[0]['category'], function (data) {
+        $('#item_name').val(res[0]['name']);
+        $('.item_name').html(res[0]['name']);
+        $('#undertaker').val(res[0]['responsible_unit']);
+        $('.undertaker').html(res[0]['responsible_unit']);
+        $.get(domainName + "/api-label/label/tree/" + res[0]['type'], function (data) {
             $('#category').val(data[0]['content']);
             $('.category').html(data[0]['content']);
         });
@@ -1764,7 +1764,7 @@
     });
 
     //初始化指标信息
-    $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (res) {
+    $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
         var BE_TECHNICAL_INDICATORS = false;
         var BE_ECONOMIC_INDICATORS = false;
         var BE_INDICATORS_OF_TALENT_TEAM_CONS = false;
@@ -1809,7 +1809,7 @@
                     continue
                 }
             }
-            SIGNS += data.target + ',';
+            SIGNS += data.content + ',';
         }
         var url = domainName + "/api-label/label/tree/";
         $.get(url + SIGNS.trim(","), function (res) {

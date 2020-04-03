@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>项目经费</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">项目经费</h1>
+</header>
+<div class="weui-cells__title page-bg">甲方提供的科技经费用途预算（万元）</div>
+<div id="content_1">
+    <!--<div class="weui-form-preview">
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">科目</label>
+                <span class="weui-form-preview__value" style="color: #666;">设备费</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">金额</label>
+                <span class="weui-form-preview__value" style="color: #666;">20</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">开支内容</label>
+                <span class="weui-form-preview__value" style="color: #666;">名字名字名字名字名字名字</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">备注</label>
+                <span class="weui-form-preview__value" style="color: #666;">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</span>
+            </div>
+        </div>
+    </div>-->
+</div>
+<div class="weui-cells__title page-bg">其余经费来源（单位：万元）</div>
+<div id="content_2">
+    <!--<div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">负责落实资金的承担单位名称</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="responsible_unit"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">国家科技部门拨款</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="state_science_and_technology_department"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">国家其他部门拨款</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="state_other_department"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">区级部门拨款</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="area_department"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">市级部门拨款</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="city_department"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">县级部门拨款</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="county_department"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">自有资金</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="own_fund"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">银行贷款</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="bank_loan"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">国外资金</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="offshore_fund"></span></div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="weui-flex__item">
+            <div class="field">其他资金</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content"><span id="other_fund"></span></div>
+        </div>
+    </div>-->
+</div>
+<div class="weui-cells__title page-bg"><span id="total"></span></div>
+<br>
+<br>
+<br>
+<br>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+    var id = getUrlParam("id");
+	var total = 0;
+    queryFundBudget(id);
+    queryFundSource(id);
+
+
+
+    function queryFundBudget(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundBudget/list',
+            data: "item_id=" + id + '&type=first_party_provide',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var str = '';
+                $(data).each(function () {
+                    if (this.money != 0) {
+                        total += this.money;
+                        str += '<div class="weui-form-preview">\n' +
+                            '        <div class="weui-form-preview__bd">\n' +
+                            '            <div class="weui-form-preview__item">\n' +
+                            '                <label class="weui-form-preview__label">科目</label>\n' +
+                            '                <span class="weui-form-preview__value" style="color: #666;">' + this.subject + '</span>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-form-preview__item">\n' +
+                            '                <label class="weui-form-preview__label">金额</label>\n' +
+                            '                <span class="weui-form-preview__value" style="color: #666;">' + this.money + '</span>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-form-preview__item">\n' +
+                            '                <label class="weui-form-preview__label">开支内容</label>\n' +
+                            '                <span class="weui-form-preview__value" style="color: #666;">' + this.content + '</span>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-form-preview__item">\n' +
+                            '                <label class="weui-form-preview__label">备注</label>\n' +
+                            '                <span class="weui-form-preview__value" style="color: #666;">' + this.remark + '</span>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '    </div>';
+                    }
+                })
+                $('#content_1').append(str);
+            }
+        })
+    }
+
+    function queryFundSource(id) {
+		$.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundSource/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+
+                $('#responsible_unit').text(d.responsible_unit);
+                $('#state_science_and_technology_department').text(d.state_science_and_technology_department);
+                $('#state_other_department').text(d.state_other_department);
+                $('#area_department').text(d.area_department);
+                $('#city_department').text(d.city_department);
+                $('#county_department').text(d.county_department);
+                $('#own_fund').text(d.own_fund);
+                $('#bank_loan').text(d.bank_loan);
+                $('#offshore_fund').text(d.offshore_fund);
+                $('#other_fund').text(d.other_fund);
+
+                var str = '';
+                $.each(data[0], function (key, value) {
+                    if (value != 0) {
+                        if (key != 'id'&& key != 'item_id' && key != 'first_party_provide') {
+                        	if(key != 'responsible_unit'){
+								total += value;
+							}
+                            var text = '';
+                            if(key == 'responsible_unit'){
+								text = '负责落实资金的承担单位名称';
+							}else if(key == 'state_science_and_technology_department'){
+								text = '国家科技部门拨款';
+							}else if(key == 'state_other_department'){
+								text = '区级部门拨款';
+							}else if(key == 'area_department'){
+								text = '市级部门拨款';
+							}else if(key == 'city_department'){
+								text = '县级部门拨款';
+							}else if(key == 'county_department'){
+								text = '自有资金';
+							}else if(key == 'own_fund'){
+								text = '银行贷款';
+							}else if(key == 'bank_loan'){
+								text = '国外资金';
+							}else if(key == 'offshore_fund'){
+								text = '国外资金';
+							}else if(key == 'other_fund'){
+								text = '其他资金';
+							}
+                            str += '<div class="weui-flex bg-white">\n' +
+                                '        <div class="weui-flex__item">\n' +
+                                '            <div class="field">'+text+'</div>\n' +
+                                '        </div>\n' +
+                                '        <div class="weui-flex__item">\n' +
+                                '            <div class="content">'+value+'</div>\n' +
+                                '        </div>\n' +
+                                '    </div>';
+                        }
+                    }
+                });
+                $('#content_2').append(str);
+				$('#total').text('项目总投资：' + total + '万元');
+            }
+        })
+    }
+</script>
+</html>

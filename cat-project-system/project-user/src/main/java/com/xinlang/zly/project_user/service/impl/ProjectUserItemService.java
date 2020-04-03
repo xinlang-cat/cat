@@ -3,6 +3,7 @@ package com.xinlang.zly.project_user.service.impl;
 import com.xinlang.bean.project_user.ProjectUserItem;
 import com.xinlang.zly.project_user.mapper.ProjectUserItemMapper;
 import com.xinlang.zly.project_user.service.IProjectUserItemService;
+import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -16,7 +17,7 @@ import java.util.Random;
  * 2019-11-09
  */
 @Service
-public class ProjectUserItemService implements IProjectUserItemService {
+public class ProjectUserItemService extends BaseService<ProjectUserItem> implements IProjectUserItemService {
 
     @Autowired
     private ProjectUserItemMapper projectUserItemMapper;
