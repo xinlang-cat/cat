@@ -5,8 +5,10 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -30,4 +32,6 @@ public class WorkLog implements Serializable {
     private String accessory;//附件
     private Date implementTime;//实施时间
     private String remark;//备注
+    @Transient
+    private List<WorkLogAffiliate> workLogAffiliates;
 }

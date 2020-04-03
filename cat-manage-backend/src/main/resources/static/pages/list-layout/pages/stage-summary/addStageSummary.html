@@ -733,7 +733,7 @@
 <script>
     var pers = checkPermission();
     $('#checkHtml').hide();
-    $("#today").html(formatDate1(new Date()));
+    $("#today").html(formatDate4(new Date()));
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("user_id");
 
@@ -743,13 +743,12 @@
             , upload = layui.upload;
         form = layui.form;
         laydate = layui.laydate;
-        lay('.date').each(function () {
+
             laydate.render({
-                elem: this
+                elem: '.date'
                 , showBottom: false
                 , trigger: 'click'
             });
-        });
         upload.render({
             elem: '#upload_file' //绑定元素
             , accept: 'file'
@@ -789,7 +788,7 @@
             $('#category').val(data[0]['content']);
             $('.category').html(data[0]['content']);
         });
-        var startAndEndTime = formatDate1(res[0].start_date) + "---" + formatDate1(res[0].end_date);
+        var startAndEndTime = formatDate4(res[0].start_date) + "---" + formatDate4(res[0].end_date);
         $("#startAndEndTime").val(startAndEndTime);
         $(".startAndEndTime").html(startAndEndTime);
     });
@@ -810,7 +809,7 @@
             str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck" >';
             str += '我所填写的项目执行情况调查表实事求是，数据详实。在下一步研究中，我将认真工作并及时报告重大变动情况。</textarea> </br>';
             str += '<div class="layui-input-block"><input name="principalCheckEnable" value="1" title="同意" checked="" type="radio"><input name="principalCheckEnable" value="0" title="驳回" type="radio"></div>';
-            str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate1(new Date());
+            str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate4(new Date());
             str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
             $(".principalCheckStage").append(str);
         }
@@ -825,7 +824,7 @@
             str += '<label>2.其他意见：</label>';
             str += '<textarea placeholder="其他意见" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
             str += '<div class="layui-input-block"><input name="deptCheckEnable" value="1" title="同意" checked="" type="radio"><input name="deptCheckEnable" value="0" title="驳回" type="radio"></div>';
-            str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate1(new Date());
+            str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate4(new Date());
             str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
             $(".deptCheckStage").append(str);
         }
@@ -946,6 +945,7 @@
         formData.stageTechnologyPactRegisterCatalogues = stageTechnologyPactRegisterCatalogues;
         formData.stageTargets = stageTargets;
         formData.itemId = itemId;
+        formData.cause = (formData.causes).join(',');
         formData.createUserId = userId;
         $.ajax({
             type: 'post',
@@ -1034,14 +1034,6 @@
             str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
             str += '</tr>';
             $("tr.stagePaperCatalogue:last").after(str);
-            lay('.date').each(function () {
-                laydate.render({
-                    elem: this
-                    , showBottom: false
-                    , trigger: 'click'
-                });
-            });
-            return;
         }
         if (type == 'stagePatentCatalogue') {
             patentIndex++;
@@ -1058,14 +1050,6 @@
             str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
             str += '</tr>';
             $("tr.stagePatentCatalogue:last").after(str);
-            lay('.date').each(function () {
-                laydate.render({
-                    elem: this
-                    , showBottom: false
-                    , trigger: 'click'
-                });
-            });
-            return;
         }
         if (type == 'stageScienceAchievementAwardCatalogue') {
             scienceAchievementAwardIndex++;
@@ -1081,14 +1065,6 @@
             str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
             str += '</tr>';
             $("tr.stageScienceAchievementAwardCatalogue:last").after(str);
-            lay('.date').each(function () {
-                laydate.render({
-                    elem: this
-                    , showBottom: false
-                    , trigger: 'click'
-                });
-            });
-            return;
         }
         if (type == 'stageScienceAchievementRegisterCatalogue') {
             scienceAchievementRegisterIndex++;
@@ -1102,7 +1078,6 @@
             str += '<td><button class="layui-btn layui-btn-sm" style="float: right;background-color: #a90329" onclick="delTr(this)"><i class="layui-icon">&#xe640;</i>删除</button></td>';
             str += '</tr>';
             $("tr.stageScienceAchievementRegisterCatalogue:last").after(str);
-            return;
         }
         if (type == 'stageTechnologyPactRegisterCatalogue') {
             technologyPactRegisterIndex++;
@@ -1119,6 +1094,13 @@
             str += '</tr>';
             $("tr.stageTechnologyPactRegisterCatalogue:last").after(str);
         }
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
     }
 
     //初始化数量指标

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我的项目</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link rel="stylesheet" href="../../weui/css/weui.css" />
+		<link rel="stylesheet" href="../../weui/css/weuix.css" />
+		<link rel="stylesheet" href="../../weui/css/demos.css" />
+
+		<script src="../../weui/js/zepto.min.js"></script>
+		<script src="../../weui/js/zepto.weui.js"></script>
+		<script>
+			$(function() {
+				$('.collapse .js-category').click(function() {
+					$parent = $(this).parent('li');
+					if ($parent.hasClass('js-show')) {
+						$parent.removeClass('js-show');
+						$(this).children('i').removeClass('icon-35').addClass('icon-74');
+					} else {
+						$parent.siblings().removeClass('js-show');
+						$parent.addClass('js-show');
+						$(this).children('i').removeClass('icon-74').addClass('icon-35');
+						$parent.siblings().find('i').removeClass('icon-35').addClass('icon-74');
+					}
+				});
+
+			});
+		</script>
+		<style>
+			.weui-grid__label {
+				color: #10AEFF;
+			}
+			.collapse li {
+				margin: 0;
+			}
+			.collapse .weui-flex {
+			    padding: 5px;
+			}
+			.weui-flex__item{
+				font-size: 14px;
+				padding: 0 10px;
+				color: #333;
+			}
+		</style>
+	</head>
+	<body ontouchstart class="page-bg">
+		<header class='demos-header'>
+			<h1 class="demos-title">我的项目</h1>
+		</header>
+		<div id="content">
+			<!--<div class="weui-panel weui-panel_access">
+				<div class="weui-panel__hd"><span style="color: #000000;">警方重点人员时空分析与预测关键技术研究示范</span></div>
+				<ul class="collapse">
+					<li>
+						<div class="weui-flex js-category">
+							<div class="weui-flex__item">项目信息</div>
+							<i class="icon icon-74"></i>
+						</div>
+						<div class="page-category js-categoryInner">
+							<div class="weui-cells page-category-content">
+								<div class="weui-grids grids-small">
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectInfo.html'">
+										<p class="weui-grid__label">
+											项目信息
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectIndicators.html'">
+										<p class="weui-grid__label">
+											项目指标
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectSchedul.html'">
+										<p class="weui-grid__label">
+											课题进度
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectFund.html'">
+										<p class="weui-grid__label">
+											项目经费
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectPersonnel.html'">
+										<p class="weui-grid__label">
+											项目人员
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectContactWay.html'">
+										<p class="weui-grid__label">
+											联系信息
+										</p>
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="weui-flex js-category">
+							<div class="weui-flex__item">经费使用</div>
+							<i class="icon icon-74"></i>
+						</div>
+						<div class="page-category js-categoryInner">
+
+							<div class="weui-cells page-category-content">
+								<div class="weui-grids grids-small">
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectInfo.html'">
+										<p class="weui-grid__label">
+											项目信息
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectIndicators.html'">
+										<p class="weui-grid__label">
+											项目指标
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectSchedul.html'">
+										<p class="weui-grid__label">
+											课题进度
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectFund.html'">
+										<p class="weui-grid__label">
+											项目经费
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectPersonnel.html'">
+										<p class="weui-grid__label">
+											项目人员
+										</p>
+									</a>
+									<a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectContactWay.html'">
+										<p class="weui-grid__label">
+											联系信息
+										</p>
+									</a>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>-->
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+	<script src="../../weui/lib/fastclick.js"></script>
+	<script src="../../weui/js/jquery-weui.js"></script>
+	<script src="../../../../js/constant.js"></script>
+	<script type="text/javascript" src="../../../../js/jq.js"></script>
+	<script type="text/javascript" src="../../../../js/common.js"></script>
+	<script>
+		getProject();
+
+		function getProject() {
+			$.ajax({
+				type: 'get',
+				url: domainName + '/project-item/item/information/my',
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				success: function (data) {
+					var str = '';
+					$(data).each(function () {
+						str += '<div class="weui-panel weui-panel_access">\n' +
+								'<div class="weui-panel__hd"><span style="color: #000000;">' + this.name + '</span></div>\n' +
+								'<ul class="collapse">\n' +
+								'<li>\n' +
+								'<div class="weui-flex js-category">\n' +
+								'<div class="weui-flex__item">项目信息</div><i class="icon icon-74"></i></div>\n' +
+								'<div class="page-category js-categoryInner">\n' +
+								'<div class="weui-cells page-category-content">\n' +
+								'<div class="weui-grids grids-small">\n' +
+								'<a href="javascript:;" class="grid" onclick="javascript:top.location.href=\'projectInfo.html?id='+this.id+'\'">\n' +
+								'<p class="weui-grid__label">项目信息</p>\n' +
+								'</a>\n' +
+								'<a href="javascript:;" class="grid" onclick="javascript:top.location.href=\'projectIndicators.html?id='+this.id+'\'">\n' +
+								'<p class="weui-grid__label">项目指标</p>\n' +
+								'</a>\n' +
+								'<a href="javascript:;" class="grid" onclick="javascript:top.location.href=\'projectSchedul.html?id='+this.id+'\'">\n' +
+								'<p class="weui-grid__label">课题进度</p>\n' +
+								'</a><a href="javascript:;" class="grid" onclick="javascript:top.location.href=\'projectFund.html?id='+this.id+'\'">\n' +
+								'<p class="weui-grid__label">项目经费</p>\n' +
+								'</a>\n' +
+								'<a href="javascript:;" class="grid" onclick="javascript:top.location.href=\'projectPersonnel.html?id='+this.id+'\'">\n' +
+								'<p class="weui-grid__label">项目人员</p>\n' +
+								'</a>\n' +
+								'<a href="javascript:;" class="grid" onclick="javascript:top.location.href=\'projectContactWay.html?id='+this.id+'\'">\n' +
+								'<p class="weui-grid__label">联系信息</p>\n' +
+								'</a>\n' +
+								'</div>\n' +
+								'</div>\n' +
+								'</div>\n' +
+								'</li>\n' +
+								'</ul>\n' +
+								'</div>';
+					});
+					$("#content").append(str);
+				}
+			});
+		}
+	</script>
+</html>

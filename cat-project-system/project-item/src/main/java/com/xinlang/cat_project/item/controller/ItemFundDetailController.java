@@ -29,11 +29,27 @@ public class ItemFundDetailController {
         return  ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ApiOperation(value = "查询项目人员")
-    @LogAnnotation(module = "查询项目人员")
+    @ApiOperation(value = "查询经费明细")
+    @LogAnnotation(module = "查询经费明细")
     @GetMapping("list")
     public ResponseEntity<List<ItemFundDetail>> getFundDetail(@RequestParam Map<String, Object> params){
         List<ItemFundDetail> fundDetail = itemFundDetailService.findListByParams(params,ItemFundDetail.class);
         return ResponseEntity.ok(fundDetail);
+    }
+    @ApiOperation(value = "修改经费明细")
+    @LogAnnotation(module = "修改经费明细")
+    @PreAuthorize("hasAnyAuthority('project:item:update')")
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody ItemFundDetail itemFundDetail){
+        itemFundDetailService.update(itemFundDetail);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+    @ApiOperation(value = "删除经费明细")
+    @LogAnnotation(module = "删除经费明细")
+    @PreAuthorize("hasAnyAuthority('project:item:delete')")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        itemFundDetailService.delete(id);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

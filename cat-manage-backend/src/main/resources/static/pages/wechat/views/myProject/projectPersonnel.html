@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>项目人员</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+</head>
+<style>
+    p {
+        font-size: 14px;
+    }
+</style>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">项目人员</h1>
+</header>
+<div class="weui-cells__title">主要研究、开发人员及责任分工</div>
+<div class="weui-cells" id="content">
+    <!--<a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <p>小李</p>
+        </div>
+        <div class="weui-cell__ft"><p>项目负责人</p></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__bd">
+            <p>小张</p>
+        </div>
+        <div class="weui-cell__ft"><p>平台开发</p></div>
+    </a>-->
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+	var id = getUrlParam("id");
+	queryPersonnel(id);
+
+	function queryPersonnel(id) {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/personnel/list',
+			data: "item_id=" + id,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				$(data).each(function () {
+					var str = '<a class="weui-cell weui-cell_access" href="personalInfo.html?id='+this.id+'">\n' +
+							'        <div class="weui-cell__bd">\n' +
+							'            <p>' + this.name + '</p>\n' +
+							'        </div>\n' +
+							'        <div class="weui-cell__ft"><p>' + this.responsibilities + '</p></div>\n' +
+							'    </a>';
+					$('#content').append(str);
+				})
+			}
+		})
+	}
+</script>
+</html>
