@@ -5790,7 +5790,7 @@ Device/OS Detection
             //默认显示今天
             if(!params.value) {
               var today = new Date();
-              params.value = [today.getFullYear() + "/" + format(today.getMonth() + 1) + "/" + format(today.getDate())];
+              params.value = [today.getFullYear() + "-" + format(today.getMonth() + 1) + "-" + format(today.getDate())];
             }
             calendar = $this.data("calendar", new Calendar($.extend(p, params)));
           }

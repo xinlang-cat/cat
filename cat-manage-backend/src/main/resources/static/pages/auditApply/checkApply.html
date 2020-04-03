@@ -2,61 +2,124 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
     <style>
-        .btn-group {
-            display: none;
+        .layui-table td {
+            position: initial;
+        }
 
+        .layui-textarea {
+            min-height: 60px;
         }
     </style>
 
 </head>
 <body>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="layui-form" style="margin-top: 60px;">
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <!--基本信息-->
+        <form id="form1">
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>建议查定时间</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+
+                        <p name="period" id="period"></p>
+                    </div>
+                </td>
+
+            </tr>
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>申请说明</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+        <!--项目考核指标-->
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="90%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                    <div class="field">
+                                        <span id="target">查定指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border: 0px;">
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
-        <fieldset>
-            <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-2 control-label">所需审查指标:</label>
-                <div class="col-md-2">
-                    <input class="form-control" placeholder="开始时间" type="text" name="name" maxlength="50"
-                           id="name" readonly>
-                </div>
-                <label class="col-md-1 control-label">建议开始时间</label>
-                <div class="col-md-2">
-                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date" maxlength="50"
-                           id="start_date" data-bv-notempty="true"
-                           data-bv-notempty-message="开始时间 不能为空" readonly>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">指标所在地域</label>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="province" maxlength="50"
-                           id="province" readonly>
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="city" maxlength="50"
-                           id="city" readonly>
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="area" maxlength="50"
-                           id="area" readonly>
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="street" maxlength="50"
-                           id="street" readonly>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">内容:</label>
-                <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
-                              class="layui-textarea form-control" lay-verify="required"
-                              id="content" name="content" readonly></textarea>
-                </div>
-            </div>
-            <div class="layui-btn-group btn-group" style="text-align: center">
+
+            <div class="layui-btn-group btn-group" style="text-align: center;display: none" >
 
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
                         onclick="pass();">
@@ -69,9 +132,9 @@
 
             </div>
 
-        </fieldset>
     </form>
 </div>
+</body>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
@@ -85,7 +148,7 @@
     var layedit, index;
 
     var id = getUrlParam("id");
-    var userType = getUrlParam("userType");
+    var userType ;
     var h = $(window).height() - 100;
     layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
@@ -105,19 +168,26 @@
             async: false,
             success: function (data) {
                 $(data).each(function () {
-                    getProvince(data[0].provinceCode);
-                    getCity(data[0].cityCode);
-                    getArea(data[0].areaCode);
-                    if (data[0].post_type == 2) {
-                        $("#street").val(data[0].streetCode);
-                    } else {
-                        getStreet(data[0].streetCode);
-                    }
-                    getTargetName(data[0].target_id);
-                    $("#content").val(data[0].content);
                     status(data[0].status);
-                    $("#start_date").val(formatDate3(data[0].start_date));
-                    $("#end_date").val(formatDate3(data[0].end_date));
+                    $("#content").text(data[0].content);
+                    $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            var serial = $("#target").parents('thead').next().children().length + 1;
+                            var str = '';
+
+                            str = '<tr>' +
+                                '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                                '<div class="field">' +
+                                '<input type="text"  name="content" value="' + item.content + '" lay-verify="required">' +
+                                '</div>' +
+                                '</td>' +
+                                ' </tr>';
+                            $("#target").parents('thead').next().append(str);
+                        });
+                    })
+
                 });
 
             }
@@ -125,71 +195,41 @@
     }
 
     function status(status) {
-        if (status == 1 && userType == 2) {
-            var obj = document.getElementsByClassName("btn-group");
-            obj[0].style.display = "block";
-        }
-
-    }
-
-    function province(provinceCode) {
         $.ajax({
             type: 'get',
-            url: domainName + '/map/province/one/' + provinceCode,
+            url : domainName + '/api-c/company/now-user',
             async: false,
+            contentType: "application/json; charset=utf-8",
             success: function (data) {
-                $("#provinceCode").val(data.provinceName);
+                var identity = data.identity;
+                if (identity=="PARTY_C" && status == 1){
+                    var obj = document.getElementsByClassName("btn-group");
+                    obj[0].style.display = "block";
+                }
+
             }
         });
+
     }
 
-    function city(cityCode) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/map/city/one/' + cityCode,
-            async: false,
-            success: function (data) {
-                $("#cityCode").val(data.cityName);
-            }
-        });
-    }
-
-    function area(areaCode) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/map/area/one/' + areaCode,
-            async: false,
-            success: function (data) {
-                var name = data.areaName;
-                $("#areaCode").val(name);
-            }
-        });
-    }
-
-    function street(streetCode) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/map/street/one/' + streetCode,
-            async: false,
-            success: function (data) {
-                $("#streetCode").val(data.streetName);
-            }
-        });
-    }
 
     function getTargetName(id) {
         $.ajax({
             type: 'get',
-            url: domainName + '/project-item/item/target/list',
+            url: domainName + '/project-item/item/indicators/list',
             contentType: "application/json; charset=utf-8",
             data: {id: id},
             success: function (data) {
-                if (data[0]['count'] != null) {
-                    $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
-                        $("#name").val(res[0].content);
-                    })
+                $.get(domainName + "/api-label/label/tree/" + data[0]['type'], function (res) {
+                    $("#name").val(res[0].content);
+                });
+                var count = data[0]['count'];
+                if (count != null) {
+                    $.get(domainName + "/api-label/label/tree/" + data[0]['content'], function (res) {
+                        $("#targetContent").val(res[0].content + "*" + count);
+                    });
                 } else {
-                    $("#name").val(data[0].content);
+                    $("#targetContent").val(data[0].content);
                 }
             }
         });

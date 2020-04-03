@@ -16,6 +16,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -108,7 +110,17 @@ public class ItemTargetController {
     @ApiOperation(value = "添加指标查定")
     @LogAnnotation(module = "添加指标查定")
     @PostMapping("/auditApply/one")
-    public ResponseEntity<Void> saveAuditApply(@RequestBody auditApply auditApply){
+    public ResponseEntity<Void> saveAuditApply(@RequestBody auditApply auditApply) throws ParseException {
+        System.err.println(auditApply);
+        if ( null!=auditApply.getPeriod()&&!auditApply.getPeriod().isEmpty() && !auditApply.getPeriod().equals("")) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = null;
+            date = simpleDateFormat.parse(auditApply.getPeriod().substring(0, 10));
+            auditApply.setStart_date(date);
+            date = simpleDateFormat.parse(auditApply.getPeriod().substring(12));
+            auditApply.setEnd_date(date);
+        }
+
         Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         auditApply.setEdit_userid(userId);
         auditApply.setEdit_date(new Date());
@@ -130,7 +142,19 @@ public class ItemTargetController {
     @ApiOperation(value = "修改指标查定")
     @LogAnnotation(module = "修改指标查定")
     @PutMapping("/auditApply/update")
-    public ResponseEntity<Void> updateAuditApply(@RequestBody auditApply auditApply){
+    public ResponseEntity<Void> updateAuditApply(@RequestBody auditApply auditApply) throws ParseException {
+        if (auditApply.getPeriods()!= null && !auditApply.getPeriods().equals("")){
+            if (!auditApply.getPeriods().equals("")) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+                date = simpleDateFormat.parse(auditApply.getPeriods().substring(0, 10));
+                auditApply.setStart_date_true(date);
+                date = simpleDateFormat.parse(auditApply.getPeriods().substring(12));
+                auditApply.setEnd_date_true(date);
+            }
+        }
+
+
         Integer userId =AppUserUtil.getLoginAppUser().getId().intValue();
         auditApply.setCheck_userid(userId);
         auditApplyService.update(auditApply);
@@ -154,32 +178,21 @@ public class ItemTargetController {
                                                                      @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params){
-        String count = (String) params.get("count");
+
+        String item_id = (String) params.get("item_id");
         String name = (String) params.get("item_name");
-        Boolean search =true;
-        if (count == "" || count == null ){
+        String check_unit = (String) params.get("check_unit");
 
-        }else {
-            Integer weth = Integer.parseInt(count);
-            List<ItemTarget> targets = targetService.findQuantity(weth);
-            List<Integer> ids =new ArrayList<>();
-            if (targets.size()==0){
-                ids.add(0);
-                search=false;
-            }else {
-                for (int i=0;i<targets.size();i++){
-                    ids.add(targets.get(i).getId());
-                }
-                params.put("ids",ids);
-            }
-        }
-
-
-        if (name == "" || name == null ){
+        if (name == "" || name == null &&  item_id == null ){
 
         }else {
             List<ItemBasic> itemBasics = itemBasicService.findByName(name);
             List<Integer> itemIds =new ArrayList<>();
+            Integer id =0;
+            if ( item_id != null){
+                id = Integer.parseInt(item_id);
+            }
+            itemIds.add(id);
             if (itemIds.size()==0){
                 itemIds.add(0);
             }else {
@@ -189,7 +202,6 @@ public class ItemTargetController {
             }
             params.put("itemIds",itemIds);
         }
-        System.err.println("查询");
         PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
 

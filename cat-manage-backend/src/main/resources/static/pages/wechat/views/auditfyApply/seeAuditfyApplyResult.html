@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>指标查定</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/stageSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+
+</head>
+<body ontouchstart>
+
+<div style="z-index: 999999">
+
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__hd">
+            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <p class="weui-max-title">指标详情</p>
+        </div>
+    </a>
+    <div class="weui-panel" id="list">
+
+
+    </div>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">查定结果:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" id="result" name="result" type="text" value="">
+        </div>
+    </div>
+
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__hd">
+            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <p class="weui-max-title">查定申请详情</p>
+        </div>
+    </a>
+
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">项目名称:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">提交人:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input" type="text" value="" id="userName" name="userName" placeholder="" readonly>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">建议开始时间:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">预计结束时间:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <input class="weui-input date" type="text" value="" id="end_date" readonly name="end_date">
+        </div>
+    </div>
+
+
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">申请内容:</label>
+        </div>
+        <div class="weui-cell__bd">
+            <textarea class="weui-textarea" rows="5" id="content" name="content" readonly></textarea>
+        </div>
+    </div>
+
+    <a class="weui-cell weui-cell_access" href="javascript:;">
+        <div class="weui-cell__hd">
+            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+        </div>
+        <div class="weui-cell__bd weui-cell_primary">
+            <p class="weui-max-title">查定结果</p>
+        </div>
+    </a>
+    <form id="form">
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">实际查定时间:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true"
+                       name="start_date_true" readonly>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">实际技术时间:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true"
+                       name="end_date_true" readonly>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">查定情况简述:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" rows="5" id="description" name="description" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">查定目的:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" rows="5" id="purpose" name="purpose" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">查定依据:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" rows="5" id="depand" name="depand" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">查定内容:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" rows="5" id="details" name="details" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">查定方法:</label>
+            </div>
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" rows="5" id="means" name="means" readonly></textarea>
+            </div>
+        </div>
+
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__hd">
+                        <p class="weui-uploader__title" style="font-weight: bold">图片</p>
+                        <div class="weui-uploader__info">0/6</div>
+                    </div>
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="image">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <input type="hidden" name="accessory" id="accessory" value="">
+
+
+    </form>
+</div>
+
+
+</div>
+
+<script src="../../weui/lib/jquery-2.1.4.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../weui/js/swiper.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/chooseArea.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+</script>
+<script>
+    var id = getUrlParam("id");
+    $(".swiper-container").swiper({
+        loop: true,
+        autoplay: 3000
+    });
+    initData();
+
+
+    function initData() {
+        var data = {
+            id: id,
+        }
+        $.ajax({
+            type: 'get',
+            data: data,
+            url: domainName + '/project-item/item/target/applyList',
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    $("#userName").val(getUserName(data[0].edit_userid));
+                    $("#itemName").val(getItemName(data[0].item_id));
+                    $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#start_date_true").val(formatDate3(data[0].start_date_true));
+                    $("#end_date").val(formatDate3(data[0].end_date));
+                    $("#end_date_true").val(formatDate3(data[0].end_date_true));
+                    file(data[0].accessory);
+                    status(data[0].status);
+
+                    $("#content").text(data[0].content);
+                    $("#purpose").text(data[0].purpose);
+
+                    $("#depand").text(data[0].depand);
+                    $("#details").text(data[0].details);
+                    $("#means").text(data[0].means);
+                    $("#description").text(data[0].description);
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                        var str = '<article class="weui-article">';
+                        var count = 1;
+                        $.each(data1, function (i, item) {
+
+                            str += ' <h2 class="title">' + count + '</h2>\n' +
+                                '   <section>\n' +
+                                '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
+                                '      	 <p>指标内容：' + item.content + '</p>\n' +
+                                '      	<p>指标地址：广西壮族自治区南宁市西乡塘区振华路</p>\n' +
+                                '   </section>\n' +
+                                '<div class="weui-line"></div>';
+                            count++;
+
+                        });
+                        str += '</article>';
+                        $("#list").append(str);
+                    })
+
+
+            });
+
+    }
+    });
+    }
+
+    function file(accessory) {
+        $.get(domainName + "/api-f/files/list", {ids: accessory}, function (data1) {
+            $.each(data1, function (i, item) {
+                $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
+
+            });
+        })
+    }
+    function getUserName(user_id) {
+        $.ajaxSettings.async = false;
+        var data = '';
+        $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
+            data = res[0]['name'];
+        })
+        $.ajaxSettings.async = true;
+        return data;
+    }
+    function getType(type) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + type,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+    }
+    function status(status) {
+        if (status != 1) {
+            var con = '';
+            if (status == 2) {
+                con = "查定中";
+            } else if (status == 3) {
+                con = "查定合格";
+            } else if (status == 4) {
+                con = "查定不合格";
+            } else if (status == 5) {
+                con = "查定申请未通过";
+            }
+            $("#result").val(con);
+        }
+    }
+
+    function getTargetName(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/indicators/list',
+            contentType: "application/json; charset=utf-8",
+            data: {id: id},
+            success: function (data) {
+                $.get(domainName + "/api-label/label/tree/" + data[0]['type'], function (res) {
+                    $("#name").val(res[0].content);
+                });
+                var count = data[0]['count'];
+                if (count != null) {
+                    $.get(domainName + "/api-label/label/tree/" + data[0]['content'], function (res) {
+                        $("#targetContent").val(res[0].content + "*" + count);
+                    });
+                } else {
+                    $("#targetContent").val(data[0].content);
+                }
+            }
+        });
+    }
+
+    function getItemName(id) {
+        $.ajaxSettings.async = false;
+        var data = '';
+        $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+            data = res[0]['name'];
+        })
+        $.ajaxSettings.async = true;
+        return data;
+    }
+
+
+</script>
+</body>
+
+</html>

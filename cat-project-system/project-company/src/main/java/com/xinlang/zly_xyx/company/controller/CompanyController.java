@@ -58,6 +58,13 @@ public class CompanyController {
         return companyService.findByDeptCode(deptCode);
     }
 
+    @GetMapping("/company/name/{name}")
+    @LogAnnotation(module = "根据公司名称查询公司、机构")
+    @ApiOperation(value = "根据公司名称查询公司、机构")
+    public Company findByName(@PathVariable String name){
+        return companyService.findByName(name);
+    }
+
     @GetMapping("/company-anon/{userId}")
     @LogAnnotation(module = "根据系统用户表id查询公司、机构")
     @ApiOperation(value = "根据系统用户表id查询公司、机构")

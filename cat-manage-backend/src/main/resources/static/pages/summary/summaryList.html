@@ -126,8 +126,8 @@ layui.use(['layer','util'], function(){
                         "render": function (data, type, row) {
                             var id =row['itemId'];
                             $.ajaxSettings.async = false;
-                            $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-                                data =  res[0]['item_name'];
+                            $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                data =  res[0]['name'];
                             })
 
                             $.ajaxSettings.async = true;
@@ -145,19 +145,15 @@ layui.use(['layer','util'], function(){
                     	"data": "", 
                     	"defaultContent": "",
                     	"render": function (data, type, row) {
-                    		var id = row['id'];
-                    		var userId = row["createUserId"];
                     		var itemId = row["itemId"];
-                    		var href = "updateSummary.html?id=" + id;
+                    		var href = "updateSummary.html?itemId=" + itemId;
                             var edit =  buttonEdit(href, "", pers);
                             var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
                             var report = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
-                            btn.attr("onclick", "showDetail(" +id+")");
-                            report.attr("onclick", "generate(" +id+","+itemId+")")
-                            var showDetail = btn.prop("outerHTML");
+                            btn.attr("onclick", "showDetail(" +itemId+")");
+                            report.attr("onclick", "generate(" +itemId+")")
                             var showReport = report.prop("outerHTML");
-                            var del = buttonDel(id,"",pers);
-                            return  edit+del+showReport;
+                            return  edit+showReport;
                       	}
                     },
                 ],
@@ -166,25 +162,9 @@ layui.use(['layer','util'], function(){
 
     init();
 });
-function del(id){
-    layer.confirm('确定要删除吗？', {
-        btn : [ '确定', '取消' ]
-    }, function() {
-        $.ajax({
-            type : 'delete',
-            url : domainName + '/api-summary/skill/'+id,
-            success : function(data) {
-                example.ajax.reload();
-                layer.msg("删除成功");
-            }
-        });
-
-        layer.close(1);
-    });
-}
 
 function addSummary() {
-    location.href='addSummary.html?itemId='+item_id/*+'&itemName='+item_name*/;
+    location.href='addSummary.html?itemId='+item_id;
 }
 
 function work() {
@@ -195,29 +175,29 @@ function back() {
 }
 
 function showWork() {
-    location.href='workSummaryList.html?item_id='+item_id/*+'&itemName='+item_name*/;
+    location.href='workSummaryList.html?item_id='+item_id;
 }
 var h = $(window).height()-100;
 var w = $(window).width()-200;
-function generate(id,itemId) {
+function generate(item_id) {
     layer.open({
         title:"详情",
         type: 2,
         area: [w + 'px', h + 'px'],
         maxmin: true,
         shadeClose: true,
-        content: ['generateSkillReport.html?id='+id+'&itemId='+itemId]
+        content: ['generateSkillReport.html?itemId='+item_id]
 
     });
 }
-function showDetail(id){
+function showDetail(item_id){
 	layer.open({
 		title:"详情",
         type: 2,
         area: [w + 'px', h + 'px'],
         maxmin: true,
         shadeClose: true,
-		content: ['detail.html?id='+id]
+		content: ['detail.html?itemId='+item_id]
 			
 	});
 }

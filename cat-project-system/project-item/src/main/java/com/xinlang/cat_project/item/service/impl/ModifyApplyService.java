@@ -47,22 +47,14 @@ public class ModifyApplyService extends BaseService<modifyApply> implements IMod
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(modifyApply.class);
-       if (params.get("modify") != "" && params.get("status") != "" && params.get("itemIds") != null){
-            example.createCriteria().andEqualTo("modify",params.get("modify")).andEqualTo("status",params.get("status")).andIn("item_id", (Iterable) params.get("itemIds"));
-       }else if (params.get("modify") != "" && params.get("itemIds") != null){
-            example.createCriteria().andEqualTo("modify",params.get("modify")).andNotEqualTo("status",-1).andIn("item_id", (Iterable) params.get("itemIds"));
-       }else if (params.get("status") != "" && params.get("itemIds") != null){
+       if (params.get("status") != "" && params.get("itemIds") != null){
             example.createCriteria().andEqualTo("status",params.get("status")).andIn("item_id", (Iterable) params.get("itemIds"));
-       }else if (params.get("status") != "" &&params.get("modify") != ""){
-           example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("modify",params.get("modify"));
+       }else if ( params.get("itemIds") != null){
+            example.createCriteria().andNotEqualTo("status",0).andIn("item_id", (Iterable) params.get("itemIds"));
        }else if (params.get("status") != "" ){
            example.createCriteria().andEqualTo("status",params.get("status"));
-       }else if (params.get("modify") != ""){
-           example.createCriteria().andNotEqualTo("status",-1).andEqualTo("modify",params.get("modify"));
-       }else if (params.get("itemIds") != null){
-           example.createCriteria().andNotEqualTo("status",-1).andIn("item_id", (Iterable) params.get("itemIds"));
        }else {
-           example.createCriteria().andNotEqualTo("status",-1);
+           example.createCriteria().andNotEqualTo("status",0);
        }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序

@@ -131,8 +131,8 @@
                             "render": function (data, type, row) {
                                 var id =row['itemId'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-                                    data =  res[0]['item_name'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                    data =  res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -150,19 +150,16 @@
                             "data": "",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var id = row['id'];
-                                var userId = row["createUserId"];
                                 var itemId = row["itemId"];
-                                var href = "updateWorkSummary.html?id=" + id;
+                                var href = "updateWorkSummary.html?itemId=" + itemId;
                                 var edit =  buttonEdit(href, "", pers);
                                 var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
                                 var report = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>详情</i></button>");
-                                report.attr("onclick", "generate(" +id+","+itemId+")");
+                                report.attr("onclick", "generate("+itemId+")");
                                 var showReport = report.prop("outerHTML");
-                                btn.attr("onclick", "showDetail(" +id+")");
-                                var showDetail = btn.prop("outerHTML");
-                                var del = buttonDel(id,"",pers);
-                                return  edit+del+showReport;
+                                btn.attr("onclick", "showDetail(" +itemId+")");
+
+                                return  edit+showReport;
                             }
                         },
                     ],
@@ -202,25 +199,25 @@
     }
     var h = $(window).height()-100;
     var w = $(window).width()-200;
-    function showDetail(id){
+    function showDetail(itemId){
         layer.open({
             title:"详情",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['checkWorkSummary.html?id='+id]
+            content: ['checkWorkSummary.html?itemId='+itemId]
 
         });
     }
-    function generate(id,itemId) {
+    function generate(itemId) {
         layer.open({
             title:"详情",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['generateWorkReport.html?id='+id+'&itemId='+itemId]
+            content: ['generateWorkReport.html?itemId='+itemId]
 
         });
     }

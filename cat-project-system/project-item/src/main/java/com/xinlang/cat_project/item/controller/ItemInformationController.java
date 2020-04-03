@@ -42,6 +42,21 @@ public class ItemInformationController {
     @Autowired
     private IItemContactWayService itemContactWayService;
 
+    @Autowired
+    private IItemInformationViceService itemInformationViceService;
+    @Autowired
+    private IItemIndicatorsViceService itemIndicatorsViceService;
+    @Autowired
+    private IItemSchedulingViceService itemSchedulingViceService;
+    @Autowired
+    private IItemPersonnelViceService itemPersonnelViceService;
+    @Autowired
+    private IItemFundBudgetViceService itemFundBudgetViceService;
+    @Autowired
+    private IItemFundSourceViceService itemFundSourceViceService;
+    @Autowired
+    private IItemContactWayViceService itemContactWayViceService;
+
     @ApiOperation(value = "添加项目信息")
     @LogAnnotation(module = "添加项目信息")
     @PreAuthorize("hasAnyAuthority('project:item:save')")
@@ -185,11 +200,10 @@ public class ItemInformationController {
 
     /**
      * 查询项目，分页查询
-     *
-     * @param page   当前页
-     * @param rows   每页大小
+     * @param page 当前页
+     * @param rows 每页大小
      * @param sortBy 排序字段 (预留，暂时没用到)
-     * @param desc   是否为降序 (预留，暂时没用到)
+     * @param desc 是否为降序 (预留，暂时没用到)
      * @param params 参数
      * @return
      */
@@ -237,5 +251,13 @@ public class ItemInformationController {
     public ResponseEntity<Void> deleteItem(@PathVariable Integer id) {
         itemInformationService.delete(id);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "查询项目信息")
+    @LogAnnotation(module = "查询项目信息")
+    @GetMapping("listVice")
+    public ResponseEntity<List<ItemInformationVice>> getItemVice(@RequestParam Map<String, Object> params){
+        List<ItemInformationVice> information = itemInformationViceService.findListByParams(params,ItemInformationVice.class);
+        return ResponseEntity.ok(information);
     }
 }

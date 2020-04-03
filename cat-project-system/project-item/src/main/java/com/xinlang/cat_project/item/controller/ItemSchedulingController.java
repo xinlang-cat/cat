@@ -1,7 +1,9 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemScheduling;
+import com.xinlang.cat_project.item.pojo.ItemSchedulingVice;
 import com.xinlang.cat_project.item.service.IItemSchedulingService;
+import com.xinlang.cat_project.item.service.IItemSchedulingViceService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ import java.util.Map;
 public class ItemSchedulingController {
     @Autowired
     private IItemSchedulingService itemSchedulingService;
+
+    @Autowired
+    private IItemSchedulingViceService itemSchedulingViceService;
 
     @ApiOperation(value = "添加进度安排")
     @LogAnnotation(module = "添加进度安排")
@@ -42,6 +47,14 @@ public class ItemSchedulingController {
     @GetMapping("list")
     public ResponseEntity<List<ItemScheduling>> getScheduling(@RequestParam Map<String, Object> params){
         List<ItemScheduling> schedulings = itemSchedulingService.findListByParams(params,ItemScheduling.class);
+        return ResponseEntity.ok(schedulings);
+    }
+
+    @ApiOperation(value = "查询进度安排")
+    @LogAnnotation(module = "查询进度安排")
+    @GetMapping("viceList")
+    public ResponseEntity<List<ItemSchedulingVice>> getSchedulingVice(@RequestParam Map<String, Object> params){
+        List<ItemSchedulingVice> schedulings = itemSchedulingViceService.findListByParams(params,ItemSchedulingVice.class);
         return ResponseEntity.ok(schedulings);
     }
 

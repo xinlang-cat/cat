@@ -41,6 +41,15 @@
 			<div class="weui-line"></div>
 			<div class="weui-cell">
 				<div class="weui-cell__hd">
+					<label class="weui-label">指标内容:</label>
+				</div>
+				<div class="weui-cell__bd">
+					<textarea class="weui-textarea" rows="5" id="targetContent" name="targetContent" readonly></textarea>
+				</div>
+			</div>
+			<div class="weui-line"></div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd">
 					<label class="weui-label">查定时间:</label>
 				</div>
 				<div class="weui-cell__bd">
@@ -323,7 +332,12 @@
 
 			function pass() {
 				 var formdata = $("#form").serializeObject();
-				formdata.accessory = formdata.accessory.join(',');
+				var files =  document.getElementsByName("accessory").length;
+				if (files==1){
+
+				}else {
+					formdata.accessory = formdata.accessory.join(',');
+				}
 				$.ajax({
 					type: 'put',
 					url: domainName + '/project-item/item/target/auditApply/update',
