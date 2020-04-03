@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>工作日志列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml.
+    It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <style>
+        .weui-set-hide-val{margin-left: 15px;}
+    </style>
+</head>
+
+<body ontouchstart>
+<!--<div style="padding: 10px 5px;background-color: #efeff4;height: 50px;">-->
+<!--    <div class="form-group">-->
+<!--        <select class="input-sm" style="width: 19%;">-->
+<!--            <option value="LOCAL">全部</option>-->
+<!--            <option value="ALIYUN">我的</option>-->
+<!--        </select>-->
+<!--        <select class="input-sm" style="width: 55%;">-->
+<!--            <option value="LOCAL">本地上传</option>-->
+<!--            <option value="ALIYUN">项目名很长很长很长很长很长很长很长很长很长很长很长很长</option>-->
+<!--        </select>-->
+<!--        <button id="searchBt" class="layui-btn layui-btn-sm" permission="file:query" style="float: right"><i-->
+<!--                class="layui-icon">&#xe615;</i>搜索-->
+<!--        </button>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="page__bd">
+
+</div>
+
+<div id="full" class='weui-popup__container'>
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal" style="background-color: white;">
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">项目名称</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="itemName weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">评审意见建议</label>
+                <p class="evaluateContent weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">评审结果</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="isPass weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">评审人</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="userName weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">评审时间</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="createTime weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+
+        <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">返回</a>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+
+    var itemId = 1;//getUrlParam("itemId");
+    
+    $(function () {
+        var params = {
+            itemId: 1
+        };
+        $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
+            var str = '';
+            for (var i = data.length - 1; i >= 0; i--) {
+                var outline = data[i].evaluateContent.length > 20 ? data[i].evaluateContent.substring(0, 20) + '...' : data[i].evaluateC;
+                str += '<a href="javascript:;" class="open-popup" data-target="#full" onclick="detail(' + data[i].id + ')"><div class="weui-panel">';
+                str += '        <div class="weui-panel__bd">';
+                str += '            <div class="weui-media-box weui-media-box_text">';
+                str += '               <p class="weui-media-box__desc">' + outline + '</p>';
+                str += '               <ul class="weui-media-box__info">';
+                str += '                    <li class="weui-media-box__info__meta">' + data[i].userName + '</li>';
+                str += '                    <li class="weui-media-box__info__meta">' + formatDate4(data[i].createTime) + '</li>';
+                str += '               </ul>';
+                str += '          </div>';
+                str += '     </div>';
+                str += ' </div></a><div class="weui-interval"></div>';
+            }
+            $(".page__bd").append(str);
+        });
+    });
+    
+    function detail(id) {
+        //初始化
+        $.get(domainName + '/api-summary/expert-evaluate/list', {id: id}, function (res) {
+            for (var key in res[0]) {
+                if (key == 'createTime') {
+                    $("." + key).html(formatDate4(res[0][key]));
+                } else {
+                    $("." + key).html(res[0][key]);
+                }
+            }
+            var isPass = null;
+            if (res[0].isPass == 1) {
+                isPass = '通过';
+            }
+            if (res[0].isPass == -1) {
+                isPass = '不通过';
+            }
+            if (res[0].isPass == 0) {
+                isPass = '待定';
+            }
+            $('.isPass').html(isPass);
+        });
+    }
+
+
+</script>
+</body>
+</html>

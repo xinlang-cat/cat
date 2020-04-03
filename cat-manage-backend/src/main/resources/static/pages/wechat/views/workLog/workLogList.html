@@ -13,9 +13,12 @@
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/common.css">
-
 </head>
-
+<style>
+    .weui-set-hide-val {
+        margin-left: 15px;
+    }
+</style>
 <body ontouchstart>
 <!--<div style="padding: 10px 5px;background-color: #efeff4;height: 50px;">-->
 <!--    <div class="form-group">-->
@@ -61,6 +64,10 @@
                     <span id="content"></span>
                 </div>
             </div>
+        </div>
+        <div id="targetSum">
+
+
         </div>
         <div class="weui-line"></div>
         <div class="weui-cell">
@@ -110,27 +117,35 @@
         <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
     </div>
 </div>
+
+<a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary" id="test">匹配专家</a>
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
 <script src="../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../js/matchExpert.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
 
+
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
     var targetId = getUrlParam("targetId");
 
+    $.matchExpert({
+        elem: '#test',
+        itemId:1//itemId
+    });
     $(function () {
         $("#saveBt").hide();
         var params = {
             status: 1,
-            itemId: 44,
-            targetId: 492
+            itemId: 1,
+            targetId: 4
         };
         $.get(domainName + "/api-summary/work-log/list", params, function (data) {
             var str = '';
@@ -142,7 +157,7 @@
                 str += '               <p class="weui-media-box__desc">' + outline + '</p>';
                 str += '               <ul class="weui-media-box__info">';
                 str += '                    <li class="weui-media-box__info__meta">' + data[i].createUserName + '</li>';
-                str += '                    <li class="weui-media-box__info__meta">' + formatDate1(data[i].createTime) + '</li>';
+                str += '                    <li class="weui-media-box__info__meta">' + formatDate4(data[i].createTime) + '</li>';
                 str += '               </ul>';
                 str += '          </div>';
                 str += '     </div>';
@@ -159,9 +174,56 @@
     }
 
     function detail(id) {
-        $('#image,#files,#vedio').empty();
+        $('#image,#files,#vedio,#targetSum').empty();
         var url = domainName + '/api-summary/work-log/list';
         $.get(url, {id: id}, function (data) {
+            var flag = false;
+            var str = '';
+            $.each(data[0].workLogAffiliates, function (i, item) {
+                flag = true;
+                str += '<div class="targetSum">\n' +
+                    '            <div class="weui-imaginary-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">指标名称</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + item.content + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">计划数量</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + item.originalCount + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">上次数量</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + item.nowCount + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">上次本次合计</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + item.nowCount + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+            });
+            if (flag) {
+                str += '<div class="weui-imaginary-line"></div>';
+            }
+            $('#targetSum').append(str);
             for (var key in data[0]) {
                 $("#" + key).html(data[0][key]);
             }

@@ -30,6 +30,4 @@ public class ProjectUserItem implements Serializable {
     private Date updateTime;
     @Transient
     private List<ProjectUser> experts;
-
-
 }

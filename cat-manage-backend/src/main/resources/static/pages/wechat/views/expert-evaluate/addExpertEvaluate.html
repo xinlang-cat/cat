@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <title>工作日志起草</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" href="../../css/common.css">
+</head>
+
+<body ontouchstart>
+<form class="form-horizontal" onsubmit="return false" id="form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">项目名称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <p class="itemName weui-set-hide-val"></p>
+            <input type="hidden" id="itemName" name="itemName">
+            <input type="hidden" id="itemId" name="itemId">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-line" style="margin-top: 15px;"></div>
+    <div class="weui-cells__title">评审意见建议</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入文本" id="evaluateContent" name="evaluateContent" rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">评审结果</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="isPass" value="1" checked="checked">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>通过</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="isPass" value="0" >
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>待定</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="isPass" value="-1" >
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>不通过</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">评审人</label>
+        </div>
+        <div class="weui-cell__bd">
+            <p class="userName weui-set-hide-val"></p>
+            <input type="hidden" id="userName" name="userName">
+            <input type="hidden" id="userId" name="userId">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">评审时间</label>
+        </div>
+        <div class="weui-cell__bd">
+            <p class="createTime weui-set-hide-val"></p>
+            <input type="hidden" id="createTime" name="createTime">
+        </div>
+    </div>
+    <div class="weui-line"></div>
+
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="save()">提交</a>
+    </div>
+</form>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript">
+
+
+    var itemId = 1;//getUrlParam("itemId");
+    var userId = 1;//getUrlParam("userId");
+    $('.createTime').html(formatDate4(new Date()));
+    $('#itemId').val(itemId);
+    $('#userId').val(userId);
+
+    //专家信息
+    $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
+        $('.userName').html(res[0].name);
+        $('#userName').val(res[0].name);
+    });
+
+    //初始化项目信息
+    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
+        $('.itemName').html(res[0].item_name);
+        $('#itemName').val(res[0].item_name);
+    });
+
+    //保存数据
+    function save() {
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/api-summary/expert-evaluate',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                $.toast('成功');
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

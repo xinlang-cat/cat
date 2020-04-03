@@ -1,109 +1,100 @@
-function initTreeLabel(id,sign) {
-    $.ajax({
-        type : 'get',
-        url : domainName + '/api-label/label/tree/'+sign,
-        contentType: "application/json; charset=utf-8",
-        success : function(res) {
-            tree.render({
-                elem: id
-                ,data: convert(res)
-                ,showCheckbox: true  //是否显示复选框
-                ,onlyIconControl: true
-                ,click: function(obj){
-                    var data = obj.data;  //获取当前点击的节点数据
-                    layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
-                }
-            });
+
+
+layui.use(['element', 'layer', 'form'], function () {
+    var element = layui.element;
+    var layer = layui.layer;
+    var form = layui.form;
+    element.on('collapse(test)', function (data) {
+        if (data.show) {
+            var userDiv = $(this).next('div');
+            var inputArr = $(userDiv).find('input');
+            if (inputArr.length <= 0) {
+                var sign = $(this).data('sign');
+                $.get(domainName + '/project-user/item/assign/expert/' + sign, function (res) {
+                    var str = '';
+                    $.each(res[sign], function (i, item) {
+                        str +=
+                            '<div class="layui-form-item">\n' +
+                            '    <input name="' + item.userId + '" value="' + item.name + '" title="' + item.name + '   |   ' + item.phone + '   |   ' + item.deptName + '" type="radio">' +
+                            '</div>';
+                    });
+                    $(userDiv).append(str);
+                    form.render('radio');
+                });
+            }
         }
     });
-}
-
-function convert(res){
-    var data = [];
-    $.each(res,function (i,item) {
-        var data1 = {
-            id : item.id,
-            title : item.content,
-            children : null,
-            disabled: true
-        };
-        if(item.child.length>0){
-            setProperty(data1,item.child);
-        }
-        data[i] = data1;
-    })
-    return data;
-}
-
-function setProperty(data,children1){
-    var arr  = [];
-    $.each(children1,function (i,item) {
-        var d = {
-            id : item.id,
-            title: item.content,
-            children : null
-        };
-        if(item.child.length>0){
-            setProperty(arr,item.child,i);
-        }
-        arr[i] = d;
-    })
-    data.children = arr;
-}
-//#################################################################################################################################################################################################################################################################
-var layedit ,index,layer,tree,util,laydate,form;
-layui.use(['tree','layedit','upload','layer','util', 'laydate'], function(){
-    layedit = layui.layedit;
-    layer  = layui.layer;
-    laydate = layui.laydate;
-    tree = layui.tree;
-    util = layui.util;
-    form = layui.form;
-
 });
 
-function back() {
-    layer.close(index);
-}
-function choose(line) {
-    var sign ="INDUSTRY_GROUP";
-    var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="label">';
+
+$.matchExpert = function (params) {
+    var str = '';
     $.ajax({
         type: 'get',
-        url: domainName + '/api-label/label/tree/' + sign,
+        url: domainName + '/api-label/label/tree/INDUSTRY_GROUP',
         async: false,
         success: function (data) {
+            str += '<form class="layui-form" onsubmit="return false"><div class="layui-collapse" lay-filter="test" style="margin: 30px;">';
             $.each(data[0].child, function (i, item) {
-                    element += ' <input type="radio" name="' + line + '" value="' + item.sign + '" title="' + item.content + '" id="' + item.id + '">'
-
+                str += '<div class="layui-colla-item"><h2 class="layui-colla-title" data-sign="' + item.sign + '">' + item.content + '</h2>' +
+                    '<div class="layui-colla-content"></div></div>';
             });
-
-                element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="SaveLabel(' + line + ')">保存</button></div></div></form></div>';
-
-            index = layer.open({
-                title: "请选择",
-                type: 1,
-                area: ['800px', '400px'],
-                maxmin: true,
-                shadeClose: true,
-                content: element
-            });
-                form.render('radio');
-
+            str += '</div><div class="form-actions"><div class="row" align="center"><div class="col-md-12">' +
+                '<button class="btn btn-primary" type="submit" id="SAVE_INDUSTRY_TITLE"><i class="fa fa-save"></i> 保存</button></div></div></div></form>';
         }
     });
-
-}
-function SaveLabel(name) {
-    var res =$("input[type='radio']:checked").val();
-    var text =$("input[type='radio']:checked").attr('title');
-    var title = "type"+name;
-    var value="labelSign"+name;
-    $("#"+title).val(text);
-    $("#"+value).val(res);
-    layer.msg("成功", {shift: -1, time: 1000}, function(){
-        layer.close(index);
+    $(params.elem).click(function () {
+        layer.open({
+            title: "匹配专家",
+            type: 1,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: str,
+        });
+        layui.element.init();
     });
-}
+
+    $('body').on('click','#SAVE_INDUSTRY_TITLE',function () {
+        var arr = new Array();
+        $.each($('div.layui-colla-item'), function (i, item) {
+            var data = {
+                labelSign: $($(item)).find('h2').data('sign'),
+                userType: 'EXPERT'
+            };
+            var inputs = $($(item)).find('input:checked');
+            if (inputs.length > 0) {
+                $.each(inputs, function (i, it) {
+                    data['userId'] = $(it).attr('name');
+                    data['itemId'] = params.itemId;
+                });
+                arr.push(data);
+            }
+        });
+        if (params.defaultSave) {
+            $.ajax({
+                type: 'post',
+                url: domainName + '/project-user/item/list',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(arr),
+                success: function (res) {
+                    alert('操作成功')
+                },
+                error: function (res) {
+                    alert('操作失败');
+                }
+            });
+        } else {
+            params.defaultSaveFun(arr);
+        }
+    });
+};
+
+
+
+
+
+
 
 

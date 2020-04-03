@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <title>查看项目验收报告</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-22 col-lg-12" >
+    <form class="form-horizontal layui-form" onsubmit="return false" style="padding-bottom: 30px">
+        <fieldset>
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-2 control-label">项目名称</label>
+                <div class="col-md-10">
+                    <p class="form-control itemName" style="border: none"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">综合意见建议</label>
+                <div class="col-md-10">
+                    <p class="form-control evaluateContent" style="border: none"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">评审结果</label>
+                <div class="col-md-8">
+                    <input type="radio" name="isPass" value="1" title="通过">
+                    <input type="radio" name="isPass" value="0" title="待定">
+                    <input type="radio" name="isPass" value="-1" title="不通过">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">评审人</label>
+                <div class="col-md-10">
+                    <p class="form-control userName" style="border: none"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">评审日期</label>
+                <div class="col-md-10">
+                    <p class="form-control createTime" style="border: none"></p>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript">
+
+    var form;
+    layui.use(['form'], function () {
+        form = layui.form;
+    });
+
+    var id = getUrlParam("expertEvaluateId");
+
+    //初始化
+    $.get(domainName + '/api-summary/expert-evaluate/list', {id:id}, function (res) {
+        for (var key in res[0]) {
+            if (key == 'createTime'){
+                $("." + key).html(formatDate4(res[0][key]));
+            }else {
+                $("." + key).html(res[0][key]);
+            }
+            setRadio($('input[name=isPass]'),res[0].isPass);
+        }
+    });
+
+    //设置单选框
+    function setRadio(inputs,data) {
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() == data) {
+                $(inputs[i]).prop('checked', true);
+            }else {
+                $(inputs[i]).prop('disabled', true);
+            }
+        }
+    }
+
+
+</script>
+</body>
+</html>

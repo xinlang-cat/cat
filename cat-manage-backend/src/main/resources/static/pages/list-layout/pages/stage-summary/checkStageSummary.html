@@ -704,7 +704,7 @@
                 str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck" >';
                 str += '我所填写的项目执行情况调查表实事求是，数据详实。在下一步研究中，我将认真工作并及时报告重大变动情况。</textarea> </br>';
                 str += '<div class="layui-input-block"><input name="principalCheckEnable" value="1" title="同意" checked="" type="radio"><input name="principalCheckEnable" value="-1" title="驳回" type="radio"></div>';
-                str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate1(new Date());
+                str += '<label>项目负责人：</label>' + res.data[0].name + '<input type="hidden" id="principal" name="principal" value="' + res.data[0].name + '"> </br> <label>日期：</label> ' + formatDate4(new Date());
                 str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
                 $(".principalCheckStage").append(str);
             }
@@ -718,7 +718,7 @@
                 str += '<label>2.其他意见：</label>';
                 str += '<textarea placeholder="其他意见" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
                 str += '<div class="layui-input-block"><input name="deptCheckEnable" value="1" title="同意" checked="" type="radio"><input name="deptCheckEnable" value="-1" title="驳回" type="radio"></div>';
-                str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate1(new Date());
+                str += '<label>经办人：</label>' + res.data[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res.data[0].name + '"></br><label>日期：</label> ' + formatDate4(new Date());
                 str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
                 $(".deptCheckStage").append(str);
             }

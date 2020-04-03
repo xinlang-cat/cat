@@ -5,8 +5,8 @@
 .weui-cells:after, .weui-cells:before{border: none;}
 .weui-max-title{font-size: 18px;font-weight: bold;}
 label >div.weui-cell__bd >p{font-size: 14px;}
-div.weui-cells__title{font-weight: bold;}
-label.weui-label{font-weight: bold;text-align-last: justify;}
+div.weui-cells__title{font-weight: bold;font-size: 14px}
+label.weui-label{font-weight: bold;text-align-last: justify;font-size: 14px}
 .weui-textarea{border:1px solid #e5e5e5;border-radius:6px;padding: 5px 5px;width: 97%;}
 .weui-textarea-counter{margin-top: -20px;}
 .weui-imaginary-line{border: 2px dashed #e5e5e5;marginp: 10px 0;}

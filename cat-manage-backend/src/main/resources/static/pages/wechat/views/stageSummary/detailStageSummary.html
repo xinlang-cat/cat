@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>执行报告列表</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/stageSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="//at.alicdn.com/t/font_1682849_3q8aaf8z15b.css">
+
+</head>
+
+<body ontouchstart>
+<div class="page__bd">
+
+</div>
+
+<div id="detail">
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cell on-off">
+            <div class="weui-cell__bd weui-cell_primary">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <p class="weui-max-title" style="float: left">基本信息</p>
+            </div>
+            <div class="weui-cell__bd">
+                <a href="javascript:;"
+                   style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">项目名称</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="itemName weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">合同编号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="contractNo weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">项目类别</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="category weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">承担单位</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="undertaker weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">填报人</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="createUserName weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">填报人电话</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="createUserPhone weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">报人邮箱</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="createUserEmail weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">填报日期</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="createTime weui-set-hide-val"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cell on-off">
+            <div class="weui-cell__bd weui-cell_primary">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <p class="weui-max-title" style="float: left">项目执行进展情况</p>
+            </div>
+            <div class="weui-cell__bd">
+                <a href="javascript:;"
+                   style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">合同规定起止时间</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="startAndEndTime weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">是否申请延期</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="applicantExtension weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">批复截止时间</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="extensionTime weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">产学研联合</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="produceLearnResearch weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">创新类型</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="innovateType weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">合作形式</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="collaborate weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">主要技术来源单位</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="skillSourceDept weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">项目进展情况</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="progress weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cells__title">
+                项目拖延/停顿/终止/撤销的主要原因
+                <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary open-popup" data-target="#full"
+                   style="float: right;">选项描述</a>
+            </div>
+            <div class="weui-cells weui-cells_checkbox" style="width: 100%;">
+                <label class="weui-cell weui-check__label " style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="causes" value="0" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>0.技术变化</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="1" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>1.计划性调整</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="2" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>2.设备、材料不落实</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="3" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>3.协作关系影响</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="4" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>4.资金不到位</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="5" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>5.市场变化</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="6" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>6.技术骨干变动</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="7" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>7.立题不当</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="8" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>8.不可抗拒因素</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="9" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>9.合作方变动</p>
+                    </div>
+                </label>
+                <label class="weui-cell weui-check__label" style="float: left;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" name="causes" class="weui-check" value="10" disabled>
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd">
+                        <p>10.其他原因</p>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <div id="full" class='weui-popup__container'>
+            <div class="weui-popup__overlay"></div>
+            <div class="weui-popup__modal">
+                <header class='demos-header'>
+                    <h2 class="demos-second-title">项目拖延/停顿/终止/撤销的主要原因</h2>
+                </header>
+                <article class="weui-article">
+                    <section>
+                        <section>
+                            <h3>勾选项目进展受阻的主要原因，最多选三项：</h3>
+                            <p id="stageTarget">   
+                                0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br>    
+                                1.计划性调整：由项目组织部门或主管部门审定对合同书 的计划进度进行的调整。</br>  
+                                2.设备、材料不落实：由于设备紧张、材料短缺等原因而 影响计划进度的完成。</br>     
+                                3.协作关系影响：由于协作单位拖延加工、检验、测试以 及依托工程拖延等影响计划进度的完成。</br>     
+                                4.资金不到位：由于在报告期内项目资金不到位而影响计 划进度的完成。</br>     
+                                5.市场变化：由于市场的供求状况发生改变，而使该项目 不能或不宜按原计划进度进行。</br>     
+                                6.技术骨干变动：由于项目组技术骨干调动或较长时间脱 离项目活动等原因而影响计划进度完成。</br>     
+                                7.立题不当：由于可行性研究不够、制定的指标过高、技 术不成熟、技术力量不足，导致项目难以进行而影响计划进度 的完成。</br>     
+                                8.不可抗拒因素：人力不可抗拒因素，例如自然灾害等。</br>     
+                                9.合作方变动：国际或区域科技合作项目的合作方发生变 动，导致项目难以按计划完成。</br>     
+                                10.其他原因：除上述原因以外，影响计划进度完成的其 他各种原因。论文发表周期较长、项目建设场地问题。</br>
+                            </p>
+                        </section>
+                    </section>
+                </article>
+                <a href="javascript:;" style="margin:40px 30px;"
+                   class="weui-btn weui-btn_primary close-popup">关闭</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cell on-off">
+            <div class="weui-cell__bd weui-cell_primary">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <p class="weui-max-title" style="float: left">考核指标完成情况</p>
+            </div>
+            <div class="weui-cell__bd">
+                <a href="javascript:;"
+                   style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <div id="TECHNICAL_INDICATORS"></div>
+
+            <div id='ECONOMIC_INDICATORS'></div>
+
+            <div id="INDICATORS_OF_TALENT_TEAM_CONS"></div>
+
+            <div id="OTHER_INDICATORS"></div>
+
+            <div class="weui-imaginary-line"></div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <label class="weui-min-title">项目重要进展情况描述</label>
+                    <p class="importanceDescribe weui-set-hide-val"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cell on-off">
+            <div class="weui-cell__bd weui-cell_primary">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <p class="weui-max-title" style="float: left">项目经费管理情况</p>
+            </div>
+            <div class="weui-cell__bd">
+                <a href="javascript:;"
+                   style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">项目资金是否单独核算</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="isOneCheck weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">单独核算形式</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="oneCheckType weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p class="weui-max-title">项目资金收支情况(截止报告期限)</p>
+                </div>
+            </a>
+
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">收入</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="allIncome weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">支出</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="allExpend weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">其中劳务支出</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="labourExpend weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">其中缴费支出</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="performanceExpend weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cell on-off">
+            <div class="weui-cell__bd weui-cell_primary">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <p class="weui-max-title" style="float: left">项目经费使用情况</p>
+            </div>
+            <div class="weui-cell__bd">
+                <a href="javascript:;"
+                   style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <span style="font-size: 14px;">   
+                        其中：广西科技厅资助经费(如为先验收后补助项目，则【合同原始预算】和【已支出金额】为乙方自筹经费中的科技经费)
+                    </span>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-imaginary-line stageFundUse"></div>
+
+
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>项目其他经费支出(如为先验收后补助项目，则此处经费不包含自筹经费中的科技经费)</p>
+                </div>
+            </a>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">国家科技部门</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="stateSkillDeptAppropriation weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">国家其他部门</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="stateOtherDeptAppropriation weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">区级部门拨款</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="districtDeptAppropriation weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">市级部门拨款</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="cityDeptAppropriation weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">县级部门拨款</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="countyDeptAppropriation weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">自筹资金:</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="selfRaisedFund weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">银行贷款</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="bankLoan weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">国外资金</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="foreignFund weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">其他资金</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <p class="otherFund weui-set-hide-val"></p>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cell on-off">
+            <div class="weui-cell__bd weui-cell_primary">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <p class="weui-max-title" style="float: left">项目效益及成果情况</p>
+            </div>
+            <div class="weui-cell__bd">
+                <a href="javascript:;"
+                   style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+            </div>
+        </div>
+
+        <div>
+            <div class="weui-cell open-popup" data-target="#full1">
+                <div class="weui-cell__hd">
+                    <label class="weui-centre-title">项目效益及基本情况</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;"
+                       style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell open-popup" data-target="#full2">
+                <div class="weui-cell__hd">
+                    <label class="weui-centre-title">专注、论文目录</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;"
+                       style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell open-popup" data-target="#full3">
+                <div class="weui-cell__hd">
+                    <label class="weui-centre-title">授权专利目录</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;"
+                       style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell open-popup" data-target="#full4">
+                <div class="weui-cell__hd">
+                    <label class="weui-centre-title">科技成果奖励目录</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;"
+                       style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell open-popup" data-target="#full5">
+                <div class="weui-cell__hd">
+                    <label class="weui-centre-title">科技成果登记目录</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;"
+                       style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell open-popup" data-target="#full6">
+                <div class="weui-cell__hd">
+                    <label class="weui-centre-title">技术合同认定目录</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;"
+                       style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="full1" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white">
+            <div class="weui-cell stageTarget">
+                <div class="weui-cell__hd">
+                    <p style="font-size: 16px;font-weight: bold;">项目效益及成果情况</p>
+                </div>
+            </div>
+            <div class="weui-imaginary-line"></div>
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+
+
+    <div id="full2" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white">
+            <div class="weui-cell stagePaperCatalogue">
+                <div class="weui-cell__hd">
+                    <p style="font-size: 16px;font-weight: bold;">专利论文目录</p>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;" class="stage-summary-a"
+                       onclick="addListHtml('stagePaperCatalogue')">添加</a>
+                </div>
+            </div>
+            <div class="weui-imaginary-line"></div>
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+
+
+    <div id="full3" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white">
+            <div class="weui-cell stagePatentCatalogue">
+                <div class="weui-cell__hd">
+                    <p style="font-size: 16px;font-weight: bold;">授权专利目录</p>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;" class="stage-summary-a"
+                       onclick="addListHtml('stagePatentCatalogue')">添加</a>
+                </div>
+            </div>
+
+            <div class="weui-imaginary-line"></div>
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+
+
+    <div id="full4" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white">
+            <div class="weui-cell stageScienceAchievementAwardCatalogue">
+                <div class="weui-cell__hd">
+                    <p style="font-size: 16px;font-weight: bold;">科技成果奖励目录</p>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;" class="stage-summary-a"
+                       onclick="addListHtml('stageScienceAchievementAwardCatalogue')">添加</a>
+                </div>
+            </div>
+            <div class="weui-imaginary-line"></div>
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+
+
+    <div id="full5" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white">
+            <div class="weui-cell stageScienceAchievementRegisterCatalogue">
+                <div class="weui-cell__hd">
+                    <p style="font-size: 16px;font-weight: bold;">科技成果登记目录</p>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;" class="stage-summary-a"
+                       onclick="addListHtml('stageScienceAchievementRegisterCatalogue')">添加</a>
+                </div>
+            </div>
+            <div class="weui-imaginary-line"></div>
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+
+
+    <div id="full6" class='weui-popup__container'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal" style="background-color: white">
+            <div class="weui-cell stageTechnologyPactRegisterCatalogue">
+                <div class="weui-cell__hd">
+                    <p style="font-size: 16px;font-weight: bold;">技术合同认定登记目录</p>
+                </div>
+                <div class="weui-cell__bd">
+                    <a href="javascript:;" class="stage-summary-a"
+                       onclick="addListHtml('stageTechnologyPactRegisterCatalogue')">添加</a>
+                </div>
+            </div>
+            <div class="weui-imaginary-line"></div>
+            <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <a class="weui-cell weui-cell_access" href="javascript:;">
+            <div class="weui-cell__hd">
+                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+            </div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <p class="weui-max-title">项目负责人承诺及单位意见</p>
+            </div>
+        </a>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">项目负责人承诺</label>
+                <p class="principalCheck weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">项目负责人</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="principal weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">日期</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="principalCheckTime weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cells__title">项目完成情况</div>
+        <div class="weui-cells weui-cells_checkbox">
+            <label class="weui-cell weui-check__label " style="float: left;">
+                <div class="weui-cell__hd">
+                    <input type="radio" class="weui-check" name="projectCompletion" value="按计划进度实施" disabled>
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>按计划进度实施</p>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" style="float: left;">
+                <div class="weui-cell__hd">
+                    <input type="radio" name="projectCompletion" class="weui-check" value="基本按计划进度实施" disabled>
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>基本按计划进度实施</p>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" style="float: left;">
+                <div class="weui-cell__hd">
+                    <input type="radio" name="projectCompletion" class="weui-check" value="未按计划进度实施" disabled>
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>未按计划进度实施</p>
+                </div>
+            </label>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <label class="weui-min-title">单位意见</label>
+                <p class="deptCheck weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">经办人</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="deptCheckUser weui-set-hide-val"></p>
+            </div>
+        </div>
+        <div class="weui-line"></div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">日期</label>
+            </div>
+            <div class="weui-cell__bd">
+                <p class="deptCheckTime weui-set-hide-val"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="weui-interval"></div>
+        <div class="weui-cells__title">
+            <div class="weui-cell__hd">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;display:block;float: left;">
+                <p style="float: left">附件清单</p>
+            </div>
+        </div>
+        <div class="weui-cell stageAffixFile" style="margin-bottom: 15px;"></div>
+        <div class="weui-imaginary-line" style="margin-bottom: 30px;"></div>
+    </div>
+
+    <div class="weui-interval"></div>
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="closeDetail()">返回</a>
+    </div>
+    <div style="height: 100px;background-color: white;width: 100%;"></div>
+</div>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../js/stageSummaryFundOnOff.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+
+    var itemId = 1; //getUrlParam("itemId");
+    $("#detail").hide();
+    $(function () {
+        var params = {
+            itemId: itemId,
+            enable: 1
+        };
+        $.get(domainName + "/api-summary/stage/list", params, function (data) {
+            var str = '';
+            for (var i = data.length - 1; i >= 0; i--) {
+                var outline = data[i].itemName;
+                str += '<a href="javascript:;"  onclick="detail(' + data[i].id + ')"><div class="weui-panel">';
+                str += '        <div class="weui-panel__bd">';
+                str += '            <div class="weui-media-box weui-media-box_text">';
+                str += '               <p class="weui-media-box__desc">' + outline + '</p>';
+                str += '               <ul class="weui-media-box__info">';
+                str += '                    <li class="weui-media-box__info__meta">' + data[i].createUserName + '</li>';
+                str += '                    <li class="weui-media-box__info__meta">' + formatDate4(data[i].createTime) + '</li>';
+                str += '               </ul>';
+                str += '          </div>';
+                str += '     </div>';
+                str += ' </div></a><div class="weui-interval"></div>';
+            }
+            $(".page__bd").append(str);
+        });
+    });
+
+    function detail(id) {
+
+        $.get(domainName + "/api-summary/stage/" + id, function (res) {
+            for (var key in res) {
+                $("." + key).html(res[key]);
+            }
+            $('.deptCheckTime').html(formatDate4(res.deptCheckTime));
+            $('.principalCheckTime').html(formatDate4(res.principalCheckTime));
+            $('.createTime').html(formatDate4(res.createTime));
+            $('.extensionTime').html(formatDate4(res.extensionTime));
+
+            var causesInput = $('input[name=causes]');
+            var causesVal = (res.cause).split(',');
+            for (var i = 0; i < causesInput.length; i++) {
+                for (var j = 0; j < causesVal.length; j++) {
+                    if ($(causesInput[i]).val() == causesVal[j]) {
+                        $(causesInput[i]).prop('checked', true);
+                    }
+                }
+            }
+            setRadio($('input[name=principalCheckEnable]'), res.principalCheckEnable);
+            setRadio($('input[name=deptCheckEnable]'), res.deptCheckEnable);
+            setRadio($('input[name=projectCompletion]'), res.projectCompletion);
+
+            if (res.otherTarget != null) {
+
+                var str = '<div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">\n' +
+                    '                    <p style="font-weight: bold">其他指标-指标内容：</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + res.otherTarget + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">完成情况</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">' +
+                    '               <p class="weui-set-hide-val">' + res.otherTargetSchedule + '</p>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">完成情况描述</label>\n' +
+                    '               <p class="weui-set-hide-val">' + res.otherTargetDescribe + '</p>' +
+                    '            </div>\n' +
+                    '        </div>';
+                $("#OTHER_INDICATORS").append(str);
+            }
+            if (res.skillTarget != null) {
+                var str = '<div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">\n' +
+                    '                    <p style="font-weight: bold">技术指标-指标内容：</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + res.skillTarget + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">完成情况</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">' +
+                    '               <p class="weui-set-hide-val">' + res.skillTargetSchedule + '</p>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">完成情况描述</label>\n' +
+                    '               <p class="weui-set-hide-val">' + res.skillTargetDescribe + '</p>' +
+                    '            </div>\n' +
+                    '        </div>';
+                $("#TECHNICAL_INDICATORS").append(str);
+            }
+            if (res.economyTarget != null) {
+                var str = '<div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">\n' +
+                    '                    <p style="font-weight: bold">经济指标-指标内容：</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + res.economyTarget + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">完成情况</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">' +
+                    '               <p class="weui-set-hide-val">' + res.economyTargetSchedule + '</p>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">完成情况描述</label>\n' +
+                    '               <p class="weui-set-hide-val">' + res.economyTargetDescribe + '</p>' +
+                    '            </div>\n' +
+                    '        </div>';
+                $("#ECONOMIC_INDICATORS").append(str);
+            }
+            if (res.personTarget != null) {
+                var str = '<div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <div class="weui-cell__bd weui-cell_primary" style="font-size: 16px;">\n' +
+                    '                    <p style="font-weight: bold">人才队伍建设指标-指标内容：</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + res.personTarget + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">完成情况</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">' +
+                    '               <p class="weui-set-hide-val">' + res.personTargetSchedule + '</p>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">完成情况描述</label>\n' +
+                    '               <p class="weui-set-hide-val">' + res.personTargetDescribe + '</p>' +
+                    '            </div>\n' +
+                    '        </div>';
+                $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
+            }
+            var stageFundUses = res.stageFundUses;
+            var STR_stageFundUses = '';
+            for (var i = 0; i < stageFundUses.length; i++) {
+                STR_stageFundUses += '<div class="weui-cell on-off" onclick="set_on_Off(this)" >\n' +
+                    '                    <div class="weui-cell__bd weui-cell_primary">\n' +
+                    '                        <p class="weui-title">' + stageFundUses[i].fundUseSubject + '</p>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <a href="javascript:;"\n' +
+                    '                           style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>\n' +
+                    '                    </div>\n' +
+                    '                </div><div>'+
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">支出金额</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageFundUses[i].fundUseExpenditure + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">合同原始预算</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageFundUses[i].fundUseOriginalBudget + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">已支出金额</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageFundUses[i].fundUseExpenditureOut + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <label class="weui-min-title">开支内容</label>\n' +
+                    '                    <p class="weui-set-hide-val">' + stageFundUses[i].fundUseRemark + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-imaginary-line"></div></div>\n';
+            }
+            $('.stageFundUse').after(STR_stageFundUses);
+            var stageAffixFiles = res.stageAffixFiles;
+            var STR_stageAffixFiles = '';
+            for (var i = 0; i < stageAffixFiles.length; i++) {
+                STR_stageAffixFiles = '<div class="stageAffixFile" id="' + res['id'] + '">\n' +
+                    '        <div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">附件名称</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + stageAffixFiles[i].fileName + '</p>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">文件说明</label>\n' +
+                    '                <p class="weui-set-hide-val">' + stageAffixFiles[i].fileRemark + '</p>' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <a href="javascript:;" class="stage-summary-a" onclick="delFileHtml(' + stageAffixFiles[i].url + ')">下载</a>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+            }
+            $(".stageAffixFile").after(STR_stageAffixFiles);
+            var stagePaperCatalogues = res.stagePaperCatalogues;
+            var STR_stagePaperCatalogues = '';
+            for (var i = 0; i < stagePaperCatalogues.length; i++) {
+                STR_stagePaperCatalogues += '<div class="stagePaperCatalogue">\n' +
+                    '            <div class="weui-imaginary-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">序号</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + (i + 1) + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">专著论文标题</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stagePaperCatalogues[i]['paperTitle'] + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">完成人</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stagePaperCatalogues[i].paperPersonCharge + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">项目负责人排位</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stagePaperCatalogues[i].paperLeaderRank + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">发表时间</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + formatDate4(stagePaperCatalogues[i].paperPostedTime) + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">论文收录类别</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stagePaperCatalogues[i].paperCategory + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">他人引用次数</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stagePaperCatalogues[i].paperCitationsSum + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <label class="weui-min-title">有关说明</label>\n' +
+                    '                    <p class="weui-set-hide-val">' + stagePaperCatalogues[i].paperRemark + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+            }
+            $("div.stagePaperCatalogue:last").after(STR_stagePaperCatalogues);
+            var stagePatentCatalogues = res.stagePatentCatalogues;
+            var STR_stagePatentCatalogues = '';
+            for (var i = 0; i < stagePatentCatalogues.length; i++) {
+                STR_stagePatentCatalogues += '<div class="stagePatentCatalogue"><div class="weui-imaginary-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">序号</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + (i + 1) + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">专利编号</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + stagePatentCatalogues[i].patentNumber + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">专利名称</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + stagePatentCatalogues[i].patentName + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">完成人</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + stagePatentCatalogues[i].patentPersonCharge + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">专利类型</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + stagePatentCatalogues[i].patentType + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">申请专利时间</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + formatDate4(stagePatentCatalogues[i].patentApplicationTime) + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-label">专利授权时间</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p class="weui-set-hide-val">' + formatDate4(stagePatentCatalogues[i].patentAuthorizeTime) + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">有关说明</label>\n' +
+                    '                <p class="weui-set-hide-val">' + stagePatentCatalogues[i].patentRemark + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '    </div>';
+            }
+            $("div.stagePatentCatalogue:last").after(STR_stagePatentCatalogues);
+            var stageScienceAchievementAwardCatalogues = res.stageScienceAchievementAwardCatalogues;
+            var STR_stageScienceAchievementAwardCatalogues = '';
+            for (var i = 0; i < stageScienceAchievementAwardCatalogues.length; i++) {
+                STR_stageScienceAchievementAwardCatalogues += '<div class="stageScienceAchievementAwardCatalogue">\n' +
+                    '           <div class="weui-imaginary-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__hd">\n' +
+                    '                   <label class="weui-label">序号</label>\n' +
+                    '               </div>\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <p class="weui-set-hide-val">' + (i + 1) + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '           <div class="weui-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__hd">\n' +
+                    '                   <label class="weui-label">成果名称</label>\n' +
+                    '               </div>\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <p class="weui-set-hide-val">' + stageScienceAchievementAwardCatalogues[i].scienceAwardAchievementName + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '           <div class="weui-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__hd">\n' +
+                    '                   <label class="weui-label">完成人</label>\n' +
+                    '               </div>\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <p class="weui-set-hide-val">' + stageScienceAchievementAwardCatalogues[i].scienceAwardPersonCharge + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '           <div class="weui-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__hd">\n' +
+                    '                   <label class="weui-label">项目负责人排位</label>\n' +
+                    '               </div>\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <p class="weui-set-hide-val">' + stageScienceAchievementAwardCatalogues[i].scienceAwardLeaderRank + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '           <div class="weui-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__hd">\n' +
+                    '                   <label class="weui-label">获奖时间</label>\n' +
+                    '               </div>\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <p class="weui-set-hide-val">' + formatDate4(stageScienceAchievementAwardCatalogues[i].scienceAwardGetTime) + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '           <div class="weui-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__hd">\n' +
+                    '                   <label class="weui-label">奖励类别</label>\n' +
+                    '               </div>\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <p class="weui-set-hide-val">' + stageScienceAchievementAwardCatalogues[i].scienceAwardType + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '           <div class="weui-line"></div>\n' +
+                    '           <div class="weui-cell">\n' +
+                    '               <div class="weui-cell__bd">\n' +
+                    '                   <label class="weui-min-title">有关说明</label>\n' +
+                    '                   <p class="weui-set-hide-val">' + stageScienceAchievementAwardCatalogues[i].scienceAwardRemark + '</p>\n' +
+                    '               </div>\n' +
+                    '           </div>\n' +
+                    '       </div>';
+            }
+            $("div.stageScienceAchievementAwardCatalogue:last").after(STR_stageScienceAchievementAwardCatalogues);
+            var stageScienceAchievementRegisterCatalogues = res.stageScienceAchievementRegisterCatalogues;
+            var STR_stageScienceAchievementRegisterCatalogues = '';
+            for (var i = 0; i < stageScienceAchievementRegisterCatalogues.length; i++) {
+                STR_stageScienceAchievementRegisterCatalogues += ' <div class="stageScienceAchievementRegisterCatalogue">\n' +
+                    '            <div class="weui-imaginary-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">序号</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + (i + 1) + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">登记号</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterNumber + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">成果名称</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterAchievementName + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">第一完成单位</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterAccomplishDept + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">第一完成人</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageScienceAchievementRegisterCatalogues[i].scienceRegisterPersonCharge + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+            }
+            $("div.stageScienceAchievementRegisterCatalogue:last").after(STR_stageScienceAchievementRegisterCatalogues);
+            var stageTechnologyPactRegisterCatalogues = res.stageTechnologyPactRegisterCatalogues;
+            var STR_stageTechnologyPactRegisterCatalogues = '';
+            for (var i = 0; i < stageTechnologyPactRegisterCatalogues.length; i++) {
+                STR_stageTechnologyPactRegisterCatalogues += '<div class="stageTechnologyPactRegisterCatalogue">\n' +
+                    '            <div class="weui-imaginary-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">序号</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + (i + 1) + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">技术合同编号</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageTechnologyPactRegisterCatalogues[i].technologyPactNumber + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">技术合同名称</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageTechnologyPactRegisterCatalogues[i].technologyPactName + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">卖方单位</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageTechnologyPactRegisterCatalogues[i].technologySellerDept + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">合同成交金额</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageTechnologyPactRegisterCatalogues[i].technologyPactVolumeTransaction + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">技术交易金额</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageTechnologyPactRegisterCatalogues[i].technologyVolumeTransaction + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">技术合同类型</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val">' + stageTechnologyPactRegisterCatalogues[i].technologyPactType + '</p>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+            }
+            $("div.stageTechnologyPactRegisterCatalogue:last").after(STR_stageTechnologyPactRegisterCatalogues);
+            var stageTargets = res.stageTargets;
+            var STR_stageTargets = '';
+            for (var i = 0; i < stageTargets.length; i++) {
+                STR_stageTargets += ' <div class="stageTarget">\n' +
+                    '            <div class="weui-imaginary-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">效益/成果名称</label>\n' +
+                    '                </div>' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val"> ' + stageTargets[i].targetName + '</p>' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">数量</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <p class="weui-set-hide-val"> ' + stageTargets[i].targetSum + '</p>' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+            }
+            $('div.stageTarget:last').after(STR_stageTargets);
+            $.each($('.on-off'), function (i, item) {
+                $($(item).next('div')).hide();
+            });
+        });
+        $('.page__bd').hide();
+        $("#detail").show();
+    }
+
+    function closeDetail() {
+        $('.page__bd').show();
+        $("#detail").hide();
+    }
+
+    //设置单选框
+    function setRadio(inputs, data) {
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() == data) {
+                $(inputs[i]).prop('checked', true);
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

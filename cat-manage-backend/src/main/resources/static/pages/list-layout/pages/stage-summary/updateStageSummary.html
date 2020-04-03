@@ -945,6 +945,7 @@
         formData.stageTargets = stageTargets;
         formData.principalCheckEnable = 0;
         formData.deptCheckEnable = 0;
+        formData.cause = (formData.causes).join(',');
         formData.enable = 0;
         formData.id = stageId;
         $.ajax({

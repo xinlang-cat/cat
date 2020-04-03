@@ -26,7 +26,7 @@
         <div class="weui-slider">
             <div id="sliderInner" class="weui-slider__inner">
                 <div id="sliderTrack" class="weui-slider__track"></div>
-                <div id="sliderHandler"  class="weui-slider__handler"></div>
+                <div id="sliderHandler" class="weui-slider__handler"></div>
             </div>
         </div>
         <div id="sliderValue" class="weui-slider-box__value" style="margin-right: 10px;"></div>
@@ -40,6 +40,12 @@
             </div>
         </div>
     </div>
+
+    <div id="targetSum">
+
+
+    </div>
+
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
@@ -98,7 +104,7 @@
         </div>
     </div>
 
-    <input type="hidden" name="accessory" id="accessory" >
+    <input type="hidden" name="accessory" id="accessory">
     <input type="hidden" name="plan" id="plan" value="">
     <div class="weui-line"></div>
     <div class="weui-btn-area">
@@ -156,7 +162,7 @@
                 if (jQuery.isEmptyObject(accessory)) {
                     $('#accessory').val(res.id);
                 } else {
-                    $('#accessory').val(accessory+ ',' + res.id);
+                    $('#accessory').val(accessory + ',' + res.id);
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -169,43 +175,174 @@
         FastClick.attach(document.body);
     });
     var plan = 0;
-    $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 1}, function (res) {
+    $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 4}, function (res) {
+
+        if (!jQuery.isEmptyObject(res)) {
+            var flag = false;
+            var str = '';
+            $.each(res.workLogAffiliates, function (i, item) {
+                flag = true;
+                str += '<div class="targetSum">\n' +
+                    '            <div class="weui-imaginary-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">指标名称</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <input class="weui-input" type="text" name="content" value="' + item.content + '" disabled>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">计划数量</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <input class="weui-input" type="text" name="originalCount" value="' + item.originalCount + '" disabled>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">上次数量</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <input class="weui-input" type="text" name="oldCount" value="' + item.nowCount + '" disabled>\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-line"></div>\n' +
+                    '            <div class="weui-cell">\n' +
+                    '                <div class="weui-cell__hd">\n' +
+                    '                    <label class="weui-label">上次本次合计</label>\n' +
+                    '                </div>\n' +
+                    '                <div class="weui-cell__bd">\n' +
+                    '                    <input class="weui-input" type="text" name="nowCount" value="' + item.nowCount + '" >\n' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    '        </div>';
+            });
+            if (flag) {
+                str += '<div class="weui-imaginary-line"></div>';
+            }
+            $('#targetSum').append(str);
+        } else {
+            $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (data) {
+                var str = '';
+                var flag = false;
+                $.each(data, function (i, item) {
+                    if (item['count'] > 0) {
+                        var content = '';
+                        flag = true;
+                        $.ajaxSettings.async = false;
+                        $.get(domainName + "/api-label/label/tree/" + item['target'], function (result) {
+                            content = result[0]['content'];
+                        });
+                        $.ajaxSettings.async = true;
+                        str += '<div class="targetSum">\n' +
+                            '            <div class="weui-imaginary-line"></div>\n' +
+                            '            <div class="weui-cell">\n' +
+                            '                <div class="weui-cell__hd">\n' +
+                            '                    <label class="weui-label">指标名称</label>\n' +
+                            '                </div>\n' +
+                            '                <div class="weui-cell__bd">\n' +
+                            '                    <input class="weui-input" type="text" name="content" value="' + item.content + '" disabled>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-line"></div>\n' +
+                            '            <div class="weui-cell">\n' +
+                            '                <div class="weui-cell__hd">\n' +
+                            '                    <label class="weui-label">计划数量</label>\n' +
+                            '                </div>\n' +
+                            '                <div class="weui-cell__bd">\n' +
+                            '                    <input class="weui-input" type="text" name="originalCount" value="' + item['count'] + '" disabled>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-line"></div>\n' +
+                            '            <div class="weui-cell">\n' +
+                            '                <div class="weui-cell__hd">\n' +
+                            '                    <label class="weui-label">上次数量</label>\n' +
+                            '                </div>\n' +
+                            '                <div class="weui-cell__bd">\n' +
+                            '                    <input class="weui-input" type="text" name="oldCount" value="0" disabled>\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-line"></div>\n' +
+                            '            <div class="weui-cell">\n' +
+                            '                <div class="weui-cell__hd">\n' +
+                            '                    <label class="weui-label">上次本次合计</label>\n' +
+                            '                </div>\n' +
+                            '                <div class="weui-cell__bd">\n' +
+                            '                    <input class="weui-input" type="text" name="nowCount" value="0" >\n' +
+                            '                </div>\n' +
+                            '            </div>\n' +
+                            '        </div>';
+                    }
+                });
+                if (flag) {
+                    str += '<div class="weui-imaginary-line"></div>';
+                }
+                $('#targetSum').append(str);
+            });
+        }
+
         if (!jQuery.isEmptyObject(res.plan)) {
             plan = parseInt(res.plan);
         }
         setPlan(plan);
     });
     $('#slider2').slider(function (per) {
-       if(per<plan){
-           setPlan(plan);
-       }else {
-           $("#plan").val(per);
-       }
+        if (per < plan) {
+            setPlan(plan);
+        } else {
+            $("#plan").val(per);
+        }
     });
+
     function setPlan(plan) {
-        $("#sliderTrack").css('min-width',plan + '%');
-        $("#sliderHandler").css('left',plan + '%');
+        $("#sliderTrack").css('min-width', plan + '%');
+        $("#sliderHandler").css('left', plan + '%');
         $("#sliderValue").html(plan + '%');
         $("#plan").val(plan + '%')
     }
 
     function save(obj) {
         $(obj).attr("disabled", true);
+        var workLogAffiliates = setObjectProperty('.targetSum');
         var formdata = $("#form").serializeObject();
-        formdata.itemId = 44;
-        formdata.targetId = 492;
+        formdata.itemId = 1;
+        formdata.targetId = 4;
+        formdata.paln = formdata.plan + '%';
+        formdata.workLogAffiliates = workLogAffiliates;
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/work-log',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function () {
-                    $(obj).attr("disabled", false);
-                });
+                $.toast("成功");
+                $(obj).attr("disabled", false);
             }
         });
+    }
+
+    function setObjectProperty(attribute) {
+        var target = $(attribute);
+        var arr = new Array();
+        for (var i = 0; i < target.length; i++) {
+            var obj = {};
+            var input = $(target[i]).find('input,textarea');
+            var falg = false;
+            for (var j = 0; j < input.length; j++) {
+                falg = true;
+                obj[$(input[j]).attr('name')] = $(input[j]).val();
+                $(input[j]).attr('disabled', true)
+            }
+            if (falg) {
+                arr.push(obj);
+            }
+            falg = false;
+        }
+        return arr;
     }
 
 </script>
