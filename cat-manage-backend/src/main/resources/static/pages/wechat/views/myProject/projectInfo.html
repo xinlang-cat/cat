@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>项目信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 18%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">项目信息</h1>
+</header>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>合同编号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="contract_no"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目类别</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="type"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目名称</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="name"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>委托单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="entrusting_party"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>承担单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="responsible_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>管理单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="management_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>下达文号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="document_number"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>实施期限</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="period"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>总体目标</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="overall_objective"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>主要研究内容</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="research_contents"></span>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+<div class="weui-footer weui-footer_fixed-bottom">
+
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+    var id = getUrlParam("id");
+    queryInformation(id);
+
+    function queryInformation(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/information/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $('#contract_no').text(d.contract_no);
+                $('#type').text(analysisLablename(d.type));
+                $('#name').text(d.name);
+                $('#entrusting_party').text(d.entrusting_party);
+                $('#responsible_unit').text(d.responsible_unit);
+                $('#management_unit').text(d.management_unit);
+                $('#document_number').text(d.document_number);
+                $('#overall_objective').text(d.overall_objective);
+                $('#research_contents').text(d.research_contents);
+                $('#period').text(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
+                $('#status').text(d.status);
+            }
+        })
+    }
+
+    function analysisLablename(sign) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+    }
+</script>
+</html>

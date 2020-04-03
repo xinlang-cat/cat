@@ -19,9 +19,12 @@ public class ItemFundDetail {
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
+    private Integer item_id;
     private Integer budget_id;
     private Integer money;
     private Date date;
     private String remark;
     private String accessory;
+    private Integer status;
+    private Integer edit_user_id;
 }

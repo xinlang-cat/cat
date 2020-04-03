@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>各方联系方式</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align-last: justify;
+            text-align: right;
+            line-height: 1.5em;
+            width: 15%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">各方联系方式</h1>
+</header>
+<div id="content"></div>
+<!--<div class="weui-cells__title">甲方</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>联系人</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>电话</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>传真</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>邮编</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>地址</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>电子邮件</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+
+<div class="weui-cells__title">乙方</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>联系人</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>电话</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>传真</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>邮编</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>地址</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>电子邮件</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">20183103</div>
+    </div>
+</div>-->
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+	var id = getUrlParam("id");
+	queryContactWay(id);
+
+	function queryContactWay(id) {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/contactWay/list',
+			data: "item_id=" + id,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				$(data).each(function () {
+					var text = '';
+					if (this.type == 1) {
+						text = '甲方';
+					} else if (this.type == 2) {
+						text = '乙方';
+					} else {
+						text = '丙方';
+					}
+					var str = '<div class="weui-cells__title">'+text+'</div>\n' +
+							'<div class="weui-flex bg-white">\n' +
+							'    <div class="field">\n' +
+							'        <div>联系人</div>\n' +
+							'    </div>\n' +
+							'    <div class="weui-flex__item">\n' +
+							'        <div class="content">'+this.linkman+'</div>\n' +
+							'    </div>\n' +
+							'</div>\n' +
+							'<div class="weui-flex bg-white">\n' +
+							'    <div class="field">\n' +
+							'        <div>电话</div>\n' +
+							'    </div>\n' +
+							'    <div class="weui-flex__item">\n' +
+							'        <div class="content">'+this.phone+'</div>\n' +
+							'    </div>\n' +
+							'</div>\n' +
+							'<div class="weui-flex bg-white">\n' +
+							'    <div class="field">\n' +
+							'        <div>传真</div>\n' +
+							'    </div>\n' +
+							'    <div class="weui-flex__item">\n' +
+							'        <div class="content">'+this.fax+'</div>\n' +
+							'    </div>\n' +
+							'</div>\n' +
+							'<div class="weui-flex bg-white">\n' +
+							'    <div class="field">\n' +
+							'        <div>邮编</div>\n' +
+							'    </div>\n' +
+							'    <div class="weui-flex__item">\n' +
+							'        <div class="content">'+this.postcode+'</div>\n' +
+							'    </div>\n' +
+							'</div>\n' +
+							'<div class="weui-flex bg-white">\n' +
+							'    <div class="field">\n' +
+							'        <div>地址</div>\n' +
+							'    </div>\n' +
+							'    <div class="weui-flex__item">\n' +
+							'        <div class="content">'+this.site+'</div>\n' +
+							'    </div>\n' +
+							'</div>\n' +
+							'<div class="weui-flex bg-white">\n' +
+							'    <div class="field">\n' +
+							'        <div>电子邮件</div>\n' +
+							'    </div>\n' +
+							'    <div class="weui-flex__item">\n' +
+							'        <div class="content">'+this.e_mail+'</div>\n' +
+							'    </div>\n' +
+							'</div>';
+					$('#content').append(str);
+				})
+			}
+		})
+	}
+</script>
+</html>
