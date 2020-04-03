@@ -154,13 +154,16 @@
     });
 
     var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
+    var targetId = getUrlParam("targetId");
 
     $(function () {
         $("#saveBt").hide();
         var params = {
             status: 1,
             itemId: 1,
-            targetId: 4
+            targetId: 369,
+            createUserId: 1
         };
         $.get(domainName + "/api-summary/work-log/list", params, function (data) {
             var str = '';

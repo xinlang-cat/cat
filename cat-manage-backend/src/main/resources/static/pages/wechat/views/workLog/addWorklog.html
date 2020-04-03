@@ -171,12 +171,14 @@
         });
     }
 
+    var itemId = 1;
+    var targetId = 369;
+
     $(function () {
         FastClick.attach(document.body);
     });
     var plan = 0;
-    $.get(domainName + "/api-summary/work-log/lately", {itemId: 1, targetId: 4}, function (res) {
-
+    $.get(domainName + "/api-summary/work-log/lately", {itemId: itemId, targetId: targetId}, function (res) {
         if (!jQuery.isEmptyObject(res)) {
             var flag = false;
             var str = '';
@@ -226,7 +228,7 @@
             }
             $('#targetSum').append(str);
         } else {
-            $.get(domainName + "/project-item/item/target/list", {item_id: itemId}, function (data) {
+            $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (data) {
                 var str = '';
                 var flag = false;
                 $.each(data, function (i, item) {
@@ -234,7 +236,7 @@
                         var content = '';
                         flag = true;
                         $.ajaxSettings.async = false;
-                        $.get(domainName + "/api-label/label/tree/" + item['target'], function (result) {
+                        $.get(domainName + "/api-label/label/tree/" + item['content'], function (result) {
                             content = result[0]['content'];
                         });
                         $.ajaxSettings.async = true;

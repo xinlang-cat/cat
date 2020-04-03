@@ -162,18 +162,12 @@
                     });
                 });
             }
-            $.get(domainName + "/project-item/item/target/list", {id: data[0].targetId}, function (res) {
-                if (jQuery.isEmptyObject(res[0].target.trim())) {
-                    var val = res[0].content;
-                    if (val.length > 40) {
-                        val = val.substring(0, 40) + '...';
-                    }
-                    $("#text").text(val)
-                } else {
-                    $.get(domainName + "/api-label/label/tree/" + res[0].target, function (result) {
-                        $("#text").text(result[0].content)
-                    });
+            $.get(domainName + "/project-item/item/indicators/list", {id: data[0].targetId}, function (res) {
+                var val = res[0].content;
+                if (val.length > 40) {
+                    val = val.substring(0, 40) + '...';
                 }
+                $("#text").text(val)
             });
         });
     }
