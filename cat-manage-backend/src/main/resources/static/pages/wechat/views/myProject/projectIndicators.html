@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>项目指标</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <style>
+        .placeholder {
+            margin: 5px 10px;
+            height: 2.3em;
+            line-height: 2.3em;
+            text-align: left;
+            font-size: 0.7rem;
+            color: #666666;
+        }
+
+        .field {
+            width: 30%;
+            text-align: right;
+            font-size: 0.7rem;
+            margin: 5px 10px;
+            color: #666666;
+            height: 2.3em;
+            line-height: 2.3em;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">项目指标</h1>
+</header>
+<div class="weui-cells__title page-bg">考核指标</div>
+<div class="weui-news">
+    <ul class="weui-news-list" id="content_1">
+        <!--<li class="weui-news-item">
+            <div class="weui-news-inners">
+                <div class="weui-news-text">
+                    <p class="weui-news-p">
+                        新中国成立以来，特别是改革开放40年来，党和人民立足国情、立足实际大力度推进社会主义现代化建设，中国经济建设健康持续发展，取得了世界瞩目的成就。当然，在中国改革开放的进程中，总是伴有杂音的，也有一些错误的论调。比如，有的认为，“改革开放的力度和成效还远远不够，只有按照西方模式推进才是真正的改革”。事实胜于雄辩，中国的改革开放，“既不走封闭僵化的老路，也不走改旗易帜的邪路”，而是坚持走正路，走自己的路，建设有中国特色的社会主义。党和人民立足国情、立足实际推进社会主义现代化建设，中国经济建设持续健康发展，取得了世界瞩目的成就。</p>
+                </div>
+                <div class="weui-news-info">
+                    <div class="weui-news-infoitem">技术指标</div>
+                    <div class="weui-news-infoitem"><a>详细信息</a></div>
+                </div>
+            </div>
+        </li>-->
+    </ul>
+</div>
+<div class="weui-cells__title page-bg">预估成果</div>
+<div id="content_2">
+	<!--<div class="weui-flex bg-white">
+		<div class="weui-flex__item">
+			<div class="placeholder">新增产值</div>
+		</div>
+		<div class="field">
+			<div class="">3项</div>
+		</div>
+	</div>-->
+</div>
+
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+	var id = getUrlParam("id");
+	queryIndicators(id)
+
+	function queryIndicators(id) {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/indicators/list',
+			data: "item_id=" + id,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				$(data).each(function () {
+					if (this.type != 'QUANTITY_INDICATORS') {
+						var str = '<li class="weui-news-item">\n' +
+								'            <div class="weui-news-inners">\n' +
+								'                <div class="weui-news-text">\n' +
+								'                    <p class="weui-news-p">' + this.content + '</p>\n' +
+								'                </div>\n' +
+								'                <div class="weui-news-info">\n' +
+								'                    <div class="weui-news-infoitem">' + analysisLablename(this.type) + '</div>\n' +
+								'                    <div class="weui-news-infoitem"><a href="indicatorDetails.html?id='+this.id+'">详细信息</a></div>\n' +
+								'                </div>\n' +
+								'            </div>\n' +
+								'        </li>';
+						$('#content_1').append(str);
+					} else {
+						var str = '<div class="weui-flex bg-white">\n' +
+								'    <div class="weui-flex__item">\n' +
+								'        <div class="placeholder">' + analysisLablename(this.content) + '</div>\n' +
+								'    </div>\n' +
+								'    <div class="field">\n' +
+								'        <div class="">' + this.count+unit + '</div>\n' +
+								'    </div>\n' +
+								'</div>' +
+								'</div>';
+						$('#content_2').append(str);
+					}
+				})
+			}
+		})
+	}
+	var unit = '';
+	function analysisLablename(sign) {
+		var text = '';
+		$.ajax({
+			type: 'get',
+			url: domainName + '/api-label/label/tree/' + sign,
+			async: false,
+			success: function (data) {
+				text = data[0].content;
+				unit = data[0].unit;
+			}
+		});
+		return text;
+	}
+</script>
+</html>

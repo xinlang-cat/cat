@@ -20,6 +20,7 @@
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
     <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="my();">我的录入</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
@@ -198,16 +199,112 @@
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/serializeJson.js"></script>
 <script type="text/javascript" src='../../js/initSelectData.js'></script>
 
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/pictureViewer.js"></script>
 <script>
-    layui.use(['layer', 'laydate', 'upload'], function () {
+    var pers = checkPermission();
+    var currentUser = currentUser();
+
+    var id = getUrlParam("id");
+
+    layui.use(['layer', 'laydate', 'upload', 'form'], function () {
         var layer = layui.layer
             , upload = layui.upload
+            , form = layui.form
             , laydate = layui.laydate;
+
+        //获取项目数据项目
+
+        queryFundBudget(id);
+
+        //使用情况
+        function queryFundBudget(id) {
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-item/item/fundBudget/list',
+                data: "item_id=" + id,
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var str1 = '';
+                    var total = 0;
+                    $(data).each(function () {
+                        var fundDetail = queryFundDetail(this.id);
+                        var count = 0;
+                        var boolean = false;
+                        $(fundDetail).each(function () {
+                            if (this.status == 2) {
+                                count += this.money;
+                                total += this.money;
+                            } else if (this.status == 1) {
+                                boolean = true;
+                            }
+                        });
+                        var buttonCheck = '';
+                        if ($.inArray('html:principal:check', pers) != -1 && boolean) {
+                            alert(boolean)
+                            buttonCheck = '<button type="button" class="layui-btn layui-btn-xs check" name="check" id="' + this.id + '">审核</button>';
+                        }
+                        if (this.type == 'first_party_provide') {
+                            var str = '<tr>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text" name="subject" value="' + this.subject + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text" name="money" value="' + this.money + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text" name="expenditure" value="' + count + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text" name="content" value="' + this.content + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
+                                '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>' + buttonCheck + '\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                            </tr>';
+                            $('#fundBudget').append(str);
+                        } else {
+                            var str = '<tr>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text" name="subject" value="' + this.subject + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text" name="expenditure" value="' + count + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
+                                '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>' + buttonCheck + '\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                            </tr>';
+                            $('#fundUse').append(str);
+                        }
+                    })
+                    $('#total').text('累计支出：' + total + '万元');
+                }
+            })
+        }
 
         //录入
         $(document).on('click', '.edit', function () {
@@ -290,6 +387,9 @@
                 },
                 yes: function (index, layero) {
                     var formdata = $("#form").serializeObject();
+                    formdata.item_id = id;
+                    formdata.edit_user_id = currentUser.id;
+                    formdata.status = 1;
                     formdata.accessory = accessory;
                     $.ajax({
                         type: 'post',
@@ -310,6 +410,46 @@
                 }
             });
         })
+        //审核
+        $(document).on('click', '.check', function () {
+            var budgetId = $(this).attr('id');
+            var accessory = '';
+            var content = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+                '<div><div class="widget-body no-padding">\n' +
+                '<table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">\n' +
+                '<thead><tr></tr><tr><th width="20%">支出日期</th><th width="20%">支出金额</th><th width="30%">开支内容</th><th width="30%">操作</th></tr></thead><tbody id="content"></tbody>' +
+                '</table></div></div></div>';
+            layer.open({
+                type: 1,
+                title: '经费审核',
+                area: ['1000px', '600px'],
+                btn: ['确定', '关闭'],
+                scrollbar: false,
+                content: content,
+                success: function (layero, index) {
+                    $.ajax({
+                        type: 'get',
+                        url: domainName + '/project-item/item/fundDetail/list',
+                        contentType: "application/json; charset=utf-8",
+                        data: 'budget_id=' + budgetId + '&status=1',
+                        success: function (data) {
+                            var str = '';
+                            $(data).each(function () {
+                                str += '<tr><td>' + this.date.substring(0, 10) + '</td><td>' + this.money + '</td><td>' + this.remark + '</td>' +
+                                    '<td><button type="button" class="layui-btn layui-btn-sm" onclick="info(' + this.id + ');">详情</button></td></tr>';
+                            })
+                            $('#content').append(str);
+                        }
+                    });
+                },
+                yes: function (index, layero) {
+                    layer.close(index);
+                },
+                btn2: function (index, layero) {
+                    layer.close(index);
+                }
+            });
+        });
         //明细
         $(document).on('click', '.detail', function () {
             var budgetId = $(this).attr('id');
@@ -332,23 +472,25 @@
                 success: function (layero, index) {
                     var str = '';
                     $(fundDetail).each(function () {
-                        var imgs = '';
-                        $(this.accessory.split(',')).each(function (i, d) {
-                            if (i != 0) {
-                                imgs += '<div class="cover"><img src="' + d + '" alt=""></div>'
-                            }
-                        })
-                        str += '<li class="layui-timeline-item">\n' +
-                            '                        <i class="layui-icon layui-timeline-axis"></i>\n' +
-                            '                        <div class="layui-timeline-content layui-text">\n' +
-                            '                            <h3 class="layui-timeline-title">支出日期：' + this.date.substring(0, 10) + '</h3>\n' +
-                            '                            <h3 class="layui-timeline-title">支出金额：' + this.money + '万</h3>\n' +
-                            '                            <h3 class="layui-timeline-title"> 支出内容：' + this.remark + '</h3\n' +
-                            '                            <div class="main-content">\n' +
-                            '                                <div class="image-list">' + imgs + '</div>\n' +
-                            '                            </div>\n' +
-                            '                        </div>\n' +
-                            '                    </li>';
+                        if (this.status == 2) {
+                            var imgs = '';
+                            $(this.accessory.split(',')).each(function (i, d) {
+                                if (i != 0) {
+                                    imgs += '<div class="cover"><img src="' + d + '" alt=""></div>'
+                                }
+                            })
+                            str += '<li class="layui-timeline-item">\n' +
+                                '                        <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                '                        <div class="layui-timeline-content layui-text">\n' +
+                                '                            <h3 class="layui-timeline-title">支出日期：' + this.date.substring(0, 10) + '</h3>\n' +
+                                '                            <h3 class="layui-timeline-title">支出金额：' + this.money + '万</h3>\n' +
+                                '                            <h3 class="layui-timeline-title"> 支出内容：' + this.remark + '</h3\n' +
+                                '                            <div class="main-content">\n' +
+                                '                                <div class="image-list">' + imgs + '</div>\n' +
+                                '                            </div>\n' +
+                                '                        </div>\n' +
+                                '                    </li>';
+                        }
                     })
                     $('.layui-timeline').append(str);
 
@@ -363,91 +505,13 @@
         })
     })
 
-    //获取项目数据项目
-    var id = getUrlParam("id");
-    queryFundBudget(id);
-
-    function queryFundBudget(id) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/fundBudget/list',
-            data: "item_id=" + id,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                var str1 = '';
-                var total = 0;
-                $(data).each(function () {
-                    var fundDetail = queryFundDetail(this.id);
-                    var count = 0;
-                    $(fundDetail).each(function () {
-                        count += this.money;
-                        total += this.money;
-                    });
-                    if(this.type=='first_party_provide'){
-                    var str = '<tr>\n' +
-                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                        '                                    <div class="field">\n' +
-                        '                                        <input type="text" name="subject" value="' + this.subject + '" readonly>\n' +
-                        '                                    </div>\n' +
-                        '                                </td>\n' +
-                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                        '                                    <div class="field">\n' +
-                        '                                        <input type="text" name="money" value="' + this.money + '" readonly>\n' +
-                        '                                    </div>\n' +
-                        '                                </td>\n' +
-                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                        '                                    <div class="field">\n' +
-                        '                                        <input type="text" name="expenditure" value="' + count + '" readonly>\n' +
-                        '                                    </div>\n' +
-                        '                                </td>\n' +
-                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                        '                                    <div class="field">\n' +
-                        '                                        <input type="text" name="content" value="' + this.content + '" readonly>\n' +
-                        '                                    </div>\n' +
-                        '                                </td>\n' +
-                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                        '                                    <div class="field">\n' +
-                        '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
-                        '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>\n' +
-                        '                                    </div>\n' +
-                        '                                </td>\n' +
-                        '                            </tr>';
-                    $('#fundBudget').append(str);
-                    }else {
-                        var str = '<tr>\n' +
-                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
-                            '                                    <div class="field">\n' +
-                            '                                        <input type="text" name="subject" value="' + this.subject + '" readonly>\n' +
-                            '                                    </div>\n' +
-                            '                                </td>\n' +
-                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
-                            '                                    <div class="field">\n' +
-                            '                                        <input type="text" name="expenditure" value="' + count + '" readonly>\n' +
-                            '                                    </div>\n' +
-                            '                                </td>\n' +
-                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                            '                                    <div class="field">\n' +
-                            '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
-                            '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>\n' +
-                            '                                    </div>\n' +
-                            '                                </td>\n' +
-                            '                            </tr>';
-                        $('#fundUse').append(str);
-                    }
-                })
-                $('#total').text('累计支出：' + total + '万元');
-            }
-        })
-    }
-
     /*明细*/
     function queryFundDetail(id) {
         var Detail = {};
         $.ajax({
             type: 'get',
             url: domainName + '/project-item/item/fundDetail/list',
-            data: "budget_id=" + id,
+            data: 'budget_id=' + id,
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
@@ -455,6 +519,155 @@
             }
         })
         return Detail;
+    }
+
+    //详情
+    function info(id) {
+
+        var content = '<div style="margin-top: 20px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+            '    <form class="form-horizontal layui-form" onsubmit="return false" id="info">\n' +
+            '        <fieldset>\n' +
+            '            <div class="form-group">\n' +
+            '                <label class="col-md-2 control-label">支出金额:</label>\n' +
+            '                <div class="col-md-8">' +
+            '                   <span id="money"></span>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="form-group">\n' +
+            '                <label class="col-md-2 control-label">支出日期:</label>\n' +
+            '                <div class="col-md-8">\n' +
+            '                   <span id="date"></span>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="form-group">\n' +
+            '                <label class="col-md-2 control-label">开支内容:</label>\n' +
+            '                <div class="col-md-8">\n' +
+            '                   <span id="remark"></span>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="form-group">\n' +
+            '                <label class="col-md-2 control-label">相关图片</label>\n' +
+            '                <div class="col-md-8">\n' +
+            '                    <div data-bv-notempty="true"\n' +
+            '                         data-bv-notempty-message="内容 不能为空" class="layui-textarea" style="float: left; width: 100%;"\n' +
+            '                         id="imgs"></div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="form-group">\n' +
+            '                <label class="col-md-2 control-label">审核:</label>\n' +
+            '                <div class="col-md-8">\n' +
+            '                   <input type="radio" name="status" value="2" title="通过">\n' +
+            '                   <input type="radio" name="status" value="0" title="驳回" checked>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </fieldset>\n' +
+            '    </form>' +
+            '</div>';
+        layer.open({
+            type: 1,
+            title: '详情',
+            area: ['1000px', '600px'],
+            btn: ['确定', '关闭'],
+            scrollbar: false,
+            content: content,
+            success: function (layero, index) {
+                layui.use('form', function () {
+                    var form = layui.form;
+                    form.render();
+                });
+                $.ajax({
+                    type: 'get',
+                    url: domainName + '/project-item/item/fundDetail/list',
+                    contentType: "application/json; charset=utf-8",
+                    data: 'id=' + id,
+                    success: function (data) {
+                        var d = data[0];
+                        $('#money').text(d.money);
+                        $('#date').text(d.date.substring(0, 10));
+                        $('#remark').text(d.remark);
+                        $(d.accessory.split(',')).each(function (i) {
+                            if (i != 0) {
+                                var str = '<img style="width: 23%;height:27%;margin-left: 10px;" src="' + this + '" class="layui-upload-img">';
+                                $('#imgs').append(str);
+                            }
+                        })
+                    }
+                });
+            },
+            yes: function (index, layero) {
+                var formdata = $("#info").serializeObject();
+                formdata.id = id;
+                $.ajax({
+                    type: 'put',
+                    url: domainName + '/project-item/item/fundDetail',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(formdata),
+                    success: function (data) {
+                        layer.msg("成功", {shift: -1, time: 1000}, function () {
+                            location.reload();
+                        });
+                    }
+                });
+            },
+            btn2: function (index, layero) {
+                layer.close(index);
+            }
+        });
+    }
+
+    //我的录入
+    function my() {
+        var content = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
+            '<div><div class="widget-body no-padding">\n' +
+            '<table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">\n' +
+            '<thead><tr></tr><tr><th width="20%">支出日期</th><th width="20%">支出金额</th><th width="30%">开支内容</th><th width="30%">操作</th></tr></thead><tbody id="content"></tbody>' +
+            '</table></div></div></div>';
+        layer.open({
+            type: 1,
+            title: '我的录入',
+            area: ['1000px', '600px'],
+            btn: ['确定', '关闭'],
+            scrollbar: false,
+            content: content,
+            success: function (layero, index) {
+                $.ajax({
+                    type: 'get',
+                    url: domainName + '/project-item/item/fundDetail/list',
+                    contentType: "application/json; charset=utf-8",
+                    data: 'item_id=' + id + '&edit_user_id=' + currentUser.id + '&status=0',
+                    success: function (data) {
+                        var str = '';
+                        $(data).each(function () {
+                            str += '<tr><td>' + this.date.substring(0, 10) + '</td><td>' + this.money + '</td><td>' + this.remark + '</td>' +
+                                '<td><button type="button" class="layui-btn layui-btn-sm" onclick="del(' + this.id + ');">删除</button></td></tr>';
+                        })
+                        $('#content').append(str);
+                    }
+                });
+            },
+            yes: function (index, layero) {
+                layer.close(index);
+            },
+            btn2: function (index, layero) {
+                layer.close(index);
+            }
+        });
+    }
+
+    //删除
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + "/project-item/item/fundDetail/" + id,
+                success: function (data) {
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
     }
 </script>
 </html>

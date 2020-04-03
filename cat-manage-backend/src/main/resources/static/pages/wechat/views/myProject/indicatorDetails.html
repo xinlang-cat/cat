@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>指标详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 15%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">指标详情</h1>
+</header>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>指标内容</div>
+    </div>
+    <div class="weui-flex__item">
+		<div class="content"><span id="content"></span></div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>完成期限</div>
+    </div>
+    <div class="weui-flex__item">
+		<div class="content"><span id="period"></span></div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>实施地点</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content"><span id="site"></span></div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>实施人员</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content"><span id="personnel"></span></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+	var id = getUrlParam("id");
+    queryIndicators(id);
+
+	function queryIndicators(id) {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/indicators/list',
+			data: "id=" + id,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				var d = data[0];
+				var site = getsuperior(d.site);
+				var names = [];
+				$(d.userIds.split(',')).each(function () {
+					names.push(getUserName(this));
+				});
+
+				$('#content').text(d.content);
+				$('#period').text(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
+				$('#site').text(site);
+				$('#personnel').text(names);
+			}
+		})
+	}
+	function getsuperior(code) {
+		var text = '';
+		$.ajax({
+			type: 'get',
+			url: domainName + '/map/province/tree/' + code,
+			async: false,
+			success: function (data) {
+				var provinceName,
+						city,
+						area,
+						street;
+				var str;
+				if (data.street != undefined) {
+					provinceName = data.province.provinceName;
+					city = data.city.cityName;
+					area = data.area.areaName;
+					street = data.street.streetName;
+					str = provinceName + '-' + city + '-' + area + '-' + street + '-';
+				} else if (data.area != undefined) {
+					provinceName = data.province.provinceName;
+					city = data.city.cityName;
+					area = data.area.areaName;
+					str = provinceName + '-' + city + '-' + area + '-';
+				} else if (data.city != undefined) {
+					provinceName = data.province.provinceName;
+					city = data.city.cityName;
+					str = provinceName + '-' + city + '-';
+				} else if (data.province != undefined) {
+					provinceName = data.province.provinceName;
+					str = provinceName + '-';
+				}
+				text = str;
+			}
+		});
+		return text;
+	}
+	function getUserName(userId){
+		var name = '';
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-user/user/'+userId,
+			contentType: "application/json; charset=utf-8",
+			async: false,
+			success: function (data) {
+				name = data[0].name;
+			}
+		});
+		return name;
+	}
+</script>
+</html>

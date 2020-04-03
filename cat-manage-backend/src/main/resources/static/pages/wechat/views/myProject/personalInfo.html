@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>人员信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link rel="stylesheet" href="../../weui/css/weui.css" />
+		<link rel="stylesheet" href="../../weui/css/weuix.css" />
+		<link rel="stylesheet" href="../../weui/css/demos.css" />
+		
+		<script src="../../weui/js/zepto.min.js"></script>
+		<script src="../../weui/js/zepto.weui.js"></script>
+		<style>
+			.field {
+				margin-top: 10px;
+				padding: 0 15px;
+				color: #999999;
+				font-size: 14px;
+				text-align-last: justify;
+				text-align: right;
+				line-height: 1.5em;
+				width: 15%;
+			}
+		
+			.content {
+				margin-top: 10px;
+				padding-right: 15px;
+				color: #666666;
+				font-size: 14px;
+				text-align: right;
+				line-height: 1.5em;
+			}
+		</style>
+	</head>
+	<body ontouchstart class="page-bg">
+		<header class='demos-header'>
+			<h1 class="demos-title">人员信息</h1>
+		</header>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>姓名</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="name"></span></div>
+			</div>
+		</div>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>性别</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="sex"></span></div>
+			</div>
+		</div>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>年龄</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="age"></span></div>
+			</div>
+		</div>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>职称</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="professional_title"></span></div>
+			</div>
+		</div>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>从事专业</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="specialty"></span></div>
+			</div>
+		</div>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>工作单位</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="organization"></span></div>
+			</div>
+		</div>
+		<div class="weui-flex bg-white">
+			<div class="field">
+				<div>研究开发中的责任分工</div>
+			</div>
+			<div class="weui-flex__item">
+				<div class="content"><span id="responsibilities"></span></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+	<script src="../../weui/lib/fastclick.js"></script>
+	<script src="../../weui/js/jquery-weui.js"></script>
+	<script src="../../../../js/constant.js"></script>
+	<script type="text/javascript" src="../../../../js/jq.js"></script>
+	<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+	var id = getUrlParam("id");
+	queryPersonnel(id);
+
+	function queryPersonnel(id) {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/personnel/list',
+			data: "id=" + id,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				var d = data[0];
+				$('#name').text(d.name);
+				$('#sex').text(d.sex);
+				$('#age').text(d.age);
+				$('#professional_title').text(d.professional_title);
+				$('#specialty').text(d.specialty);
+				$('#organization').text(d.organization);
+				$('#responsibilities').text(d.responsibilities);
+			}
+		})
+	}
+</script>
+</html>
