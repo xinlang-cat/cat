@@ -29,17 +29,6 @@
                     <input type="text" name="period" placeholder="请输入" class="form-control date" readonly>
                 </div>
             </div>
-            <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-2 control-label">指标内容:</label>
-                <div class="col-md-8">
-                    <textarea placeholder="指标内容。"
-                              class="layui-textarea form-control" lay-verify="required"
-                              id="targetContent" name="targetContent" data-bv-notempty="true"
-                              data-bv-notempty-message=""></textarea>
-
-                </div>
-
-            </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">申请说明:</label>
                 <div class="col-md-8">
@@ -61,6 +50,42 @@
             </div>
         </fieldset>
     </form>
+    <tr style="height: 40px;">
+        <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        <td class="mainTd_1" rowspan="1" colspan="1"></td>
+        <td class="mainTd_1" rowspan="1" colspan="6">
+            <div class="indicators">
+                <form>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="60%">
+
+                            <col width="30%">
+                        </colgroup>
+                        <thead>
+                        <tr style="background-color: #ffffff;">
+                            <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                <div class="field">
+                                    <span id="targets">查定指标</span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tdDorder">序号</th>
+                            <th class="tdDorder">指标内容</th>
+                            <th class="tdDorder">实施地点</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </td>
+        <td class="mainTd_1" rowspan="1" colspan="1"></td>
+        <td class="mainTd_0" rowspan="1" colspan="1"></td>
+    </tr>
 </div>
 
 <script src="../../js/constant.js"></script>
@@ -69,16 +94,17 @@
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../layui/layui.all.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript">
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("userId");
 
-    var index, layer, upload,laydate,form;
-    layui.use(['layedit', 'upload', 'laydate', 'layer','form'], function () {
+    var index, layer, upload, laydate, form;
+    layui.use(['layedit', 'upload', 'laydate', 'layer', 'form'], function () {
         layer = layui.layer;
         laydate = layui.laydate;
         upload = layui.upload;
-       form = layui.form;
+        form = layui.form;
         var $ = layui.$, slider = layui.slider;
         lay('.date').each(function () {
             laydate.render({
@@ -88,7 +114,7 @@
             });
         });
         $($("div[data-sign]")).click(function () {
-            var signs= $("#target_id").val();
+            var signs = $("#target_id").val();
             var name = $(this).attr("id");
             var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="label">';
             $.ajax({
@@ -102,16 +128,20 @@
                         var code = d.id;
                         var count = d.count;
                         var content = d.content;
-                        if (count!=null){
+                        var start_date = d.start_date;
+                        var end_date = d.end_date;
+                        var site = d.site;
+                        var userIds = d.userIds;
+                        if (count != null) {
 
-                        }else {
-                            if (signs.includes(code)){
-                                element += '<input type="checkbox" name="' + name + '" id="' + code + '" value="' + code + '" title="' + content + ' "  checked="checked"><div class="layui-unselect layui-form-checkbox"><span>' + content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
+                        } else {
+                            if (signs.includes(code)) {
+                                element += '<input type="checkbox" name="' + name + '" id="' + code + '" value="' + code + '" title="' + content + ' "  checked="checked" data-start_date="' + start_date + '" data-end_date="' + end_date + '" data-site="' + site + '" data-userIds="' + userIds + '"><div class="layui-unselect layui-form-checkbox"><span>' + content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
 
-                            }else {
-                                element += '<input type="checkbox" name="' + name + '" id="' + code + '" value="' + code + '" title="' + content + '"><div class="layui-unselect layui-form-checkbox"><span>' + content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
+                            } else {
+                                element += '<input type="checkbox" name="' + name + '" id="' + code + '" value="' + code + '" title="' + content + '" data-start_date="' + start_date + '" data-end_date="' + end_date + '" data-site="' + site + '" data-userIds="' + userIds + '"><div class="layui-unselect layui-form-checkbox"><span>' + content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
                             }
-                                                 }
+                        }
                     }
                     element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'SaveLabel()">保存</button></div></div></form></div>';
 
@@ -130,27 +160,67 @@
         });
 
     });
+
     function targetSaveLabel() {
         var obj = document.getElementsByName('target');
-        var texts=[];
+        var texts = [];
         $("input[type='checkbox']:checked").each(function () {
             texts.push($(this).attr('title'));
         })
         var length = obj.length;
         var str = [];
-        for(var i=0; i<length; i++){
+
+
+        for (var i = 0; i < length; i++) {
             if (obj[i].checked) {
                 str.push(obj[i].value);
+
             }
         }
         $("#target_id").val(str);
+        showTarget(str);
         $("#text5").val(texts);
-        $("#targetContent").val(texts);
-        layer.msg("成功", {shift: -1, time: 1000}, function(){
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
             layer.close(index);
         });
 
     }
+
+    function showTarget(ids) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/indicators/ids',
+            data: "ids=" + ids,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $(data).each(function () {
+                    var serial = $("#targets").closest('thead').nextAll('tbody').children().length + 1;
+                    var str = '';
+                    var text = getsuperior(this.site);
+
+
+                    str = '<tr>' +
+                        '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<span type="text"  name="content" lay-verify="required"> ' + this.content + ' </span>' +
+                        '</div>' +
+                        '</td>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field" style="position: relative;">' +
+                        '<span type="text" name="site">' + text + '</span>' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
+
+                    $("#targets").closest('thead').nextAll('tbody').append(str);
+                })
+            }
+        })
+    }
+
     function getItemName(id) {
 
         $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
@@ -159,7 +229,9 @@
         })
 
     }
+
     getItemName(itemId);
+
     function add(obj) {
         if ($("#target_id").val() == '') {
             layer.msg("请选择指标");

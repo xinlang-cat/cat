@@ -22,7 +22,7 @@
     <div style="position: absolute;right: 30px;top: 15px;">
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);">提交</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);">保存</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="closeThis();">关闭</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
 <div class="layui-form" style="margin-top: 60px;">
@@ -104,8 +104,6 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
                         <input type="hidden" name="id" id="item_id">
-                        <input type="hidden" name="status" id="status">
-                        <input type="hidden" name="apply_id" id="apply_id">
                         <input type="text" name="contract_no" placeholder="请输入">
                     </div>
                 </td>
@@ -287,6 +285,95 @@
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
         </form>
+        <!--主要研究、开发人员及责任分工-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 主要研究、开发人员及责任分工</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="personnel">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="8">
+                                    <div class="field">
+                                        <span>主要研究、开发人员及责任分工</span>
+                                    </div>
+                                </th>
+                                <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
+                                    <div class="layui-btn-group">
+                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
+                                                name="personnel">
+                                            <i class="layui-icon">&#xe654;</i>
+                                        </button>
+                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
+                                                name="delTr">
+                                            <i class="layui-icon">&#xe640;</i>
+                                        </button>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">
+                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
+                                           name="c_all">
+                                </th>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">姓名</th>
+                                <th class="tdDorder">性别</th>
+                                <th class="tdDorder">年龄</th>
+                                <th class="tdDorder">职称</th>
+                                <th class="tdDorder">从事专业</th>
+                                <th class="tdDorder">工作单位</th>
+                                <th class="tdDorder">研究开发中的责任分工</th>
+                            </tr>
+                            </thead>
+                            <tbody id="personnel">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
         <!--项目考核指标-->
         <tr style="height: 25px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -324,11 +411,14 @@
                             <colgroup>
                                 <col width="5%">
                                 <col width="5%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span>技术指标</span>
                                     </div>
@@ -353,31 +443,12 @@
                                 </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <!--<tr>
-                                <td class="tdDorder mainTd_1">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                                </td>
-                                <td class="mainTd_1 tdDorder">1</td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tdDorder mainTd_1">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_one">
-                                </td>
-                                <td class="mainTd_1 tdDorder">1</td>
-                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <div class="field">
-                                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
-                                    </div>
-                                </td>
-                            </tr>-->
                             </tbody>
                         </table>
                     </form>
@@ -397,11 +468,14 @@
                             <colgroup>
                                 <col width="5%">
                                 <col width="5%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span>经济指标</span>
                                     </div>
@@ -427,6 +501,9 @@
                                 </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -449,11 +526,14 @@
                             <colgroup>
                                 <col width="5%">
                                 <col width="5%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span>人才建设指标</span>
                                     </div>
@@ -479,6 +559,9 @@
                                 </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -501,11 +584,14 @@
                             <colgroup>
                                 <col width="5%">
                                 <col width="5%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span>其他指标</span>
                                     </div>
@@ -531,6 +617,9 @@
                                 </th>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -675,95 +764,7 @@
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
-        <!--主要研究、开发人员及责任分工-->
-        <tr style="height: 25px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-        <tr style="height: 25px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="8"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-        <tr style="height: 40px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
-                <div class="subheading">
-                    <span>丨 主要研究、开发人员及责任分工</span>
-                </div>
-            </td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-        <tr style="height: 24px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="8"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-        <tr style="height: 40px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="6">
-                <div class="personnel">
-                    <form>
-                        <table class="layui-table">
-                            <colgroup>
-                                <col width="5%">
-                                <col width="5%">
-                                <col width="10%">
-                                <col width="5%">
-                                <col width="5%">
-                                <col width="10%">
-                                <col width="15%">
-                                <col width="15%">
-                                <col width="15%">
-                            </colgroup>
-                            <thead>
-                            <tr style="background-color: #ffffff;">
-                                <th class="tdDorder" rowspan="1" colspan="8">
-                                    <div class="field">
-                                        <span>主要研究、开发人员及责任分工</span>
-                                    </div>
-                                </th>
-                                <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
-                                    <div class="layui-btn-group">
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm addTr"
-                                                name="personnel">
-                                            <i class="layui-icon">&#xe654;</i>
-                                        </button>
-                                        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm"
-                                                name="delTr">
-                                            <i class="layui-icon">&#xe640;</i>
-                                        </button>
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th class="tdDorder">
-                                    <input type="checkbox" name="" title="" lay-skin="primary" lay-filter="c_all"
-                                           name="c_all">
-                                </th>
-                                <th class="tdDorder">序号</th>
-                                <th class="tdDorder">姓名</th>
-                                <th class="tdDorder">性别</th>
-                                <th class="tdDorder">年龄</th>
-                                <th class="tdDorder">职称</th>
-                                <th class="tdDorder">从事专业</th>
-                                <th class="tdDorder">工作单位</th>
-                                <th class="tdDorder">研究开发中的责任分工</th>
-                            </tr>
-                            </thead>
-                            <tbody id="personnel">
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
+
         <!--经费用途预算-->
         <tr style="height: 25px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>

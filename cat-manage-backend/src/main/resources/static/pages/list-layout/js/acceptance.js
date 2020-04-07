@@ -14,13 +14,28 @@ function getbasic(id) {
             $("#end_date").text(d.end_date.substring(0, 10));
             $("#outline").text(d.outline);
             $(".responsible_unit").text(d.responsible_unit);
+            getCompanyInfo(d.responsible_unit);
             $(".management_unit").text(d.management_unit);
             $("#entrusting_party").text(d.entrusting_party);
 
         }
     })
 }
-function getCompanyInfo(id) {
+function getCompanyInfo(name) {
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-c/company/name/'+name,
+        async: false,
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            alert(data.signName);
+            $("#phone").text(data.principalPhone);
+            $("#site").text(data.address);
+            $("#linkman").text(data.principal);
+        }
+    });
+}
+/*function getCompanyInfo(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/company/list',
@@ -69,7 +84,7 @@ function getCompanyInfo(id) {
             })
         }
     })
-}
+}*/
 function getItem_user(id) {
     $.ajax({
         type: 'get',
