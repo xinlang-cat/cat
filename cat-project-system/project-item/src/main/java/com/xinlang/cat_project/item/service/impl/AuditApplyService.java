@@ -51,7 +51,7 @@ public class AuditApplyService extends BaseService<auditApply> implements IAudit
         // 过滤
         Example example = new Example(auditApply.class);
         if (params.get("status") != "" && params.get("itemIds") != null && params.get("check_unit") != ""){
-            example.createCriteria().andEqualTo("status",params.get("status")).andIn("itemIds", (Iterable) params.get("itemIds")).andEqualTo("check_unit", params.get("check_unit"));
+            example.createCriteria().andEqualTo("status",params.get("status")).andIn("item_id", (Iterable) params.get("itemIds")).andEqualTo("check_unit", params.get("check_unit"));
         }else if (params.get("check_unit") != "" && params.get("itemIds") != null){
             example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit")).andIn("item_id", (Iterable) params.get("itemIds"));
         }else if (params.get("status") != "" && params.get("itemIds") != null) {

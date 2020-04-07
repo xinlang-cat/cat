@@ -33,9 +33,21 @@ function queryIndicatorsVice(id) {
 
             $(data).each(function () {
                 var content = this.content;
-                var serial = $('#' + this.type).parents('thead').next().children().length + 1;
+                var serial = $('#' + this.type).closest('thead').nextAll('tbody').children().length + 1;
                 var str = '';
                 if (this.type != 'QUANTITY_INDICATORS') {
+                    var text = getsuperior(this.site);
+                    var userIds = this.userIds.split(',');
+                    var userNames = [];
+                    $('input[name=user_id]').each(function (i,d) {
+                        var UId = $(d).val();
+                        $(userIds).each(function () {
+                            if (UId == this) {
+                                var name = $(d).next().val();
+                                userNames.push(name)
+                            }
+                        });
+                    })
                     str = '<tr>' +
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -43,7 +55,23 @@ function queryIndicatorsVice(id) {
                         '<input type="text"  name="content" value="' + this.content + '" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
-                        ' </tr>';
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input class="date" type="text" placeholder="请输入" name="period" value="'+this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7)+'" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field" style="position: relative;">' +
+                        '<input type="text" name="site" value="'+text+'">'+
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input type="text" placeholder="请输入" name="" value="'+userNames+'" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
                 } else {
                     str = '<tr>' +
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
@@ -59,7 +87,7 @@ function queryIndicatorsVice(id) {
                         '</td>' +
                         ' </tr>';
                 }
-                $('#' + this.type).parents('thead').next().append(str);
+                $('#' + this.type).closest('thead').nextAll('tbody').append(str);
             })
         }
     })

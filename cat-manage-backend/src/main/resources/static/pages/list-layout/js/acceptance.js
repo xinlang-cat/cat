@@ -28,7 +28,6 @@ function getCompanyInfo(name) {
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            alert(data.signName);
             $("#phone").text(data.principalPhone);
             $("#site").text(data.address);
             $("#linkman").text(data.principal);
