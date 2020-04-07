@@ -108,4 +108,15 @@ public class CompanyService implements ICompanyService {
         return new Page<>(total,companys);
     }
 
+    @Override
+    public Company findByName(String name) {
+        Example example = new Example(Company.class);
+        example.createCriteria().andEqualTo("signName",name);
+        List<Company> list = companyMapper.selectByExample(example);
+        if(!list.isEmpty()){
+            return list.get(0);
+        }
+        return null;
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemContactWay;
+import com.xinlang.cat_project.item.pojo.ItemContactWayVice;
 import com.xinlang.cat_project.item.pojo.ItemFundBudget;
 import com.xinlang.cat_project.item.pojo.ItemFundSource;
 import com.xinlang.cat_project.item.service.IItemContactWayService;
+import com.xinlang.cat_project.item.service.IItemContactWayViceService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ import java.util.Map;
 public class ItemContactWayController {
     @Autowired
     private IItemContactWayService itemContactWayService;
+
+    @Autowired
+    private IItemContactWayViceService itemContactWayViceService;
 
     @ApiOperation(value = "添加各方联系方式")
     @LogAnnotation(module = "添加各方联系方式")
@@ -43,6 +48,14 @@ public class ItemContactWayController {
     @GetMapping("list")
     public ResponseEntity<List<ItemContactWay>> getContactWay(@RequestParam Map<String, Object> params){
         List<ItemContactWay> ContactWays = itemContactWayService.findListByParams(params,ItemContactWay.class);
+        return ResponseEntity.ok(ContactWays);
+    }
+
+    @ApiOperation(value = "查询各方联系方式")
+    @LogAnnotation(module = "查询各方联系方式")
+    @GetMapping("viceList")
+    public ResponseEntity<List<ItemContactWayVice>> getContactWayVice(@RequestParam Map<String, Object> params){
+        List<ItemContactWayVice> ContactWays = itemContactWayViceService.findListByParams(params,ItemContactWayVice.class);
         return ResponseEntity.ok(ContactWays);
     }
 

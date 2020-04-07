@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,5 +25,10 @@ public class ItemIndicatorsService extends BaseService<ItemIndicators> implement
     @Override
     public void deleteByAttribute(ItemIndicators indicator) {
         int i = itemIndicatorsMapper.delete(indicator);
+    }
+
+    @Override
+    public List<ItemIndicators> getByIds(ArrayList<Integer> ids) {
+        return itemIndicatorsMapper.getByIds(ids);
     }
 }

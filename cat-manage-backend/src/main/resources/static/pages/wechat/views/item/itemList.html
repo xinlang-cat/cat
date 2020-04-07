@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>更改申请列表</title>
+    <title>项目列表</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -77,7 +77,7 @@
 
         $.ajax({
             type: 'get',
-            url: domainName + "/project-item/item/basic/company",
+            url: domainName + '/project-item/item/information/my',
             contentType: "application/json; charset=utf-8",
             async: false,
             success: function (data) {
@@ -86,10 +86,10 @@
                     str += '<div class="weui-panel__bd">\n' +
                         '   <a class="weui-cell weui-cell_access" href="menu.html?item_id=' + this.id + '">\n' +
                         '      <div class="weui-media-box weui-media-box_text">\n' +
-                        '      	<h4 class="weui-media-box__title">' + this.item_name + '</h4>\n' +
-                        '      	<p class="weui-media-box__desc" >' + getType(this.category) + '</p>\n' +
+                        '      	<h4 class="weui-media-box__title">' + this.name + '</h4>\n' +
+                        '      	<p class="weui-media-box__desc" >' + getType(this.type) + '</p>\n' +
                         '      	<ul class="weui-media-box__info">\n' +
-                        '       	<li class="weui-media-box__info__meta">' + getUserName(this.user_id) + '</li>\n' +
+                        '       	<li class="weui-media-box__info__meta">' + getUserName(this.edit_user_id) + '</li>\n' +
                         '       	<li class="weui-media-box__info__meta">' + getTime(this.start_date) + '-' + getTime(this.end_date) +
                         '</li>\n' +
                         '        	<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) +
@@ -133,9 +133,11 @@
 
     function getUserName(user_id) {
         var data = '';
+        $.ajaxSettings.async = false;
         $.get(domainName + "/project-user/user-anon/" + user_id, function (res) {
             data = res[0]['name'];
         })
+        $.ajaxSettings.async = true;
         return data;
     }
 

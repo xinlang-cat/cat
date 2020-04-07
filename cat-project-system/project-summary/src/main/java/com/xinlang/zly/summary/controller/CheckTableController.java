@@ -35,6 +35,9 @@ public class CheckTableController {
     @LogAnnotation(module = "添加结题申请表")
     @ApiOperation(value = "添加结题申请表")
     public CheckTable save(@RequestBody CheckTable checkTable){
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        Integer userId = appUser.getId().intValue();
+        checkTable.setCreateUserId(userId);
         checkTable.setApplicationDate(new Date());
         checkTableService.save(checkTable);
         return checkTable;

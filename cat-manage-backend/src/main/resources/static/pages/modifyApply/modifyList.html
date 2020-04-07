@@ -33,12 +33,12 @@
                     <thead>
                     <tr>
                         <th style="width:25%;">项目名称</th>
-                        <th style="width:20%;">更改内容</th>
+
                         <th style="width:15%">提交时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
-                        <th style="width:5%;">修改</th>
+
                         <!--<th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
@@ -60,6 +60,9 @@
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
+
+
+
 
     var pers = checkPermission();
     var itemId = getUrlParam("item_id");
@@ -116,36 +119,15 @@
                             "render": function (data, type, row) {
                                 var id =row['item_id'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-                                    data =  res[0]['item_name'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                    data =  res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
                                 return data;
                             }
                         },
-                        {
-                            "data": "modify",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var modify =row['modify'];
-                                $.ajaxSettings.async = false;
-                                if (modify == 1){
-                                    data="项目基本信息";
-                                }else if (modify == 2){
-                                    data="项目研究内容";
-                                }else if (modify == 3){
-                                    data="项目人员";
-                                }else if (modify == 4){
-                                    data="项目指标";
-                                }else if (modify == 5){
-                                    data="项目经费";
-                                }
 
-                                $.ajaxSettings.async = true;
-                                return data;
-                            }
-                        },
                         {
                             "data": "apply_time",
                             "defaultContent": "",
@@ -174,13 +156,13 @@
                                 var status =row['status'];
                                 $.ajaxSettings.async = false;
                                if (status == 0){
-                                   data="待审核";
+                                   data="未提交";
                                }else if (status == 1){
-                                   data="更改中";
+                                   data="审核中";
                                }else if (status == 2){
                                    data="审核未通过";
                                }else if (status == 3){
-                                   data="更改成功";
+                                   data="更改通过";
                                }
 
                                 $.ajaxSettings.async = true;
@@ -191,20 +173,12 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',2'+')" ><i class="layui-icon">申请详情</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',1,'+ row['status'] +')" ><i class="layui-icon">申请详情</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
                         },
-                        {
-                            "data": "id",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['item_id'] +','+row['id'] + ','+row['modify'] +','+row['status'] +')" ><i class="layui-icon">更改信息</i></button>');
-                                var showDetail = btn.prop("outerHTML");
-                                return showDetail;
-                            }
-                        },
+
                         /*{
                             "data": "id",
                             "defaultContent": "",
@@ -224,29 +198,46 @@
     var w = $(window).width()-200;
     function add() {
         layer.open({
-            title:"添加",
+            title:"项目更改",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['addAuditApply.html?item_id='+itemId+'&userId='+userId],
+            content: ['addAuditApply.html?id='+itemId],
             end : function() {
 
             }
         });
     }
-    function read(id,userType) {
-        layer.open({
-            title:"查看查定申请",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['checkApply.html?id='+id+'&userType='+userType],
-            end : function() {
+    function read(id,userType,status) {
+        if (status==0){
+            //可更改
+            layer.open({
+                title:"更改申请详情",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['addAuditApply.html?apply_id='+id],
+                end : function() {
 
-            }
-        });
+                }
+            });
+        }else {
+            //仅查看
+            layer.open({
+                title:"查看更改申请",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkApply.html?id='+id+'&userType='+userType],
+                end : function() {
+
+                }
+            });
+        }
+
     }
 
     function report(id,modifyId,modify,status) {

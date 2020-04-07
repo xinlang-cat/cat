@@ -743,7 +743,7 @@
                 <div class="col-md-12">
                     <button class="btn btn-primary" onclick=" closeThis();" >关闭</button>
                    <button class="btn btn-primary" type="submit" onclick="finish();" >
-                        <i class="fa fa-save"></i> 更改完成
+                        <i class="fa fa-save"></i> 提交申请
                     </button>
                 </div>
             </div>
@@ -827,10 +827,8 @@
 
     //获取项目数据项目
     var id = getUrlParam("id");
-    var modify = getUrlParam("modify");
-    var modifyId = getUrlParam("modifyId");
-    var status = getUrlParam("status");
-    showBut(modify);
+
+
     function showBut(modify){
         if (status==1){
             var obj=document.getElementsByClassName("btn-group");

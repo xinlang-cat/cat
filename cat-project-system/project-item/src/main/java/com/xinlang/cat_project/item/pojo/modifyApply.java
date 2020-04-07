@@ -27,7 +27,7 @@ public class modifyApply implements Serializable {
     @KeySql(useGeneratedKeys = true)
 
     private Integer id;
-    private String item_id;
+    private Integer item_id;
     /**
      *修改原因说明
      */

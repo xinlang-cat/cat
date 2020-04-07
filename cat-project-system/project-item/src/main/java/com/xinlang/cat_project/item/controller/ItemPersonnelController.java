@@ -1,8 +1,9 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemPersonnel;
-import com.xinlang.cat_project.item.pojo.ItemScheduling;
+import com.xinlang.cat_project.item.pojo.ItemPersonnelVice;
 import com.xinlang.cat_project.item.service.IItemPersonnelService;
+import com.xinlang.cat_project.item.service.IItemPersonnelViceService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.Map;
 public class ItemPersonnelController {
     @Autowired
     private IItemPersonnelService itemPersonnelService;
+
+    @Autowired
+    private IItemPersonnelViceService itemPersonnelViceService;
 
     @ApiOperation(value = "添加项目人员")
     @LogAnnotation(module = "添加项目人员")
@@ -43,6 +47,14 @@ public class ItemPersonnelController {
     @GetMapping("list")
     public ResponseEntity<List<ItemPersonnel>> getPersonnels(@RequestParam Map<String, Object> params){
         List<ItemPersonnel> personnels = itemPersonnelService.findListByParams(params,ItemPersonnel.class);
+        return ResponseEntity.ok(personnels);
+    }
+
+    @ApiOperation(value = "查询项目人员")
+    @LogAnnotation(module = "查询项目人员")
+    @GetMapping("viceList")
+    public ResponseEntity<List<ItemPersonnelVice>> getPersonnelsVice(@RequestParam Map<String, Object> params){
+        List<ItemPersonnelVice> personnels = itemPersonnelViceService.findListByParams(params,ItemPersonnelVice.class);
         return ResponseEntity.ok(personnels);
     }
 

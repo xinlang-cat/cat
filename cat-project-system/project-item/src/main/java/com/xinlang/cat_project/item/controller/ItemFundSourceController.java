@@ -1,8 +1,10 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemFundSource;
+import com.xinlang.cat_project.item.pojo.ItemFundSourceVice;
 import com.xinlang.cat_project.item.pojo.ItemScheduling;
 import com.xinlang.cat_project.item.service.IItemFundSourceService;
+import com.xinlang.cat_project.item.service.IItemFundSourceViceService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.Map;
 public class ItemFundSourceController {
     @Autowired
     private IItemFundSourceService itemFundSourceService;
+    @Autowired
+    private IItemFundSourceViceService itemFundSourceViceService;
 
     @ApiOperation(value = "添加资金来源")
     @LogAnnotation(module = "添加资金来源")
@@ -34,6 +38,14 @@ public class ItemFundSourceController {
     @GetMapping("list")
     public ResponseEntity<List<ItemFundSource>> getFundSource(@RequestParam Map<String, Object> params){
         List<ItemFundSource> fundSources = itemFundSourceService.findListByParams(params,ItemFundSource.class);
+        return ResponseEntity.ok(fundSources);
+    }
+
+    @ApiOperation(value = "查询经费来源")
+    @LogAnnotation(module = "查询经费来源")
+    @GetMapping("viceList")
+    public ResponseEntity<List<ItemFundSourceVice>> getFundSourceVice(@RequestParam Map<String, Object> params){
+        List<ItemFundSourceVice> fundSources = itemFundSourceViceService.findListByParams(params,ItemFundSourceVice.class);
         return ResponseEntity.ok(fundSources);
     }
 

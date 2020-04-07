@@ -20,4 +20,6 @@ public interface ICompanyService {
     List<Company> findAll();
     Page<Company> findByParams(Map<String,Object> params);
     Page<Company> link(Map<String,Object> params);
+
+    Company findByName(String name);
 }
