@@ -195,7 +195,7 @@
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="#" class="grid"
+                        <a href="#" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
                            onclick="javascript:top.location.href='stageSummary/addStageSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhihangbaogaoqicao f26"></i>
@@ -204,7 +204,7 @@
                                 执行报告起草
                             </p>
                         </a>
-                        <a href="#" class="grid"
+                        <a href="#" class="grid" permission="html:dept:check:stage,html:principal:check:stage"
                            onclick="javascript:top.location.href='stageSummary/checkStageSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhezhihangbaogao f26"></i>
@@ -222,7 +222,7 @@
                                 执行报告查询
                             </p>
                         </a>
-                        <a href="#" class="grid"
+                        <a href="#" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
                            onclick="javascript:top.location.href='stageSummary/updateStageSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--xiangmuzhihangqingkuanggenzong f26"></i>
@@ -231,13 +231,25 @@
                                 我的执行报告
                             </p>
                         </a>
-                        <a href="#" class="grid"
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item">专家审核</div>
+                <i class="icon icon-74"></i>
+            </div>
+            <div class="page-category js-categoryInner">
+                <div class="weui-cells page-category-content">
+                    <div class="weui-grids grids-small">
+                        <a href="#" class="grid addExpertEvaluate"  permission="EXPERT:html"
                            onclick="javascript:top.location.href='expert-evaluate/addExpertEvaluate.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--xiangmuzhihangqingkuanggenzong f26"></i>
                             </div>
                             <p class="weui-grid__label">
-                                专家审核
+                                审核报告起草
                             </p>
                         </a>
                         <a href="#" class="grid"
@@ -246,16 +258,16 @@
                                 <i class="iconfont icon--xiangmuzhihangqingkuanggenzong f26"></i>
                             </div>
                             <p class="weui-grid__label">
-                                专家审核
+                                审核报告列表
                             </p>
                         </a>
-                        <a href="#" class="grid"
+                        <a href="#" class="grid" permission="EXPERT:html"
                            onclick="javascript:top.location.href='expert-evaluate/updateExpertEvaluate.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--xiangmuzhihangqingkuanggenzong f26"></i>
                             </div>
                             <p class="weui-grid__label">
-                                专家审核
+                                我的审核报告
                             </p>
                         </a>
                     </div>
@@ -270,7 +282,8 @@
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='workLog/indicatorList.html'">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='workLog/indicatorList.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhongzhishenqingqicao1 f26"></i>
                             </div>
@@ -357,7 +370,8 @@
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='workLog/indicatorList.html'">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='workLog/indicatorList.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhongzhishenqingqicao1 f26"></i>
                             </div>
@@ -391,7 +405,6 @@
                 <i class="icon icon-74"></i>
             </div>
             <div class="page-category js-categoryInner">
-
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="#" class="grid" onclick="javascript:top.location.href='auditfyApply/itemList.html'">
@@ -489,11 +502,15 @@
     </ul>
 </div>
 </body>
-<script src="../weui/lib/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../../js/constant.js"></script>
 <script type="text/javascript" src='../../../js/common.js'></script>
 <script src="../weui/lib/fastclick.js"></script>
+<script src="../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/my/permission.js"></script>
 <script>
+    checkPermission();
     $(function () {
         FastClick.attach(document.body);
     });
@@ -502,11 +519,19 @@
     var as = $("a[class=grid]");
     $.each(as, function (i, item) {
         var oldHref = $(item).attr('onclick');
-        if (oldHref != null && oldHref != undefined && oldHref!=''){
-            var newHref = oldHref.replace(".html",'.html?itemId=' + itemId + '&userId=' + userId );
-            $(item).attr('onclick',newHref);
+        if (oldHref != null && oldHref != undefined && oldHref != '') {
+            var newHref = oldHref.replace(".html", '.html?itemId=' + itemId + '&userId=' + userId);
+            $(item).attr('onclick', newHref);
         }
-
+    });
+    var params = {
+        itemId: itemId,
+        userId: userId
+    };
+    $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
+        if (data.length > 0) {
+            $('.addExpertEvaluate').remove();
+        }
     });
 </script>
 </html>
