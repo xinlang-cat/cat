@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>验收申请表</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
+    <style>
+        .layui-table thead tr {
+            text-align: center;
+        }
+
+        .layui-table th {
+            text-align: center;
+            font-weight: 400;
+        }
+
+        tbody td {
+            text-align: center;
+            border: 1px solid #000;
+        }
+
+        span {
+            float: left;
+        }
+
+        .table-info {
+            background-color: #4FAAA2;
+            margin: 40px;
+            color: white;
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .td-text {
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        .td-text1 {
+            text-align: right;
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        #old {
+            display: none;
+
+        }
+
+        #new {
+            display: none;
+
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <div align="left">
+        <table style="width: 100%">
+            <tr>
+                <td align="left" style="border: 0;text-align: left;">
+                    <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showWork()">
+                        <i class="layui-icon">&#xe615;</i>查看工作总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showSkill()">
+                        <i class="layui-icon">&#xe615;</i>查看技术总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" permission="mail:query" onclick="showAudit()">
+                        <i class="layui-icon">&#xe615;</i>查看查定报告
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="content">
+
+    <form class="layui-form" id="form">
+        <div><h2 style="text-align: center;margin: 40px;">广西科技研究与技术开发计划项目验收申请表</h2></div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="34%">
+                    <col width="14%">
+                    <col width="34%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <input type="hidden" id="createUserId" name="createUserId" value="">
+                    <input type="hidden" id="item_id" name="item_id" value="">
+                    <input type="hidden" id="id" name="id" value="">
+
+                    <td rowspan="3" class="table-info">基本信息</td>
+                    <td class="td-text1">合同编号:</td>
+                    <td>
+                        <span id="contract_no"></span>
+                    </td>
+                    <td class="td-text1">项目名称:</td>
+                    <td>
+                        <span id="item_name"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">承担单位:</td>
+                    <td>
+                        <span class="responsible_unit"></span>
+                    </td>
+                    <td class="td-text1">受委托管理单位:</td>
+                    <td>
+                        <span id="entrusting_party"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">申请验收理单位:</td>
+                    <td>
+                        <span class="management_unit"></span>
+                    </td>
+                    <td class="td-text1">申请日期:</td>
+                    <td>
+                <span> <input class="form-control date" placeholder="申请日期" type="text"
+                              name="applicationDate" maxlength="50"
+                              id="applicationDate" data-bv-notempty="true"
+                              data-bv-notempty-message="申请日期 不能为空"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="34%">
+                    <col width="14%">
+                    <col width="34%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="100" class="table-info">申请验收单位信息</td>
+                    <td class="td-text1">单位名称:</td>
+                    <td>
+                        <span class="responsible_unit"></span>
+                    </td>
+                    <td class="td-text1">通信地址:</td>
+                    <td>
+                        <span id="site"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">联 系 人:</td>
+                    <td>
+                        <span id="linkman"></span>
+                    </td>
+                    <td class="td-text1">联系电话:</td>
+                    <td>
+                        <span id="phone"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">单位性质:</td>
+                    <td>
+                        <span>企业</span>
+                    </td>
+                    <td class="td-text1">申请验收单位建议的验收日期:</td>
+                    <td><input class="form-control date" placeholder="申请日期" type="text"
+                               name="suggestDate" maxlength="50"
+                               id="suggestDate" data-bv-notempty="true"
+                               data-bv-notempty-message="申请日期 不能为空"></td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目合同(或课件任务书)约定的项目实施开始时间:</td>
+                    <td>
+                        <span id="start_date"></span>
+                    </td>
+                    <td class="td-text1">项目合同(或课件任务书)约定的项目实施结束时间:</td>
+                    <td>
+                        <span id="end_date"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况:</td>
+                    <td colspan="3"> <textarea placeholder="项目合同(或课件任务书)约定的目标任务与技术经济指标完成情况"
+                                               class="layui-textarea form-control" lay-verify="required"
+                                               id="cean" name="cean"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="td-text1">提交的验收文件和资料目录:</td>
+                    <td colspan="3"> <textarea placeholder="提交的验收文件和资料目录" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="katalog" name="katalog"></textarea></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="4%">
+                    <col width="10%">
+                    <col width="10%">
+                    <col width="4%">
+                    <col width="15%">
+                    <col width="6%">
+                    <col width="15%">
+                    <col>
+                </colgroup>
+                <tbody id="userinfo">
+                <tr class="td-text">
+                    <td rowspan="100" class="table-info">主要完成人员名单</td>
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>性别</td>
+                    <td>出生年月</td>
+                    <td>技术职称</td>
+                    <td>文化程度</td>
+                    <td>工作单位</td>
+                    <td>对完成项目的贡献</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="12%">
+                    <col width="13%">
+                </colgroup>
+                <tbody>
+                <tr style="font-size: 14px;font-weight: bolder;">
+                    <td rowspan="100" class="table-info">项目投入产出基本情况表</td>
+                    <td style="text-align: right;font-size: 14px;font-weight: bolder; ">参加单位数(个)</td>
+                    <td><input id="the_company_number" name="the_company_number" style="text-align: center"></td>
+                    <td colspan="6"></td>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+
+                <tr class="td-text">
+                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目组人员情况(人)</td>
+                    <td class="td-text">合计</td>
+                    <td class="td-text">高级职称</td>
+                    <td class="td-text">中级职称</td>
+                    <td class="td-text">初级职称</td>
+                    <td class="td-text">博士</td>
+                    <td class="td-text">硕士</td>
+                    <td class="td-text">学士</td>
+                </tr>
+                <tr>
+                    <td><input id="countMan" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="advanced" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="middle" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="elementary" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="doctor" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="postgraduate" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="bachelor" style="text-align: center;border: 0px;" readonly></td>
+
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td rowspan="4" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目经费情况(万元)</td>
+                    <td class="td-text">合计</td>
+                    <td class="td-text">甲方提供</td>
+                    <td class="td-text">国家科技部门拨款</td>
+                    <td class="td-text">国家其他部门拨款</td>
+                    <td class="td-text">自治区财政科技经费</td>
+                    <td class="td-text">市县财政科技经费</td>
+                    <td class="td-text">单位自筹</td>
+
+
+                </tr>
+                <tr>
+                    <td><input id="countMoney" name="countMoney" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="first_party_provide" name="first_party_provide" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="state_science_and_technology_department" name="state_science_and_technology_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="state_other_department" name="state_other_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="area_department" name="area_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="city_department" name="city_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="own_fund" name="own_fund" style="text-align: center;border: 0px;" readonly></td>
+
+                </tr>
+                <tr>
+                    <td class="td-text">银行贷款</td>
+                    <td class="td-text">国外资金</td>
+                    <td class="td-text">其他</td>
+                </tr>
+                <tr>
+                    <td><input id="bank_loan" name="bank_loan" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="offshore_fund" name="offshore_fund" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="other_fund" name="other_fund" style="text-align: center;border: 0px;" readonly></td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td rowspan="10" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目主要成果情况</td>
+                    <td class="td-text">引进技术(项)</td>
+                    <td class="td-text">集成应用技术(项)</td>
+                    <td class="td-text">工业新产品(种)</td>
+                    <td class="td-text">农业新品种(种)</td>
+                    <td class="td-text">新工艺(新方法，新模式)(项)</td>
+                    <td class="td-text">新材料(种)</td>
+                    <td class="td-text">新装置(新装备)(套)</td>
+                </tr>
+                <tr>
+                    <td><input id="the_imported_technology" style="text-align: center;" name="the_imported_technology">
+                    </td>
+                    <td><input id="integrated_application_technology" style="text-align: center;"
+                               name="integrated_application_technology"></td>
+                    <td><input id="new_industrial_product" style="text-align: center;" name="new_industrial_product">
+                    </td>
+                    <td><input id="new_agricultural_variety" style="text-align: center;"
+                               name="new_agricultural_variety"></td>
+                    <td><input id="the_new_technology" style="text-align: center;" name="the_new_technology"></td>
+                    <td><input id="the_new_material" style="text-align: center;" name="the_new_material"></td>
+                    <td><input id="the_new_device" style="text-align: center;" name="the_new_device"></td>
+                </tr>
+                <tr>
+                    <td class="td-text">申请登记计算软件(套)</td>
+                    <td class="td-text">技术研发平台(个)</td>
+                    <td class="td-text">科技信息服务平台(个)</td>
+                    <td class="td-text">示范点(个)</td>
+                    <td class="td-text">中试线</td>
+                    <td class="td-text">生产线(种)</td>
+                    <td class="td-text">试验基地(个)</td>
+                </tr>
+                <tr>
+                    <td><input id="register_computer_software" style="text-align: center;"
+                               name="register_computer_software"></td>
+                    <td><input id="research_and_development_platform" style="text-align: center;"
+                               name="research_and_development_platform"></td>
+                    <td><input id="science_information_platform" style="text-align: center;"
+                               name="science_information_platform"></td>
+                    <td><input id="pilot_studies" style="text-align: center;" name="pilot_studies"></td>
+                    <td><input id="pilot_line" style="text-align: center;" name="pilot_line"></td>
+                    <td><input id="the_production_line" style="text-align: center;" name="the_production_line"></td>
+                    <td><input id="experimental_base" style="text-align: center;" name="experimental_base"></td>
+                </tr>
+                <tr>
+                    <td class="td-text">专利申请(项)</td>
+                    <td class="td-text">发明专利</td>
+                    <td class="td-text">实用新型</td>
+                    <td class="td-text">授权专利</td>
+                    <td class="td-text">发明专利</td>
+                    <td class="td-text">实用新型</td>
+                    <td class="td-text">参与制定技术标准(个)</td>
+                </tr>
+                <tr>
+                    <td><input id="application_for_patent" style="text-align: center;" name="application_for_patent">
+                    </td>
+                    <td><input id="application_for_invention_patent" style="text-align: center;"
+                               name="application_for_invention_patent"></td>
+                    <td><input id="application_for_utility_paten" style="text-align: center;"
+                               name="application_for_utility_paten"></td>
+                    <td><input id="authorized_patent" style="text-align: center;" name="authorized_patent"></td>
+                    <td><input id="authorized_invention_patent" style="text-align: center;"
+                               name="authorized_invention_patent"></td>
+                    <td><input id="authorized_utility_patent" style="text-align: center;"
+                               name="authorized_utility_patent"></td>
+                    <td><input id="count_standard" style="text-align: center;" name="count_standard"></td>
+                </tr>
+                <tr>
+                    <td class="td-text">国家标准(个)</td>
+                    <td class="td-text">国际标准(个)</td>
+                    <td class="td-text">行业标准(个)</td>
+                    <td class="td-text">地方标准(个)</td>
+                    <td class="td-text">企业标准(个)</td>
+                    <td class="td-text">论文专著研究报告(篇)</td>
+                    <td class="td-text">国内发表(篇)</td>
+                </tr>
+                <tr>
+                    <td><input id="the_national_standard" style="text-align: center;" name="the_national_standard"></td>
+                    <td><input id="the_international_standard" style="text-align: center;"
+                               name="the_international_standard"></td>
+                    <td><input id="the_industry_standard" style="text-align: center;" name="the_industry_standard"></td>
+                    <td><input id="local_standard" style="text-align: center;" name="local_standard"></td>
+                    <td><input id="the_enterprise_standard" style="text-align: center;" name="the_enterprise_standard">
+                    </td>
+                    <td><input id="count_thesis" style="text-align: center;" name="count_thesis"></td>
+                    <td><input id="domestic_papers" style="text-align: center;" name="domestic_papers"></td>
+                </tr>
+                <tr>
+                    <td class="td-text">国外发表(篇)</td>
+                    <td class="td-text">培养博士后(人)</td>
+                    <td class="td-text">培养博士(人)</td>
+                    <td class="td-text">培养硕士(人)</td>
+                    <td class="td-text">举办培训班(次)</td>
+                    <td class="td-text">参与培训人数(人次)</td>
+                    <td rowspan="2"></td>
+                </tr>
+                <tr>
+                    <td><input id="foreign_papers" style="text-align: center;" name="foreign_papers"></td>
+                    <td><input id="make_postdoctor" style="text-align: center;" name="make_postdoctor"></td>
+                    <td><input id="make_doctor" style="text-align: center;" name="make_doctor"></td>
+                    <td><input id="make_postgraduate" style="text-align: center;" name="make_postgraduate"></td>
+                    <td><input id="hold_training_courses" style="text-align: center;" name="hold_training_courses"></td>
+                    <td><input id="number_of_participants" style="text-align: center;" name="number_of_participants">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目成果应用情况</td>
+                    <td class="td-text">实际应用成果数(项)</td>
+                    <td class="td-text">已商品化成果数(项)</td>
+                    <td class="td-text">成果转让合同数(项)</td>
+                    <td class="td-text">成果转让合同金额(万元)</td>
+                    <td colspan="3" rowspan="2"></td>
+                </tr>
+                <tr>
+                    <td><input id="convert_the_number_of_applications" style="text-align: center;"
+                               name="convert_the_number_of_applications"></td>
+                    <td><input id="results_of_industrialization" style="text-align: center;"
+                               name="results_of_industrialization"></td>
+                    <td><input id="achievement_transfer_contract" style="text-align: center;"
+                               name="achievement_transfer_contract"></td>
+                    <td><input id="total_amount_of_achievement_transfer_contract" style="text-align: center;"
+                               name="total_amount_of_achievement_transfer_contract"></td>
+
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目实施期间累积获取的经济效益</td>
+                    <td class="td-text">效益分类</td>
+                    <td class="td-text">新增销售收入(万元)</td>
+                    <td class="td-text">新增产值(万元)</td>
+                    <td class="td-text">新增利润(万元)</td>
+                    <td class="td-text">新增出口创汇(万美元)</td>
+                    <td rowspan="3" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="td-text">直接经济效益</td>
+                    <td><input id="all_production_a" style="text-align: center;" name="all_production_a"></td>
+                    <td><input id="the_new_production_a" style="text-align: center;" name="the_new_production_a"></td>
+                    <td><input id="the_new_tax_a" style="text-align: center;" name="the_new_tax_a"></td>
+                    <td><input id="net_amount_a" style="text-align: center;" name="net_amount_a"></td>
+
+                </tr>
+                <tr>
+                    <td class="td-text">间接经济效益</td>
+                    <td><input id="all_production_b" style="text-align: center;" name="all_production_b"></td>
+                    <td><input id="the_new_production_b" style="text-align: center;" name="the_new_production_b"></td>
+                    <td><input id="the_new_tax_b" style="text-align: center;" name="the_new_tax_b"></td>
+                    <td><input id="net_amount_b" style="text-align: center;" name="net_amount_b"></td>
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">预期项目完成后年增效益</td>
+                    <td class="td-text">年增销售收入(万元)</td>
+                    <td class="td-text">年增产值(万元）</td>
+                    <td class="td-text">年增利税(万元)</td>
+                    <td class="td-text">年增出口创汇(万美元)</td>
+                    <td rowspan="2" colspan="3"></td>
+                </tr>
+                <tr>
+                    <td><input id="all_production_year" style="text-align: center;" name="all_production_year"></td>
+                    <td><input id="the_new_production_year" style="text-align: center;" name="the_new_production_year">
+                    </td>
+                    <td><input id="the_new_tax_year" style="text-align: center;" name="the_new_tax_year"></td>
+                    <td><input id="net_amount_year" style="text-align: center;" name="net_amount_year"></td>
+
+                </tr>
+                <tr>
+                    <td colspan="8"></td>
+                </tr>
+
+                <tr>
+                    <td class="td-text">申请验收单位意见:</td>
+                    <td colspan="7"> <textarea placeholder="申请验收单位意见" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="applicationDeptOpinion" name="applicationDeptOpinion"></textarea>
+                    </td>
+                </tr>
+
+                <tr permission="back:supervisor:check">
+                    <td class="td-text">受委托管理单位或项目牵头承担单位意见:</td>
+                    <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
+                    </td>
+                </tr>
+
+                <tr permission="back:boss:check">
+                    <td class="td-text">验收方意见:</td>
+                    <td colspan="7"> <textarea placeholder="验收方意见" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
+                    </td>
+                </tr>
+                <tr permission="back:boss:check">
+                    <td class="td-text">专家意见:</td>
+                    <td colspan="7"> <textarea placeholder="专家意见" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               ></textarea>
+                    </td>
+                </tr>
+                <tr permission="back:boss:check">
+                    <td class="td-text">验收方核验结果:</td>
+                    <td colspan="7"> <textarea placeholder="验收方核验结果" class="layui-textarea form-control"
+                                               lay-verify="required"
+                    ></textarea>
+                    </td>
+                </tr>
+                <tr permission="back:boss:check">
+                    <td class="td-text">受委托管理单位或项目牵头承担单位核验结果:</td>
+                    <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位核验结果" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               ></textarea>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="form-actions" id="new">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" onclick="location.href='../list-layout/list.html'">返回</button>
+                    <button class="btn btn-primary" type="button" onclick="add_ACC();">
+                        <i class="fa fa-save"></i> 提交
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions" id="old">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" onclick="history.back(-1);">返回</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript" src='../../js/constant.js'></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
+<script type="text/javascript" src='../../js/common.js'></script>
+<script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../list-layout/js/saveData.js'></script>
+<script type="text/javascript" src="../list-layout/js/acceptance.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript">
+
+    var item_id = getUrlParam("item_id");
+    $("#item_id").val(item_id);
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'laydate', 'layer'], function () {
+        layer = layui.layer;
+        laydate = layui.laydate;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , format: 'yyyy-MM-dd'
+                , trigger: 'click'
+            });
+        });
+
+    });
+
+    function add_ACC() {
+        var tableId = parseInt($("#id").val());
+        var formdata = $("#form").serializeObject();
+        formdata.itemId = item_id;
+        if (!tableId) {
+            formdata.status = 1;
+            $.ajax({
+                type: 'post',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "添加成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        location.href = '../list-layout/list.html';
+                    });
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "保存成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+
+    }
+
+    getdata(item_id);
+
+    function getdata(item_id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-summary/check-table/list',
+            data: "item_id=" + item_id,
+            async: false,
+            success: function (data) {
+                var arr = Object.keys(data);
+                if (arr.length == 0) {
+                    document.getElementById('new').style.display = 'block';
+                    $("textarea").attr('readonly', true);
+                    $("#applicationDeptOpinion").removeAttr("readonly");
+                    $("#cean").removeAttr("readonly");
+                    $("#katalog").removeAttr("readonly");
+                }
+                for (var key in data[0]) {
+                    var date = data[0][key];
+                    $('#' + key).val(date);
+
+                }
+                $(data).each(function () {
+                    $("#applicationDate").val(this.applicationDate.substring(0, 10));
+                    $("#suggestDate").val(this.suggestDate.substring(0, 10));
+                    $("#cean").text(this.cean);
+                    $("#katalog").text(this.katalog);
+                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
+                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
+                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
+                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
+                    change(this.status);
+                })
+            }
+        })
+    }
+
+    function change(status) {
+
+        if (status == 0) {
+            document.getElementById('new').style.display = 'block';
+        } else {
+            $("input").attr('readonly', true);
+            $("input").attr("style", "text-align: center;border: 0px;");
+            $("textarea").attr('readonly', true);
+            $("#applicationDate").attr('disabled', true);
+            $("#suggestDate").attr('disabled', true);
+            document.getElementById('old').style.display = 'block';
+        }
+    }
+
+    getbasic(item_id);
+    /*getCompanyInfo(item_id);*/
+
+    var advanced = 0;
+    var middle = 0;
+    var elementary = 0;
+    var doctor = 0;
+    var postgraduate = 0;
+    var bachelor = 0;
+    getItem_user(item_id);
+    getFund(item_id);
+
+
+    function send_ACC() {
+        var formdata = $("#form").serializeObject();
+        formdata.status = 1;
+        $.ajax({
+            type: 'put',
+            url: domainName + '/api-summary/check-table',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var msg = "保存成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+
+                });
+            }
+        });
+    }
+
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
+
+    function showAudit() {
+        layer.open({
+            title: "查定报告",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../auditApply/checkedApplyList.html?item_id=' + item_id]
+
+        });
+    }
+
+    function showSkill() {
+        layer.open({
+            title: "技术总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/generateSkillReport.html?itemId=' + item_id]
+
+        });
+    }
+
+    function showWork() {
+        layer.open({
+            title: "工作总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/generateWorkReport.html?itemId=' + item_id]
+
+        });
+    }
+
+</script>
+</html>

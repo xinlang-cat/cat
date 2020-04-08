@@ -227,7 +227,12 @@
     function update(obj) {
         $(obj).attr("disabled",true);
         var formdata = $("#form").serializeObject();
-        formdata.accessory = formdata.accessory.join(',');
+        var files =  document.getElementsByName("accessory").length;
+        if (files==1){
+
+        }else {
+            formdata.accessory = formdata.accessory.join(',');
+        }
         formdata.status = 0;
         $.ajax({
             type : 'put',

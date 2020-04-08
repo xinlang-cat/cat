@@ -20,18 +20,10 @@
                                     项目名称(支持模糊搜索)：
                                     <input id="item_name" type="text" class="form-control" placeholder="项目名">
                                     更改内容：
-                                    <select class="form-control input-sm" id="modify">
-                                        <option value="">全部</option>
-                                        <option value=1>项目基本信息</option>
-                                        <option value=2>项目研究内容</option>
-                                        <option value=3>项目人员</option>
-                                        <option value=4>项目指标</option>
-                                        <option value=5>项目经费</option>
-                                    </select>
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
-                                        <option value=1>更改中</option>
+                                        <option value=1>待审核</option>
                                         <option value=2>审核未通过</option>
                                         <option value=3>更改成功</option>
                                     </select>
@@ -50,7 +42,6 @@
                     <thead>
                     <tr>
                         <th style="width:30%;">项目名称</th>
-                        <th style="width:20%;">更改内容</th>
                         <th style="width:15%">提交时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
@@ -102,7 +93,6 @@
                         "url": domainName + "/project-item/item/basic/modifyApply/page",
                         "data":function(d){
                             d.status = $('#status').val();
-                            d.modify = $('#modify').val();
                             d.item_name = $('#item_name').val();
                         },
                         "type": "get",
@@ -140,36 +130,15 @@
                             "render": function (data, type, row) {
                                 var id =row['item_id'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/basic/list?id=" + id, function (res) {
-                                    data =  res[0]['item_name'];
+                                $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                    data =  res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
                                 return data;
                             }
                         },
-                        {
-                            "data": "modify",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var modify =row['modify'];
-                                $.ajaxSettings.async = false;
-                                if (modify == 1){
-                                    data="项目基本信息";
-                                }else if (modify == 2){
-                                    data="项目研究内容";
-                                }else if (modify == 3){
-                                    data="项目人员";
-                                }else if (modify == 4){
-                                    data="项目指标";
-                                }else if (modify == 5){
-                                    data="项目经费";
-                                }
 
-                                $.ajaxSettings.async = true;
-                                return data;
-                            }
-                        },
                         {
                             "data": "apply_time",
                             "defaultContent": "",

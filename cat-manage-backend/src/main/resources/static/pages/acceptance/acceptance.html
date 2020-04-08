@@ -51,6 +51,7 @@
             display: none;
 
         }
+
     </style>
 </head>
 
@@ -86,17 +87,17 @@
                 <tr>
                     <td class="td-text1">承担单位:</td>
                     <td>
-                        <span class="undertaker"></span>
+                        <span class="responsible_unit"></span>
                     </td>
                     <td class="td-text1">受委托管理单位:</td>
                     <td>
-                        <span id="administrator"></span>
+                        <span id="entrusting_party"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-text1">申请验收理单位:</td>
                     <td>
-                        <span class="undertaker"></span>
+                        <span class="management_unit"></span>
                     </td>
                     <td class="td-text1">申请日期:</td>
                     <td>
@@ -124,7 +125,7 @@
                     <td rowspan="100" class="table-info">申请验收单位信息</td>
                     <td class="td-text1">单位名称:</td>
                     <td>
-                        <span class="undertaker"></span>
+                        <span class="responsible_unit"></span>
                     </td>
                     <td class="td-text1">通信地址:</td>
                     <td>
@@ -141,16 +142,7 @@
                         <span id="phone"></span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="td-text1">邮政编码:</td>
-                    <td>
-                        <span id="postal_code"></span>
-                    </td>
-                    <td class="td-text1">电子邮箱:</td>
-                    <td>
-                        <span id="email"></span>
-                    </td>
-                </tr>
+
                 <tr>
                     <td class="td-text1">单位性质:</td>
                     <td>
@@ -207,9 +199,9 @@
                     <td>序号</td>
                     <td>姓名</td>
                     <td>性别</td>
-                    <td>出生年月</td>
-                    <td>技术职称</td>
-                    <td>文化程度</td>
+                    <td>年龄</td>
+                    <td>职称</td>
+                    <td>从事专业</td>
                     <td>工作单位</td>
                     <td>对完成项目的贡献</td>
                 </tr>
@@ -234,7 +226,8 @@
                 <tr style="font-size: 14px;font-weight: bolder;">
                     <td rowspan="100" class="table-info">项目投入产出基本情况表</td>
                     <td style="text-align: right;font-size: 14px;font-weight: bolder; ">参加单位数(个)</td>
-                    <td colspan="7"><input id="the_company_number" name="the_company_number" style="text-align: center"></td>
+                    <td><input id="the_company_number" name="the_company_number" style="text-align: center"></td>
+                    <td colspan="6"></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -266,33 +259,34 @@
                 <tr>
                     <td rowspan="4" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目经费情况(万元)</td>
                     <td class="td-text">合计</td>
-                    <td class="td-text">自治区财政科技经费</td>
-                    <td class="td-text">科技经费</td>
+                    <td class="td-text">甲方提供</td>
                     <td class="td-text">国家科技部门拨款</td>
                     <td class="td-text">国家其他部门拨款</td>
+                    <td class="td-text">自治区财政科技经费</td>
                     <td class="td-text">市县财政科技经费</td>
-                    <td class="td-text">其他拨款</td>
+                    <td class="td-text">单位自筹</td>
+
 
                 </tr>
                 <tr>
                     <td><input id="countMoney" name="countMoney" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="MUNICIPALITY" name="MUNICIPALITY" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="SCIENCE_ND_TECHNOLOGY_FUNDING" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="STATE_SCIENCE_AND_TECHNOLOGY_DEPARTMENTS" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="APPROPRIATIONS_FROM_OTHER_DEPARTMENTS_OF_THE_STATE" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="MUNICIPAL_ALLOCATION" name="MUNICIPAL_ALLOCATION" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="OTHER_FUNDS" name="OTHER_FUNDS" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="first_party_provide" name="first_party_provide" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="state_science_and_technology_department" name="state_science_and_technology_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="state_other_department" name="state_other_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="area_department" name="area_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="city_department" name="city_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="own_fund" name="own_fund" style="text-align: center;border: 0px;" readonly></td>
 
                 </tr>
                 <tr>
-                    <td class="td-text">单位自筹</td>
                     <td class="td-text">银行贷款</td>
+                    <td class="td-text">国外资金</td>
                     <td class="td-text">其他</td>
                 </tr>
                 <tr>
-                    <td><input id="ITS_OWN_FUNDS" name="ITS_OWN_FUNDS" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="BANK_LOAN" name="BANK_LOAN" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="other" name="other" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="bank_loan" name="bank_loan" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="offshore_fund" name="offshore_fund" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="other_fund" name="other_fund" style="text-align: center;border: 0px;" readonly></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -470,21 +464,6 @@
                                                id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
                     </td>
                 </tr>
-
-                <tr permission="back:boss:check">
-                    <td class="td-text" >自治区科技厅项目主管处意见:</td>
-                    <td colspan="7"> <textarea placeholder="自治区科技同项目主管处意见" class="layui-textarea form-control"
-                                               lay-verify="required"
-                                               id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
-                    </td>
-                </tr>
-                <tr permission="back:boss:check">
-                    <td class="td-text" >自治区科技厅条件财务处意见:</td>
-                    <td colspan="7"> <textarea placeholder="自治区科技厅条件财务处意见" class="layui-textarea form-control"
-                                               lay-verify="required"
-                                               id="burgFinanceOpinion" name="burgFinanceOpinion"></textarea>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -495,13 +474,11 @@
                     <button class="btn btn-primary" type="button" onclick="add_ACC();">
                         <i class="fa fa-save"></i> 提交
                     </button>
-                    <!--<button class="btn btn-primary"  onclick="send_ACC();">
-                        <i class="fa fa-save"></i> 提交
-                    </button>-->
                 </div>
             </div>
         </div>
         <div class="form-actions" id="old">
+            <!--<div class="row" align="center">-->
             <div class="row" align="center">
                 <div class="col-md-12">
                     <button class="btn btn-primary"  onclick="history.back(-1);">返回</button>
@@ -626,7 +603,7 @@
         }
     }
     getbasic(item_id);
-    getCompanyInfo(item_id);
+    /*getCompanyInfo(item_id);*/
 
     var advanced = 0;
     var middle = 0;
@@ -656,5 +633,6 @@
          });
 
      }
+
 </script>
 </html>

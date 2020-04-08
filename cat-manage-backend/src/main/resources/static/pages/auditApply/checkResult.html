@@ -4,110 +4,185 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+
+        .layui-textarea {
+            min-height: 60px;
+        }
+
+    </style>
 </head>
 <body>
+
+<div class="layui-form" style="margin-top: 60px;">
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <!--基本信息-->
+        <form id="form1">
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>建议查定时间</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span name="period" id="period"></span>
+                    </div>
+                </td>
+
+            </tr>
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>申请说明</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+        <!--项目考核指标-->
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="60%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="3">
+                                    <div class="field">
+                                        <span id="target">查定指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">查定地址</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
         <fieldset>
-            <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-2 control-label">所需审查指标:</label>
-                <div class="col-md-2">
-                    <input class="form-control" placeholder="开始时间" type="text" name="name" maxlength="50"
-                           id="name" readonly>
-                </div>
-                <label class="col-md-2 control-label">查定结果:</label>
-                <div class="col-md-2">
-                    <input class="form-control" placeholder="开始时间" type="text" name="result" maxlength="50"
-                           id="result" readonly>
-                </div>
-            </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">预计开始时间</label>
-                <div class="col-md-3">
-                    <input class="form-control" placeholder="开始时间" type="text" maxlength="50"
-                           id="start_date" readonly>
-                </div>
                 <input style="display: none" id="check_userid" name="check_userid" value="">
+
                 <input style="display: none" id="id" name="id" value="">
-                <label class="col-md-2 control-label">实际开始时间</label>
+                <label class="col-md-2 control-label">实际查定时间</label>
                 <div class="col-md-3">
-                    <input class="form-control date" placeholder="开始时间" type="text" name="start_date_true"
-                           maxlength="50"
-                           id="start_date2" data-bv-notempty="true"
-                           data-bv-notempty-message="开始时间 不能为空" readonly>
+                    <input type="text" name="periods" id="periods" placeholder="请输入" class="form-control date" readonly>
                 </div>
 
+                <label class="col-md-2 control-label">查定结果</label>
+                <div class="col-md-3">
+                    <p name="result" id="result" style=""></p>
+                    <!--<input type="text" name="result" id="result" placeholder="请输入" class="form-control date">-->
+                </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-md-2 control-label">指标所在地域</label>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="province" maxlength="50"
-                           id="province" readonly>
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="city" maxlength="50"
-                           id="city" readonly>
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="area" maxlength="50"
-                           id="area" readonly>
-                </div>
-                <div class="col-md-2">
-                    <input class="form-control" type="text" name="street" maxlength="50"
-                           id="street" readonly>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">申请内容:</label>
-                <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
-                              class="layui-textarea form-control" lay-verify="required"
-                              id="content" name="content" readonly></textarea>
-                </div>
-            </div>
+
             <div class="form-group">
                 <label class="col-md-2 control-label">查定情况简述:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定情况简述。"
                               class="layui-textarea form-control" lay-verify="required"
-                              id="description" name="description" readonly></textarea>
+                              id="description" name="description" data-bv-notempty="true"
+                              data-bv-notempty-message="查定情况简述 不能为空"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定目的:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定目的。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="purpose" name="purpose" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定目的 不能为空"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定依据:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定依据。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="depand" name="depand" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定依据 不能为空"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定内容:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定内容。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="details" name="details" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定内容 不能为空"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">查定方法:</label>
                 <div class="col-md-8">
-                    <textarea placeholder="内容简介。"
+                    <textarea placeholder="查定方法。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="means" name="means" data-bv-notempty="true"
-                              data-bv-notempty-message="情况简述 不能为空"></textarea>
+                              data-bv-notempty-message="查定方法 不能为空"></textarea>
                 </div>
             </div>
 
@@ -123,6 +198,7 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 
 
 <script type="text/javascript">
@@ -156,20 +232,36 @@
                     $("#means").val(data[0].means);
                     $("#description").val(data[0].description);
 
-                    getProvince(data[0].provinceCode);
-                    getTargetName(data[0].target_id);
-                    $("#result").val(data[0].status == 3 ? "查定合格" : "查定不合格");
-                    getCity(data[0].cityCode);
-                    getArea(data[0].areaCode);
-                    if (data[0].postType == 2) {
-                        $("#street").val(data[0].street);
-                    } else {
-                        getStreet(data[0].streetCode);
-                    }
-                    $("#start_date").val(formatDate3(data[0].start_date));
-                    $("#end_date").val(formatDate3(data[0].end_date));
-                    $("#start_date2").val(formatDate3(data[0].start_date_true));
-                    $("#end_date2").val(formatDate3(data[0].end_date_true));
+                    $("#result").text(data[0].status == 3 ? "查定合格" : "查定不合格");
+
+                    $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
+                    $("#periods").val(formatDate3(data[0].start_date_true) + " - " + formatDate3(data[0].end_date_true));
+
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            var serial = $("#target").parents('thead').next().children().length + 1;
+                            var str = '';
+                            var text = getsuperior(item.site);
+                            str = '<tr>' +
+                                '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + item.type + '"></td>' +
+                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                                '<div class="field">' +
+                                '<span type="text"  name="content" lay-verify="required"> ' + item.content + ' </span>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                                '<div class="field" style="position: relative;">' +
+                                '<span type="text" name="site">' + text + '</span>' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
+                            $("#target").parents('thead').next().append(str);
+                        });
+                        $("input").attr('readonly', true);
+                        $("input").attr("style", "text-align: center;border: 0px;");
+                        $("textarea").attr('readonly', true);
+                    })
+
                     $.get(domainName + "/api-f/albums/list", {ids: data[0].accessory}, function (data1) {
                         $.each(data1, function (i, item) {
                             addImgHtml(item)
@@ -209,63 +301,8 @@
         });
     }
 
-    function getTargetName(id) {
-        var name='';
-        $.get(domainName + "/project-item/item/target/list?id=" + id, function (res) {
-            name =  res[0]['content'];
-            $("#name").val(name);
-            if (res[0]['count']!=null){
-                $.get(domainName + "/api-label/label/tree/" + res[0]['target'], function (res) {
-                    name =  res[0]['content'];
-                    $("#name").val(name);
-                })
-            }
-        })
-        // $.ajax({
-        //     type : 'get',
-        //     url : domainName + '/project-item/item/target/list',
-        //     contentType: "application/json; charset=utf-8",
-        //     data: {id: id},
-        //     success : function(data) {
-        //         alert(data[0]['content']);
-        //         if (data[0]['count']!=null){
-        //             $.get(domainName + "/api-label/label/tree/" + data[0]['target'], function (res) {
-        //                 $("#name").val(res[0].content);
-        //             })
-        //         }else {
-        //             $("#name").val(data[0].content);
-        //         }
-        //     }
-        // });
-    }
-    function pass() {
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 2}),
-            success : function(data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    parent.location.reload();
-                });
-            }
-        });
-    }
-    function unPass() {
-        $.ajax({
-            type : 'put',
-            url : domainName + '/project-item/item/target/auditApply/update',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id,status : 5}),
-            success : function(data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function(){
-                    parent.location.reload();
-                });
-            }
-        });
-    }
+
+
 
 </script>
 </body>
