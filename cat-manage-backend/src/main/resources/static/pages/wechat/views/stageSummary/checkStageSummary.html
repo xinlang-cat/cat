@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>执行报告列表</title>
+    <title>执行报告审核</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -26,9 +26,10 @@
 
     <div>
         <div class="weui-interval"></div>
-        <div class="weui-cell on-off" >
+        <div class="weui-cell on-off">
             <div class="weui-cell__bd weui-cell_primary">
-                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
                 <p class="weui-max-title" style="float: left">基本信息</p>
             </div>
             <div class="weui-cell__bd">
@@ -115,9 +116,10 @@
 
     <div>
         <div class="weui-interval"></div>
-        <div class="weui-cell on-off" >
+        <div class="weui-cell on-off">
             <div class="weui-cell__bd weui-cell_primary">
-                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
                 <p class="weui-max-title" style="float: left">项目执行进展情况</p>
             </div>
             <div class="weui-cell__bd">
@@ -342,9 +344,10 @@
 
     <div>
         <div class="weui-interval"></div>
-        <div class="weui-cell on-off" >
+        <div class="weui-cell on-off">
             <div class="weui-cell__bd weui-cell_primary">
-                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
                 <p class="weui-max-title" style="float: left">考核指标完成情况</p>
             </div>
             <div class="weui-cell__bd">
@@ -376,9 +379,10 @@
 
     <div>
         <div class="weui-interval"></div>
-        <div class="weui-cell on-off" >
+        <div class="weui-cell on-off">
             <div class="weui-cell__bd weui-cell_primary">
-                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
                 <p class="weui-max-title" style="float: left">项目经费管理情况</p>
             </div>
             <div class="weui-cell__bd">
@@ -454,9 +458,10 @@
 
     <div>
         <div class="weui-interval"></div>
-        <div class="weui-cell on-off" >
+        <div class="weui-cell on-off">
             <div class="weui-cell__bd weui-cell_primary">
-                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
                 <p class="weui-max-title" style="float: left">项目经费使用情况</p>
             </div>
             <div class="weui-cell__bd">
@@ -568,9 +573,10 @@
 
     <div>
         <div class="weui-interval"></div>
-        <div class="weui-cell on-off" >
+        <div class="weui-cell on-off">
             <div class="weui-cell__bd weui-cell_primary">
-                <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
+                <img src="../../images/green.png" alt=""
+                     style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
                 <p class="weui-max-title" style="float: left">项目效益及成果情况</p>
             </div>
             <div class="weui-cell__bd">
@@ -784,7 +790,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
 
@@ -823,13 +828,12 @@
     });
     var pers = checkPermission();
 
-    var itemId = 1; //getUrlParam("itemId");
-    var userId = 1; //getUrlParam("user_id");
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
     var projectUser = null;
     $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
         projectUser = res[0];
         var checkHtml = '';
-        var flag = false;
         if ($.inArray('html:principal:check:stage', pers) >= 0) {
             checkHtml += '<div class="weui-cell">\n' +
                 '            <div class="weui-cell__bd">\n' +
@@ -879,7 +883,6 @@
                 '                <input type="hidden" name="principalCheckTime" value="' + formatDate4(new Date) + '">\n' +
                 '            </div>\n' +
                 '        </div>';
-            flag = true;
         }
         if ($.inArray('html:dept:check:stage', pers) >= 0) {
             checkHtml += '<div class="weui-cells__title">项目完成情况</div>\n' +
@@ -961,18 +964,20 @@
                 '                <input type="hidden" name="deptCheckTime" value="' + formatDate4(new Date) + '">\n' +
                 '            </div>\n' +
                 '        </div>';
-            flag = true;
         }
-        if (flag) {
-            $('#checkHtml').append(checkHtml);
-        }
+        $('#checkHtml').append(checkHtml);
     });
     $("#detail").hide();
     $(function () {
         var params = {
             itemId: itemId,
-            enable: 1
+            enable: 0
         };
+        if ($.inArray('html:dept:check:stage', pers) > 0) {
+            params['principalCheckEnable'] = 1;
+        } else {
+            params['principalCheckEnable'] = 0;
+        }
         $.get(domainName + "/api-summary/stage/list", params, function (data) {
             var str = '';
             for (var i = data.length - 1; i >= 0; i--) {
@@ -1015,7 +1020,7 @@
             setRadio($('input[name=principalCheckEnable]'), res.principalCheckEnable);
             setRadio($('input[name=deptCheckEnable]'), res.deptCheckEnable);
             setRadio($('input[name=projectCompletion]'), res.projectCompletion);
-
+            $('#OTHER_INDICATORS,#TECHNICAL_INDICATORS,#ECONOMIC_INDICATORS,#INDICATORS_OF_TALENT_TEAM_CONS').empty();
             if (res.otherTarget != null) {
 
                 var str = '<div class="weui-imaginary-line"></div>\n' +
@@ -1145,6 +1150,7 @@
                     '        </div>';
                 $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
             }
+            emptyElem();
             var stageFundUses = res.stageFundUses;
             var STR_stageFundUses = '';
             for (var i = 0; i < stageFundUses.length; i++) {
@@ -1157,7 +1163,7 @@
                     '                        <a href="javascript:;"\n' +
                     '                           style="float: right;width: 40px;"><i class="iconfont icon-jiantou-7"></i></a>\n' +
                     '                    </div>\n' +
-                    '                </div><div>'+
+                    '                </div><div>' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
                     '                    <label class="weui-label">支出金额</label>\n' +
@@ -1597,8 +1603,22 @@
         });
         $('.page__bd').hide();
         $("#detail").show();
+        $.each($('.on-off'), function (i, item) {
+            $($(item).next('div')).hide();
+        });
+
     }
 
+    function emptyElem() {
+        var arr = ['.stageFundUse','.stageAffixFile','.stagePaperCatalogue','.stagePatentCatalogue','.stageScienceAchievementAwardCatalogue','.stageScienceAchievementRegisterCatalogue','.stageTechnologyPactRegisterCatalogue','.stageTarget']
+        $.each(arr,function (i,item) {
+            $.each($(item), function (j, elem) {
+                if (j != 0) {
+                    $(elem).remove();
+                }
+            });
+        });
+    }
 
     function submit(id) {
         var formData = $("#form").serializeObject();
@@ -1622,7 +1642,7 @@
                 $.toast('操作成功');
                 $('.page__bd').show();
                 $("#detail").hide();
-                $('#' + id ).remove();
+                $('#' + id).remove();
             },
             error: function (xhr, textStatus, errorThrown) {
                 $.toast('操作失败', 'forbidden');
@@ -1633,6 +1653,7 @@
     //设置单选框
     function setRadio(inputs, data) {
         for (var i = 0; i < inputs.length; i++) {
+            $(inputs[i]).prop('checked', false);
             if ($(inputs[i]).val() == data) {
                 $(inputs[i]).prop('checked', true);
             }

@@ -120,6 +120,10 @@
 <script type="text/javascript" src="../../../../js/common.js"></script>
 
 <script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+
 
     function uploader(obj) {
         if ($(obj).val() == "") {
@@ -171,12 +175,8 @@
         });
     }
 
-    var itemId = 1;
-    var targetId = 369;
-
-    $(function () {
-        FastClick.attach(document.body);
-    });
+    var itemId = getUrlParam('itemId');
+    var targetId = getUrlParam("targetId");
     var plan = 0;
     $.get(domainName + "/api-summary/work-log/lately", {itemId: itemId, targetId: targetId}, function (res) {
         if (!jQuery.isEmptyObject(res)) {

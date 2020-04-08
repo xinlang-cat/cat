@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>考核指标</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will
+    appear in your document head meta (for Google search results) and in your feed.xml site description.">
+    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
+    <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="../../css/common.css">
+
+</head>
+<style>
+    .weui-set-hide-val {
+        margin-left: 15px;
+    }
+</style>
+<body ontouchstart>
+<div class="page__bd">
+    <div class="weui-interval"></div>
+</div>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../js/stageSummaryFundOnOff.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script>
+    $(function () {
+        FastClick.attach(document.body);
+    });
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
+
+    $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (data) {
+        var str = '';
+        $.each(data, function (i, item) {
+            if (item['count'] == null || item['count'] <= 0) {
+                var type = '';
+                if (item['type'] == 'TECHNICAL_INDICATORS') {
+                    type = '技术指标';
+                }
+                if (item['type'] == 'OTHER_INDICATORS') {
+                    type = '其他指标';
+                }
+                if (item['type'] == 'ECONOMIC_INDICATORS') {
+                    type = '经济指标';
+                }
+                if (item['type'] == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    type = '人才队伍建设指标';
+                }
+                var startEndTime = formatDate4(item['start_date']) + '---' + formatDate4(item['end_date']);
+                str += '<div class="weui-cell">\n' +
+                    '        <div class="weui-cell__hd">\n' +
+                    '            <label class="weui-label">指标类型</label>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell__bd">\n' +
+                    '            <p class="itemName weui-set-hide-val">' + type + '</p>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="weui-line"></div>\n' +
+                    '    <div class="weui-cell">\n' +
+                    '        <div class="weui-cell__hd">\n' +
+                    '            <label class="weui-label">起止时间</label>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell__bd">\n' +
+                    '            <p class="itemName weui-set-hide-val">' + startEndTime + '</p>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="weui-line"></div>\n' +
+                    '    <div class="weui-cell">\n' +
+                    '        <div class="weui-cell__hd">\n' +
+                    '            <label class="weui-label">指标进度</label>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell__bd">\n' +
+                    '            <p class="itemName weui-set-hide-val">' + item['plan'] + '</p>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="weui-line"></div>\n' +
+                    '    <div class="weui-cell">\n' +
+                    '        <div class="weui-cell__hd">\n' +
+                    '            <label class="weui-label">指标内容</label>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell__bd">\n' +
+                    '            <p class="itemName weui-set-hide-val">' + item['content'] + '</p>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="weui-line"></div>\n' +
+                    '    <div class="weui-cell">\n' +
+                    '        <div class="weui-cell__bd">\n' +
+                    '            <a href="addWorklog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" permission="PARTY_B:principal:html,PARTY_B:member:html">添加日志</a>\n' +
+                    '            <a href="checkWorkLog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" permission="PARTY_B:principal:html">审核日志</a>\n' +
+                    '            <a href="myWorkLog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" permission="PARTY_B:principal:html,PARTY_B:member:html">日志修改</a>\n' +
+                    '            <a href="workLogList.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" >日志查询</a>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '    <div class="weui-interval"></div>'
+            }
+        });
+        $('.page__bd').append(str);
+        checkPermission();
+    });
+</script>
+</body>
+</html>

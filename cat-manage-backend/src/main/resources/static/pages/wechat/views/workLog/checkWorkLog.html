@@ -166,11 +166,10 @@
     var targetId = getUrlParam("targetId");
 
     $(function () {
-        $("#saveBt").hide();
         var params = {
-            status: 1,
-            itemId: 1,
-            targetId: 369
+            status: 0,
+            itemId: itemId,
+            targetId: targetId
         };
         $.get(domainName + "/api-summary/work-log/list", params, function (data) {
             var str = '';

@@ -138,16 +138,7 @@
                         <span id="phone"></span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="td-text1">邮政编码:</td>
-                    <td>
-                        <span id="postal_code"></span>
-                    </td>
-                    <td class="td-text1">电子邮箱:</td>
-                    <td>
-                        <span id="email"></span>
-                    </td>
-                </tr>
+
                 <tr>
                     <td class="td-text1">单位性质:</td>
                     <td>
@@ -263,33 +254,34 @@
                 <tr>
                     <td rowspan="4" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目经费情况(万元)</td>
                     <td class="td-text">合计</td>
-                    <td class="td-text">自治区财政科技经费</td>
-                    <td class="td-text">科技经费</td>
+                    <td class="td-text">甲方提供</td>
                     <td class="td-text">国家科技部门拨款</td>
                     <td class="td-text">国家其他部门拨款</td>
+                    <td class="td-text">自治区财政科技经费</td>
                     <td class="td-text">市县财政科技经费</td>
-                    <td class="td-text">其他拨款</td>
+                    <td class="td-text">单位自筹</td>
+
 
                 </tr>
                 <tr>
                     <td><input id="countMoney" name="countMoney" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="MUNICIPALITY" name="MUNICIPALITY" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="SCIENCE_ND_TECHNOLOGY_FUNDING" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="STATE_SCIENCE_AND_TECHNOLOGY_DEPARTMENTS" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="APPROPRIATIONS_FROM_OTHER_DEPARTMENTS_OF_THE_STATE" name="SCIENCE_ND_TECHNOLOGY_FUNDING" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="MUNICIPAL_ALLOCATION" name="MUNICIPAL_ALLOCATION" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="OTHER_FUNDS" name="OTHER_FUNDS" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="first_party_provide" name="first_party_provide" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="state_science_and_technology_department" name="state_science_and_technology_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="state_other_department" name="state_other_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="area_department" name="area_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="city_department" name="city_department" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="own_fund" name="own_fund" style="text-align: center;border: 0px;" readonly></td>
 
                 </tr>
                 <tr>
-                    <td class="td-text">单位自筹</td>
                     <td class="td-text">银行贷款</td>
+                    <td class="td-text">国外资金</td>
                     <td class="td-text">其他</td>
                 </tr>
                 <tr>
-                    <td><input id="ITS_OWN_FUNDS" name="ITS_OWN_FUNDS" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="BANK_LOAN" name="BANK_LOAN" style="text-align: center;border: 0px;" readonly></td>
-                    <td><input id="other" name="other" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="bank_loan" name="bank_loan" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="offshore_fund" name="offshore_fund" style="text-align: center;border: 0px;" readonly></td>
+                    <td><input id="other_fund" name="other_fund" style="text-align: center;border: 0px;" readonly></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
@@ -574,7 +566,7 @@
         })
     }
     getbasic(item_id);
-    getCompanyInfo(item_id);
+    /*getCompanyInfo(item_id);*/
 
     var advanced = 0;
     var middle = 0;

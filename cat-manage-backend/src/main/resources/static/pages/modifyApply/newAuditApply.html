@@ -104,7 +104,6 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
                         <input type="hidden" name="id" id="item_id">
-                        <input type="hidden" name="apply_id" id="apply_id">
                         <input type="text" name="contract_no" placeholder="请输入">
                     </div>
                 </td>
@@ -1022,7 +1021,7 @@
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='../item/js/updateProject.js'></script>
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
-
+<script type="application/javascript" src="js/updateProjectVice.js"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
         var form = layui.form,
@@ -1048,7 +1047,7 @@
 
         //添加tr
         $(document).on('click', '.addTr', function () {
-            var serial = $(this).closest('thead').nextAll('tbody').children().length + 1;
+            var serial = $(this).parent().parent().parent().parent().next().children().length + 1;
             var name = $(this).attr('name');
             var str = '';
             if (name == 'indicators') {
@@ -1291,7 +1290,7 @@
                     }
                 });
             }
-            $(this).closest('thead').nextAll('tbody').append(str);
+            $(this).parent().parent().parent().parent().next().append(str);
             $(this).closest('thead').nextAll('tbody').children().last().find('button[name=refresh]').trigger('click');//点击新添加的表格中的地点刷新按钮，起到初始化的作用
             //渲染日期
             lay('.date').each(function () {
@@ -1335,21 +1334,21 @@
         //移除tr
         $(document).on('click', 'button[name=delTr]', function () {
             //移除选中的tr
-            var serial = $(this).closest('thead').nextAll('tbody').find("input[type=checkbox]:checked");
+            var serial = $(this).parent().parent().parent().parent().next().find("input[type=checkbox]:checked");
             serial.each(function () {
-                $(this).closest('tr').remove();
+                $(this).parent().parent().remove();
             })
             //重新排序
-            var serial2 = $(this).closest('thead').nextAll('tbody').find("input[type=checkbox]");
+            var serial2 = $(this).parent().parent().parent().parent().next().find("input[type=checkbox]");
             serial2.each(function (i) {
                 $(this).parent().next().text(i + 1);
             })
             //如果全部移除则全选取消选中
             if (serial2.length == 0) {
-                $(this).closest('tr').next().find("input[type=checkbox]").prop("checked", false);
+                $(this).parent().parent().parent().next().find("input[type=checkbox]").prop("checked", false);
             }
             //如果移除的是项目人员
-            if($(this).prev().attr('name')=='personnel'){
+            if ($(this).prev().attr('name') == 'personnel') {
                 //修改实施人员选择
                 var d = [];
                 $('input[name=user_id]').each(function () {
@@ -1371,7 +1370,7 @@
         });
         //全选
         form.on('checkbox(c_all)', function (data) {
-            var elem = $(data.elem).closest('thead').nextAll('tbody').find('input[type=checkbox]');
+            var elem = $(data.elem).parent().parent().parent().next().find('input[type=checkbox]');
             //如果没有选项全选不可选中
             if (elem.length == 0) {
                 $(data.elem).prop("checked", false);
@@ -1383,10 +1382,10 @@
         })
         //有一个未选中全选取消选中
         form.on('checkbox(c_one)', function (data) {
-            var item = $(data.elem).closest('tbody').find('input[type=checkbox]');
+            var item = $(data.elem).parent().parent().parent().find('input[type=checkbox]');
             for (var i = 0; i < item.length; i++) {
                 if (item[i].checked == false) {
-                    $(data.elem).closest('tbody').prevAll('thead').find('input[type=checkbox]').prop("checked", false);
+                    $(data.elem).parent().parent().parent().prev().find('input[type=checkbox]').prop("checked", false);
                     form.render('checkbox');
                     break;
                 }
@@ -1399,7 +1398,7 @@
                 }
             }
             if (all == 0) {
-                $(data.elem).closest('tbody').prevAll('thead').find('input[type=checkbox]').prop("checked", true);
+                $(data.elem).parent().parent().parent().prev().find('input[type=checkbox]').prop("checked", true);
                 form.render('checkbox');
             }
         });
@@ -1443,10 +1442,10 @@
 
     //获取项目数据项目
     var id = getUrlParam("id");
-    $('#item_id').val(id);
     var apply_id = getUrlParam("apply_id");
     $('#apply_id').val(apply_id);
-   getId();
+    $('#item_id').val(id);
+    getId();
 
     function getId() {
         if (apply_id != "" && apply_id != null && apply_id != undefined) {
@@ -1482,10 +1481,12 @@
                 }
             })
         } else {
+
+            $('#item_id').val(id);
             queryInformation(id);
-            queryPersonnel(id);
             queryIndicators(id);
             queryScheduling(id);
+            queryPersonnel(id);
             queryFundBudget(id);
             queryFundSource(id);
             queryContactWay(id);
@@ -1494,13 +1495,6 @@
 
     }
 
-    /*queryInformation(id);
-    queryPersonnel(id);
-    queryIndicators(id);
-    queryScheduling(id);
-    queryFundBudget(id);
-    queryFundSource(id);
-    queryContactWay(id);*/
 
     function submit(status) {
         var information = $('#form1').serializeObject();
@@ -1530,8 +1524,19 @@
             async: false,
             data: JSON.stringify(data),
             success: function (data) {
+                var now = $("#status").val();
+                if (now == 0 && status == 1) {
+                    $.ajax({
+                        type: 'put',
+                        url: domainName + '/project-item/item/basic/modifyApply',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({id: apply_id, status: 1}),
+                        success: function (data) {
+                        }
+                    });
+                }
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    history.back(-1);
+                    parent.location.reload();
                 });
             }
         });
@@ -1560,9 +1565,6 @@
         if (isNaN(age)) {
             age = "";
         }
-        if(nowMajor!=''){
-            nowMajor = analysisLablename(nowMajor);
-        }
         return d.userId + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
     }
 
@@ -1586,5 +1588,9 @@
             $('#total').text('');
         }
     }, 1000);
+
+    function closeThis(index) {
+        layer.close(index);
+    }
 </script>
 </html>

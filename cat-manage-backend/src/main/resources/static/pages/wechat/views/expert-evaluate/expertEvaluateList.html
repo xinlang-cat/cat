@@ -99,11 +99,11 @@
         FastClick.attach(document.body);
     });
 
-    var itemId = 1;//getUrlParam("itemId");
+    var itemId = getUrlParam("itemId");
     
     $(function () {
         var params = {
-            itemId: 1
+            itemId: itemId
         };
         $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
             var str = '';

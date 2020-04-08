@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>执行报告列表</title>
+    <title>执行报告详情</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -880,7 +880,7 @@
         FastClick.attach(document.body);
     });
 
-    var itemId = 1; //getUrlParam("itemId");
+    var itemId = getUrlParam("itemId");
     $("#detail").hide();
     $(function () {
         var params = {
@@ -908,7 +908,6 @@
     });
 
     function detail(id) {
-
         $.get(domainName + "/api-summary/stage/" + id, function (res) {
             for (var key in res) {
                 $("." + key).html(res[key]);
@@ -930,9 +929,8 @@
             setRadio($('input[name=principalCheckEnable]'), res.principalCheckEnable);
             setRadio($('input[name=deptCheckEnable]'), res.deptCheckEnable);
             setRadio($('input[name=projectCompletion]'), res.projectCompletion);
-
+            $('#OTHER_INDICATORS,#TECHNICAL_INDICATORS,#ECONOMIC_INDICATORS,#INDICATORS_OF_TALENT_TEAM_CONS').empty();
             if (res.otherTarget != null) {
-
                 var str = '<div class="weui-imaginary-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
                     '            <div class="weui-cell__bd">\n' +
@@ -1060,6 +1058,7 @@
                     '        </div>';
                 $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
             }
+            emptyElem();
             var stageFundUses = res.stageFundUses;
             var STR_stageFundUses = '';
             for (var i = 0; i < stageFundUses.length; i++) {
@@ -1510,6 +1509,21 @@
         });
         $('.page__bd').hide();
         $("#detail").show();
+        $.each($('.on-off'), function (i, item) {
+            $($(item).next('div')).hide();
+        });
+
+    }
+
+    function emptyElem() {
+        var arr = ['.stageFundUse','.stageAffixFile','.stagePaperCatalogue','.stagePatentCatalogue','.stageScienceAchievementAwardCatalogue','.stageScienceAchievementRegisterCatalogue','.stageTechnologyPactRegisterCatalogue','.stageTarget']
+        $.each(arr,function (i,item) {
+            $.each($(item), function (j, elem) {
+                if (j != 0) {
+                    $(elem).remove();
+                }
+            });
+        });
     }
 
     function closeDetail() {
@@ -1520,6 +1534,7 @@
     //设置单选框
     function setRadio(inputs, data) {
         for (var i = 0; i < inputs.length; i++) {
+            $(inputs[i]).prop('checked', false);
             if ($(inputs[i]).val() == data) {
                 $(inputs[i]).prop('checked', true);
             }

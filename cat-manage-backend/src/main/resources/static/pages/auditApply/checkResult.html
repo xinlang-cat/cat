@@ -45,8 +45,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-
-                        <p name="period" id="period"></p>
+                        <span name="period" id="period"></span>
                     </div>
                 </td>
 
@@ -89,11 +88,12 @@
                         <table class="layui-table">
                             <colgroup>
                                 <col width="10%">
-                                <col width="90%">
+                                <col width="60%">
+                                <col width="30%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="3">
                                     <div class="field">
                                         <span id="target">查定指标</span>
                                     </div>
@@ -102,6 +102,7 @@
                             <tr>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">查定地址</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -197,6 +198,7 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 
 
 <script type="text/javascript">
@@ -239,17 +241,25 @@
                         $.each(data1, function (i, item) {
                             var serial = $("#target").parents('thead').next().children().length + 1;
                             var str = '';
-
+                            var text = getsuperior(item.site);
                             str = '<tr>' +
-                                '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                                '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + item.type + '"></td>' +
                                 '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                                 '<div class="field">' +
-                                '<input type="text"  name="content" value="' + item.content + '" lay-verify="required">' +
+                                '<span type="text"  name="content" lay-verify="required"> ' + item.content + ' </span>' +
                                 '</div>' +
                                 '</td>' +
-                                ' </tr>';
+                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                                '<div class="field" style="position: relative;">' +
+                                '<span type="text" name="site">' + text + '</span>' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
                             $("#target").parents('thead').next().append(str);
                         });
+                        $("input").attr('readonly', true);
+                        $("input").attr("style", "text-align: center;border: 0px;");
+                        $("textarea").attr('readonly', true);
                     })
 
                     $.get(domainName + "/api-f/albums/list", {ids: data[0].accessory}, function (data1) {
