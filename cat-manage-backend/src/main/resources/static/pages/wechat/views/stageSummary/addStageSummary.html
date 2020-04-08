@@ -1372,9 +1372,9 @@
     <div>
         <div class="weui-interval"></div>
         <div class="weui-cell on-off" >
-            <div class="weui-cell__bd weui-cell_primary">
+            <div class="weui-cell__bd weui-cell_primary" style="width: 75%;">
                 <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;margin-top: 4px;display:block;float: left;">
-                <p class="weui-max-title" style="float: left">项目效益及成果情况</p>
+                <p class="weui-max-title" style="float: left">项目效益及成果</p>
             </div>
             <div class="weui-cell__bd">
                 <a href="javascript:;"
@@ -1669,8 +1669,8 @@
     var toDay = new Date();
     $(".createTime").html(formatDate4(toDay));
     $("#createTime").html(formatDate4(toDay));
-    var itemId = 1; // getUrlParam("item_id");
-    var userId = 1; //getUrlParam("user_id");
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
     var projectUser = null;
     $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
         projectUser = res[0];

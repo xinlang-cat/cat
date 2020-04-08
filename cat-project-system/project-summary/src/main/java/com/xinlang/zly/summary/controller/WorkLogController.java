@@ -2,6 +2,7 @@ package com.xinlang.zly.summary.controller;
 
 import com.xinlang.zly.summary.bean.WorkLog;
 import com.xinlang.zly.summary.bean.WorkLogAffiliate;
+import com.xinlang.zly.summary.fegin.ConsumeIndicators;
 import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.IWorkLogAffiliateService;
 import com.xinlang.zly.summary.service.IWorkLogService;
@@ -34,6 +35,8 @@ public class WorkLogController {
     private IWorkLogAffiliateService workLogAffiliateService;
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
+    @Autowired
+    private ConsumeIndicators consumeIndicators;
 
     @PostMapping
     @LogAnnotation(module = "添加工作日志")
@@ -45,6 +48,7 @@ public class WorkLogController {
         workLog.setCreateUserId(appUser.getId().intValue());
         workLog.setCreateUserName(consumeProjectUser.findByUserId(appUser.getId().intValue()).get(0).getName());
         workLogService.save(workLog);
+        consumeIndicators.updateIndicator(workLog.getTargetId(),workLog.getPlan());
         workLog.getWorkLogAffiliates().forEach(item -> {
             if (item.getNowCount() != null && item.getNowCount() != 0) {
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
