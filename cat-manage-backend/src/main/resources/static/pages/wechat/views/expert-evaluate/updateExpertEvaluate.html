@@ -131,11 +131,13 @@
         FastClick.attach(document.body);
     });
 
-    var itemId = 1;//getUrlParam("itemId");
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
 
     $(function () {
         var params = {
-            itemId: 1
+            itemId: itemId,
+            userId : userId
         };
         $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
             var str = '';
@@ -168,6 +170,15 @@
                 }
             }
             setRadio($('input[name=isPass]'), res[0].isPass);
+            if(res[0].isPass != -1){
+                $.each($('input,textarea'),function (i,item) {
+                    $(item).attr('disabled',true);
+                });
+            }else {
+                $.each($('input,textarea'),function (i,item) {
+                    $(item).attr('disabled',false);
+                });
+            }
         });
     }
 

@@ -29,6 +29,7 @@
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../js/stageSummaryFundOnOff.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -92,16 +93,17 @@
                     '    <div class="weui-line"></div>\n' +
                     '    <div class="weui-cell">\n' +
                     '        <div class="weui-cell__bd">\n' +
-                    '            <a href="addWorklog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a">添加日志</a>\n' +
-                    '            <a href="checkWorkLog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a">审核日志</a>\n' +
-                    '            <a href="myWorkLog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a">日志修改</a>\n' +
-                    '            <a href="workLogList.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a">日志查询</a>\n' +
+                    '            <a href="addWorklog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" permission="PARTY_B:principal:html,PARTY_B:member:html">添加日志</a>\n' +
+                    '            <a href="checkWorkLog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" permission="PARTY_B:principal:html">审核日志</a>\n' +
+                    '            <a href="myWorkLog.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" permission="PARTY_B:principal:html,PARTY_B:member:html">日志修改</a>\n' +
+                    '            <a href="workLogList.html?itemId=' + itemId + '&userId=' + userId + '&targetId=' + item['id'] + '" class="stage-summary-a" >日志查询</a>\n' +
                     '        </div>\n' +
                     '    </div>\n' +
                     '    <div class="weui-interval"></div>'
             }
         });
         $('.page__bd').append(str);
+        checkPermission();
     });
 </script>
 </body>
