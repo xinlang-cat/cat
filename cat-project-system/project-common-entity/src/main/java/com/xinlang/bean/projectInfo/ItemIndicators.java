@@ -31,6 +31,7 @@ public class ItemIndicators {
     private Date end_date;
     private String userIds;
     private Integer status;
+    private String plan;
 
     @Transient
     private String period;

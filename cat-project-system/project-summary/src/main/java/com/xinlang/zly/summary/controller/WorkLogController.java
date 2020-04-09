@@ -1,5 +1,6 @@
 package com.xinlang.zly.summary.controller;
 
+import com.xinlang.bean.projectInfo.ItemIndicators;
 import com.xinlang.zly.summary.bean.WorkLog;
 import com.xinlang.zly.summary.bean.WorkLogAffiliate;
 import com.xinlang.zly.summary.fegin.ConsumeIndicators;
@@ -48,7 +49,10 @@ public class WorkLogController {
         workLog.setCreateUserId(appUser.getId().intValue());
         workLog.setCreateUserName(consumeProjectUser.findByUserId(appUser.getId().intValue()).get(0).getName());
         workLogService.save(workLog);
-        consumeIndicators.updateIndicator(workLog.getTargetId(),workLog.getPlan());
+        ItemIndicators itemIndicators = new ItemIndicators();
+        itemIndicators.setId(workLog.getTargetId());
+        itemIndicators.setPlan(workLog.getPlan());
+        consumeIndicators.updateIndicator(itemIndicators);
         workLog.getWorkLogAffiliates().forEach(item -> {
             if (item.getNowCount() != null && item.getNowCount() != 0) {
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
