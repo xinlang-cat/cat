@@ -1,7 +1,6 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.cat_project.item.pojo.ItemFundDetail;
-import com.xinlang.cat_project.item.pojo.ItemPersonnel;
 import com.xinlang.cat_project.item.service.IItemFundDetailService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;

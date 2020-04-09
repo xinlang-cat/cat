@@ -1,9 +1,7 @@
 package com.xinlang.cat_project.item.controller;
 
-import com.xinlang.cat_project.item.pojo.ItemIndicators;
+import com.xinlang.bean.projectInfo.ItemIndicators;
 import com.xinlang.cat_project.item.pojo.ItemIndicatorsVice;
-import com.xinlang.cat_project.item.pojo.ItemInformation;
-import com.xinlang.cat_project.item.pojo.ItemTarget;
 import com.xinlang.cat_project.item.service.IItemIndicatorsService;
 import com.xinlang.cat_project.item.service.IItemIndicatorsViceService;
 import com.xinlang.zly_xyx.log.LogAnnotation;

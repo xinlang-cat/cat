@@ -1,8 +1,7 @@
 package com.xinlang.cat_project.item.service.impl;
 
 import com.xinlang.cat_project.item.mapper.ItemPersonnelMapper;
-import com.xinlang.cat_project.item.pojo.ItemPersonnel;
-import com.xinlang.cat_project.item.pojo.ItemScheduling;
+import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.cat_project.item.service.IItemPersonnelService;
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import lombok.extern.slf4j.Slf4j;

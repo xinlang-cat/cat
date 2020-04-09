@@ -1,5 +1,7 @@
 package com.xinlang.cat_project.item.controller;
 
+import com.xinlang.bean.projectInfo.ItemIndicators;
+import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.cat_project.item.VO.ItemInformationVO;
 import com.xinlang.cat_project.item.pojo.*;
 import com.xinlang.cat_project.item.service.*;
@@ -13,9 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
