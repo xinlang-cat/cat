@@ -253,16 +253,32 @@ function queryContactWay(id) {
                 var text = '';
                 if (this.type == 1) {
                     text = '甲方';
-                } else if (this.type == 1) {
+                } else if (this.type == 2) {
                     text = '乙方';
                 } else {
                     text = '丙方';
                 }
                 var str = '<tr>\n' +
-                    '                                <td class="tdDorder mainTd_1" rowspan="3">\n' +
+                    '                                <td class="tdDorder mainTd_1" rowspan="4">\n' +
                     '                                    <span>' + text + '</span>\n' +
                     '                                    <input type="hidden" name="type" value="' + this.type + '">\n' +
                     '                                </td>\n' +
+                    '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
+                    '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                    '                                    <div class="field">\n' +
+                    '                                        <input type="text"  name="leader" value="' + getUserName(this.leader) + '">\n' +
+                    '                                    </div>\n' +
+                    '                                </td>\n' +
+                    '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                    '                                    <span>负责人电话</span>\n' +
+                    '                                </td>\n' +
+                    '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                    '                                    <div class="field">\n' +
+                    '                                        <input type="text"  name="leader_phone" value="' + this.leader_phone + '">\n' +
+                    '                                    </div>\n' +
+                    '                                </td>\n' +
+                    '                            </tr>\n' +
+                    '                            <tr>\n' +
                     '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
@@ -270,11 +286,11 @@ function queryContactWay(id) {
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                    <span>电话</span>\n' +
+                    '                                    <span>联系人电话</span>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="phone" value="' + this.phone + '">\n' +
+                    '                                        <input type="text"  name="linkman_phone" value="' + this.linkman_phone + '">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -314,4 +330,17 @@ function queryContactWay(id) {
             })
         }
     })
+}
+function getUserName(userId) {
+    var userName = '';
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-user/user-anon/'+userId,
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        success: function (data) {
+            userName = data[0].name;
+        }
+    });
+    return userName;
 }
