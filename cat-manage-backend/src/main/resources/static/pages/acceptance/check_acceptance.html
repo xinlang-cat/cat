@@ -96,7 +96,8 @@
                     <input type="hidden" id="item_id" name="item_id" value="">
                     <input type="hidden" id="status" name="status" value="">
                     <input type="hidden" id="id" name="id" value="">
-
+                    <input type="hidden" id="entrusting_company" name="entrusting_company" value="">
+                    <input type="hidden" id="management_company" name="management_company" value="">
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
                     <td>
@@ -108,11 +109,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="td-text1">承担单位:</td>
+                    <td class="td-text1">项目承担单位（乙方）:</td>
                     <td>
                         <span class="responsible_unit"></span>
                     </td>
-                    <td class="td-text1">受委托管理单位:</td>
+                    <td class="td-text1">委托单位（甲方）:</td>
                     <td>
                         <span id="entrusting_party"></span>
                     </td>
@@ -520,11 +521,12 @@
 
                 <tr id="check_b">
                     <td class="td-text">验收方初审意见:</td>
-                    <td colspan="7"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
+                    <td colspan="6"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
                                                lay-verify="required"
                                                id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
 
                     </td>
+                    <td><button data-method="offset" type="button" style="display: none" data-type="auto" class="layui-btn layui-btn-normal" id="test">匹配专家</button></td>
                 </tr>
                 <tr id="check_c">
                     <td class="td-text">验收方核验结果:</td>
@@ -584,6 +586,7 @@
 <script type="text/javascript" src='../list-layout/js/saveData.js'></script>
 <script type="text/javascript" src="../list-layout/js/acceptance.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../js/matchExpert.js"></script>
 
 <script type="text/javascript">
 
@@ -606,7 +609,16 @@
 
     });
     userType();
-
+    $.matchExpert({
+        elem: '#test',
+        itemId: 103,//getUrlParam("itemId"),
+        // defaultSave: true,//保存到默认数据库
+        defaultSave: false,//自定义保存
+        defaultSaveFun:function (arr) {
+            console.log(arr)
+            // ...
+        }
+    });
     function userType() {
         $.ajax({
             type: 'get',
@@ -642,7 +654,6 @@
             });
         } else {
             var applicantExtension = formdata.applicantExtension;
-            alert(formdata.acceptance_company);
             if (applicantExtension=="是"){
                 formdata.status=1+ parseInt(formdata.status);
             }else {
@@ -727,6 +738,7 @@
                 $("#acceptance_company").removeAttr("readonly");
             } else if (status == 2 && identity == "PARTY_D") {
                 //验收初审
+                document.getElementById('test').style.display = 'block';
                 document.getElementById('new').style.display = 'block';
                 document.getElementById('check_c').style.display = 'none';
                 document.getElementById('check_d').style.display = 'none';

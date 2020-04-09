@@ -16,6 +16,10 @@
                     <td>
                         <form class="form-inline" onsubmit="return false">
                             <div class="form-group">
+                                <input type="hidden" name="acceptance_company" id="acceptance_company">
+                                <input type="hidden" name="entrusting_company" id="entrusting_company">
+                                <input type="hidden" name="management_company" id="management_company">
+
                                 状态：
                                 <select class="form-control input-sm" id="status">
                                     <option value="">全部</option>
@@ -26,7 +30,9 @@
                                     <option value="5">监理终审</option>
                                     <option value="6">已结题</option>
                                 </select>
-                                <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
                             </div>
                         </form>
                     </td>
@@ -80,6 +86,7 @@
         var util = layui.util;
 
         function init() {
+            userType();
             example =
                 $('#dt-table').DataTable({
                     "searching": false,
@@ -93,14 +100,17 @@
                     },
                     "ajax": {
                         "url": domainName + "/api-summary/check-table/page",
-                        "data":function(d){
+                        "data": function (d) {
                             d.status = $("#status").val();
+                            d.acceptance_company = $("#acceptance_company").val();
+                            d.entrusting_company = $("#entrusting_company").val();
+                            d.management_company = $("#management_company").val();
                         },
                         "type": "get",
                         "dataSrc": function (json) {
                             console.log(json)
-                            json.recordsTotal=json.total;
-                            json.recordsFiltered=json.total;
+                            json.recordsTotal = json.total;
+                            json.recordsFiltered = json.total;
                             return json.data;
                         },
                         "error": function (xhr, textStatus, errorThrown) {
@@ -129,10 +139,10 @@
                             "data": "item_id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var item_id =row['itemId'];
+                                var item_id = row['itemId'];
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-item/item/information/list?id=" + item_id, function (res) {
-                                    data =  res[0]['name'];
+                                    data = res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -143,12 +153,12 @@
                             "data": "item_id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var item_id =row['itemId'];
+                                var item_id = row['itemId'];
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-item/item/information/list?id=" + item_id, function (res) {
-                                    var category =  res[0]['type'];
+                                    var category = res[0]['type'];
                                     $.get(domainName + "/api-label/label/tree/" + category, function (res) {
-                                        data =  res[0]['content'];
+                                        data = res[0]['content'];
 
                                     })
                                 })
@@ -162,7 +172,7 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var start = formatDate3(data);
-                                return start ;
+                                return start;
                             }
                         },
                         {
@@ -171,7 +181,7 @@
                             "render": function (data, type, row) {
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-user/user-anon/" + row['createUserId'], function (res) {
-                                    data =  res[0]['name'];
+                                    data = res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -183,18 +193,18 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 $.ajaxSettings.async = false;
-                                if (data==1){
-                                    data="监理初审中";
-                                }else if (data==2){
-                                    data="验收初审中";
-                                }else if (data==3){
-                                    data="专家审核";
-                                }else if (data==4){
-                                    data="验收终审";
-                                }else if (data==5){
-                                    data="监理终审";
-                                }else if (data==6){
-                                    data="结题审核通过";
+                                if (data == 1) {
+                                    data = "监理初审中";
+                                } else if (data == 2) {
+                                    data = "验收初审中";
+                                } else if (data == 3) {
+                                    data = "专家审核";
+                                } else if (data == 4) {
+                                    data = "验收终审";
+                                } else if (data == 5) {
+                                    data = "监理终审";
+                                } else if (data == 6) {
+                                    data = "结题审核通过";
                                 }
                                 $.ajaxSettings.async = true;
                                 return data;
@@ -213,15 +223,15 @@
                                  * 管理员类型为5
                                  * @type {string}
                                  */
-                                var detailsHref ="show_acceptance.html?item_id="+id+"&userType="+2;
+                                var detailsHref = "show_acceptance.html?item_id=" + id + "&userType=" + 2;
                                 var details = "";
-                                var btn = $("<a  href="+detailsHref+" class=\"layui-btn layui-btn-xs\"> 详情</a>");
+                                var btn = $("<a  href=" + detailsHref + " class=\"layui-btn layui-btn-xs\"> 详情</a>");
                                 details = btn.prop("outerHTML");
                                 /*return details;*/
 
 
                                 var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收申请表</i></button>");
-                                btn.attr("onclick", 'check(' +id+')');
+                                btn.attr("onclick", 'check(' + id + ')');
                                 /*btn.attr("onclick", location.href='show_acceptance.html?id='+id+'&userType='+userType);
 */
                                 setMenu = btn.prop("outerHTML");
@@ -250,23 +260,51 @@
                     ],
                 });
         }
+
         init();
     });
-    var h = $(window).height()-100;
-    var w = $(window).width()-200;
+
+    function userType() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                identity = data.identity;
+                if (identity == "PARTY_A") {
+                    //甲方
+                    $("#entrusting_company").val(data.signName);
+                } else if (identity == "PARTY_D") {
+                    //验收方
+                    $("#acceptance_company").val(data.signName);
+                } else if (identity == "PARTY_C") {
+                    //监理方
+                    $("#management_company").val(data.signName);
+                }
+
+
+            }
+        });
+
+    }
+
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
 
     function check(id) {
-        window.location.href="check_acceptance.html?item_id="+id;
+        window.location.href = "check_acceptance.html?item_id=" + id;
     }
+
     function read(id) {
         layer.open({
-            title:"查看查定申请",
+            title: "查看查定申请",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['checkApply.html?id='+id],
-            end : function() {
+            content: ['checkApply.html?id=' + id],
+            end: function () {
 
             }
         });
@@ -275,18 +313,19 @@
 
     function checkResult(id) {
         layer.open({
-            title:"添加",
+            title: "添加",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['checkResult.html?id='+id],
-            end : function() {
+            content: ['checkResult.html?id=' + id],
+            end: function () {
 
             }
         });
     }
-    $("#searchBt").click(function(){
+
+    $("#searchBt").click(function () {
         example.ajax.reload();
     });
 

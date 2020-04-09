@@ -34,6 +34,8 @@ public class CheckTable implements Serializable {
     private String burgLeaderResult;//验收方核验结果
     private String manageDeptResult;//受委托管理单位或项目牵头承担单位最终核验结果
     private String acceptance_company;//验收单位
+    private String entrusting_company;//委托单位（甲方）
+    private String management_company;//受委托管理单位（丙方）
     private Integer status;
     /**
      * 申请状态
