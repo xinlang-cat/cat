@@ -15,3 +15,4 @@ label.weui-label{font-weight: bold;text-align-last: justify;font-size: 16px}
 .weui-cell:before{border: none;}
 .weui-title{font-size: 16px;font-weight: bold;}
 .weui-min-title{font-size: 16px;font-weight: bold;}
+.stage-summary-a{margin-left:20px;color: #2D93CA;float: right;}

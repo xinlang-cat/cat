@@ -1,6 +1,6 @@
 package com.xinlang.cat_project.item.controller;
 
-import com.xinlang.cat_project.item.pojo.ItemPersonnel;
+import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.cat_project.item.pojo.ItemPersonnelVice;
 import com.xinlang.cat_project.item.service.IItemPersonnelService;
 import com.xinlang.cat_project.item.service.IItemPersonnelViceService;

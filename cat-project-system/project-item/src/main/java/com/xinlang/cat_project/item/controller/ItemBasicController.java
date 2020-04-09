@@ -135,6 +135,7 @@ public class ItemBasicController {
     @PostMapping("/modifyApply")
     public ResponseEntity<ItemInformationViceVO> ModifyApply(@RequestBody ItemInformationViceVO itemInformationViceVO) throws ParseException {
         ItemInformationVice information = itemInformationViceVO.getInformation();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
         Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         System.err.println(information);
         Integer apply_id;
@@ -188,7 +189,6 @@ public class ItemBasicController {
         information.setEdit_user_id(userId);
         information.setEdit_date(new Date());
         if (!information.getPeriod().equals("")) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
             Date date = null;
             date = simpleDateFormat.parse(information.getPeriod().substring(0, 7));
             information.setStart_date(date);
@@ -201,6 +201,11 @@ public class ItemBasicController {
         List<ItemIndicatorsVice> indicators = itemInformationViceVO.getIndicators();
         for (ItemIndicatorsVice indicator : indicators) {
             indicator.setItem_id(information.getId());
+            Date date = null;
+            date = simpleDateFormat.parse(indicator.getPeriod().substring(0, 7));
+            indicator.setStart_date(date);
+            date = simpleDateFormat.parse(indicator.getPeriod().substring(10));
+            indicator.setEnd_date(date);
         }
         itemIndicatorsViceService.saveIndicators(indicators);
         List<ItemIndicatorsVice> achievements = itemInformationViceVO.getAchievements();

@@ -160,10 +160,9 @@
     $(function () {
         $("#saveBt").hide();
         var params = {
-            status: 1,
-            itemId: 1,
-            targetId: 369,
-            createUserId: 1
+            itemId: itemId,
+            targetId: targetId,
+            createUserId: userId
         };
         $.get(domainName + "/api-summary/work-log/list", params, function (data) {
             var str = '';
@@ -313,14 +312,21 @@
                             '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
                     }
                 });
-            })
+            });
+            if(data[0].status == 1){
+
+                $.each($('input,textarea'),function (i,item) {
+                    $(item).attr('disabled',true);
+                });
+            }
         });
+
     }
 
     function update(id) {
-        var workLogAffiliates = setObjectProperty('.targetSum');
         var params = $("#form").serializeObject();
         params.id = id;
+        params.status = 0;
         $.ajax({
             url: domainName + "/api-summary/work-log",
             contentType: "application/json; charset=utf-8",

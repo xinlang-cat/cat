@@ -32,10 +32,10 @@ public class ModifyApplyService extends BaseService<modifyApply> implements IMod
     @Override
     public List<modifyApply> findApplyList(Map<String, Object> params, Class<modifyApply> modifyApplyClass) {
         Example example = new Example(modifyApply.class);
-        if (params.get("status") != ""){
-            example.createCriteria().andEqualTo("status",params.get("status"));
+        if (params.get("status") != "" && params.get("item_id") != ""){
+            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("item_id",params.get("item_id"));
         }else {
-            example.createCriteria().andNotEqualTo("status",-1);
+            example.createCriteria().andNotEqualTo("status",-1).andEqualTo("item_id",params.get("item_id"));
         }
         List<modifyApply> list =modifyApplyMapper.selectByExample(example);
         return list;

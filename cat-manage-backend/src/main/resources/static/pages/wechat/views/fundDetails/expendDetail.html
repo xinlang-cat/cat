@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">支出明细</h1>
+</header>
+<div id="content"></div>
+<!--<div class="weui-form-preview">
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">支出金额</label>
+            <span class="weui-form-preview__value" style="color: #666;">20</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">支出日期</label>
+            <span class="weui-form-preview__value" style="color: #666;">2020-03-30</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">开支内容</label>
+            <span class="weui-form-preview__value" style="color: #666;">数据分析设备、储存、分析硬件购置</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">相关图片</label>
+            <div class="weui-form-preview__value" style="color: #666;">
+                <ul class="weui-uploader__files">
+                    <li class="weui-uploader__file"
+                        style="background-image:url(../../weui/images/icon_nav_button.png)"></li>
+                    <li class="weui-uploader__file"
+                        style="background-image:url(../../weui/images/icon_nav_button.png)"></li>
+                    <li class="weui-uploader__file"
+                        style="background-image:url(../../weui/images/icon_nav_button.png)"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="weui-gallery" style="display: none">
+    <span class="weui-gallery__img"></span>
+    <div class="weui-gallery__opr">
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+    var id = getUrlParam("id");
+    queryFundDetail(id);
+
+    function queryFundDetail(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundDetail/list',
+            data: 'budget_id=' + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var str = '';
+                $(data).each(function () {
+                    if (this.status == 2) {
+                        var li = '';
+                        $(this.accessory.split(',')).each(function (i, d) {
+                            if (i != 0) {
+                                li += '<li class="weui-uploader__file" style="background-image:url(' + d + ')"></li>'
+                            }
+                        });
+                        str += '<div class="weui-form-preview">\n' +
+                            '    <div class="weui-form-preview__bd">\n' +
+                            '        <div class="weui-form-preview__item">\n' +
+                            '            <label class="weui-form-preview__label">支出金额</label>\n' +
+                            '            <span class="weui-form-preview__value" style="color: #666;">' + this.money + '万元</span>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-form-preview__item">\n' +
+                            '            <label class="weui-form-preview__label">支出日期</label>\n' +
+                            '            <span class="weui-form-preview__value" style="color: #666;">' + this.date.substring(0, 10) + '</span>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-form-preview__item">\n' +
+                            '            <label class="weui-form-preview__label">开支内容</label>\n' +
+                            '            <span class="weui-form-preview__value" style="color: #666;">' + this.remark + '</span>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-form-preview__item">\n' +
+                            '            <label class="weui-form-preview__label">相关图片</label>\n' +
+                            '            <div class="weui-form-preview__value" style="color: #666;">\n' +
+                            '                <ul class="weui-uploader__files">' + li + '</ul>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '    </div>\n' +
+                            '</div>';
+                    }
+                })
+				$("#content").append(str);
+            }
+        })
+    }
+
+    $(function () {
+        var $uploaderFiles = $(".weui-uploader__files"); //图片列表
+        var $galleryImg = $(".weui-gallery__img"); //相册图片地址
+        var $gallery = $(".weui-gallery");
+        $uploaderFiles.on("click", "li", function () {
+            $galleryImg.attr("style", this.getAttribute("style"));
+            console.log(this)
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function () {
+            $gallery.fadeOut(100);
+        });
+    });
+</script>
+</html>

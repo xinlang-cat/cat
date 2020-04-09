@@ -1,6 +1,6 @@
 package com.xinlang.cat_project.item.mapper;
 
-import com.xinlang.cat_project.item.pojo.ItemIndicators;
+import com.xinlang.bean.projectInfo.ItemIndicators;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;

@@ -1,7 +1,6 @@
 package com.xinlang.cat_project.item.service;
 
-import com.xinlang.cat_project.item.pojo.ItemPersonnel;
-import com.xinlang.cat_project.item.pojo.ItemScheduling;
+import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
 import java.util.List;

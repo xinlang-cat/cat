@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>经费管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <script>
+
+    </script>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">项目经费</h1>
+</header>
+<div class="weui-cells__title page-bg">甲方提供的科技经费支出（万元）</div>
+<div id="content_1"></div>
+<!--<div class="weui-form-preview">
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">科目</label>
+            <span class="weui-form-preview__value" style="color: #666;">设备费</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预算金额</label>
+            <span class="weui-form-preview__value" style="color: #666;">20</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">支出金额</label>
+            <span class="weui-form-preview__value" style="color: #666;">20</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">开支内容</label>
+            <span class="weui-form-preview__value" style="color: #666;">数据分析设备、储存、分析硬件购置</span>
+        </div>
+    </div>
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="expendDetail.html">明细</a>
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="newExpend.html">录入</a>
+    </div>
+</div>
+<br>-->
+<div class="weui-cells__title page-bg">其余经费支出（万元）</div>
+<div id="content_2"></div>
+<!--<div class="weui-form-preview">
+    <div class="weui-form-preview__bd">
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">科目</label>
+            <span class="weui-form-preview__value" style="color: #666;">材料费</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">预算金额</label>
+            <span class="weui-form-preview__value" style="color: #666;">20</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">支出金额</label>
+            <span class="weui-form-preview__value" style="color: #666;">20</span>
+        </div>
+        <div class="weui-form-preview__item">
+            <label class="weui-form-preview__label">开支内容</label>
+            <span class="weui-form-preview__value" style="color: #666;">数据、软件购置</span>
+        </div>
+    </div>
+    <div class="weui-form-preview__ft">
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">明细</a>
+        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:">录入</a>
+    </div>
+</div>
+<br>-->
+<div class="weui-form-preview__ft bg-white">
+    <a class="weui-form-preview__btn weui-form-preview__btn_primary" id="append">新增</a>
+</div>
+<br>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script>
+    var id = getUrlParam("id");
+    queryFundBudget(id);
+
+    function queryFundBudget(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundBudget/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var str = '';
+                var subjectList = [];
+                $(data).each(function () {
+                    if (this.type == 'first_party_provide') {
+                        if (this.money != 0) {
+                            var count = 0;
+                            var expend = queryFundDetail(this.id);
+                            $(expend).each(function () {
+                                if (this.status == 2) {
+                                    count += this.money;
+                                }
+                            });
+                            str += '<div class="weui-form-preview">\n' +
+                                '    <div class="weui-form-preview__bd">\n' +
+                                '        <div class="weui-form-preview__item">\n' +
+                                '            <label class="weui-form-preview__label">科目</label>\n' +
+                                '            <span class="weui-form-preview__value" style="color: #666;">' + this.subject + '</span>\n' +
+                                '        </div>\n' +
+                                '        <div class="weui-form-preview__item">\n' +
+                                '            <label class="weui-form-preview__label">预算金额</label>\n' +
+                                '            <span class="weui-form-preview__value" style="color: #666;">' + this.money + '</span>\n' +
+                                '        </div>\n' +
+                                '        <div class="weui-form-preview__item">\n' +
+                                '            <label class="weui-form-preview__label">支出金额</label>\n' +
+                                '            <span class="weui-form-preview__value" style="color: #666;">' + count + '</span>\n' +
+                                '        </div>\n' +
+                                '        <div class="weui-form-preview__item">\n' +
+                                '            <label class="weui-form-preview__label">开支内容</label>\n' +
+                                '            <span class="weui-form-preview__value" style="color: #666;">' + this.content + '</span>\n' +
+                                '        </div>\n' +
+                                '    </div>\n' +
+                                '    <div class="weui-form-preview__ft">\n' +
+                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="expendDetail.html?id=' + this.id + '">明细</a>\n' +
+                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="newExpend.html?itemId=' + id + '&budgetId='+this.id+'">录入</a>\n' +
+                                '    </div>\n' +
+                                '</div>\n' +
+                                '<br>';
+                        }
+                    } else {
+                        var info = {'title': this.subject, 'value': this.id};
+                        subjectList.push(info);
+                    }
+                });
+                $('#content_1').append(str);
+                console.log(subjectList);
+                $('#append').select({
+                    title: "选择科目",
+                    items: subjectList,
+                    onChange: function (d) {
+                        //console.log(this, d);
+                    },
+                    onClose: function (d) {
+                        var data = d.data;
+                        if (data.titles) {
+                            var count = 0;
+                            var expend = queryFundDetail(data.values);
+                            $(expend).each(function () {
+                                if (this.status == 2) {
+                                    count += this.money;
+                                }
+                            });
+                            var str2 = '<div class="weui-form-preview">\n' +
+                                '    <div class="weui-form-preview__bd">\n' +
+                                '        <div class="weui-form-preview__item">\n' +
+                                '            <label class="weui-form-preview__label">科目</label>\n' +
+                                '            <span class="weui-form-preview__value" style="color: #666;">' + data.titles + '</span>\n' +
+                                '        </div>\n' +
+                                '        <div class="weui-form-preview__item">\n' +
+                                '            <label class="weui-form-preview__label">支出金额</label>\n' +
+                                '            <span class="weui-form-preview__value" style="color: #666;">'+count+'</span>\n' +
+                                '        </div>\n' +
+                                '    </div>\n' +
+                                '    <div class="weui-form-preview__ft">\n' +
+                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="expendDetail.html?id=' + data.values + '">明细</a>\n' +
+                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="newExpend.html?itemId=' + id + '&budgetId='+data.values+'">录入</a>\n' +
+                                '    </div>\n' +
+                                '</div>\n' +
+                                '<br>';
+                            $('#content_2').append(str2);
+                            $(subjectList).each(function (i, d) {
+                                if (d.value == data.values) {
+                                    subjectList.splice(i, 1);
+                                }
+                            });
+                            $('#append').select("update", {items: subjectList});
+                        }
+                    },
+                });
+            }
+        })
+    }
+
+    /*明细*/
+    function queryFundDetail(id) {
+        var Detail = {};
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundDetail/list',
+            data: 'budget_id=' + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                Detail = data;
+            }
+        });
+        return Detail;
+    }
+</script>
+</html>

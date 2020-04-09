@@ -1,5 +1,7 @@
 package com.xinlang.cat_project.item.VO;
 
+import com.xinlang.bean.projectInfo.ItemIndicators;
+import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.cat_project.item.pojo.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
