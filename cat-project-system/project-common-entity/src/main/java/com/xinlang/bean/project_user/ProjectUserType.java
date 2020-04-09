@@ -14,7 +14,8 @@ public enum ProjectUserType {
     /**
      * 乙方
      */
-    PARTY_B,
+    PARTY_B_PRINCIPAL,//项目负责人
+    PARTY_B_MEMBER,//项目成员
     /**
      * 监理
      */

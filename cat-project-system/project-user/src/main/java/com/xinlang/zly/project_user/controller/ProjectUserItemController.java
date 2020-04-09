@@ -1,13 +1,16 @@
 package com.xinlang.zly.project_user.controller;
 
+import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.bean.project_user.ProjectUserDomain;
 import com.xinlang.bean.project_user.ProjectUserItem;
 import com.xinlang.bean.project_user.ProjectUserType;
+import com.xinlang.zly.project_user.fegin.ConsumeItemPersonnel;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserItemService;
 import com.xinlang.zly.project_user.service.IProjectUserService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.constants.UserType;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +32,8 @@ public class ProjectUserItemController {
     private IProjectUserDomainService projectUserDomainService;
     @Autowired
     private IProjectUserService projectUserService;
+    @Autowired
+    private ConsumeItemPersonnel consumeItemPersonnel;
 
     @PostMapping("/item/list")
     @ApiOperation(value = "params:List<ProjectUserItem>")
@@ -40,11 +45,17 @@ public class ProjectUserItemController {
             map.put("itemId", projectUserItem.getItemId());
             map.put("userId", projectUserItem.getUserId());
             List<ProjectUserItem> list = projectUserItemService.findListByParams(map, ProjectUserItem.class);
-            if (!list.isEmpty()) {
+            if (list.isEmpty()) {
                 projectUserItem.setCreateTime(date);
                 projectUserItemService.save(projectUserItem);
+                ItemPersonnel itemPersonnel = new ItemPersonnel();
+                itemPersonnel.setItem_id(projectUserItem.getItemId());
+                itemPersonnel.setUser_id(projectUserItem.getUserId());
+                itemPersonnel.setUser_type("EXPERT");
+                consumeItemPersonnel.savePersonnels(itemPersonnel);
             }
         }
+
         return projectUserItems;
     }
 

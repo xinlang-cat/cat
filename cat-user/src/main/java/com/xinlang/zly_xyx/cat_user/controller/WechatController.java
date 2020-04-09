@@ -53,7 +53,7 @@ public class WechatController {
         }
 
 
-        String toUrl = "192.168.5.48/api-b/pages/wechat/index.html";
+        String toUrl = "192.168.5.64/api-b/pages/wechat/index.html";
 
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
 

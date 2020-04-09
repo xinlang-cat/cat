@@ -23,6 +23,7 @@ public class ItemPersonnel {
     private String name;
     private String sex;
     private Integer age;
+    private String user_type;
     private String professional_title; // 职称
     private String specialty;        // 从事专业
     private String organization;     // 工作单位
