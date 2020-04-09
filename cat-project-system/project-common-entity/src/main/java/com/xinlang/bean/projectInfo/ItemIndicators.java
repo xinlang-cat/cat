@@ -1,4 +1,4 @@
-package com.xinlang.cat_project.item.pojo;
+package com.xinlang.bean.projectInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +31,7 @@ public class ItemIndicators {
     private Date end_date;
     private String userIds;
     private Integer status;
+    private String plan;
 
     @Transient
     private String period;

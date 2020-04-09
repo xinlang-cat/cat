@@ -1,6 +1,5 @@
 package com.xinlang.cat_project.item.service;
 
-import com.xinlang.cat_project.item.pojo.ItemPersonnel;
 import com.xinlang.cat_project.item.pojo.ItemPersonnelVice;
 import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 
