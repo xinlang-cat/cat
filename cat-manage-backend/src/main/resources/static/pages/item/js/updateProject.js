@@ -10,9 +10,9 @@ function queryInformation(id) {
             $('input[name=contract_no]').val(d.contract_no);
             $('select[name=type]').val(d.type);
             $('input[name=name]').val(d.name);
-            $('input[name=entrusting_party]').val(d.entrusting_party);
+            $('select[name=entrusting_party]').val(d.entrusting_party);
             $('input[name=responsible_unit]').val(d.responsible_unit);
-            $('input[name=management_unit]').val(d.management_unit);
+            $('select[name=management_unit]').val(d.management_unit);
             $('input[name=document_number]').val(d.document_number);
             $('textarea[name=overall_objective]').val(d.overall_objective);
             $('textarea[name=research_contents]').val(d.research_contents);
@@ -49,15 +49,15 @@ function queryIndicators(id) {
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input class="date" type="text" placeholder="请输入" name="period" value="'+this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7)+'" lay-verify="required">' +
+                        '<input class="date" type="text" placeholder="请输入" name="period" value="' + this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7) + '" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field" style="position: relative;">' +
                         '<select class="site" lay-verify="required" lay-filter="site">' +
-                        '<option value="'+this.site+'">'+text+'</option>\n' +
+                        '<option value="' + this.site + '">' + text + '</option>\n' +
                         '</select>\n' +
-                        '<input type="hidden" name="site" value="'+this.site+'">'+
+                        '<input type="hidden" name="site" value="' + this.site + '">' +
                         '<button type="button" class="layui-btn layui-btn-xs" name="refresh"\n' +
                         ' style="position: absolute;right: 0;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
                         '<i class="layui-icon">&#xe669;</i>\n' +
@@ -175,7 +175,7 @@ function queryPersonnel(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/personnel/list',
-        data: "item_id=" + id,
+        data: "item_id=" + id + "&user_type=PARTY_B_MEMBER",
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
@@ -186,7 +186,7 @@ function queryPersonnel(id) {
                     '                            <td class="tdDorder mainTd_1">\n' +
                     '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
                     '                            </td>\n' +
-                    '                            <td class="mainTd_1 tdDorder">'+serial+'</td>\n' +
+                    '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
                     '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + this.user_id + '">\n' +
@@ -234,7 +234,7 @@ function queryFundBudget(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/fundBudget/list',
-        data: "item_id=" + id+'&type=first_party_provide',
+        data: "item_id=" + id + '&type=first_party_provide',
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
@@ -302,18 +302,40 @@ function queryContactWay(id) {
         success: function (data) {
             $(data).each(function () {
                 var text = '';
+                var options = '';
                 if (this.type == 1) {
                     text = '甲方';
-                } else if (this.type == 1) {
+                    options = getCompanyUsers($('#entrusting_party').val(), this.leader);
+                } else if (this.type == 2) {
                     text = '乙方';
+                    options = getCompanyUsers($('#responsible_unit').val(), this.leader);
                 } else {
                     text = '丙方';
+                    options = getCompanyUsers($('#management_unit').val(), this.leader);
                 }
                 var str = '<tr>\n' +
-                    '                                <td class="tdDorder mainTd_1" rowspan="3">\n' +
+                    '                                <td class="tdDorder mainTd_1" rowspan="4">\n' +
                     '                                    <span>' + text + '</span>\n' +
                     '                                    <input type="hidden" name="type" value="' + this.type + '">\n' +
                     '                                </td>\n' +
+                    '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
+                    '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                    '                                    <div class="field">\n' +
+                    '                                        <select name="leader" id="leader_1">\n' +
+                    '                                            <option value=""></option>\n' + options +
+                    '                                        </select>\n' +
+                    '                                    </div>\n' +
+                    '                                </td>\n' +
+                    '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                    '                                    <span>负责人电话</span>\n' +
+                    '                                </td>\n' +
+                    '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                    '                                    <div class="field">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="leader_phone" value="' + this.leader_phone + '">\n' +
+                    '                                    </div>\n' +
+                    '                                </td>\n' +
+                    '                            </tr>\n' +
+                    '                            <tr>\n' +
                     '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
@@ -321,11 +343,11 @@ function queryContactWay(id) {
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                    '                                    <span>电话</span>\n' +
+                    '                                    <span>联系人电话</span>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="phone" value="' + this.phone + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="linkman_phone" value="' + this.linkman_phone + '">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -365,4 +387,25 @@ function queryContactWay(id) {
             })
         }
     })
+}
+
+function getCompanyUsers(deptName, selected) {
+    var options = '';
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-user/users',
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        data: 'deptName=' + deptName,
+        success: function (d) {
+            $(d.data).each(function () {
+                if (this.userId == selected) {
+                    options += '<option value="' + this.userId + '" selected = "selected">' + this.name + '</option>';
+                } else {
+                    options += '<option value="' + this.userId + '">' + this.name + '</option>';
+                }
+            });
+        }
+    });
+    return options;
 }

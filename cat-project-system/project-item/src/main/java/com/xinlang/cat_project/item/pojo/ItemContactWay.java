@@ -19,8 +19,10 @@ public class ItemContactWay {
     @KeySql(useGeneratedKeys = true)
     private Integer id;
     private Integer item_id;
+    private Integer leader;
+    private String leader_phone;
     private String linkman;
-    private String phone;
+    private String linkman_phone;
     private String fax;
     private String postcode;
     private String site;
