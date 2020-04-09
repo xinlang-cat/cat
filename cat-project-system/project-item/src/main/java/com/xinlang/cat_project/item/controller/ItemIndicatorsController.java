@@ -65,7 +65,6 @@ public class ItemIndicatorsController {
 
     @ApiOperation(value = "修改指标")
     @LogAnnotation(module = "修改指标")
-    @PreAuthorize("hasAnyAuthority('project:item:update')")
     @PutMapping
     public ResponseEntity<Void> updateIndicators(@RequestBody ItemIndicators indicator){
         itemIndicatorsService.update(indicator);

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient("project-item")
+@FeignClient("cat-project-item")
 public interface ConsumeIndicators {
     @PutMapping("/item/indicators")
     void updateIndicator(@RequestBody ItemIndicators indicator);

@@ -76,13 +76,13 @@
 
     $.matchExpert({
         elem: '#test',
-        itemId: 1,//getUrlParam("itemId"),
-        // defaultSave: true,//保存到默认数据库
-        defaultSave: false,//自定义保存
-        defaultSaveFun:function (arr) {
-        console.log(arr)
-         // ...
-        }
+        itemId: getUrlParam("itemId"),
+        defaultSave: true,//保存到默认数据库
+        // defaultSave: false,//自定义保存
+        // defaultSaveFun:function (arr) {
+        // console.log(arr)
+        //  // ...
+        // }
     });
 
     allWorkLog();

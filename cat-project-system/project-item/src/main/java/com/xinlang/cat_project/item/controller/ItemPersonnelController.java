@@ -26,7 +26,6 @@ public class ItemPersonnelController {
 
     @ApiOperation(value = "添加项目人员")
     @LogAnnotation(module = "添加项目人员")
-    @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping
     public ResponseEntity<ItemPersonnel> save(@RequestBody ItemPersonnel itemPersonnel) {
         itemPersonnelService.save(itemPersonnel);
@@ -35,7 +34,6 @@ public class ItemPersonnelController {
 
     @ApiOperation(value = "添加多条项目人员")
     @LogAnnotation(module = "添加多条项目人员")
-    @PreAuthorize("hasAnyAuthority('project:item:save')")
     @PostMapping("/multi")
     public ResponseEntity<List<ItemPersonnel>> savePersonnels(@RequestBody List<ItemPersonnel> itemPersonnels) {
         itemPersonnelService.savePersonnels(itemPersonnels);

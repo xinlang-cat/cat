@@ -41,22 +41,21 @@ public class ProjectUserItemController {
     public List<ProjectUserItem> saveList(@RequestBody List<ProjectUserItem> projectUserItems) {
         Date date = new Date();
         Map<String, Object> map = new HashMap<>();
-        List<ItemPersonnel> personnels = new ArrayList<>();
         for (ProjectUserItem projectUserItem : projectUserItems) {
             map.put("itemId", projectUserItem.getItemId());
             map.put("userId", projectUserItem.getUserId());
             List<ProjectUserItem> list = projectUserItemService.findListByParams(map, ProjectUserItem.class);
-            if (!list.isEmpty()) {
+            if (list.isEmpty()) {
                 projectUserItem.setCreateTime(date);
                 projectUserItemService.save(projectUserItem);
                 ItemPersonnel itemPersonnel = new ItemPersonnel();
                 itemPersonnel.setItem_id(projectUserItem.getItemId());
                 itemPersonnel.setUser_id(projectUserItem.getUserId());
                 itemPersonnel.setUser_type("EXPERT");
-                personnels.add(itemPersonnel);
+                consumeItemPersonnel.savePersonnels(itemPersonnel);
             }
         }
-        consumeItemPersonnel.savePersonnels(personnels);
+
         return projectUserItems;
     }
 

@@ -56,7 +56,8 @@ public class WorkLogController {
         workLog.getWorkLogAffiliates().forEach(item -> {
             if (item.getNowCount() != null && item.getNowCount() != 0) {
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
-                item.setPlan(numberFormat.format(item.getOriginalCount() / item.getNowCount()) + "%");
+                numberFormat.setMaximumFractionDigits(-1);
+                item.setPlan(numberFormat.format((float)item.getNowCount()/ (float)item.getOriginalCount()*100) + "%");
             }
             item.setWorkLogId(workLog.getId());
             item.setItemId(workLog.getItemId());
