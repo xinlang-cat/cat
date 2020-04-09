@@ -127,7 +127,7 @@ function queryPersonnel(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/personnel/list',
-        data: "item_id=" + id,
+        data: "item_id=" + id + "&user_type=PARTY_B_MEMBER",
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
