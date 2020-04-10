@@ -1,22 +1,27 @@
 package com.xinlang.zly.summary.controller;
 
+import com.xinlang.bean.project_user.ProjectUserItem;
+import com.xinlang.zly.summary.bean.CheckTable;
 import com.xinlang.zly.summary.bean.ExpertEvaluate;
+import com.xinlang.zly.summary.fegin.ConsumeItemUser;
+import com.xinlang.zly.summary.service.ICheckTableService;
 import com.xinlang.zly.summary.service.IExpertEvaluateService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/expert-evaluate")
 public class ExpertEvaluateController {
     @Autowired
     private IExpertEvaluateService expertEvaluateService;
+    @Autowired
+    private ConsumeItemUser consumeItemUser;
+    @Autowired
+    private ICheckTableService checkTableService;
 
     @PostMapping
     @LogAnnotation(module = "添加专家评估报告")
@@ -24,6 +29,17 @@ public class ExpertEvaluateController {
     public ExpertEvaluate save(@RequestBody ExpertEvaluate expertEvaluate) {
         expertEvaluate.setCreateTime(new Date());
         expertEvaluateService.save(expertEvaluate);
+        Map<String,Object> map = new HashMap<>();
+        map.put("itemId",expertEvaluate.getItemId());
+        List<ExpertEvaluate> expertEvaluates = expertEvaluateService.findListByParams(map,ExpertEvaluate.class);
+        List<ProjectUserItem> projectUserItems = consumeItemUser.findExpertByItemId(expertEvaluate.getItemId());
+        if(expertEvaluates.size() == projectUserItems.size()){
+            List<CheckTable> checkTables = checkTableService.findListByParams(map,CheckTable.class);
+            CheckTable checkTable = new CheckTable();
+            checkTable.setId(checkTables.get(0).getId());
+            checkTable.setStatus(5);
+            checkTableService.update(checkTable);
+        }
         return expertEvaluate;
     }
 
