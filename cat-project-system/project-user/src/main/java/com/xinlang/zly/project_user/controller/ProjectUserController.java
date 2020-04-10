@@ -3,6 +3,8 @@ package com.xinlang.zly.project_user.controller;
 import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.bean.project_user.ProjectUserDomain;
 import com.xinlang.bean.project_user.ProjectUserSkill;
+import com.xinlang.bean.project_user.ProjectUserType;
+import com.xinlang.zly.project_user.fegin.ConsumeCatUser;
 import com.xinlang.zly.project_user.mapper.ProjectUserDomainMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
@@ -33,12 +35,33 @@ public class ProjectUserController {
     private IProjectUserSkillService projectUserSkillService;
     @Autowired
     private IProjectUserDomainService projectUserDomainService;
+    @Autowired
+    private ConsumeCatUser consumeCatUser;
 
     @ApiOperation(value = "添加用户信息,全参不包含id")
     @LogAnnotation(module = "添加用户信息")
     @PostMapping("/user")
     public ProjectUser save(@RequestBody ProjectUser projectUser){
         projectUserService.save(projectUser);
+        Long userId = projectUser.getUserId().longValue();
+        if(ProjectUserType.EXPERT.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,4L);
+        }
+        if(ProjectUserType.PARTY_A.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,5L);
+        }
+        if(ProjectUserType.PARTY_B_MEMBER.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,7L);
+        }
+        if(ProjectUserType.PARTY_B_PRINCIPAL.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,6L);
+        }
+        if(ProjectUserType.PARTY_C.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,8L);
+        }
+        if(ProjectUserType.PARTY_D.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,9L);
+        }
         return projectUser;
     }
 

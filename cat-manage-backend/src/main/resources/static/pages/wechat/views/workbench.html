@@ -100,7 +100,7 @@
     <ul class="collapse">
         <li>
             <div class="weui-flex js-category">
-                <div class="weui-flex__item">合同管理</div>
+                <div class="weui-flex__item">项目信息</div>
                 <i class="icon icon-74"></i>
             </div>
             <div class="page-category js-categoryInner">
@@ -108,30 +108,96 @@
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="javascript:;" class="grid"
-                           onclick="javascript:top.location.href='myproject1/newproject.html'">
+                           onclick="javascript:top.location.href='myProject/projectInfo.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--hetongqigao f26"></i>
-                                <!-- <img src="../weui/images/icon_nav_button.png" alt=""> -->
                             </div>
                             <p class="weui-grid__label">
-                                合同起草
+                                基本信息
                             </p>
                         </a>
-                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='projectList.html'">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='myProject/projectIndicators.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhehetongshu f26"></i>
-                                <!-- <img src="../weui/images/icon_nav_cell.png" alt=""> -->
                             </div>
                             <p class="weui-grid__label">
-                                审核合同书
+                                项目指标
                             </p>
                         </a>
-                        <a href="javascript:;" class="grid">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='myProject/projectSchedul.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--suoyouhetongchaxun f26"></i>
                             </div>
                             <p class="weui-grid__label">
-                                所有合同查询
+                                课题进度
+                            </p>
+                        </a>
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='myProject/projectFund.html'">
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon--suoyouhetongchaxun f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                项目经费
+                            </p>
+                        </a>
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='myProject/projectPersonnel.html'">
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon--suoyouhetongchaxun f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                项目人员
+                            </p>
+                        </a>
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='myProject/projectContactWay.html'">
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon--suoyouhetongchaxun f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                联系信息
+                            </p>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item">经费使用</div>
+                <i class="icon icon-74"></i>
+            </div>
+            <div class="page-category js-categoryInner">
+
+                <div class="weui-cells page-category-content">
+                    <div class="weui-grids grids-small">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='fundDetails/fundExpend.html'">
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon--hetongqigao f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                经费支出
+                            </p>
+                        </a>
+                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='fundDetails/fundCheck.html'">
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon--shenhehetongshu f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                经费审核
+                            </p>
+                        </a>
+                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='fundDetails/myExpend.html'">
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon--suoyouhetongchaxun f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                我的录入
                             </p>
                         </a>
                     </div>
@@ -243,7 +309,7 @@
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="#" class="grid addExpertEvaluate"  permission="EXPERT:html"
+                        <a href="#" class="grid addExpertEvaluate" permission="EXPERT:html"
                            onclick="javascript:top.location.href='expert-evaluate/addExpertEvaluate.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--xiangmuzhihangqingkuanggenzong f26"></i>
@@ -303,16 +369,17 @@
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="#" class="grid" onclick="javascript:top.location.href='itemList.html'">
+                        <a href="#" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
+                           onclick="javascript:top.location.href='workSummary/addWorkSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhihangbaogaoqicao f26"></i>
                             </div>
                             <p class="weui-grid__label">
-                                工作总结起草
+                                工作总结
                             </p>
                         </a>
                         <a href="#" class="grid"
-                           onclick="javascript:top.location.href='workSummary/workSummaryList.html'">
+                           onclick="javascript:top.location.href='workSummary/workSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhezhihangbaogao f26"></i>
                             </div>
@@ -320,16 +387,17 @@
                                 查看工作总结
                             </p>
                         </a>
-                        <a href="#" class="grid" onclick="javascript:top.location.href='skillSummary/itemList.html'">
+                        <a href="#" class="grid"
+                           onclick="javascript:top.location.href='skillSummary/addSkillSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhihangbaogaochaxun f26"></i>
                             </div>
                             <p class="weui-grid__label">
-                                技术总结起草
+                                技术总结
                             </p>
                         </a>
-                        <a href="#" class="grid"
-                           onclick="javascript:top.location.href='skillSummary/skillSummaryList.html'">
+                        <a href="#" class="grid" permission="PARTY_D:html,PARTY_C:html,PARTY_A:html,EXPERT:html"
+                           onclick="javascript:top.location.href='skillSummary/skillSummary.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhezhihangbaogao f26"></i>
                             </div>
@@ -407,7 +475,8 @@
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="#" class="grid" onclick="javascript:top.location.href='auditfyApply/itemList.html'">
+                        <a href="#" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
+                           onclick="javascript:top.location.href='auditfyApply/addAuditfyApply.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--chadingshenqingqicao f26"></i>
                             </div>
@@ -416,7 +485,7 @@
                             </p>
                         </a>
                         <a href="#" class="grid"
-                           onclick="javascript:top.location.href='auditfyApply/auditfyApplyList.html'">
+                           onclick="javascript:top.location.href='auditfyApply/checkAuditfyApplyList.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhechadingshenqingshu f26"></i>
                             </div>
@@ -425,7 +494,7 @@
                             </p>
                         </a>
                         <a href="#" class="grid"
-                           onclick="javascript:top.location.href='auditfyApply/auditfyApplyList.html'">
+                           onclick="javascript:top.location.href='auditfyApply/reportAuditfyApplyList.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon&#45;&#45;suoyouchadingshenqingshu f26"></i>
                             </div>
@@ -433,15 +502,15 @@
                                 查定报告起草
                             </p>
                         </a>
-                        <a href="#" class="grid"
+                       <!-- <a href="#" class="grid"
                            onclick="javascript:top.location.href='auditfyApply/auditfyApplyList.html'">
                             <div class="weui-grid__icon">
-                                <i class="iconfont icon--suoyouchadingshenqingshu f26"></i>
+                                <i class="iconfont icon&#45;&#45;suoyouchadingshenqingshu f26"></i>
                             </div>
                             <p class="weui-grid__label">
                                 所有查定申请查询
                             </p>
-                        </a>
+                        </a>-->
                     </div>
                 </div>
             </div>
@@ -455,7 +524,8 @@
 
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
-                        <a href="javascript:;" class="grid">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='acceptance/acceptance.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--Yanshoushenqingqicao f26"></i>
                             </div>
@@ -463,7 +533,8 @@
                                 验收申请起草
                             </p>
                         </a>
-                        <a href="javascript:;" class="grid">
+                        <a href="javascript:;" class="grid"
+                           onclick="javascript:top.location.href='acceptance/checkAcceptance.html'">
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenheyanshoushenqing f26"></i>
                             </div>
@@ -471,30 +542,18 @@
                                 审核验收申请
                             </p>
                         </a>
-                        <a href="javascript:;" class="grid">
-                            <div class="weui-grid__icon">
-                                <i class="iconfont icon--shenheyanshoushu f26"></i>
-                            </div>
-                            <p class="weui-grid__label">
-                                审核验收书
-                            </p>
-                        </a>
-                        <a href="javascript:;" class="grid">
-                            <div class="weui-grid__icon">
-                                <i class="iconfont icon--suoyouyanshoushenqingshu f26"></i>
-                            </div>
-                            <p class="weui-grid__label">
-                                所有验收申请书查询
-                            </p>
-                        </a>
-                        <a href="javascript:;" class="grid">
-                            <div class="weui-grid__icon">
-                                <i class="iconfont icon--suoyouyanshouzhengshu f26"></i>
-                            </div>
-                            <p class="weui-grid__label">
-                                所有验收证书查询
-                            </p>
-                        </a>
+
+                       <!-- <a href="javascript:;" class="grid">
+                            <a href="javascript:;" class="grid"
+                               onclick="javascript:top.location.href='acceptance/acceptanceList.html'">
+                                <div class="weui-grid__icon">
+                                    <i class="iconfont icon&#45;&#45;suoyouyanshoushenqingshu f26"></i>
+                                </div>
+                                <p class="weui-grid__label">
+                                    所有验收申请书查询
+                                </p>
+                            </a>
+                        </a>-->
                     </div>
                 </div>
             </div>

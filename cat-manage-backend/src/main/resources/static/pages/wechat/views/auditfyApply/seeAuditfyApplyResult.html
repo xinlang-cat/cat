@@ -211,6 +211,7 @@
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/chooseArea.js"></script>
+<script type="text/javascript" src="auditApply.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -256,12 +257,12 @@
                         var str = '<article class="weui-article">';
                         var count = 1;
                         $.each(data1, function (i, item) {
-
+                            var text = getsuperior(item.site);
                             str += ' <h2 class="title">' + count + '</h2>\n' +
                                 '   <section>\n' +
                                 '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
                                 '      	 <p>指标内容：' + item.content + '</p>\n' +
-                                '      	<p>指标地址：广西壮族自治区南宁市西乡塘区振华路</p>\n' +
+                                '      	<p>指标地址：' + text + '</p>\n' +
                                 '   </section>\n' +
                                 '<div class="weui-line"></div>';
                             count++;

@@ -67,6 +67,7 @@ public class auditApply implements Serializable {
     private Integer status;
 
     private String check_unit;     //审核单位
+    private String manage_unit;     //管理单位
 
     @Transient
     private String period;

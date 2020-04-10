@@ -22,6 +22,7 @@
 
             <input class="form-control" id="target_id" name="target_id" type="hidden">
             <input class="form-control" id="check_unit" name="check_unit" type="hidden">
+            <input class="form-control" id="manage_unit" name="manage_unit" type="hidden">
 
             <div class="form-group" style="margin-top: 40px">
                 <label class="col-md-2 control-label">建议查定时间</label>
@@ -226,8 +227,8 @@
         $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
             var name = res[0]['management_unit'];
             $("#check_unit").val(name);
+            $("#manage_unit").val(res[0]['entrusting_party']);
         })
-
     }
 
     getItemName(itemId);

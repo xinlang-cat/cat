@@ -179,13 +179,15 @@
                             "render": function (data, type, row) {
                                 var id = row['id'];
                                 var href = "updateProject.html?id=" + id;
-                                var edit = buttonEdit(href, "back:user:update", pers);
-                                var del = buttonDel(id, "back:permission:delete", pers);
+                                var href_2 = "projectInfo.html?id=" + id;
+                                var edit = buttonEdit(href, "project:item:update", pers);
+                                var del = buttonDel(id, "project:item:delete", pers);
+                                var examine =buttonBasic(href_2, "查看", "", pers);
 
                                 if(data==0){
                                     return edit+del;
                                 }else if(data==1){
-                                    return edit;
+                                    return examine;
                                 }
                             }
                         },

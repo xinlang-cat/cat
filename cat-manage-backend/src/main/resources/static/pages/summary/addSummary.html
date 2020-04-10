@@ -504,11 +504,11 @@
         $(obj).attr("disabled", false);
     }
 
-    initData();
+
     function toWork() {
         location.href='addWorkSummary.html?itemId='+itemId;
     }
-
+    initData();
     function initData() {
         var data = {
             itemId: itemId,

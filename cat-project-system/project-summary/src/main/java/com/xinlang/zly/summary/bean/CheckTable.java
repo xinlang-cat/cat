@@ -31,15 +31,20 @@ public class CheckTable implements Serializable {
     private String manageDeptOpinion;//受委托管理单位或项目牵头承担单位意见
     private String burgLeaderOpinion;//自治区科技同项目
     private String burgFinanceOpinion;//自治区科技厅条件财务处意见
-
+    private String burgLeaderResult;//验收方核验结果
+    private String manageDeptResult;//受委托管理单位或项目牵头承担单位最终核验结果
+    private String acceptance_company;//验收单位
+    private String entrusting_company;//委托单位（甲方）
+    private String management_company;//受委托管理单位（丙方）
     private Integer status;
     /**
      * 申请状态
      * 0-待提交
      * 1-待监理审核
-     * 2-待甲方审核
-     * 3-审核通过
-     * 4-审核未通过
+     * 2-待验收方审核
+     * 3-专家审核
+     * 4-验收方终审
+     * 5-监理终审
      */
     private Integer the_company_number;
     private Integer the_imported_technology;

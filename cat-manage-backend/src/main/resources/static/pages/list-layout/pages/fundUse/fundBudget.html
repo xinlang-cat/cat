@@ -245,9 +245,12 @@
                             }
                         });
                         var buttonCheck = '';
-                        if ($.inArray('html:principal:check', pers) != -1 && boolean) {
-                            alert(boolean)
+                        var buttondetail = '';
+                        if ($.inArray('principal:check', pers) != -1 && boolean) {
                             buttonCheck = '<button type="button" class="layui-btn layui-btn-xs check" name="check" id="' + this.id + '">审核</button>';
+                        }
+                        if (count>0) {
+                            buttondetail = '<button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>';
                         }
                         if (this.type == 'first_party_provide') {
                             var str = '<tr>\n' +
@@ -273,8 +276,7 @@
                                 '                                </td>\n' +
                                 '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                                 '                                    <div class="field">\n' +
-                                '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
-                                '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>' + buttonCheck + '\n' +
+                                '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>' +buttondetail+buttonCheck + '\n' +
                                 '                                    </div>\n' +
                                 '                                </td>\n' +
                                 '                            </tr>';
@@ -293,8 +295,7 @@
                                 '                                </td>\n' +
                                 '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                                 '                                    <div class="field">\n' +
-                                '                                        <button type="button" class="layui-btn layui-btn-xs detail" name="detail" id="' + this.id + '">明细</button>\n' +
-                                '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>' + buttonCheck + '\n' +
+                                '                                        <button type="button" class="layui-btn layui-btn-xs edit" name="edit" id="' + this.id + '">录入</button>' +buttondetail+buttonCheck + '\n' +
                                 '                                    </div>\n' +
                                 '                                </td>\n' +
                                 '                            </tr>';

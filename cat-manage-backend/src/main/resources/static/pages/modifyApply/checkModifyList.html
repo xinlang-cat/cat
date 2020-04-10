@@ -17,8 +17,8 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    项目名称(支持模糊搜索)：
-                                    <input id="item_name" type="text" class="form-control" placeholder="项目名">
+                                   <!-- 项目名称(支持模糊搜索)：
+                                    <input id="item_name" type="text" class="form-control" placeholder="项目名">-->
                                     更改内容：
                                     状态：
                                     <select class="form-control input-sm" id="status">
@@ -71,12 +71,14 @@
 <script type="text/javascript">
 
     var pers = checkPermission();
-
+    var identity;
+    var check_unit;
+    var manage_dept;
     var example;
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
-
+        getCompanryCode();
         function init() {
             example =
                 $('#dt-table').DataTable({
@@ -94,6 +96,8 @@
                         "data":function(d){
                             d.status = $('#status').val();
                             d.item_name = $('#item_name').val();
+                            d.check_unit = check_unit;
+                            d.manage_unit = manage_dept;
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -184,7 +188,7 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',2'+')" ><i class="layui-icon">申请详情</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id']+')" ><i class="layui-icon">申请详情</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
@@ -228,14 +232,34 @@
             }
         });
     }
-    function read(id,userType) {
+    function getCompanryCode() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                identity = data.identity;
+
+                if (identity == "PARTY_A") {
+                    manage_dept = data.signName;
+
+                } else if (identity == "PARTY_C") {
+                    check_unit = data.signName;
+
+                }
+            }
+        });
+
+    }
+    function read(id) {
         layer.open({
             title:"查看查定申请",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['checkApply.html?id='+id+'&userType='+userType],
+            content: ['manageCheckApply.html?id='+id],
             end : function() {
 
             }

@@ -306,7 +306,7 @@
         formdata.itemId = itemId;
         formdata.targetId = targetId;
         var accessory =formdata.accessory;
-        if (!jQuery.isEmptyObject(accessory) && accessory.length > 1) {
+        if (Array.isArray(accessory)) {
             formdata.accessory = formdata.accessory.join(',');
         }
         formdata.workLogAffiliates = workLogAffiliates;

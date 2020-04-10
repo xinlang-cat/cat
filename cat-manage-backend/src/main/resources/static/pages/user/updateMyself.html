@@ -1,773 +1,776 @@
 <!DOCTYPE html>
 <html lang="en-us" id="extr-page">
 <head>
-	<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
 <body>
-	<div class="col-xs-12 col-sm-12 col-md-22 col-lg-12">
-		<form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px">
-			<input type="hidden" id="id" name="id">
-			<fieldset>
-				<div class="form-group">
-					<label class="col-md-2 control-label">用户名</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="用户名" type="text" name="username" id="username" readonly="readonly">
-					</div>
-				</div>
+<div class="col-xs-12 col-sm-12 col-md-22 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px">
+        <input type="hidden" id="id" name="id">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-2 control-label">用户名</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="用户名" type="text" name="username" id="username"
+                           readonly="readonly">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">昵称</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="昵称" type="text" name="nickname" id="nickname" maxlength="50">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">昵称</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="昵称" type="text" name="nickname" id="nickname"
+                           maxlength="50">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">性别</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" name="sex" id="sex">
-							<option value="1">男</option>
-							<option value="0">女</option>
-						</select>
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-2 control-label">出生时间</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate" readonly="readonly">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">性别</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" name="sex" id="sex">
+                        <option value="1">男</option>
+                        <option value="0">女</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">姓名</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="姓名" type="text" name="name" id="name"
-							   data-bv-notempty="true"
-							   data-bv-notempty-message="姓名 不能为空">
-					</div>
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-2 control-label">民族</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="民族" type="text" name="nation" id="nation">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">出生时间</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate"
+                           readonly="readonly">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">身份类型</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm"  id="userType1" disabled="disabled">
-							<option value="PARTY_A">甲方</option>
-							<option value="PARTY_B">乙方</option>
-							<option value="PARTY_C">监理</option>
-							<option value="PARTY_D">验收</option>
-							<option value="EXPERT">专家</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">姓名</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="姓名" type="text" name="name" id="name"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="姓名 不能为空">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">证件类型</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" name="idType" id="idType">
-							<option value="身份证">身份证</option>
-							<option value="护照">护照</option>
-							<option value="其他">其他</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">民族</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="民族" type="text" name="nation" id="nation">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">证件号码</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="证件号码" type="text" name="idCard" id="idCard" >
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">身份类型</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" id="userType" name="userType">
+                        <option value="PARTY_A">甲方</option>
+                        <option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>
+                        <option value="PARTY_B_MEMBER">乙方项目成员</option>
+                        <option value="PARTY_C">监理</option>
+                        <option value="PARTY_D">验收</option>
+                        <option value="EXPERT">专家</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">单位/公司代码</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode" id="deptCode" >
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">证件类型</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" name="idType" id="idType">
+                        <option value="身份证">身份证</option>
+                        <option value="护照">护照</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">单位/公司名称</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="单位/公司名称" type="text" name="deptName" id="deptName" readonly="readonly" >
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">证件号码</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="证件号码" type="text" name="idCard" id="idCard">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">单位/公司类型</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" id="deptType1" disabled="disabled">
-							<option value="ACADEMY">大专院校</option>
-							<option value="FIRM">企业</option>
-							<option value="UNIT">事业单位</option>
-							<option value="RESTS">其他</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">单位/公司代码</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode" id="deptCode">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">邮政编码</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="邮政编码" name="postcode" id="postcode">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">单位/公司名称</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="单位/公司名称" type="text" name="deptName" id="deptName"
+                           readonly="readonly">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">职称</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle" id="academicTitle" >
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">单位/公司类型</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" id="deptType1" disabled="disabled">
+                        <option value="ACADEMY">大专院校</option>
+                        <option value="FIRM">企业</option>
+                        <option value="UNIT">事业单位</option>
+                        <option value="RESTS">其他</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">政治面貌</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" name="politics" id="politics">
-							<option value="1">共产党员</option>
-							<option value="0">共青团员</option>
-							<option value="0">群众</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">邮政编码</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="邮政编码" name="postcode" id="postcode">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">职务</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="职务" type="text" name="job" id="job">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">职称</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle"
+                           id="academicTitle">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">职称级别</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" name="academicTitleRank" id="academicTitleRank">
-							<option value="高级">高级</option>
-							<option value="中级">中级</option>
-							<option value="初级">初级</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">政治面貌</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" name="politics" id="politics">
+                        <option value="1">共产党员</option>
+                        <option value="0">共青团员</option>
+                        <option value="0">群众</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">毕业院校</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom" id="graduatedFrom">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">职务</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="职务" type="text" name="job" id="job">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">学位</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" name="degree" id="degree">
-							<option value="学士">学士</option>
-							<option value="硕士">硕士</option>
-							<option value="博士">博士</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">职称级别</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" name="academicTitleRank" id="academicTitleRank">
+                        <option value="高级">高级</option>
+                        <option value="中级">中级</option>
+                        <option value="初级">初级</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">学历</label>
-					<div class="col-md-8">
-						<select class="form-control input-sm" name="academicDiplomas" id="academicDiplomas">
-							<option value="初中">初中</option>
-							<option value="高中">高中</option>
-							<option value="中专">中专</option>
-							<option value="大专">大专</option>
-							<option value="本科">本科</option>
-							<option value="研究生">研究生</option>
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">毕业院校</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom" id="graduatedFrom">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">学位获得时间</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear" readonly="readonly">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">学位</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" name="degree" id="degree">
+                        <option value="学士">学士</option>
+                        <option value="硕士">硕士</option>
+                        <option value="博士">博士</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">学位授予国家/地区</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="学位授予国家/地区" name="degreeState" id="degreeState">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">学历</label>
+                <div class="col-md-8">
+                    <select class="form-control input-sm" name="academicDiplomas" id="academicDiplomas">
+                        <option value="初中">初中</option>
+                        <option value="高中">高中</option>
+                        <option value="中专">中专</option>
+                        <option value="大专">大专</option>
+                        <option value="本科">本科</option>
+                        <option value="研究生">研究生</option>
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">学位授予学校</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="学位授予学校" name="degreeSchool" id="degreeSchool">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">学位获得时间</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear"
+                           readonly="readonly">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">邮箱</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="邮箱" name="email" id="email">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">学位授予国家/地区</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="学位授予国家/地区" name="degreeState" id="degreeState">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">所学专业</label>
-					<div class="col-md-8">
-						<div class="input-group" id="major" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text1">
-							<span class="input-group-addon" ><a >选择</a></span>
-						</div>
-					</div>
-					<input type="text" class="form-control" id="majorValue1" name="major" style="display: none">
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">学位授予学校</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="学位授予学校" name="degreeSchool" id="degreeSchool">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">手机号码</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="手机号码" name="phone" id="phone">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">邮箱</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="邮箱" name="email" id="email">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">办公电话</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="办公电话" name="telephone" id="telephone">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">所学专业</label>
+                <div class="col-md-8">
+                    <div class="input-group" id="major" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
+                        <input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text1">
+                        <span class="input-group-addon"><a>选择</a></span>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="majorValue1" name="major" style="display: none">
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">现从事专业</label>
-					<div class="col-md-8">
-						<div class="input-group" id="nowMajor" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text2">
-							<span class="input-group-addon"><a >选择</a></span>
-						</div>
-					</div>
-					<input type="text" class="form-control" id="MajorValue" name="nowMajor" style="display: none">
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">手机号码</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="手机号码" name="phone" id="phone">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">主要研究领域</label>
-					<div class="col-md-8">
-						<div class="input-group" id="mainDomain" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
-							<input type="text" class="form-control" placeholder="主要研究领域"  readonly="readonly" id="text3">
-							<span class="input-group-addon"><a >选择</a></span>
-						</div>
-					</div>
-					<input type="hidden" class="form-control" id="mainValue" name="mainDomain">
-				</div>
-				
-				<div class="form-group">
-					<label class="col-md-2 control-label">传真</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="传真" name="fax" id="fax">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">办公电话</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="办公电话" name="telephone" id="telephone">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">所在地域</label>
-					<div class="col-md-2">
-						<select class="form-control input-sm" name="provinceCode" id="provinceCode">
-						</select>
-					</div>
-					<div class="col-md-2">
-						<select class="form-control input-sm" name="cityCode" id="cityCode">
-						</select>
-					</div>
-					<div class="col-md-2">
-						<select class="form-control input-sm" name="areaCode" id="areaCode">
-						</select>
-					</div>
-					<div class="col-md-2">
-						<select class="form-control input-sm" name="streetCode" id="streetCode">
-						</select>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">现从事专业</label>
+                <div class="col-md-8">
+                    <div class="input-group" id="nowMajor" data-status="true" data-type="radio"
+                         data-sign="INDUSTRY_GROUP">
+                        <input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text2">
+                        <span class="input-group-addon"><a>选择</a></span>
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="MajorValue" name="nowMajor" style="display: none">
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">通讯地址</label>
-					<div class="col-md-8">
-						<input class="form-control" placeholder="通讯地址" type="text" name="address" id="address">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">主要研究领域</label>
+                <div class="col-md-8">
+                    <div class="input-group" id="mainDomain" data-status="true" data-type="radio"
+                         data-sign="INDUSTRY_GROUP">
+                        <input type="text" class="form-control" placeholder="主要研究领域" readonly="readonly" id="text3">
+                        <span class="input-group-addon"><a>选择</a></span>
+                    </div>
+                </div>
+                <input type="hidden" class="form-control" id="mainValue" name="mainDomain">
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">服务的产业或领域</label>
-					<div class="col-md-8">
-						<div class="input-group" id="domains" data-status="true" data-sign="INDUSTRY_GROUP">
-							<input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly" id="text4">
-							<span class="input-group-addon" ><a>选择</a></span>
-						</div>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">传真</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="传真" name="fax" id="fax">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">技术专长及提供的服务</label>
-					<div class="col-md-8">
-						<div class="input-group" id="skills" data-status="true" data-type="1" data-sign="INDUSTRY_GROUP">
-							<input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text5">
-							<span class="input-group-addon" ><a >选择</a></span>
-						</div>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">所在地域</label>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="provinceCode" id="provinceCode">
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="cityCode" id="cityCode">
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="areaCode" id="areaCode">
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control input-sm" name="streetCode" id="streetCode">
+                    </select>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">承担的科技项目</label>
-					<div class="col-md-8">
-						<input type="text" class="form-control" placeholder="承担的科技项目" name="projects" id="projects">
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">通讯地址</label>
+                <div class="col-md-8">
+                    <input class="form-control" placeholder="通讯地址" type="text" name="address" id="address">
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">工作成就案例</label>
-					<div class="col-md-8">
-						<textarea class="layui-textarea" id="accomplishment" style="display: none">
-						</textarea>
-					</div>
-				</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">服务的产业或领域</label>
+                <div class="col-md-8">
+                    <div class="input-group" id="domains" data-status="true" data-sign="INDUSTRY_GROUP">
+                        <input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly" id="text4">
+                        <span class="input-group-addon"><a>选择</a></span>
+                    </div>
+                </div>
+            </div>
 
-				<div class="form-group">
-					<label class="col-md-2 control-label">获得的科技成果/奖励/荣誉</label>
-					<div class="col-md-8">
-						<textarea class="layui-textarea" id="achievement" style="display: none">
-						</textarea>
-					</div>
-				</div>
-				<input type="hidden" class="form-control" id="projectUserId">
-				<input type="hidden" class="form-control" id="identity">
-				<input type="hidden" class="form-control" id="userType" name="userType">
-				<input type="hidden" class="form-control" id="deptType" name="deptType">
-				<input type="hidden" class="form-control" name="enable" value="true">
-				<div class="form-actions">
-					<div class="row" align="center">
-						<div class="col-md-12" id="div_submit">
-							<!--<button class="btn btn-primary" type="submit" onclick="update()">
-								<i class="fa fa-save"></i> 保存
-							</button>-->
-						</div>
-					</div>
-				</div>
-			</fieldset>
-		</form>
-			<input style="display: none" class="form-control" id="domainsVa" name="domainsVa">
-			<input style="display: none" class="form-control" id="skillsVa" name="signs">
-	</div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">技术专长及提供的服务</label>
+                <div class="col-md-8">
+                    <div class="input-group" id="skills" data-status="true" data-type="1" data-sign="INDUSTRY_GROUP">
+                        <input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text5">
+                        <span class="input-group-addon"><a>选择</a></span>
+                    </div>
+                </div>
+            </div>
 
-	<script src="../../js/constant.js"></script>
-	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="../../js/jq.js"></script>
-	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-	<script type="text/javascript" src="../../js/common.js"></script>
-	<script type="text/javascript" src="../../layui/layui.js"></script>
-	<script type="text/javascript" src="../../js/label.js"></script>
-	<script type="text/javascript" src="../../js/chooseArea.js"></script>
-	<script type="text/javascript">
+            <div class="form-group">
+                <label class="col-md-2 control-label">承担的科技项目</label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" placeholder="承担的科技项目" name="projects" id="projects">
+                </div>
+            </div>
 
-		var layedit ,index1,index2,layer,tree,util,laydate,form;
+            <div class="form-group">
+                <label class="col-md-2 control-label">工作成就案例</label>
+                <div class="col-md-8">
+                    <textarea id="accomplishment" name="accomplishment" placeholder="请输入内容" class="layui-textarea"
+                              rows="10"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">获得的科技成果/奖励/荣誉</label>
+                <div class="col-md-8">
+                    <textarea id="achievement" name="achievement" placeholder="获得的科技成果/奖励/荣誉" class="layui-textarea"
+                              rows="10"></textarea>
+                </div>
+            </div>
+            <input type="hidden" class="form-control" id="projectUserId">
+            <input type="hidden" class="form-control" id="identity">
+            <input type="hidden" class="form-control" id="deptType" name="deptType">
+            <input type="hidden" class="form-control" name="enable" value="true">
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12" id="div_submit">
+                        <!--<button class="btn btn-primary" type="submit" onclick="update()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>-->
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <input style="display: none" class="form-control" id="domainsVa" name="domainsVa">
+    <input style="display: none" class="form-control" id="skillsVa" name="signs">
+</div>
 
-		layui.use(['tree','layedit','upload','layer','util', 'laydate'], function(){
-			layedit = layui.layedit;
-			layer  = layui.layer;
-			laydate = layui.laydate;
-			tree = layui.tree;
-			util = layui.util;
-			form = layui.form;
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/label.js"></script>
+<script type="text/javascript" src="../../js/chooseArea.js"></script>
+<script type="text/javascript">
 
-			laydate.render({
-				elem: '#birthDate'
-				, type: 'year'
-			});
+    var layedit, layer, tree, util, laydate, form;
 
-			layedit.set({
-				uploadImage: {
-					url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
-					type: 'post'
-				}
-			});
-			laydate.render({
-				elem: '#lastYear'
-				, type: 'year'
-			});
+    layui.use(['tree', 'layedit', 'upload', 'layer', 'util', 'laydate'], function () {
+        layedit = layui.layedit;
+        layer = layui.layer;
+        laydate = layui.laydate;
+        tree = layui.tree;
+        util = layui.util;
+        form = layui.form;
 
-			index1 = layedit.build('accomplishment');
-			index2 = layedit.build('achievement');
-		});
+        laydate.render({
+            elem: '#birthDate'
+            , type: 'year'
+        });
 
-		$.ajax({
-			type : 'get',
-			url : domainName + '/api-u/users/current',
-			async : false,
-			success : function(data) {
-				setValue(data);
-				getUserDomain(data.id);
-				getUserSkill(data.id);
-				$.ajax({
-					type : 'get',
-					url : domainName + '/project-user/user-anon/'+data.id,
-					async : false,
-					success : function(data) {
-						var element = $("#div_submit");
-						element.empty();
-						var str = '';
-						if(jQuery.isEmptyObject(data[0])){
-							str = '<button class="btn btn-primary" type="submit" onclick="update(0)"><i class="fa fa-save"></i> 保存</button>';
-						}else{
-							str = '<button class="btn btn-primary" type="submit" onclick="update(1)"><i class="fa fa-save"></i> 保存</button>';
-							for(var key in data[0]){
-								var date= data[0][key];
-								if(!jQuery.isEmptyObject(date)) if(key == 'birthDate' || key == 'lastYear'){
-									date = formatDate2(date);
-								}
-								if(key == 'id'){
-									$("#projectUserId").val(data[0].id);
-									$("#userType1").val(data[0].userType);
-									$("#deptType1").val(data[0].deptType);
-									continue;
-								}
-								$('#'+key).val(date);
-								if (data[0].streetCode != "" && data[0].streetCode != null && data[0].streetCode != undefined){
-									getAddress(data[0].provinceCode,data[0].cityCode,data[0].areaCode,data[0].streetCode);
-								}
+        layedit.set({
+            uploadImage: {
+                url: domainName + '/zuul/api-f/files/layui?access_token=' + localStorage.getItem("access_token"),
+                type: 'post'
+            }
+        });
+        laydate.render({
+            elem: '#lastYear'
+            , type: 'year'
+        });
+    });
 
-								$("#majorValue1").val(data[0].major);
-								getName(data[0].major,$("#text1"));
-								$("#MajorValue").val(data[0].nowMajor);
-								getName(data[0].nowMajor,$("#text2"));
-								$("#mainValue").val(data[0].mainDomain);
-								getName(data[0].mainDomain,$("#text3"));
-							}
-						}
-						element.append(str);
-					}
-				});
-			}
-		});
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-u/users/current',
+        async: false,
+        success: function (data) {
+            setValue(data);
+            getUserDomain(data.id);
+            getUserSkill(data.id);
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-user/user-anon/' + data.id,
+                async: false,
+                success: function (data) {
+                    var element = $("#div_submit");
+                    element.empty();
+                    var str = '';
+                    if (jQuery.isEmptyObject(data[0])) {
+                        str = '<button class="btn btn-primary" type="submit" onclick="update(0)"><i class="fa fa-save"></i> 保存</button>';
+                    } else {
+                        str = '<button class="btn btn-primary" type="submit" onclick="update(1)"><i class="fa fa-save"></i> 保存</button>';
+                        for (var key in data[0]) {
+                            var date = data[0][key];
+                            if (!jQuery.isEmptyObject(date)) if (key == 'birthDate' || key == 'lastYear') {
+                                date = formatDate2(date);
+                            }
+                            if (key == 'id') {
+                                $("#projectUserId").val(data[0].id);
+                                $("#deptType1").val(data[0].deptType);
+                                continue;
+                            }
+                            $('#' + key).val(date);
 
-		function update(status) {
-			$('#form').bootstrapValidator();
-			var bootstrapValidator = $("#form").data('bootstrapValidator');
-			bootstrapValidator.validate();
-			if(!bootstrapValidator.isValid()){
-			   return;
-			}
-			var formdata = $("#form").serializeObject();
-			$.ajax({
-				type : 'put',
-				url : domainName + '/api-u/users/me',
-				contentType: "application/json; charset=utf-8",
-				data : JSON.stringify(formdata),
-				success : function(data) {
-					formdata.accomplishment = layedit.getContent(index1);
-					formdata.achievement = layedit.getContent(index2);
-					formdata.userId = $("#id").val();
-					formdata.birthDate = Date.parse(new Date(formdata.birthDate));
-					formdata.lastYear = Date.parse(new Date(formdata.lastYear));
-					if(status == 1){
-						formdata.id = $("#projectUserId").val();
-						$.ajax({
-							type : 'put',
-							url : domainName + '/project-user/user',
-							contentType: "application/json; charset=utf-8",
-							data : JSON.stringify(formdata),
-							success : function(data) {
-								$.ajax({
-									type : 'put',
-									url : domainName + '/api-c/user',
-									contentType: "application/json; charset=utf-8",
-									data : JSON.stringify(formdata),
-									success : function(data) {
-									}
-								});
-							}
-						});
-					}else {
-						formdata.id = null;
-						$.ajax({
-							type : 'post',
-							url : domainName + '/project-user/user',
-							contentType: "application/json; charset=utf-8",
-							data : JSON.stringify(formdata),
-							success : function(data) {
-								$.ajax({
-									type : 'post',
-									url : domainName + '/api-c/user',
-									contentType: "application/json; charset=utf-8",
-									data : JSON.stringify(formdata),
-									success : function(data) {
-									}
-								});
-							}
-						});
-					}
-					layer.msg("成功", {shift: -1, time: 1000}, function(){
-						parent.$(".admin-header-user span").text($("#nickname").val());
-						companyUser();//保存用户跟公司信息
-						delSkills();
-						delDomains();
-						updateSkills();
-						updateDomains();
-						refresh_token(); //刷新当前登录用户缓存
-						deleteCurrentTab();
+                        }
+                        if (data[0].streetCode != "" && data[0].streetCode != null && data[0].streetCode != undefined) {
+                            getAddress(data[0].provinceCode, data[0].cityCode, data[0].areaCode, data[0].streetCode);
+                        }
 
-					});
-				}
-			});
-		}
+                        $("#majorValue1").val(data[0].major);
+                        getName(data[0].major, $("#text1"));
+                        $("#MajorValue").val(data[0].nowMajor);
+                        getName(data[0].nowMajor, $("#text2"));
+                        $("#mainValue").val(data[0].mainDomain);
+                        getName(data[0].mainDomain, $("#text3"));
+                    }
+                    element.append(str);
+                }
+            });
+        }
+    });
 
-		$("#deptCode").blur(function () {
-			var deptCode =$.trim( $(this).val());
-			$.ajax({
-				type : 'get',
-				url : domainName + '/api-c/company/'+deptCode,
-				success : function(data) {
-					if(jQuery.isEmptyObject(data)){
-						layer.open({
-							closeBtn: 0
-							,title:"还没添加公司信息呢"
-							,btn: ['返回首页', '去完善公司信息']
-							,btn1: function(index, layero){
-								deleteCurrentTab();
-							}
-							,btn2: function(index, layero){
-								location.href=domainName + '/api-b/pages/company/addCompany.html';
-							}
-						})
-					}else{
-						$("#deptCode").val(data.deptCode);
-						$("#deptName").val(data.signName);
-						$("#deptType").val(data.type);
-						$("#userType").val(data.identity);
-						$("#deptType1").val(data.type);
-						$("#userType1").val(data.identity);
-					}
-				}
-			});
-		});
-		function companyUser() {
-			$('#form').bootstrapValidator();
-			var bootstrapValidator = $("#form").data('bootstrapValidator');
-			bootstrapValidator.validate();
-			if(!bootstrapValidator.isValid()){
-				return;
-			}
-			var formdata = $("#form").serializeObject();
-			$.ajax({
-				type : 'post',
-				url : domainName + '/project-company/user',
-				contentType: "application/json; charset=utf-8",
-				data : JSON.stringify(formdata),
-				success : function(data) {
-					alert("ok");
-				}
-			});
-		}
-		function setValue(data) {
-			$("#id").val(data.id);
-			$("#username").val(data.username);
-			$("#nickname").val(data.nickname);
-			$("#sex").val(data.sex);
-			$("#phone").val(data.phone);
-		}
+    function update(status) {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'put',
+            url: domainName + '/api-u/users/me',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                formdata.userId = $("#id").val();
+                formdata.birthDate = Date.parse(new Date(formdata.birthDate));
+                formdata.lastYear = Date.parse(new Date(formdata.lastYear));
+                if (status == 1) {
+                    formdata.id = $("#projectUserId").val();
+                    $.ajax({
+                        type: 'put',
+                        url: domainName + '/project-user/user',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formdata),
+                        success: function (data) {
+                            $.ajax({
+                                type: 'put',
+                                url: domainName + '/api-c/user',
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(formdata),
+                                success: function (data) {
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    formdata.id = null;
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-user/user',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formdata),
+                        success: function (data) {
+                            $.ajax({
+                                type: 'post',
+                                url: domainName + '/api-c/user',
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify(formdata),
+                                success: function (data) {
+                                }
+                            });
+                        }
+                    });
+                }
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    parent.$(".admin-header-user span").text($("#nickname").val());
+                    companyUser();//保存用户跟公司信息
+                    delSkills();
+                    delDomains();
+                    updateSkills();
+                    updateDomains();
+                    refresh_token(); //刷新当前登录用户缓存
+                    deleteCurrentTab();
 
-		function getName(sign,node) {
-			if (sign != "" && sign != null && sign != undefined){
-				$.ajax({
-					type : 'get',
-					url : domainName + '/api-label/label/tree/'+sign,
-					async : false,
-					success : function(data) {
-						$(data).each(function () {
-							node.val(this.content);
-						});
+                });
+            }
+        });
+    }
 
-					}
-				});
-			}
-		}
+    $("#deptCode").blur(function () {
+        var deptCode = $.trim($(this).val());
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/' + deptCode,
+            success: function (data) {
+                if (jQuery.isEmptyObject(data)) {
+                    layer.open({
+                        closeBtn: 0
+                        , title: "还没添加公司信息呢"
+                        , btn: ['返回首页', '去完善公司信息']
+                        , btn1: function (index, layero) {
+                            deleteCurrentTab();
+                        }
+                        , btn2: function (index, layero) {
+                            location.href = domainName + '/api-b/pages/company/addCompany.html';
+                        }
+                    })
+                } else {
+                    $("#deptCode").val(data.deptCode);
+                    $("#deptName").val(data.signName);
+                    $("#deptType").val(data.type);
+                    $("#deptType1").val(data.type);
+                }
+            }
+        });
+    });
 
-		function mainDomainSaveLabel() {
-			var res =$("input[type='radio']:checked").val();
-			var text =$("input[type='radio']:checked").attr('title');
-			$("#mainValue").val(res);
-			$("#text3").val(text);
-			layer.msg("成功", {shift: -1, time: 1000}, function(){
-				layer.close(index);
-			});
-		}
-		function nowMajorSaveLabel() {
-			var DomainValue =$("input[type='radio']:checked").val();
-			var text =$("input[type='radio']:checked").attr('title');
-			$("#MajorValue").val(DomainValue);
-			$("#text2").val(text);
-			layer.msg("成功", {shift: -1, time: 1000}, function(){
-				layer.close(index);
-			});
-		}
+    function companyUser() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-company/user',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
 
-		function majorSaveLabel() {
-			var majorValue =$("input[type='radio']:checked").val();
-			var text =$("input[type='radio']:checked").attr('title');
-			$("#majorValue1").val(majorValue);
-			$("#text1").val(text);
-			layer.msg("成功", {shift: -1, time: 1000}, function(){
-				layer.close(index);
-			});
-		}
+            }
+        });
+    }
 
-		function skillsSaveLabel() {
-			var obj = document.getElementsByName('skills');
-			var texts=[];
-			$("input[type='checkbox']:checked").each(function () {
-				texts.push($(this).attr('title'));
-			})
-			var length = obj.length;
-			var str = [];
-			for(var i=0; i<length; i++){
-				if (obj[i].checked) {
-					str.push(obj[i].value);
-				}
-			}
-			$("#skillsVa").val(str);
-			$("#text5").val(texts);
-			layer.msg("成功", {shift: -1, time: 1000}, function(){
-				layer.close(index);
-			});
+    function setValue(data) {
+        $("#id").val(data.id);
+        $("#username").val(data.username);
+        $("#nickname").val(data.nickname);
+        $("#sex").val(data.sex);
+        $("#phone").val(data.phone);
+    }
 
-		}
-		function updateSkills() {
-			var userType= $("#userType").val();
-			var signs= $("#skillsVa").val();
-			var result = signs.split(",");
-			$.ajax({
-				type: 'post',
-				url : domainName + '/project-user/toSkills?userType='+userType,
-				contentType: "application/json; charset=utf-8",
-				data : JSON.stringify(result),
-				success: function (data) {
-					layer.msg("成功");
-				}
-			});
-		}
-		function delSkills() {
-			var id= $("#id").val();
-			$.ajax({
-				type : 'delete',
-				url : domainName + "/project-user/skill/"+id,
-				success : function(data) {
+    function getName(sign, node) {
+        if (sign != "" && sign != null && sign != undefined) {
+            $.ajax({
+                type: 'get',
+                url: domainName + '/api-label/label/tree/' + sign,
+                async: false,
+                success: function (data) {
+                    $(data).each(function () {
+                        node.val(this.content);
+                    });
+                }
+            });
+        }
+    }
 
-				}
-			});
-		}
-		function delDomains() {
-			var id= $("#id").val();
-			$.ajax({
-				type : 'delete',
-				url : domainName + "/project-user/domain/"+id,
-				success : function(data) {
+    function mainDomainSaveLabel() {
+        var res = $("input[type='radio']:checked").val();
+        var text = $("input[type='radio']:checked").attr('title');
+        $("#mainValue").val(res);
+        $("#text3").val(text);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            layer.close(index);
+        });
+    }
 
-				}
-			});
-		}
+    function nowMajorSaveLabel() {
+        var DomainValue = $("input[type='radio']:checked").val();
+        var text = $("input[type='radio']:checked").attr('title');
+        $("#MajorValue").val(DomainValue);
+        $("#text2").val(text);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            layer.close(index);
+        });
+    }
 
-		function domainsSaveLabel() {
-			var obj = document.getElementsByName('domains');
-			var texts=[];
-			$("input[type='checkbox']:checked").each(function () {
-				texts.push($(this).attr('title'));
-			})
-			var skills = [];
-			var length = obj.length;
-			for(var i=0; i<length; i++){
-				if (obj[i].checked) {
-					skills.push(obj[i].value);
-				}
-			}
-			$("#domainsVa").val(skills);
-			$("#text4").val(texts);
-			layer.msg("成功", {shift: -1, time: 1000}, function(){
-				layer.close(index);
-			});
+    function majorSaveLabel() {
+        var majorValue = $("input[type='radio']:checked").val();
+        var text = $("input[type='radio']:checked").attr('title');
+        $("#majorValue1").val(majorValue);
+        $("#text1").val(text);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            layer.close(index);
+        });
+    }
 
-		}
-		function updateDomains() {
-			var userType= $("#userType").val();
-			var signs= $("#domainsVa").val();
-			var result = signs.split(",");
-			$.ajax({
-				type: 'post',
-				url : domainName + '/project-user/toDomains?userType='+userType,
-				contentType: "application/json; charset=utf-8",
-				data : JSON.stringify(result),
-				success: function (data) {
-					layer.msg("成功");
-				}
-			});
-		}
+    function skillsSaveLabel() {
+        var obj = document.getElementsByName('skills');
+        var texts = [];
+        $("input[type='checkbox']:checked").each(function () {
+            texts.push($(this).attr('title'));
+        })
+        var length = obj.length;
+        var str = [];
+        for (var i = 0; i < length; i++) {
+            if (obj[i].checked) {
+                str.push(obj[i].value);
+            }
+        }
+        $("#skillsVa").val(str);
+        $("#text5").val(texts);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            layer.close(index);
+        });
 
-		function getUserDomain(id) {
-			$.ajax({
-				type : 'get',
-				url : domainName + '/project-user/domain/'+id,
-				async : false,
-				success : function(data) {
-					var signs = [];
-					for(var i=0; i<data.length; i++){
-						var d = data[i];
-						signs.push(d.labelSign);
-					}
-					$("#domainsVa").val(signs);
-					if (!jQuery.isEmptyObject(signs)){
-						getNames(signs,$("#text4"));
-					}
+    }
 
-				}
-			});
-		}
+    function updateSkills() {
+        var userType = $("#userType").val();
+        var signs = $("#skillsVa").val();
+        var result = signs.split(",");
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/toSkills?userType=' + userType,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(result),
+            success: function (data) {
+                layer.msg("成功");
+            }
+        });
+    }
 
-		function getUserSkill(id) {
-			$.ajax({
-				type : 'get',
-				url : domainName + '/project-user/skill-anon/'+id,
-				async : false,
-				success : function(data) {
-					var signs = [];
-					for(var i=0; i<data.length; i++){
-						var d = data[i];
-						signs.push(d.labelSign);
-					}
-					$("#skillsVa").val(signs);
-					if (!jQuery.isEmptyObject(signs)){
-						getNames(signs,$("#text5"));
-					}
+    function delSkills() {
+        var id = $("#id").val();
+        $.ajax({
+            type: 'delete',
+            url: domainName + "/project-user/skill/" + id,
+            success: function (data) {
 
+            }
+        });
+    }
 
-				}
-			});
+    function delDomains() {
+        var id = $("#id").val();
+        $.ajax({
+            type: 'delete',
+            url: domainName + "/project-user/domain/" + id,
+            success: function (data) {
 
-		}
-		function getNames(signs,node) {
-			if (!jQuery.isEmptyObject(signs)){
-				$.ajax({
-					type : 'get',
-					url : domainName + '/api-label/label/tree/'+signs,
-					async : false,
-					success : function(data) {
-						var content = [];
-						$(data).each(function () {
-							content.push(this.content);
-						});
-						node.val(content);
-					}
-				});
-			}
-		}
-	</script>
+            }
+        });
+    }
+
+    function domainsSaveLabel() {
+        var obj = document.getElementsByName('domains');
+        var texts = [];
+        $("input[type='checkbox']:checked").each(function () {
+            texts.push($(this).attr('title'));
+        })
+        var skills = [];
+        var length = obj.length;
+        for (var i = 0; i < length; i++) {
+            if (obj[i].checked) {
+                skills.push(obj[i].value);
+            }
+        }
+        $("#domainsVa").val(skills);
+        $("#text4").val(texts);
+        layer.msg("成功", {shift: -1, time: 1000}, function () {
+            layer.close(index);
+        });
+
+    }
+
+    function updateDomains() {
+        var userType = $("#userType").val();
+        var signs = $("#domainsVa").val();
+        var result = signs.split(",");
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/toDomains?userType=' + userType,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(result),
+            success: function (data) {
+                layer.msg("成功");
+            }
+        });
+    }
+
+    function getUserDomain(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-user/domain/' + id,
+            async: false,
+            success: function (data) {
+                var signs = [];
+                for (var i = 0; i < data.length; i++) {
+                    var d = data[i];
+                    signs.push(d.labelSign);
+                }
+                $("#domainsVa").val(signs);
+                if (!jQuery.isEmptyObject(signs)) {
+                    getNames(signs, $("#text4"));
+                }
+            }
+        });
+    }
+
+    function getUserSkill(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-user/skill-anon/' + id,
+            async: false,
+            success: function (data) {
+                var signs = [];
+                for (var i = 0; i < data.length; i++) {
+                    var d = data[i];
+                    signs.push(d.labelSign);
+                }
+                $("#skillsVa").val(signs);
+                if (!jQuery.isEmptyObject(signs)) {
+                    getNames(signs, $("#text5"));
+                }
+            }
+        });
+    }
+
+    function getNames(signs, node) {
+        if (!jQuery.isEmptyObject(signs)) {
+            $.ajax({
+                type: 'get',
+                url: domainName + '/api-label/label/tree/' + signs,
+                async: false,
+                success: function (data) {
+                    var content = [];
+                    $(data).each(function () {
+                        content.push(this.content);
+                    });
+                    node.val(content);
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>

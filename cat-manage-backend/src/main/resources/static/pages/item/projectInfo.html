@@ -891,6 +891,7 @@
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
@@ -898,6 +899,8 @@
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 
 <script>
+    var pers = checkPermission();
+
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
         var form = layui.form,
             layer = layui.layer,
@@ -947,7 +950,7 @@
 
     $('input').attr("readonly","readonly");
     $('textarea').attr("readonly","readonly");
-    if($('#status').val()==1){
+    if($('#status').val()==1&&$.inArray('PARTY_B:principal:html', pers) != -1){
         $('#pass').css("display"," inline");
         $('#reject').css("display"," inline");
     }

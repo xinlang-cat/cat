@@ -2,11 +2,13 @@ package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.bean.projectInfo.ItemIndicators;
 import com.xinlang.bean.projectInfo.ItemPersonnel;
+import com.xinlang.bean.project_user.ProjectUserType;
 import com.xinlang.cat_project.item.VO.ItemInformationVO;
 import com.xinlang.cat_project.item.pojo.*;
 import com.xinlang.cat_project.item.service.*;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.constants.UserType;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -134,6 +136,7 @@ public class ItemInformationController {
         List<ItemPersonnel> personnels = informationVO.getPersonnels();
         for (ItemPersonnel personnel : personnels) {
             personnel.setItem_id(information.getId());
+            personnel.setUser_type(ProjectUserType.PARTY_B_MEMBER.name());
         }
         itemPersonnelService.savePersonnels(personnels);
         //资金预算
@@ -192,6 +195,18 @@ public class ItemInformationController {
         List<ItemContactWay> contactWays = informationVO.getContactWays();
         for (ItemContactWay contactWay : contactWays) {
             contactWay.setItem_id(information.getId());
+
+            ItemPersonnel personnel = new ItemPersonnel();
+            personnel.setItem_id(contactWay.getItem_id());
+            personnel.setUser_id(contactWay.getLeader());
+            if(contactWay.getType()==1){
+                personnel.setUser_type(ProjectUserType.PARTY_A.name());
+            }else if(contactWay.getType()==2){
+                personnel.setUser_type(ProjectUserType.PARTY_B_PRINCIPAL.name());
+            }else {
+                personnel.setUser_type(ProjectUserType.PARTY_C.name());
+            }
+            itemPersonnelService.save(personnel);
         }
         itemContactWayService.saveContactWays(contactWays);
 

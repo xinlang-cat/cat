@@ -22,24 +22,6 @@
 <div class="weui-content">
     <div class="weui-interval"></div>
     <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_small-appmsg">
-                <div class="weui-cells">
-                    <a class="weui-cell weui-cell_access" href="javascript:;">
-                        <div class="weui-cell__hd">
-                            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>变更申请</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="weui-grids" id="list">
-
-        </div>
 
         <div class="weui-interval"></div>
         <div class="weui-panel weui-panel_access">
@@ -140,35 +122,6 @@
 <script>
     var itemId = getUrlParam("item_id");
     $(function () {
-        var str = '';
-        str += '<a href="../modifyApply/addModifyApply.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
-            '<div class="weui-grid__icon">\n' +
-            '<img src="../../images/icon_nav_new.png" alt="">\n' +
-            '</div>\n' +
-            ' <p class="weui-grid__label">\n' +
-            '变更起草\n' +
-            ' </p>\n' +
-            '</a>';
-
-        str += '<a href="../modifyApply/checkApplyList.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
-            '<div class="weui-grid__icon">\n' +
-            '<img src="../../images/icon_nav_new.png" alt="">\n' +
-            '</div>\n' +
-            ' <p class="weui-grid__label">\n' +
-            '变更审核\n' +
-            ' </p>\n' +
-            '</a>';
-
-        str += '<a href="../modifyApply/allModifyApplyList.html" class="weui-grid js_grid">\n' +
-            '<div class="weui-grid__icon">\n' +
-            '<img src="../../images/icon_nav_new.png" alt="">\n' +
-            '</div>\n' +
-            ' <p class="weui-grid__label">\n' +
-            '所有变更\n' +
-            ' </p>\n' +
-            '</a>';
-        $("#list").append(str);
-
         var str1 = '';
         str1 += '<a href="../auditfyApply/addAuditfyApply.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
@@ -212,7 +165,7 @@
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
             ' <p class="weui-grid__label">\n' +
-            '技术总结起草\n' +
+            '技术总结\n' +
             ' </p>\n' +
             '</a>';
 
@@ -230,7 +183,7 @@
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
             ' <p class="weui-grid__label">\n' +
-            '工作总结起草\n' +
+            '工作总结\n' +
             ' </p>\n' +
             '</a>';
 
