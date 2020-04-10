@@ -756,13 +756,13 @@
     function update() {
         var formData = $("#form").serializeObject();
         formData.id = stageId;
-        if ($.inArray('html:principal:check:stage', pers) > 0) {
+        if ($.inArray('html:principal:check:stage', pers) > -1) {
             var principalCheckEnable = formData.principalCheckEnable;
             if (principalCheckEnable < 0) {
                 formData.enable = principalCheckEnable;
             }
         }
-        if ($.inArray('html:dept:check:stage', pers) > 0) {
+        if ($.inArray('html:dept:check:stage', pers) > -1) {
             formData.enable = formData.deptCheckEnable;
         }
         $.ajax({
