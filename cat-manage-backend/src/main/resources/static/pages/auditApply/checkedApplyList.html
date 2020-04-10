@@ -162,9 +162,9 @@
                             "render": function (data, type, row) {
 
                                 var btn = null;
-                                if ($.inArray('PARTY_A', pers)) {
+                                if ($.inArray('PARTY_A', pers)!=-1) {
                                     btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',' + row['status'] + ')" >查看详情<i class="layui-icon"></i></button>');
-                                }else if ($.inArray('PARTY_C', pers)) {
+                                }else if ($.inArray('PARTY_C', pers)!=-1) {
                                     var status = row['status'] == 1 ? "申请详情" : "查定报告";
                                     btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ')" >' + status + '<i class="layui-icon"></i></button>');
                                 }
