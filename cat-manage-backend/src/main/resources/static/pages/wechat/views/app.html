@@ -1,103 +1,130 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-		<link rel="stylesheet" href="../weui/css/weui.css" />
-		<link rel="stylesheet" href="../weui/css/weuix.css" />
-		<link rel="stylesheet" href="../css/self.css">
-		<script src="../weui/js/zepto.min.js"></script>
-		<script src="../weui/js/zepto.weui.js"></script>
-		<script src="../weui/js/cookie.js"></script>
-		<script>
-			$(function() {
-				if (cookie.get("index") > 0) {
-					$('.weui-tab').tab({
-						defaultIndex: cookie.get("index"),
-						activeClass: 'weui-bar__item_on',
-						onToggle: function(index) {}
-					})
-				} else {
-					$('.weui-tab').tab({
-						defaultIndex: 1,
-						activeClass: 'weui-bar__item_on',
-						onToggle: function(index) {}
-					})
-				}
-			})
-		</script>
-	</head>
-	<body ontouchstart>
-		<div class="weui-tab" style="height:100%;">
-			<div class="weui-tab__panel">
-				<div id="c0" class="weui-tab__content">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../css/self.css">
 
-				</div>
-				<div id="c1" class="weui-tab__content">
-					<iframe src="itemList.html" width="100%" height="100%" frameborder="0"></iframe>
-				</div>
-				<div id="c2" class="weui-tab__content">
-					<iframe src="chart.html" width="100%" height="100%" frameborder="0"></iframe>
-				</div>
-				<div id="c3" class="weui-tab__content">
-					<div class="head-box">
-						<h3>我</h3>
-						<div class="head-icon-outer">
-							<div class="head-icon"></div>
-						</div>
-						<h5>头像点击可以更换</h5>
-					</div>
-					<div class="weui-cells">
-						<a class="weui-cell weui-cell_access" href="user/addUserInfo.html">
-							<div class="weui-cell__bd">
-								<p>个人信息</p>
-							</div>
-							<div class="weui-cell__ft">
-							</div>
-						</a>
-						<a class="weui-cell weui-cell_access" href="company/addCompany.html">
-							<div class="weui-cell__bd">
-								<p>公司资料</p>
-							</div>
-							<div class="weui-cell__ft">
-							</div>
-						</a>
-						<a class="weui-cell weui-cell_access" href="user/updatePassword.html">
-							<div class="weui-cell__bd">
-								<p>密码修改</p>
-							</div>
-							<div class="weui-cell__ft">
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
+</head>
+<body ontouchstart>
+<div class="weui-tab" style="height:100%;">
+    <div class="weui-tab__panel">
+        <div id="c0" class="weui-tab__content">
 
-			<div class="weui-tabbar tab-bottom">
-				<a href="javascript:;" class="weui-tabbar__item">
+        </div>
+        <div id="c1" class="weui-tab__content">
+            <iframe src="itemList.html" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        <div id="c2" class="weui-tab__content">
+            <iframe src="chart.html" width="100%" height="100%" frameborder="0"></iframe>
+        </div>
+        <div id="c3" class="weui-tab__content">
+            <div class="head-box">
+                <!--						<h3>我</h3>-->
+                <div class="head-icon-outer">
+                    <div id="headImg" class="head-icon" style="background-image:url('../images/avatar3.jpg')"></div>
+                </div>
+                <!--						<h5>头像点击可以更换</h5>-->
+            </div>
+            <div class="weui-cells">
+                <a class="weui-cell weui-cell_access" href="user/addUserInfo.html">
+                    <div class="weui-cell__bd">
+                        <p>个人信息</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="company/addCompany.html">
+                    <div class="weui-cell__bd">
+                        <p>公司资料</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+                <a class="weui-cell weui-cell_access" href="user/updatePassword.html">
+                    <div class="weui-cell__bd">
+                        <p>密码修改</p>
+                    </div>
+                    <div class="weui-cell__ft">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="weui-tabbar tab-bottom">
+        <a href="javascript:;" class="weui-tabbar__item">
 					<span style="display: inline-block;position: relative;">
 						<i class="icon icon-79 f27 weui-tabbar__icon"></i>
 						<span class="weui-badge" style="position: absolute;top: -2px;right: -13px;">8</span>
 					</span>
-					<p class="weui-tabbar__label">公告</p>
-				</a>
-				<a href="javascript:;" class="weui-tabbar__item">
-					<i class="icon icon-67 f27 weui-tabbar__icon"></i>
-					<p class="weui-tabbar__label">工作台</p>
-				</a>
-				<a href="javascript:;" class="weui-tabbar__item">
+            <p class="weui-tabbar__label">公告</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item">
+            <i class="icon icon-67 f27 weui-tabbar__icon"></i>
+            <p class="weui-tabbar__label">工作台</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item">
 					<span style="display: inline-block;position: relative;">
 						<i class="icon icon-89 f27 weui-tabbar__icon"></i>
 						<span class="weui-badge weui-badge_dot" style="position: absolute;top: 0;right: -6px;"></span>
 					</span>
-					<p class="weui-tabbar__label">数据</p>
-				</a>
-				<a href="javascript:;" class="weui-tabbar__item ">
-					<i class="icon icon-85 f27 weui-tabbar__icon"></i>
-					<p class="weui-tabbar__label">我</p>
-				</a>
-			</div>
-		</div>
-	</body>
+            <p class="weui-tabbar__label">数据</p>
+        </a>
+        <a href="javascript:;" class="weui-tabbar__item ">
+            <i class="icon icon-85 f27 weui-tabbar__icon"></i>
+            <p class="weui-tabbar__label">我</p>
+        </a>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../weui/js/zepto.min.js"></script>
+<script type="text/javascript" src="../weui/js/zepto.weui.js"></script>
+<script type="text/javascript" src="../weui/js/cookie.js"></script>
+<script>
+	$(function () {
+		if (cookie.get("index") > 0) {
+			$('.weui-tab').tab({
+				defaultIndex: cookie.get("index"),
+				activeClass: 'weui-bar__item_on',
+				onToggle: function (index) {
+				}
+			})
+		} else {
+			$('.weui-tab').tab({
+				defaultIndex: 1,
+				activeClass: 'weui-bar__item_on',
+				onToggle: function (index) {
+				}
+			})
+		}
+	})
+</script>
+<script>
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-u/users/current',
+        success: function (data) {
+            if(!jQuery.isEmptyObject(data.headImgUrl)){
+                $('#headImg').attr("style","background-image:url('"+ data.headImgUrl +"')")
+            }else{
+                if(data.sex == 1){
+                    $('#headImg').attr("style","background-image:url('../images/avatar3.jpg')")
+                }else {
+                    $('#headImg').attr("style","background-image:url('../images/avatar.jpg')")
+                }
+
+            }
+
+        }
+    });
+
+</script>
 </html>

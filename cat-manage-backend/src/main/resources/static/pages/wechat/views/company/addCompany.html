@@ -286,7 +286,7 @@
             contentType: false,
             success: function (res) {
                 $.toast('上传成功');
-                (div).find('ul').empty();
+                $(div).find('ul').empty();
                 $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(' + res.url + ')"></li><input type="hidden" name="charter" value="' + res.url + '">');
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -311,6 +311,8 @@
             } else {
                 $(".weui-btn_primary").attr('onclick', 'update()');
             }
+            var div = $('.weui-uploader__files');
+            $(div).append('<li class="weui-uploader__file" style="background-image:url(' + data.charter + ')"></li><input type="hidden" name="charter" value="' + data.charter + '">');
         }
     });
 

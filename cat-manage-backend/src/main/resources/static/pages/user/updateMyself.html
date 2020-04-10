@@ -334,39 +334,36 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-md-2 control-label">工作成就案例</label>
-                <div class="col-md-8">
-						<textarea class="layui-textarea" id="accomplishment" style="display: none">
-						</textarea>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-2 control-label">获得的科技成果/奖励/荣誉</label>
-                <div class="col-md-8">
-						<textarea class="layui-textarea" id="achievement" style="display: none">
-						</textarea>
-                </div>
-            </div>
-            <input type="hidden" class="form-control" id="projectUserId">
-            <input type="hidden" class="form-control" id="identity">
-            <input type="hidden" class="form-control" id="deptType" name="deptType">
-            <input type="hidden" class="form-control" name="enable" value="true">
-            <div class="form-actions">
-                <div class="row" align="center">
-                    <div class="col-md-12" id="div_submit">
-                        <!--<button class="btn btn-primary" type="submit" onclick="update()">
-                            <i class="fa fa-save"></i> 保存
-                        </button>-->
-                    </div>
-                </div>
-            </div>
-        </fieldset>
-    </form>
-    <input style="display: none" class="form-control" id="domainsVa" name="domainsVa">
-    <input style="display: none" class="form-control" id="skillsVa" name="signs">
-</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label">工作成就案例</label>
+					<div class="col-md-8">
+						<textarea id="accomplishment" name="accomplishment" placeholder="请输入内容" class="layui-textarea" rows="10"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-2 control-label">获得的科技成果/奖励/荣誉</label>
+					<div class="col-md-8">
+						<textarea id="achievement" name="achievement" placeholder="获得的科技成果/奖励/荣誉" class="layui-textarea" rows="10"></textarea>
+					</div>
+				</div>
+				<input type="hidden" class="form-control" id="projectUserId">
+				<input type="hidden" class="form-control" id="identity">
+				<input type="hidden" class="form-control" id="deptType" name="deptType">
+				<input type="hidden" class="form-control" name="enable" value="true">
+				<div class="form-actions">
+					<div class="row" align="center">
+						<div class="col-md-12" id="div_submit">
+							<!--<button class="btn btn-primary" type="submit" onclick="update()">
+								<i class="fa fa-save"></i> 保存
+							</button>-->
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+			<input style="display: none" class="form-control" id="domainsVa" name="domainsVa">
+			<input style="display: none" class="form-control" id="skillsVa" name="signs">
+	</div>
 
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
@@ -378,7 +375,7 @@
 <script type="text/javascript" src="../../js/chooseArea.js"></script>
 <script type="text/javascript">
 
-    var layedit, index1, index2, layer, tree, util, laydate, form;
+		var layedit ,layer,tree,util,laydate,form;
 
     layui.use(['tree', 'layedit', 'upload', 'layer', 'util', 'laydate'], function () {
         layedit = layui.layedit;
@@ -393,20 +390,17 @@
             , type: 'year'
         });
 
-        layedit.set({
-            uploadImage: {
-                url: domainName + '/zuul/api-f/files/layui?access_token=' + localStorage.getItem("access_token"),
-                type: 'post'
-            }
-        });
-        laydate.render({
-            elem: '#lastYear'
-            , type: 'year'
-        });
-
-        index1 = layedit.build('accomplishment');
-        index2 = layedit.build('achievement');
-    });
+			layedit.set({
+				uploadImage: {
+					url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
+					type: 'post'
+				}
+			});
+			laydate.render({
+				elem: '#lastYear'
+				, type: 'year'
+			});
+		});
 
     $.ajax({
         type: 'get',
@@ -457,71 +451,69 @@
         }
     });
 
-    function update(status) {
-        $('#form').bootstrapValidator();
-        var bootstrapValidator = $("#form").data('bootstrapValidator');
-        bootstrapValidator.validate();
-        if (!bootstrapValidator.isValid()) {
-            return;
-        }
-        var formdata = $("#form").serializeObject();
-        $.ajax({
-            type: 'put',
-            url: domainName + '/api-u/users/me',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
-            success: function (data) {
-                formdata.accomplishment = layedit.getContent(index1);
-                formdata.achievement = layedit.getContent(index2);
-                formdata.userId = $("#id").val();
-                formdata.birthDate = Date.parse(new Date(formdata.birthDate));
-                formdata.lastYear = Date.parse(new Date(formdata.lastYear));
-                if (status == 1) {
-                    formdata.id = $("#projectUserId").val();
-                    $.ajax({
-                        type: 'put',
-                        url: domainName + '/project-user/user',
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(formdata),
-                        success: function (data) {
-                            $.ajax({
-                                type: 'put',
-                                url: domainName + '/api-c/user',
-                                contentType: "application/json; charset=utf-8",
-                                data: JSON.stringify(formdata),
-                                success: function (data) {
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    formdata.id = null;
-                    $.ajax({
-                        type: 'post',
-                        url: domainName + '/project-user/user',
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(formdata),
-                        success: function (data) {
-                            $.ajax({
-                                type: 'post',
-                                url: domainName + '/api-c/user',
-                                contentType: "application/json; charset=utf-8",
-                                data: JSON.stringify(formdata),
-                                success: function (data) {
-                                }
-                            });
-                        }
-                    });
-                }
-                layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    parent.$(".admin-header-user span").text($("#nickname").val());
-                    companyUser();//保存用户跟公司信息
-                    delSkills();
-                    delDomains();
-                    updateSkills();
-                    updateDomains();
-                    refresh_token(); //刷新当前登录用户缓存
-                    deleteCurrentTab();
+		function update(status) {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+			if(!bootstrapValidator.isValid()){
+			   return;
+			}
+			var formdata = $("#form").serializeObject();
+			$.ajax({
+				type : 'put',
+				url : domainName + '/api-u/users/me',
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(formdata),
+				success : function(data) {
+					formdata.userId = $("#id").val();
+					formdata.birthDate = Date.parse(new Date(formdata.birthDate));
+					formdata.lastYear = Date.parse(new Date(formdata.lastYear));
+					if(status == 1){
+						formdata.id = $("#projectUserId").val();
+						$.ajax({
+							type : 'put',
+							url : domainName + '/project-user/user',
+							contentType: "application/json; charset=utf-8",
+							data : JSON.stringify(formdata),
+							success : function(data) {
+								$.ajax({
+									type : 'put',
+									url : domainName + '/api-c/user',
+									contentType: "application/json; charset=utf-8",
+									data : JSON.stringify(formdata),
+									success : function(data) {
+									}
+								});
+							}
+						});
+					}else {
+						formdata.id = null;
+						$.ajax({
+							type : 'post',
+							url : domainName + '/project-user/user',
+							contentType: "application/json; charset=utf-8",
+							data : JSON.stringify(formdata),
+							success : function(data) {
+								$.ajax({
+									type : 'post',
+									url : domainName + '/api-c/user',
+									contentType: "application/json; charset=utf-8",
+									data : JSON.stringify(formdata),
+									success : function(data) {
+									}
+								});
+							}
+						});
+					}
+					layer.msg("成功", {shift: -1, time: 1000}, function(){
+						parent.$(".admin-header-user span").text($("#nickname").val());
+						companyUser();//保存用户跟公司信息
+						delSkills();
+						delDomains();
+						updateSkills();
+						updateDomains();
+						refresh_token(); //刷新当前登录用户缓存
+						deleteCurrentTab();
 
                 });
             }
