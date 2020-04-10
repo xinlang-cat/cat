@@ -35,10 +35,9 @@
 <script type="text/javascript" src="auditApply.js"></script>
 
 <script>
-
-    var status = " ";
+    
+    var status = 2;
     var itemId = getUrlParam("itemId");
-    status = getUrlParam("status");
     var deptCode;
     var unit;
     var manage_dept;
@@ -52,7 +51,7 @@
             url: domainName + "/project-item/item/target/applyList",
             contentType: "application/json; charset=utf-8",
             data: {
-                itemId: itemId
+                status: status, itemId : itemId
             },
             success: function (data) {
 

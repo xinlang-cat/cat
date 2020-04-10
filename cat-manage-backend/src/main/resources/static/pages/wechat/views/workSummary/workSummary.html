@@ -119,11 +119,11 @@
 	$(function () {
 		FastClick.attach(document.body);
 	});
-	var id = getUrlParam("id");
+	var itemId = getUrlParam("itemId");
 	initData();
 	function initData() {
 		var data = {
-			id: id,
+			itemId = itemId,
 		}
 		$.ajax({
 			type: 'get',

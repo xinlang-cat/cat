@@ -100,7 +100,7 @@
     $(function () {
         FastClick.attach(document.body);
     });
-    var itemId = getUrlParam("item_id");
+    var itemId = getUrlParam("itemId");
     function getItemName(id) {
 
         $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
