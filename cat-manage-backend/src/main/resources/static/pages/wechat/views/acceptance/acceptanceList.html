@@ -73,7 +73,7 @@
             type: 'get',
             url: domainName + "/api-summary/check-table/list",
             contentType: "application/json; charset=utf-8",
-            data: {},
+            data: {entrusting_company:entrusting_company,acceptance_company},
             success: function (data) {
                 var str = '';
                 $(data).each(function () {

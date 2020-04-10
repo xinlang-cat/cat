@@ -966,7 +966,7 @@
             success : function(data) {
                 $(data).each(function () {
                     var status =data[0].status;
-                    if(status==1 && $.inArray('PARTY_A', pers)){
+                    if(status==1 && $.inArray('PARTY_A', pers)!=-1){
                         document.getElementById("pass").style.display="block";
                         document.getElementById("reject").style.display="block";
                     }

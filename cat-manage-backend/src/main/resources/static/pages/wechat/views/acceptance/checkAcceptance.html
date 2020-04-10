@@ -603,7 +603,7 @@
         FastClick.attach(document.body);
     });
     var identity;
-    var item_id = getUrlParam("item_id");
+    var item_id = getUrlParam("itemId");
     $("#item_id").val(item_id);
     userType();
     getdata(item_id);
@@ -715,24 +715,24 @@
         $("input").attr("style", "text-align: center;border: 0px;");
         $("textarea").attr('readonly', true);
 
-        if (status == 1 && identity == "PARTY_C") {
+        if (status == 1 && $.inArray('PARTY_C', pers)!=-1) {
             //监理初审
             document.getElementById('check_b').style.display = 'none';
             document.getElementById('check_c').style.display = 'none';
             document.getElementById('check_d').style.display = 'none';
             $("#manageDeptOpinion").removeAttr("readonly");
             $("#acceptance_company").removeAttr("readonly");
-        } else if (status == 2 && identity == "PARTY_D") {
+        } else if (status == 2 && $.inArray('PARTY_D', pers)!=-1) {
             //验收初审
             document.getElementById('test').style.display = 'block';
             document.getElementById('check_c').style.display = 'none';
             document.getElementById('check_d').style.display = 'none';
             $("#burgLeaderOpinion").removeAttr("readonly");
-        } else if (status == 4 && identity == "PARTY_D") {
+        } else if (status == 4 && $.inArray('PARTY_D', pers)!=-1) {
             //验收终审
             document.getElementById('check_d').style.display = 'none';
             $("#manageDeptResult").removeAttr("readonly");
-        } else if (status == 5 && identity == "PARTY_C") {
+        } else if (status == 5 && $.inArray('PARTY_C', pers)!=-1) {
             //监理终审
             $("#burgLeaderResult").removeAttr("readonly");
         } else {

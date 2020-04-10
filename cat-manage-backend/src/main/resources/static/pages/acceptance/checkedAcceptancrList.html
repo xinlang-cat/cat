@@ -238,24 +238,7 @@
                                 return setMenu;
                             }
                         },
-                        /* {
-                             "data": "id",
-                             "defaultContent": "",
-                             "render": function (data, type, row) {
-                                 var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['item_id'] +','+row['id'] + ','+row['modify'] +')" ><i class="layui-icon">更改信息</i></button>');
-                                 var showDetail = btn.prop("outerHTML");
-                                 return showDetail;
-                             }
-                         },*/
-                        /* {
-                             "data": "id",
-                             "defaultContent": "",
-                             "render": function (data, type, row) {
-                                 var btn = $('<button class="layui-btn layui-btn-xs" onclick="checkResult(' + row['id'] + ')" ><i class="layui-icon">查定报告结果</i></button>');
-                                 var showDetail = btn.prop("outerHTML");
-                                 return showDetail;
-                             }
-                         }*/
+
 
                     ],
                 });
@@ -272,13 +255,13 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 identity = data.identity;
-                if (identity == "PARTY_A") {
+                if ($.inArray('PARTY_A', pers)!=-1) {
                     //甲方
                     $("#entrusting_company").val(data.signName);
-                } else if (identity == "PARTY_D") {
+                } else if ($.inArray('PARTY_D', pers)!=-1) {
                     //验收方
                     $("#acceptance_company").val(data.signName);
-                } else if (identity == "PARTY_C") {
+                } else if ($.inArray('PARTY_C', pers)!=-1) {
                     //监理方
                     $("#management_company").val(data.signName);
                 }
