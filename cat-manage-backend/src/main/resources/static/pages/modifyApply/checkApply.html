@@ -889,10 +889,10 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
-<script type="text/javascript" src='js/projectInfoVice.js'></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 
+<script type="text/javascript" src='js/projectInfoVice.js'></script>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
         var form = layui.form,
@@ -913,7 +913,6 @@
     var apply_id = getUrlParam("id");
 
     getId();
-    initData();
     function getId() {
         $.ajax({
             type: 'get',
