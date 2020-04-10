@@ -37,7 +37,7 @@ public class ExpertEvaluateController {
             List<CheckTable> checkTables = checkTableService.findListByParams(map,CheckTable.class);
             CheckTable checkTable = new CheckTable();
             checkTable.setId(checkTables.get(0).getId());
-            checkTable.setStatus(5);
+            checkTable.setStatus(4);
             checkTableService.update(checkTable);
         }
         return expertEvaluate;
