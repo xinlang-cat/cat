@@ -533,6 +533,7 @@
                     </td>
                 </tr>
                 <tr id="check_c">
+
                     <td class="td-text">验收方核验结果:</td>
                     <td colspan="7"> <textarea placeholder="验收方核验结果，专家审核后填写" class="layui-textarea form-control"
                                                lay-verify="required"
@@ -540,6 +541,9 @@
                     ></textarea>
 
                     </td>
+                </tr>
+                <tr id="check_expect">
+
                 </tr>
                 <tr id="check_d">
                     <td class="td-text">受委托管理单位或项目牵头承担单位核验结果:</td>
@@ -615,6 +619,41 @@
 
     });
     userType();
+
+    function getExpert() {
+        var params = {
+            itemId: item_id
+        };
+        $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
+            var str = '<td class="td-text">专家姓名</td>\n' +
+                '<td class="td-text">审核时间</td>\n' +
+                '                    <td colspan="6">评审意见</td>';
+            for (var i = data.length - 1; i >= 0; i--) {
+
+                str += '<td class="td-text">' + data[i].userName + '</td>\n' +
+                    '<td class="td-text">' + formatDate4(data[i].createTime) + '</td>\n' +
+                    '<td class="td-text">' + getStatus(data[i].status) + '</td>\n' +
+                    '                    <td colspan="5"> <textarea class="layui-textarea form-control" lay-verify="required"\n' +
+                    '                    >' + data[i].evaluateContent + '</textarea>\n' +
+                    '                    </td>';
+
+
+            }
+            $("#check_expect").append(str);
+        });
+    };
+
+    function getStatus(status) {
+        if (status == 1) {
+            return "通过";
+        } else if (status == 0) {
+            return "保留意见";
+        } else {
+            return "1不通过";
+        }
+
+    }
+
     $.matchExpert({
         elem: '#test',
         itemId: item_id,
@@ -755,7 +794,9 @@
             if ($.inArray('PARTY_A:html', pers) != -1) {
 
             }
-
+            if (status > 3) {
+                getExpert();
+            }
             if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
                 //监理初审
                 document.getElementById('new').style.display = 'block';
@@ -779,6 +820,7 @@
                 document.getElementById('new').style.display = 'block';
                 $("#burgLeaderOpinion").removeAttr("readonly");
             } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
+
                 //验收终审
                 document.getElementById('new').style.display = 'block';
                 document.getElementById('check_d').style.display = 'none';
