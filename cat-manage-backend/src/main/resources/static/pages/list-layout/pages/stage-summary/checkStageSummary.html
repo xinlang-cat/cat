@@ -725,7 +725,7 @@
         //初始化创建者信息
         $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
             //负责人填写的部分
-            if ($.inArray('html:principal:check:stage', pers) > 0) {
+            if ($.inArray('html:principal:check:stage', pers) > -1) {
                 var str = '';
                 str += '<td><label>项目负责人承诺：</label>';
                 str += '<textarea placeholder="项目负责人承诺" class="layui-textarea form-control" lay-verify="required" id="principalCheck" name="principalCheck" >';
@@ -736,7 +736,7 @@
                 $(".principalCheckStage").append(str);
             }
             //单位填写的部分
-            if ($.inArray('html:dept:check:stage', pers) > 0) {
+            if ($.inArray('html:dept:check:stage', pers) > -1) {
                 var str = '';
                 str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
                 str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施" checked></div>';
