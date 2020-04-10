@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -192,6 +193,18 @@ public class UserController {
             throw new IllegalArgumentException("手机号不一致");
         }
     }
-
+    /**
+     * 根据用户类型给用户 分配角色
+     *
+     * @param id      用户id
+     * @param roleId 角色id
+     */
+    @LogAnnotation(module = "分配角色")
+    @PostMapping("/users/roles/default")
+    public void setDefaultRoleToUser(@RequestParam Long id, @RequestParam Long roleId) {
+        Set<Long> roleIds = new HashSet<>();
+        roleIds.add(roleId);
+        appUserService.setRoleToUser(id, roleIds);
+    }
 
 }

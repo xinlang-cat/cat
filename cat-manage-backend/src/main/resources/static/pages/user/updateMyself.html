@@ -60,9 +60,10 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">身份类型</label>
 					<div class="col-md-8">
-						<select class="form-control input-sm"  id="userType1" disabled="disabled">
+						<select class="form-control input-sm"  id="userType" name="userType">
 							<option value="PARTY_A">甲方</option>
-							<option value="PARTY_B">乙方</option>
+							<option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>
+							<option value="PARTY_B_MEMBER">乙方项目成员</option>
 							<option value="PARTY_C">监理</option>
 							<option value="PARTY_D">验收</option>
 							<option value="EXPERT">专家</option>
@@ -328,21 +329,17 @@
 				<div class="form-group">
 					<label class="col-md-2 control-label">工作成就案例</label>
 					<div class="col-md-8">
-						<textarea class="layui-textarea" id="accomplishment" style="display: none">
-						</textarea>
+						<textarea id="accomplishment" name="accomplishment" placeholder="请输入内容" class="layui-textarea" rows="10"></textarea>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label class="col-md-2 control-label">获得的科技成果/奖励/荣誉</label>
 					<div class="col-md-8">
-						<textarea class="layui-textarea" id="achievement" style="display: none">
-						</textarea>
+						<textarea id="achievement" name="achievement" placeholder="获得的科技成果/奖励/荣誉" class="layui-textarea" rows="10"></textarea>
 					</div>
 				</div>
 				<input type="hidden" class="form-control" id="projectUserId">
 				<input type="hidden" class="form-control" id="identity">
-				<input type="hidden" class="form-control" id="userType" name="userType">
 				<input type="hidden" class="form-control" id="deptType" name="deptType">
 				<input type="hidden" class="form-control" name="enable" value="true">
 				<div class="form-actions">
@@ -370,7 +367,7 @@
 	<script type="text/javascript" src="../../js/chooseArea.js"></script>
 	<script type="text/javascript">
 
-		var layedit ,index1,index2,layer,tree,util,laydate,form;
+		var layedit ,layer,tree,util,laydate,form;
 
 		layui.use(['tree','layedit','upload','layer','util', 'laydate'], function(){
 			layedit = layui.layedit;
@@ -395,9 +392,6 @@
 				elem: '#lastYear'
 				, type: 'year'
 			});
-
-			index1 = layedit.build('accomplishment');
-			index2 = layedit.build('achievement');
 		});
 
 		$.ajax({
@@ -427,7 +421,6 @@
 								}
 								if(key == 'id'){
 									$("#projectUserId").val(data[0].id);
-									$("#userType1").val(data[0].userType);
 									$("#deptType1").val(data[0].deptType);
 									continue;
 								}
@@ -464,8 +457,6 @@
 				contentType: "application/json; charset=utf-8",
 				data : JSON.stringify(formdata),
 				success : function(data) {
-					formdata.accomplishment = layedit.getContent(index1);
-					formdata.achievement = layedit.getContent(index2);
 					formdata.userId = $("#id").val();
 					formdata.birthDate = Date.parse(new Date(formdata.birthDate));
 					formdata.lastYear = Date.parse(new Date(formdata.lastYear));
@@ -543,9 +534,7 @@
 						$("#deptCode").val(data.deptCode);
 						$("#deptName").val(data.signName);
 						$("#deptType").val(data.type);
-						$("#userType").val(data.identity);
 						$("#deptType1").val(data.type);
-						$("#userType1").val(data.identity);
 					}
 				}
 			});

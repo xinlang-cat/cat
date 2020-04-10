@@ -149,7 +149,10 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="entrusting_party" placeholder="请输入">
+                        <!--<input type="text" name="entrusting_party" placeholder="请输入">-->
+                        <select name="entrusting_party" id="entrusting_party" lay-filter="unit">
+                            <option value=""></option>
+                        </select>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -181,7 +184,10 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="management_unit" placeholder="请输入">
+                        <!--<input type="text" name="management_unit" placeholder="请输入">-->
+                        <select name="management_unit" id="management_unit" lay-filter="unit">
+                            <option value=""></option>
+                        </select>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -1293,10 +1299,29 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td class="tdDorder mainTd_1" rowspan="3">
+                                <td class="tdDorder mainTd_1" rowspan="4">
                                     <span>甲方</span>
                                     <input type="hidden" name="type" value="1">
                                 </td>
+                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <!--<input type="text" placeholder="请输入" name="leader">-->
+                                        <select name="leader" id="leader_1">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <span>负责人电话</span>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="leader_phone">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="mainTd_1 tdDorder"><span>联系人</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
@@ -1304,11 +1329,11 @@
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <span>电话</span>
+                                    <span>联系人电话</span>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="phone">
+                                        <input type="text" placeholder="请输入" name="linkman_phone">
                                     </div>
                                 </td>
                             </tr>
@@ -1345,10 +1370,29 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tdDorder mainTd_1" rowspan="3">
+                                <td class="tdDorder mainTd_1" rowspan="4">
                                     <span>乙方</span>
                                     <input type="hidden" name="type" value="2">
                                 </td>
+                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <!--<input type="text" placeholder="请输入" name="leader">-->
+                                        <select name="leader" id="leader_2">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <span>负责人电话</span>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="leader_phone">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="mainTd_1 tdDorder"><span>联系人</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
@@ -1356,11 +1400,11 @@
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <span>电话</span>
+                                    <span>联系人电话</span>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="phone">
+                                        <input type="text" placeholder="请输入" name="linkman_phone">
                                     </div>
                                 </td>
                             </tr>
@@ -1397,10 +1441,29 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="tdDorder mainTd_1" rowspan="3">
+                                <td class="tdDorder mainTd_1" rowspan="4">
                                     <span>丙方</span>
                                     <input type="hidden" name="type" value="3">
                                 </td>
+                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <!--<input type="text" placeholder="请输入" name="leader">-->
+                                        <select name="leader" id="leader_3">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <span>负责人电话</span>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="leader_phone">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="mainTd_1 tdDorder"><span>联系人</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
@@ -1408,11 +1471,11 @@
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                                    <span>电话</span>
+                                    <span>联系人电话</span>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="phone">
+                                        <input type="text" placeholder="请输入" name="linkman_phone">
                                     </div>
                                 </td>
                             </tr>
@@ -1631,7 +1694,7 @@
                                         url: domainName + '/project-user/users',
                                         contentType: "application/json; charset=utf-8",
                                         async: false,
-                                        data: 'dept=' + $('responsible_unit').val(),
+                                        data: 'deptName=' + $('#responsible_unit').val(),
                                         success: function (data) {
                                             var d = [];
                                             $(data.data).each(function () {
@@ -1681,12 +1744,6 @@
                         var select = xmSelect.get('#user_select', true);
                         var data = select.getValue();
                         var arr = data[0].value.split(',');
-                        var input = '';
-                        if (serial == 1) {
-                            input = '<input type="text" placeholder="请输入" name="responsibilities" value="项目负责人" readonly>';
-                        } else {
-                            input = '<input type="text" placeholder="请输入" name="responsibilities">';
-                        }
                         str = '<tr>\n' +
                             '                            <td class="tdDorder mainTd_1">\n' +
                             '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
@@ -1724,7 +1781,8 @@
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
-                            '                                <div class="field">\n' + input +
+                            '                                <div class="field">' +
+                            '                                   <input type="text" placeholder="请输入" name="responsibilities">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                        </tr>';
@@ -1740,7 +1798,7 @@
                                 var data = {name: name, value: UId,};
                                 d.push(data)
                             }
-                        })
+                        });
                         $(xmSelect.get()).each(function () {// 给指标的实施人员选择赋值
                             this.update({
                                 data: d
@@ -1896,11 +1954,37 @@
             $(this).parent().find('input[name=site]').text('');;
             form.render('select');
         });
+        //监听单位选择选择
+        form.on('select(unit)', function(data){
+            var id = $(data.elem).attr('id');
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-user/users',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: 'deptName=' + data.value,
+                success: function (d) {
+                    var options = '<option value=""></option>';
+                    $(d.data).each(function () {
+                        options += '<option value="'+this.userId+'">'+this.name+'</option>';
+                    });
+                    if(id=='entrusting_party'){
+                        $('#leader_1').empty();
+                        $('#leader_1').append(options);
+                    }else {
+                        $('#leader_3').empty();
+                        $('#leader_3').append(options);
+                    }
+                }
+            });
+            form.render('select');
+        });
     })
     ;
     /*初始化数据*/
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
-    initCompanySelect($('#responsible_unit'));//当前用户公司
+    getMyCompany($('#responsible_unit'));//当前用户单位
+    initCompanySelect();//单位选择
 
     /*保存或提交*/
     function submit(status) {
