@@ -54,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <div class="weui-tabbar tab-bottom">
         <a href="javascript:;" class="weui-tabbar__item">
 					<span style="display: inline-block;position: relative;">
@@ -113,7 +112,17 @@
         type: 'get',
         url: domainName + '/api-u/users/current',
         success: function (data) {
-			$('#headImg').attr("style","background-image:url('"+ data.headImgUrl +"')")
+            if(!jQuery.isEmptyObject(data.headImgUrl)){
+                $('#headImg').attr("style","background-image:url('"+ data.headImgUrl +"')")
+            }else{
+                if(data.sex == 1){
+                    $('#headImg').attr("style","background-image:url('../images/avatar3.jpg')")
+                }else {
+                    $('#headImg').attr("style","background-image:url('../images/avatar.jpg')")
+                }
+
+            }
+
         }
     });
 
