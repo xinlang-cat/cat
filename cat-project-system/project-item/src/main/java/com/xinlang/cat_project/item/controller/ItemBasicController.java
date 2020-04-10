@@ -153,6 +153,8 @@ public class ItemBasicController {
             modifyApply.setApply_time(new Date());
             modifyApply.setStatus(information.getStatus());
             modifyApply.setItem_id(information.getId());
+            modifyApply.setManage_unit(information.getEntrusting_party());
+            modifyApply.setCheck_unit(information.getManagement_unit());
             modifyApplyService.save(modifyApply);
             System.err.println(modifyApply);
             apply_id = modifyApply.getId();
@@ -285,21 +287,8 @@ public class ItemBasicController {
                                                                      @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params) {
-        String name = (String) params.get("item_name");
-        if (name == "" || name == null) {
 
-        } else {
-            List<ItemBasic> itemBasics = itemBasicService.findByName(name);
-            List<Integer> itemIds = new ArrayList<>();
-            if (itemIds.size() == 0) {
-                itemIds.add(0);
-            } else {
-                for (int i = 0; i < itemBasics.size(); i++) {
-                    itemIds.add(itemBasics.get(i).getId());
-                }
-            }
-            params.put("itemIds", itemIds);
-        }
+
         PageResult<modifyApply> result = modifyApplyService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
     }

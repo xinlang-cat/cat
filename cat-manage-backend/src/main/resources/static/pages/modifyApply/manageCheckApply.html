@@ -18,7 +18,13 @@
 </head>
 
 <body>
-
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" style="display: none;"></button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="reject();" id="reject" style="display: none;" >驳回</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="pass();" id="pass" style="display: none;">通过</button>
+    </div>
+</div>
 <div class="layui-form" style="margin-top: 60px;">
     <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
         <colgroup>
@@ -948,7 +954,27 @@
             }
         })
     }
+    function initData(){
+        var data = {
+            id:apply_id,
+        }
+        $.ajax({
+            type : 'get',
+            data:data,
+            url : domainName + '/project-item/item/basic/modifyApply/list',
+            async : false,
+            success : function(data) {
+                $(data).each(function () {
+                    var status =data[0].status;
+                    if(status==1 && $.inArray('PARTY_A', pers)){
+                        document.getElementById("pass").style.display="block";
+                        document.getElementById("reject").style.display="block";
+                    }
+                });
 
+            }
+        });
+    }
 
     function pass() {
         $.ajax({

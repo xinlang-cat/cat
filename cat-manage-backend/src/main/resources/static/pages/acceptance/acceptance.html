@@ -73,6 +73,9 @@
              <input type="hidden" id="createUserId" name="createUserId" value="">
                     <input type="hidden" id="item_id" name="item_id" value="">
                     <input type="hidden" id="id" name="id" value="">
+                    <input type="hidden" id="status" name="status" value="">
+                    <input type="hidden" id="entrusting_company" name="entrusting_company" value="">
+                    <input type="hidden" id="management_company" name="management_company" value="">
 
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
@@ -85,17 +88,17 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="td-text1">承担单位:</td>
+                    <td class="td-text1">项目承担单位（乙方）:</td>
                     <td>
                         <span class="responsible_unit"></span>
                     </td>
-                    <td class="td-text1">受委托管理单位:</td>
+                    <td class="td-text1">委托单位（甲方）:</td>
                     <td>
                         <span id="entrusting_party"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td class="td-text1">申请验收理单位:</td>
+                    <td class="td-text1">受委托管理单位（丙方）:</td>
                     <td>
                         <span class="management_unit"></span>
                     </td>
@@ -457,11 +460,36 @@
                     </td>
                 </tr>
 
-                <tr permission="back:supervisor:check">
+                <tr>
                     <td class="td-text" >受委托管理单位或项目牵头承担单位意见:</td>
                     <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见" class="layui-textarea form-control"
                                                lay-verify="required"
                                                id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
+                    </td>
+                </tr>
+                <tr id="check_b">
+                    <td class="td-text">验收方初审意见:</td>
+                    <td colspan="7"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
+
+                    </td>
+                </tr>
+                <tr id="check_c">
+                    <td class="td-text">验收方核验结果:</td>
+                    <td colspan="7"> <textarea placeholder="验收方核验结果，专家审核后填写" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="burgLeaderResult" name="burgLeaderResult"
+                    ></textarea>
+
+                    </td>
+                </tr>
+                <tr id="check_d" >
+                    <td class="td-text">受委托管理单位或项目牵头承担单位核验结果:</td>
+                    <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位最终核验结果" class="layui-textarea form-control"
+                                               lay-verify="required" id="manageDeptResult"
+                                               name="manageDeptResult"></textarea>
+
                     </td>
                 </tr>
                 </tbody>
@@ -584,6 +612,8 @@
                     $("#manageDeptOpinion").text(this.manageDeptOpinion);
                     $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
                     $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
+                    $("#manageDeptResult").text(this.manageDeptResult);
+                    $("#burgLeaderResult").text(this.burgLeaderResult);
                     change(this.status);
                 })
             }

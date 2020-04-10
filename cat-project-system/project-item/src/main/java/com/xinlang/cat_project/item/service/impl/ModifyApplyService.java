@@ -47,11 +47,17 @@ public class ModifyApplyService extends BaseService<modifyApply> implements IMod
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(modifyApply.class);
-       if (params.get("status") != "" && params.get("itemIds") != null){
-            example.createCriteria().andEqualTo("status",params.get("status")).andIn("item_id", (Iterable) params.get("itemIds"));
-       }else if ( params.get("itemIds") != null){
-            example.createCriteria().andNotEqualTo("status",0).andIn("item_id", (Iterable) params.get("itemIds"));
+
+       if (params.get("status") != "" && params.get("check_unit") != null){
+            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("check_unit",params.get("check_unit"));
+       }else if ( params.get("check_unit") != null){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit",params.get("check_unit"));
+       }else if (params.get("status") != "" &&  params.get("manage_unit") != null){
+           example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit",params.get("manage_unit"));
+       }else if ( params.get("manage_unit") != null){
+           example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit",params.get("manage_unit"));
        }else if (params.get("status") != "" ){
+
            example.createCriteria().andEqualTo("status",params.get("status"));
        }else {
            example.createCriteria().andNotEqualTo("status",0);

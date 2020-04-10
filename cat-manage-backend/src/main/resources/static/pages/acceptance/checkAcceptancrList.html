@@ -161,13 +161,17 @@
                             "render": function (data, type, row) {
                                 $.ajaxSettings.async = false;
                                 if (data==1){
-                                    data="监理审核中";
+                                    data="监理初审中";
                                 }else if (data==2){
-                                    data="甲方审核中";
+                                    data="验收初审中";
                                 }else if (data==3){
-                                    data="已结题";
+                                    data="专家审核";
                                 }else if (data==4){
-                                    data="审核未通过";
+                                    data="验收终审";
+                                }else if (data==5){
+                                    data="监理终审";
+                                }else if (data==6){
+                                    data="结题审核通过";
                                 }
                                 $.ajaxSettings.async = true;
                                 return data;

@@ -17,6 +17,8 @@ function getbasic(id) {
             getCompanyInfo(d.responsible_unit);
             $(".management_unit").text(d.management_unit);
             $("#entrusting_party").text(d.entrusting_party);
+            $("#entrusting_company").val(d.entrusting_party);
+            $("#management_company").val(d.management_unit);
 
         }
     })

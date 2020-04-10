@@ -24,7 +24,7 @@
         <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
     </div>
     <div class="weui-cell__bd weui-cell_primary">
-        <p class="weui-max-title">添加工作总结</p>
+        <p class="weui-max-title">工作总结</p>
     </div>
 </a>
 
@@ -102,7 +102,7 @@
     </div>
 
     <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交</a>
+        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
     </div>
 </form>
 
@@ -120,6 +120,32 @@
 		FastClick.attach(document.body);
 	});
 	var itemId = getUrlParam("item_id");
+    initData();
+    function initData() {
+        var data = {
+            itemId: itemId,
+        }
+        $.ajax({
+            type: 'get',
+            data: data,
+            url: domainName + '/api-summary/work/list',
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    for (var key in data[0]) {
+                        $("textarea[name=" + key + "]").val(data[0][key]);
+                    }
+                });
+                if(data.length>0){
+                    $("input").attr('readonly', true);
+                    $("input").attr("style", "text-align: center;border: 0px;");
+                    $("textarea").attr('readonly', true);
+                    document.getElementById('showTooltips').style.display='none';
+                }
+
+            }
+        });
+    }
 	function add() {
 		var formdata = $("#form").serializeObject();
 		formdata.itemId = itemId;

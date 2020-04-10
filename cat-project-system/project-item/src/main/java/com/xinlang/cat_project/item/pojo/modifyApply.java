@@ -66,4 +66,6 @@ public class modifyApply implements Serializable {
      * 3 "更改成功";
      */
     private Integer status;
+    private String check_unit;     //审核单位
+    private String manage_unit;     //管理单位
 }

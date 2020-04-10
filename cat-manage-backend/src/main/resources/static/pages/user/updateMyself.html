@@ -520,60 +520,58 @@
         });
     }
 
-    $("#deptCode").blur(function () {
-        var deptCode = $.trim($(this).val());
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-c/company/' + deptCode,
-            success: function (data) {
-                if (jQuery.isEmptyObject(data)) {
-                    layer.open({
-                        closeBtn: 0
-                        , title: "还没添加公司信息呢"
-                        , btn: ['返回首页', '去完善公司信息']
-                        , btn1: function (index, layero) {
-                            deleteCurrentTab();
-                        }
-                        , btn2: function (index, layero) {
-                            location.href = domainName + '/api-b/pages/company/addCompany.html';
-                        }
-                    })
-                } else {
-                    $("#deptCode").val(data.deptCode);
-                    $("#deptName").val(data.signName);
-                    $("#deptType").val(data.type);
-                    $("#deptType1").val(data.type);
-                }
-            }
-        });
-    });
+		$("#deptCode").blur(function () {
+			var deptCode =$.trim( $(this).val());
+			$.ajax({
+				type : 'get',
+				url : domainName + '/api-c/company/'+deptCode,
+				success : function(data) {
+					if(jQuery.isEmptyObject(data)){
+						layer.open({
+							closeBtn: 0
+							,title:"还没添加公司信息呢"
+							,btn: ['返回首页', '去完善公司信息']
+							,btn1: function(index, layero){
+								deleteCurrentTab();
+							}
+							,btn2: function(index, layero){
+								location.href=domainName + '/api-b/pages/company/addCompany.html';
+							}
+						})
+					}else{
+						$("#deptCode").val(data.deptCode);
+						$("#deptName").val(data.signName);
+						$("#deptType").val(data.type);
+						$("#deptType1").val(data.type);
+					}
+				}
+			});
+		});
+		function companyUser() {
+			$('#form').bootstrapValidator();
+			var bootstrapValidator = $("#form").data('bootstrapValidator');
+			bootstrapValidator.validate();
+			if(!bootstrapValidator.isValid()){
+				return;
+			}
+			var formdata = $("#form").serializeObject();
+			$.ajax({
+				type : 'post',
+				url : domainName + '/project-company/user',
+				contentType: "application/json; charset=utf-8",
+				data : JSON.stringify(formdata),
+				success : function(data) {
 
-    function companyUser() {
-        $('#form').bootstrapValidator();
-        var bootstrapValidator = $("#form").data('bootstrapValidator');
-        bootstrapValidator.validate();
-        if (!bootstrapValidator.isValid()) {
-            return;
-        }
-        var formdata = $("#form").serializeObject();
-        $.ajax({
-            type: 'post',
-            url: domainName + '/project-company/user',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
-            success: function (data) {
-                alert("ok");
-            }
-        });
-    }
-
-    function setValue(data) {
-        $("#id").val(data.id);
-        $("#username").val(data.username);
-        $("#nickname").val(data.nickname);
-        $("#sex").val(data.sex);
-        $("#phone").val(data.phone);
-    }
+				}
+			});
+		}
+		function setValue(data) {
+			$("#id").val(data.id);
+			$("#username").val(data.username);
+			$("#nickname").val(data.nickname);
+			$("#sex").val(data.sex);
+			$("#phone").val(data.phone);
+		}
 
     function getName(sign, node) {
         if (sign != "" && sign != null && sign != undefined) {
