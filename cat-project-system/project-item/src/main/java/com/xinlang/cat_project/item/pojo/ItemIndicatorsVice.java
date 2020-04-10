@@ -31,6 +31,7 @@ public class ItemIndicatorsVice {
     private Date end_date;
     private String userIds;
     private Integer status;
+    private String plan;
 
 
 

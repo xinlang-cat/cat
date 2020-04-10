@@ -18,6 +18,9 @@
 <form class="layui-form" id="form">
     <input type="hidden" id="item_id" name="item_id" value="">
     <input type="hidden" id="id" name="id" value="">
+    <input type="hidden" id="status" name="status" value="">
+    <input type="hidden" id="entrusting_company" name="entrusting_company" value="">
+    <input type="hidden" id="management_company" name="management_company" value="">
     <div class="page-hd padding15 bg-white">
         <h1 class="page-hd-title" style="text-align: center;">
             结题申请
@@ -93,18 +96,7 @@
                 <span id="phone"></span>
             </div>
         </div>
-        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
-            <div class="weui-cell__hd"><label class="weui-label -bold">邮政编码</label></div>
-            <div class="weui-cell__bd">
-                <span id="postal_code"></span>
-            </div>
-        </div>
-        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
-            <div class="weui-cell__hd"><label class="weui-label -bold">电子邮箱</label></div>
-            <div class="weui-cell__bd">
-                <span id="email"></span>
-            </div>
-        </div>
+
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__hd"><label class="weui-label -bold">单位性质</label></div>
             <div class="weui-cell__bd">
@@ -133,7 +125,7 @@
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__bd">
                 <label class="weui-min-title">指标完成情况</label>
-                <textarea class="weui-textarea" placeholder="请输入指标完成情况" rows="3"   id="cean"
+                <textarea class="weui-textarea" placeholder="请输入指标完成情况" rows="3" id="cean"
                           name="cean"></textarea>
             </div>
         </div>
@@ -141,7 +133,7 @@
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__bd">
                 <label class="weui-min-title">资料文件目录</label>
-                <textarea class="weui-textarea" placeholder="请输入资料文件目录" rows="3"   id="katalog"
+                <textarea class="weui-textarea" placeholder="请输入资料文件目录" rows="3" id="katalog"
                           name="katalog"></textarea>
             </div>
         </div>
@@ -447,7 +439,7 @@
                 <input class="weui-input" type="number" id="net_amount_a" name="net_amount_a">
             </div>
         </div>
-        <td class="td-text">间接经济效益</td>
+        <div class="weui-cells__title page-bg">间接经济效益</div>
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__hd"><label class="weui-label -bold">新增销售收入(万元)</label></div>
             <div class="weui-cell__bd">
@@ -473,36 +465,36 @@
                 <input class="weui-input" type="number" id="net_amount_b" name="net_amount_b">
             </div>
         </div>
-    </div>
-    <div class="weui-cells__title page-bg">预期项目完成后年增效益</div>
+        <div class="weui-cells__title page-bg">预期项目完成后年增效益</div>
 
-    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
-        <div class="weui-cell__hd"><label class="weui-label -bold">年增销售收入(万元)</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="number" id="all_production_year"
-                   name="all_production_year">
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">年增销售收入(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="all_production_year"
+                       name="all_production_year">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">年增产值(万元）</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_production_year"
+                       name="the_new_production_year">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">年增利税(万元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="the_new_tax_year" name="the_new_tax_year">
+            </div>
+        </div>
+        <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
+            <div class="weui-cell__hd"><label class="weui-label -bold">年增出口创汇(万美元)</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="net_amount_year" name="net_amount_year">
+            </div>
         </div>
     </div>
-    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
-        <div class="weui-cell__hd"><label class="weui-label -bold">年增产值(万元）</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="number" id="the_new_production_year"
-                   name="the_new_production_year">
-        </div>
-    </div>
-    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
-        <div class="weui-cell__hd"><label class="weui-label -bold">年增利税(万元)</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="number" id="the_new_tax_year" name="the_new_tax_year">
-        </div>
-    </div>
-    <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
-        <div class="weui-cell__hd"><label class="weui-label -bold">年增出口创汇(万美元)</label></div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="number" id="net_amount_year" name="net_amount_year">
-        </div>
-    </div>
-    </div>
+
 
     <div class="weui-loadmore_line"></div>
     <!-- 总体目标和主要研究内容 -->
@@ -511,15 +503,15 @@
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__bd">
                 <label class="weui-min-title">申请验收单位意见</label>
-						<textarea class="weui-textarea" rows="3"  
-                                  id="applicationDeptOpinion" name="applicationDeptOpinion"></textarea>
+                <textarea class="weui-textarea" rows="3"
+                          id="applicationDeptOpinion" name="applicationDeptOpinion"></textarea>
             </div>
         </div>
         <div class="weui-loadmore_line"></div>
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__bd">
                 <label class="weui-min-title">受委托管理单位或项目牵头承担单位意见</label>
-                <textarea class="weui-textarea" rows="3"  
+                <textarea class="weui-textarea" rows="3"
                           id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
             </div>
         </div>
@@ -553,6 +545,7 @@
 <div class="weui-btn-area">
     <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
 </div>
+
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
@@ -560,7 +553,6 @@
 <script src="../../weui/js/city-picker.js"></script>
 <script src="../../../../js/constant.js"></script>
 <script src="../../../../js/common.js"></script>
-<script src="../../js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script>
     $(function () {
@@ -570,7 +562,8 @@
     $("#item_id").val(item_id);
     getdata(item_id);
     getbasic(item_id);
-    getCompanyInfo(item_id);
+
+    /* getCompanyInfo(item_id);*/
 
     function getbasic(id) {
         $.ajax({
@@ -588,9 +581,11 @@
                 $("#end_date").text(d.end_date.substring(0, 10));
                 $("#outline").text(d.outline);
                 $(".responsible_unit").text(d.responsible_unit);
+                getCompanyInfo(d.responsible_unit);
                 $(".management_unit").text(d.management_unit);
                 $("#entrusting_party").text(d.entrusting_party);
-                getCompanyInfo(d.responsible_unit);
+                $("#entrusting_company").val(d.entrusting_party);
+                $("#management_company").val(d.management_unit);
 
             }
         })
@@ -599,7 +594,7 @@
     function getCompanyInfo(name) {
         $.ajax({
             type: 'get',
-            url: domainName + '/api-c/company/name/'+name,
+            url: domainName + '/api-c/company/name/' + name,
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
@@ -609,7 +604,9 @@
             }
         });
     }
+
     getUserId();
+
     function getUserId() {
         $.ajax({
             type: 'get',
@@ -682,10 +679,7 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(formdata),
                 success: function (data) {
-                    var msg = "添加成功";
-                    layer.msg(msg, {shift: -1, time: 1000}, function () {
                         $.toptip('操作成功', 'success');
-                    });
                 }
             });
         } else {

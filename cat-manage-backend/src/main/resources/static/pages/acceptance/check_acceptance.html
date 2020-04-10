@@ -738,10 +738,10 @@
                 $("#acceptance_company").removeAttr("readonly");
             } else if (status == 2 && identity == "PARTY_D") {
                 //验收初审
-                document.getElementById('test').style.display = 'block';
-                document.getElementById('new').style.display = 'block';
                 document.getElementById('check_c').style.display = 'none';
                 document.getElementById('check_d').style.display = 'none';
+                document.getElementById('test').style.display = 'block';
+                document.getElementById('new').style.display = 'block';
                 $("#burgLeaderOpinion").removeAttr("readonly");
             } else if (status == 4 && identity == "PARTY_D") {
                 //验收终审

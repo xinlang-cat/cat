@@ -17,8 +17,8 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    项目名称(支持模糊搜索)：
-                                    <input id="item_name" type="text" class="form-control" placeholder="项目名">
+                                    <!--项目名称(支持模糊搜索)：
+                                    <input id="item_name" type="text" class="form-control" placeholder="项目名">-->
                                     状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
@@ -28,7 +28,9 @@
                                         <option value=4>查定不合格</option>
                                         <option value=5>查定申请未通过</option>
                                     </select>
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i
+                                            class="layui-icon">&#xe615;</i>搜索
+                                    </button>
                                 </div>
                             </form>
                         </td>
@@ -47,7 +49,7 @@
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">操作</th>
-                       <!-- <th style="width:5%;">查定报告</th>-->
+                        <!-- <th style="width:5%;">查定报告</th>-->
                         <!--<th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
@@ -73,38 +75,40 @@
 
     var pers = checkPermission();
     var unit;
-    var deptCode;//当前用户的公司代码r
-    itemId = getUrlParam("item_id");
+    var deptCode;//当前用户的公司代码
+    var manage_dept;
+    var identity;
     var example;
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
         getCompanryCode();
+
         function init() {
             example =
                 $('#dt-table').DataTable({
                     "searching": false,
                     "processing": false,
                     "serverSide": true,
-                   /* "info": false,
-                    "paging": true, // 禁止分页*/
+                    /* "info": false,
+                     "paging": true, // 禁止分页*/
                     "ordering": false,
                     "language": {
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
                         "url": domainName + "/project-item/item/target/applyList/page",
-                        "data":function(d){
+                        "data": function (d) {
                             d.item_name = $('#item_name').val();
                             d.status = $('#status').val();
-                            d.item_id = itemId;
-                            d.check_unit=unit;
+                            d.check_unit = unit;
+                            d.manage_dept = manage_dept;
                         },
                         "type": "get",
                         "dataSrc": function (json) {
                             console.log(json)
-                            json.recordsTotal=json.total;
-                            json.recordsFiltered=json.total;
+                            json.recordsTotal = json.total;
+                            json.recordsFiltered = json.total;
                             return json.data;
                         },
                         "error": function (xhr, textStatus, errorThrown) {
@@ -133,10 +137,10 @@
                             "data": "item_name",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var id =row['item_id'];
+                                var id = row['item_id'];
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
-                                    data =  res[0]['name'];
+                                    data = res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -148,7 +152,7 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var start = formatDate3(data);
-                                return start ;
+                                return start;
                             }
                         },
                         {
@@ -157,7 +161,7 @@
                             "render": function (data, type, row) {
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-user/user-anon/" + row['edit_userid'], function (res) {
-                                    data =  res[0]['name'];
+                                    data = res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -168,19 +172,19 @@
                             "data": "status",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var status =row['status'];
+                                var status = row['status'];
                                 $.ajaxSettings.async = false;
-                               if (status == 1){
-                                   data="待查定";
-                               }else if (status == 2){
-                                   data="查定中";
-                               }else if (status == 3){
-                                   data="查定合格";
-                               }else if (status == 4){
-                                   data="查定不合格";
-                               }else if (status == 5){
-                                   data="查定申请未通过";
-                               }
+                                if (status == 1) {
+                                    data = "待查定";
+                                } else if (status == 2) {
+                                    data = "查定中";
+                                } else if (status == 3) {
+                                    data = "查定合格";
+                                } else if (status == 4) {
+                                    data = "查定不合格";
+                                } else if (status == 5) {
+                                    data = "查定申请未通过";
+                                }
 
 
                                 $.ajaxSettings.async = true;
@@ -191,47 +195,39 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var status =row['status']==1?"申请详情":"查定报告";
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] +','+row['status']+ ')" >'+status+'<i class="layui-icon"></i></button>');
+
+                                var btn = null;
+                                if ($.inArray('PARTY_A', pers)) {
+                                    btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',' + row['status'] + ')" >查看详情<i class="layui-icon"></i></button>');
+                                }else if ($.inArray('PARTY_C', pers)) {
+                                    var status = row['status'] == 1 ? "申请详情" : "查定报告";
+                                    btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ')" >' + status + '<i class="layui-icon"></i></button>');
+                                }
                                 var showDetail = btn.prop("outerHTML");
+
                                 return showDetail;
                             }
                         },
-                       /* {
-                            "data": "id",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="report(' + row['id'] +','+row['status']+ ')" ><i class="layui-icon">查定报告</i></button>');
-                                var showDetail = btn.prop("outerHTML");
-                                return showDetail;
-                            }
-                        },*/
-                        /*{
-                            "data": "id",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="checkResult(' + row['id'] + ')" ><i class="layui-icon">查定报告结果</i></button>');
-                                var showDetail = btn.prop("outerHTML");
-                                return showDetail;
-                            }
-                        }*/
+
 
                     ],
                 });
         }
+
         init();
     });
-    var h = $(window).height()-100;
-    var w = $(window).width()-200;
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
+
     function add() {
         layer.open({
-            title:"添加",
+            title: "添加",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['addAuditApply.html?item_id='+itemId+'&userId='+userId],
-            end : function() {
+            content: ['addAuditApply.html?item_id=' + itemId + '&userId=' + userId],
+            end: function () {
 
             }
         });
@@ -239,80 +235,112 @@
 
 
     function getCompanryCode() {
+
         $.ajax({
             type: 'get',
-            url : domainName + '/api-c/company/now-user',
+            url: domainName + '/api-c/company/now-user',
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                var identity = data.identity;
-                if (identity=="PARTY_A"){
+                identity = data.identity;
 
-                }else {
+                if (identity == "PARTY_A") {
+                    manage_dept = data.signName;
+                } else if (identity == "PARTY_C") {
                     unit = data.signName;
                 }
-
-
             }
         });
 
-
     }
-    function read(id,status) {
-        if (status==2){
+
+    function read(id, status) {
+
+        if (status == 3 || status == 4) {
             layer.open({
-                title:"添加查定报告",
+                title: "查看查定报告",
                 type: 2,
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['addResult.html?id='+id],
-                end : function() {
+                content: ['checkResult.html?id=' + id],
+                end: function () {
 
                 }
             });
-        }else if (status==3||status==4){
+        } else if (status == 1||status==2) {
             layer.open({
-                title:"查看查定报告",
+                title: "查看查定申请",
                 type: 2,
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['checkResult.html?id='+id],
-                end : function() {
-
-                }
-            });
-        }else if (status==1){
-            layer.open({
-                title:"查看查定申请",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['checkApply.html?id='+id],
-                end : function() {
+                content: ['checkApply.html?id=' + id],
+                end: function () {
 
                 }
             });
         }
 
     }
-    function checkResult(id) {
+    function check(id, status) {
+        if (status == 2) {
             layer.open({
-                title:"添加",
+                title: "添加查定报告",
                 type: 2,
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['checkResult.html?id='+id],
-                end : function() {
+                content: ['addResult.html?id=' + id],
+                end: function () {
 
                 }
             });
 
+        } else if (status == 3 || status == 4) {
+            layer.open({
+                title: "查看查定报告",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkResult.html?id=' + id],
+                end: function () {
+
+                }
+            });
+        } else if (status == 1) {
+            layer.open({
+                title: "查看查定申请",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkApply.html?id=' + id],
+                end: function () {
+
+                }
+            });
+        }
+
     }
-    $("#searchBt").click(function(){
+
+    function checkResult(id) {
+        layer.open({
+            title: "添加",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkResult.html?id=' + id],
+            end: function () {
+
+            }
+        });
+
+    }
+
+    $("#searchBt").click(function () {
         example.ajax.reload();
     });
 

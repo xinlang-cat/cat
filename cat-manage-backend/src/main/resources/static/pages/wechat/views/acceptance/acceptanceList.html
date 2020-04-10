@@ -40,7 +40,35 @@
     $(function () {
         FastClick.attach(document.body);
     });
+    var acceptance_company;
+    var entrusting_company;
+    var management_company;
+    function userType() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                identity = data.identity;
+                if (identity == "PARTY_A") {
+                    //甲方
+                    entrusting_company=data.signName;
+                } else if (identity == "PARTY_D") {
+                    //验收方
+                    acceptance_company=data.signName;
+                } else if (identity == "PARTY_C") {
+                    //监理方
+                    management_company=data.signName;
+                }
+
+
+            }
+        });
+
+    }
     $(function () {
+        userType();
         $.ajax({
             type: 'get',
             url: domainName + "/api-summary/check-table/list",
@@ -53,7 +81,7 @@
                         '   <a class="weui-cell weui-cell_access" href="acceptance.html?item_id=' + this.itemId + '">\n' +
                         '       <div class="weui-media-box weui-media-box_text">\n' +
                         '           <h4 class="weui-media-box__title">' + getItemName(this.itemId) + '</h4>\n' +
-                        '           <p class="weui-media-box__desc" >技术总结</p>\n' +
+                        '           <p class="weui-media-box__desc" >' + getStatus(this.status) + '</p>\n' +
                         '           <ul class="weui-media-box__info">\n' +
                         '               <li class="weui-media-box__info__meta">' + getUserName(this.createUserId)+ '</li>\n' +
                         '               <li class="weui-media-box__info__meta">' + getTime(this.applicationDate) + '</li>\n' +
@@ -114,14 +142,18 @@
 
     function getStatus(status) {
         var data = '';
-        if (status == 0) {
-            data = "待审核";
-        } else if (status == 1) {
-            data = "更改中";
+        if (status == 1) {
+            data = "监理初审中";
         } else if (status == 2) {
-            data = "审核未通过";
+            data = "验收初审中";
         } else if (status == 3) {
-            data = "更改成功";
+            data = "专家审核";
+        } else if (status == 4) {
+            data = "验收终审";
+        } else if (status == 5) {
+            data = "监理终审";
+        } else if (status == 6) {
+            data = "结题审核通过";
         }
         return data;
     }

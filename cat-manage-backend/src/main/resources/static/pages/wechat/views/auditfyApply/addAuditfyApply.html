@@ -50,7 +50,9 @@
     <div class="weui-cell">
         <div class="weui-cell__hd">
             <label class="weui-label">建议开始时间:</label>
-            <input type="hidden" id="target_id">
+            <input type="hidden" id="target_id" name="target_id">
+            <input id="check_unit" name="check_unit" type="hidden">
+            <input id="manage_unit" name="manage_unit" type="hidden">
         </div>
         <div class="weui-cell__bd">
             <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date" name="start_date">
@@ -99,6 +101,16 @@
         FastClick.attach(document.body);
     });
     var itemId = getUrlParam("item_id");
+    function getItemName(id) {
+
+        $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+            var name = res[0]['management_unit'];
+            $("#check_unit").val(name);
+            $("#manage_unit").val(res[0]['entrusting_party']);
+        })
+    }
+
+    getItemName(itemId);
     $(function () {
         $.ajax({
             type: 'get',

@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="../../weui/lib/weui.min.css">
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
 </head>
 
 <body ontouchstart>
@@ -24,7 +22,8 @@
 
     </div>
 </div>
-<script src="../../weui/lib/jquery-2.1.4.js"></script>
+
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
 <script src="../../weui/js/swiper.js"></script>
@@ -34,9 +33,15 @@
 <script src="../../js/layer.js"></script>
 <script src="../../js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="auditApply.js"></script>
+
 <script>
+    
     var status = " ";
     status = getUrlParam("status");
+    var deptCode;
+    var unit;
+    var manage_dept;
+    var identity;
     $(function () {
         FastClick.attach(document.body);
     });
@@ -46,7 +51,8 @@
             url: domainName + "/project-item/item/target/applyList",
             contentType: "application/json; charset=utf-8",
             data: {
-                status: status
+                status: status, check_unit : unit,
+        manage_dept : manage_dept
             },
             success: function (data) {
 
@@ -115,7 +121,24 @@
     })
 
 
+    function getCompanryCode() {
 
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                identity = data.identity;
+                if (identity == "PARTY_A") {
+                    manage_dept = data.signName;
+                } else if (identity == "PARTY_C") {
+                    unit = data.signName;
+                }
+            }
+        });
+
+    }
 
 </script>
 <script src="../../weui/js/jquery-weui.js"></script>
