@@ -152,6 +152,13 @@ public class ProjectUserItemController {
         return result;
     }
 
+    @ApiOperation(value = "根据项目id获取专家集合")
+    @LogAnnotation(module = "根据标签获取专家指派专家")
+    @GetMapping(value = "/item/expert")
+    public List<ProjectUserItem> assignExpert(@RequestParam Integer itemId) {
+        return  projectUserItemService.findByItemIdAndUserType(itemId,ProjectUserType.EXPERT.name());
+    }
+
     @DeleteMapping("/item/{id}")
     @ApiOperation(value = "删除用户与项目关系")
     @LogAnnotation(module = "删除用户与项目关系")
