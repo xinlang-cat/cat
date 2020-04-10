@@ -723,7 +723,7 @@
         });
 
         //初始化创建者信息
-        $.get(domainName + "/project-user/users", {id: userId}, function (res) {
+        $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
             //负责人填写的部分
             if ($.inArray('html:principal:check:stage', pers) > 0) {
                 var str = '';
