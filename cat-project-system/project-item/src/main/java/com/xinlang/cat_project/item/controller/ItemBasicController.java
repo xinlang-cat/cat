@@ -141,8 +141,13 @@ public class ItemBasicController {
         Integer apply_id;
         if (information.getApply_id() != null) {
             //更改申请已存在
-        apply_id = information.getApply_id();
-        }else {
+            apply_id = information.getApply_id();
+
+            modifyApply modifyApply = new modifyApply();
+            modifyApply.setId(information.getApply_id());
+            modifyApply.setStatus(information.getStatus());
+            modifyApplyService.update(modifyApply);
+        } else {
             modifyApply modifyApply = new modifyApply();
             modifyApply.setUser_id(userId);
             modifyApply.setApply_time(new Date());
@@ -154,7 +159,6 @@ public class ItemBasicController {
             System.err.println(modifyApply);
             apply_id = modifyApply.getId();
         }
-
 
 
         if (information.getId() != null) {

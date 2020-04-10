@@ -19,7 +19,7 @@
             text-align-last: justify;
             text-align: right;
             line-height: 1.5em;
-            width: 15%;
+            width: 20%;
         }
 
         .content {
@@ -144,79 +144,108 @@
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
 <script>
-	var id = getUrlParam("itemId");
-	queryContactWay(id);
+    var id = getUrlParam("itemId");
+    queryContactWay(id);
 
-	function queryContactWay(id) {
-		$.ajax({
-			type: 'get',
-			url: domainName + '/project-item/item/contactWay/list',
-			data: "item_id=" + id,
-			async: false,
-			contentType: "application/json; charset=utf-8",
-			success: function (data) {
-				$(data).each(function () {
-					var text = '';
-					if (this.type == 1) {
-						text = '甲方';
-					} else if (this.type == 2) {
-						text = '乙方';
-					} else {
-						text = '丙方';
-					}
-					var str = '<div class="weui-cells__title">'+text+'</div>\n' +
-							'<div class="weui-flex bg-white">\n' +
-							'    <div class="field">\n' +
-							'        <div>联系人</div>\n' +
-							'    </div>\n' +
-							'    <div class="weui-flex__item">\n' +
-							'        <div class="content">'+this.linkman+'</div>\n' +
-							'    </div>\n' +
-							'</div>\n' +
-							'<div class="weui-flex bg-white">\n' +
-							'    <div class="field">\n' +
-							'        <div>电话</div>\n' +
-							'    </div>\n' +
-							'    <div class="weui-flex__item">\n' +
-							'        <div class="content">'+this.phone+'</div>\n' +
-							'    </div>\n' +
-							'</div>\n' +
-							'<div class="weui-flex bg-white">\n' +
-							'    <div class="field">\n' +
-							'        <div>传真</div>\n' +
-							'    </div>\n' +
-							'    <div class="weui-flex__item">\n' +
-							'        <div class="content">'+this.fax+'</div>\n' +
-							'    </div>\n' +
-							'</div>\n' +
-							'<div class="weui-flex bg-white">\n' +
-							'    <div class="field">\n' +
-							'        <div>邮编</div>\n' +
-							'    </div>\n' +
-							'    <div class="weui-flex__item">\n' +
-							'        <div class="content">'+this.postcode+'</div>\n' +
-							'    </div>\n' +
-							'</div>\n' +
-							'<div class="weui-flex bg-white">\n' +
-							'    <div class="field">\n' +
-							'        <div>地址</div>\n' +
-							'    </div>\n' +
-							'    <div class="weui-flex__item">\n' +
-							'        <div class="content">'+this.site+'</div>\n' +
-							'    </div>\n' +
-							'</div>\n' +
-							'<div class="weui-flex bg-white">\n' +
-							'    <div class="field">\n' +
-							'        <div>电子邮件</div>\n' +
-							'    </div>\n' +
-							'    <div class="weui-flex__item">\n' +
-							'        <div class="content">'+this.e_mail+'</div>\n' +
-							'    </div>\n' +
-							'</div>';
-					$('#content').append(str);
-				})
-			}
-		})
-	}
+    function queryContactWay(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/contactWay/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $(data).each(function () {
+                    var text = '';
+                    if (this.type == 1) {
+                        text = '甲方';
+                    } else if (this.type == 2) {
+                        text = '乙方';
+                    } else {
+                        text = '丙方';
+                    }
+                    var str = '<div class="weui-cells__title">' + text + '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>负责人</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + getUserName(this.leader) + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>负责人电话</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.leader_phone + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>联系人</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.linkman + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>联系人电话</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.linkman_phone + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>传真</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.fax + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>邮编</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.postcode + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>地址</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.site + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>\n' +
+                        '<div class="weui-flex bg-white">\n' +
+                        '    <div class="field">\n' +
+                        '        <div>电子邮件</div>\n' +
+                        '    </div>\n' +
+                        '    <div class="weui-flex__item">\n' +
+                        '        <div class="content">' + this.e_mail + '</div>\n' +
+                        '    </div>\n' +
+                        '</div>';
+                    $('#content').append(str);
+                })
+            }
+        })
+    }
+    function getUserName(userId) {
+        var userName = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-user/user-anon/'+userId,
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                userName = data[0].name;
+            }
+        });
+        return userName;
+    }
 </script>
 </html>
