@@ -1,58 +1,60 @@
-function initTreeLabel(id,sign) {
+function initTreeLabel(id, sign) {
     $.ajax({
-        type : 'get',
-        url : domainName + '/api-label/label/tree/'+sign,
+        type: 'get',
+        url: domainName + '/api-label/label/tree/' + sign,
         contentType: "application/json; charset=utf-8",
-        success : function(res) {
+        success: function (res) {
             tree.render({
                 elem: id
-                ,data: convert(res)
-                ,showCheckbox: true  //是否显示复选框
-                ,onlyIconControl: true
-                ,click: function(obj){
+                , data: convert(res)
+                , showCheckbox: true  //是否显示复选框
+                , onlyIconControl: true
+                , click: function (obj) {
                     var data = obj.data;  //获取当前点击的节点数据
-                    layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+                    layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
                 }
             });
         }
     });
 }
 
-function convert(res){
+function convert(res) {
     var data = [];
-    $.each(res,function (i,item) {
+    $.each(res, function (i, item) {
         var data1 = {
-            id : item.id,
-            title : item.content,
-            children : null,
+            id: item.id,
+            title: item.content,
+            children: null,
             disabled: true
         };
-        if(item.child.length>0){
-            setProperty(data1,item.child);
+        if (item.child.length > 0) {
+            setProperty(data1, item.child);
         }
         data[i] = data1;
-    })
+    });
     return data;
 }
 
-function setProperty(data,children1){
-    var arr  = [];
-    $.each(children1,function (i,item) {
+function setProperty(data, children1) {
+    var arr = [];
+    $.each(children1, function (i, item) {
         var d = {
-            id : item.id,
+            id: item.id,
             title: item.content,
-            children : null
+            children: null
         };
-        if(item.child.length>0){
-            setProperty(arr,item.child,i);
+        if (item.child.length > 0) {
+            setProperty(arr, item.child, i);
         }
         arr[i] = d;
-    })
+    });
     data.children = arr;
 }
+
 //#################################################################################################################################################################################################################################################################
 var index = null;
-layui.use(['form', 'layer'], function() {
+$.labels = {};
+layui.use(['form', 'layer'], function () {
     var form = layui.form;
     var layer = layui.layer;
     $($("div[data-sign]")).click(function () {
@@ -61,40 +63,51 @@ layui.use(['form', 'layer'], function() {
         var sign = $(this).data("sign");
         var type = $(this).data("type");
         var element = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="labelList"><form class="layui-form" onsubmit="return false" id="LabelForm"><div class="layui-form-item"><div class="layui-input-block" id="label">';
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-label/label/tree/' + sign,
-            async: false,
-            success: function (data) {
-                $.each(data[0].child, function (i, item) {
-                    if(type=='radio'){
-                        element += ' <input type="radio" name="' + name + '" value="' + item.sign + '" title="' + item.content + '" id="' + item.id + '">'
-                    }else{
-                        element += '<input type="checkbox" name="' + name + '" id="' + item.id + '" value="' + item.sign + '" title="' + item.content + '"><div class="layui-unselect layui-form-checkbox"><span>' + item.content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
-                    }
-                });
-                if (status) {
-                    element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'SaveLabel()">保存</button></div></div></form></div>';
-                } else {
-                    element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'UpdateLabel()">保存</button></div></div></form></div>';
+        var data = null;
+        if(jQuery.isEmptyObject($.labels[sign])){
+            $.ajax({
+                type: 'get',
+                url: domainName + '/api-label/label/tree/' + sign,
+                async: false,
+                success: function (res) {
+                    $.labels[sign] = res;
+                    data=res;
                 }
-                index = layer.open({
-                    title: "请选择",
-                    type: 1,
-                    area: ['800px', '400px'],
-                    maxmin: true,
-                    shadeClose: true,
-                    content: element
-                });
-                if(type=='radio'){
-                    form.render('radio');
-                }else{
-                    form.render('checkbox');
-                }
+            });
+        }else {
+            data = $.labels[sign];
+        }
+        $.each(data[0].child, function (i, item) {
+            if (type == 'radio') {
+                element += ' <input type="radio" name="' + name + '" value="' + item.sign + '" title="' + item.content + '" id="' + item.id + '">'
+            } else {
+                element += '<input type="checkbox" name="' + name + '" id="' + item.id + '" value="' + item.sign + '" title="' + item.content + '"><div class="layui-unselect layui-form-checkbox"><span>' + item.content + '</span><i class="layui-icon layui-icon-ok"></i></div>';
             }
         });
+        if (status) {
+            element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'SaveLabel()">保存</button></div></div></form></div>';
+        } else {
+            element += '</div></div><div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn" onclick="back()">返回</button><button class="layui-btn" onclick="' + name + 'UpdateLabel()">保存</button></div></div></form></div>';
+        }
+        index = layer.open({
+            title: "请选择",
+            type: 1,
+            area: ['800px', '400px'],
+            maxmin: true,
+            shadeClose: true,
+            content: element
+        });
+        if (type == 'radio') {
+            form.render('radio');
+        } else {
+            form.render('checkbox');
+        }
     });
 });
+
+function setLabels(data) {
+
+}
 
 function back() {
     layer.close(index);
