@@ -592,6 +592,7 @@
 
     var item_id = getUrlParam("item_id");
     $("#item_id").val(item_id);
+    var pers = checkPermission();
     var identity;
     var index, layer, upload;
     layui.use(['layedit', 'upload', 'laydate', 'layer'], function () {
@@ -728,7 +729,10 @@
             $("textarea").attr('readonly', true);
             $("#applicationDate").attr('disabled', true);
             $("#suggestDate").attr('disabled', true);
-            if (status == 1 && identity == "PARTY_C") {
+            if ($.inArray('PARTY_A', pers)) {
+
+            }
+            if (status == 1 && $.inArray('PARTY_C', pers)) {
                 //监理初审
                 document.getElementById('new').style.display = 'block';
                 document.getElementById('check_b').style.display = 'none';
@@ -736,19 +740,19 @@
                 document.getElementById('check_d').style.display = 'none';
                 $("#manageDeptOpinion").removeAttr("readonly");
                 $("#acceptance_company").removeAttr("readonly");
-            } else if (status == 2 && identity == "PARTY_D") {
+            } else if (status == 2 && $.inArray('PARTY_D', pers)) {
                 //验收初审
                 document.getElementById('check_c').style.display = 'none';
                 document.getElementById('check_d').style.display = 'none';
                 document.getElementById('test').style.display = 'block';
                 document.getElementById('new').style.display = 'block';
                 $("#burgLeaderOpinion").removeAttr("readonly");
-            } else if (status == 4 && identity == "PARTY_D") {
+            } else if (status == 4 && $.inArray('PARTY_D', pers)) {
                 //验收终审
                 document.getElementById('new').style.display = 'block';
                 document.getElementById('check_d').style.display = 'none';
                 $("#manageDeptResult").removeAttr("readonly");
-            } else if (status == 5 && identity == "PARTY_C") {
+            } else if (status == 5 && $.inArray('PARTY_C', pers)) {
                 //监理终审
                 document.getElementById('new').style.display = 'block';
                 $("#burgLeaderResult").removeAttr("readonly");
