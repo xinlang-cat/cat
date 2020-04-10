@@ -96,9 +96,9 @@
     });
 
     //初始化项目信息
-    $.get(domainName + "/project-item/item/basic/list", {id: itemId}, function (res) {
-        $('.itemName').html(res[0].item_name);
-        $('#itemName').val(res[0].item_name);
+    $.get(domainName + "/project-item/item/information/list", {id: itemId}, function (res) {
+        $('.itemName').html(res[0].name);
+        $('#itemName').val(res[0].name);
     });
 
     //保存数据
