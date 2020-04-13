@@ -47,7 +47,6 @@
         </div>
 
 
-        <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal" id="test">匹配专家</button>
     </div>
 </div>
 
@@ -58,7 +57,6 @@
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
-<script type="text/javascript" src="../../js/matchExpert.js"></script>
 <script src="../../js/common.js"></script>
 <script>
     var pers = checkPermission();
@@ -68,22 +66,9 @@
         var form = layui.form;
     });
 
-
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
     var targetId = getUrlParam("targetId");
-
-
-    $.matchExpert({
-        elem: '#test',
-        itemId: getUrlParam("itemId"),
-        defaultSave: true,//保存到默认数据库
-        // defaultSave: false,//自定义保存
-        // defaultSaveFun:function (arr) {
-        // console.log(arr)
-        //  // ...
-        // }
-    });
 
     allWorkLog();
 

@@ -834,150 +834,64 @@
     $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
         projectUser = res[0];
         var checkHtml = '';
-        if ($.inArray('html:principal:check:stage', pers) >= 0) {
-            checkHtml += '<div class="weui-cell">\n' +
-                '            <div class="weui-cell__bd">\n' +
-                '                <label class="weui-min-title">项目负责人承诺</label>\n' +
-                '                <textarea class="weui-textarea" placeholder="项目负责人承诺" id="principalCheck" name="principalCheck"\n' +
-                '                          rows="5"></textarea>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="weui-cells__title">审核意见</div>\n' +
-                '        <div class="weui-cells weui-cells_checkbox">\n' +
-                '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" class="weui-check" name="principalCheckEnable" value="1" checked="checked">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>同意</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" class="weui-check" name="principalCheckEnable" value="-1">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>驳回</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '        </div>\n' +
-                '        <div class="weui-line"></div>\n' +
-                '        <div class="weui-cell">\n' +
-                '            <div class="weui-cell__hd">\n' +
-                '                <label class="weui-label">项目负责人</label>\n' +
-                '            </div>\n' +
-                '            <div class="weui-cell__bd">\n' +
-                '                <p class="weui-set-hide-val">' + projectUser.name + '</p>\n' +
-                '                <input class="weui-input" type="hidden"  name="principal" value="' + projectUser.name + '" placeholder="项目负责人">\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="weui-line"></div>\n' +
-                '        <div class="weui-cell">\n' +
-                '            <div class="weui-cell__hd">\n' +
-                '                <label class="weui-label">日期</label>\n' +
-                '            </div>\n' +
-                '            <div class="weui-cell__bd">\n' +
-                '                <p class="weui-set-hide-val">' + formatDate4(new Date) + '</p>\n' +
-                '                <input type="hidden" name="principalCheckTime" value="' + formatDate4(new Date) + '">\n' +
-                '            </div>\n' +
-                '        </div>';
-        }
-        if ($.inArray('html:dept:check:stage', pers) >= 0) {
-            checkHtml += '<div class="weui-cells__title">项目完成情况</div>\n' +
-                '        <div class="weui-cells weui-cells_checkbox">\n' +
-                '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" class="weui-check" name="projectCompletion" value="按计划进度实施" checked="checked">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>按计划进度实施</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '            <label class="weui-cell weui-check__label" style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" name="projectCompletion" class="weui-check" value="基本按计划进度实施">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>基本按计划进度实施</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '            <label class="weui-cell weui-check__label" style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" name="projectCompletion" class="weui-check" value="未按计划进度实施">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>未按计划进度实施</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '        </div>\n' +
-                '        <div class="weui-line"></div>\n' +
-                '        <div class="weui-cell">\n' +
-                '            <div class="weui-cell__bd">\n' +
-                '                <label class="weui-min-title">单位意见</label>\n' +
-                '                <textarea class="weui-textarea" id="deptCheck" name="deptCheck" placeholder="单位意见" rows="5"></textarea>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="weui-cells__title">审核意见</div>\n' +
-                '        <div class="weui-cells weui-cells_checkbox">\n' +
-                '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" class="weui-check" name="deptCheckEnable" value="1" checked="checked">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>同意</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
-                '                <div class="weui-cell__hd">\n' +
-                '                    <input type="radio" class="weui-check" name="deptCheckEnable" value="-1">\n' +
-                '                    <i class="weui-icon-checked"></i>\n' +
-                '                </div>\n' +
-                '                <div class="weui-cell__bd">\n' +
-                '                    <p>驳回</p>\n' +
-                '                </div>\n' +
-                '            </label>\n' +
-                '        </div>\n' +
-                '        <div class="weui-line"></div>\n' +
-                '        <div class="weui-cell">\n' +
-                '            <div class="weui-cell__hd">\n' +
-                '                <label class="weui-label">经办人</label>\n' +
-                '            </div>\n' +
-                '            <div class="weui-cell__bd">\n' +
-                '                <p class="weui-set-hide-val">' + projectUser.name + '</p>\n' +
-                '                <input class="weui-input" type="hidden"  name="deptCheckUser" value="' + projectUser.name + '"\n' +
-                '                       placeholder="经办人">\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="weui-line"></div>\n' +
-                '        <div class="weui-cell">\n' +
-                '            <div class="weui-cell__hd">\n' +
-                '                <label class="weui-label">日期</label>\n' +
-                '            </div>\n' +
-                '            <div class="weui-cell__bd">\n' +
-                '                <p class="weui-set-hide-val">' + formatDate4(new Date) + '</p>\n' +
-                '                <input type="hidden" name="deptCheckTime" value="' + formatDate4(new Date) + '">\n' +
-                '            </div>\n' +
-                '        </div>';
-        }
+        checkHtml += '<div class="weui-cell">\n' +
+            '            <div class="weui-cell__bd">\n' +
+            '                <label class="weui-min-title">项目负责人承诺</label>\n' +
+            '                <textarea class="weui-textarea" placeholder="项目负责人承诺" id="principalCheck" name="principalCheck"\n' +
+            '                          rows="5"></textarea>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="weui-cells__title">审核意见</div>\n' +
+            '        <div class="weui-cells weui-cells_checkbox">\n' +
+            '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
+            '                <div class="weui-cell__hd">\n' +
+            '                    <input type="radio" class="weui-check" name="principalCheckEnable" value="1" checked="checked">\n' +
+            '                    <i class="weui-icon-checked"></i>\n' +
+            '                </div>\n' +
+            '                <div class="weui-cell__bd">\n' +
+            '                    <p>同意</p>\n' +
+            '                </div>\n' +
+            '            </label>\n' +
+            '            <label class="weui-cell weui-check__label " style="float: left;">\n' +
+            '                <div class="weui-cell__hd">\n' +
+            '                    <input type="radio" class="weui-check" name="principalCheckEnable" value="-1">\n' +
+            '                    <i class="weui-icon-checked"></i>\n' +
+            '                </div>\n' +
+            '                <div class="weui-cell__bd">\n' +
+            '                    <p>驳回</p>\n' +
+            '                </div>\n' +
+            '            </label>\n' +
+            '        </div>\n' +
+            '        <div class="weui-line"></div>\n' +
+            '        <div class="weui-cell">\n' +
+            '            <div class="weui-cell__hd">\n' +
+            '                <label class="weui-label">项目负责人</label>\n' +
+            '            </div>\n' +
+            '            <div class="weui-cell__bd">\n' +
+            '                <p class="weui-set-hide-val">' + projectUser.name + '</p>\n' +
+            '                <input class="weui-input" type="hidden"  name="principal" value="' + projectUser.name + '" placeholder="项目负责人">\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="weui-line"></div>\n' +
+            '        <div class="weui-cell">\n' +
+            '            <div class="weui-cell__hd">\n' +
+            '                <label class="weui-label">日期</label>\n' +
+            '            </div>\n' +
+            '            <div class="weui-cell__bd">\n' +
+            '                <p class="weui-set-hide-val">' + formatDate4(new Date) + '</p>\n' +
+            '                <input type="hidden" name="principalCheckTime" value="' + formatDate4(new Date) + '">\n' +
+            '            </div>\n' +
+            '        </div>';
+
         $('#checkHtml').append(checkHtml);
     });
     $("#detail").hide();
     $(function () {
         var params = {
             itemId: itemId,
-            enable: 0
+            enable: 0,
+            principalCheckEnable: 0
         };
-        if ($.inArray('html:dept:check:stage', pers) > 0) {
-            params['principalCheckEnable'] = 1;
-        } else {
-            params['principalCheckEnable'] = 0;
-        }
         $.get(domainName + "/api-summary/stage/list", params, function (data) {
             var str = '';
             for (var i = data.length - 1; i >= 0; i--) {
@@ -1610,8 +1524,8 @@
     }
 
     function emptyElem() {
-        var arr = ['.stageFundUse','.stageAffixFile','.stagePaperCatalogue','.stagePatentCatalogue','.stageScienceAchievementAwardCatalogue','.stageScienceAchievementRegisterCatalogue','.stageTechnologyPactRegisterCatalogue','.stageTarget']
-        $.each(arr,function (i,item) {
+        var arr = ['.stageFundUse', '.stageAffixFile', '.stagePaperCatalogue', '.stagePatentCatalogue', '.stageScienceAchievementAwardCatalogue', '.stageScienceAchievementRegisterCatalogue', '.stageTechnologyPactRegisterCatalogue', '.stageTarget']
+        $.each(arr, function (i, item) {
             $.each($(item), function (j, elem) {
                 if (j != 0) {
                     $(elem).remove();

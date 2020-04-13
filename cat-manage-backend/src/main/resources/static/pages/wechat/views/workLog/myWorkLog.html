@@ -62,7 +62,8 @@
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <textarea class="weui-textarea" placeholder="请输入文本" id="content" name="content" rows="10"></textarea>
+                        <textarea class="weui-textarea" placeholder="请输入文本" id="content" name="content"
+                                  rows="10"></textarea>
                     </div>
                 </div>
             </div>
@@ -135,8 +136,8 @@
                     <span id="remark"></span>
                 </div>
             </div>
-            <input type="hidden" name="status" value="0" >
-            <input type="hidden" name="accessory" id="accessory" >
+            <input type="hidden" name="status" value="0">
+            <input type="hidden" name="accessory" id="accessory">
             <input type="hidden" name="plan" id="plan" value="">
             <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary">保存修改</a>
         </div>
@@ -225,7 +226,7 @@
                 if (jQuery.isEmptyObject(accessory)) {
                     $('#accessory').val(res.id);
                 } else {
-                    $('#accessory').val(accessory+ ',' + res.id);
+                    $('#accessory').val(accessory + ',' + res.id);
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
@@ -271,16 +272,16 @@
                     '            <div class="weui-line"></div>\n' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
-                    '                    <label class="weui-label">上次数量</label>\n' +
+                    '                    <label class="weui-label">本次数量</label>\n' +
                     '                </div>\n' +
                     '                <div class="weui-cell__bd">\n' +
-                    '                    <p class="weui-set-hide-val">' + item.nowCount + '</p>\n' +
+                    '                    <p class="weui-set-hide-val">' + item.oldCount + '</p>\n' +
                     '                </div>\n' +
                     '            </div>\n' +
                     '            <div class="weui-line"></div>\n' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
-                    '                    <label class="weui-label">上次本次合计</label>\n' +
+                    '                    <label class="weui-label">累计数量</label>\n' +
                     '                </div>\n' +
                     '                <div class="weui-cell__bd">\n' +
                     '                    <p class="weui-set-hide-val">' + item.nowCount + '</p>\n' +
@@ -298,25 +299,27 @@
             $("#remark").html(data[0].remark);
             setPlan(data[0].plan);
             $(".weui-btn_primary").attr('onclick', 'update(' + data[0].id + ')');
-            $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
-                $.each(data1, function (i, item) {
-                    var type = item.contentType;
-                    if (item.isImg) {
-                        $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
-                    }
-                    if (type.substring(0, 11) == 'application') {
-                        $('#files').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + item.name + '</li>');
-                    }
-                    if (type.substring(0, 5) == 'video') {
-                        $('#vedio').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
-                            '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
-                    }
+            if (!jQuery.isEmptyObject(data[0].accessory)) {
+                $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
+                    $.each(data1, function (i, item) {
+                        var type = item.contentType;
+                        if (item.isImg) {
+                            $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
+                        }
+                        if (type.substring(0, 11) == 'application') {
+                            $('#files').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + item.name + '</li>');
+                        }
+                        if (type.substring(0, 5) == 'video') {
+                            $('#vedio').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
+                                '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
+                        }
+                    });
                 });
-            });
-            if(data[0].status == 1){
+            }
+            if (data[0].status == 1) {
 
-                $.each($('input,textarea'),function (i,item) {
-                    $(item).attr('disabled',true);
+                $.each($('input,textarea'), function (i, item) {
+                    $(item).attr('disabled', true);
                 });
             }
         });

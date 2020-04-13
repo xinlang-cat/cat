@@ -522,26 +522,6 @@
                         <span class="principalCheckTime"></span>
                     </td>
                 </tr>
-                <tr class="deptCheckStage">
-                    <td>
-                        项目第一承担单位对项目完成质量评价意见</br>
-                        <label>1.项目完成情况</label>
-                        <div class="layui-input-block">
-                            <input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施" >
-                        </div>
-                        <div class="layui-input-block">
-                            <input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施">
-                        </div>
-                        <div class="layui-input-block">
-                            <input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施">
-                        </div>
-                        <span style="font-weight: bold">2.其他意见：</span>
-                        <span class="deptCheck"></span></br>
-                        <span style="font-weight: bold">经办人：</span><span class="deptCheckUser"></span></br>
-                        <span style="font-weight: bold">审核时间：</span>
-                        <span class="deptCheckTime"></span>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -611,7 +591,6 @@
                 $(causesInput[i]).prop('disabled', true);
             }
             setRadio($('input[name=principalCheckEnable]'),res.principalCheckEnable);
-            setRadio($('input[name=deptCheckEnable]'),res.deptCheckEnable);
             setRadio($('input[name=projectCompletion]'),res.projectCompletion);
             form.render();
             if (res.otherTarget != null) {

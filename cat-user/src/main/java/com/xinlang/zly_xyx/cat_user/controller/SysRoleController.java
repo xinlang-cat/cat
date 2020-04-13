@@ -112,7 +112,13 @@ public class SysRoleController {
         return sysRoleService.findRoles(params);
     }
 
-
-
-
+    /**
+     * 根据id获取角色信息
+     * @param code
+     * @return
+     */
+    @GetMapping("/roles/code")
+    public SysRole findByCode(@RequestParam String  code){
+        return sysRoleService.findByCode(code);
+    }
 }

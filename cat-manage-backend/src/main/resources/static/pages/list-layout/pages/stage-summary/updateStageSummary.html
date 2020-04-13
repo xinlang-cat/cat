@@ -593,33 +593,6 @@
                         <span class="principalCheckTime"></span>
                     </td>
                 </tr>
-                <tr class="deptCheckStage">
-                    <td>
-                        项目第一承担单位对项目完成质量评价意见</br>
-<!--                        <label>1.项目完成情况</label>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施" >-->
-<!--                        </div>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施">-->
-<!--                        </div>-->
-<!--                        <div class="layui-input-block">-->
-<!--                            <input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施">-->
-<!--                        </div>-->
-                        <span style="font-weight: bold">单位意见：</span>
-                        <span class="deptCheck"></span></br>
-<!--                        <div class="layui-form-item">-->
-<!--                            <label class="layui-form-label">单位审核结果:</label>-->
-<!--                            <div class="layui-input-block">-->
-<!--                                <input type="radio" name="deptCheckEnable" value="1" title="同意">-->
-<!--                                <input type="radio" name="deptCheckEnable" value="-1" title="驳回">-->
-<!--                            </div>-->
-<!--                        </div>-->
-                        <span style="font-weight: bold">经办人：</span><span class="deptCheckUser"></span></br>
-                        <span style="font-weight: bold">审核时间：</span>
-                        <span class="deptCheckTime"></span>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -752,43 +725,51 @@
             setRadio($('input[name=isOneCheck]'),res.isOneCheck);
             setRadio($('input[name=oneCheckType]'),res.oneCheckType);
 
-            form.render();
             if (res.otherTarget != null) {
                 var str1 = '';
                 str1 += '<td>其他指标</td><td><span>' + res.otherTarget + '</span><input type="hidden" name="otherTarget" value="' + res.otherTarget + '"></td>';
-                str1 += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str1 += 'id="otherTargetSchedule" name="otherTargetSchedule">'+ res.otherTargetSchedule +'</textarea></td>';
+                str1 += '<td><input type="radio" name="otherTargetSchedule" value="全部完成" title="全部完成">\n';
+                str1 += '<input type="radio" name="otherTargetSchedule" value="未完成" title="未完成"></td>';
                 str1 += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
                 str1 += 'id="otherTargetDescribe" name="otherTargetDescribe">'+ res.otherTargetDescribe +'</textarea></td>';
                 $("#OTHER_INDICATORS").append(str1);
+                form.render('radio')
+                setRadio($('input[name=otherTargetSchedule]'),res.otherTargetSchedule);
             }
             if (res.skillTarget != null) {
                 var str = '';
                 str += '<td>技术指标</td><td><span>' + res.skillTarget + '</span><input type="hidden" name="skillTarget" value="' + res.skillTarget + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="skillTargetSchedule" name="skillTargetSchedule">'+ res.skillTargetSchedule +'</textarea></td>';
+                str += '<td><input type="radio" name="skillTargetSchedule" value="全部完成" title="全部完成">';
+                str += '<input type="radio" name="skillTargetSchedule" value="未完成" title="未完成"></td>';
                 str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
                 str += 'id="skillTargetDescribe" name="skillTargetDescribe">'+ res.skillTargetDescribe +'</textarea></td>';
                 $("#TECHNICAL_INDICATORS").append(str);
+                form.render('radio')
+                setRadio($('input[name=skillTargetSchedule]'),res.skillTargetSchedule);
             }
             if (res.economyTarget != null) {
                 var str = '';
                 str += '<td>经济指标</td><td><span>' + res.economyTarget + '</span><input type="hidden" name="economyTarget" value="' + res.economyTarget + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="economyTargetSchedule" name="economyTargetSchedule">'+ res.economyTargetSchedule +'</textarea></td>';
+                str += '<td><input type="radio" name="economyTargetSchedule" value="全部完成" title="全部完成">\n';
+                str += '<input type="radio" name="economyTargetSchedule" value="未完成" title="未完成"></td>';
                 str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
                 str += 'id="economyTargetDescribe" name="economyTargetDescribe">'+ res.economyTargetDescribe +'</textarea></td>';
                 $("#ECONOMIC_INDICATORS").append(str);
+                form.render('radio')
+                setRadio($('input[name=economyTargetSchedule]'),res.economyTargetSchedule);
             }
             if (res.personTarget != null) {
                 var str = '';
                 str += '<td>人才队伍建设指标</td><td><span>' + res.personTarget + '</span><input type="hidden" name="personTarget" value="' + res.personTarget + '"></td>';
-                str += '<td><textarea placeholder="完成情况" class="layui-textarea form-control" lay-verify="required"';
-                str += 'id="personTargetSchedule" name="personTargetSchedule">'+ res.personTargetSchedule +'</textarea></td>';
+                str += '<td><input type="radio" name="personTargetSchedule" value="全部完成" title="全部完成">\n';
+                str += '<input type="radio" name="personTargetSchedule" value="未完成" title="未完成"></td>';
                 str += '<td><textarea placeholder="完成情况描述" class="layui-textarea form-control" lay-verify="required"';
                 str += 'id="personTargetDescribe" name="personTargetDescribe">'+ res.personTargetDescribe +'</textarea></td>';
                 $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
+                form.render('radio')
+                setRadio($('input[name=personTargetSchedule]'),res.personTargetSchedule);
             }
+            form.render();
             var stageFundUses = res.stageFundUses;
             var STR_stageFundUses = '';
             for (var i = 0; i < stageFundUses.length; i++) {
