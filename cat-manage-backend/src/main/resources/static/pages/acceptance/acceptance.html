@@ -559,11 +559,12 @@
                 url: domainName + '/api-summary/check-table',
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(formdata),
+                async: false,
                 success: function (data) {
-                    var msg = "添加成功";
-                    layer.msg(msg, {shift: -1, time: 1000}, function(){
-                        location.href='../list-layout/list.html';
-                    });
+                    changeStatus(item_id);
+                   /* layer.msg(msg, {shift: -1, time: 1000}, function(){
+                        location.reload();
+                    });*/
                 }
             });
         }else {
@@ -582,6 +583,21 @@
         }
 
     }
+   function changeStatus(item_id) {
+        var item={"id":item_id,"status":3};
+       $.ajax({
+           type: 'put',
+           url: domainName + '/project-item/item/information',
+           contentType: "application/json; charset=utf-8",
+           async: false,
+           data: JSON.stringify(item),
+           success: function (data) {
+               layer.msg("成功", {shift: -1, time: 1000}, function () {
+                   history.back(-1);
+               });
+           }
+       });
+   }
     getdata(item_id);
     function getdata(item_id) {
         $.ajax({
