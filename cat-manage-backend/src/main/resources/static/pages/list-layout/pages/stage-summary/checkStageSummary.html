@@ -51,6 +51,7 @@
         .layui-checkbox-disbaled[lay-skin=primary] span {
             color: #0C0C0C;
         }
+
         .layui-form-radio {
             margin: 0;
         }
@@ -71,7 +72,8 @@
         .layui-form-item {
             margin-bottom: 0;
         }
-        .layui-disabled > div{
+
+        .layui-disabled > div {
             color: #666;
         }
     </style>
@@ -155,90 +157,91 @@
     </div>
 
     <form class="layui-form">
-    <div class="module">
-        <table class="layui-table">
-            <colgroup>
-                <col width="3%">
-                <col width="15%">
-                <col width="38%">
-                <col width="16%">
-                <col width="28%">
-            </colgroup>
-            <tbody>
-            <tr>
-                <td rowspan="100" class="table-info">项目基本信息及执行进展情况</td>
-                <td class="td-text1">合同规定起止时间:</td>
-                <td colspan="3" style="text-align: center">
-                    <span class="startAndEndTime"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">是否申请延期:</td>
-                <td>
-                    <span class="applicantExtension"></span>
-                </td>
-                <td class="td-text1">延期批复的截至时间</td>
-                <td>
-                    <span class="extensionTime"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">产学研联合:</td>
-                <td colspan="3">
-                    <span class="produceLearnResearch"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">创新类型:</td>
-                <td colspan="3">
-                    <span class="innovateType"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">合作形式:</td>
-                <td colspan="3">
-                    <span class="collaborate"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">主要技术来源单位:</td>
-                <td colspan="3">
-                    <span class="skillSourceDept"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">项目进展情况:</td>
-                <td colspan="3">
-                    <span class="progress"></span>
-                </td>
-            </tr>
-            <tr>
-                <td class="td-text1">项目拖延、停顿、终止 、撤销的主要原因（最 多选三项）:</td>
-                <td>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="0"
-                                                          title="0.技术变化"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="1"
-                                                          title="1.计划性调整"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="2"
-                                                          title="2.设备、材料不落实"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="3"
-                                                          title="3.协作关系影响"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="4"
-                                                          title="4.资金不到位"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="5"
-                                                          title="5.市场变化"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="6"
-                                                          title="6.技术骨干变动"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="7"
-                                                          title="7.立题不当"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8"
-                                                          title="8.不可抗拒因素"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="9"
-                                                          title="9.合作方变动"></div>
-                    <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="10"
-                                                          title="10.其他原因"></div>
-                </td>
-                <td colspan="2">
+        <div class="module">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="3%">
+                    <col width="15%">
+                    <col width="38%">
+                    <col width="16%">
+                    <col width="28%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td rowspan="100" class="table-info">项目基本信息及执行进展情况</td>
+                    <td class="td-text1">合同规定起止时间:</td>
+                    <td colspan="3" style="text-align: center">
+                        <span class="startAndEndTime"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">是否申请延期:</td>
+                    <td>
+                        <span class="applicantExtension"></span>
+                    </td>
+                    <td class="td-text1">延期批复的截至时间</td>
+                    <td>
+                        <span class="extensionTime"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">产学研联合:</td>
+                    <td colspan="3">
+                        <span class="produceLearnResearch"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">创新类型:</td>
+                    <td colspan="3">
+                        <span class="innovateType"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">合作形式:</td>
+                    <td colspan="3">
+                        <span class="collaborate"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">主要技术来源单位:</td>
+                    <td colspan="3">
+                        <span class="skillSourceDept"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目进展情况:</td>
+                    <td colspan="3">
+                        <span class="progress"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-text1">项目拖延、停顿、终止 、撤销的主要原因（最 多选三项）:</td>
+                    <td>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="0"
+                                                              title="0.技术变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="1"
+                                                              title="1.计划性调整"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="2"
+                                                              title="2.设备、材料不落实"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="3"
+                                                              title="3.协作关系影响"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="4"
+                                                              title="4.资金不到位"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="5"
+                                                              title="5.市场变化"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="6"
+                                                              title="6.技术骨干变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="7"
+                                                              title="7.立题不当"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="8"
+                                                              title="8.不可抗拒因素"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes" value="9"
+                                                              title="9.合作方变动"></div>
+                        <div class="layui-input-block"><input type="checkbox" lay-skin="primary" name="causes"
+                                                              value="10"
+                                                              title="10.其他原因"></div>
+                    </td>
+                    <td colspan="2">
                         <span>
                             勾选项目进展受阻的主要原因，最多选三项：</br>    
                             0.技术变化：由于国内外技术取得进展及技术发展趋势发 生变化而导致该项目计划进度等变化。</br>    
@@ -253,42 +256,42 @@
                             9.合作方变动：国际或区域科技合作项目的合作方发生变 动，导致项目难以按计划完成。</br>     
                             10.其他原因：除上述原因以外，影响计划进度完成的其 他各种原因。论文发表周期较长、项目建设场地问题。</br>
                         </span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4"></td>
-            </tr>
-            <tr>
-                <td colspan="4" style="text-align: center;"><h3>考核指标完成情况</h3></td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align: center;">考核指标</td>
-                <td style="text-align: center;">完成情况</td>
-                <td style="text-align: center;">完成情况描述</td>
-            </tr>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: center;"><h3>考核指标完成情况</h3></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">考核指标</td>
+                    <td style="text-align: center;">完成情况</td>
+                    <td style="text-align: center;">完成情况描述</td>
+                </tr>
 
-            <tr id="TECHNICAL_INDICATORS" class="stageKpi">
+                <tr id="TECHNICAL_INDICATORS" class="stageKpi">
 
-            </tr>
+                </tr>
 
-            <tr id="ECONOMIC_INDICATORS" class="stageKpi">
-            </tr>
+                <tr id="ECONOMIC_INDICATORS" class="stageKpi">
+                </tr>
 
-            <tr id="INDICATORS_OF_TALENT_TEAM_CONS" class="stageKpi">
-            </tr>
+                <tr id="INDICATORS_OF_TALENT_TEAM_CONS" class="stageKpi">
+                </tr>
 
-            <tr id="OTHER_INDICATORS" class="stageKpi">
-            </tr>
+                <tr id="OTHER_INDICATORS" class="stageKpi">
+                </tr>
 
-            <tr>
-                <td>项目重要进展情况描述：</td>
-                <td colspan="3">
-                    <span class="importanceDescribe"></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                <tr>
+                    <td>项目重要进展情况描述：</td>
+                    <td colspan="3">
+                        <span class="importanceDescribe"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </form>
 
     <div class="module">
@@ -735,20 +738,6 @@
                 str += '<input type="hidden" id="principalCheckTime" name="principalCheckTime" value="' + formatDate4(new Date()) + '"> </td>';
                 $(".principalCheckStage").append(str);
             }
-            //单位填写的部分
-            if ($.inArray('html:dept:check:stage', pers) > -1) {
-                var str = '';
-                str += '<td>项目第一承担单位对项目完成质量评价意见</br><label>1.项目完成情况</label>';
-                str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="按计划进度实施" title="按计划进度实施" checked></div>';
-                str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="基本按计划进度实施" title="基本按计划进度实施"></div>';
-                str += '<div class="layui-input-block"><input type="radio" lay-skin="primary" name="projectCompletion" value="未按计划进度实施" title="未按计划进度实施"></div>';
-                str += '<label>2.其他意见：</label>';
-                str += '<textarea placeholder="其他意见" class="layui-textarea form-control" lay-verify="required" id="deptCheck" name="deptCheck"></textarea>';
-                str += '<div class="layui-input-block"><input name="deptCheckEnable" value="1" title="同意" checked="" type="radio"><input name="deptCheckEnable" value="-1" title="驳回" type="radio"></div>';
-                str += '<label>经办人：</label>' + res[0].name + '<input type="hidden" id="deptCheckUser" name="deptCheckUser" value="' + res[0].name + '"></br><label>日期：</label> ' + formatDate4(new Date());
-                str += '<input type="hidden" id="deptCheckTime" name="deptCheckTime" value="' + formatDate4(new Date()) + '"></td>';
-                $(".deptCheckStage").append(str);
-            }
             form.render('radio')
         });
     });
@@ -756,15 +745,7 @@
     function update() {
         var formData = $("#form").serializeObject();
         formData.id = stageId;
-        if ($.inArray('html:principal:check:stage', pers) > -1) {
-            var principalCheckEnable = formData.principalCheckEnable;
-            if (principalCheckEnable < 0) {
-                formData.enable = principalCheckEnable;
-            }
-        }
-        if ($.inArray('html:dept:check:stage', pers) > -1) {
-            formData.enable = formData.deptCheckEnable;
-        }
+        formData.enable = formData.principalCheckEnable;
         $.ajax({
             type: 'put',
             url: domainName + '/api-summary/stage',

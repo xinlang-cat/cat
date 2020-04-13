@@ -1125,83 +1125,6 @@
                     <p class="weui-set-hide-val principalCheckTime"></p>
                 </div>
             </div>
-            <div class="weui-line"></div>
-            <div class="weui-cells__title">项目完成情况</div>
-            <div class="weui-cells weui-cells_checkbox">
-                <label class="weui-cell weui-check__label " style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" class="weui-check" name="projectCompletion" value="按计划进度实施" disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>按计划进度实施</p>
-                    </div>
-                </label>
-                <label class="weui-cell weui-check__label" style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" name="projectCompletion" class="weui-check" value="基本按计划进度实施" disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>基本按计划进度实施</p>
-                    </div>
-                </label>
-                <label class="weui-cell weui-check__label" style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" name="projectCompletion" class="weui-check" value="未按计划进度实施" disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>未按计划进度实施</p>
-                    </div>
-                </label>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <label class="weui-min-title">单位意见</label>
-                    <p class="weui-set-hide-val deptCheck"></p>
-                </div>
-            </div>
-            <div class="weui-cells__title">审核意见</div>
-            <div class="weui-cells weui-cells_checkbox">
-                <label class="weui-cell weui-check__label " style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" class="weui-check" name="deptCheckEnable" value="1" disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>同意</p>
-                    </div>
-                </label>
-                <label class="weui-cell weui-check__label " style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" class="weui-check" name="deptCheckEnable" value="-1" disabled>
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>驳回</p>
-                    </div>
-                </label>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">经办人</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <p class="weui-set-hide-val deptCheckUser"></p>
-                </div>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">日期</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <p class="weui-set-hide-val deptCheckTime"></p>
-                </div>
-            </div>
         </div>
 
 
@@ -1339,29 +1262,32 @@
     $("#detail").hide();
 
     $(function () {
-        var params = {
-            itemId: itemId,
-            enable: -1
-        };
-        $.get(domainName + "/api-summary/stage/list", params, function (data) {
-            var str = '';
-            for (var i = data.length - 1; i >= 0; i--) {
-                var outline = data[i].itemName;
-                str += '<a href="javascript:;" id="' + data[i].id + '"  onclick="detail(' + data[i].id + ')"><div class="weui-panel">';
-                str += '        <div class="weui-panel__bd">';
-                str += '            <div class="weui-media-box weui-media-box_text">';
-                str += '               <p class="weui-media-box__desc">' + outline + '</p>';
-                str += '               <ul class="weui-media-box__info">';
-                str += '                    <li class="weui-media-box__info__meta">' + data[i].createUserName + '</li>';
-                str += '                    <li class="weui-media-box__info__meta">' + formatDate4(data[i].createTime) + '</li>';
-                str += '               </ul>';
-                str += '          </div>';
-                str += '     </div>';
-                str += ' </div></a><div class="weui-interval"></div>';
-            }
-            $(".page__bd").append(str);
+        $.get(domainName + "/api-summary/stage/list", {itemId: itemId, enable: -1}, function (data) {
+           addList(data);
+        });
+        $.get(domainName + "/api-summary/stage/list", {itemId: itemId, enable: 0}, function (data) {
+            addList(data);
         });
     });
+
+    function addList(data) {
+        var str = '';
+        for (var i = data.length - 1; i >= 0; i--) {
+            var outline = data[i].itemName;
+            str += '<a href="javascript:;" id="' + data[i].id + '"  onclick="detail(' + data[i].id + ')"><div class="weui-panel">';
+            str += '        <div class="weui-panel__bd">';
+            str += '            <div class="weui-media-box weui-media-box_text">';
+            str += '               <p class="weui-media-box__desc">' + outline + '</p>';
+            str += '               <ul class="weui-media-box__info">';
+            str += '                    <li class="weui-media-box__info__meta">' + data[i].createUserName + '</li>';
+            str += '                    <li class="weui-media-box__info__meta">' + formatDate4(data[i].createTime) + '</li>';
+            str += '               </ul>';
+            str += '          </div>';
+            str += '     </div>';
+            str += ' </div></a><div class="weui-interval"></div>';
+        }
+        $(".page__bd").append(str);
+    }
 
 
     function submit(id) {
@@ -1418,7 +1344,6 @@
                 $("." + key).html(res[key]);
                 $("#" + key).val(res[key]);
             }
-            $('.deptCheckTime').html(formatDate4(res.deptCheckTime));
             $('.principalCheckTime').html(formatDate4(res.principalCheckTime));
             $('.createTime').html(formatDate4(res.createTime));
             $('#extensionTime').val(formatDate4(res.extensionTime));
@@ -1441,7 +1366,6 @@
             setRadio($('input[name=isOneCheck]'), res.isOneCheck);
             setRadio($('input[name=oneCheckType]'), res.oneCheckType);
             setRadio($('input[name=principalCheckEnable]'), res.principalCheckEnable);
-            setRadio($('input[name=deptCheckEnable]'), res.deptCheckEnable);
             setRadio($('input[name=projectCompletion]'), res.projectCompletion);
 
             $('#OTHER_INDICATORS,#TECHNICAL_INDICATORS,#ECONOMIC_INDICATORS,#INDICATORS_OF_TALENT_TEAM_CONS').empty();
@@ -1460,16 +1384,28 @@
                     '                <input type="hidden" name="otherTarget" value="' + res.otherTarget + '">\n' +
                     '            </div>\n' +
                     '        </div>\n' +
-                    '        <div class="weui-line"></div>\n' +
-                    '        <div class="weui-cell">\n' +
-                    '            <div class="weui-cell__hd">\n' +
-                    '                <label class="weui-label">完成情况</label>\n' +
-                    '            </div>\n' +
-                    '            <div class="weui-cell__bd">' +
-                    '                <input class="weui-input" id="otherTargetSchedule" name="otherTargetSchedule" type="text" value="' + res.otherTargetSchedule + '"\n' +
-                    '                       placeholder="完成情况">\n' +
-                    '            </div>\n' +
-                    '        </div>\n' +
+                    '<div class="weui-line"></div>\n' +
+                    '            <div class="weui-cells__title">完成情况</div>\n' +
+                    '            <div class="weui-cells weui-cells_checkbox">\n' +
+                    '                <label class="weui-cell weui-check__label " style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" class="weui-check" name="otherTargetSchedule" value="全部完成">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>全部完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '                <label class="weui-cell weui-check__label" style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" name="otherTargetSchedule" class="weui-check" value="未完成">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>未完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '            </div>' +
                     '        <div class="weui-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
                     '            <div class="weui-cell__bd">\n' +
@@ -1479,6 +1415,7 @@
                     '            </div>\n' +
                     '        </div>';
                 $("#OTHER_INDICATORS").append(str);
+                setRadio($('input[name=otherTargetSchedule]'), res.otherTargetSchedule);
             }
             if (res.skillTarget != null) {
                 var str = '<div class="weui-imaginary-line"></div>\n' +
@@ -1496,15 +1433,28 @@
                     '            </div>\n' +
                     '        </div>\n' +
                     '        <div class="weui-line"></div>\n' +
-                    '        <div class="weui-cell">\n' +
-                    '            <div class="weui-cell__hd">\n' +
-                    '                <label class="weui-label">完成情况</label>\n' +
-                    '            </div>\n' +
-                    '            <div class="weui-cell__bd">' +
-                    '                <input class="weui-input" id="skillTargetSchedule" name="skillTargetSchedule" type="text" value="' + res.skillTargetSchedule + '"\n' +
-                    '                       placeholder="完成情况">\n' +
-                    '            </div>\n' +
-                    '        </div>\n' +
+                    '<div class="weui-line"></div>\n' +
+                    '            <div class="weui-cells__title">完成情况</div>\n' +
+                    '            <div class="weui-cells weui-cells_checkbox">\n' +
+                    '                <label class="weui-cell weui-check__label " style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" class="weui-check" name="skillTargetSchedule" value="全部完成" checked="checked">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>全部完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '                <label class="weui-cell weui-check__label" style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" name="skillTargetSchedule" class="weui-check" value="未完成">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>未完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '            </div>' +
                     '        <div class="weui-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
                     '            <div class="weui-cell__bd">\n' +
@@ -1515,6 +1465,7 @@
                     '            </div>\n' +
                     '        </div>';
                 $("#TECHNICAL_INDICATORS").append(str);
+                setRadio($('input[name=skillTargetSchedule]'), res.skillTargetSchedule);
             }
             if (res.economyTarget != null) {
                 var str = '<div class="weui-imaginary-line"></div>\n' +
@@ -1531,16 +1482,28 @@
                     '                <input type="hidden" name="economyTarget" value="' + res.economyTarget + '">\n' +
                     '            </div>\n' +
                     '        </div>\n' +
-                    '        <div class="weui-line"></div>\n' +
-                    '        <div class="weui-cell">\n' +
-                    '            <div class="weui-cell__hd">\n' +
-                    '                <label class="weui-label">完成情况</label>\n' +
-                    '            </div>\n' +
-                    '            <div class="weui-cell__bd">' +
-                    '                <input class="weui-input" id="economyTargetSchedule" name="economyTargetSchedule" type="text" value="' + res.economyTargetSchedule + '"\n' +
-                    '                       placeholder="完成情况">\n' +
-                    '            </div>\n' +
-                    '        </div>\n' +
+                    '<div class="weui-line"></div>\n' +
+                    '            <div class="weui-cells__title">完成情况</div>\n' +
+                    '            <div class="weui-cells weui-cells_checkbox">\n' +
+                    '                <label class="weui-cell weui-check__label " style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" class="weui-check" name="economyTargetSchedule" value="全部完">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>全部完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '                <label class="weui-cell weui-check__label" style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" name="economyTargetSchedule" class="weui-check" value="未完成">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>未完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '            </div>' +
                     '        <div class="weui-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
                     '            <div class="weui-cell__bd">\n' +
@@ -1551,6 +1514,7 @@
                     '            </div>\n' +
                     '        </div>';
                 $("#ECONOMIC_INDICATORS").append(str);
+                setRadio($('input[name=economyTargetSchedule]'), res.economyTargetSchedule);
             }
             if (res.personTarget != null) {
                 var str = '<div class="weui-imaginary-line"></div>\n' +
@@ -1567,16 +1531,28 @@
                     '                <input type="hidden" name="personTarget" value="' + res.personTarget + '">\n' +
                     '            </div>\n' +
                     '        </div>\n' +
-                    '        <div class="weui-line"></div>\n' +
-                    '        <div class="weui-cell">\n' +
-                    '            <div class="weui-cell__hd">\n' +
-                    '                <label class="weui-label">完成情况</label>\n' +
-                    '            </div>\n' +
-                    '            <div class="weui-cell__bd">' +
-                    '                <input class="weui-input" id="personTargetSchedule" name="personTargetSchedule" type="text" value="' + res.personTargetSchedule + '"\n' +
-                    '                       placeholder="完成情况">\n' +
-                    '            </div>\n' +
-                    '        </div>\n' +
+                    '<div class="weui-line"></div>\n' +
+                    '            <div class="weui-cells__title">完成情况</div>\n' +
+                    '            <div class="weui-cells weui-cells_checkbox">\n' +
+                    '                <label class="weui-cell weui-check__label " style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" class="weui-check" name="personTargetSchedule" value="全部完成">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>全部完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '                <label class="weui-cell weui-check__label" style="float: left;">\n' +
+                    '                    <div class="weui-cell__hd">\n' +
+                    '                        <input type="radio" name="personTargetSchedule" class="weui-check" value="未完成">\n' +
+                    '                        <i class="weui-icon-checked"></i>\n' +
+                    '                    </div>\n' +
+                    '                    <div class="weui-cell__bd">\n' +
+                    '                        <p>未完成</p>\n' +
+                    '                    </div>\n' +
+                    '                </label>\n' +
+                    '            </div>' +
                     '        <div class="weui-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
                     '            <div class="weui-cell__bd">\n' +
@@ -1587,6 +1563,7 @@
                     '            </div>\n' +
                     '        </div>';
                 $("#INDICATORS_OF_TALENT_TEAM_CONS").append(str);
+                setRadio($('input[name=personTargetSchedule]'), res.personTargetSchedule);
             }
             emptyElem();
             var stageFundUses = res.stageFundUses;
