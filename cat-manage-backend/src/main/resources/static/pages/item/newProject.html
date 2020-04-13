@@ -1703,7 +1703,7 @@
                                                     value: packUserInfo(this)
                                                 };
                                                 d.push(obj);
-                                            })
+                                            });
                                             cb(d);
                                         }
                                     });
@@ -1715,15 +1715,172 @@
                                         async: false,
                                         data: 'name=' + val,
                                         success: function (data) {
-                                            var d = [];
-                                            $(data.data).each(function () {
-                                                var obj = {
-                                                    name: this.name + '_' + this.idCard,
-                                                    value: packUserInfo(this)
-                                                };
-                                                d.push(obj);
-                                            })
-                                            cb(d);
+                                            if(data.total!=0){
+                                                var d = [];
+                                                $(data.data).each(function () {
+                                                    var obj = {
+                                                        name: this.name + '_' + this.idCard,
+                                                        value: packUserInfo(this)
+                                                    };
+                                                    d.push(obj);
+                                                });
+                                                cb(d);
+                                            }else {
+                                                layer.close(index);
+                                                var content = '<form class="layui-form" action="" lay-filter="example" style="width: 80%;margin: 20px auto;">\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">手机号码</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input type="tel" name="username" value="" lay-verify="required|phone" placeholder="请输入" class="layui-input">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">初始密码</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input type="text" name="password" value="123456" placeholder="请输入" class="layui-input" lay-verify="required">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">姓名</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input type="text" name="nickname" value="'+val+'" placeholder="请输入" class="layui-input" lay-verify="required">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">性别</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input type="radio" name="sex" value="1" title="男" checked="">\n' +
+                                                    '      <input type="radio" name="sex" value="0" title="女">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">证件类型</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '        <select class="form-control input-sm" name="idType" id="idType">\n' +
+                                                    '          <option value="身份证">身份证</option>\n' +
+                                                    '          <option value="护照">护照</option>\n' +
+                                                    '        </select>\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">证件号码</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input class="layui-input" placeholder="证件号码" type="text" name="idCard" lay-verify="required">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">职称</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input class="layui-input" placeholder="单位/公司级别" type="text" name="academicTitle" lay-verify="required">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">从事专业</label>\n' +
+                                                    '    <div class="layui-input-block">\n' +
+                                                    '      <input class="layui-input" placeholder="现从事专业" type="text" name="nowMajor" lay-verify="required">\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>\n' +
+                                                    '  <div class="layui-form-item">\n' +
+                                                    '    <label class="layui-form-label">工作单位</label>\n' +
+                                                    '    <div class="layui-input-block">' +
+                                                    '       <div id="deptName"></div>\n' +
+                                                    '    </div>\n' +
+                                                    '  </div>' +
+                                                    '<button class="layui-btn sub" lay-submit lay-filter="addUser" id="addUser" style="display: none;">提交</button>\n' +
+                                                    '</form>';
+                                                layer.open({
+                                                    title: '添加用户',
+                                                    type: 1,
+                                                    area: ['800px', '400px'],
+                                                    btn: ['确定', '关闭'],
+                                                    scrollbar: false,
+                                                    content: content,
+                                                    yes: function (index, layero) {
+                                                        $('#addUser').trigger("click");
+                                                    },
+                                                    btn2: function (index, layero) {
+                                                        layer.close(index);
+                                                    },
+                                                    success: function (layero, index) {
+                                                        form.render();
+                                                        var selcetDept = xmSelect.render({
+                                                            el: '#deptName',
+                                                            tips: '工作单位',
+                                                            name: 'deptName',
+                                                            layVerify: 'required',
+                                                            layVerType: 'msg',
+                                                            radio: true,
+                                                            clickClose: true,
+                                                            filterable: true,
+                                                            remoteSearch: true,
+                                                            delay: 500,
+                                                            remoteMethod: function (val, cb, show) {
+                                                                //这里如果val为空, 则不触发搜索
+                                                                if (!val) {
+                                                                    return cb([]);
+                                                                }
+                                                                $.ajax({
+                                                                    type: 'get',
+                                                                    url: domainName + '/api-c/company/link',
+                                                                    data: 'signName=' + val,
+                                                                    async: false,
+                                                                    success: function (data) {
+                                                                        var d = [];
+                                                                        $(data.data).each(function () {
+                                                                            var obj = {name: this.signName, value: this.signName};
+                                                                            d.push(obj);
+                                                                        });
+                                                                        cb(d);
+                                                                    }
+                                                                })
+                                                            },
+                                                            model: {
+                                                                label: {
+                                                                    type: 'text',
+                                                                    text: {
+                                                                        left: '',
+                                                                        right: '',
+                                                                        separator: ', ',
+                                                                    },
+                                                                }
+                                                            },
+                                                        });
+                                                        //监听提交
+                                                        form.on('submit(addUser)', function (data) {
+                                                            var d = data.field;
+                                                            var user = {
+                                                                username: d.username,
+                                                                password: d.password,
+                                                                nickname: d.nickname,
+                                                                sex: d.sex,
+                                                                type: 'BACKEND'
+                                                            };
+                                                            var userInfo = {
+                                                                name: d.nickname,
+                                                                phone: d.username,
+                                                                sex: d.sex,
+                                                                idType: d.idType,
+                                                                idCard: d.idCard,
+                                                                academicTitle: d.academicTitle,
+                                                                nowMajor: d.nowMajor,
+                                                                deptName: d.deptName
+                                                            };
+                                                            $.ajax({
+                                                                type: 'post',
+                                                                url: domainName + '/api-u/users-anon/register',
+                                                                contentType: "application/json; charset=utf-8",
+                                                                async: false,
+                                                                data: JSON.stringify(user),
+                                                                success: function (data) {
+                                                                    userInfo.userId = data.id;
+                                                                    addUserInfo(userInfo)
+                                                                }
+                                                            });
+                                                            return false;
+                                                        });
+                                                    }
+                                                })
+                                            }
                                         }
                                     });
                                 }
@@ -2037,15 +2194,9 @@
         } else {
             sex = '女';
         }
-        // 获得今天的时间，计算年龄
-        var date = new Date();
-        var startDate = new Date(birthDate);
-        var newDate = date.getTime() - startDate.getTime();
-        var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 / 365);
-        if (isNaN(age)) {
-            age = "";
-        }
-        if(nowMajor!=''){
+        // 计算年龄
+        var age = IdCard(idCard);
+        if(nowMajor!=''&&/^[a-zA-Z]+$/.test(nowMajor)){
             nowMajor = analysisLablename(nowMajor);
         }
         return d.userId + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
@@ -2071,5 +2222,33 @@
             $('#total').text('');
         }
     }, 1000);
+
+    //添加用户信息
+    function addUserInfo(userInfo) {
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(userInfo),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    layer.closeAll();
+                });
+            }
+        });
+    }
+    //根据身份证计算年龄
+    function IdCard(UUserCard) {
+        //获取年龄
+        var myDate = new Date();
+        var month = myDate.getMonth() + 1;
+        var day = myDate.getDate();
+        var age = myDate.getFullYear() - UUserCard.substring(6, 10) - 1;
+        if (UUserCard.substring(10, 12) < month || UUserCard.substring(10, 12) == month && UUserCard.substring(12, 14) <= day) {
+            age++;
+        }
+        return age;
+    }
 </script>
 </html>

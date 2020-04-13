@@ -532,6 +532,9 @@
                         </button>
                     </td>
                 </tr>
+                <tr id="check_expect">
+
+                </tr>
                 <tr id="check_c">
 
                     <td class="td-text">验收方核验结果:</td>
@@ -542,9 +545,7 @@
 
                     </td>
                 </tr>
-                <tr id="check_expect">
 
-                </tr>
                 <tr id="check_d">
                     <td class="td-text">受委托管理单位或项目牵头承担单位核验结果:</td>
                     <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位最终核验结果" class="layui-textarea form-control"
@@ -625,15 +626,13 @@
             itemId: item_id
         };
         $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
-            var str = '<td class="td-text">专家姓名</td>\n' +
-                '<td class="td-text">审核时间</td>\n' +
-                '                    <td colspan="6">评审意见</td>';
+            var str = '';
             for (var i = data.length - 1; i >= 0; i--) {
 
                 str += '<td class="td-text">' + data[i].userName + '</td>\n' +
                     '<td class="td-text">' + formatDate4(data[i].createTime) + '</td>\n' +
                     '<td class="td-text">' + getStatus(data[i].status) + '</td>\n' +
-                    '                    <td colspan="5"> <textarea class="layui-textarea form-control" lay-verify="required"\n' +
+                    '                    <td colspan="5"> <textarea readonly class="layui-textarea form-control" lay-verify="required"\n' +
                     '                    >' + data[i].evaluateContent + '</textarea>\n' +
                     '                    </td>';
 
@@ -824,11 +823,11 @@
                 //验收终审
                 document.getElementById('new').style.display = 'block';
                 document.getElementById('check_d').style.display = 'none';
-                $("#manageDeptResult").removeAttr("readonly");
+                $("#burgLeaderResult").removeAttr("readonly");
             } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
                 //监理终审
                 document.getElementById('new').style.display = 'block';
-                $("#burgLeaderResult").removeAttr("readonly");
+                $("#manageDeptResult").removeAttr("readonly");
             } else {
                 document.getElementById('check').style.display = 'none';
                 document.getElementById('old').style.display = 'block';
