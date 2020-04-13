@@ -22,6 +22,8 @@ public interface ISysRoleService {
 
     SysRole findById(Long id);
 
+    SysRole findByCode(String code);
+
     Page<SysRole> findRoles(Map<String, Object> params);
 
     Set<SysPermission> findPermissionsByRoleId(Long roleId);
