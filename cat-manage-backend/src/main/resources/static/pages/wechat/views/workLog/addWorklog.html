@@ -206,19 +206,19 @@
                     '            <div class="weui-line"></div>\n' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
-                    '                    <label class="weui-label">上次数量</label>\n' +
+                    '                    <label class="weui-label">本次数量</label>\n' +
                     '                </div>\n' +
                     '                <div class="weui-cell__bd">\n' +
-                    '                    <input class="weui-input" type="text" name="oldCount" value="' + item.nowCount + '" disabled>\n' +
+                    '                    <input class="weui-input" type="text" name="oldCount" value="0" onchange="setNowCount(this)">\n' +
                     '                </div>\n' +
                     '            </div>\n' +
                     '            <div class="weui-line"></div>\n' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
-                    '                    <label class="weui-label">上次本次合计</label>\n' +
+                    '                    <label class="weui-label">累计数量</label>\n' +
                     '                </div>\n' +
                     '                <div class="weui-cell__bd">\n' +
-                    '                    <input class="weui-input" type="text" name="nowCount" value="' + item.nowCount + '" >\n' +
+                    '                    <input class="weui-input" type="text" name="nowCount" data-initial-val="' + item.nowCount + '" value="' + item.nowCount + '" disabled>\n' +
                     '                </div>\n' +
                     '            </div>\n' +
                     '        </div>';
@@ -265,7 +265,7 @@
                             '                    <label class="weui-label">上次数量</label>\n' +
                             '                </div>\n' +
                             '                <div class="weui-cell__bd">\n' +
-                            '                    <input class="weui-input" type="text" name="oldCount" value="0" disabled>\n' +
+                            '                    <input class="weui-input" type="text" name="oldCount" value="0" onchange="setNowCount(this)">\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '            <div class="weui-line"></div>\n' +
@@ -274,7 +274,7 @@
                             '                    <label class="weui-label">上次本次合计</label>\n' +
                             '                </div>\n' +
                             '                <div class="weui-cell__bd">\n' +
-                            '                    <input class="weui-input" type="text" name="nowCount" value="0" >\n' +
+                            '                    <input class="weui-input" type="text" name="nowCount" data-initial-val="0" value="0"  disabled>\n' +
                             '                </div>\n' +
                             '            </div>\n' +
                             '        </div>';
@@ -300,6 +300,14 @@
         }
     });
 
+    function setNowCount(obj) {
+        var oldCount = $(obj).val();
+        var parentElem = $(obj).parents("div.targetSum");
+        var nowCountInput = $(parentElem).find("input[name=nowCount]");
+        var initialVal = $(nowCountInput).data("initial-val");
+        $(nowCountInput).val(parseInt(oldCount)+parseInt(initialVal));
+    }
+
     function setPlan(plan) {
         $("#sliderTrack").css('min-width', plan + '%');
         $("#sliderHandler").css('left', plan + '%');
@@ -311,8 +319,8 @@
         $(obj).attr("disabled", true);
         var workLogAffiliates = setObjectProperty('.targetSum');
         var formdata = $("#form").serializeObject();
-        formdata.itemId = 1;
-        formdata.targetId = 4;
+        formdata.itemId = itemId;
+        formdata.targetId = targetId;
         formdata.paln = formdata.plan + '%';
         formdata.workLogAffiliates = workLogAffiliates;
         $.ajax({
