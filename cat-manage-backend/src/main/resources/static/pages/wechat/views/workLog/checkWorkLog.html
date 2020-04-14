@@ -227,16 +227,16 @@
                     '            <div class="weui-line"></div>\n' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
-                    '                    <label class="weui-label">上次数量</label>\n' +
+                    '                    <label class="weui-label">本次数量</label>\n' +
                     '                </div>\n' +
                     '                <div class="weui-cell__bd">\n' +
-                    '                    <p class="weui-set-hide-val">' + item.nowCount + '</p>\n' +
+                    '                    <p class="weui-set-hide-val">' + item.oldCount + '</p>\n' +
                     '                </div>\n' +
                     '            </div>\n' +
                     '            <div class="weui-line"></div>\n' +
                     '            <div class="weui-cell">\n' +
                     '                <div class="weui-cell__hd">\n' +
-                    '                    <label class="weui-label">上次本次合计</label>\n' +
+                    '                    <label class="weui-label">累计数量</label>\n' +
                     '                </div>\n' +
                     '                <div class="weui-cell__bd">\n' +
                     '                    <p class="weui-set-hide-val">' + item.nowCount + '</p>\n' +
@@ -253,21 +253,23 @@
             }
             setPlan(data[0].plan);
             $(".weui-btn_primary").attr('onclick', 'check(' + data[0].id + ')');
-            $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
-                $.each(data1, function (i, item) {
-                    var type = item.contentType;
-                    if (item.isImg) {
-                        $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
-                    }
-                    if (type.substring(0, 11) == 'application') {
-                        $('#files').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + item.name + '</li>');
-                    }
-                    if (type.substring(0, 5) == 'video') {
-                        $('#vedio').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
-                            '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
-                    }
-                });
-            })
+            if (!jQuery.isEmptyObject(data[0].accessory)) {
+                $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
+                    $.each(data1, function (i, item) {
+                        var type = item.contentType;
+                        if (item.isImg) {
+                            $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
+                        }
+                        if (type.substring(0, 11) == 'application') {
+                            $('#files').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + item.name + '</li>');
+                        }
+                        if (type.substring(0, 5) == 'video') {
+                            $('#vedio').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
+                                '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
+                        }
+                    });
+                })
+            }
         });
     }
 

@@ -122,6 +122,16 @@ public class SysRoleService implements ISysRoleService {
     }
 
     /**
+     * 根据code查询
+     * @param code
+     * @return
+     */
+    @Override
+    public SysRole findByCode(String code) {
+        return sysRoleMapper.findByCode(code);
+    }
+
+    /**
      * 分页查询
      * @param params
      * @return

@@ -789,62 +789,6 @@
                 <p class="principalCheckTime weui-set-hide-val"></p>
             </div>
         </div>
-        <div class="weui-line"></div>
-        <div class="weui-cells__title">项目完成情况</div>
-        <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label " style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" class="weui-check" name="projectCompletion" value="按计划进度实施" disabled>
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>按计划进度实施</p>
-                </div>
-            </label>
-            <label class="weui-cell weui-check__label" style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" name="projectCompletion" class="weui-check" value="基本按计划进度实施" disabled>
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>基本按计划进度实施</p>
-                </div>
-            </label>
-            <label class="weui-cell weui-check__label" style="float: left;">
-                <div class="weui-cell__hd">
-                    <input type="radio" name="projectCompletion" class="weui-check" value="未按计划进度实施" disabled>
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>未按计划进度实施</p>
-                </div>
-            </label>
-        </div>
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <label class="weui-min-title">单位意见</label>
-                <p class="deptCheck weui-set-hide-val"></p>
-            </div>
-        </div>
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">经办人</label>
-            </div>
-            <div class="weui-cell__bd">
-                <p class="deptCheckUser weui-set-hide-val"></p>
-            </div>
-        </div>
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">日期</label>
-            </div>
-            <div class="weui-cell__bd">
-                <p class="deptCheckTime weui-set-hide-val"></p>
-            </div>
-        </div>
     </div>
 
 
@@ -912,7 +856,6 @@
             for (var key in res) {
                 $("." + key).html(res[key]);
             }
-            $('.deptCheckTime').html(formatDate4(res.deptCheckTime));
             $('.principalCheckTime').html(formatDate4(res.principalCheckTime));
             $('.createTime').html(formatDate4(res.createTime));
             $('.extensionTime').html(formatDate4(res.extensionTime));
@@ -925,9 +868,7 @@
                         $(causesInput[i]).prop('checked', true);
                     }
                 }
-            }
-            setRadio($('input[name=principalCheckEnable]'), res.principalCheckEnable);
-            setRadio($('input[name=deptCheckEnable]'), res.deptCheckEnable);
+            };
             setRadio($('input[name=projectCompletion]'), res.projectCompletion);
             $('#OTHER_INDICATORS,#TECHNICAL_INDICATORS,#ECONOMIC_INDICATORS,#INDICATORS_OF_TALENT_TEAM_CONS').empty();
             if (res.otherTarget != null) {
