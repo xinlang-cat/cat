@@ -104,7 +104,8 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
                         <input type="hidden" name="id" id="item_id">
-                        <input type="text" name="contract_no" placeholder="请输入">
+                        <input type="text" name="contract_no" placeholder="请输入" lay-verify="required">
+                        <input type="hidden" name="status" id="ItemStatus">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -116,7 +117,7 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
                         <!--<input type="text" name="type" placeholder="请输入">-->
-                        <select name="type" id="type">
+                        <select name="type" id="type" lay-verify="required">
                             <option value=""></option>
                         </select>
                     </div>
@@ -139,7 +140,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="name" placeholder="请输入">
+                        <input type="text" name="name" placeholder="请输入" lay-verify="required">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -151,7 +152,7 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
                         <!--<input type="text" name="entrusting_party" placeholder="请输入">-->
-                        <select name="entrusting_party" id="entrusting_party" lay-filter="unit">
+                        <select name="entrusting_party" id="entrusting_party" lay-filter="unit" lay-verify="required">
                             <option value=""></option>
                         </select>
                     </div>
@@ -186,7 +187,7 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
                         <!--<input type="text" name="management_unit" placeholder="请输入">-->
-                        <select name="management_unit" id="management_unit" lay-filter="unit">
+                        <select name="management_unit" id="management_unit" lay-filter="unit" lay-verify="required">
                             <option value=""></option>
                         </select>
                     </div>
@@ -209,7 +210,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="document_number" placeholder="请输入">
+                        <input type="text" name="document_number" placeholder="请输入" lay-verify="required">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -220,7 +221,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="period" placeholder="请输入" class="date">
+                        <input type="text" name="period" placeholder="请输入" class="date" lay-verify="required">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -263,7 +264,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="overall_objective" placeholder="请输入" class="layui-textarea"></textarea>
+                        <textarea name="overall_objective" placeholder="请输入" class="layui-textarea" lay-verify="required"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -284,7 +285,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -998,23 +999,52 @@
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
-
+        <!--合同附件-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 合同附件</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_1" colspan="1"></td>
+            <td class="mainTd_1" colspan="6">
+                <button type="button" class="layui-btn layui-btn-sm" id="contract">上传附件</button>
+                <a id="contractName" href=""></a>
+                <input type="hidden" name="accessory" id="accessory">
+            </td>
+            <td class="mainTd_1" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+        </tr>
         <tr style="height: 22px;">
             <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_1" colspan="8"></td>
             <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-            <td class="mainTd_0" colspan="1"></td>
-
         </tr>
         </tbody>
     </table>
-    <button class="layui-btn" lay-submit lay-filter="submit" style="display: none">立即提交</button>
+    <button class="layui-btn" lay-submit lay-filter="submit" id="submit" style="display: none">立即提交</button>
 </div>
 </body>
 
@@ -1029,10 +1059,11 @@
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 
 <script>
-    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery','upload'], function () {
         var form = layui.form,
             layer = layui.layer,
             element = layui.element,
+            upload = layui.upload,
             laydate = layui.laydate,
             $ = layui.jquery;
         lay('.date').each(function () {
@@ -1043,12 +1074,27 @@
                 , trigger: 'click'
             });
         });
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#contract' //绑定元素
+            ,accept: 'file'
+            ,url: domainName+'/zuul/api-f/files' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                var id = res.id,
+                    name = res.name;
+                $("#accessory").val(id);
+                $("#contractName").text(name);
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
 
         //监听提交
         form.on('submit(submit)', function (data) {
-            //layer.msg(JSON.stringify(data.field));
-            submit();
-            //return false;
+            save();
+            return false;
         });
 
         //添加tr
@@ -1104,7 +1150,7 @@
                                 option += '<option value=' + this.sign + '>' + this.content + '</option>';
                             });
                         }
-                    })
+                    });
                     str = '<tr>' +
                         '<td class="tdDorder mainTd_1">' +
                         '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
@@ -1112,7 +1158,7 @@
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<select name="content">\n' +
+                        '<select name="content" lay-verify="required">\n' +
                         '<option value=""></option>' + option + '\n' +
                         '</select>' +
                         '</div>' +
@@ -1390,37 +1436,37 @@
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">' +
                             '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + arr[0] + '">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="name" value="' + arr[1] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="name" value="' + arr[1] + '" readonly>\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="sex" value="' + arr[2] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="sex" value="' + arr[2] + '" readonly>\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="age" value="' + arr[3] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="age" value="' + arr[3] + '" readonly>\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="organization" value="' + arr[8] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="organization" value="' + arr[8] + '" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                   <input type="text" placeholder="请输入" name="responsibilities">\n' +
+                            '                                   <input type="text" placeholder="请输入" name="responsibilities" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                        </tr>';
@@ -1636,12 +1682,17 @@
     queryFundSource(id);
     queryContactWay(id);
 
+    /*保存或提交*/
     function submit(status) {
+        $('#ItemStatus').val(status);
+        $('#submit').trigger("click");
+    }
+    function save() {
         var information = $('#form1').serializeObject();
-        information.status = status;
+        information.accessory = $('#accessory').val();
         var indicator = $('.indicators').find('form').serializeArrayObj();
-        var scheduling = $('.scheduling').find('form').serializeArrayObj();
         var achievement = $('.achievement').find('form').serializeArrayObj();
+        var scheduling = $('.scheduling').find('form').serializeArrayObj();
         var personnel = $('.personnel').find('form').serializeArrayObj();
         var fundBudget = $('.fundBudget').find('form').serializeArrayObj();
         var fundSource = $('.fundSource').find('form').serializeObject();

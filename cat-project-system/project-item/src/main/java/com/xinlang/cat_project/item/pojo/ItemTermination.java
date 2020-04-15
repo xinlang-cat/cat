@@ -4,22 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import tk.mybatis.mapper.annotation.KeySql;
 
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.util.Date;
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "item_content")
-public class ItemContent {
-    @Id
-    @KeySql(useGeneratedKeys = true)
+@Table(name = "item_termination")
+public class ItemTermination {
     private Integer id;
     private Integer item_id;
-    private String content;
+    private String remark;
+    private String accessorys;
+    private Integer status;
 }
