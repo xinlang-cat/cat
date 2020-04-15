@@ -59,7 +59,6 @@
     var pers = checkPermission();
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
-    var example;
 
     $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
         var str = '';

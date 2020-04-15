@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us" id="extr-page">
 <head>
-    <title>工作日志列表</title>
+    <title>修改工作日志</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -34,91 +34,126 @@
 <!--        </button>-->
 <!--    </div>-->
 <!--</div>-->
-<div class="page__bd">
+<!--<div class="page__bd">-->
 
+<!--</div>-->
+
+
+<form class="form-horizontal" onsubmit="return false" id="form">
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-label">项目名称</label>
+        </div>
+        <div class="weui-cell__bd">
+            <p class="itemName weui-set-hide-val"></p>
+        </div>
+    </div>
+    <div class="weui-line" style="margin-top: 15px;"></div>
+    <div class="weui-cells__title">相关信息</div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('url')">基本信息</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('url')">经费使用</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('../stageSummary/detailStageSummary.html')">阶段总结</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('url')">结题总结</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('url')">查定申请</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('url')">变更申请</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary"
+               onclick="openPopup('url')">结题申请</a>
+        </div>
+    </div>
+    <div class="targets">
+        <div class="weui-imaginary-line"></div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-line" style="margin-top: 15px;"></div>
+    <div class="weui-cells__title">评审意见建议</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                        <textarea class="weui-textarea evaluateContent" placeholder="请输入文本" name="evaluateContent"
+                                  rows="20"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cells__title">评审结果</div>
+    <div class="weui-cells weui-cells_checkbox">
+        <label class="weui-cell weui-check__label " style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="isPass" value="1">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>通过</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="isPass" value="0">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>待定</p>
+            </div>
+        </label>
+        <label class="weui-cell weui-check__label" style="float: left;">
+            <div class="weui-cell__hd">
+                <input type="radio" class="weui-check" name="isPass" value="-1">
+                <i class="weui-icon-checked"></i>
+            </div>
+            <div class="weui-cell__bd">
+                <p>不通过</p>
+            </div>
+        </label>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-min-title">评审专家</label>
+        </div>
+        <div class="weui-cell__bd">
+            <p class="userName weui-set-hide-val"></p>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd">
+            <label class="weui-min-title">评审时间</label>
+        </div>
+        <div class="weui-cell__bd">
+            <p class="createTime weui-set-hide-val"></p>
+        </div>
+    </div>
+    <div class="weui-line"></div>
+
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" id="submit" href="javascript:" onclick="">保存修改</a>
+    </div>
+    <input type="hidden" id="id" name="id">
+</form>
+
+
+<div id="work-log-popup" class='weui-popup__container'>
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal work-log-content" style="background-color: white;">
+
+    </div>
 </div>
 
 <div id="full" class='weui-popup__container'>
     <div class="weui-popup__overlay"></div>
-    <div class="weui-popup__modal" style="background-color: white;">
+    <div class="weui-popup__modal full" style="background-color: white;">
 
-        <form class="form-horizontal" onsubmit="return false" id="form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">项目名称</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <p class="itemName weui-set-hide-val"></p>
-                </div>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-line" style="margin-top: 15px;"></div>
-            <div class="weui-cells__title">评审意见建议</div>
-            <div class="weui-cells weui-cells_form">
-                <div class="weui-cell">
-                    <div class="weui-cell__bd">
-                        <textarea class="weui-textarea evaluateContent" placeholder="请输入文本" name="evaluateContent"
-                                  rows="20"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-cells__title">评审结果</div>
-            <div class="weui-cells weui-cells_checkbox">
-                <label class="weui-cell weui-check__label " style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" class="weui-check" name="isPass" value="1">
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>通过</p>
-                    </div>
-                </label>
-                <label class="weui-cell weui-check__label" style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" class="weui-check" name="isPass" value="0">
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>待定</p>
-                    </div>
-                </label>
-                <label class="weui-cell weui-check__label" style="float: left;">
-                    <div class="weui-cell__hd">
-                        <input type="radio" class="weui-check" name="isPass" value="-1">
-                        <i class="weui-icon-checked"></i>
-                    </div>
-                    <div class="weui-cell__bd">
-                        <p>不通过</p>
-                    </div>
-                </label>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">评审人</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <p class="userName weui-set-hide-val"></p>
-                </div>
-            </div>
-            <div class="weui-line"></div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">评审时间</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <p class="createTime weui-set-hide-val"></p>
-                </div>
-            </div>
-            <div class="weui-line"></div>
-
-            <div class="weui-btn-area">
-                <a class="weui-btn weui-btn_primary" href="javascript:" onclick="">保存修改</a>
-            </div>
-        </form>
     </div>
 </div>
+
 
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
@@ -137,31 +172,14 @@
     $(function () {
         var params = {
             itemId: itemId,
-            userId : userId
+            userId: userId,
+            isPass: 0
         };
-        $.get(domainName + "/api-summary/expert-evaluate/list", params, function (data) {
-            var str = '';
-            for (var i = data.length - 1; i >= 0; i--) {
-                var outline = data[i].evaluateContent.length > 20 ? data[i].evaluateContent.substring(0, 20) + '...' : data[i].evaluateContent;
-                str += '<a href="javascript:;" class="open-popup" data-target="#full" onclick="detail(' + data[i].id + ')"><div class="weui-panel">';
-                str += '        <div class="weui-panel__bd">';
-                str += '            <div class="weui-media-box weui-media-box_text">';
-                str += '               <p class="weui-media-box__desc">' + outline + '</p>';
-                str += '               <ul class="weui-media-box__info">';
-                str += '                    <li class="weui-media-box__info__meta">' + data[i].userName + '</li>';
-                str += '                    <li class="weui-media-box__info__meta">' + formatDate4(data[i].createTime) + '</li>';
-                str += '               </ul>';
-                str += '          </div>';
-                str += '     </div>';
-                str += ' </div></a><div class="weui-interval"></div>';
-            }
-            $(".page__bd").append(str);
-        });
-    });
 
-    function detail(id) {
-        $(".weui-btn_primary").attr('onclick', 'update(' + id + ')');
-        $.get(domainName + '/api-summary/expert-evaluate/list', {id: id}, function (res) {
+        $.get(domainName + '/api-summary/expert-evaluate/list', params, function (res) {
+            if (jQuery.isEmptyObject(res[0])) return;
+            $("#submit").attr('onclick', 'update(' + res[0].id + ')');
+            $("#id").val(res[0].id);
             for (var key in res[0]) {
                 if (key == 'createTime') {
                     $("." + key).html(formatDate4(res[0][key]));
@@ -170,17 +188,101 @@
                 }
             }
             setRadio($('input[name=isPass]'), res[0].isPass);
-            if(res[0].isPass != -1){
-                $.each($('input,textarea'),function (i,item) {
-                    $(item).attr('disabled',true);
+            $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (data) {
+                var str = '';
+                $.each(data, function (i, item) {
+                    var type = '';
+                    var startEndTime = formatDate4(item['start_date']) + '---' + formatDate4(item['end_date']);
+                    if (item['count'] > 0) {
+
+                    } else {
+                        if (item['type'] == 'TECHNICAL_INDICATORS') {
+                            type = '技术指标';
+                        }
+                        if (item['type'] == 'OTHER_INDICATORS') {
+                            type = '其他指标';
+                        }
+                        if (item['type'] == 'ECONOMIC_INDICATORS') {
+                            type = '经济指标';
+                        }
+                        if (item['type'] == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                            type = '人才队伍建设指标';
+                        }
+                        var affiliate = null;
+                        $.each(res[0].list, function (i, item1) {
+                            if (item1.targetId == item.id) {
+                                affiliate = item1;
+                            }
+                        });
+                        var plan = item['plan'] == null ? '0%' : item['plan'];
+                        str += '<div class="target">\n' +
+                            '        <div class="weui-cell">\n' +
+                            '            <div class="weui-cell__hd">\n' +
+                            '                <label class="weui-min-title">指标类型</label>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-cell__bd">\n' +
+                            '                <p style="margin: 0 15px;">' + type + '</p>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-line"></div>\n' +
+                            '        <div class="weui-cell">\n' +
+                            '            <div class="weui-cell__bd">\n' +
+                            '                <label class="weui-min-title">指标内容</label>\n' +
+                            '                <p style="margin: 0 15px;">' + item['content'] + '</p>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-line"></div>\n' +
+                            '        <div class="weui-cell">\n' +
+                            '            <div class="weui-cell__hd">\n' +
+                            '                <label class="weui-min-title">起止时间</label>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-cell__bd">\n' +
+                            '                <p style="margin-left: 10px;">' + startEndTime + '</p>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-line"></div>\n' +
+                            '        <div class="weui-cell">\n' +
+                            '            <div class="weui-cell__hd">\n' +
+                            '                <label class="weui-min-title">指标进度</label>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-cell__bd">\n' +
+                            '                <p style="margin-left: 10px;">' + plan + '</p>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-line"></div>\n' +
+                            '        <div class="weui-cell weui-cell_select weui-cell_select-after">\n' +
+                            '            <div class="weui-cell__hd">\n' +
+                            '                <label class="weui-min-title">完成情况</label>\n' +
+                            '            </div>\n' +
+                            '            <div class="weui-cell__bd" style="margin-left: 15px;">\n' +
+                            '                <select class="weui-select" name="checked">\n' +
+                            '                    <option value="">请评判指标完成情况</option>\n' +
+                            '                    <option value="已完成">已完成</option>\n' +
+                            '                    <option value="未完成">未完成</option>\n' +
+                            '                </select>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-line"></div>\n' +
+                            '        <div class="weui-cell">\n' +
+                            '            <div class="weui-cell__bd">\n' +
+                            '                <label class="weui-min-title">指标评价</label>\n' +
+                            '                <textarea class="weui-textarea" name="content" placeholder="请对该指标完成情况做出评价" rows="5">' + affiliate.content + '</textarea>\n' +
+                            '               <input type="hidden" name="id" value="' + affiliate.id + '">\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-cell">\n' +
+                            '            <div class="weui-cell__bd">\n' +
+                            '                <a href="javascript:;" class="stage-summary-a" onclick="seeWorkLog(' + item['id'] + ')" >日志查询</a>\n' +
+                            '            </div>\n' +
+                            '        </div>\n' +
+                            '        <div class="weui-imaginary-line"></div>\n' +
+                            '    </div>';
+                    }
                 });
-            }else {
-                $.each($('input,textarea'),function (i,item) {
-                    $(item).attr('disabled',false);
-                });
-            }
+                $('.targets').append(str);
+            });
         });
-    }
+    });
 
 
     //设置单选框
@@ -195,8 +297,9 @@
 
     //保存数据
     function update(id) {
+        var list = setObjectProperty('.target');
         var formdata = $("#form").serializeObject();
-        formdata.id = id;
+        formdata.list = list;
         $.ajax({
             type: 'put',
             url: domainName + '/api-summary/expert-evaluate',
@@ -208,6 +311,43 @@
             }
         });
     }
+
+    function setObjectProperty(attribute) {
+        var target = $(attribute);
+        var arr = new Array();
+        for (var i = 0; i < target.length; i++) {
+            var obj = {};
+            var input = $(target[i]).find('input,select,textarea');
+            var falg = false;
+            for (var j = 0; j < input.length; j++) {
+                falg = true;
+                obj[$(input[j]).attr('name')] = $(input[j]).val();
+                $(input[j]).attr('disabled', true)
+            }
+            if (falg) {
+                arr.push(obj);
+            }
+            falg = false;
+        }
+        return arr;
+    }
+
+    function seeWorkLog(targetId) {
+        $('.work-log-content').empty();
+        $('.work-log-content').append('<iframe src="../workLog/workLogList.html?itemId=' + itemId + '&userId=' +
+            userId + '&targetId=' + targetId + '" width="100%" height="100%" frameborder="0"></iframe>' +
+            '<a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">返回评审页面</a>');
+        $("#work-log-popup").popup();
+    }
+
+    function openPopup(url) {
+        $('.full').empty();
+        $('.full').append('<iframe src="' + url + '?itemId=' + itemId + '&userId=' +
+            userId + '" width="100%" height="100%" frameborder="0"></iframe>' +
+            '<a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">返回评审页面</a>');
+        $("#full").popup();
+    }
+
 
 </script>
 </body>
