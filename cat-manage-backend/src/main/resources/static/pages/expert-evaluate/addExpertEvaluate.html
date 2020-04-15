@@ -7,49 +7,115 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
 </head>
+<style>
+    .col-md-11{
+        width: 91.66666667%;
+    }
+</style>
 <body>
-<div class="col-xs-12 col-sm-12 col-md-22 col-lg-12" >
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <header style="height: 100%">
+        <div align="left">
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <form class="form-inline" onsubmit="return false">
+                            <div class="form-group">
+
+                            </div>
+                        </form>
+                    </td>
+                    <td align="right">
+                        <button class="layui-btn layui-btn-sm" onclick="javascript:history.back(-1);">
+                            <i class="layui-icon">&#xe65c;</i> 返回
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </header>
     <form class="form-horizontal layui-form" onsubmit="return false" id="form" style="padding-bottom: 30px">
         <fieldset>
 
             <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-2 control-label">项目名称</label>
-                <div class="col-md-10">
+                <label class="col-md-1 control-label">项目名称</label>
+                <div class="col-md-11">
                     <p class="form-control itemName" style="border: none"></p>
                     <input type="hidden" class="form-control" id="itemName" name="itemName">
                     <input type="hidden" id="itemId" name="itemId">
                 </div>
             </div>
-
             <div class="form-group">
-                <label class="col-md-2 control-label">综合意见建议</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">相关信息</label>
+                <div class="col-md-11">
+                    <button class="layui-btn layui-btn-sm" onclick="itemInfo();">
+                        <i class="layui-icon">&#xe62d;</i> 项目信息
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="stageSummary();">
+                        <i class="layui-icon">&#xe62d;</i> 阶段总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="fundUse();">
+                        <i class="layui-icon">&#xe62d;</i> 经费使用
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="itemEndSummary();">
+                        <i class="layui-icon">&#xe62d;</i> 结题总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="checkTable();">
+                        <i class="layui-icon">&#xe62d;</i> 查定申请
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="itemChange();">
+                        <i class="layui-icon">&#xe62d;</i> 项目变更
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">考核指标</label>
+                <div class="col-md-11">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th style="width:6%;">指标类型</th>
+                            <th style="width:54%;">指标内容</th>
+                            <th style="width:13%">起止时间</th>
+                            <th style="width:5%;">进度[%]</th>
+                            <th style="width:8%;">实施日志</th>
+                        </tr>
+                        </thead>
+                        <tbody id="content">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">综合意见建议</label>
+                <div class="col-md-11">
 						<textarea class="layui-textarea" id="evaluateContent" name="evaluateContent" rows="15">
 						</textarea>
                 </div>
             </div>
-
             <div class="form-group">
-                <label class="col-md-2 control-label">评审结果</label>
-                <div class="col-md-8">
-                    <input type="radio" name="isPass" value="1" title="通过">
+                <label class="col-md-1 control-label">评审结果</label>
+                <div class="col-md-11">
+                    <input type="radio" name="isPass" value="1" checked title="通过">
                     <input type="radio" name="isPass" value="0" title="待定">
                     <input type="radio" name="isPass" value="-1" title="不通过">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">评审人</label>
-                <div class="col-md-10">
+                <label class="col-md-1 control-label">评审人</label>
+                <div class="col-md-11">
                     <p class="form-control userName" style="border: none"></p>
-                    <input type="hidden" id="userName" name="userName"  class="form-control">
-                    <input type="hidden" id="userId"  name="userId">
+                    <input type="hidden" id="userName" name="userName" class="form-control">
+                    <input type="hidden" id="userId" name="userId">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">评审日期</label>
-                <div class="col-md-10">
+                <label class="col-md-1 control-label">评审日期</label>
+                <div class="col-md-11">
                     <p class="form-control createTime" style="border: none"></p>
                 </div>
             </div>
@@ -74,6 +140,7 @@
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/expert-evaluate.js"></script>
 <script type="text/javascript">
 
     var laydate, form;
@@ -106,22 +173,68 @@
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
-        if(!bootstrapValidator.isValid()){
+        if (!bootstrapValidator.isValid()) {
             return;
         }
+        var list = setObjectProperty('.target');
         var formdata = $("#form").serializeObject();
+        formdata.list = list;
         $.ajax({
-            type : 'post',
-            url : domainName + '/api-summary/expert-evaluate',
+            type: 'post',
+            url: domainName + '/api-summary/expert-evaluate',
             contentType: "application/json; charset=utf-8",
-            data : JSON.stringify(formdata),
+            data: JSON.stringify(formdata),
             success: function (data) {
-                layer.msg("成功", {shift: -1, time: 1000}, function(){
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
                     //location.href = "userList.html";
                 });
             }
         });
     }
+
+    $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
+        var str = '';
+        $.each(res, function (i, item) {
+            var type = '';
+            var content = item['content'];
+            var startEndTime = formatDate4(item['start_date']) + '---' + formatDate4(item['end_date']);
+            if (item['count'] > 0) {
+
+            } else {
+                if (item['type'] == 'TECHNICAL_INDICATORS') {
+                    type = '技术指标';
+                }
+                if (item['type'] == 'OTHER_INDICATORS') {
+                    type = '其他指标';
+                }
+                if (item['type'] == 'ECONOMIC_INDICATORS') {
+                    type = '经济指标';
+                }
+                if (item['type'] == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    type = '人才队伍建设指标';
+                }
+                var plan = item['plan'] == null ? '0%' : item['plan'];
+                str += '<tr ><td style="vertical-align: middle;" rowspan="2">' + type + '</td><td>' + content + '</td><td style="vertical-align: middle;">' + startEndTime + '</td>';
+                str += '<td style="vertical-align: middle;">' + plan + '</td><td style="vertical-align: middle;">';
+                if (item['count'] <= 0) {
+                    str += '<button class="layui-btn layui-btn-xs" onclick="location.href=\'../work-log/workLogList.html?itemId=';
+                    str += itemId + '&targetId=' + item['id'] + '&userId=' + userId + '\'" ><i class="layui-icon">日志详情</i></button>';
+                }
+                str += '</td></tr><tr class="target">';
+                str += '<td colspan="2"><textarea class="layui-textarea" placeholder="请对该指标做出评价,不超过500字！" name="content" rows="5"></textarea></td>';
+                str += '<td colspan="2"><select name="checked">' +
+                    '                    <option value="" selected>请确认完成情况</option>' +
+                    '                    <option value="已完成">已完成</option>' +
+                    '                    <option value="未完成">未完成</option></select>' +
+                    '                    <input type="hidden" name="targetId" value="' + item['id'] + '"></td></tr>';
+
+            }
+
+        });
+        $('#content').append(str);
+        form.render();
+    });
+
 
 </script>
 </body>

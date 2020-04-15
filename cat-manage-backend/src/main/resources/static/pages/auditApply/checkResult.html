@@ -127,12 +127,12 @@
                 <input style="display: none" id="check_userid" name="check_userid" value="">
 
                 <input style="display: none" id="id" name="id" value="">
-                <label class="col-md-2 control-label">实际查定时间</label>
+                <label class="col-md-1 control-label">实际查定时间</label>
                 <div class="col-md-3">
                     <input type="text" name="periods" id="periods" placeholder="请输入" class="form-control date" readonly>
                 </div>
 
-                <label class="col-md-2 control-label">查定结果</label>
+                <label class="col-md-1 control-label">查定结果</label>
                 <div class="col-md-3">
                     <p name="result" id="result" style=""></p>
                     <!--<input type="text" name="result" id="result" placeholder="请输入" class="form-control date">-->
@@ -141,8 +141,8 @@
 
 
             <div class="form-group">
-                <label class="col-md-2 control-label">查定情况简述:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">查定情况简述:</label>
+                <div class="col-md-11">
                     <textarea placeholder="查定情况简述。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="description" name="description" data-bv-notempty="true"
@@ -150,8 +150,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">查定目的:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">查定目的:</label>
+                <div class="col-md-11">
                     <textarea placeholder="查定目的。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="purpose" name="purpose" data-bv-notempty="true"
@@ -159,8 +159,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">查定依据:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">查定依据:</label>
+                <div class="col-md-11">
                     <textarea placeholder="查定依据。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="depand" name="depand" data-bv-notempty="true"
@@ -168,8 +168,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">查定内容:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">查定内容:</label>
+                <div class="col-md-11">
                     <textarea placeholder="查定内容。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="details" name="details" data-bv-notempty="true"
@@ -177,8 +177,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">查定方法:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">查定方法:</label>
+                <div class="col-md-11">
                     <textarea placeholder="查定方法。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="means" name="means" data-bv-notempty="true"
@@ -285,8 +285,8 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
-    var h = $(window).height() - 100;
-    var w = $(window).width() - 200;
+    var h = $(window).height() -15;
+    var w = $(window).width() -30;
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({
