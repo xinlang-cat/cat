@@ -14,12 +14,16 @@
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/common.css">
 </head>
-
+<style>
+    .weui-set-hide-val {
+        margin-left: 15px;
+    }
+</style>
 <body ontouchstart>
 <form class="form-horizontal" onsubmit="return false" id="form">
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">项目名称</label>
+            <label class="weui-min-title">项目名称</label>
         </div>
         <div class="weui-cell__bd">
             <p class="itemName weui-set-hide-val"></p>
@@ -27,13 +31,30 @@
             <input type="hidden" id="itemId" name="itemId">
         </div>
     </div>
-    <div class="weui-line"></div>
+    <div class="weui-line" style="margin-top: 15px;"></div>
+    <div class="weui-cells__title">相关信息</div>
+    <div class="weui-cell">
+        <div class="weui-cell__bd">
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('url')">基本信息</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('url')">经费使用</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('../stageSummary/detailStageSummary.html')">阶段总结</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('url')">结题总结</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('url')">查定申请</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('url')">变更申请</a>
+            <a href="javascript:;" class="weui-btn weui-btn_mini weui-btn_primary" onclick="openPopup('url')">结题申请</a>
+        </div>
+    </div>
+    <div class="targets">
+        <div class="weui-imaginary-line"></div>
+    </div>
+
     <div class="weui-line" style="margin-top: 15px;"></div>
     <div class="weui-cells__title">评审意见建议</div>
     <div class="weui-cells weui-cells_form">
         <div class="weui-cell">
             <div class="weui-cell__bd">
-                <textarea class="weui-textarea" placeholder="请输入文本" id="evaluateContent" name="evaluateContent" rows="20"></textarea>
+                <textarea class="weui-textarea" placeholder="请输入文本" id="evaluateContent" name="evaluateContent"
+                          rows="20"></textarea>
             </div>
         </div>
     </div>
@@ -51,7 +72,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="isPass" value="0" >
+                <input type="radio" class="weui-check" name="isPass" value="0">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -60,7 +81,7 @@
         </label>
         <label class="weui-cell weui-check__label" style="float: left;">
             <div class="weui-cell__hd">
-                <input type="radio" class="weui-check" name="isPass" value="-1" >
+                <input type="radio" class="weui-check" name="isPass" value="-1">
                 <i class="weui-icon-checked"></i>
             </div>
             <div class="weui-cell__bd">
@@ -71,7 +92,7 @@
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">评审人</label>
+            <label class="weui-min-title">评专家</label>
         </div>
         <div class="weui-cell__bd">
             <p class="userName weui-set-hide-val"></p>
@@ -82,7 +103,7 @@
     <div class="weui-line"></div>
     <div class="weui-cell">
         <div class="weui-cell__hd">
-            <label class="weui-label">评审时间</label>
+            <label class="weui-min-title">评审时间</label>
         </div>
         <div class="weui-cell__bd">
             <p class="createTime weui-set-hide-val"></p>
@@ -95,6 +116,22 @@
         <a class="weui-btn weui-btn_primary" href="javascript:" onclick="save()">提交</a>
     </div>
 </form>
+
+<div id="work-log-popup" class='weui-popup__container'>
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal work-log-content" style="background-color: white;">
+
+    </div>
+</div>
+
+<div id="full" class='weui-popup__container'>
+    <div class="weui-popup__overlay"></div>
+    <div class="weui-popup__modal full" style="background-color: white;">
+        <iframe src="../workLog/workLogList.html?itemId=1&userId=7&targetId=369" width="100%" height="100%"
+                frameborder="0"></iframe>
+        <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
+    </div>
+</div>
 
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
@@ -110,7 +147,6 @@
     $('.createTime').html(formatDate4(new Date()));
     $('#itemId').val(itemId);
     $('#userId').val(userId);
-
     //专家信息
     $.get(domainName + '/project-user/user-anon/' + userId, function (res) {
         $('.userName').html(res[0].name);
@@ -122,10 +158,100 @@
         $('.itemName').html(res[0].name);
         $('#itemName').val(res[0].name);
     });
+    $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
+        var str = '';
+        $.each(res, function (i, item) {
+            var type = '';
+            var content = item['content'];
+            var startEndTime = formatDate4(item['start_date']) + '---' + formatDate4(item['end_date']);
+            if (item['count'] > 0) {
+
+            } else {
+                if (item['type'] == 'TECHNICAL_INDICATORS') {
+                    type = '技术指标';
+                }
+                if (item['type'] == 'OTHER_INDICATORS') {
+                    type = '其他指标';
+                }
+                if (item['type'] == 'ECONOMIC_INDICATORS') {
+                    type = '经济指标';
+                }
+                if (item['type'] == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    type = '人才队伍建设指标';
+                }
+                var plan = item['plan'] == null ? '0%' : item['plan'];
+                str += '<div class="target">\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-min-title">指标类型</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p style="margin: 0 15px;">' + type + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">指标内容</label>\n' +
+                    '                <p style="margin: 0 15px;">' + item['content'] + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-min-title">起止时间</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p style="margin-left: 10px;">' + startEndTime + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-min-title">指标进度</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <p style="margin-left: 10px;">' + plan + '</p>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell weui-cell_select weui-cell_select-after">\n' +
+                    '            <div class="weui-cell__hd">\n' +
+                    '                <label class="weui-min-title">完成情况</label>\n' +
+                    '            </div>\n' +
+                    '            <div class="weui-cell__bd" style="margin-left: 15px;">\n' +
+                    '                <select class="weui-select" name="checked">\n' +
+                    '                    <option value="">请评判指标完成情况</option>\n' +
+                    '                    <option value="已完成">已完成</option>\n' +
+                    '                    <option value="未完成">未完成</option>\n' +
+                    '                </select>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-line"></div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <label class="weui-min-title">指标评价</label>\n' +
+                    '                <textarea class="weui-textarea" name="content" placeholder="请对该指标完成情况做出评价" rows="5"></textarea>\n' +
+                    '               <input type="hidden" name="targetId" value="' + item['id'] + '">\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-cell">\n' +
+                    '            <div class="weui-cell__bd">\n' +
+                    '                <a href="javascript:;" class="stage-summary-a" onclick="seeWorkLog(' + item['id'] + ')" >日志查询</a>\n' +
+                    '            </div>\n' +
+                    '        </div>\n' +
+                    '        <div class="weui-imaginary-line"></div>\n' +
+                    '    </div>';
+            }
+        });
+        $('.targets').append(str);
+    });
 
     //保存数据
     function save() {
+        var list = setObjectProperty('.target');
         var formdata = $("#form").serializeObject();
+        formdata.list = list;
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/expert-evaluate',
@@ -135,6 +261,42 @@
                 $.toast('成功');
             }
         });
+    }
+
+    function setObjectProperty(attribute) {
+        var target = $(attribute);
+        var arr = new Array();
+        for (var i = 0; i < target.length; i++) {
+            var obj = {};
+            var input = $(target[i]).find('input,select,textarea');
+            var falg = false;
+            for (var j = 0; j < input.length; j++) {
+                falg = true;
+                obj[$(input[j]).attr('name')] = $(input[j]).val();
+                $(input[j]).attr('disabled', true)
+            }
+            if (falg) {
+                arr.push(obj);
+            }
+            falg = false;
+        }
+        return arr;
+    }
+
+    function seeWorkLog(targetId) {
+        $('.work-log-content').empty();
+        $('.work-log-content').append('<iframe src="../workLog/workLogList.html?itemId=' + itemId + '&userId=' +
+            userId + '&targetId=' + targetId + '" width="100%" height="100%" frameborder="0"></iframe>' +
+            '<a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">返回评审页面</a>');
+        $("#work-log-popup").popup();
+    }
+
+    function openPopup(url) {
+        $('.full').empty();
+        $('.full').append('<iframe src="' + url + '?itemId=' + itemId + '&userId=' +
+            userId + '" width="100%" height="100%" frameborder="0"></iframe>' +
+            '<a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">返回评审页面</a>');
+        $("#full").popup();
     }
 
 </script>

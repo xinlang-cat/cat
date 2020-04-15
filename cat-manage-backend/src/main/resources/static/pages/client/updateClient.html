@@ -9,20 +9,20 @@
 	<form class="form-horizontal" onsubmit="return false" id="form">
 		<fieldset>
 			<div class='form-group'>
-				<label class='col-md-2 control-label'>client_id</label>
+				<label class='col-md-1 control-label'>client_id</label>
 				<div class='col-md-10'>
 					<input class='form-control' placeholder='client_id' type='text' name='client_id' id='client_id' maxlength="50" readonly>
 				</div>
 			</div>
 			<div class='form-group'>
-				<label class='col-md-2 control-label'>scope（随意字符串即可，暂时没用）</label>
+				<label class='col-md-1 control-label'>scope（随意字符串即可，暂时没用）</label>
 				<div class='col-md-10'>
 					<input class='form-control' placeholder='scope' type='text' name='scope' id='scope' maxlength="50"
 						   data-bv-notempty='true' data-bv-notempty-message='scope 不能为空'>
 				</div>
 			</div>
 			<div class='form-group'>
-				<label class='col-md-2 control-label'>授权类型（该项不用改）</label>
+				<label class='col-md-1 control-label'>授权类型（该项不用改）</label>
 				<div class='col-md-10'>
 					<input class='form-control' placeholder='为空的话将默认refresh_token,authorization_code' type='text' name='authorized_grant_types' id='authorized_grant_types' maxlength="50"
 						   value="authorization_code,password,refresh_token"
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			<div class='form-group'>
-				<label class='col-md-2 control-label'>access_token有效期（单位秒）</label>
+				<label class='col-md-1 control-label'>access_token有效期（单位秒）</label>
 				<div class='col-md-10'>
 					<input class='form-control' placeholder='access_token有效期（单位秒）' name='access_token_validity' id='access_token_validity' maxlength="9"
 						   type="number"
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class='form-group'>
-				<label class='col-md-2 control-label'>是否自动同意（默认空即可，授权码模式时用）</label>
+				<label class='col-md-1 control-label'>是否自动同意（默认空即可，授权码模式时用）</label>
 				<div class='col-md-10'>
 					<select class="form-control input-sm" id="autoapprove" name="autoapprove">
 						<option value="false">false</option>
@@ -47,7 +47,7 @@
 				</div>
 			</div>
 			<div class='form-group'>
-				<label class='col-md-2 control-label'>回调地址（授权码模式时用，多个的话用,分开）</label>
+				<label class='col-md-1 control-label'>回调地址（授权码模式时用，多个的话用,分开）</label>
 				<div class='col-md-10'>
 					<input class='form-control' placeholder='回调地址（授权码模式时用）' name='redirect_uri' id='redirect_uri' maxlength="255"
 						   type="text">
