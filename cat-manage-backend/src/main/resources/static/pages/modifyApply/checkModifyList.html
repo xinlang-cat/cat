@@ -170,15 +170,21 @@
                             "render": function (data, type, row) {
                                 var status =row['status'];
                                 $.ajaxSettings.async = false;
-                               if (status == 0){
-                                   data="待审核";
-                               }else if (status == 1){
-                                   data="更改中";
-                               }else if (status == 2){
-                                   data="审核未通过";
-                               }else if (status == 3){
-                                   data="更改成功";
-                               }
+                                if (status == 0) {
+                                    data = "未提交";
+                                } else if (status == 1) {
+                                    data = "监理审核中";
+                                } else if (status == 2) {
+                                    data = "监理审核通过";
+                                } else if (status == 3) {
+                                    data = "监理审核未通过";
+                                }else if (status == 4) {
+                                    data = "甲方审核中";
+                                }else if (status == 5) {
+                                    data = "甲方审核通过";
+                                }else if (status == 6) {
+                                    data = "甲方审核未通过";
+                                }
 
                                 $.ajaxSettings.async = true;
                                 return data;
@@ -188,7 +194,7 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id']+')" ><i class="layui-icon">申请详情</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ','+ row['type'] + ')" ><i class="layui-icon">申请详情</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
@@ -252,18 +258,63 @@
         });
 
     }
-    function read(id) {
-        layer.open({
-            title:"查看查定申请",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['manageCheckApply.html?id='+id],
-            end : function() {
+    function read(id, type) {
+        var arr = [1, 2, 3, 4, 5];
 
-            }
-        });
+        if (arr.indexOf(type) != -1) {
+            //项目信息表内容
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkBase.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        } else if (type== 6) {
+            //项目信息表内容+各方联系方式及联系地址
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkLinkMan.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }else if (type== 7) {
+            //经费相关
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkFound.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }else if (type== 8) {
+            //指标相关
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkTarget.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }
+
     }
 
     function report(id,modifyId,modify) {

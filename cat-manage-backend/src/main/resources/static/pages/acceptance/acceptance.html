@@ -603,10 +603,11 @@
         $.ajax({
             type: 'get',
             url: domainName + '/api-summary/check-table/list',
-            data: "item_id=" + item_id,
+            data: "itemId=" + item_id,
             async: false,
             success: function (data) {
                 var arr = Object.keys(data);
+                alert(arr.length);
                 if (arr.length == 0){
                     document.getElementById('new').style.display='block';
                     $("textarea").attr('readonly', true);

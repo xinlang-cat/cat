@@ -36,7 +36,7 @@ public class ItemInformationVice implements Serializable {
     private Date edit_date;             //编辑时间
     private Integer edit_user_id;        //编辑人ID
     private Integer status;             //状态，默认为0
-    private Integer apply_id;           //更改申请id
+    private Integer apply_id;           //变更申请id
 
     @Transient
     private String period;

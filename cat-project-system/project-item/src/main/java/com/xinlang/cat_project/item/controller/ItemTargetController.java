@@ -171,7 +171,7 @@ public class ItemTargetController {
         return ResponseEntity.ok(targets);
     }
 
-    @LogAnnotation(module = "获取更改申请列表")
+    @LogAnnotation(module = "获取变更申请列表")
     @GetMapping("/applyList/page")
     public ResponseEntity<PageResult<auditApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                                      @RequestParam(value = "rows", defaultValue = "10") Integer rows,

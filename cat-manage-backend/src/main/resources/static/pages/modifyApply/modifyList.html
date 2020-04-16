@@ -15,12 +15,30 @@
                 <table style="width: 100%">
                     <tr>
                         <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt">
-                                <i class="layui-icon">&#xe608;</i> 添加
-                            </button>
-                            <button class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">
-                                <i class="layui-icon">&#xe65c;</i> 返回
-                            </button>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="" id="modules">
+                                        <option value="">选择更改类型</option>
+                                        <option value="1">项目名称</option>
+                                        <option value="2">承担单位（单位）</option>
+                                        <option value="3">研究内容重大调整改变</option>
+                                        <option value="4">实施期限变更</option>
+                                        <option value="5">研究内容一般调整变更（不涉及合同考核指标）</option>
+                                        <option value="6">参与单位变更/负责人变更</option>
+                                        <option value="7">经费调整变更</option>
+                                        <option value="8">指标/人员/分工变更</option>
+                                    </select>
+                                </div>
+                                <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt">
+                                    <i class="layui-icon">&#xe608;</i> 添加
+                                </button>
+                                <button class="layui-btn layui-btn-sm"
+                                        onclick="location.href='../list-layout/list.html'">
+                                    <i class="layui-icon">&#xe65c;</i> 返回
+                                </button>
+                            </div>
+
+
                         </td>
                     </tr>
                 </table>
@@ -62,8 +80,6 @@
 <script type="text/javascript">
 
 
-
-
     var pers = checkPermission();
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("userId");
@@ -71,6 +87,7 @@
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
+        var $ = layui.jquery;
 
         function init() {
             example =
@@ -117,10 +134,10 @@
                             "data": "item_name",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var id =row['item_id'];
+                                var id = row['item_id'];
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
-                                    data =  res[0]['name'];
+                                    data = res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -133,7 +150,7 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var start = formatDate3(data);
-                                return start ;
+                                return start;
                             }
                         },
                         {
@@ -142,7 +159,7 @@
                             "render": function (data, type, row) {
                                 $.ajaxSettings.async = false;
                                 $.get(domainName + "/project-user/user-anon/" + row['user_id'], function (res) {
-                                    data =  res[0]['name'];
+                                    data = res[0]['name'];
                                 })
 
                                 $.ajaxSettings.async = true;
@@ -153,18 +170,23 @@
                             "data": "status",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var status =row['status'];
+                                var status = row['status'];
                                 $.ajaxSettings.async = false;
-                               if (status == 0){
-                                   data="未提交";
-                               }else if (status == 1){
-                                   data="审核中";
-                               }else if (status == 2){
-                                   data="审核未通过";
-                               }else if (status == 3){
-                                   data="更改通过";
-                               }
-
+                                if (status == 0) {
+                                    data = "未提交";
+                                } else if (status == 1) {
+                                    data = "监理审核中";
+                                } else if (status == 2) {
+                                    data = "监理审核通过";
+                                } else if (status == 3) {
+                                    data = "监理审核未通过";
+                                }else if (status == 4) {
+                                    data = "甲方审核中";
+                                }else if (status == 5) {
+                                    data = "甲方审核通过";
+                                }else if (status == 6) {
+                                    data = "甲方审核未通过";
+                                }
                                 $.ajaxSettings.async = true;
                                 return data;
                             }
@@ -173,7 +195,7 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',1,'+ row['status'] +')" ><i class="layui-icon">申请详情</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ','+ row['type'] + ')" ><i class="layui-icon">申请详情</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
@@ -192,47 +214,64 @@
                     ],
                 });
         }
+
         init();
     });
-    var h = $(window).height()-100;
-    var w = $(window).width()-200;
-    function add() {
-        layer.open({
-            title:"项目更改",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['addAuditApply.html?id='+itemId],
-            end : function() {
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
 
-            }
-        });
-    }
-    function read(id,userType,status) {
-        if (status==0){
-            //可更改
+    function add() {
+        var type = parseInt($("#modules").val());
+        var arr = [1, 2, 3, 4, 5];
+        if (arr.indexOf(type) != -1) {
+            //项目信息表内容
             layer.open({
-                title:"更改申请详情",
+                title: "项目更改",
                 type: 2,
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['addAuditApply.html?apply_id='+id],
-                end : function() {
+                content: ['addBase.html?id=' + itemId + '&type=' + type],
+                end: function () {
 
                 }
             });
-        }else {
-            //仅查看
+        } else if (type==6 ) {
+            //项目信息表内容+各方联系方式及联系地址
             layer.open({
-                title:"查看更改申请",
+                title: "项目更改",
                 type: 2,
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['checkApply.html?id='+id+'&userType='+userType],
-                end : function() {
+                content: ['addLinkMan.html?id=' + itemId + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }else if (type== 7) {
+            //经费相关
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['addFound.html?id=' + itemId + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }else if (type== 8) {
+            //指标相关
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['addTarget.html?id=' + itemId + '&type=' + type],
+                end: function () {
 
                 }
             });
@@ -240,28 +279,88 @@
 
     }
 
-    function report(id,modifyId,modify,status) {
+    function read(id, type) {
+        var arr = [1, 2, 3, 4, 5];
+
+        if (arr.indexOf(type) != -1) {
+            //项目信息表内容
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkBase.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        } else if (type== 6) {
+            //项目信息表内容+各方联系方式及联系地址
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkLinkMan.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }else if (type== 7) {
+            //经费相关
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkFound.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }else if (type== 8) {
+            //指标相关
+            layer.open({
+                title: "项目更改",
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                maxmin: true,
+                shadeClose: true,
+                content: ['checkTarget.html?id=' + id + '&type=' + type],
+                end: function () {
+
+                }
+            });
+        }
+
+    }
+
+    function report(id, modifyId, modify, status) {
         layer.open({
-            title:"添加",
+            title: "添加",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['addResult.html?id='+id+'&modifyId='+modifyId+'&modify='+modify+'&status='+status],
-            end : function() {
+            content: ['addResult.html?id=' + id + '&modifyId=' + modifyId + '&modify=' + modify + '&status=' + status],
+            end: function () {
 
             }
         });
     }
+
     function checkResult(id) {
         layer.open({
-            title:"添加",
+            title: "添加",
             type: 2,
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['checkResult.html?id='+id],
-            end : function() {
+            content: ['checkResult.html?id=' + id],
+            end: function () {
 
             }
         });

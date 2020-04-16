@@ -255,13 +255,13 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 identity = data.identity;
-                if ($.inArray('PARTY_A', pers)!=-1) {
+                if ($.inArray('PARTY_A:html', pers) != -1) {
                     //甲方
                     $("#entrusting_company").val(data.signName);
-                } else if ($.inArray('PARTY_D', pers)!=-1) {
+                } else if ($.inArray('PARTY_D:html', pers) != -1) {
                     //验收方
                     $("#acceptance_company").val(data.signName);
-                } else if ($.inArray('PARTY_C', pers)!=-1) {
+                } else if ($.inArray('PARTY_C:html', pers) != -1) {
                     //监理方
                     $("#management_company").val(data.signName);
                 }
