@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+
+        .layui-textarea {
+            min-height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);">提交</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);">保存</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
+    </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更前内容</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+        <form id="form1">
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                    <div class="subheading">
+                        <span>丨 基本信息</span>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>委托单位（甲方）</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <input type="text" name="entrusting_party" readonly>
+
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="2"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目承担单位（乙方）</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <input type="text" name="responsible_unit" placeholder="请输入" readonly>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="2"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>受委托管理单位（丙方）</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <input type="text" name="management_unit" readonly>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="2"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+
+        <!--各方联系方式及联系地址-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 联系方式及联系地址</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="contactWay1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="30%">
+                                <col width="15%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            </thead>
+                            <tbody id="contactWay1">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 22px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更后内容</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+        <form id="form">
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                    <div class="subheading">
+                        <span>丨 基本信息</span>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>委托单位（甲方）</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <select name="entrusting_party" id="entrusting_party" lay-filter="unit">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="2"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目承担单位（乙方）</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <select name="responsible_unit" id="responsible_unit" lay-filter="unit">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="2"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>受委托管理单位（丙方）</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                    <div class="field">
+                        <select name="management_unit" id="management_unit" lay-filter="unit">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="2"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+
+        <!--各方联系方式及联系地址-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 联系方式及联系地址</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="contactWay">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="30%">
+                                <col width="15%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            </thead>
+                            <tbody id="contactWay">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <form id="form2">
+        <tr style="height: 22px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px; ">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>变更原因</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <div class="field">
+                    <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+
+                    <button type="button" class="layui-btn" id="upload_accessory">
+                        <i class="layui-icon">&#xe67c;</i>上传附件
+                    </button>
+                    <span style="color: #999;">只支持jpg格式的图片</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="5">
+                <div class="field">
+                    <label class="col-md-1 control-label">附件:</label>
+                    <input type="hidden" name="item_id" id="item_id">
+                    <input type="hidden" name="type" id="type">
+                    <input type="hidden" name="check_unit" id="check_unit">
+                    <input type="hidden" name="manage_unit" id="manage_unit">
+                    <div class="col-md-11" id="accessory_files">
+
+                    </div>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        </form>
+        </tbody>
+    </table>
+    <button class="layui-btn" lay-submit lay-filter="submit" style="display: none">立即提交</button>
+</div>
+</body>
+
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../item/js/updateProject.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+<script type="application/javascript" src="js/updateProjectVice.js"></script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery','upload'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            element = layui.element,
+            laydate = layui.laydate,
+            upload = layui.upload,
+            $ = layui.jquery;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , type: 'month'
+                , range: true
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_accessory' //绑定元素
+            , accept: 'jpg'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/albums'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
+
+            }
+        });
+        //插入一张图片
+        function addImgHtml(item) {
+            var str = '';
+            var val = item.name.substring(0, item.name.indexOf("."));
+            if (val.length > 10) {
+                val = val.substring(0, 8) + '...';
+            }
+            str = '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+            str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_files").append(str);
+            $(".close-a").hide();
+        }
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            //layer.msg(JSON.stringify(data.field));
+            submit();
+            //return false;
+        });
+
+
+        //监听单位选择选择
+        form.on('select(unit)', function (data) {
+            var id = $(data.elem).attr('id');
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-user/users',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: 'deptName=' + data.value,
+                success: function (d) {
+                    var options = '<option value=""></option>';
+                    $(d.data).each(function () {
+                        options += '<option value="' + this.userId + '">' + this.name + '</option>';
+                    });
+                    if (id == 'entrusting_party') {
+                        $('#leader_1').empty();
+                        $('#leader_1').append(options);
+                    } else {
+                        $('#leader_3').empty();
+                        $('#leader_3').append(options);
+                    }
+                }
+            });
+            form.render('select');
+        });
+    });
+    /*初始化数据*/
+    initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
+    getMyCompany($('#responsible_unit'));//当前用户单位
+    initCompanySelect();//单位选择
+    //获取项目数据项目
+    var id = getUrlParam("id");
+    $('#item_id').val(id);
+    var type = getUrlParam("type");
+    $('#type').val(type);
+    var apply_id = getUrlParam("apply_id");
+    $('#apply_id').val(apply_id);
+    getId();
+    queryContactWay(id);
+    queryContactWays(id);
+
+    function getId() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/information/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+
+                $('input[name=entrusting_party]').val(d.entrusting_party);
+                $('input[name=responsible_unit]').val(d.responsible_unit);
+                $('input[name=management_unit]').val(d.management_unit);
+                $('select[name=responsible_unit]').val(d.responsible_unit);
+                $('select[name=management_unit]').val(d.management_unit);
+                $('select[name=entrusting_party]').val(d.entrusting_party);
+                $("#manage_unit").val(d.entrusting_party);
+                $("#check_unit").val(d.management_unit);
+            }
+        })
+
+
+    }
+
+    function initCompanySelect() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/all',
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    if (this.identity == 'PARTY_A') {
+                        $("#entrusting_party").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
+                    } else if (this.identity == 'PARTY_C') {
+                        $("#management_unit").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
+                    } else if (this.identity == 'PARTY_B') {
+                        $("#responsible_unit").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
+                    }
+                })
+            }
+        });
+    }
+
+    function submit(status) {
+
+        var information = $('#form').serializeObject();
+        var modifyApply = $('#form2').serializeObject();
+        modifyApply.status=status;
+
+        var contactWay = $('.contactWay').find('form').serializeArrayObj();
+        var data = {
+            information: information,
+            contactWays: contactWay,
+            modifyApply: modifyApply
+        };
+        var files = document.getElementsByName("accessory").length;
+        var arr = [];
+        var dayObj = $('input[name="accessory"]');
+        for (var i = 0; i < dayObj.length; i++) {
+            arr.push(dayObj[i].getAttribute('value'));
+        }
+        if (files == 1) {
+            modifyApply.accessory=$("input[name='accessory']").val();
+        } else {
+            modifyApply.accessory = arr.join(',');
+
+        }var arr = [];
+        var dayObj = $('input[name="accessory"]');
+        for (var i = 0; i < dayObj.length; i++) {
+            arr.push(dayObj[i].getAttribute('value'));
+        }
+
+        if (files == 1) {
+            modifyApply.accessory=$("input[name='accessory']").val();
+        } else {
+            modifyApply.accessory = arr.join(',');
+
+        }
+        console.log(JSON.stringify(data));
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/basic/modifyApply/linkMan',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(data),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+    function getUserName(userId) {
+        var userName = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-user/user-anon/' + userId,
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                userName = data[0].name;
+            }
+        });
+        return userName;
+    }
+
+    function queryContactWays(id) {
+
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/contactWay/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $(data).each(function () {
+                    var text = '';
+                    if (type == 2) {
+                        if (this.type == 2) {
+                            var str = '<tr>\n' +
+                                '                                <td class="tdDorder mainTd_1">\n' +
+                                '                                    <span> 乙方 </span>\n' +
+                                '                                    <input type="hidden" name="type" value="' + this.type + '" readonly>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text"  name="leader" value="' + getUserName(this.leader) + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <span>负责人电话</span>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text"  name="leader_phone" value="' + this.leader_phone + '" readonly>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                            </tr>';
+                            $('#contactWay1').append(str);
+                        }
+                    } else {
+
+
+                        if (this.type == 1) {
+                            text = '甲方';
+                        } else if (this.type == 2) {
+                            text = '乙方';
+                        } else {
+                            text = '丙方';
+                        }
+                        var str = '<tr>\n' +
+                            '                                <td class="tdDorder mainTd_1">\n' +
+                            '                                    <span>' + text + '</span>\n' +
+                            '                                    <input type="hidden" name="type" value="' + this.type + '" readonly>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="leader" value="' + getUserName(this.leader) + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>负责人电话</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="leader_phone" value="' + this.leader_phone + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>\n' +
+                            '                            <tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="linkman" value="' + this.linkman + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>联系人电话</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="linkman_phone" value="' + this.linkman_phone + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>\n' +
+                            '                            <tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>传真</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="fax" value="' + this.fax + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>邮编</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="postcode" value="' + this.postcode + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>\n' +
+                            '                            <tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>地址</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="site" value="' + this.site + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>E-mail（电子邮件）</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text"  name="e_mail" value="' + this.e_mail + '" readonly>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>';
+                        $('#contactWay1').append(str);
+                    }
+                })
+            }
+        })
+    }
+    function queryContactWay(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/contactWay/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $(data).each(function () {
+                    var text = '';
+                    var options = '';
+                    if (type == 2) {
+                        if (this.type == 2) {
+                            options = getCompanyUsers($('#responsible_unit').val(), this.leader);
+                            var str = '<tr>\n' +
+                                '                                <td class="tdDorder mainTd_1">\n' +
+                                '                                    <span> 乙方 </span>\n' +
+                                '                                    <input type="hidden" name="type" value="' + this.type + '">\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <select name="leader" id="leader_1">\n' +
+                                '                                            <option value=""></option>\n' + options +
+                                '                                        </select>\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <span>负责人电话</span>\n' +
+                                '                                </td>\n' +
+                                '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                                '                                    <div class="field">\n' +
+                                '                                        <input type="text"  name="leader_phone" value="' + this.leader_phone + '" >\n' +
+                                '                                    </div>\n' +
+                                '                                </td>\n' +
+                                '                            </tr>';
+                            $('#contactWay').append(str);
+                        }
+                    } else {
+                        if (this.type == 1) {
+                            text = '甲方';
+                            options = getCompanyUsers($('#entrusting_party').val(), this.leader);
+                        } else if (this.type == 2) {
+                            text = '乙方';
+                            options = getCompanyUsers($('#responsible_unit').val(), this.leader);
+                        } else {
+                            text = '丙方';
+                            options = getCompanyUsers($('#management_unit').val(), this.leader);
+                        }
+                        var str = '<tr>\n' +
+                            '                                <td class="tdDorder mainTd_1" rowspan="4">\n' +
+                            '                                    <span>' + text + '</span>\n' +
+                            '                                    <input type="hidden" name="type" value="' + this.type + '">\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <select name="leader" id="leader_1">\n' +
+                            '                                            <option value=""></option>\n' + options +
+                            '                                        </select>\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>负责人电话</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="leader_phone" value="' + this.leader_phone + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>\n' +
+                            '                            <tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="linkman" value="' + this.linkman + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>联系人电话</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="linkman_phone" value="' + this.linkman_phone + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>\n' +
+                            '                            <tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>传真</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="fax" value="' + this.fax + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>邮编</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="postcode" value="' + this.postcode + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>\n' +
+                            '                            <tr>\n' +
+                            '                                <td class="mainTd_1 tdDorder"><span>地址</span></td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="site" value="' + this.site + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <span>E-mail（电子邮件）</span>\n' +
+                            '                                </td>\n' +
+                            '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                    <div class="field">\n' +
+                            '                                        <input type="text" placeholder="请输入" name="e_mail" value="' + this.e_mail + '">\n' +
+                            '                                    </div>\n' +
+                            '                                </td>\n' +
+                            '                            </tr>';
+                        $('#contactWay').append(str);
+                    }
+                })
+            }
+        })
+    }
+    //移除一张图片
+    function deleteImg(obj) {
+        $(obj).parent('div').remove();
+    }
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "' />";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    //显示隐藏图片删除按钮
+    function showOrHideCloseBut(obj) {
+        var eum = $(obj).children("a:eq(1)");
+        var flag = $(eum).is(":hidden");
+        if (flag) {
+            $(eum).show();
+        } else {
+            $(eum).hide();
+        }
+    }
+</script>
+</html>

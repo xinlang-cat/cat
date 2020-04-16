@@ -46,20 +46,23 @@ public class ModifyApplyService extends BaseService<modifyApply> implements IMod
         // 过滤
         Example example = new Example(modifyApply.class);
 
-       if (params.get("status") != "" && params.get("check_unit") != null){
-            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("check_unit",params.get("check_unit"));
-       }else if ( params.get("check_unit") != null){
-            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit",params.get("check_unit"));
-       }else if (params.get("status") != "" &&  params.get("manage_unit") != null){
-           example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit",params.get("manage_unit"));
-       }else if ( params.get("manage_unit") != null){
-           example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit",params.get("manage_unit"));
-       }else if (params.get("status") != "" ){
-
-           example.createCriteria().andEqualTo("status",params.get("status"));
-       }else {
-           example.createCriteria().andNotEqualTo("status",0);
-       }
+        if (params.get("status") != "" && params.get("manage_unit") != "" && params.get("check_unit") != ""){
+            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("manage_unit", params.get("manage_unit")).andEqualTo("check_unit", params.get("check_unit"));
+        }else if (params.get("check_unit") != "" && params.get("manage_unit") != ""){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit")).andEqualTo("manage_unit", params.get("manage_unit"));
+        }else if (params.get("status") != "" && params.get("manage_unit") != "") {
+            example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("manage_unit", params.get("manage_unit"));
+        }else if (params.get("status") != "" && params.get("check_unit") !=  "" ){
+            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("check_unit", params.get("check_unit"));
+        }else if (params.get("check_unit") != ""){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit"));
+        }else if (params.get("manage_unit") != ""){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit", params.get("manage_unit"));
+        }else if (params.get("status") != ""){
+            example.createCriteria().andNotEqualTo("status",params.get("status"));
+        }else {
+            example.createCriteria().andNotEqualTo("status",0);
+        }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序
             String orderByClause = sortBy + (desc ? " DESC" : " ASC");

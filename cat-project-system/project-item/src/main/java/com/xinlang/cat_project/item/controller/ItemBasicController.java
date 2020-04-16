@@ -48,133 +48,9 @@ public class ItemBasicController {
 
 
 
-    @ApiOperation(value = "添加更改申请")
-    @LogAnnotation(module = "添加更改申请")
-    @PostMapping("/modifyApply")
-    public ResponseEntity<ItemInformationViceVO> ModifyApply(@RequestBody ItemInformationViceVO itemInformationViceVO) throws ParseException {
-        ItemInformationVice information = itemInformationViceVO.getInformation();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
-        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
-        System.err.println(information);
-        Integer apply_id;
-        if (information.getApply_id() != null) {
-            //更改申请已存在
-            apply_id = information.getApply_id();
 
-            modifyApply modifyApply = new modifyApply();
-            modifyApply.setId(information.getApply_id());
-            modifyApply.setStatus(information.getStatus());
-            modifyApplyService.update(modifyApply);
-        } else {
-            modifyApply modifyApply = new modifyApply();
-            modifyApply.setUser_id(userId);
-            modifyApply.setApply_time(new Date());
-            modifyApply.setStatus(information.getStatus());
-            modifyApply.setItem_id(information.getId());
-            modifyApply.setManage_unit(information.getEntrusting_party());
-            modifyApply.setCheck_unit(information.getManagement_unit());
-            modifyApplyService.save(modifyApply);
-            System.err.println(modifyApply);
-            apply_id = modifyApply.getId();
-        }
-
-
-        if (information.getId() != null) {
-
-            itemInformationViceService.delete(information.getId());
-
-
-            ItemIndicatorsVice indicator = new ItemIndicatorsVice();
-            indicator.setItem_id(information.getId());
-            itemIndicatorsViceService.deleteByAttribute(indicator);
-
-            ItemSchedulingVice scheduling = new ItemSchedulingVice();
-            scheduling.setItem_id(information.getId());
-            itemSchedulingViceService.deleteByAttribute(scheduling);
-
-            ItemPersonnelVice personnel = new ItemPersonnelVice();
-            personnel.setItem_id(information.getId());
-            itemPersonnelViceService.deleteByAttribute(personnel);
-
-            ItemFundBudgetVice fundBudget = new ItemFundBudgetVice();
-            fundBudget.setItem_id(information.getId());
-            itemFundBudgetViceService.deleteByAttribute(fundBudget);
-
-            ItemFundSourceVice fundSource = new ItemFundSourceVice();
-            fundSource.setItem_id(information.getId());
-            itemFundSourceViceService.deleteByAttribute(fundSource);
-
-            ItemContactWayVice contactWay = new ItemContactWayVice();
-            contactWay.setItem_id(information.getId());
-            itemContactWayViceService.deleteByAttribute(contactWay);
-
-            information.setId(null);
-        }
-        information.setEdit_user_id(userId);
-        information.setEdit_date(new Date());
-        if (!information.getPeriod().equals("")) {
-            Date date = null;
-            date = simpleDateFormat.parse(information.getPeriod().substring(0, 7));
-            information.setStart_date(date);
-            date = simpleDateFormat.parse(information.getPeriod().substring(10));
-            information.setEnd_date(date);
-        }
-        information.setApply_id(apply_id);
-        itemInformationViceService.save(information);
-        //指标
-        List<ItemIndicatorsVice> indicators = itemInformationViceVO.getIndicators();
-        for (ItemIndicatorsVice indicator : indicators) {
-            indicator.setItem_id(information.getId());
-            Date date = null;
-            date = simpleDateFormat.parse(indicator.getPeriod().substring(0, 7));
-            indicator.setStart_date(date);
-            date = simpleDateFormat.parse(indicator.getPeriod().substring(10));
-            indicator.setEnd_date(date);
-        }
-        itemIndicatorsViceService.saveIndicators(indicators);
-        List<ItemIndicatorsVice> achievements = itemInformationViceVO.getAchievements();
-        for (ItemIndicatorsVice achievement : achievements) {
-            achievement.setItem_id(information.getId());
-        }
-        itemIndicatorsViceService.saveIndicators(achievements);
-        //计划
-        List<ItemSchedulingVice> schedulings = itemInformationViceVO.getScheduling();
-        for (ItemSchedulingVice scheduling : schedulings) {
-            scheduling.setItem_id(information.getId());
-        }
-        itemSchedulingViceService.saveSchedulings(schedulings);
-        //人员
-        List<ItemPersonnelVice> personnels = itemInformationViceVO.getPersonnels();
-        for (ItemPersonnelVice personnel : personnels) {
-            personnel.setItem_id(information.getId());
-        }
-        itemPersonnelViceService.savePersonnels(personnels);
-        //资金预算
-        List<ItemFundBudgetVice> fundBudgets = itemInformationViceVO.getFundBudgets();
-        int total = 0;
-        for (ItemFundBudgetVice fundBudget : fundBudgets) {
-            if (fundBudget.getMoney() != null) {
-                total += fundBudget.getMoney();
-            }
-            fundBudget.setItem_id(information.getId());
-        }
-        itemFundBudgetViceService.saveFundBudgets(fundBudgets);
-        //资金来源
-        ItemFundSourceVice fundSource = itemInformationViceVO.getFundSource();
-        fundSource.setItem_id(information.getId());
-        fundSource.setFirst_party_provide(total);
-        itemFundSourceViceService.save(fundSource);
-        //联系方式
-        List<ItemContactWayVice> contactWays = itemInformationViceVO.getContactWays();
-        for (ItemContactWayVice contactWay : contactWays) {
-            contactWay.setItem_id(information.getId());
-        }
-        itemContactWayViceService.saveContactWays(contactWays);
-        return ResponseEntity.status(HttpStatus.CREATED).body(itemInformationViceVO);
-    }
-
-    @ApiOperation(value = "查询更改申请")
-    @LogAnnotation(module = "查询更改申请")
+    @ApiOperation(value = "查询变更申请")
+    @LogAnnotation(module = "查询变更申请")
     @GetMapping("/modifyApply/list")
     public ResponseEntity<List<modifyApply>> getApplyById(@RequestParam Map<String, Object> params) {
         List<modifyApply> targets = modifyApplyService.findListByParams(params, modifyApply.class);
@@ -182,23 +58,23 @@ public class ItemBasicController {
         return ResponseEntity.ok(targets);
     }
 
-    @ApiOperation(value = "修改更改申请")
-    @LogAnnotation(module = "修改更改申请")
+    @ApiOperation(value = "修改变更申请")
+    @LogAnnotation(module = "修改变更申请")
     @PutMapping("/modifyApply")
     public ResponseEntity<Void> updateApply(@RequestBody modifyApply modifyApply) {
         modifyApplyService.update(modifyApply);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @ApiOperation(value = "查询更改申请")
-    @LogAnnotation(module = "查询更改申请")
+    @ApiOperation(value = "查询变更申请")
+    @LogAnnotation(module = "查询变更申请")
     @GetMapping("/modifyApply/lists")
     public ResponseEntity<List<modifyApply>> getApplyCheck(@RequestParam Map<String, Object> params) {
         List<modifyApply> targets = modifyApplyService.findApplyList(params, modifyApply.class);
         return ResponseEntity.ok(targets);
     }
 
-    @LogAnnotation(module = "获取更改申请列表")
+    @LogAnnotation(module = "获取变更申请列表")
     @GetMapping("/modifyApply/page")
     public ResponseEntity<PageResult<modifyApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                                      @RequestParam(value = "rows", defaultValue = "10") Integer rows,
@@ -211,5 +87,168 @@ public class ItemBasicController {
         return ResponseEntity.ok(result);
     }
 
+    @ApiOperation(value = "添加变更申请(基本信息)")
+    @LogAnnotation(module = "添加变更申请(基本信息)")
+    @PostMapping("/modifyApply/base")
+    public ResponseEntity<ItemInformationViceVO> ModifyBase(@RequestBody ItemInformationViceVO itemInformationViceVO) throws ParseException {
+        //获取基本信息
+        ItemInformationVice information = itemInformationViceVO.getInformation();
+        //获取更改信息
+        modifyApply modifyApply = itemInformationViceVO.getModifyApply();
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        Integer type = modifyApply.getType();
+        Integer apply_id = modifyApply.getId();
+        //将修改信息存入数据库，获取申请id
+        modifyApply.setUser_id(userId);
+        modifyApply.setApply_time(new Date());
+
+        modifyApplyService.save(modifyApply);
+        System.err.println(modifyApply);
+        apply_id = modifyApply.getId();
+
+        information.setApply_id(apply_id);
+        information.setEdit_user_id(userId);
+        information.setEdit_date(new Date());
+        if (null!=information.getPeriod()&&!information.getPeriod().isEmpty() && !information.getPeriod().equals("")){
+            Date date = null;
+            date = simpleDateFormat.parse(information.getPeriod().substring(0, 7));
+            information.setStart_date(date);
+            date = simpleDateFormat.parse(information.getPeriod().substring(10));
+            information.setEnd_date(date);
+        }
+        itemInformationViceService.save(information);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemInformationViceVO);
+    }
+
+
+
+    @ApiOperation(value = "添加变更申请(单位/负责人)")
+    @LogAnnotation(module = "添加变更申请(单位/负责人)")
+    @PostMapping("/modifyApply/linkMan")
+    public ResponseEntity<ItemInformationViceVO> ModifyLinkMan(@RequestBody ItemInformationViceVO itemInformationViceVO) throws ParseException {
+        //获取基本信息
+        ItemInformationVice information = itemInformationViceVO.getInformation();
+        //获取更改信息
+        modifyApply modifyApply = itemInformationViceVO.getModifyApply();
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        Integer type = modifyApply.getType();
+        Integer apply_id = modifyApply.getId();
+        //将修改信息存入数据库，获取申请id
+        modifyApply.setUser_id(userId);
+        modifyApply.setApply_time(new Date());
+
+        modifyApplyService.save(modifyApply);
+        System.err.println(modifyApply);
+        apply_id = modifyApply.getId();
+
+        information.setApply_id(apply_id);
+        information.setEdit_user_id(userId);
+        information.setEdit_date(new Date());
+        if (null!=information.getPeriod()&&!information.getPeriod().isEmpty() && !information.getPeriod().equals("")){
+            Date date = null;
+            date = simpleDateFormat.parse(information.getPeriod().substring(0, 7));
+            information.setStart_date(date);
+            date = simpleDateFormat.parse(information.getPeriod().substring(10));
+            information.setEnd_date(date);
+        }
+        itemInformationViceService.save(information);
+
+        List<ItemContactWayVice> contactWays = itemInformationViceVO.getContactWays();
+        for (ItemContactWayVice contactWay : contactWays) {
+            contactWay.setItem_id(apply_id);
+        }
+        itemContactWayViceService.saveContactWays(contactWays);
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemInformationViceVO);
+    }
+
+    @ApiOperation(value = "添加变更申请(经费/预算)")
+    @LogAnnotation(module = "添加变更申请(经费/预算)")
+    @PostMapping("/modifyApply/found")
+    public ResponseEntity<ItemInformationViceVO> ModifyFound(@RequestBody ItemInformationViceVO itemInformationViceVO) throws ParseException {
+        //获取基本信息
+
+        //获取更改信息
+        modifyApply modifyApply = itemInformationViceVO.getModifyApply();
+
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+
+        //将修改信息存入数据库，获取申请id
+        modifyApply.setUser_id(userId);
+        modifyApply.setApply_time(new Date());
+        modifyApplyService.save(modifyApply);
+        System.err.println(modifyApply);
+        Integer apply_id = modifyApply.getId();
+
+        List<ItemFundBudgetVice> fundBudgets = itemInformationViceVO.getFundBudgets();
+        int total = 0;
+        for (ItemFundBudgetVice fundBudget : fundBudgets) {
+            if (fundBudget.getMoney() != null) {
+                total += fundBudget.getMoney();
+            }
+            fundBudget.setItem_id(apply_id);
+        }
+        itemFundBudgetViceService.saveFundBudgets(fundBudgets);
+        //资金来源
+        ItemFundSourceVice fundSource = itemInformationViceVO.getFundSource();
+        fundSource.setItem_id(apply_id);
+        fundSource.setFirst_party_provide(total);
+        itemFundSourceViceService.save(fundSource);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemInformationViceVO);
+    }
+
+    @ApiOperation(value = "添加变更申请(人员/指标)")
+    @LogAnnotation(module = "添加变更申请(人员/指标)")
+    @PostMapping("/modifyApply/target")
+    public ResponseEntity<ItemInformationViceVO> ModifyTarget(@RequestBody ItemInformationViceVO itemInformationViceVO) throws ParseException {
+        //获取基本信息
+
+        //获取更改信息
+        modifyApply modifyApply = itemInformationViceVO.getModifyApply();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+
+        //将修改信息存入数据库，获取申请id
+        modifyApply.setUser_id(userId);
+        modifyApply.setApply_time(new Date());
+        modifyApplyService.save(modifyApply);
+        System.err.println(modifyApply);
+        Integer apply_id = modifyApply.getId();
+
+        //指标
+        List<ItemIndicatorsVice> indicators = itemInformationViceVO.getIndicators();
+        for (ItemIndicatorsVice indicator : indicators) {
+            indicator.setItem_id(apply_id);
+            Date date = null;
+            date = simpleDateFormat.parse(indicator.getPeriod().substring(0, 7));
+            indicator.setStart_date(date);
+            date = simpleDateFormat.parse(indicator.getPeriod().substring(10));
+            indicator.setEnd_date(date);
+        }
+        itemIndicatorsViceService.saveIndicators(indicators);
+        List<ItemIndicatorsVice> achievements = itemInformationViceVO.getAchievements();
+        for (ItemIndicatorsVice achievement : achievements) {
+            achievement.setItem_id(apply_id);
+        }
+        itemIndicatorsViceService.saveIndicators(achievements);
+
+
+        //人员
+        List<ItemPersonnelVice> personnels = itemInformationViceVO.getPersonnels();
+        for (ItemPersonnelVice personnel : personnels) {
+            personnel.setItem_id(apply_id);
+        }
+        itemPersonnelViceService.savePersonnels(personnels);
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemInformationViceVO);
+    }
 }

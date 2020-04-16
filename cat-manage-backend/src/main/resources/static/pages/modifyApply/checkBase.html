@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+
+        .layui-textarea {
+            min-height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_C">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(2);" permission="PARTY_C:html">通过</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(3);" permission="PARTY_C:html">未通过</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(4);" permission="PARTY_C:html">提交至甲方审核</button>
+    </div>
+    <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_A">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(5);" permission="PARTY_A:html">甲方审核通过</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(6);" permission="PARTY_A:html">甲方审核未通过</button>
+    </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="15%">
+            <col width="28%">
+            <col width="2%">
+            <col width="5%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更说明</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="contactWay">
+                    <form id="form1">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="8%">
+                                <col width="3%">
+                                <col width="10%">
+                                <col width="28%">
+                                <col width="2%">
+                                <col width="3%">
+                                <col width="8%">
+                                <col width="10%">
+                                <col width="20">
+                                <col width="8%">
+                            </colgroup>
+                            <thead>
+                            </thead>
+                            <tbody id="old">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更说明</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+        <form id="form">
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+            <tr style="height: 25px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>变更原因</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="status" id="status">
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="5">
+                    <div class="field">
+                        <label class="col-md-1 control-label">附件:</label>
+                        <div class="col-md-11" id="accessory_files">
+
+                        </div>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>监理单位意见</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="check_unit_idea" id="check_unit_idea" placeholder="请输入内容" class="layui-textarea" ></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>甲方单位意见</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="manage_unit_idea" id="manage_unit_idea" placeholder="请输入内容" class="layui-textarea" ></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+</div>
+</body>
+
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../item/js/updateProject.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+<script type="application/javascript" src="js/updateProjectVice.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            element = layui.element,
+            laydate = layui.laydate,
+            upload = layui.upload,
+            $ = layui.jquery;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , type: 'month'
+                , range: true
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_accessory' //绑定元素
+            , accept: 'jpg'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/albums'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
+
+            }
+        });
+
+
+
+
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            //layer.msg(JSON.stringify(data.field));
+            submit();
+            //return false;
+        });
+
+    });
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 100;
+
+
+
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "' />";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+
+
+    /*初始化数据*/
+    getMyCompany($('#responsible_unit1'));//当前用户单位
+
+    /*获取机构*/
+    function initCompanySelect() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/all',
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+                    if (this.identity == 'PARTY_A') {
+                        $("#entrusting_party").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
+                    } else if (this.identity == 'PARTY_C') {
+                        $("#management_unit").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
+                    } else if (this.identity == 'PARTY_B') {
+                        $("#responsible_unit").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
+                    }
+                })
+            }
+        });
+    }
+
+    //获取项目数据项目
+    var pers = checkPermission();
+    var id = getUrlParam("id");
+    $('#id').val(id);
+    var type = getUrlParam("type");
+    $('#type').val(type);
+    //拼接页面
+    show();
+    //获取更改申请
+    getApply(id);
+    function getApply(id){
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/basic/modifyApply/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $("#id").text(d.id);
+                $("#content").text(d.content);
+                $("#check_unit_idea").text(d.check_unit_idea);
+                $("#manage_unit_idea").text(d.manage_unit_idea);
+                getStatus(d.status);
+                //获取原来数据
+                old(d.item_id);
+                //获取修改数据
+                newMess(d.id);
+                var accessory= d.accessory;
+                if (accessory != "" && accessory != null && accessory != undefined) {
+                    $.get(domainName + "/api-f/albums/list", {ids:accessory}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            addImgHtml(item)
+                        });
+                    })
+                }
+
+
+            }
+        })
+    }
+    function getStatus(status){
+        $("textarea").attr('readonly', true);
+        //监理审核，隐藏甲方按钮
+        if (status==1){
+            document.getElementById('PARTY_A').style.display='none';
+            if ($.inArray('PARTY_A:html', pers)!=-1) {
+                $("#check_unit_idea").removeAttr("readonly");
+            }
+
+        }else if (status==4){
+            //甲方审核，隐藏监理按钮
+            document.getElementById('PARTY_C').style.display='none';
+            if ($.inArray('PARTY_A:html', pers)!=-1) {
+                $("#manage_unit_idea").removeAttr("readonly");
+            }
+
+        }else {
+            document.getElementById('PARTY_C').style.display='none';
+            document.getElementById('PARTY_A').style.display='none';
+        }
+    }
+    function addImgHtml(item) {
+        var str = '';
+        var val = item.name.substring(0, item.name.indexOf("."));
+        if (val.length > 10) {
+            val = val.substring(0, 8) + '...';
+        }
+        str = '<div style="float: left;position: relative;text-align: center;height: 250px;">';
+        str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+        str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        $("#accessory_files").append(str);
+    }
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "'/>";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从
+                // 页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+    function old(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/information/list',
+            data: "apply_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $("#manage_unit1").text(d.entrusting_party);
+                $("#name1").text(d.name);
+                $("#check_unit1").text(d.management_unit);
+                $('#period1').text(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
+                $("#research_contents1").text(d.research_contents);
+            }
+        })
+
+
+    }
+    function newMess(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/information/listVice',
+            data: "apply_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $("#manage_unit2").text(d.entrusting_party);
+                $("#name2").text(d.name);
+                $("#check_unit2").text(d.management_unit);
+                $("#research_contents2").text(d.research_contents);
+
+                if (!d.start_date && typeof(d.start_date)!="undefined" && d.start_date!=null){
+                    $('#period2').text(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
+                }
+
+            }
+        })
+
+
+    }
+
+
+
+    function show() {
+
+        var str = '';
+        if (type == 1) {
+            str += '<tr style="height: 40px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="2">变更前内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>项目名称</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span id="name1"></span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="2">变更后内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>项目名称</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                '                   <span id="name2"></span>\n' +
+                '                </td>\n' +
+
+
+                '            </tr>';
+            $('#old').append(str);
+
+
+        } else if (type == 2) {
+            str += '<tr style="height: 40px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="2">变更前内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>项目承担单位</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span id="responsible_unit1"></span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="2">变更后内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>项目承担单位</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                '                    <div class="field">\n' +
+                '                         <span id="responsible_unit2"></span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+
+
+                '            </tr>';
+            $('#old').append(str);
+
+        } else if (type == 4) {
+            str += '<tr style="height: 40px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="2">变更前内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>实施期限</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span id="period1"></span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="2">变更后内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>实施期限</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">\n' +
+                '                    <div class="field">\n' +
+                '                         <span id="period2"></span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+
+
+                '            </tr>';
+            $('#old').append(str);
+
+
+        } else if (type == 3 || type == 5) {
+
+            str = ' <tr style="height: 24px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="8"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '            </tr>\n' +
+                '            <tr style="height: 40px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">变更前内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>主要研究开发内容</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="6">\n' +
+                '                    <div class="field">\n' +
+                '                        <textarea  placeholder="请输入" class="layui-textarea" readonly id="research_contents1"></textarea>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '            </tr>\n' +
+                '            <tr style="height: 24px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="8"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '            </tr>\n' +
+                '            <tr style="height: 40px;">\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">变更后内容:</td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '                <td class="mainTd_1" rowspan="1" colspan="1">\n' +
+                '                    <div class="field">\n' +
+                '                        <span>主要研究开发内容</span>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+                '                <td class="mainTd_1 tdDorder" rowspan="1" colspan="6">\n' +
+                '                    <div class="field">\n' +
+                '                        <textarea  placeholder="请输入" class="layui-textarea" readonly id="research_contents2"></textarea>\n' +
+                '                    </div>\n' +
+                '                </td>\n' +
+
+                '                <td class="mainTd_1" rowspan="1" colspan="1"></td>\n' +
+                '            </tr>';
+
+            $('#old').append(str);
+        }
+    }
+
+
+
+
+    function submit(status) {
+        var modifyApply = $('#form').serializeObject();
+        modifyApply.status = status;
+
+        console.log(JSON.stringify(modifyApply));
+
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/basic/modifyApply',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(modifyApply),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+
+</script>
+</html>

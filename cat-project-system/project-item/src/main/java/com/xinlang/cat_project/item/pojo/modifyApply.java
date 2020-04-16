@@ -60,12 +60,38 @@ public class modifyApply implements Serializable {
     private Integer check_user;
     /**
      *修改状态
-     * 0 "待审核";
-     * 1 "更改中";
-     * 2 "审核未通过";
-     * 3 "更改成功";
+     * 0 "未提交";
+     * 1 "监理审核中";
+     * 2 "监理审核通过";
+     * 3 "监理审核未通过";
+     * 4 "甲方审核中";
+     * 5 "甲方审核通过";
+     * 6 "甲方审核未通过";
      */
     private Integer status;
-    private String check_unit;     //审核单位
-    private String manage_unit;     //管理单位
+    private String check_unit;     //监理单位
+    private String manage_unit;     //甲方单位
+    /**
+     *修改类型
+     * 1 "项目名称";
+     * 2 "承担单位（单位+负责人）";
+     * 3 "承担单位（单位）";
+     * 4 "参与单位变更/承担单位变更";
+     * 5 "项目负责人变更";
+     * 6 "资助经费总额变更";
+     * 7 "实施期限变更";
+     * 8 "实施单位间的经费调整变更";
+     * 9 "研究内容";
+     * 10 "考核指标";
+     * 11 "项目组成员";
+     * 12 "经费明细";
+     * 13 "研究内容";
+     * 14 "实施地点";
+     */
+    private Integer type;
+
+    private String accessory;
+
+    private String check_unit_idea;     //监理单位意见
+    private String manage_unit_idea;     //甲方单位意见
 }
