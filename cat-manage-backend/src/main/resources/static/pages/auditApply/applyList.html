@@ -32,12 +32,11 @@
                 <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                     <thead>
                     <tr>
-                        <th style="width:15%">建议查定时间</th>
-                        <th style="width:10%;">提交人</th>
-                        <th style="width:10%;">状态</th>
-                        <th style="width:5%;">查看</th>
-                        <!--<th style="width:5%;">修改</th>
-                        <th style="width:5%;">查定结果</th>-->
+                        <th style="width:30%;">项目名称</th>
+                        <th style="width:20%">起止时间</th>
+                        <th style="width:20%;">提交人</th>
+                        <th style="width:20%;">状态</th>
+                        <th style="width:10%;">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -108,7 +107,20 @@
                     },
                     "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                     "columns": [
+                        {
+                            "data": "item_name",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var id = row['item_id'];
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
+                                    data = res[0]['name'];
+                                })
 
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
 
                         {
                             "data": "start_date",

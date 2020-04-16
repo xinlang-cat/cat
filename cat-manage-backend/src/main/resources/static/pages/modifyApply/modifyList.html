@@ -50,14 +50,12 @@
                 <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                     <thead>
                     <tr>
-                        <th style="width:25%;">项目名称</th>
-
+                        <th style="width:30%;">项目名称</th>
+                        <th style="width:30%">更改内容</th>
                         <th style="width:15%">提交时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
-
-                        <!--<th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -144,7 +142,34 @@
                                 return data;
                             }
                         },
+                        {
+                            "data": "type",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
 
+                                $.ajaxSettings.async = false;
+                                if (data == 1) {
+                                    data = "项目名称";
+                                } else if (data == 2) {
+                                    data = "承担单位（单位）";
+                                } else if (data == 3) {
+                                    data = "研究内容重大调整改变";
+                                } else if (data == 4) {
+                                    data = "实施期限变更";
+                                } else if (data == 5) {
+                                    data = "研究内容一般调整变更（不涉及合同考核指标）";
+                                } else if (data == 6) {
+                                    data = "参与单位变更/负责人变更";
+                                } else if (data == 7) {
+                                    data = "经费调整变更";
+                                } else if (data == 8) {
+                                    data = "指标/人员/分工变更";
+                                }
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
                         {
                             "data": "apply_time",
                             "defaultContent": "",
@@ -180,11 +205,11 @@
                                     data = "监理审核通过";
                                 } else if (status == 3) {
                                     data = "监理审核未通过";
-                                }else if (status == 4) {
+                                } else if (status == 4) {
                                     data = "甲方审核中";
-                                }else if (status == 5) {
+                                } else if (status == 5) {
                                     data = "甲方审核通过";
-                                }else if (status == 6) {
+                                } else if (status == 6) {
                                     data = "甲方审核未通过";
                                 }
                                 $.ajaxSettings.async = true;
@@ -195,7 +220,7 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ','+ row['type'] + ')" ><i class="layui-icon">申请详情</i></button>');
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',' + row['type'] + ')" ><i class="layui-icon">申请详情</i></button>');
                                 var showDetail = btn.prop("outerHTML");
                                 return showDetail;
                             }
@@ -236,7 +261,7 @@
 
                 }
             });
-        } else if (type==6 ) {
+        } else if (type == 6) {
             //项目信息表内容+各方联系方式及联系地址
             layer.open({
                 title: "项目更改",
@@ -249,7 +274,7 @@
 
                 }
             });
-        }else if (type== 7) {
+        } else if (type == 7) {
             //经费相关
             layer.open({
                 title: "项目更改",
@@ -262,7 +287,7 @@
 
                 }
             });
-        }else if (type== 8) {
+        } else if (type == 8) {
             //指标相关
             layer.open({
                 title: "项目更改",
@@ -295,7 +320,7 @@
 
                 }
             });
-        } else if (type== 6) {
+        } else if (type == 6) {
             //项目信息表内容+各方联系方式及联系地址
             layer.open({
                 title: "项目更改",
@@ -308,7 +333,7 @@
 
                 }
             });
-        }else if (type== 7) {
+        } else if (type == 7) {
             //经费相关
             layer.open({
                 title: "项目更改",
@@ -321,7 +346,7 @@
 
                 }
             });
-        }else if (type== 8) {
+        } else if (type == 8) {
             //指标相关
             layer.open({
                 title: "项目更改",

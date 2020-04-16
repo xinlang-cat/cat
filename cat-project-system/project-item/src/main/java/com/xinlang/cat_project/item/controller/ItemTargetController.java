@@ -179,29 +179,7 @@ public class ItemTargetController {
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params){
 
-        String item_id = (String) params.get("item_id");
-        String name = (String) params.get("item_name");
-        String check_unit = (String) params.get("check_unit");
 
-        if (name == "" || name == null &&  item_id == null ){
-
-        }else {
-            List<ItemBasic> itemBasics = itemBasicService.findByName(name);
-            List<Integer> itemIds =new ArrayList<>();
-            Integer id =0;
-            if ( item_id != null){
-                id = Integer.parseInt(item_id);
-            }
-            itemIds.add(id);
-            if (itemIds.size()==0){
-                itemIds.add(0);
-            }else {
-                for (int i=0;i<itemBasics.size();i++){
-                    itemIds.add(itemBasics.get(i).getId());
-                }
-            }
-            params.put("itemIds",itemIds);
-        }
         PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
 

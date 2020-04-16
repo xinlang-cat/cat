@@ -42,12 +42,12 @@
                     <thead>
                     <tr>
                         <th style="width:30%;">项目名称</th>
+                        <th style="width:30%">更改内容</th>
                         <th style="width:15%">提交时间</th>
                         <th style="width:10%;">提交人</th>
                         <th style="width:10%;">状态</th>
                         <th style="width:5%;">查看</th>
-                        <!--<th style="width:5%;">修改</th>
-                        <th style="width:5%;">查定结果</th>-->
+
                     </tr>
                     </thead>
                     <tbody>
@@ -142,7 +142,34 @@
                                 return data;
                             }
                         },
+                        {
+                            "data": "type",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
 
+                                $.ajaxSettings.async = false;
+                                if (data == 1) {
+                                    data = "项目名称";
+                                } else if (data == 2) {
+                                    data = "承担单位（单位）";
+                                } else if (data == 3) {
+                                    data = "研究内容重大调整改变";
+                                } else if (data == 4) {
+                                    data = "实施期限变更";
+                                } else if (data == 5) {
+                                    data = "研究内容一般调整变更（不涉及合同考核指标）";
+                                } else if (data == 6) {
+                                    data = "参与单位变更/负责人变更";
+                                } else if (data == 7) {
+                                    data = "经费调整变更";
+                                } else if (data == 8) {
+                                    data = "指标/人员/分工变更";
+                                }
+
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
                         {
                             "data": "apply_time",
                             "defaultContent": "",

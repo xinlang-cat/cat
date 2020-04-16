@@ -50,19 +50,19 @@ public class AuditApplyService extends BaseService<auditApply> implements IAudit
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(auditApply.class);
-        if (params.get("status") != "" && params.get("itemIds") != null && params.get("check_unit") != ""){
-            example.createCriteria().andEqualTo("status",params.get("status")).andIn("item_id", (Iterable) params.get("itemIds")).andEqualTo("check_unit", params.get("check_unit"));
-        }else if (params.get("check_unit") != "" && params.get("itemIds") != null){
-            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit")).andIn("item_id", (Iterable) params.get("itemIds"));
-        }else if (params.get("status") != "" && params.get("itemIds") != null) {
-            example.createCriteria().andEqualTo("status", params.get("status")).andIn("item_id", (Iterable) params.get("itemIds"));
+        if (params.get("status") != "" && params.get("manage_unit") != "" && params.get("check_unit") != ""){
+            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("manage_unit", params.get("manage_unit")).andEqualTo("check_unit", params.get("check_unit"));
+        }else if (params.get("check_unit") != "" && params.get("manage_unit") != ""){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit")).andEqualTo("manage_unit", params.get("manage_unit"));
+        }else if (params.get("status") != "" && params.get("manage_unit") != "") {
+            example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("manage_unit", params.get("manage_unit"));
         }else if (params.get("status") != "" && params.get("check_unit") !=  "" ){
             example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("check_unit", params.get("check_unit"));
         }else if (params.get("check_unit") != ""){
             example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit"));
-        }else if (params.get("itemIds") != null){
-            example.createCriteria().andNotEqualTo("status",0).andIn("item_id", (Iterable) params.get("itemIds"));
-        }else if (params.get("status") != null){
+        }else if (params.get("manage_unit") != ""){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit", params.get("manage_unit"));
+        }else if (params.get("status") != ""){
             example.createCriteria().andNotEqualTo("status",params.get("status"));
         }else {
             example.createCriteria().andNotEqualTo("status",0);
