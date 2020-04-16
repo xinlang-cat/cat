@@ -6,29 +6,29 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
 <body>
-<div class="col-xs-12 col-sm-12 col-md-22 col-lg-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px">
         <input type="hidden" id="id" name="id">
         <fieldset>
             <div class="form-group">
-                <label class="col-md-2 control-label">用户名</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">用户名</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="用户名" type="text" name="username" id="username"
                            readonly="readonly">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">昵称</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">昵称</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="昵称" type="text" name="nickname" id="nickname"
                            maxlength="50">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">性别</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">性别</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" name="sex" id="sex">
                         <option value="1">男</option>
                         <option value="0">女</option>
@@ -37,16 +37,16 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">出生时间</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">出生时间</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate"
                            readonly="readonly">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">姓名</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">姓名</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="姓名" type="text" name="name" id="name"
                            data-bv-notempty="true"
                            data-bv-notempty-message="姓名 不能为空">
@@ -54,15 +54,15 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">民族</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">民族</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="民族" type="text" name="nation" id="nation">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">身份类型</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">身份类型</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" id="userType" name="userType">
                         <option value="PARTY_A">甲方</option>
                         <option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>
@@ -75,8 +75,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">证件类型</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">证件类型</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" name="idType" id="idType">
                         <option value="身份证">身份证</option>
                         <option value="护照">护照</option>
@@ -86,30 +86,30 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">证件号码</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">证件号码</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="证件号码" type="text" name="idCard" id="idCard">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">单位/公司代码</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">单位/公司代码</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode" id="deptCode">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">单位/公司名称</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">单位/公司名称</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="单位/公司名称" type="text" name="deptName" id="deptName"
                            readonly="readonly">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">单位/公司类型</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">单位/公司类型</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" id="deptType1" disabled="disabled">
                         <option value="ACADEMY">大专院校</option>
                         <option value="FIRM">企业</option>
@@ -120,23 +120,23 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">邮政编码</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">邮政编码</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="邮政编码" name="postcode" id="postcode">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">职称</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">职称</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle"
                            id="academicTitle">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">政治面貌</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">政治面貌</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" name="politics" id="politics">
                         <option value="1">共产党员</option>
                         <option value="0">共青团员</option>
@@ -146,15 +146,15 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">职务</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">职务</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="职务" type="text" name="job" id="job">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">职称级别</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">职称级别</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" name="academicTitleRank" id="academicTitleRank">
                         <option value="高级">高级</option>
                         <option value="中级">中级</option>
@@ -164,15 +164,15 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">毕业院校</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">毕业院校</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom" id="graduatedFrom">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">学位</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">学位</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" name="degree" id="degree">
                         <option value="学士">学士</option>
                         <option value="硕士">硕士</option>
@@ -182,8 +182,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">学历</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">学历</label>
+                <div class="col-md-11">
                     <select class="form-control input-sm" name="academicDiplomas" id="academicDiplomas">
                         <option value="初中">初中</option>
                         <option value="高中">高中</option>
@@ -196,37 +196,37 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">学位获得时间</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">学位获得时间</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear"
                            readonly="readonly">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">学位授予国家/地区</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">学位授予国家/地区</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="学位授予国家/地区" name="degreeState" id="degreeState">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">学位授予学校</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">学位授予学校</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="学位授予学校" name="degreeSchool" id="degreeSchool">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">邮箱</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">邮箱</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="邮箱" name="email" id="email">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">所学专业</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">所学专业</label>
+                <div class="col-md-11">
                     <div class="input-group" id="major" data-status="true" data-type="radio" data-sign="INDUSTRY_GROUP">
                         <input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text1">
                         <span class="input-group-addon"><a>选择</a></span>
@@ -236,22 +236,22 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">手机号码</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">手机号码</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="手机号码" name="phone" id="phone">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">办公电话</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">办公电话</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="办公电话" name="telephone" id="telephone">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">现从事专业</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">现从事专业</label>
+                <div class="col-md-11">
                     <div class="input-group" id="nowMajor" data-status="true" data-type="radio"
                          data-sign="INDUSTRY_GROUP">
                         <input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text2">
@@ -262,8 +262,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">主要研究领域</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">主要研究领域</label>
+                <div class="col-md-11">
                     <div class="input-group" id="mainDomain" data-status="true" data-type="radio"
                          data-sign="INDUSTRY_GROUP">
                         <input type="text" class="form-control" placeholder="主要研究领域" readonly="readonly" id="text3">
@@ -274,42 +274,42 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">传真</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">传真</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="传真" name="fax" id="fax">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">所在地域</label>
-                <div class="col-md-2">
+                <label class="col-md-1 control-label">所在地域</label>
+                <div class="col-md-1">
                     <select class="form-control input-sm" name="provinceCode" id="provinceCode">
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <select class="form-control input-sm" name="cityCode" id="cityCode">
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <select class="form-control input-sm" name="areaCode" id="areaCode">
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <select class="form-control input-sm" name="streetCode" id="streetCode">
                     </select>
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">通讯地址</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">通讯地址</label>
+                <div class="col-md-11">
                     <input class="form-control" placeholder="通讯地址" type="text" name="address" id="address">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">服务的产业或领域</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">服务的产业或领域</label>
+                <div class="col-md-11">
                     <div class="input-group" id="domains" data-status="true" data-sign="INDUSTRY_GROUP">
                         <input type="text" class="form-control" placeholder="服务的产业或领域" readonly="readonly" id="text4">
                         <span class="input-group-addon"><a>选择</a></span>
@@ -318,8 +318,8 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">技术专长及提供的服务</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">技术专长及提供的服务</label>
+                <div class="col-md-11">
                     <div class="input-group" id="skills" data-status="true" data-type="1" data-sign="INDUSTRY_GROUP">
                         <input type="text" class="form-control" placeholder="技术专长及提供的服务" readonly="readonly" id="text5">
                         <span class="input-group-addon"><a>选择</a></span>
@@ -328,22 +328,22 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">承担的科技项目</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">承担的科技项目</label>
+                <div class="col-md-11">
                     <input type="text" class="form-control" placeholder="承担的科技项目" name="projects" id="projects">
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">工作成就案例</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">工作成就案例</label>
+                <div class="col-md-11">
                     <textarea id="accomplishment" name="accomplishment" placeholder="请输入内容" class="layui-textarea"
                               rows="10"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">获得的科技成果/奖励/荣誉</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">获得的科技成果/奖励/荣誉</label>
+                <div class="col-md-11">
                     <textarea id="achievement" name="achievement" placeholder="获得的科技成果/奖励/荣誉" class="layui-textarea"
                               rows="10"></textarea>
                 </div>

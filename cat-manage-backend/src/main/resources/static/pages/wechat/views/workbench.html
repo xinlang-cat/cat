@@ -575,7 +575,7 @@
     });
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
-    var as = $("a[class=grid]");
+    var as = $("a.grid");
     $.each(as, function (i, item) {
         var oldHref = $(item).attr('onclick');
         if (oldHref != null && oldHref != undefined && oldHref != '') {

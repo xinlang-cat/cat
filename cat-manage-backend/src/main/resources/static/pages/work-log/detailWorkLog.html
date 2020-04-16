@@ -52,9 +52,9 @@
                 '<div class="layui-form-mid layui-word-aux" style="width: 25%;"><span style="color: #0C0C0C;">' + item.content + '</span></div>' +
                 '                    <label class="col-md-1 layui-form-label" style="font-weight: bolder">计划数量:</label>\n' +
                 '<div class="layui-form-mid layui-word-aux" style="width: 5%;"><span style="color: #0C0C0C;">' + item.originalCount + '</span></div>' +
-                '                    <label class="col-md-1 layui-form-label" style="font-weight: bolder">上次数量:</label>\n' +
-                '<div class="layui-form-mid layui-word-aux" style="width: 5%;"><span style="color: #0C0C0C;">' + item.nowCount + '</span></div>' +
-                '                    <label class="col-md-2 layui-form-label" style="font-weight: bolder">上次本次合计:</label>\n' +
+                '                    <label class="col-md-1 layui-form-label" style="font-weight: bolder">本次数量:</label>\n' +
+                '<div class="layui-form-mid layui-word-aux" style="width: 5%;"><span style="color: #0C0C0C;">' + item.oldCount + '</span></div>' +
+                '                    <label class="col-md-1 layui-form-label" style="font-weight: bolder">累计数量:</label>\n' +
                 '<div class="layui-form-mid layui-word-aux" style="width: 5%;"><span style="color: #0C0C0C">' + item.nowCount + '</span></div>' +
                 '                </div>';
 
@@ -82,7 +82,7 @@
             '                    </table>\n' +
             '                </div>';
         $("#content").append(content);
-        if (data[0].accessory != null) {
+        if(!jQuery.isEmptyObject(data[0].accessory)){
             $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
                 $.each(data1, function (i, item) {
                     addImgHtml(item)
@@ -92,8 +92,8 @@
     });
 
 
-    var h = $(window).height() - 100;
-    var w = $(window).width() - 200;
+    var h = $(window).height() -15;
+    var w = $(window).width() -30;
 
     function addImgHtml(item) {
         var str = '';

@@ -96,8 +96,8 @@
         });
     }
 
-    var h = $(window).height() - 100;
-    var w = $(window).width() - 200;
+    var h = $(window).height() -15;
+    var w = $(window).width() -30;
 
     function toSave() {
         layer.open({
@@ -145,7 +145,7 @@
                 if (data[i].enable == 1) enable = '审核已过';
                 if (data[i].enable == -1) enable = '审核未过';
                 str += '<tr><td>' + data[i].itemName + '</td><td>' + formatDate4(data[i].createTime) + '</td><td>' + enable + '</td><td>';
-                if(data[i].enable == -1 || (data[i].enable == 0 && data[i].principalCheckEnable == 0)){
+                if(data[i].enable == -1 || data[i].enable == 0 ){
                     str += '<button class="layui-btn layui-btn-xs" title="编辑" onclick="toUpdate('+ data[i].id +')"><i class="layui-icon">&#xe642;</i></button>';
                     str += '</td></tr>'
                 }
@@ -161,14 +161,9 @@
     function checkStageSummary() {
         var params = {
             itemId : itemId,
-            enable : 0
+            enable : 0,
+            principalCheckEnable : 0
         };
-        if ($.inArray('html:principal:check:stage', pers) >= 0) {
-            params['principalCheckEnable'] = 0;
-        } else {
-            params['principalCheckEnable'] = 1;
-            params['deptCheckEnable'] = 0;
-        }
         $.get(domainName + "/api-summary/stage/list", params, function (data) {
             $("#content").empty();
             var str = ' <div class="widget-body no-padding"><table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%;margin-top: 5px">';

@@ -208,13 +208,13 @@
                         '                    <div class="col-md-1">\n' +
                         '                        <input class="form-control" type="text" name="originalCount" value="' + item.originalCount + '" disabled>\n' +
                         '                    </div>\n' +
-                        '                    <label class="col-md-1 control-label">上次数量:</label>\n' +
+                        '                    <label class="col-md-1 control-label">本次数量:</label>\n' +
                         '                    <div class="col-md-1">\n' +
-                        '                        <input class="form-control" type="text" name="oldCount" value="' + item.nowCount + '" disabled>\n' +
+                        '                        <input class="form-control" type="text" name="oldCount" onchange="setNowCount(this)" value="0" >\n' +
                         '                    </div>\n' +
-                        '                    <label class="col-md-2 control-label">上次本次合计:</label>\n' +
+                        '                    <label class="col-md-1 control-label">累计数量:</label>\n' +
                         '                    <div class="col-md-1">\n' +
-                        '                        <input class="form-control" type="text" name="nowCount" lay-verify="number" value="' + item.nowCount + '">\n' +
+                        '                        <input class="form-control" type="text" name="nowCount" lay-verify="number" data-initial-val="' + item.nowCount + '" value="' + item.nowCount + '" disabled>\n' +
                         '                    </div>\n' +
                         '                </div>';
                 });
@@ -239,13 +239,13 @@
                                 '                    <div class="col-md-1">\n' +
                                 '                        <input class="form-control" type="text" name="originalCount" value="' + item['count'] + '" disabled>\n' +
                                 '                    </div>\n' +
-                                '                    <label class="col-md-1 control-label">上次累计:</label>\n' +
+                                '                    <label class="col-md-1 control-label">本次数量:</label>\n' +
                                 '                    <div class="col-md-1">\n' +
-                                '                        <input class="form-control" type="text" name="oldCount" value="0" disabled>\n' +
+                                '                        <input class="form-control" type="text" name="oldCount" value="0" onchange="setNowCount(this)">\n' +
                                 '                    </div>\n' +
-                                '                    <label class="col-md-2 control-label">当前累计:</label>\n' +
+                                '                    <label class="col-md-1 control-label">累计数量:</label>\n' +
                                 '                    <div class="col-md-1">\n' +
-                                '                        <input class="form-control" type="text" lay-verify="number" name="nowCount" value="0">\n' +
+                                '                        <input class="form-control" type="text" lay-verify="number" data-initial-val="0" name="nowCount" value="0" disabled>\n' +
                                 '                    </div>\n' +
                                 '                </div>';
                         }
@@ -280,6 +280,14 @@
         });
 
     });
+
+    function setNowCount(obj) {
+        var oldCount = $(obj).val();
+        var parentElem = $(obj).parents("div.targetSum");
+        var nowCountInput = $(parentElem).find("input[name=nowCount]");
+        var initialVal = $(nowCountInput).data("initial-val");
+        $(nowCountInput).val(parseInt(oldCount)+parseInt(initialVal));
+    }
 
 
     function deleteFile(id) {

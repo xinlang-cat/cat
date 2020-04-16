@@ -10,24 +10,24 @@
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
         <fieldset>
             <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-2 control-label">所需审查指标:</label>
-                <div class="col-md-2">
+                <label class="col-md-1 control-label">所需审查指标:</label>
+                <div class="col-md-1">
                     <input class="form-control" placeholder="开始时间" type="text" name="name" maxlength="50"
                            id="name" readonly>
                 </div>
-                <label class="col-md-2 control-label">查定结果:</label>
-                <div class="col-md-2">
+                <label class="col-md-1 control-label">查定结果:</label>
+                <div class="col-md-1">
                     <input class="form-control" placeholder="开始时间" type="text" name="result" maxlength="50"
                            id="result" readonly>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">预计开始时间</label>
+                <label class="col-md-1 control-label">预计开始时间</label>
                 <div class="col-md-3">
                     <input class="form-control" placeholder="开始时间" type="text" maxlength="50"
                            id="start_date" readonly>
                 </div>
-                <label class="col-md-2 control-label">预计结束时间</label>
+                <label class="col-md-1 control-label">预计结束时间</label>
                 <div class="col-md-3">
                     <input class="form-control" placeholder="结束时间" type="text"  maxlength="50"
                            id="end_date" readonly>
@@ -36,13 +36,13 @@
             <div class="form-group">
                 <input style="display: none" id="check_userid" name="check_userid" value="">
                 <input style="display: none" id="id" name="id" value="">
-                <label class="col-md-2 control-label">实际开始时间</label>
+                <label class="col-md-1 control-label">实际开始时间</label>
                 <div class="col-md-3">
                     <input class="form-control date" placeholder="开始时间" type="text" name="start_date_true" maxlength="50"
                            id="start_date2" data-bv-notempty="true"
                            data-bv-notempty-message="开始时间 不能为空" readonly>
                 </div>
-                <label class="col-md-2 control-label">实际结束时间</label>
+                <label class="col-md-1 control-label">实际结束时间</label>
                 <div class="col-md-3">
                     <input class="form-control date" placeholder="结束时间" type="text" name="end_date_true" maxlength="50"
                            id="end_date2" data-bv-notempty="true"
@@ -51,35 +51,35 @@
             </div>
 
             <div class="form-group">
-                <label class="col-md-2 control-label">指标所在地域</label>
-                <div class="col-md-2">
+                <label class="col-md-1 control-label">指标所在地域</label>
+                <div class="col-md-1">
                     <input class="form-control" type="text" name="province" maxlength="50"
                            id="province" readonly>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <input class="form-control" type="text" name="city" maxlength="50"
                            id="city" readonly>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <input class="form-control" type="text" name="area" maxlength="50"
                            id="area" readonly>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <input class="form-control" type="text" name="street" maxlength="50"
                            id="street" readonly>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">申请内容:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">申请内容:</label>
+                <div class="col-md-11">
                     <textarea placeholder="内容简介。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="content" name="content" readonly></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">查定情况简述:</label>
-                <div class="col-md-8">
+                <label class="col-md-1 control-label">查定情况简述:</label>
+                <div class="col-md-11">
                     <textarea placeholder="内容简介。"
                               class="layui-textarea form-control" lay-verify="required"
                               id="description" name="description" readonly></textarea>
@@ -155,8 +155,8 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
-    var h = $(window).height() - 100;
-    var w = $(window).width() - 200;
+    var h = $(window).height() -15;
+    var w = $(window).width() -30;
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({

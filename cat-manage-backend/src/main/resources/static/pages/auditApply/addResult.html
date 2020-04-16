@@ -277,8 +277,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"
-                                  readonly></textarea>
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -590,8 +589,6 @@
         </tbody>
     </table>
 </div>
-
-
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
@@ -607,11 +604,11 @@
     var id = getUrlParam("id");
     $("#id").val(id);
     var h = $(window).height() - 100;
-    layui.use(['layedit', 'upload', 'laydate'], function () {
+    layui.use(['layedit','upload', 'laydate'], function(){
         layedit = layui.layedit;
         laydate = layui.laydate;
         upload = layui.upload;
-        index = layedit.build('demo', {tool: [], height: h});
+        index = layedit.build('demo',{tool:[], height:h});
         lay('.date').each(function () {
             laydate.render({
                 elem: this
@@ -629,12 +626,10 @@
             }
             , done: function (res, index, upload) {
                 addImgHtml(res);
-
             }
         });
     });
     initData();
-
     //移除一张图片
     function deleteImg(obj) {
         $(obj).parent('div').remove();
@@ -654,10 +649,8 @@
         $("#accessory_files").append(str);
         $(".close-a").hide();
     }
-
-    var h = $(window).height() - 50;
-    var w = $(window).width() - 100;
-
+    var h = $(window).height()-50;
+    var w = $(window).width()-100;
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "' />";
         layer.open({
@@ -728,7 +721,7 @@
 
 
     function pass() {
-        if ($("#status").val() == '') {
+        if ($("#status").val()=='') {
             layer.msg("请选择是否通过");
             return;
         }

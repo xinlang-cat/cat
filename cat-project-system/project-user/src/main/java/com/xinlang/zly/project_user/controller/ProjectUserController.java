@@ -11,6 +11,7 @@ import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserSkillService;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.SysRole;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,22 +46,22 @@ public class ProjectUserController {
         projectUserService.save(projectUser);
         Long userId = projectUser.getUserId().longValue();
         if(ProjectUserType.EXPERT.name().equals(projectUser.getUserType())){
-            consumeCatUser.setDefaultRoleToUser(userId,4L);
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
         }
         if(ProjectUserType.PARTY_A.name().equals(projectUser.getUserType())){
-            consumeCatUser.setDefaultRoleToUser(userId,5L);
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
         }
         if(ProjectUserType.PARTY_B_MEMBER.name().equals(projectUser.getUserType())){
-            consumeCatUser.setDefaultRoleToUser(userId,7L);
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode("PARTY_B:MEMBER").getId());
         }
         if(ProjectUserType.PARTY_B_PRINCIPAL.name().equals(projectUser.getUserType())){
-            consumeCatUser.setDefaultRoleToUser(userId,6L);
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode("PARTY_B:PRINCIPAL").getId());
         }
         if(ProjectUserType.PARTY_C.name().equals(projectUser.getUserType())){
-            consumeCatUser.setDefaultRoleToUser(userId,8L);
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
         }
         if(ProjectUserType.PARTY_D.name().equals(projectUser.getUserType())){
-            consumeCatUser.setDefaultRoleToUser(userId,9L);
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
         }
         return projectUser;
     }
@@ -70,6 +71,25 @@ public class ProjectUserController {
     @PutMapping("/user")
     public ProjectUser update(@RequestBody ProjectUser projectUser){
         projectUserService.update(projectUser);
+        Long userId = projectUser.getUserId().longValue();
+        if(ProjectUserType.EXPERT.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
+        if(ProjectUserType.PARTY_A.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
+        if(ProjectUserType.PARTY_B_MEMBER.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode("PARTY_B:MEMBER").getId());
+        }
+        if(ProjectUserType.PARTY_B_PRINCIPAL.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode("PARTY_B:PRINCIPAL").getId());
+        }
+        if(ProjectUserType.PARTY_C.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
+        if(ProjectUserType.PARTY_D.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
         return projectUser;
     }
 
