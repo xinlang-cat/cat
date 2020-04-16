@@ -11,7 +11,7 @@ function queryInformation(id) {
             $('input[name=type]').val(analysisLablename(d.type));
             $('input[name=name]').val(d.name);
             $('input[name=entrusting_party]').val(d.entrusting_party);
-            company(d.entrusting_party);
+            company(d.responsible_unit);
             $('input[name=responsible_unit]').val(d.responsible_unit);
             $('input[name=management_unit]').val(d.management_unit);
             $('input[name=document_number]').val(d.document_number);

@@ -766,14 +766,14 @@
                             text = '丙方';
                         }
                         var str = '<tr>\n' +
-                            '                                <td class="tdDorder mainTd_1">\n' +
+                            '                                <td class="tdDorder mainTd_1" rowspan="4">\n' +
                             '                                    <span>' + text + '</span>\n' +
-                            '                                    <input type="hidden" name="type" value="' + this.type + '" readonly>\n' +
+                            '                                    <span>' + this.type + '</span>\n' +
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="leader" value="' + getUserName(this.leader) + '" readonly>\n' +
+                            '                                        <span>' + getUserName(this.leader) + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -781,7 +781,7 @@
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="leader_phone" value="' + this.leader_phone + '" readonly>\n' +
+                            '                                       <span>' + this.leader_phone + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                            </tr>\n' +
@@ -789,7 +789,7 @@
                             '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="linkman" value="' + this.linkman + '" readonly>\n' +
+                            '                                        <span>' + this.linkman + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -797,7 +797,7 @@
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="linkman_phone" value="' + this.linkman_phone + '" readonly>\n' +
+                            '                                        <span>' + this.linkman_phone + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                            </tr>\n' +
@@ -805,7 +805,7 @@
                             '                                <td class="mainTd_1 tdDorder"><span>传真</span></td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="fax" value="' + this.fax + '" readonly>\n' +
+                            '                                        <span>' + this.fax + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -813,7 +813,7 @@
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="postcode" value="' + this.postcode + '" readonly>\n' +
+                            '                                       <span>' + this.postcode + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                            </tr>\n' +
@@ -821,7 +821,7 @@
                             '                                <td class="mainTd_1 tdDorder"><span>地址</span></td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="site" value="' + this.site + '" readonly>\n' +
+                            '                                       <span>' + this.site + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -829,7 +829,7 @@
                             '                                </td>\n' +
                             '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                    <div class="field">\n' +
-                            '                                        <input type="text"  name="e_mail" value="' + this.e_mail + '" readonly>\n' +
+                            '                                        <span>' + this.e_mail + '</span>\n' +
                             '                                    </div>\n' +
                             '                                </td>\n' +
                             '                            </tr>';

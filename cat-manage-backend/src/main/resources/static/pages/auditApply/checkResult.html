@@ -598,7 +598,7 @@
     var layedit, index;
 
     var id = getUrlParam("id");
-    var h = $(window).height() - 100;
+    var h = $(window).height() - 15;
     layui.use(['layedit','upload', 'laydate'], function(){
         layedit = layui.layedit;
         laydate = layui.laydate;
@@ -679,8 +679,8 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
-    var h = $(window).height() - 100;
-    var w = $(window).width() - 200;
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({
