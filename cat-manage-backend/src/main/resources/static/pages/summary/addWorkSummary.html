@@ -115,7 +115,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="type">
+                        <input type="text" name="type" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -136,7 +136,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="name">
+                        <input type="text" name="name" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -147,7 +147,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="entrusting_party">
+                        <input type="text" name="entrusting_party" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -179,7 +179,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="management_unit">
+                        <input type="text" name="management_unit" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -200,7 +200,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="document_number">
+                        <input type="text" name="document_number" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -211,7 +211,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="period">
+                        <input type="text" name="period" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -254,7 +254,7 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="overall_objective" class="layui-textarea"></textarea>
+                        <textarea name="overall_objective" class="layui-textarea" readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -275,13 +275,84 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
         </form>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 主要研究、开发人员及责任分工</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="personnel">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="8">
+                                    <div class="field">
+                                        <span id="personnel">主要研究、开发人员及责任分工</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">姓名</th>
+                                <th class="tdDorder">性别</th>
+                                <th class="tdDorder">年龄</th>
+                                <th class="tdDorder">职称</th>
+                                <th class="tdDorder">从事专业</th>
+                                <th class="tdDorder">工作单位</th>
+                                <th class="tdDorder">研究开发中的责任分工</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
         <!--项目考核指标-->
         <tr style="height: 25px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -318,11 +389,14 @@
                         <table class="layui-table">
                             <colgroup>
                                 <col width="10%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span id="TECHNICAL_INDICATORS">技术指标</span>
                                     </div>
@@ -331,6 +405,9 @@
                             <tr>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -352,11 +429,14 @@
                         <table class="layui-table">
                             <colgroup>
                                 <col width="10%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span id="ECONOMIC_INDICATORS">经济指标</span>
                                     </div>
@@ -365,6 +445,9 @@
                             <tr>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -386,11 +469,14 @@
                         <table class="layui-table">
                             <colgroup>
                                 <col width="10%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span id="INDICATORS_OF_TALENT_TEAM_CONS">人才建设指标</span>
                                     </div>
@@ -399,6 +485,9 @@
                             <tr>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -420,11 +509,14 @@
                         <table class="layui-table">
                             <colgroup>
                                 <col width="10%">
-                                <col width="90%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
                             </colgroup>
                             <thead>
                             <tr style="background-color: #ffffff;">
-                                <th class="tdDorder border-right-none" rowspan="1" colspan="2">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
                                     <div class="field">
                                         <span id="OTHER_INDICATORS">其他指标</span>
                                     </div>
@@ -433,6 +525,9 @@
                             <tr>
                                 <th class="tdDorder">序号</th>
                                 <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -860,13 +955,16 @@
     $("#btn_return").click(function () {
         location.href = "workSummaryList.html?item_id=" + itemId;
     });
+
     queryInformation(itemId);
+    queryPersonnel(itemId);
     queryIndicators(itemId);
     queryScheduling(itemId);
-    queryPersonnel(itemId);
     queryFundBudget(itemId);
     queryFundSource(itemId);
     queryContactWay(itemId);
+
+    $('input').attr("readonly","readonly");
     //定时任务,监听预算的合计
     var ref = setInterval(function () {
         var total = 0;

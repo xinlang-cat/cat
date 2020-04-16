@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ItemInformationViceVO {
 
-
+    private modifyApply modifyApply;
     private ItemInformationVice information;
     private List<ItemIndicatorsVice> indicators;
     private List<ItemIndicatorsVice> achievements;

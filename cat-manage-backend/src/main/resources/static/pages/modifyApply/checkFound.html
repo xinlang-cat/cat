@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+
+        .layui-textarea {
+            min-height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+        <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_C">
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(2);" permission="PARTY_C:html">通过</button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(3);" permission="PARTY_C:html">未通过</button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(4);" permission="PARTY_C:html">提交至甲方审核</button>
+        </div>
+        <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_A">
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(5);" permission="PARTY_A:html">甲方审核通过</button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(6);" permission="PARTY_A:html">甲方审核未通过</button>
+        </div>
+    </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更前内容:</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <!--经费用途预算-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 经费用途预算</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="fundBudget1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="30%">
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="4">
+                                    <div class="field">
+                                        <span>甲方提供的科技经费用途预算</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">科目</th>
+                                <th class="tdDorder">金额（万元）</th>
+                                <th class="tdDorder">开支内容</th>
+                                <th class="tdDorder">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fundBudget1">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="fundSource1" >
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="28%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="10">
+                                    <div class="field">
+                                        <span>除甲方提供科技经费之外的其余经费</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">承担单位名称</th>
+                                <th class="tdDorder">国家科技部门拨款</th>
+                                <th class="tdDorder">国家其他部门拨款</th>
+                                <th class="tdDorder">区级部门拨款</th>
+                                <th class="tdDorder">市级部门拨款</th>
+                                <th class="tdDorder">县级部门拨款</th>
+                                <th class="tdDorder">自有资金</th>
+                                <th class="tdDorder">银行贷款</th>
+                                <th class="tdDorder">国外资金</th>
+                                <th class="tdDorder">其他资金</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="responsible_unit">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入"
+                                               name="state_science_and_technology_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="state_other_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="area_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="city_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="county_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="own_fund">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="bank_loan">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="offshore_fund">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="other_fund">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div style="color: #0C0C0C;" id="total1"></div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 22px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更后内容:</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <!--经费用途预算-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 经费用途预算</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="fundBudget">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="30%">
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="30%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="4">
+                                    <div class="field">
+                                        <span>甲方提供的科技经费用途预算</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">科目</th>
+                                <th class="tdDorder">金额（万元）</th>
+                                <th class="tdDorder">开支内容</th>
+                                <th class="tdDorder">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody id="fundBudget">
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="fundSource">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="28%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                                <col width="8%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="10">
+                                    <div class="field">
+                                        <span>除甲方提供科技经费之外的其余经费</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">承担单位名称</th>
+                                <th class="tdDorder">国家科技部门拨款</th>
+                                <th class="tdDorder">国家其他部门拨款</th>
+                                <th class="tdDorder">区级部门拨款</th>
+                                <th class="tdDorder">市级部门拨款</th>
+                                <th class="tdDorder">县级部门拨款</th>
+                                <th class="tdDorder">自有资金</th>
+                                <th class="tdDorder">银行贷款</th>
+                                <th class="tdDorder">国外资金</th>
+                                <th class="tdDorder">其他资金</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="responsible_unit">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入"
+                                               name="state_science_and_technology_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="state_other_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="area_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="city_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="county_department">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="own_fund">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="bank_loan">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="offshore_fund">
+                                    </div>
+                                </td>
+                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                                    <div class="field">
+                                        <input type="text" placeholder="请输入" name="other_fund">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div style="color: #0C0C0C;" id="total"></div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 22px;">
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+            <td class="mainTd_0" colspan="1"></td>
+
+        </tr>
+
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>变更说明</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+        <form id="form">
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+
+            <tr style="height: 25px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>变更原因</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="status" id="status">
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="5">
+                    <div class="field">
+                        <label class="col-md-1 control-label">附件:</label>
+                        <div class="col-md-11" id="accessory_files">
+
+                        </div>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>监理单位意见</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="check_unit_idea" id="check_unit_idea" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>甲方单位意见</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="manage_unit_idea" id="manage_unit_idea" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+
+</div>
+</body>
+
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../item/js/updateProject.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+<script type="application/javascript" src="js/updateProjectVice.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery','upload'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            element = layui.element,
+            laydate = layui.laydate,
+            upload = layui.upload,
+            $ = layui.jquery;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , type: 'month'
+                , range: true
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_accessory' //绑定元素
+            , accept: 'jpg'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/albums'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
+
+            }
+        });
+
+
+        //插入一张图片
+        function addImgHtml(item) {
+            var str = '';
+            var val = item.name.substring(0, item.name.indexOf("."));
+            if (val.length > 10) {
+                val = val.substring(0, 8) + '...';
+            }
+            str = '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+            str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_files").append(str);
+            $(".close-a").hide();
+        }
+
+
+
+
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            //layer.msg(JSON.stringify(data.field));
+            submit();
+            //return false;
+        });
+
+    });
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 30;;
+    //获取项目数据项目
+    var id = getUrlParam("id");
+    var pers = checkPermission();
+    $('#id').val(id);
+    var type = getUrlParam("type");
+    $('#type').val(type);
+    //获取更改申请
+    getApply(id);
+    function getApply(id){
+        $("input").attr('readonly', true);
+        $("input").attr("style", "text-align: center;border: 0px;");
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/basic/modifyApply/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $("#content").text(d.content);
+                getStatus(d.status);
+                //获取原来数据
+                queryFundBudget1(d.item_id);
+                queryFundSource1(d.item_id);
+
+
+                //获取修改数据
+                queryFundBudget(id);
+
+                queryFundSource(id);
+                $.get(domainName + "/api-f/albums/list", {ids: d.accessory}, function (data1) {
+                    $.each(data1, function (i, item) {
+                        addImgHtml(item)
+                    });
+                })
+
+            }
+        })
+
+    }
+    function getStatus(status){
+        $("textarea").attr('readonly', true);
+        //监理审核，隐藏甲方按钮
+        if (status==1){
+            $("#check_unit_idea").removeAttr("readonly");
+            document.getElementById('PARTY_A').style.display='none';
+        }else if (status==4){
+            //甲方审核，隐藏监理按钮
+            document.getElementById('PARTY_C').style.display='none';
+            $("#manage_unit_idea").removeAttr("readonly");
+        }else {
+            document.getElementById('PARTY_C').style.display='none';
+            document.getElementById('PARTY_A').style.display='none';
+        }
+    }
+    function queryFundBudget(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundBudget/viceList',
+            data: "item_id=" + id + '&type=first_party_provide',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $(data).each(function () {
+                    var str = '<tr>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="subject" value="' + this.subject + '" readonly>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="money" value="' + this.money + '">\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="content" value="' + this.content + '">\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="remark" value="' + this.remark + '">\n' +
+                        '                                        <input type="hidden" name="type" value="' + this.type + '">\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                            </tr>';
+                    $('#fundBudget').append(str);
+                })
+            }
+        })
+    }
+    function queryFundSource(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundSource/viceList',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $('.fundSource').find('input[name=responsible_unit]').val(d.responsible_unit);
+                $('.fundSource').find('input[name=state_science_and_technology_department]').val(d.state_science_and_technology_department);
+                $('.fundSource').find('input[name=state_other_department]').val(d.state_other_department);
+                $('.fundSource').find('input[name=area_department]').val(d.area_department);
+                $('.fundSource').find('input[name=city_department]').val(d.city_department);
+                $('.fundSource').find('input[name=county_department]').val(d.county_department);
+                $('.fundSource').find('input[name=own_fund]').val(d.own_fund);
+                $('.fundSource').find('input[name=bank_loan]').val(d.bank_loan);
+                $('.fundSource').find('input[name=offshore_fund]').val(d.offshore_fund);
+                $('.fundSource').find('input[name=other_fund]').val(d.other_fund);
+            }
+        })
+    }
+    function addImgHtml(item) {
+        var str = '';
+        var val = item.name.substring(0, item.name.indexOf("."));
+        if (val.length > 10) {
+            val = val.substring(0, 8) + '...';
+        }
+        str = '<div style="float: left;position: relative;text-align: center;height: 250px;">';
+        str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+        str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        $("#accessory_files").append(str);
+    }
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "'/>";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从
+                // 页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    function queryFundSource1(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundSource/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $('.fundSource1').find('input[name=responsible_unit]').val(d.responsible_unit);
+                $('.fundSource1').find('input[name=state_science_and_technology_department]').val(d.state_science_and_technology_department);
+                $('.fundSource1').find('input[name=state_other_department]').val(d.state_other_department);
+                $('.fundSource1').find('input[name=area_department]').val(d.area_department);
+                $('.fundSource1').find('input[name=city_department]').val(d.city_department);
+                $('.fundSource1').find('input[name=county_department]').val(d.county_department);
+                $('.fundSource1').find('input[name=own_fund]').val(d.own_fund);
+                $('.fundSource1').find('input[name=bank_loan]').val(d.bank_loan);
+                $('.fundSource1').find('input[name=offshore_fund]').val(d.offshore_fund);
+                $('.fundSource1').find('input[name=other_fund]').val(d.other_fund);
+            }
+        })
+    }
+    function queryFundBudget1(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/fundBudget/list',
+            data: "item_id=" + id + '&type=first_party_provide',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $(data).each(function () {
+                    var str = '<tr>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="subject" value="' + this.subject + '" readonly>\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="money1" value="' + this.money + '">\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="content" value="' + this.content + '">\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                    <div class="field">\n' +
+                        '                                        <input type="text" placeholder="请输入" name="remark" value="' + this.remark + '">\n' +
+                        '                                        <input type="hidden" name="type" value="' + this.type + '">\n' +
+                        '                                    </div>\n' +
+                        '                                </td>\n' +
+                        '                            </tr>';
+                    $('#fundBudget1').append(str);
+                })
+            }
+        })
+    }
+    //移除一张图片
+    function deleteImg(obj) {
+        $(obj).parent('div').remove();
+    }
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "' />";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    //显示隐藏图片删除按钮
+    function showOrHideCloseBut(obj) {
+        var eum = $(obj).children("a:eq(1)");
+        var flag = $(eum).is(":hidden");
+        if (flag) {
+            $(eum).show();
+        } else {
+            $(eum).hide();
+        }
+    }
+
+    function submit(status) {
+
+        var modifyApply = $('#form').serializeObject();
+        modifyApply.status=status;
+
+        console.log(JSON.stringify(modifyApply));
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/basic/modifyApply',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(modifyApply),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+
+    //定时任务,监听预算的合计
+    var ref = setInterval(function () {
+        var total = 0;
+        $('input[name=money]').each(function () {
+            if ($(this).val() != '') {
+                total += $(this).val() - 0;
+            }
+        })
+        var sourceInput = $('.fundSource').find('input');
+        $(sourceInput).each(function (i, d) {
+            if ($(d).val() != '' && i != 0) {
+                total += $(d).val() - 0;
+            }
+        })
+        if (total != 0) {
+            $('#total').text('项目总投资：' + total + '万元');
+        } else {
+            $('#total').text('');
+        }
+    }, 1000);
+</script>
+</html>

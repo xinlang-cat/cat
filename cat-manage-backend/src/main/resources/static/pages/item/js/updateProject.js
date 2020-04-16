@@ -17,11 +17,29 @@ function queryInformation(id) {
             $('textarea[name=overall_objective]').val(d.overall_objective);
             $('textarea[name=research_contents]').val(d.research_contents);
             $('input[name=period]').val(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
+            $('input[name=accessory]').val(d.accessory);
 
+            $("#contractName").text(analysisFile(d.accessory).name);
+            $("#contractName").attr('href', analysisFile(d.accessory).url);
         }
     })
 }
-
+/*解析文件*/
+function analysisFile(id) {
+    if (id == '') {
+        return '';
+    }
+    var text = {};
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-f/files/' + id,
+        async: false,
+        success: function (data) {
+            text = data;
+        }
+    });
+    return text;
+}
 function queryIndicators(id) {
     $.ajax({
         type: 'get',
@@ -161,7 +179,7 @@ function queryScheduling(id) {
                     ' </td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                     ' <div class="field">' +
-                    '   <textarea name="objectives" placeholder="请输入内容" class="layui-textarea">' + this.objectives + '</textarea>' +
+                    '   <textarea name="objectives" placeholder="请输入内容" class="layui-textarea" lay-verify="required">' + this.objectives + '</textarea>' +
                     '  </div>' +
                     ' </td>' +
                     '  </tr>';
@@ -190,37 +208,37 @@ function queryPersonnel(id) {
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
                     '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + this.user_id + '">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="name" value="' + this.name + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="name" value="' + this.name + '" readonly>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="sex" value="' + this.sex + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="sex" value="' + this.sex + '" readonly>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="age" value="' + this.age + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="age" value="' + this.age + '" readonly>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + this.professional_title + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + this.professional_title + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="specialty" value="' + this.specialty + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="specialty" value="' + this.specialty + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="organization" value="' + this.organization + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="organization" value="' + this.organization + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="responsibilities" value="' + this.responsibilities + '">\n' +
+                    '                                    <input type="text" placeholder="请输入" name="responsibilities" value="' + this.responsibilities + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                        </tr>';
@@ -248,7 +266,7 @@ function queryFundBudget(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="money" value="' + this.money + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="money" value="' + this.money + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -321,7 +339,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <select name="leader" id="leader_1">\n' +
+                    '                                        <select name="leader" id="leader_1" lay-verify="required">\n' +
                     '                                            <option value=""></option>\n' + options +
                     '                                        </select>\n' +
                     '                                    </div>\n' +
@@ -331,7 +349,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="leader_phone" value="' + this.leader_phone + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="leader_phone" value="' + this.leader_phone + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -339,7 +357,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="linkman" value="' + this.linkman + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="linkman" value="' + this.linkman + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -347,7 +365,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="linkman_phone" value="' + this.linkman_phone + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="linkman_phone" value="' + this.linkman_phone + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -355,7 +373,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>传真</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="fax" value="' + this.fax + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="fax" value="' + this.fax + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -363,7 +381,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="postcode" value="' + this.postcode + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="postcode" value="' + this.postcode + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -371,7 +389,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>地址</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="site" value="' + this.site + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="site" value="' + this.site + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -379,7 +397,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="e_mail" value="' + this.e_mail + '">\n' +
+                    '                                        <input type="text" placeholder="请输入" name="e_mail" value="' + this.e_mail + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>';

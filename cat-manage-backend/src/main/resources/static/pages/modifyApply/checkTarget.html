@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>项目信息</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../item/css/newProjecy.css">
+    <style>
+        .layui-table td {
+            position: initial;
+        }
+
+        .layui-textarea {
+            min-height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+        <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_C">
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(2);" permission="PARTY_C:html">通过</button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(3);" permission="PARTY_C:html">未通过</button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(4);" permission="PARTY_C:html">提交至甲方审核</button>
+        </div>
+        <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_A">
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(5);" permission="PARTY_A:html">甲方审核通过</button>
+            <button type="button" class="layui-btn layui-btn-sm" onclick="submit(6);" permission="PARTY_A:html">甲方审核未通过</button>
+        </div>
+    </div>
+</div>
+<div class="layui-form" style="margin-top: 60px;">
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>项目信息</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+
+        <!--主要研究、开发人员及责任分工-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 主要研究、开发人员及责任分工</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="personnel1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="8">
+                                    <div class="field">
+                                        <span id="personnel1">主要研究、开发人员及责任分工</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">姓名</th>
+                                <th class="tdDorder">性别</th>
+                                <th class="tdDorder">年龄</th>
+                                <th class="tdDorder">职称</th>
+                                <th class="tdDorder">从事专业</th>
+                                <th class="tdDorder">工作单位</th>
+                                <th class="tdDorder">研究开发中的责任分工</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--项目考核指标-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 项目考核指标</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="TECHNICAL_INDICATORS1">技术指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="ECONOMIC_INDICATORS1">经济指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="INDICATORS_OF_TALENT_TEAM_CONS1">人才建设指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="OTHER_INDICATORS1">其他指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="achievement1">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="50%">
+                                <col width="40%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="3">
+                                    <div class="field">
+                                        <span id="QUANTITY_INDICATORS1">预估效益及成果</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">内容</th>
+                                <th class="tdDorder">数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="10"></td>
+        </tr>
+        <tr style="height: 22px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 33px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
+            <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
+                <div class="headline">
+                    <span>项目信息</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+
+        <tr style="height: 30px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--基本信息-->
+
+        <!--主要研究、开发人员及责任分工-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 主要研究、开发人员及责任分工</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="personnel">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="10%">
+                                <col width="5%">
+                                <col width="5%">
+                                <col width="10%">
+                                <col width="15%">
+                                <col width="15%">
+                                <col width="15%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder" rowspan="1" colspan="8">
+                                    <div class="field">
+                                        <span id="personnel">主要研究、开发人员及责任分工</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">姓名</th>
+                                <th class="tdDorder">性别</th>
+                                <th class="tdDorder">年龄</th>
+                                <th class="tdDorder">职称</th>
+                                <th class="tdDorder">从事专业</th>
+                                <th class="tdDorder">工作单位</th>
+                                <th class="tdDorder">研究开发中的责任分工</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <!--项目考核指标-->
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 25px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
+                <div class="subheading">
+                    <span>丨 项目考核指标</span>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="TECHNICAL_INDICATORS">技术指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="ECONOMIC_INDICATORS">经济指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="INDICATORS_OF_TALENT_TEAM_CONS">人才建设指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="indicators">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="30%">
+                                <col width="20%">
+                                <col width="20%">
+                                <col width="20%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="5">
+                                    <div class="field">
+                                        <span id="OTHER_INDICATORS">其他指标</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">指标内容</th>
+                                <th class="tdDorder">完成期限</th>
+                                <th class="tdDorder">实施地点</th>
+                                <th class="tdDorder">实施人员</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="6">
+                <div class="achievement">
+                    <form>
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="10%">
+                                <col width="50%">
+                                <col width="40%">
+                            </colgroup>
+                            <thead>
+                            <tr style="background-color: #ffffff;">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="3">
+                                    <div class="field">
+                                        <span id="QUANTITY_INDICATORS">预估效益及成果</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">内容</th>
+                                <th class="tdDorder">数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+        </tr>
+        <form id="form">
+            <tr style="height: 25px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 25px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>变更原因</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="status" id="status">
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="5">
+                    <div class="field">
+                        <label class="col-md-1 control-label">附件:</label>
+                        <div class="col-md-11" id="accessory_files">
+
+                        </div>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>监理单位意见</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="check_unit_idea" id="check_unit_idea" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px; ">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>甲方单位意见</span>
+                    </div>
+                </td>
+                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                    <div class="field">
+                        <textarea name="manage_unit_idea" id="manage_unit_idea" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+        </form>
+        </tbody>
+    </table>
+
+</div>
+</body>
+
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../list-layout/js/serializeJson.js"></script>
+<script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
+<script type="text/javascript" src='../item/js/updateProject.js'></script>
+<script type="application/javascript" src="../../layui/xm-select.js"></script>
+<script type="application/javascript" src="js/updateProjectVice.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            element = layui.element,
+            laydate = layui.laydate,
+            upload = layui.upload,
+            $ = layui.jquery;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , type: 'month'
+                , range: true
+                , trigger: 'click'
+            });
+        });
+        upload.render({
+            elem: '#upload_accessory' //绑定元素
+            , accept: 'jpg'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/albums'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addImgHtml(res);
+
+            }
+        });
+
+        //插入一张图片
+        function addImgHtml(item) {
+            var str = '';
+            var val = item.name.substring(0, item.name.indexOf("."));
+            if (val.length > 10) {
+                val = val.substring(0, 8) + '...';
+            }
+            str = '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+            str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_files").append(str);
+            $(".close-a").hide();
+        }
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            //layer.msg(JSON.stringify(data.field));
+            submit();
+            //return false;
+        });
+
+        //添加tr
+        $(document).on('click', '.addTr', function () {
+            var serial = $(this).closest('thead').nextAll('tbody').children().length + 1;
+            var name = $(this).attr('name');
+            var str = '';
+            if (name == 'indicators') {
+                var type = $(this).attr('id');
+                if (type != 'QUANTITY_INDICATORS') {
+                    str = '<tr>' +
+                        '<td class="tdDorder mainTd_1">' +
+                        '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + type + '"></td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input type="text" placeholder="请输入" name="content" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input class="date" type="text" placeholder="请输入" name="period" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field" style="position: relative;">' +
+                        '<select class="site" lay-verify="required" lay-filter="site">\n' +
+                        '<option value="">请选择</option>\n' +
+                        '</select>\n' +
+                        '<input type="hidden" name="site">\n' +
+                        '<button type="button" class="layui-btn layui-btn-xs" name="refresh"\n' +
+                        ' style="position: absolute;right: 0;top: 50%;margin-top:-11px;background-color: #e1e1e1;">\n' +
+                        '<i class="layui-icon">&#xe669;</i>\n' +
+                        '</button>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<div class="userIds"></div>' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
+                } else {
+                    var option = '';
+                    $.ajax({
+                        type: 'get',
+                        url: domainName + '/api-label/label/tree/' + 'INDICATORS_OF_LIBRARY',
+                        async: false,
+                        success: function (data) {
+                            var ds = data[0].child;
+                            $(ds).each(function () {
+                                option += '<option value=' + this.sign + '>' + this.content + '</option>';
+                            });
+                        }
+                    })
+                    str = '<tr>' +
+                        '<td class="tdDorder mainTd_1">' +
+                        '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + type + '"></td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<select name="content">\n' +
+                        '<option value=""></option>' + option + '\n' +
+                        '</select>' +
+                        '</div>' +
+                        '</td>' +
+                        '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                        '<div class="field">' +
+                        '<input type="text" placeholder="请输入" name="count" lay-verify="required">' +
+                        '</div>' +
+                        '</td>' +
+                        ' </tr>';
+                }
+            } else if (name == 'scheduling') {
+                str = '<tr>' +
+                    '<td class="tdDorder mainTd_1">' +
+                    ' <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
+                    '  </td>' +
+                    '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
+                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                    ' <div class="field">' +
+                    ' <input type="text" placeholder="请输入" name="annual" lay-verify="required">' +
+                    ' </div>' +
+                    ' </td>' +
+                    '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                    ' <div class="field">' +
+                    '   <textarea name="objectives" placeholder="请输入内容" class="layui-textarea"></textarea>' +
+                    '  </div>' +
+                    ' </td>' +
+                    '  </tr>';
+            } else if (name = 'personnel') {
+                var content = '<div class="layui-form" style="margin: 20px auto;width: 80%;">' +
+                    '<blockquote class="layui-elem-quote layui-text">\n' +
+                    '  选择或搜索选择\n' +
+                    '</blockquote>' +
+                    '  <div class="layui-form-item">\n' +
+                    '    <label class="layui-form-label">姓名</label>\n' +
+                    '    <div class="layui-input-block">\n' +
+                    '      <div id="user_select" class="xm-select-demo"></div>\n' +
+                    '    </div>\n' +
+                    '  </div>' +
+                    '</div>';
+
+                layer.open({
+                    type: 1,
+                    area: ['800px', '400px'],
+                    btn: ['确定', '关闭'],
+                    scrollbar: false,
+                    content: content,
+                    success: function (layero, index) {
+                        var user_select = xmSelect.render({
+                            el: '#user_select',
+                            radio: true,
+                            clickClose: true,
+                            filterable: true,
+                            delay: 1000,
+                            remoteSearch: true,
+                            remoteMethod: function (val, cb, show) {
+                                if (!val) {
+                                    $.ajax({
+                                        type: 'get',
+                                        url: domainName + '/project-user/users',
+                                        contentType: "application/json; charset=utf-8",
+                                        async: false,
+                                        data: 'deptName=' + $('#responsible_unit').val(),
+                                        success: function (data) {
+                                            var d = [];
+                                            $(data.data).each(function () {
+                                                var obj = {
+                                                    name: this.name + '_' + this.idCard,
+                                                    value: packUserInfo(this)
+                                                };
+                                                d.push(obj);
+                                            })
+                                            cb(d);
+                                        }
+                                    });
+                                } else {
+                                    $.ajax({
+                                        type: 'get',
+                                        url: domainName + '/project-user/users',
+                                        contentType: "application/json; charset=utf-8",
+                                        async: false,
+                                        data: 'name=' + val,
+                                        success: function (data) {
+                                            var d = [];
+                                            $(data.data).each(function () {
+                                                var obj = {
+                                                    name: this.name + '_' + this.idCard,
+                                                    value: packUserInfo(this)
+                                                };
+                                                d.push(obj);
+                                            })
+                                            cb(d);
+                                        }
+                                    });
+                                }
+                            },
+                            model: {
+                                label: {
+                                    type: 'text',
+                                    text: {
+                                        left: '',
+                                        right: '',
+                                        separator: ', ',
+                                    },
+                                }
+                            },
+                        })
+                    },
+                    yes: function (index, layero) {
+                        var select = xmSelect.get('#user_select', true);
+                        var data = select.getValue();
+                        var arr = data[0].value.split(',');
+                        str = '<tr>\n' +
+                            '                            <td class="tdDorder mainTd_1">\n' +
+                            '                                <input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">' +
+                            '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + arr[0] + '">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="name" value="' + arr[1] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="sex" value="' + arr[2] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="age" value="' + arr[3] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                    <input type="text" placeholder="请输入" name="organization" value="' + arr[8] + '">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                            '                                <div class="field">\n' +
+                            '                                   <input type="text" placeholder="请输入" name="responsibilities">\n' +
+                            '                                </div>\n' +
+                            '                            </td>\n' +
+                            '                        </tr>';
+                        $('#personnel').append(str);
+                        form.render();
+                        layer.close(index);
+                        //修改实施人员选择
+                        var d = [];
+                        $('input[name=user_id]').each(function () {
+                            var UId = $(this).val();
+                            if (UId != '') {
+                                var name = $(this).next().val();
+                                var data = {name: name, value: UId,};
+                                d.push(data)
+                            }
+                        })
+                        $(xmSelect.get()).each(function () {// 给指标的实施人员选择赋值
+                            this.update({
+                                data: d
+                            })
+                        });
+
+                    },
+                    btn2: function (index, layero) {
+                        layer.close(index);
+                    }
+                });
+            }
+            $(this).closest('thead').nextAll('tbody').append(str);
+            $(this).closest('thead').nextAll('tbody').children().last().find('button[name=refresh]').trigger('click');//点击新添加的表格中的地点刷新按钮，起到初始化的作用
+            //渲染日期
+            lay('.date').each(function () {
+                laydate.render({
+                    elem: this
+                    , type: 'month'
+                    , range: true
+                    , trigger: 'click'
+                });
+            });
+            form.render();
+            //获取项目人员
+            var d = [];
+            $('input[name=user_id]').each(function () {
+                var UId = $(this).val();
+                if (UId != '') {
+                    var name = $(this).next().val();
+                    var data = {name: name, value: UId,};
+                    d.push(data)
+                }
+            });
+            //渲染实施人员选择
+            xmSelect.render({
+                name: 'userIds',
+                layVerify: 'required',
+                layVerType: 'msg',
+                el: $(this).closest('thead').nextAll('tbody').children().last().find('.userIds')[0],
+                model: {
+                    label: {
+                        type: 'text',
+                        text: {
+                            left: '',
+                            right: '',
+                            separator: ', ',
+                        },
+                    }
+                },
+                data: d
+            });
+        });
+        //移除tr
+        $(document).on('click', 'button[name=delTr]', function () {
+            //移除选中的tr
+            var serial = $(this).closest('thead').nextAll('tbody').find("input[type=checkbox]:checked");
+            serial.each(function () {
+                $(this).closest('tr').remove();
+            })
+            //重新排序
+            var serial2 = $(this).closest('thead').nextAll('tbody').find("input[type=checkbox]");
+            serial2.each(function (i) {
+                $(this).parent().next().text(i + 1);
+            })
+            //如果全部移除则全选取消选中
+            if (serial2.length == 0) {
+                $(this).closest('tr').next().find("input[type=checkbox]").prop("checked", false);
+            }
+            //如果移除的是项目人员
+            if ($(this).prev().attr('name') == 'personnel') {
+                //修改实施人员选择
+                var d = [];
+                $('input[name=user_id]').each(function () {
+                    var UId = $(this).val();
+                    if (UId != '') {
+                        var name = $(this).next().val();
+                        var data = {name: name, value: UId,};
+                        d.push(data)
+                    }
+                })
+                $(xmSelect.get()).each(function () {// 给指标的实施人员选择赋值
+                    this.update({
+                        data: d
+                    })
+                });
+            }
+            //重新渲染
+            form.render();
+        });
+        //全选
+        form.on('checkbox(c_all)', function (data) {
+            var elem = $(data.elem).closest('thead').nextAll('tbody').find('input[type=checkbox]');
+            //如果没有选项全选不可选中
+            if (elem.length == 0) {
+                $(data.elem).prop("checked", false);
+                form.render('checkbox');
+                return;
+            }
+            elem.prop("checked", data.elem.checked);
+            form.render('checkbox');
+        })
+        //有一个未选中全选取消选中
+        form.on('checkbox(c_one)', function (data) {
+            var item = $(data.elem).closest('tbody').find('input[type=checkbox]');
+            for (var i = 0; i < item.length; i++) {
+                if (item[i].checked == false) {
+                    $(data.elem).closest('tbody').prevAll('thead').find('input[type=checkbox]').prop("checked", false);
+                    form.render('checkbox');
+                    break;
+                }
+            }
+            //如果都勾选了  勾上全选
+            var all = item.length;
+            for (var i = 0; i < item.length; i++) {
+                if (item[i].checked == true) {
+                    all--;
+                }
+            }
+            if (all == 0) {
+                $(data.elem).closest('tbody').prevAll('thead').find('input[type=checkbox]').prop("checked", true);
+                form.render('checkbox');
+            }
+        });
+        //监听地点选择
+        form.on('select(site)', function (data) {
+            var code = data.value;
+            var site = $(data.elem).parent().find('input[name=site]');
+            if (code == site.val() || code == '') {
+                return;
+            }
+            var text = site.text() + $(data.elem).find("option:selected").text() + '-';
+            site.val(code);
+            site.text(text);
+            $(data.elem).empty();
+            $(data.elem).append("<option value='" + code + "'>" + text + "</option>");
+            var texts = text.split('-');
+            if (texts.length == 2) {
+                getCity(code, $(data.elem));
+            } else if (texts.length == 3) {
+                getArea(code, $(data.elem));
+            } else if (texts.length == 4) {
+                getStreet(code, $(data.elem));
+            }
+            form.render('select');
+        });
+        //刷新地点选择
+        $(document).on('click', 'button[name=refresh]', function () {
+            var siteSelect = $(this).parent().find('select');
+            siteSelect.empty();
+            siteSelect.append("<option value=''>请选择</option>");
+            getProvince(siteSelect);
+            $(this).parent().find('input[name=site]').val('');
+            $(this).parent().find('input[name=site]').text('');
+            ;
+            form.render('select');
+        });
+        //监听单位选择选择
+        form.on('select(unit)', function (data) {
+            var id = $(data.elem).attr('id');
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-user/users',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: 'deptName=' + data.value,
+                success: function (d) {
+                    var options = '<option value=""></option>';
+                    $(d.data).each(function () {
+                        options += '<option value="' + this.userId + '">' + this.name + '</option>';
+                    });
+                    if (id == 'entrusting_party') {
+                        $('#leader_1').empty();
+                        $('#leader_1').append(options);
+                    } else {
+                        $('#leader_3').empty();
+                        $('#leader_3').append(options);
+                    }
+                }
+            });
+            form.render('select');
+        });
+    });
+    /*初始化数据*/
+    initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
+    getMyCompany($('#responsible_unit'));//当前用户单位
+    initCompanySelect();//单位选择
+
+    //获取项目数据项目
+    var pers = checkPermission();
+    var id = getUrlParam("id");
+    var type = getUrlParam("type");
+    $('#type').val(type);
+    $('#id').val(id);
+    getApply(id);
+    function getApply(id){
+        $("input").attr('readonly', true);
+        $("input").attr("style", "text-align: center;border: 0px;");
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/basic/modifyApply/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $("#content").text(d.content);
+                getStatus(d.status);
+                //获取原来数据
+
+                queryPersonnel1(d.item_id);
+                queryIndicators1(d.item_id);
+
+                //获取修改数据
+                queryPersonnel(id);
+                queryIndicators(id);
+                $.get(domainName + "/api-f/albums/list", {ids: d.accessory}, function (data1) {
+                    $.each(data1, function (i, item) {
+                        addImgHtml(item)
+                    });
+                })
+
+            }
+        })
+
+    }
+    function getStatus(status){
+        $("textarea").attr('readonly', true);
+        //监理审核，隐藏甲方按钮
+        if (status==1){
+            $("#check_unit_idea").removeAttr("readonly");
+            document.getElementById('PARTY_A').style.display='none';
+        }else if (status==4){
+            //甲方审核，隐藏监理按钮
+            document.getElementById('PARTY_C').style.display='none';
+            $("#manage_unit_idea").removeAttr("readonly");
+        }else {
+            document.getElementById('PARTY_C').style.display='none';
+            document.getElementById('PARTY_A').style.display='none';
+        }
+    }
+    function addImgHtml(item) {
+        var str = '';
+        var val = item.name.substring(0, item.name.indexOf("."));
+        if (val.length > 10) {
+            val = val.substring(0, 8) + '...';
+        }
+        str = '<div style="float: left;position: relative;text-align: center;height: 250px;">';
+        str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+        str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+        $("#accessory_files").append(str);
+    }
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "'/>";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从
+                // 页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+
+
+    function queryIndicators(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/indicators/viceList',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $(data).each(function () {
+                    var content = this.content;
+                    var serial = $('#' + this.type + 1).closest('thead').nextAll('tbody').children().length + 1;
+                    var str = '';
+                    if (this.type != 'QUANTITY_INDICATORS') {
+                        var text = getsuperior(this.site);
+                        var userIds = this.userIds.split(',');
+                        var userNames = [];
+                        $('input[name=user_id1]').each(function (i, d) {
+                            var UId = $(d).val();
+                            $(userIds).each(function () {
+                                if (UId == this) {
+                                    var name = $(d).next().val();
+                                    userNames.push(name)
+                                }
+                            });
+                        })
+                        str = '<tr>' +
+                            '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text"  name="content" value="' + this.content + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input class="date" type="text" placeholder="请输入" name="period" value="' + this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7) + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field" style="position: relative;">' +
+                            '<input type="text" name="site" value="' + text + '">' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text" placeholder="请输入" name="" value="' + userNames + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+                    } else {
+                        str = '<tr>' +
+                            '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text"  name="content" value="' + analysisLablename(this.content) + '">' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text"  name="count" value="' + this.count + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            ' </tr>';
+                    }
+                    $('#' + this.type + 1).closest('thead').nextAll('tbody').append(str);
+                })
+            }
+        })
+    }
+    function queryIndicators1(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/indicators/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $(data).each(function () {
+                    var content = this.content;
+                    var serial = $('#' + this.type ).closest('thead').nextAll('tbody').children().length + 1;
+                    var str = '';
+                    if (this.type != 'QUANTITY_INDICATORS') {
+                        var text = getsuperior(this.site);
+                        var userIds = this.userIds.split(',');
+                        var userNames = [];
+                        $('input[name=user_id1]').each(function (i, d) {
+                            var UId = $(d).val();
+                            $(userIds).each(function () {
+                                if (UId == this) {
+                                    var name = $(d).next().val();
+                                    userNames.push(name)
+                                }
+                            });
+                        })
+                        str = '<tr>' +
+                            '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text"  name="content" value="' + this.content + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input class="date" type="text" placeholder="请输入" name="period" value="' + this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7) + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field" style="position: relative;">' +
+                            '<input type="text" name="site" value="' + text + '">' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text" placeholder="请输入" name="" value="' + userNames + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+                    } else {
+                        str = '<tr>' +
+                            '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text"  name="content" value="' + analysisLablename(this.content) + '">' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<input type="text"  name="count" value="' + this.count + '" lay-verify="required">' +
+                            '</div>' +
+                            '</td>' +
+                            ' </tr>';
+                    }
+                    $('#' + this.type).closest('thead').nextAll('tbody').append(str);
+                })
+            }
+        })
+    }
+    function queryPersonnel1(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/list',
+            data: "item_id=" + id + "&user_type=PARTY_B_MEMBER",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $(data).each(function () {
+                    var serial = $('#personnel1').closest('thead').nextAll('tbody').children().length + 1;
+                    var str = '<tr>\n' +
+                        '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="hidden"  name="user_id1" value="' + this.user_id + '">\n' +
+                        '                                    <input type="text"  name="name" value="' + this.name + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="sex" value="' + this.sex + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="age" value="' + this.age + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="professional_title" value="' + this.professional_title + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="specialty" value="' + this.specialty + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="organization" value="' + this.organization + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="responsibilities" value="' + this.responsibilities + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                        </tr>';
+                    $('#personnel1').closest('thead').nextAll('tbody').append(str);
+                })
+            }
+        })
+    }
+
+    function queryPersonnel(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/viceList',
+            data: "item_id=" + id + "&user_type=PARTY_B_MEMBER",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+
+                $(data).each(function () {
+                    var serial = $('#personnel').closest('thead').nextAll('tbody').children().length + 1;
+                    var str = '<tr>\n' +
+                        '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="hidden"  name="user_id" value="' + this.user_id + '">\n' +
+                        '                                    <input type="text"  name="name" value="' + this.name + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="sex" value="' + this.sex + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="age" value="' + this.age + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="professional_title" value="' + this.professional_title + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="specialty" value="' + this.specialty + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="organization" value="' + this.organization + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
+                        '                                <div class="field">\n' +
+                        '                                    <input type="text"  name="responsibilities" value="' + this.responsibilities + '">\n' +
+                        '                                </div>\n' +
+                        '                            </td>\n' +
+                        '                        </tr>';
+                    $('#personnel').closest('thead').nextAll('tbody').append(str);
+                })
+            }
+        })
+    }
+    //移除一张图片
+    function deleteImg(obj) {
+        $(obj).parent('div').remove();
+    }
+
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "' />";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    //显示隐藏图片删除按钮
+    function showOrHideCloseBut(obj) {
+        var eum = $(obj).children("a:eq(1)");
+        var flag = $(eum).is(":hidden");
+        if (flag) {
+            $(eum).show();
+        } else {
+            $(eum).hide();
+        }
+    }
+
+    function submit(status) {
+        var modifyApply = $('#form').serializeObject();
+        modifyApply.status = status;
+
+        console.log(JSON.stringify(modifyApply));
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/basic/modifyApply',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(modifyApply),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    parent.location.reload();
+                });
+            }
+        });
+    }
+
+    /*处理人员数据*/
+    function packUserInfo(d) {
+        var sex = d.sex || '',
+            birthDate = d.birthDate || '',
+            idType = d.idType || '',
+            idCard = d.idCard || '',
+            academicTitle = d.academicTitle || '',
+            nowMajor = d.nowMajor || '',
+            deptName = d.deptName || '',
+            name = d.name || '';
+        if (sex == 1) {
+            sex = '男';
+        } else {
+            sex = '女';
+        }
+        // 获得今天的时间，计算年龄
+        var date = new Date();
+        var startDate = new Date(birthDate);
+        var newDate = date.getTime() - startDate.getTime();
+        var age = Math.ceil(newDate / 1000 / 60 / 60 / 24 / 365);
+        if (isNaN(age)) {
+            age = "";
+        }
+        if (nowMajor != '') {
+            nowMajor = analysisLablename(nowMajor);
+        }
+        return d.userId + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
+    }
+
+    //定时任务,监听预算的合计
+    var ref = setInterval(function () {
+        var total = 0;
+        $('input[name=money]').each(function () {
+            if ($(this).val() != '') {
+                total += $(this).val() - 0;
+            }
+        })
+        var sourceInput = $('.fundSource').find('input');
+        $(sourceInput).each(function (i, d) {
+            if ($(d).val() != '' && i != 0) {
+                total += $(d).val() - 0;
+            }
+        })
+        if (total != 0) {
+            $('#total').text('项目总投资：' + total + '万元');
+        } else {
+            $('#total').text('');
+        }
+    }, 1000);
+</script>
+</html>

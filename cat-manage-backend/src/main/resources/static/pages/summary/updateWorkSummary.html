@@ -191,7 +191,7 @@
     var layedit, index;
 
     var itemId = getUrlParam("itemId");
-    var h = $(window).height() - 100;
+    var h = $(window).height() - 15;
     layui.use(['layedit','upload'], function(){
         layedit = layui.layedit;
         index = layedit.build('demo',{tool:[], height:h});

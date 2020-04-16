@@ -18,10 +18,28 @@ function queryInformation(id) {
             $('textarea[name=research_contents]').val(d.research_contents);
             $('input[name=period]').val(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
             $('input[name=status]').val(d.status);
+
+            $("#contractName").text(analysisFile(d.accessory).name);
+            $("#contractName").attr('href', analysisFile(d.accessory).url);
         }
     })
 }
-
+/*解析文件*/
+function analysisFile(id) {
+    if (id == '') {
+        return '';
+    }
+    var text = {};
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-f/files/' + id,
+        async: false,
+        success: function (data) {
+            text = data;
+        }
+    });
+    return text;
+}
 function queryIndicators(id) {
     $.ajax({
         type: 'get',
