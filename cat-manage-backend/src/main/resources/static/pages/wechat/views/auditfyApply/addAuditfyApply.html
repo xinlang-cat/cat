@@ -173,7 +173,6 @@
         formdata.item_id = itemId;
         formdata.post_type = 2;
         formdata.target_id = $("#target_id").val();
-        alert(JSON.stringify(formdata));
          $.ajax({
              type: 'post',
              url: domainName + '/project-item/item/target/auditApply/one',
