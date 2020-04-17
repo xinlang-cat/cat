@@ -21,8 +21,7 @@
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
     <div style="position: absolute;right: 30px;top: 15px;">
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);">提交</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);">保存</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="closeThis();">返回</button>
     </div>
 </div>
 <div class="layui-form" style="margin-top: 60px;">
@@ -136,7 +135,7 @@
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="6">
-                <div class="fundSource1" >
+                <div class="fundSource1">
                     <form>
                         <table class="layui-table">
                             <colgroup>
@@ -609,7 +608,7 @@
 <script type="application/javascript" src="js/updateProjectVice.js"></script>
 
 <script>
-    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery','upload'], function () {
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
         var form = layui.form,
             layer = layui.layer,
             element = layui.element,
@@ -655,9 +654,6 @@
         }
 
 
-
-
-
         //监听提交
         form.on('submit(submit)', function (data) {
             //layer.msg(JSON.stringify(data.field));
@@ -667,7 +663,8 @@
 
     });
     var h = $(window).height() - 50;
-    var w = $(window).width() - 30;;
+    var w = $(window).width() - 30;
+    ;
     //获取项目数据项目
     var id = getUrlParam("id");
     var type = getUrlParam("type");
@@ -697,6 +694,7 @@
             }
         })
     }
+
     function queryFundSource1(id) {
         $.ajax({
             type: 'get',
@@ -719,6 +717,7 @@
             }
         })
     }
+
     function queryFundBudget1(id) {
         $.ajax({
             type: 'get',
@@ -757,10 +756,12 @@
             }
         })
     }
+
     //移除一张图片
     function deleteImg(obj) {
         $(obj).parent('div').remove();
     }
+
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "' />";
         layer.open({
@@ -792,7 +793,7 @@
         var fundBudget = $('.fundBudget').find('form').serializeArrayObj();
         var fundSource = $('.fundSource').find('form').serializeObject();
         var modifyApply = $('#form').serializeObject();
-        modifyApply.status=status;
+        modifyApply.status = status;
         var files = document.getElementsByName("accessory").length;
         var arr = [];
         var dayObj = $('input[name="accessory"]');
@@ -801,7 +802,7 @@
         }
 
         if (files == 1) {
-            modifyApply.accessory=$("input[name='accessory']").val();
+            modifyApply.accessory = $("input[name='accessory']").val();
         } else {
             modifyApply.accessory = arr.join(',');
 
@@ -847,5 +848,10 @@
             $('#total').text('');
         }
     }, 1000);
+
+    function closeThis() {
+        var index = parent.layer.getFrameIndex(window.name);
+        layer.close(index);
+    }
 </script>
 </html>

@@ -553,6 +553,12 @@
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
         if(!tableId){
+            $('#form').bootstrapValidator();
+            var bootstrapValidator = $("#form").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if(!bootstrapValidator.isValid()){
+                return;
+            }
             formdata.status = 1;
             $.ajax({
                 type: 'post',
