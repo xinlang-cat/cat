@@ -99,7 +99,7 @@
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url": domainName + "/api-summary/check-table/page",
+                        "url": domainName + "/api-summary/check-table/page/vice",
                         "data": function (d) {
                             d.status = $("#status").val();
                             d.acceptance_company = $("#acceptance_company").val();
@@ -205,6 +205,18 @@
                                     data = "监理终审";
                                 } else if (data == 6) {
                                     data = "结题审核通过";
+                                }else  if (data == -1) {
+                                    data = "监理初审未通过";
+                                } else if (data == -2) {
+                                    data = "验收初审未通过";
+                                } else if (data == -3) {
+                                    data = "专家审核未通过";
+                                } else if (data == -4) {
+                                    data = "验收终审未通过";
+                                } else if (data == -5) {
+                                    data = "监理终审未通过";
+                                } else if (data == -6) {
+                                    data = "结题审核通过未通过";
                                 }
                                 $.ajaxSettings.async = true;
                                 return data;

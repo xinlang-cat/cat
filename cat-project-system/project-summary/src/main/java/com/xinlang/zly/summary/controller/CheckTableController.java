@@ -1,6 +1,8 @@
 package com.xinlang.zly.summary.controller;
 
 import com.xinlang.bean.project_user.ProjectUser;
+import com.xinlang.cat_project.item.pojo.PageResult;
+import com.xinlang.cat_project.item.pojo.modifyApply;
 import com.xinlang.zly.summary.bean.CheckTable;
 import com.xinlang.zly.summary.bean.SkillSummary;
 import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
@@ -72,5 +74,18 @@ public class CheckTableController {
         checkTableService.delete(id);
     }
 
+    @GetMapping("/page/vice")
+    @LogAnnotation(module = "查询结题申请表分页")
+    @ApiOperation(value = "查询结题申请表分页")
+    public ResponseEntity<PageResult<CheckTable>> findPageByParamsVice(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                                        @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                                                                        @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                                        @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                                        @RequestParam(required = false) Map<String, Object> params){
+
+        PageResult<CheckTable> result = checkTableService.queryList(page, rows, sortBy, desc, params);
+        return ResponseEntity.ok(result);
+
+    }
 
 }
