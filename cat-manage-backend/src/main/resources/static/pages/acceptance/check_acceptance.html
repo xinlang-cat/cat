@@ -703,10 +703,15 @@
         } else {
             var applicantExtension = formdata.applicantExtension;
             if (applicantExtension == "是") {
+                if (formdata.status==1 && formdata.acceptance_company ==""){
+                    layer.msg("请指定验收方！");
+                    return;
+                }
                 formdata.status = 1 + parseInt(formdata.status);
             } else {
                 formdata.status = 0 - formdata.status;
             }
+
             ;
             $.ajax({
                 type: 'put',
