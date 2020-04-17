@@ -1,10 +1,9 @@
 package com.xinlang.zly.summary.service.impl;
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xinlang.cat_project.item.mapper.AuditApplyMapper;
-import com.xinlang.cat_project.item.pojo.PageResult;
-import com.xinlang.cat_project.item.pojo.auditApply;
+import com.xinlang.bean.util.PageResult;
 import com.xinlang.zly.summary.bean.CheckTable;
 import com.xinlang.zly.summary.mapper.CheckTableMapper;
 import com.xinlang.zly.summary.service.ICheckTableService;
@@ -36,43 +35,44 @@ public class CheckTableService extends BaseService<CheckTable> implements ICheck
         // 过滤
         Example example = new Example(CheckTable.class);
 
-        if ( params.get("status") != "") {
-            if ( params.get("entrusting_company") != "" ) {
+        if (params.get("status") != "") {
+            if (params.get("entrusting_company") != "") {
 
                 //甲方
                 example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("entrusting_company", params.get("entrusting_company"));
-            } else if (params.get("management_company") != "" ) {
+            } else if (params.get("management_company") != "") {
 
                 //监理
                 example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("management_company", params.get("management_company"));
-            } else if (params.get("acceptance_company") != "" ) {
+            } else if (params.get("acceptance_company") != "") {
 
                 //验收
                 example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("acceptance_company", params.get("acceptance_company"));
-            } if ( params.get("entrusting_company") != "" ) {
+            }
+            if (params.get("entrusting_company") != "") {
 
                 //甲方
                 example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("entrusting_company", params.get("entrusting_company"));
-            } else if (params.get("management_company") != "" ) {
+            } else if (params.get("management_company") != "") {
 
                 //监理
                 example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("management_company", params.get("management_company"));
-            } else if (params.get("acceptance_company") != "" ) {
+            } else if (params.get("acceptance_company") != "") {
 
                 //验收
                 example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("acceptance_company", params.get("acceptance_company"));
             }
             //状态
             example.createCriteria().andEqualTo("status", params.get("status"));
-        } else if ( params.get("entrusting_company") != "" ) {
+        } else if (params.get("entrusting_company") != "") {
 
             //甲方
             example.createCriteria().andNotEqualTo("status", 0).andEqualTo("entrusting_company", params.get("entrusting_company"));
-        } else if (params.get("management_company") != "" ) {
+        } else if (params.get("management_company") != "") {
 
             //监理
             example.createCriteria().andNotEqualTo("status", 0).andEqualTo("management_company", params.get("management_company"));
-        } else if (params.get("acceptance_company") != "" ) {
+        } else if (params.get("acceptance_company") != "") {
 
             //验收
             example.createCriteria().andNotEqualTo("status", 0).andEqualTo("acceptance_company", params.get("acceptance_company"));

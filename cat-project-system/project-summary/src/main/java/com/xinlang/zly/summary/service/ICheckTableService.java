@@ -1,6 +1,6 @@
 package com.xinlang.zly.summary.service;
 
-import com.xinlang.cat_project.item.pojo.PageResult;
+import com.xinlang.bean.util.PageResult;
 import com.xinlang.zly.summary.bean.CheckTable;
 import com.xinlang.zly_xyx.cat_common.service.IBaseService;
 import com.xinlang.zly_xyx.common.Page;

@@ -1,5 +1,6 @@
 package com.xinlang.cat_project.item.controller;
 
+import com.xinlang.bean.util.PageResult;
 import com.xinlang.cat_project.item.pojo.*;
 import com.xinlang.cat_project.item.service.IAuditApplyService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
@@ -8,13 +9,11 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -98,10 +97,10 @@ public class ItemTargetController {
     @LogAnnotation(module = "获取指标查定列表")
     @GetMapping("/applyList/page")
     public ResponseEntity<PageResult<auditApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                                                     @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
-                                                                     @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
-                                                                     @RequestParam(required = false) Map<String, Object> params){
+                                                                    @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                                                                    @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                                    @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                                    @RequestParam(required = false) Map<String, Object> params){
         PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
 

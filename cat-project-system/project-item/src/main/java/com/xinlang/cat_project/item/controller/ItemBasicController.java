@@ -1,5 +1,6 @@
 package com.xinlang.cat_project.item.controller;
 
+import com.xinlang.bean.util.PageResult;
 import com.xinlang.cat_project.item.VO.ItemInformationViceVO;
 import com.xinlang.cat_project.item.pojo.*;
 import com.xinlang.cat_project.item.service.*;
@@ -9,12 +10,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
