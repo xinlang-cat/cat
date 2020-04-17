@@ -568,9 +568,7 @@
                 async: false,
                 success: function (data) {
                     changeStatus(item_id);
-                   /* layer.msg(msg, {shift: -1, time: 1000}, function(){
-                        location.reload();
-                    });*/
+
                 }
             });
         }else {
@@ -598,9 +596,9 @@
            async: false,
            data: JSON.stringify(item),
            success: function (data) {
-               layer.msg("成功", {shift: -1, time: 1000}, function () {
-                   history.back(-1);
-               });
+                layer.msg("提交成功", {shift: -1, time: 1000}, function(){
+                         location.reload();
+                     });
            }
        });
    }
