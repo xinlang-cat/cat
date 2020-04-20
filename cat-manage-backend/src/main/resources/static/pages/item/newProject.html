@@ -14,6 +14,9 @@
         .layui-textarea {
             min-height: 60px;
         }
+        .layui-input-inline{
+            margin-left: 75px;
+        }
     </style>
 </head>
 
@@ -226,6 +229,42 @@
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="6">
+                    <div class="layui-form-item" style="margin-bottom: 0;">
+                        <label class="layui-form-label" style="padding: 9px 0;text-align: left;">项目地址</label>
+                        <div class="layui-input-inline">
+                            <select name="province_code" lay-filter="province" id="province">
+                                <option value="">请选择省</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="city_code" lay-filter="city" id="city">
+                                <option value="">请选择市</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="area_code" lay-filter="area" id="area">
+                                <option value="">请选择县/区</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="street_code" lay-filter="street" id="street">
+                                <option value="">请选择街道</option>
+                            </select>
+                        </div>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
             <!--总体目标和主要研究内容-->
             <tr style="height: 25px;">
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -263,7 +302,8 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="overall_objective" placeholder="请输入" class="layui-textarea" lay-verify="required"></textarea>
+                        <textarea name="overall_objective" placeholder="请输入" class="layui-textarea"
+                                  lay-verify="required"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -284,7 +324,8 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
+                        <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"
+                                  lay-verify="required"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -1578,7 +1619,7 @@
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 <script>
-    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery','upload'], function () {
+    layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
         var form = layui.form,
             layer = layui.layer,
             element = layui.element,
@@ -1596,15 +1637,15 @@
         //文件上传
         var uploadInst = upload.render({
             elem: '#contract' //绑定元素
-            ,accept: 'file'
-            ,url: domainName+'/zuul/api-f/files' //上传接口
-            ,done: function(res){
+            , accept: 'file'
+            , url: domainName + '/zuul/api-f/files' //上传接口
+            , done: function (res) {
                 //上传完毕回调
                 $("#accessory").val(res.id);
                 $("#contractName").text(res.name);
                 $("#contractName").attr('href', res.url);
             }
-            ,error: function(){
+            , error: function () {
                 //请求异常回调
             }
         });
@@ -1759,7 +1800,7 @@
                                         async: false,
                                         data: 'name=' + val,
                                         success: function (data) {
-                                            if(data.total!=0){
+                                            if (data.total != 0) {
                                                 var d = [];
                                                 $(data.data).each(function () {
                                                     var obj = {
@@ -1769,7 +1810,7 @@
                                                     d.push(obj);
                                                 });
                                                 cb(d);
-                                            }else {
+                                            } else {
                                                 layer.close(index);
                                                 var content = '<form class="layui-form" action="" lay-filter="example" style="width: 80%;margin: 20px auto;">\n' +
                                                     '  <div class="layui-form-item">\n' +
@@ -1787,7 +1828,7 @@
                                                     '  <div class="layui-form-item">\n' +
                                                     '    <label class="layui-form-label">姓名</label>\n' +
                                                     '    <div class="layui-input-block">\n' +
-                                                    '      <input type="text" name="nickname" value="'+val+'" placeholder="请输入" class="layui-input" lay-verify="required">\n' +
+                                                    '      <input type="text" name="nickname" value="' + val + '" placeholder="请输入" class="layui-input" lay-verify="required">\n' +
                                                     '    </div>\n' +
                                                     '  </div>\n' +
                                                     '  <div class="layui-form-item">\n' +
@@ -1871,7 +1912,10 @@
                                                                     success: function (data) {
                                                                         var d = [];
                                                                         $(data.data).each(function () {
-                                                                            var obj = {name: this.signName, value: this.signName};
+                                                                            var obj = {
+                                                                                name: this.signName,
+                                                                                value: this.signName
+                                                                            };
                                                                             d.push(obj);
                                                                         });
                                                                         cb(d);
@@ -2067,9 +2111,10 @@
             //如果全部移除则全选取消选中
             if (serial2.length == 0) {
                 $(this).closest('tr').next().find("input[type=checkbox]").prop("checked", false);
-            };
+            }
+            ;
             //如果移除的是项目人员
-            if($(this).prev().attr('name')=='personnel'){
+            if ($(this).prev().attr('name') == 'personnel') {
                 //修改实施人员选择
                 var d = [];
                 $('input[name=user_id]').each(function () {
@@ -2123,8 +2168,27 @@
                 form.render('checkbox');
             }
         });
-        //监听地点选择
-        form.on('select(site)', function(data){
+        /*监听地点选择*/
+        form.on('select(province)', function(data){
+            $("#city option").remove();
+            $("#area option").remove();
+            $("#street option").remove();
+            city(data.value);
+            form.render('select');
+        });
+        form.on('select(city)', function(data){
+            $("#area option").remove();
+            $("#street option").remove();
+            area(data.value);
+            form.render('select');
+        });
+        form.on('select(area)', function(data){
+            $("#street option").remove();
+            street(data.value);
+            form.render('select');
+        });
+        //指标地点
+        form.on('select(site)', function (data) {
             var code = data.value;
             var site = $(data.elem).parent().find('input[name=site]');
             if (code == site.val() || code == '') {
@@ -2152,11 +2216,12 @@
             siteSelect.append("<option value=''>请选择</option>");
             getProvince(siteSelect);
             $(this).parent().find('input[name=site]').val('');
-            $(this).parent().find('input[name=site]').text('');;
+            $(this).parent().find('input[name=site]').text('');
+            ;
             form.render('select');
         });
         //监听单位选择选择
-        form.on('select(unit)', function(data){
+        form.on('select(unit)', function (data) {
             var id = $(data.elem).attr('id');
             $.ajax({
                 type: 'get',
@@ -2167,12 +2232,12 @@
                 success: function (d) {
                     var options = '<option value=""></option>';
                     $(d.data).each(function () {
-                        options += '<option value="'+this.userId+'">'+this.name+'</option>';
+                        options += '<option value="' + this.userId + '">' + this.name + '</option>';
                     });
-                    if(id=='entrusting_party'){
+                    if (id == 'entrusting_party') {
                         $('#leader_1').empty();
                         $('#leader_1').append(options);
-                    }else {
+                    } else {
                         $('#leader_3').empty();
                         $('#leader_3').append(options);
                     }
@@ -2186,12 +2251,14 @@
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
     getMyCompany($('#responsible_unit'));//当前用户单位
     initCompanySelect();//单位选择
+    province();
 
     /*保存或提交*/
     function submit(status) {
         $('#ItemStatus').val(status);
         $('#submit').trigger("click");
     }
+
     function save() {
         var information = $('#form1').serializeObject();
         information.accessory = $('#accessory').val();
@@ -2244,7 +2311,7 @@
         }
         // 计算年龄
         var age = IdCard(idCard);
-        if(nowMajor!=''&&/^[a-zA-Z]+$/.test(nowMajor)){
+        if (nowMajor != '' && /^[a-zA-Z]+$/.test(nowMajor)) {
             nowMajor = analysisLablename(nowMajor);
         }
         return d.userId + ',' + name + ',' + sex + ',' + age + ',' + idType + ',' + idCard + ',' + academicTitle + ',' + nowMajor + ',' + deptName;
@@ -2286,6 +2353,7 @@
             }
         });
     }
+
     //根据身份证计算年龄
     function IdCard(UUserCard) {
         //获取年龄
@@ -2298,5 +2366,76 @@
         }
         return age;
     }
+
+    function province() {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/province/all',
+            async : false,
+            success : function(data) {
+                var select = $("#province");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.provinceCode;
+                    var name = d.provinceName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+
+    function city(provinceCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/city/all/'+provinceCode,
+            async : false,
+            success : function(data) {
+                var select = $("#city");
+                select.append("<option value=''>请选择市</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.cityCode;
+                    var name = d.cityName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+
+    function area(cityCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/area/all/'+cityCode,
+            async : false,
+            success : function(data) {
+                var select = $("#area");
+                select.append("<option value=''>请选择县/区</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.areaCode;
+                    var name = d.areaName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+    function street(areaCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/street/all/'+areaCode,
+            async : false,
+            success : function(data) {
+                var select = $("#street");
+                select.append("<option value=''>请选择街道/镇</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.streetCode;
+                    var name = d.streetName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+
 </script>
 </html>

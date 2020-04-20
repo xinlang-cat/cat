@@ -21,6 +21,11 @@ function queryInformation(id) {
 
             $("#contractName").text(analysisFile(d.accessory).name);
             $("#contractName").attr('href', analysisFile(d.accessory).url);
+
+            $('input[name=province]').val(province(d.province_code));
+            $('input[name=city]').val(city(d.city_code));
+            $('input[name=area]').val(area(d.area_code));
+            $('input[name=street]').val(street(d.street_code));
         }
     })
 }
@@ -40,6 +45,58 @@ function analysisFile(id) {
     });
     return text;
 }
+
+function province(provinceCode) {
+    var provinceName = '';
+    $.ajax({
+        type : 'get',
+        url : domainName + '/map/province/one/'+provinceCode,
+        async : false,
+        success : function(data) {
+            provinceName = data.provinceName;
+        }
+    });
+    return provinceName;
+}
+
+function city(cityCode) {
+    var cityName = '';
+    $.ajax({
+        type : 'get',
+        url : domainName + '/map/city/one/'+cityCode,
+        async : false,
+        success : function(data) {
+            cityName = data.cityName;
+        }
+    });
+    return cityName;
+}
+
+function area(areaCode) {
+    var areaName = '';
+    $.ajax({
+        type : 'get',
+        url : domainName + '/map/area/one/'+areaCode,
+        async : false,
+        success : function(data) {
+            areaName = data.areaName;
+        }
+    });
+    return areaName;
+}
+function street(streetCode) {
+    var streetName = '';
+    $.ajax({
+        type : 'get',
+        url : domainName + '/map/street/one/'+streetCode,
+        async : false,
+        success : function(data) {
+            streetName = data.streetName
+        }
+    });
+    return streetName;
+}
+
 function queryIndicators(id) {
     $.ajax({
         type: 'get',
