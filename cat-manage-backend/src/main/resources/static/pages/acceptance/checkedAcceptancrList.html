@@ -99,7 +99,7 @@
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url": domainName + "/api-summary/check-table/page",
+                        "url": domainName + "/api-summary/check-table/page/vice",
                         "data": function (d) {
                             d.status = $("#status").val();
                             d.acceptance_company = $("#acceptance_company").val();
@@ -205,6 +205,18 @@
                                     data = "监理终审";
                                 } else if (data == 6) {
                                     data = "结题审核通过";
+                                }else  if (data == -1) {
+                                    data = "监理初审未通过";
+                                } else if (data == -2) {
+                                    data = "验收初审未通过";
+                                } else if (data == -3) {
+                                    data = "专家审核未通过";
+                                } else if (data == -4) {
+                                    data = "验收终审未通过";
+                                } else if (data == -5) {
+                                    data = "监理终审未通过";
+                                } else if (data == -6) {
+                                    data = "结题审核通过未通过";
                                 }
                                 $.ajaxSettings.async = true;
                                 return data;
@@ -255,13 +267,13 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 identity = data.identity;
-                if ($.inArray('PARTY_A', pers)!=-1) {
+                if ($.inArray('PARTY_A:html', pers) != -1) {
                     //甲方
                     $("#entrusting_company").val(data.signName);
-                } else if ($.inArray('PARTY_D', pers)!=-1) {
+                } else if ($.inArray('PARTY_D:html', pers) != -1) {
                     //验收方
                     $("#acceptance_company").val(data.signName);
-                } else if ($.inArray('PARTY_C', pers)!=-1) {
+                } else if ($.inArray('PARTY_C:html', pers) != -1) {
                     //监理方
                     $("#management_company").val(data.signName);
                 }

@@ -87,10 +87,11 @@ function getCompanyInfo(name) {
     })
 }*/
 function getItem_user(id) {
+
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/personnel/list',
-        data: "item_id=" + id,
+        data: "item_id=" + id + "&user_type=PARTY_B_MEMBER",
         async: false,
         success: function (data) {
             var str = '';
