@@ -18,6 +18,7 @@ public class Notice implements Serializable {
     private String title;//标题
     private String content;//内容
     private Integer createUserId;//创建者id
-    private String  pageName;//要发布在的页面
+    private String createUserNickName;//创建者昵称
+    private String pageName;//要发布在的页面
     private Date createTime; //创建时间
  }

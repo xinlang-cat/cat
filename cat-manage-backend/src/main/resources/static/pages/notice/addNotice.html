@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <fieldset>
+        <div class="form-group">
+            <label class="col-md-2 control-label">标题</label>
+            <div class="col-md-10">
+                <input class="form-control" placeholder="标题" type="text" name="" id="title" name="title"
+                       maxlength="255">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">页面名称</label>
+            <div class="col-md-10">
+                <input class="form-control" placeholder="页面名称" type="text" name="pageName" id="pageName"
+                       maxlength="128">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">内容</label>
+            <div class="col-md-10">
+					<textarea class="layui-textarea" id="content" name="content" style="display: none">
+					</textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <div class="row" align="center">
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit" onclick="add()">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+
+    var layedit, index;
+    layui.use(['layedit', 'upload'], function () {
+        layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: domainName + '/zuul/api-f/files/layui?access_token=' + localStorage.getItem("access_token"),
+                type: 'post'
+            }
+        });
+        index = layedit.build('content');
+    });
+
+    function add(obj, send) {
+        var title = $("#title").val();
+        var pageName = $("#pageName").val();
+        if (title.trim() == "") {
+            layer.msg("标题不能为空");
+            return;
+        }
+        if (pageName.trim() == "") {
+            layer.msg("收件人不能为空");
+            return;
+        }
+        if (jQuery.isEmptyObject(layedit.getContent(index))) {
+            layer.msg("内容不能为空");
+            return;
+        }
+        $(obj).attr("disabled", true);
+
+        var formdata = $("#form").serializeObject();
+        formdata.title = title;
+        formdata.pageName = pageName;
+        formdata.content = layedit.getContent(index);
+        $.ajax({
+            type: 'post',
+            url: domainName + '/api-n/notice',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    location.href = "noticeList.html";
+                });
+            }
+        });
+        $(obj).attr("disabled", false);
+    }
+
+</script>
+</body>
+</html>
