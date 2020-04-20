@@ -62,16 +62,25 @@
         <table style="width: 100%">
             <tr>
                 <td align="left" style="border: 0;text-align: left;">
-                    <button class="layui-btn layui-btn-sm"  onclick="showWork()">
+                    <button class="layui-btn layui-btn-sm" onclick="showTarget()">
+                        <i class="layui-icon">&#xe615;</i>查看项目指标
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showStage()">
+                        <i class="layui-icon">&#xe615;</i>查看阶段总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showFund()">
+                        <i class="layui-icon">&#xe615;</i>查看经费使用
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showWork()">
                         <i class="layui-icon">&#xe615;</i>查看工作总结
                     </button>
-                    <button class="layui-btn layui-btn-sm"  onclick="showSkill()">
+                    <button class="layui-btn layui-btn-sm" onclick="showSkill()">
                         <i class="layui-icon">&#xe615;</i>查看技术总结
                     </button>
-                    <button class="layui-btn layui-btn-sm"  onclick="showAudit()">
+                    <button class="layui-btn layui-btn-sm" onclick="showAudit()">
                         <i class="layui-icon">&#xe615;</i>查看查定报告
                     </button>
-                    <button class="layui-btn layui-btn-sm"  onclick="getExpert()" id="expert">
+                    <button class="layui-btn layui-btn-sm" onclick="getExpert()" id="expert">
                         <i class="layui-icon">&#xe615;</i>查看专家意见
                     </button>
                 </td>
@@ -99,6 +108,7 @@
                     <input type="hidden" id="item_id" name="item_id" value="">
                     <input type="hidden" id="status" name="status" value="">
                     <input type="hidden" id="id" name="id" value="">
+                    <input type="hidden" id="before_acceptance_company" name="before_acceptance_company" value="">
                     <input type="hidden" id="entrusting_company" name="entrusting_company" value="">
                     <input type="hidden" id="management_company" name="management_company" value="">
                     <td rowspan="3" class="table-info">基本信息</td>
@@ -513,9 +523,10 @@
 
                 <tr id="check_a">
                     <td class="td-text">受委托管理单位或项目牵头承担单位意见:</td>
-                    <td colspan="7" id="opinion1"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见" class="layui-textarea form-control"
-                                               lay-verify="required"
-                                               id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
+                    <td colspan="7" id="opinion1"> <textarea placeholder="受委托管理单位或项目牵头承担单位意见"
+                                                             class="layui-textarea form-control"
+                                                             lay-verify="required"
+                                                             id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
                     </td>
 
 
@@ -525,8 +536,8 @@
                 <tr id="check_b">
                     <td class="td-text">验收方初审意见:</td>
                     <td colspan="7" id="opinion2"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
-                                               lay-verify="required"
-                                               id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
+                                                             lay-verify="required"
+                                                             id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
 
                     </td>
                     <td>
@@ -692,11 +703,20 @@
             });
         } else {
             var applicantExtension = formdata.applicantExtension;
+
             if (applicantExtension == "是") {
+                if (formdata.status==1 && formdata.acceptance_company ==""){
+                    layer.msg("请指定验收方！");
+                    return;
+                }
                 formdata.status = 1 + parseInt(formdata.status);
-            } else {
+            } else if (applicantExtension == "否"){
                 formdata.status = 0 - formdata.status;
+            }else {
+                layer.msg("请选择审核结果！");
+                return;
             }
+
             ;
             $.ajax({
                 type: 'put',
@@ -747,6 +767,7 @@
                     $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
                     $("#manageDeptResult").text(this.manageDeptResult);
                     $("#burgLeaderResult").text(this.burgLeaderResult);
+                    $("before_acceptance_company").val(this.acceptance_company)
                     change(this.status);
                 })
             }
@@ -796,7 +817,7 @@
                 document.getElementById('check_c').style.display = 'none';
                 document.getElementById('check_d').style.display = 'none';
                 $("#manageDeptOpinion").removeAttr("readonly");
-                $("#opinion1").attr("colSpan",5);
+                $("#opinion1").attr("colSpan", 5);
                 $("#check_a").append('<td colspan="2">指定验收单位：\n' +
                     '                       \n' +
                     '                        <select name="acceptance_company" id="acceptance_company" lay-filter="unit">\n' +
@@ -804,9 +825,10 @@
                     '                        </select>\n' +
                     '                    </td>');
                 initCompanySelect();
+                $('select[name=acceptance_company]').val($("#before_acceptance_company").val());
                 form.render('select');
             } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
-                $("#opinion2").attr("colSpan",6);
+                $("#opinion2").attr("colSpan", 6);
                 //验收初审
                 document.getElementById('check_c').style.display = 'none';
                 document.getElementById('check_d').style.display = 'none';
@@ -818,11 +840,12 @@
                 //验收终审
                 document.getElementById('new').style.display = 'block';
                 document.getElementById('check_d').style.display = 'none';
-                $("#manageDeptResult").removeAttr("readonly");
+                $("#burgLeaderResult").removeAttr("readonly");
             } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
                 //监理终审
+                $("#manageDeptResult").removeAttr("readonly");
                 document.getElementById('new').style.display = 'block';
-                $("#burgLeaderResult").removeAttr("readonly");
+
             } else {
                 document.getElementById('check').style.display = 'none';
                 document.getElementById('old').style.display = 'block';
@@ -844,8 +867,8 @@
     getFund(item_id);
 
 
-    var h = $(window).height() -15;
-    var w = $(window).width() -30;
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
 
     function showAudit() {
         layer.open({
@@ -882,5 +905,39 @@
         });
     }
 
+    function showTarget() {
+        layer.open({
+            title: "项目指标",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../indicator/readIndicatorList.html?itemId=' + item_id]
+
+        });
+    }
+
+    function showStage() {
+        layer.open({
+            title: "阶段总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/stage-summary/stageSummaryList.html?itemId=' + item_id]
+
+        });
+    }
+    function showFund() {
+        layer.open({
+            title: "经费使用",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + item_id]
+
+        });
+    }
 </script>
 </html>

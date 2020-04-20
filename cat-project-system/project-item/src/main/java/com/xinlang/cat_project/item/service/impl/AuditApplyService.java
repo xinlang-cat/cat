@@ -3,9 +3,8 @@ package com.xinlang.cat_project.item.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xinlang.cat_project.item.mapper.AuditApplyMapper;
-import com.xinlang.cat_project.item.pojo.PageResult;
+import com.xinlang.bean.util.PageResult;
 import com.xinlang.cat_project.item.pojo.auditApply;
-import com.xinlang.cat_project.item.pojo.modifyApply;
 import com.xinlang.cat_project.item.service.IAuditApplyService;
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import lombok.extern.slf4j.Slf4j;
@@ -50,23 +49,31 @@ public class AuditApplyService extends BaseService<auditApply> implements IAudit
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(auditApply.class);
-        if (params.get("status") != "" && params.get("manage_unit") != "" && params.get("check_unit") != ""){
-            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("manage_unit", params.get("manage_unit")).andEqualTo("check_unit", params.get("check_unit"));
-        }else if (params.get("check_unit") != "" && params.get("manage_unit") != ""){
-            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit")).andEqualTo("manage_unit", params.get("manage_unit"));
-        }else if (params.get("status") != "" && params.get("manage_unit") != "") {
-            example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("manage_unit", params.get("manage_unit"));
-        }else if (params.get("status") != "" && params.get("check_unit") !=  "" ){
-            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("check_unit", params.get("check_unit"));
-        }else if (params.get("check_unit") != ""){
-            example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit"));
-        }else if (params.get("manage_unit") != ""){
-            example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit", params.get("manage_unit"));
-        }else if (params.get("status") != ""){
-            example.createCriteria().andNotEqualTo("status",params.get("status"));
+        if (params.get("item_id")!=""&& params.get("status") != ""){
+            example.createCriteria().andNotEqualTo("status",0).andEqualTo("item_id", params.get("item_id"));
+        }else if (params.get("item_id")!=""&& params.get("status") == ""){
+            example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("item_id", params.get("item_id"));
         }else {
-            example.createCriteria().andNotEqualTo("status",0);
+            if (params.get("status") != "" && params.get("manage_unit") != "" && params.get("check_unit") != "" ){
+                example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("manage_unit", params.get("manage_unit")).andEqualTo("check_unit", params.get("check_unit"));
+            }else if (params.get("check_unit") != "" && params.get("manage_unit") != ""){
+                example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit")).andEqualTo("manage_unit", params.get("manage_unit"));
+            }else if (params.get("status") != "" && params.get("manage_unit") != "") {
+                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("manage_unit", params.get("manage_unit"));
+            }else if (params.get("status") != "" && params.get("check_unit") !=  "" ){
+                example.createCriteria().andEqualTo("status",params.get("status")).andEqualTo("check_unit", params.get("check_unit"));
+            }else if (params.get("check_unit") != ""){
+                example.createCriteria().andNotEqualTo("status",0).andEqualTo("check_unit", params.get("check_unit"));
+            }else if (params.get("manage_unit") != ""){
+                example.createCriteria().andNotEqualTo("status",0).andEqualTo("manage_unit", params.get("manage_unit"));
+            }else if (params.get("status") != ""){
+                example.createCriteria().andNotEqualTo("status",params.get("status"));
+            }else {
+                example.createCriteria().andNotEqualTo("status",0);
+            }
         }
+
+
 
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序

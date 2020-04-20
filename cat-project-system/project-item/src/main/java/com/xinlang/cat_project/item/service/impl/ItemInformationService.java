@@ -6,7 +6,7 @@ import com.xinlang.cat_project.item.mapper.ItemInformationMapper;
 import com.xinlang.cat_project.item.mapper.ItemPersonnelMapper;
 import com.xinlang.cat_project.item.pojo.ItemInformation;
 import com.xinlang.bean.projectInfo.ItemPersonnel;
-import com.xinlang.cat_project.item.pojo.PageResult;
+import com.xinlang.bean.util.PageResult;
 import com.xinlang.cat_project.item.service.IItemInformationService;
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;

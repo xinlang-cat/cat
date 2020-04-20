@@ -21,19 +21,6 @@
                             </form>
                         </td>
                         <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="toSave()" id="saveBt" permission="PARTY_B:principal:html,PARTY_B:member:html">
-                                <i class="layui-icon">&#xe608;</i> 添加
-                            </button>
-                            <button class="layui-btn layui-btn-sm" onclick="allWorkLog();" id="all"  permission="PARTY_B:principal:html,PARTY_B:member:html">
-                                <i class="layui-icon">&#xe62d;</i> 全部
-                            </button>
-                            <button class="layui-btn layui-btn-sm" onclick="myWorkLog()" id="my" permission="PARTY_B:principal:html,PARTY_B:member:html">
-                                <i class="layui-icon">&#xe62d;</i> 我的
-                            </button>
-                            <button class="layui-btn layui-btn-sm" onclick="checkWorkLog()" permission="PARTY_B:principal:html"
-                                    permission="project:work-log:check">
-                                <i class="layui-icon">&#xe6b2;</i> 待我审核
-                            </button>
                             <button class="layui-btn layui-btn-sm" onclick="javascript:history.back(-1);">
                                 <i class="layui-icon">&#xe65c;</i> 返回
                             </button>
@@ -57,7 +44,6 @@
 <script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
-<script type="text/javascript" src="../../js/notice.js"></script>
 <script src="../../js/common.js"></script>
 <script>
     var pers = checkPermission();
@@ -96,7 +82,7 @@
                 }
             } else {
                 str = '<li style="text-align: center;"><i class="layui-icon" style="font-size: 300px; color: #FF3621;">&#xe69c;</i></li><li style="text-align: center">';
-                str += '<p style="font-size: 28px;font-weight: bolder;color: #aea9a9;">还没有小伙伴添加日志呢!<a style="font-size: 20px;color: #1c87bf" href="#" onclick="toSave()" permission="PARTY_B:principal:html,PARTY_B:member:html">马上去添加~</a></p></li>';
+                str += '<p style="font-size: 28px;font-weight: bolder;color: #aea9a9;">还没有小伙伴添加日志呢!</p></li>';
             }
             $("#content").empty();
             $("#content").append(str + "</ul></div></div>");

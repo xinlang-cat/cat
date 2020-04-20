@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <div>
+            <div class="widget-body no-padding">
+                <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th style="width:6%;">指标类型</th>
+                        <th style="width:54%;">指标内容</th>
+                        <th style="width:13%">起止时间</th>
+                        <th style="width:5%;">进度[%]</th>
+                        <th style="width:8%;">实施日志</th>
+                    </tr>
+                    </thead>
+                    <tbody id="content">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+
+    var pers = checkPermission();
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
+
+    $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
+        var str = '';
+        $.each(res, function (i, item) {
+            var type = '';
+            var content = item['content'];
+            var startEndTime = formatDate4(item['start_date']) + '---' + formatDate4(item['end_date']);
+            if (item['count'] > 0) {
+
+            } else {
+                if (item['type'] == 'TECHNICAL_INDICATORS') {
+                    type = '技术指标';
+                }
+                if (item['type'] == 'OTHER_INDICATORS') {
+                    type = '其他指标';
+                }
+                if (item['type'] == 'ECONOMIC_INDICATORS') {
+                    type = '经济指标';
+                }
+                if (item['type'] == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                    type = '人才队伍建设指标';
+                }
+                var plan = item['plan'] == null ? '0%' : item['plan'];
+                str += '<tr><td>' + type + '</td><td>' + content + '</td><td>' + startEndTime + '</td>';
+                str += '<td>' + plan +'</td><td>';
+                if (item['count'] <= 0) {
+                    str += '<button class="layui-btn layui-btn-xs" onclick="location.href=\'../work-log/readWorkLogList.html?itemId=' + itemId + '&targetId=' + item['id'] + '&userId=' + userId + '\'" ><i class="layui-icon">日志详情</i></button>';
+                }
+                str += '</td></tr>';
+            }
+
+        });
+        $('#content').append(str);
+    });
+
+
+
+</script>
+</html>

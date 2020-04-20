@@ -499,7 +499,10 @@
             <div class="row" align="center">
                 <div class="col-md-12">
                     <button class="btn btn-primary"  onclick="location.href='../list-layout/list.html'">返回</button>
-                    <button class="btn btn-primary" type="button" onclick="add_ACC();">
+                    <button class="btn btn-primary" type="button" onclick="add_ACC(0);">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                    <button class="btn btn-primary" type="button" onclick="add_ACC(1);">
                         <i class="fa fa-save"></i> 提交
                     </button>
                 </div>
@@ -548,12 +551,23 @@
         });
 
     });
-    function add_ACC() {
+    function add_ACC(nowStatus) {
         var tableId =  parseInt($("#id").val());
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
+       if (nowStatus==0){
+           //状态不变
+       }else if (nowStatus==1){
+           //状态改变
+       }
         if(!tableId){
-            formdata.status = 1;
+            $('#form').bootstrapValidator();
+            var bootstrapValidator = $("#form").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if(!bootstrapValidator.isValid()){
+                return;
+            }
+            formdata.status=nowStatus;
             $.ajax({
                 type: 'post',
                 url: domainName + '/api-summary/check-table',
@@ -562,12 +576,15 @@
                 async: false,
                 success: function (data) {
                     changeStatus(item_id);
-                   /* layer.msg(msg, {shift: -1, time: 1000}, function(){
-                        location.reload();
-                    });*/
+
                 }
             });
         }else {
+            if (nowStatus==0){
+                //状态不变
+            }else if (nowStatus==1){
+                formdata.status=0-formdata.status;
+            }
             $.ajax({
                 type: 'put',
                 url: domainName + '/api-summary/check-table',
@@ -592,9 +609,9 @@
            async: false,
            data: JSON.stringify(item),
            success: function (data) {
-               layer.msg("成功", {shift: -1, time: 1000}, function () {
-                   history.back(-1);
-               });
+                layer.msg("提交成功", {shift: -1, time: 1000}, function(){
+                         location.reload();
+                     });
            }
        });
    }
@@ -637,8 +654,12 @@
     }
     function change(status) {
 
-        if (status==0){
-           document.getElementById('new').style.display='block';
+        if (status<=0){
+            document.getElementById('new').style.display='block';
+            $("textarea").attr('readonly', true);
+            $("#applicationDeptOpinion").removeAttr("readonly");
+            $("#cean").removeAttr("readonly");
+            $("#katalog").removeAttr("readonly");
         }else {
             $("input").attr('readonly', true);
             $("input").attr("style", "text-align: center;border: 0px;");
