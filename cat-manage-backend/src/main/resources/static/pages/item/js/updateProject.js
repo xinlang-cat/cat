@@ -21,6 +21,14 @@ function queryInformation(id) {
 
             $("#contractName").text(analysisFile(d.accessory).name);
             $("#contractName").attr('href', analysisFile(d.accessory).url);
+
+            $('select[name=province_code]').val(d.province_code);
+            city(d.province_code);
+            $('select[name=city_code]').val(d.city_code);
+            area(d.city_code);
+            $('select[name=area_code]').val(d.area_code);
+            street(d.area_code);
+            $('select[name=street_code]').val(d.street_code);
         }
     })
 }

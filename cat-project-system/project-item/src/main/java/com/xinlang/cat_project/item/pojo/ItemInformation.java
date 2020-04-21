@@ -36,6 +36,10 @@ public class ItemInformation implements Serializable {
     private Date edit_date;             //编辑时间
     private Integer edit_user_id;        //编辑人ID
     private Integer status;             //状态，默认为0
+    private String province_code;
+    private String city_code;
+    private String area_code;
+    private String street_code;
 
     @Transient
     private String period;

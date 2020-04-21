@@ -41,7 +41,7 @@ public class BaiDuMapController {
      * @param lng 百度地图通过经纬度来获取地址,传入参数纬度lat、经度lng该方法数据解析并未完善，BaiDuRoads实体需要添加属性
      * @return 地址
      */
-    @GetMapping(value = "/baiDuMap/address",params = {"lat","lng"})
+    @GetMapping(value = "/baiDuMap/address", params = {"lat", "lng"})
     @ApiOperation(value = "根据经纬度获取地址")
     @LogAnnotation(module = "根据经纬度获取地址")
     public BaiDuData getLocationInfo(String lat, String lng) {
@@ -63,7 +63,7 @@ public class BaiDuMapController {
     @LogAnnotation(module = "百度地图通过地址来获取经纬度")
     public Map<String, Double> findLngAndLat(@PathVariable String address) {
         Map<String, Double> map = new HashMap<>();
-        String url = "http://api.map.baidu.com/geocoder/v2/?address=" + address + "&output=json&ak="+baiDuMapAK;
+        String url = "http://api.map.baidu.com/geocoder/v2/?address=" + address + "&output=json&ak=" + baiDuMapAK;
         String json = loadJSON(url);
         JSONObject obj = JSONObject.fromObject(json);
         if (obj.get("status").toString().equals("0")) {
@@ -97,15 +97,15 @@ public class BaiDuMapController {
     private String doGetString(String url) {
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet httpGet = new HttpGet(url);
-        try{
+        try {
             HttpResponse response = client.execute(httpGet);
             HttpEntity entity = response.getEntity();
             if (entity != null) {
                 return EntityUtils.toString(entity, "UTF-8");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException("获取位置信息失败!");
-        }finally {
+        } finally {
             httpGet.releaseConnection();
         }
         return null;

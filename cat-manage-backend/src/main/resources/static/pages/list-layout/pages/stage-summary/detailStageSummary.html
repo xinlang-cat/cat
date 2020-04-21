@@ -511,7 +511,7 @@
                 </colgroup>
                 <tbody id="userinfo11">
                 <tr class="td-text">
-                    <td rowspan="6" class="table-info">项目负责人承诺及单位意见</td>
+                    <td rowspan="6" class="table-info">项目负责人承诺</td>
                 </tr>
                 <tr class="principalCheckStage">
                     <td>
@@ -547,13 +547,6 @@
             </table>
         </div>
 
-        <div class="form-actions" style="margin-bottom: 50px;">
-            <div class="row" align="center">
-                <div class="col-md-12">
-                    <button class="btn btn-primary" type="button" onclick=" history.back(-1);">返回</button>
-                </div>
-            </div>
-        </div>
     </form>
 
 </div>
@@ -580,15 +573,17 @@
             $('.createTime').html(formatDate4(res.createTime));
             $('.extensionTime').html(formatDate4(res.extensionTime));
 
-            var causesInput = $('input[name=causes]');
-            var causesVal = (res.cause).split(',');
-            for (var i = 0; i < causesInput.length; i++) {
-                for (var j = 0; j < causesVal.length; j++) {
-                    if ($(causesInput[i]).val() == causesVal[j]) {
-                        $(causesInput[i]).prop('checked', true);
+            if(!jQuery.isEmptyObject(res.cause)){
+                var causesInput = $('input[name=causes]');
+                var causesVal = (res.cause).split(',');
+                for (var i = 0; i < causesInput.length; i++) {
+                    for (var j = 0; j < causesVal.length; j++) {
+                        if ($(causesInput[i]).val() == causesVal[j]) {
+                            $(causesInput[i]).prop('checked', true);
+                        }
                     }
+                    $(causesInput[i]).prop('disabled', true);
                 }
-                $(causesInput[i]).prop('disabled', true);
             }
             setRadio($('input[name=principalCheckEnable]'),res.principalCheckEnable);
             setRadio($('input[name=projectCompletion]'),res.projectCompletion);
@@ -636,7 +631,7 @@
             for (var i = 0; i < stageAffixFiles.length; i++) {
                 STR_stageAffixFiles += '<tr><td><span>' + stageAffixFiles[i].fileName + '</span></td>';
                 STR_stageAffixFiles += '<td><span>' + stageAffixFiles[i].fileRemark + '</span></td>';
-                STR_stageAffixFiles += '<td><a class="layui-btn layui-btn-xs" href="' + stageAffixFiles[i].url + '"><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
+                STR_stageAffixFiles += '<td><a class="layui-btn layui-btn-xs" href="' + stageAffixFiles[i].fileUrl + '"><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
             }
             $("#file_table").append(STR_stageAffixFiles);
             var stagePaperCatalogues = res.stagePaperCatalogues;
