@@ -262,7 +262,7 @@
         <td class="mainTd_0" rowspan="1" colspan="1"></td>
     </tr>
     <!--基本信息-->
-    <form id="form">
+    <form id="form" onsubmit="return false" class="form-horizontal">
         <tr style="height: 40px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -318,7 +318,9 @@
             </td>
             <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                 <div class="field">
-                    <input type="text" name="period" placeholder="请选择时间范围" class="form-control date" style="background-color: #ffffff;" readonly>
+                    <input type="text" name="period" id="period" placeholder="请选择时间范围" class="form-control date" style="background-color: #ffffff;" data-bv-notempty="true"
+                           data-bv-notempty-message="时间范围 不能为空" readonly>
+
                 </div>
             </td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -453,7 +455,7 @@
 <script type="text/javascript">
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("userId");
-
+   var choose = 0;
     var index, layer, upload, laydate, form;
     layui.use(['layedit', 'upload', 'laydate', 'layer', 'form'], function () {
         layer = layui.layer;
@@ -524,21 +526,13 @@
 
 
     function targetSaveLabel() {
-        var obj = document.getElementsByName('target');
         var texts = [];
+        var str = [];
         $("input[type='checkbox']:checked").each(function () {
             texts.push($(this).attr('title'));
+            str.push($(this).attr('value'));
+            choose=1;
         })
-        var length = obj.length;
-        var str = [];
-
-
-        for (var i = 0; i < length; i++) {
-            if (obj[i].checked) {
-                str.push(obj[i].value);
-
-            }
-        }
         $("#target_id").val(str);
         showTarget(str);
         $("#text5").val(texts);
@@ -595,8 +589,14 @@
     getItemName(itemId);
 
     function add(obj) {
-        if ($("#target_id").val() == '') {
+
+        if ($("#target_id").val() == "") {
             layer.msg("请选择指标");
+            return;
+        }
+
+        if ($("#period").val()==''){
+            layer.msg("请选择时间范围");
             return;
         }
 

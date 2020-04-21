@@ -24,7 +24,7 @@
     <input type="hidden" id="management_company" name="management_company" value="">
     <div class="page-hd padding15 bg-white">
         <h1 class="page-hd-title" style="text-align: center;">
-            结题申请
+            广西科技研究与技术开发计划项目验收申请表
         </h1>
 
     </div>
@@ -103,6 +103,7 @@
                 <span>企业</span>
             </div>
         </div>
+        <div class="weui-cells__title page-bg">验收申请详情</div>
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;">
             <div class="weui-cell__hd"><label class="weui-label -bold">建议验收日期</label></div>
             <div class="weui-cell__bd">
@@ -524,6 +525,12 @@
                           id="manageDeptOpinion" name="manageDeptOpinion"></textarea>
             </div>
         </div>
+
+        <div class="weui-cells__title" id="company_d">指定验收单位</div>
+        <div class="weui-cells weui-cells_checkbox" id="chooseTargrt">
+
+
+        </div>
         <div class="weui-loadmore_line"></div>
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;" id="check_b">
             <div class="weui-cell__bd">
@@ -597,12 +604,14 @@
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/matchExpert.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
 
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
     var identity;
+    var pers = checkPermission();
     var item_id = getUrlParam("itemId");
     $("#item_id").val(item_id);
     userType();
@@ -612,6 +621,33 @@
     $.matchExpert({
         elem: '#test',
         itemId: item_id//itemId
+    });
+    $(function () {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/all',
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var str = '';
+                $(data).each(function () {
+                    var identity = this.identity;
+                    var signName = this.signName;
+                    if (identity == 'PARTY_D') {
+                        str += '<label class="weui-cell weui-check__label " style="float: left;">\n' +
+                            '<div class="weui-cell__hd">\n' +
+                            '<input type="checkbox" class="weui-check" name="acceptance_company" value="' + signName + '">\n' +
+                            '<i class="weui-icon-checked"></i>\n' +
+                            '</div>\n' +
+                            '<div class="weui-cell__bd">\n' +
+                            '<p>' + signName + '</p>\n' +
+                            '</div>\n' +
+                            '</label>';
+                    }
+
+                });
+                $("#chooseTargrt").append(str);
+            }
+        });
     });
 
     function userType() {
@@ -711,35 +747,46 @@
     }
 
     function change(status) {
+        var a = 0;
         $("input").attr('readonly', true);
         $("input").attr("style", "text-align: center;border: 0px;");
         $("textarea").attr('readonly', true);
-
-        if (status == 1 && $.inArray('PARTY_C', pers)!=-1) {
+        document.getElementById('company_d').style.display = 'none';
+        document.getElementById('chooseTargrt').style.display = 'none';
+        document.getElementById('test').style.display = 'none';
+        if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
+            a = 1;
             //监理初审
             document.getElementById('check_b').style.display = 'none';
             document.getElementById('check_c').style.display = 'none';
             document.getElementById('check_d').style.display = 'none';
+            document.getElementById('company_d').style.display = 'block';
+            document.getElementById('chooseTargrt').style.display = 'block';
             $("#manageDeptOpinion").removeAttr("readonly");
             $("#acceptance_company").removeAttr("readonly");
-        } else if (status == 2 && $.inArray('PARTY_D', pers)!=-1) {
+        } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
+            a = 2;
             //验收初审
             document.getElementById('test').style.display = 'block';
             document.getElementById('check_c').style.display = 'none';
             document.getElementById('check_d').style.display = 'none';
             $("#burgLeaderOpinion").removeAttr("readonly");
-        } else if (status == 4 && $.inArray('PARTY_D', pers)!=-1) {
+        } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
+            a = 3;
             //验收终审
             document.getElementById('check_d').style.display = 'none';
             $("#manageDeptResult").removeAttr("readonly");
-        } else if (status == 5 && $.inArray('PARTY_C', pers)!=-1) {
+        } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
+            a = 4;
             //监理终审
             $("#burgLeaderResult").removeAttr("readonly");
         } else {
+            a = 5;
             document.getElementById('check').style.display = 'none';
             document.getElementById('showTooltips').style.display = 'none';
             document.getElementById('result').style.display = 'none';
         }
+        alert("a=" + a);
 
     }
 

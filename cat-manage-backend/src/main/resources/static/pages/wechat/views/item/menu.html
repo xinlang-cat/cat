@@ -9,11 +9,10 @@
     <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
-    <link rel="stylesheet" href="../../weui/lib/weui.min.css">
-    <link rel="stylesheet" href=../../"weui/css/jquery-weui.css">
-    <link rel="stylesheet" href="../../weui/css/demos.css">
-    <link rel="stylesheet" href="../../css/menu.css">
-
+    <link rel="stylesheet" href="weui/lib/weui.min.css">
+    <link rel="stylesheet" href="weui/css/jquery-weui.css">
+    <link rel="stylesheet" href="weui/css/demos.css">
+    <link rel="stylesheet" href="css/menu.css">
 </head>
 
 <body ontouchstart>
@@ -123,7 +122,7 @@
     var itemId = getUrlParam("item_id");
     $(function () {
         var str1 = '';
-        str1 += '<a href="../auditfyApply/addAuditfyApply.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+        str1 += '<a href="../auditfyApply/addAuditfyApply.html?itemId=' + itemId + '" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
@@ -132,7 +131,7 @@
             ' </p>\n' +
             '</a>';
 
-        str1 += '<a href="../auditfyApply/auditfyApplyList.html?item_id=' + itemId + '&status=1" class="weui-grid js_grid">\n' +
+        str1 += '<a href="../auditfyApply/auditfyApplyList.html?itemId=' + itemId + '&status=1" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
@@ -141,7 +140,7 @@
             ' </p>\n' +
             '</a>';
 
-        str1 += '<a href="../auditfyApply/allAuditfyApplyList.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+        str1 += '<a href="../auditfyApply/allAuditfyApplyList.html?itemId=' + itemId + '" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
@@ -149,7 +148,7 @@
             '所有查定申请\n' +
             ' </p>\n' +
             '</a>';
-        str1 += '<a href="../auditfyApply/auditfyApplyList.html?item_id=' + itemId + '&status=3" class="weui-grid js_grid">\n' +
+        str1 += '<a href="../auditfyApply/auditfyApplyList.html?itemId=' + itemId + '&status=3" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
@@ -160,7 +159,7 @@
         $("#list1").append(str1);
 
         var str2 = '';
-        str2 += '<a href="../skillSummary/addSkillSummary.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+        str2 += '<a href="../skillSummary/addSkillSummary.html?itemId=' + itemId + '" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
@@ -178,7 +177,7 @@
             ' </p>\n' +
             '</a>';
 
-        str2 += '<a href="../workSummary/addWorkSummary.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+        str2 += '<a href="../workSummary/addWorkSummary.html?itemId=' + itemId + '" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +
@@ -198,7 +197,7 @@
         $("#list2").append(str2);
 
         var str3 = '';
-        str3 += '<a href="../acceptance/acceptance.html?item_id=' + itemId + '" class="weui-grid js_grid">\n' +
+        str3 += '<a href="../acceptance/acceptance.html?itemId=' + itemId + '" class="weui-grid js_grid">\n' +
             '<div class="weui-grid__icon">\n' +
             '<img src="../../images/icon_nav_new.png" alt="">\n' +
             '</div>\n' +

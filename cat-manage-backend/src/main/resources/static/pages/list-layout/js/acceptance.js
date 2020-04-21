@@ -23,19 +23,34 @@ function getbasic(id) {
         }
     })
 }
+
 function getCompanyInfo(name) {
     $.ajax({
         type: 'get',
-        url: domainName + '/api-c/company/name/'+name,
+        url: domainName + '/api-c/company/name/' + name,
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             $("#phone").text(data.principalPhone);
             $("#site").text(data.address);
+            $("#type").text(getCompanyType(data.type));
             $("#linkman").text(data.principal);
         }
     });
 }
+
+function getCompanyType(type) {
+    if (type == "ACADEMY") {
+        return "大专院校";
+    } else if (type == "FIRM") {
+        return "企业";
+    } else if (type == "UNIT") {
+        return "事业单位";
+    } else if (type == "RESTS") {
+        return "其他";
+    }
+}
+
 /*function getCompanyInfo(id) {
     $.ajax({
         type: 'get',
@@ -102,19 +117,19 @@ function getItem_user(id) {
                 var academicTitleRank;
                 var degree;
                 academicTitleRank = userInfo.academicTitleRank;
-                degree= userInfo.degree;
-                if(academicTitleRank=="高级"){
+                degree = userInfo.degree;
+                if (academicTitleRank == "高级") {
                     advanced++;
-                }else if (academicTitleRank=="中级"){
+                } else if (academicTitleRank == "中级") {
                     middle++;
-                }else if (academicTitleRank=="初级"){
+                } else if (academicTitleRank == "初级") {
                     elementary++;
                 }
-                if(degree=="博士"){
+                if (degree == "博士") {
                     doctor++;
-                }else if (degree=="硕士"){
+                } else if (degree == "硕士") {
                     postgraduate++;
-                }else if (degree=="学士"){
+                } else if (degree == "学士") {
                     bachelor++;
                 }
 
@@ -126,10 +141,9 @@ function getItem_user(id) {
                     '<td style="font-size: 14px;font-weight: bolder;">' + this.professional_title + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + this.specialty + '</td>\n' +
                     '<td style="font-size: 14px;font-weight: bolder;">' + this.organization + '</td>\n' +
-                    '<td style="font-size: 14px;font-weight: bolder;">' +  this.responsibilities + '</td>' +
+                    '<td style="font-size: 14px;font-weight: bolder;">' + this.responsibilities + '</td>' +
                     '</tr>'
                 count++;
-
 
 
             })
@@ -157,8 +171,8 @@ function getUserInfo(id) {
             userinfo = data[0];
         }
     })
-        return userinfo;
-    }
+    return userinfo;
+}
 
 function getResponsibilityName(id) {
     var name;
@@ -169,11 +183,11 @@ function getResponsibilityName(id) {
         async: false,
         success: function (data) {
             var d = data[0];
-            if (d){
-                if(d.count!=undefined){
+            if (d) {
+                if (d.count != undefined) {
                     name = getLablename(d.target);
-                }else {
-                    name= d.content;
+                } else {
+                    name = d.content;
                 }
             }
 
@@ -183,6 +197,7 @@ function getResponsibilityName(id) {
 
     return name;
 }
+
 function getLablename(sign) {
     var name;
     $.ajax({
@@ -195,6 +210,7 @@ function getLablename(sign) {
     })
     return name;
 }
+
 function getUserId() {
     var datas;
     $.ajax({
@@ -208,6 +224,7 @@ function getUserId() {
     })
     return datas;
 }
+
 function getFund(id) {
     var count = 0;
     $.ajax({
@@ -217,11 +234,11 @@ function getFund(id) {
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {
-            for(var key in data[0]){
-                var date= data[0][key];
-                if(key != 'id' && key != 'item_id'&& key != 'responsible_unit'){
-                    $('#'+key).val(date);
-                    count +=  parseInt(date);
+            for (var key in data[0]) {
+                var date = data[0][key];
+                if (key != 'id' && key != 'item_id' && key != 'responsible_unit') {
+                    $('#' + key).val(date);
+                    count += parseInt(date);
                 }
             }
             $("#countMoney").val(count);

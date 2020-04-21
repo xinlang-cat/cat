@@ -26,7 +26,9 @@ function queryInformation(id) {
 }
 /*解析文件*/
 function analysisFile(id) {
+
     if (id == '') {
+
         return '';
     }
     var text = {};
