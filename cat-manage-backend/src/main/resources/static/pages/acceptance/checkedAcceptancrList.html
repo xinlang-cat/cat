@@ -16,9 +16,8 @@
                     <td>
                         <form class="form-inline" onsubmit="return false">
                             <div class="form-group">
-                                <input type="hidden" name="acceptance_company" id="acceptance_company">
-                                <input type="hidden" name="entrusting_company" id="entrusting_company">
-                                <input type="hidden" name="management_company" id="management_company">
+                                <input type="hidden" name="item_ids" id="item_ids">
+
 
                                 状态：
                                 <select class="form-control input-sm" id="status">
@@ -86,7 +85,7 @@
         var util = layui.util;
 
         function init() {
-            userType();
+            getItemId();
             example =
                 $('#dt-table').DataTable({
                     "searching": false,
@@ -102,9 +101,7 @@
                         "url": domainName + "/api-summary/check-table/page/vice",
                         "data": function (d) {
                             d.status = $("#status").val();
-                            d.acceptance_company = $("#acceptance_company").val();
-                            d.entrusting_company = $("#entrusting_company").val();
-                            d.management_company = $("#management_company").val();
+                            d.item_ids = $("#item_ids").val();
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -258,6 +255,18 @@
 
         init();
     });
+    //获取当前用户的ID
+    function getItemId() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/getItemId',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+               $("#item_ids").val(data);
+            }
+        });
+    }
 
     function userType() {
         $.ajax({

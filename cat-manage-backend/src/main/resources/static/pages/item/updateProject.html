@@ -14,6 +14,9 @@
         .layui-textarea {
             min-height: 60px;
         }
+        .layui-input-inline{
+            margin-left: 75px;
+        }
     </style>
 </head>
 
@@ -222,6 +225,42 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
                     <div class="field">
                         <input type="text" name="period" placeholder="请输入" class="date" lay-verify="required">
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 24px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="8"></td>
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            </tr>
+            <tr style="height: 40px;">
+                <td class="mainTd_0" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="1"></td>
+                <td class="mainTd_1" rowspan="1" colspan="6">
+                    <div class="layui-form-item" style="margin-bottom: 0;">
+                        <label class="layui-form-label" style="padding: 9px 0;text-align: left;">项目地址</label>
+                        <div class="layui-input-inline">
+                            <select name="province_code" lay-filter="province" id="province">
+                                <option value="">请选择省</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="city_code" lay-filter="city" id="city">
+                                <option value="">请选择市</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="area_code" lay-filter="area" id="area">
+                                <option value="">请选择县/区</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="street_code" lay-filter="street" id="street">
+                                <option value="">请选择街道</option>
+                            </select>
+                        </div>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -1606,7 +1645,26 @@
                 form.render('checkbox');
             }
         });
-        //监听地点选择
+        /*监听地点选择*/
+        form.on('select(province)', function(data){
+            $("#city option").remove();
+            $("#area option").remove();
+            $("#street option").remove();
+            city(data.value);
+            form.render('select');
+        });
+        form.on('select(city)', function(data){
+            $("#area option").remove();
+            $("#street option").remove();
+            area(data.value);
+            form.render('select');
+        });
+        form.on('select(area)', function(data){
+            $("#street option").remove();
+            street(data.value);
+            form.render('select');
+        });
+        //指标地点
         form.on('select(site)', function (data) {
             var code = data.value;
             var site = $(data.elem).parent().find('input[name=site]');
@@ -1669,6 +1727,7 @@
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
     getMyCompany($('#responsible_unit'));//当前用户单位
     initCompanySelect();//单位选择
+    province();
 
     //获取项目数据项目
     var id = getUrlParam("id");
@@ -1791,6 +1850,75 @@
             age++;
         }
         return age;
+    }
+    function province() {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/province/all',
+            async : false,
+            success : function(data) {
+                var select = $("#province");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.provinceCode;
+                    var name = d.provinceName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+
+    function city(provinceCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/city/all/'+provinceCode,
+            async : false,
+            success : function(data) {
+                var select = $("#city");
+                select.append("<option value=''>请选择市</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.cityCode;
+                    var name = d.cityName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+
+    function area(cityCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/area/all/'+cityCode,
+            async : false,
+            success : function(data) {
+                var select = $("#area");
+                select.append("<option value=''>请选择县/区</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.areaCode;
+                    var name = d.areaName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
+    }
+    function street(areaCode) {
+        $.ajax({
+            type : 'get',
+            url : domainName + '/map/street/all/'+areaCode,
+            async : false,
+            success : function(data) {
+                var select = $("#street");
+                select.append("<option value=''>请选择街道/镇</option>");
+                for(var i=0; i<data.length; i++){
+                    var d = data[i];
+                    var code = d.streetCode;
+                    var name = d.streetName;
+                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                }
+            }
+        });
     }
 </script>
 </html>

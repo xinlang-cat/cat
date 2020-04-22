@@ -41,13 +41,13 @@ mybatis:
 security:
   oauth2:
     resource:
-      user-info-uri: http://192.168.1.7/api-o/user-me
+      user-info-uri: http://xinlangxfpt.mynatapp.cc/api-o/user-me
       prefer-token-info: false
 file:
   local:
     path: D:/localFile
     prefix: /statics
-    urlPrefix: http://192.168.1.7/api-f${file.local.prefix}
+    urlPrefix: http://xinlangxfpt.mynatapp.cc/api-f${file.local.prefix}
 
   aliyun:
     endpoint: xxx
@@ -59,7 +59,7 @@ album:
   local:
     path: D:/localFile
     prefix: /statics
-    urlPrefix: http://192.168.1.7/api-f${album.local.prefix}
+    urlPrefix: http://xinlangxfpt.mynatapp.cc/api-f${album.local.prefix}
 
     mini: #缩略图宽
       width:  108

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,48 +35,26 @@ public class CheckTableService extends BaseService<CheckTable> implements ICheck
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(CheckTable.class);
-
-        if (params.get("status") != "") {
-            if (params.get("entrusting_company") != "") {
-
-                //甲方
-                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("entrusting_company", params.get("entrusting_company"));
-            } else if (params.get("management_company") != "") {
-
-                //监理
-                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("management_company", params.get("management_company"));
-            } else if (params.get("acceptance_company") != "") {
-
-                //验收
-                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("acceptance_company", params.get("acceptance_company"));
+        String item_ids = (String) params.get("item_ids");
+        List list1 = new ArrayList();
+        if (item_ids != null && item_ids.length() != 0) {
+            String[] ids = item_ids.split(",");
+            if (ids.length != 0) {
+                for (int i = 0; i < ids.length; i++) {
+                    list1.add(Integer.parseInt(ids[i]));
+                }
             }
-            if (params.get("entrusting_company") != "") {
-
-                //甲方
-                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("entrusting_company", params.get("entrusting_company"));
-            } else if (params.get("management_company") != "") {
-
-                //监理
-                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("management_company", params.get("management_company"));
-            } else if (params.get("acceptance_company") != "") {
-
-                //验收
-                example.createCriteria().andEqualTo("status", params.get("status")).andEqualTo("acceptance_company", params.get("acceptance_company"));
+            //有项目，有状态
+            if (params.get("status") != "") {
+                example.createCriteria().andEqualTo("status", params.get("status")).andIn("itemId", list1);
+            } else {
+                //有项目，没有状态
+                example.createCriteria().andIn("itemId", list1).andNotEqualTo("status", 0);
             }
-            //状态
-            example.createCriteria().andEqualTo("status", params.get("status"));
-        } else if (params.get("entrusting_company") != "") {
 
-            //甲方
-            example.createCriteria().andNotEqualTo("status", 0).andEqualTo("entrusting_company", params.get("entrusting_company"));
-        } else if (params.get("management_company") != "") {
-
-            //监理
-            example.createCriteria().andNotEqualTo("status", 0).andEqualTo("management_company", params.get("management_company"));
-        } else if (params.get("acceptance_company") != "") {
-
-            //验收
-            example.createCriteria().andNotEqualTo("status", 0).andEqualTo("acceptance_company", params.get("acceptance_company"));
+        } else {
+            //没有项目
+            example.createCriteria().andEqualTo("itemId", -1);
         }
 
 

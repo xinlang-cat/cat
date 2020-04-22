@@ -5,8 +5,10 @@ import com.xinlang.cat_project.item.pojo.ItemPersonnelVice;
 import com.xinlang.cat_project.item.service.IItemPersonnelService;
 import com.xinlang.cat_project.item.service.IItemPersonnelViceService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -81,5 +83,15 @@ public class ItemPersonnelController {
     public ResponseEntity<Void> deletePersonnels(@RequestBody ItemPersonnel itemPersonnel){
         itemPersonnelService.deleteByAttribute(itemPersonnel);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @ApiOperation(value = "通过人员id获取项目id")
+    @LogAnnotation(module = "通过人员id获取项目id")
+    @GetMapping("getItemId")
+    public ResponseEntity<List<Integer>> getItemId(){
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        Integer userId = appUser.getId().intValue();
+        List<Integer> itemIds = itemPersonnelService.findItemIdsByuserId(userId);
+        return ResponseEntity.ok(itemIds);
     }
 }
