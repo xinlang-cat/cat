@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css"/>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #allmap {
+
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+            float: left;
+        }
+
+        #data_manipulation {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="allmap" class="col-md-10"></div>
+    <div id="data_manipulation" class="col-md-2">
+        <div class="form-actions">
+            <div class="row">
+                <div>
+                    <button class="btn btn-primary" onclick="location.href='userList.html'">返回</button>
+                    <button class="btn btn-primary" type="submit" onclick="add()">
+                        <i class="fa fa-save"></i> 保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--        <div class="col-md-2 col-sm-6  ">-->
+<!--            <table class="table table-striped table-hover" id="striped"></table>-->
+<!--            <table class="table table-striped table-hover" id="striped2">-->
+<!--            </table>-->
+<!--            <input type="button" value="清除所有覆盖物" onclick="clearAll()"/>-->
+<!--            <input type="button" value="获取所有覆盖物" onclick="getOverlayPath()"/>-->
+<!--            &lt;!&ndash; Small modal &ndash;&gt;-->
+<!--            <button type="button" class="btn btn-primary" onclick="getUnit_Name()">Small modal</button>-->
+<!--            <input type="text" placeholder="请输入单位名称" id="unit_name"/>-->
+<!--            <div class="col-sm-6 ">-->
+<!--                <div class="box-body">-->
+<!--                    <div class="zTreeDemoBackground left">-->
+<!--                        <ul id="tree" class="ztree" style="width: 230px; overflow: auto;"></ul>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <input type="text" id="deptid1" value="">-->
+<!--                <input type="text" id="deptid2" value="">-->
+<!--            </div>-->
+<!--        </div>-->
+</body>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4ZQc5ZktLFiK8tDzpBf7nDNHT7TcU6is"></script>
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<!--加载鼠标绘制工具-->
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+<link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css"/>
+<!--加载检索信息窗口-->
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script>
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
+<script type="text/javascript"
+        src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<script type="text/javascript">
+    var pers = checkPermission();
+    //百度地图API功能
+    var map = new BMap.Map("allmap", {}); // 创建Map实例
+    var point = new BMap.Point(108.374316, 22.820475);
+    map.centerAndZoom(point, 11); // 初始化地图,设置中心点坐标和地图级别
+    map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+    var marker = null;
+    var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+    map.addControl(top_left_control);
+
+    // 编写自定义函数,创建标注
+    function addMarker(point, content) {
+        var greenIcon = new BMap.ICON("resources/green.png",new BMap.Size(300,157))
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        addClickHandler(content, marker);
+    }
+
+    // $(function () {
+    //     showLables();
+    //     showStrat();
+    // });
+
+    var opts = {
+        width: 500, // 信息窗口宽度
+        height: 200, // 信息窗口高度
+        title: "窗口信息", // 信息窗口标题
+        enableMessage: false //设置允许信息窗发送短息
+    };
+
+    function addClickHandler(content, marker) {
+        marker.addEventListener("click", function (e) {
+            openInfo(content, e)
+        });
+    }
+
+    function openInfo(content, e) {
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
+        map.openInfoWindow(infoWindow, point); //开启信息窗口
+    }
+
+    //星星图
+    var sw2 = null;
+    var ne2 = null;
+    var lngSpan2 = Math.abs(sw2 - ne2);
+    var latSpan2 = Math.abs(ne2 - sw2);
+    var allPointArray2 = [];
+    var marker2 = "";
+    var markers2 = [];
+
+    //公司
+    function showStrat() {
+        $.ajax({
+            url: "${ctxPath}/map/selectStrats.do",
+            data: "",
+            type: "get",
+            dataType: "json",
+            success: function (obj) {
+                for (i = 0; i < obj.data.length; i++) {
+                    sw2 = obj.data[i].lng * 1;
+                    ne2 = obj.data[i].lat * 1;
+                    marker2 = new BMap.Marker(new BMap.Point(sw2, ne2));
+                    var point2 = new BMap.Point(sw2, ne2);
+                    var status2 = obj.data[i].status;
+                    markers2.push(marker2);
+                    var id = obj.data[i].id;
+                    allPointArray2.push({Point2: point2, id: id, status2: status2});
+
+                    var content = obj.data[i].dept_name;
+                    addMarker(new BMap.Point(sw2, ne2), content);
+
+                }
+            }
+        });
+    }
+
+    //多标注
+    var sw = null;
+    var ne = null;
+    var lngSpan = Math.abs(sw - ne);
+    var latSpan = Math.abs(ne - sw);
+    var allPointArray = [];
+    var markers = [];
+
+    //消防
+    function showLables() {
+        $.ajax({
+            url: "${ctxPath}/map/selectLables.do",
+            data: "",
+            type: "get",
+            dataType: "json",
+            success: function (obj) {
+                for (i = 0; i < obj.data.length; i++) {
+                    sw = obj.data[i].lng * 1;
+                    ne = obj.data[i].lat * 1;
+                    marker = new BMap.Marker(new BMap.Point(sw, ne));
+                    var point = new BMap.Point(sw, ne);
+                    var status = obj.data[i].status;
+                    markers.push(marker);
+                    var id = obj.data[i].id;
+                    allPointArray.push({Point: point, id: id, status: status});
+                    //-----------------
+                    var content = '<div style="margin:0;line-height:20px;padding:2px;">'
+                        + '单位名称：'
+                        + obj.data[i].unit_name
+                        + '<br/>电话：'
+                        + obj.data[i].phone
+                        + '<br/>单位地址：'
+                        + obj.data[i].introduction
+                        + '<div  class="modal-dialog" role="document">'
+                        + '<table class="table table-bordered">'
+                        + '<tr class="active">'
+                        + '<table  class="table table-striped">'
+                        + '<tr><td>巡检列表:</td><td><input type="button" value="获取列表" onclick="tosave(0)" /></td></tr>'
+                        + '</table>';
+                    '</tr>' + '</table >' + '</div>' + '</div>';
+                    //addClickHandler(content, marker);
+                    addMarker(new BMap.Point(sw, ne), content);
+                }
+            }
+        });
+    }
+
+
+    var overlays = [];
+    var overlaycomplete = function (e) {
+        clearAll();
+        overlays.push(e.overlay);
+        // e.overlay.enableEditing();可调节边框
+        e.overlay.addEventListener("lineupdate", function (e) {
+            showLatLon(e.currentTarget);
+        });
+        var pointArray = e.overlay.getPath();
+        map.setViewport(pointArray); //调整视野
+
+    };
+    var styleOptions = {
+        strokeColor: "red", //边线颜色。
+        fillColor: "red", //填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeWeight: 2, //边线的宽度，以像素为单位。
+        strokeOpacity: 0.5, //边线透明度，取值范围0 - 1。
+        fillOpacity: 0.3, //填充的透明度，取值范围0 - 1。
+        strokeStyle: 'solid' //边线的样式，solid或dashed。
+    };
+    //实例化鼠标绘制工具
+    var drawingManager = new BMapLib.DrawingManager(map, {
+        isOpen: false, //是否开启绘制模式
+        enableDrawingTool: true, //是否显示工具栏
+        drawingToolOptions: {
+            anchor: BMAP_ANCHOR_TOP_RIGHT, //位置
+            offset: new BMap.Size(5, 5), //偏离值
+            drawingModes: [BMAP_DRAWING_CIRCLE,
+                BMAP_DRAWING_RECTANGLE]
+        },
+        circleOptions: styleOptions, //圆的样式
+        polylineOptions: styleOptions, //线的样式
+        polygonOptions: styleOptions, //多边形的样式
+        rectangleOptions: styleOptions //矩形的样式
+    });
+    //添加鼠标绘制工具监听事件，用于获取绘制结果
+    drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+
+    //清除覆盖物
+    function clearAll() {
+        $("#striped").empty();
+        $("#striped2").empty();
+        for (var i = 0; i < overlays.length; i++) {
+            map.removeOverlay(overlays[i]);
+        }
+        overlays.length = 0;
+    }
+
+    //拉框
+    function getOverlayPath() {
+        var s = "";
+        var sta = [];
+        var s2 = "";
+        var sta2 = [];
+        var sn = "";
+        var stan = [];
+        var box = overlays[overlays.length - 1];
+        var pointArray = box.getPath();
+        map.setViewport(pointArray); //调整视野
+        //  var bound = map.getBounds(); //地图可视区域
+        for (var i = 0; i < allPointArray.length; i++) {
+            if (allPointArray[i].Point != null) {
+                if (isInsidePolygon(allPointArray[i].Point, pointArray)) {
+                    s += allPointArray[i].id + ",";
+                    sta.push(allPointArray[i].status);
+                }
+            }
+        }
+
+        for (var t = 0; t < allPointArray2.length; t++) {
+            if (allPointArray2[t].Point2 != null) {
+                if (isInsidePolygon(allPointArray2[t].Point2, pointArray)) {
+                    s2 += allPointArray2[t].id + ",";
+                    sta2.push(allPointArray2[t].status2);
+                }
+            }
+
+            //请求后台数据 遍历出列表
+            for (var a = 0; a < sta.length; a++) {
+                $.ajax({
+                    type: "POST",
+                    url: "../map/getlist.do?id=" + s,
+                    dataType: "json",
+                    data: "",
+                    success: function (obj) {
+                        $("#striped").empty();
+                        for (i = 0; i < obj.data.length; i++) {
+                            var str = '<tr onclick="tosave(0)"><td style="cursor:pointer"> ' + obj.data[i].unit_name + '</td></tr>';
+                            $("#striped").append(str);
+                        }
+                    }
+                });
+            }
+
+
+            for (var b = 0; b < sta2.length; b++) {
+                $.ajax({
+                    type: "POST",
+                    url: "../map/getstrat.do?id=" + s2,
+                    dataType: "json",
+                    data: "",
+                    success: function (obj) {
+                        $("#striped2").empty();
+                        for (i = 0; i < obj.data.length; i++) {
+                            console.log(obj.data[i])
+                            var str = '<tr onclick="tosave(0)"><td style="cursor:pointer">' + obj.data[i].dept_name + '</td></tr>';
+                            $("#striped2").append(str);
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    var overlaysCache = [];
+
+    function showLatLon(a) {
+        var len = a.length;
+        var arr = [];
+        for (var i = 0; i < len - 1; i++) {
+            arr.push([a[i].lng, a[i].lat]);
+        }
+        this.overlaysCache = arr;
+    }
+
+    //判断一个标注点是否在多边形里
+    //pt标注点，poly多边形数组
+    function isInsidePolygon(pt, poly) {
+        for (var c = false, i = -1, l = poly.length, j = l - 1; ++i < l; j = i)
+            ((poly[i].lat <= pt.lat && pt.lat < poly[j].lat) || (poly[j].lat <= pt.lat && pt.lat < poly[i].lat)) &&
+            (pt.lng < (poly[j].lng - poly[i].lng) * (pt.lat - poly[i].lat) / (poly[j].lat - poly[i].lat) + poly[i].lng) &&
+            (c = !c);
+        return c;
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    var swn = null;
+    var nen = null;
+    var lngSpann = Math.abs(swn - nen);
+    var latSpann = Math.abs(nen - swn);
+    var markersn = [];
+    var allPointArrayN = [];
+
+    function getCity(arrs) {
+        $.ajax({
+            url: "${ctxPath}/map/getcitys.do?city_id=" + arrs,
+            data: "",
+            type: "get",
+            dataType: "json",
+            success: function (obj) {
+
+                for (i = 0; i < obj.data.length; i++) {
+                    swn = obj.data[i].lng * 1;
+                    nen = obj.data[i].lat * 1;
+                    markern = new BMap.Marker(new BMap.Point(swn, nen));
+                    var pointn = new BMap.Point(swn, nen);
+                    var statusn = obj.data[i].status;
+                    markersn.push(markern);
+                    var id = obj.data[i].id;
+                    allPointArrayN.push({Pointn: pointn, id: id, statusn: statusn});
+
+                    var content = obj.data[i].dept_name;
+                    addMarker(new BMap.Point(swn, nen), content);
+                }
+            }
+        });
+    }
+
+
+</script>
+</html>
