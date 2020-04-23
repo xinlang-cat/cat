@@ -182,9 +182,7 @@
                         <span id="type">企业</span>
                     </td>
                     <td class="td-text1">申请验收单位建议的验收日期:</td>
-                    <td>
-                        <span id="suggestDate"></span>
-                    </td>
+                    <td><span id="suggestDate"></span></td>
                 </tr>
                 <tr>
                     <td class="td-text1">项目合同(或课件任务书)约定的项目实施开始时间:</td>
@@ -527,49 +525,53 @@
 
 
                 </tr>
-                <tr id="check_a_1" style="height: 40px;">
 
-                    <td class="mainTd_1" rowspan="1" colspan="1">
-                        <div class="field">
-                            <span>指定验收单位</span>
-                        </div>
-                    </td>
-                    <td class="mainTd_1 tdDorder" rowspan="1" colspan="3">
-                        <div class="field">
-                            <select name="acceptance_company" id="acceptance_company" lay-filter="unit"
-                                    lay-verify="required">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </td>
 
-                    <td class="mainTd_1" rowspan="1" colspan="1">
-                        <div class="field">
-                            <span>选择验收人员</span>
-                        </div>
-                    </td>
-                    <td class="mainTd_1 tdDorder" rowspan="1" colspan="3">
-                        <div class="field">
-                            <select name="acceptance_user" id="acceptance_user">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </td>
+                <tr id="check_b">
+                    <td class="td-text">验收方初审意见:</td>
+                    <td colspan="7" id="opinion2"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
+                                                             lay-verify="required"
+                                                             id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
 
+                    </td>
+                    <td>
+                        <button data-method="offset" type="button" style="display: none;" data-type="auto"
+                                class="layui-btn layui-btn-normal" id="test">匹配专家
+                        </button>
+                    </td>
+                </tr>
+                <tr id="check_c">
+
+                    <td class="td-text">验收方核验结果:</td>
+                    <td colspan="7"> <textarea placeholder="验收方核验结果，专家审核后填写" class="layui-textarea form-control"
+                                               lay-verify="required"
+                                               id="burgLeaderResult" name="burgLeaderResult"></textarea>
+
+                    </td>
                 </tr>
 
-                <tr>
+                <tr id="check_d">
+                    <td class="td-text">受委托管理单位或项目牵头承担单位核验结果:</td>
+                    <td colspan="7"> <textarea placeholder="受委托管理单位或项目牵头承担单位最终核验结果" class="layui-textarea form-control"
+                                               lay-verify="required" id="manageDeptResult"
+                                               name="manageDeptResult"></textarea>
+
+                    </td>
+                </tr>
+                <tr id="check">
                     <td class="td-text">是否通过审核:</td>
                     <td colspan="7">
                         <input type="radio" name="applicantExtension" value="是" title="是">
                         <input type="radio" name="applicantExtension" value="否" title="否">
                     </td>
                 </tr>
+                <tr id="check_expect">
 
+                </tr>
                 </tbody>
             </table>
         </div>
-        <div class="form-actions" id="new">
+        <div class="form-actions">
             <div class="row" align="center">
                 <div class="col-md-12">
 
@@ -580,6 +582,7 @@
                 </div>
             </div>
         </div>
+
     </form>
 </div>
 </body>
@@ -620,30 +623,22 @@
             });
         });
 
-        form.on('select(unit)', function (data) {
 
-            var id = $(data.elem).attr('id');
-            $.ajax({
-                type: 'get',
-                url: domainName + '/project-user/users',
-                contentType: "application/json; charset=utf-8",
-                async: false,
-                data: 'deptName=' + data.value,
-                success: function (d) {
-                    var options = '<option value=""></option>';
-                    $(d.data).each(function () {
-                        options += '<option value="' + this.userId + '">' + this.name + '</option>';
-                    });
-
-                    $('#acceptance_user').empty();
-                    $('#acceptance_user').append(options);
-                }
-            });
-            form.render('select');
-        });
     });
-    userType();
 
+
+
+    function getExpert() {
+        layer.open({
+            title: "专家审核意见",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../expert-evaluate/chechExpertEvaluateList.html?itemId=' + item_id]
+
+        });
+    };
 
     function getStatus(status) {
         if (status == 1) {
@@ -656,6 +651,22 @@
 
     }
 
+    $.matchExpert({
+        elem: '#test',
+        itemId: item_id,
+        defaultSave: true,//保存到默认数据库
+        defaultSave: false,//自定义保存
+        defaultSaveFun: function (arr) {
+            if (arr.length == 0) {
+                layer.msg("未选择专家！");
+            } else {
+                arr = arr;
+                match = true;
+            }
+            console.log(arr);
+
+        }
+    });
 
     function userType() {
         $.ajax({
@@ -665,95 +676,86 @@
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 identity = data.identity;
+
+
             }
         });
 
     }
 
     function add_ACC() {
+        var tableId = parseInt($("#id").val());
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
+        if (!tableId) {
+            formdata.status = 1;
+            $.ajax({
+                type: 'post',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    var msg = "添加成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        location.href = '../list-layout/list.html';
+                    });
+                }
+            });
+        } else {
+            var applicantExtension = formdata.applicantExtension;
 
-        var applicantExtension = formdata.applicantExtension;
-
-        if (applicantExtension == "是") {
-            if (formdata.status == 1) {
-                if (formdata.acceptance_company == "") {
-                    layer.msg("请指定验收方！");
-                    return;
-                } else if (formdata.acceptance_user == "") {
-                    layer.msg("请指定验收方！");
-                    return;
-                } else {
-
-                    var data = {"item_id": item_id, "user_id": formdata.acceptance_user, "user_type": "PARTY_D"};
+            if (applicantExtension == "是") {
 
 
+                formdata.status = 1 + parseInt(formdata.status);
+            } else if (applicantExtension == "否") {
+                formdata.status = 0 - formdata.status;
+            } else {
+                layer.msg("请选择审核结果！");
+                return;
+            }
+            status = formdata.status;
+
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/check-table',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+
+                    var item = {"id": item_id, "status": 4};
                     $.ajax({
-                        type: 'post',
-                        url: domainName + '/project-item/item/personnel',
-                        dataType: 'json',
+                        type: 'put',
+                        url: domainName + '/project-item/item/information',
                         contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(data),
-                        success: function (res) {
-                            layer.msg("录入验收方成功！");
-                        },
-                        error: function (res) {
-                            layer.msg("录入验收方失败！");
-                            return;
+                        async: false,
+                        data: JSON.stringify(item),
+                        success: function (data) {
+                            layer.msg("提交成功", {shift: -1, time: 1000}, function () {
+                                location.reload();
+                            });
                         }
                     });
 
-                }
-
-            }
-
-            formdata.status = 1 + parseInt(formdata.status);
-        } else if (applicantExtension == "否") {
-            formdata.status = 0 - formdata.status;
-        } else {
-            layer.msg("请选择审核结果！");
-            return;
-        }
-        status = formdata.status;
-
-        $.ajax({
-            type: 'put',
-            url: domainName + '/api-summary/check-table',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
-            success: function (data) {
-                var msg = "保存成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function () {
                     history.back(-1);
-                });
-            }
-        });
 
+                }
+            });
+        }
 
     }
 
     getdata(item_id);
 
     function getdata(item_id) {
-        $("input").attr('readonly', true);
-        $("input").attr("style", "text-align: center;border: 0px;");
-        $("textarea").attr('readonly', true);
-
         $.ajax({
             type: 'get',
             url: domainName + '/api-summary/check-table/list',
             data: "itemId=" + item_id,
             async: false,
             success: function (data) {
-                var arr = Object.keys(data);
-                if (arr.length == 0) {
-                    document.getElementById('new').style.display = 'block';
-                    $("textarea").attr('readonly', true);
-                    $("#applicationDeptOpinion").removeAttr("readonly");
-                    $("#cean").removeAttr("readonly");
-                    $("#katalog").removeAttr("readonly");
-                }
+
+
                 for (var key in data[0]) {
                     var date = data[0][key];
                     $('#' + key).val(date);
@@ -771,38 +773,27 @@
                     $("#manageDeptResult").text(this.manageDeptResult);
                     $("#burgLeaderResult").text(this.burgLeaderResult);
                     $("before_acceptance_company").val(this.acceptance_company);
-                    change(this.status);
+                    change();
                 })
             }
         })
     }
 
-    function initCompanySelect() {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-c/company/all',
-            async: false,
-            success: function (data) {
-                $(data).each(function () {
-                    if (this.identity == 'PARTY_D') {
-                        $("#acceptance_company").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
-                    }
-                })
-            }
-        });
-    }
 
     function change() {
-        document.getElementById('new').style.display = 'block';
-        $("#manageDeptOpinion").removeAttr("readonly");
-        initCompanySelect();
-        $('select[name=acceptance_company]').val($("#before_acceptance_company").val());
-        form.render('select');
+
+        $("input").attr('readonly', true);
+        $("input").attr("style", "text-align: center;border: 0px;");
+        $("textarea").attr('readonly', true);
+
+
+        //监理终审
+        $("#manageDeptResult").removeAttr("readonly");
+
+
     }
 
     getbasic(item_id);
-
-
     var advanced = 0;
     var middle = 0;
     var elementary = 0;

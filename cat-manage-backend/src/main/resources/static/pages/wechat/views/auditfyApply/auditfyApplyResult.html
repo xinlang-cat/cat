@@ -402,6 +402,7 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 $.toptip('操作成功', 'success');
+                history.back(-1);
             }
         });
     }

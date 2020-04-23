@@ -898,7 +898,7 @@
             success: function (data) {
 
                 $.toptip('操作成功', 'success');
-                $(obj).attr("disabled", false);
+                history.back(-1);
             }
         });
 

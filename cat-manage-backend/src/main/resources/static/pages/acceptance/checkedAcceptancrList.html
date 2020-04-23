@@ -29,7 +29,7 @@
                                     <option value="5">监理终审</option>
                                     <option value="6">已结题</option>
                                 </select>
-                                <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i
+                                <button id="searchBt" class="layui-btn layui-btn-sm"><i
                                         class="layui-icon">&#xe615;</i>搜索
                                 </button>
                             </div>
@@ -224,18 +224,10 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var id = row['itemId'];
-                                /**
-                                 * 甲方类型为1
-                                 * 监理类型为2
-                                 * 专家类型为3
-                                 * 验收类型为4
-                                 * 管理员类型为5
-                                 * @type {string}
-                                 */
-
+                                var status = row['status'];
 
                                 var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收申请表</i></button>");
-                                btn.attr("onclick", 'check(' + id + ')');
+                                btn.attr("onclick", 'check(' + id + ','+status+')');
 
                                 setMenu = btn.prop("outerHTML");
                                 return setMenu;
@@ -290,8 +282,26 @@
     var h = $(window).height() -15;
     var w = $(window).width() -30;
 
-    function check(id) {
-        window.location.href = "check_acceptance.html?item_id=" + id;
+    function check(id,status) {
+
+        if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
+            //监理初审
+             window.location.href = "check_acceptance.html?item_id=" + id;
+
+        } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
+            //验收初审
+            window.location.href = "check_acceptance_a.html?item_id=" + id;
+        } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
+
+            //验收终审
+            window.location.href = "check_acceptance_b.html?item_id=" + id;
+        } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
+            //监理终审
+            window.location.href = "check_acceptance_c.html?item_id=" + id;
+        } else {
+            window.location.href = "check_acceptance_d.html?item_id=" + id;
+        }
+
     }
 
     function read(id) {

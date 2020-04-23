@@ -36,6 +36,8 @@
     </div>
     <div class="weui-cell">
         <div class="weui-cell__bd">
+            <input type="hidden" name="id" id="item_id">
+            <input type="hidden" name="status" id="status">
             <textarea class="weui-textarea" name="deptInfo" id="deptInfo" rows="5"></textarea>
         </div>
     </div>
@@ -101,8 +103,9 @@
         </div>
     </div>
 
-    <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="add()">提交</a>
+    <div class="weui-btn-area" id="showTooltips">
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="add(0)">保存</a>
+        <a class="weui-btn weui-btn_primary" href="javascript:" onclick="add(1)">提交</a>
     </div>
 </form>
 
@@ -137,18 +140,24 @@
                     }
                 });
                 if(data.length>0){
-                    $("input").attr('readonly', true);
-                    $("input").attr("style", "text-align: center;border: 0px;");
-                    $("textarea").attr('readonly', true);
-                    document.getElementById('showTooltips').style.display='none';
+                    if (data[0].status==0){
+                        $("input").attr("style", "text-align: center;border: 0px;");
+                    }else {
+                        $("input").attr('readonly', true);
+                        $("input").attr("style", "text-align: center;border: 0px;");
+                        $("textarea").attr('readonly', true);
+                        document.getElementById('showTooltips').style.display='none';
+                    }
+
                 }
 
             }
         });
     }
-	function add() {
+	function add(status) {
 		var formdata = $("#form").serializeObject();
 		formdata.itemId = itemId;
+        formdata.status = status;
 		$.ajax({
 			type: 'post',
 			url: domainName + '/api-summary/work',
@@ -156,6 +165,7 @@
 			data: JSON.stringify(formdata),
 			success: function (data) {
 				$.toptip('操作成功', 'success');
+                history.back(-1);
 
 			}
 		});
