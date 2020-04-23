@@ -37,6 +37,7 @@ public class CheckTableService extends BaseService<CheckTable> implements ICheck
         Example example = new Example(CheckTable.class);
         String item_ids = (String) params.get("item_ids");
         List list1 = new ArrayList();
+        System.err.println("ids"+item_ids);
         if (item_ids != null && item_ids.length() != 0) {
             String[] ids = item_ids.split(",");
             if (ids.length != 0) {

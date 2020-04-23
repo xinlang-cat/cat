@@ -32,4 +32,5 @@ public class SkillSummary implements Serializable {
     private String projectEffect;//项目实施对企业的影响
     private Date createTime;
     private Date updateTime;
+    private Integer status;
 }

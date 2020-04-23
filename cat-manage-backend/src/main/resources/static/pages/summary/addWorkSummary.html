@@ -923,11 +923,14 @@
         </tbody>
     </table>
 </div>
-<div class="form-actions">
+<div class="form-actions" id="add">
     <div class="row" align="center">
         <div class="col-md-12">
-            <button class="btn btn-primary" type="submit" onclick="add_content()" id="add">
+            <button class="btn btn-primary" type="submit" onclick="add_content(0)">
                 <i class="fa fa-save"></i> 保存
+            </button>
+            <button class="btn btn-primary" type="submit" onclick="add_content(1)">
+                <i class="fa fa-save"></i> 提交
             </button>
         </div>
     </div>
@@ -986,7 +989,7 @@
         }
     }, 1000);
 
-    function add_content() {
+    function add_content(status) {
 
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
@@ -996,6 +999,7 @@
         }
         var formdata = $("#form").serializeObject();
         formdata.itemId=itemId;
+        formdata.status = status;
         $.ajax({
             type: 'post',
             url: domainName + '/api-summary/work',
@@ -1032,10 +1036,15 @@
                     }
                 });
                 if(data.length>0){
-                    $("input").attr('readonly', true);
-                    $("input").attr("style", "text-align: center;border: 0px;");
-                    $("textarea").attr('readonly', true);
-                    document.getElementById('add').style.display='none';
+                    if (data[0].status==0){
+                        $("input").attr("style", "text-align: center;border: 0px;");
+                    }else {
+                        $("input").attr('readonly', true);
+                        $("input").attr("style", "text-align: center;border: 0px;");
+                        $("textarea").attr('readonly', true);
+                        document.getElementById('add').style.display='none';
+                    }
+
                 }
 
             }

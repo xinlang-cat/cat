@@ -34,4 +34,5 @@ public class WorkSummary implements Serializable {
     private String combinedInfluence;//科技经费支持对企业和项目的影响
     private Date createTime;
     private Date updateTime;
+    private Integer status;
 }

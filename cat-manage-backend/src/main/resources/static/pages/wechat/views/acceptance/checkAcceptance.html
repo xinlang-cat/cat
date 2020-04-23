@@ -531,6 +531,11 @@
 
 
         </div>
+        <div class="weui-cells__title" id="company_d2">指定验收人员</div>
+        <div class="weui-cells weui-cells_checkbox" id="chooseTargrt2">
+
+
+        </div>
         <div class="weui-loadmore_line"></div>
         <div class="weui-cell margin15-l margin15-r" style="padding: 10px 0;" id="check_b">
             <div class="weui-cell__bd">
@@ -635,7 +640,7 @@
                     if (identity == 'PARTY_D') {
                         str += '<label class="weui-cell weui-check__label " style="float: left;">\n' +
                             '<div class="weui-cell__hd">\n' +
-                            '<input type="checkbox" class="weui-check" name="acceptance_company" value="' + signName + '">\n' +
+                            '<input type="radio" class="weui-check" name="acceptance_company" value="' + signName + '">\n' +
                             '<i class="weui-icon-checked"></i>\n' +
                             '</div>\n' +
                             '<div class="weui-cell__bd">\n' +
@@ -649,6 +654,48 @@
             }
         });
     });
+    $("#chooseTargrt").on("click", function () {
+        $('#chooseTargrt2').empty();
+        var val = $('input[name="acceptance_company"]:checked').val();
+        if (!val) {
+
+        } else {
+
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-user/users',
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                data: 'deptName=' + val,
+                success: function (d) {
+                    var str = '';
+                    $(d.data).each(function () {
+                        console.log(d);
+                        var userId = this.userId;
+                        var name = this.name;
+
+                        str += '<label class="weui-cell weui-check__label " style="float: left;">\n' +
+                            '<div class="weui-cell__hd">\n' +
+                            '<input type="radio" class="weui-check" name="acceptance_user" value="' + userId + '">\n' +
+                            '<i class="weui-icon-checked"></i>\n' +
+                            '</div>\n' +
+                            '<div class="weui-cell__bd">\n' +
+                            '<p>' + name + '</p>\n' +
+                            '</div>\n' +
+                            '</label>';
+
+
+                    });
+                    $("#chooseTargrt2").append(str);
+                }
+            });
+
+        }
+
+
+    });
+
+
 
     function userType() {
         $.ajax({
@@ -752,7 +799,9 @@
         $("input").attr("style", "text-align: center;border: 0px;");
         $("textarea").attr('readonly', true);
         document.getElementById('company_d').style.display = 'none';
+        document.getElementById('company_d2').style.display = 'none';
         document.getElementById('chooseTargrt').style.display = 'none';
+        document.getElementById('chooseTargrt2').style.display = 'none';
         document.getElementById('test').style.display = 'none';
         if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
             a = 1;
@@ -761,7 +810,9 @@
             document.getElementById('check_c').style.display = 'none';
             document.getElementById('check_d').style.display = 'none';
             document.getElementById('company_d').style.display = 'block';
+            document.getElementById('company_d2').style.display = 'block';
             document.getElementById('chooseTargrt').style.display = 'block';
+            document.getElementById('chooseTargrt2').style.display = 'block';
             $("#manageDeptOpinion").removeAttr("readonly");
             $("#acceptance_company").removeAttr("readonly");
         } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
@@ -786,7 +837,7 @@
             document.getElementById('showTooltips').style.display = 'none';
             document.getElementById('result').style.display = 'none';
         }
-        alert("a=" + a);
+
 
     }
 
@@ -796,9 +847,46 @@
         formdata.itemId = item_id;
         var applicantExtension = formdata.applicantExtension;
         if (applicantExtension == "是") {
+
+
+            if (formdata.status == 1) {
+                alert(formdata.acceptance_company);
+                alert(formdata.acceptance_user);
+                if (formdata.acceptance_company == "" || formdata.acceptance_company == undefined) {
+                    $.toptip('请指定验收方', 'error');
+                    return;
+                } else if (formdata.acceptance_user == "" || formdata.acceptance_user == undefined) {
+                    $.toptip('请指定验收人员', 'error');
+                    return;
+                }else {
+
+                    var data={"item_id":item_id,"user_id":formdata.acceptance_user,"user_type":"PARTY_D"};
+
+
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-item/item/personnel',
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(data),
+                        success: function (res) {
+                            $.toptip('录入验收方成功', 'success');
+                        },
+                        error: function (res) {
+                            $.toptip('录入验收方失败', 'error');
+                            return;
+                        }
+                    });
+
+                }
+
+            }
             formdata.status = 1 + parseInt(formdata.status);
-        } else {
+        } else if (applicantExtension == "否"){
             formdata.status = 0 - formdata.status;
+        }else {
+            $.toptip('请选择审核结果', 'error');
+            return;
         }
         ;
 

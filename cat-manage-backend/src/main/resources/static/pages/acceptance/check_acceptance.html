@@ -645,6 +645,7 @@
 
     var item_id = getUrlParam("item_id");
     var match = false;
+    var status;
     var arr = new Array();
     $("#item_id").val(item_id);
     var pers = checkPermission();
@@ -773,9 +774,9 @@
                     } else if (formdata.acceptance_user == "") {
                         layer.msg("请指定验收方！");
                         return;
-                    }else {
+                    } else {
 
-                        var data={"item_id":item_id,"user_id":formdata.acceptance_user,"user_type":"PARTY_D"};
+                        var data = {"item_id": item_id, "user_id": formdata.acceptance_user, "user_type": "PARTY_D"};
 
 
                         $.ajax({
@@ -823,8 +824,8 @@
                 layer.msg("请选择审核结果！");
                 return;
             }
+            status = formdata.status;
 
-            ;
             $.ajax({
                 type: 'put',
                 url: domainName + '/api-summary/check-table',
@@ -833,7 +834,23 @@
                 success: function (data) {
                     var msg = "保存成功";
                     layer.msg(msg, {shift: -1, time: 1000}, function () {
-                        history.back(-1);
+
+                        if (status ==6){
+                            var item = {"id": item_id, "status": 4};
+                            $.ajax({
+                                type: 'put',
+                                url: domainName + '/project-item/item/information',
+                                contentType: "application/json; charset=utf-8",
+                                async: false,
+                                data: JSON.stringify(item),
+                                success: function (data) {
+                                    layer.msg("提交成功", {shift: -1, time: 1000}, function () {
+                                        location.reload();
+                                    });
+                                }
+                            });
+                        }
+                            history.back(-1);
                     });
                 }
             });
