@@ -232,17 +232,11 @@
                                  * 管理员类型为5
                                  * @type {string}
                                  */
-                                var detailsHref = "show_acceptance.html?item_id=" + id + "&userType=" + 2;
-                                var details = "";
-                                var btn = $("<a  href=" + detailsHref + " class=\"layui-btn layui-btn-xs\"> 详情</a>");
-                                details = btn.prop("outerHTML");
-                                /*return details;*/
 
 
                                 var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收申请表</i></button>");
                                 btn.attr("onclick", 'check(' + id + ')');
-                                /*btn.attr("onclick", location.href='show_acceptance.html?id='+id+'&userType='+userType);
-*/
+
                                 setMenu = btn.prop("outerHTML");
                                 return setMenu;
                             }
