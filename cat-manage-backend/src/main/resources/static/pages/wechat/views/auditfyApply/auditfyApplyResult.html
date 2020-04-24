@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
 
 </head>
 <body ontouchstart>
@@ -318,7 +317,7 @@
                         var count = 1;
                         $.each(data1, function (i, item) {
                             var text = getsuperior(item.site);
-                            str += ' <h2 class="title">' + count + '</h2>\n' +
+                            str += ' <h2 class="title">查定指标' + count + '</h2>\n' +
                                 '   <section>\n' +
                                 '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
                                 '      	 <p>指标内容：' + item.content + '</p>\n' +
@@ -403,6 +402,7 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 $.toptip('操作成功', 'success');
+                history.back(-1);
             }
         });
     }

@@ -465,6 +465,7 @@
 	function initData() {
 		var data = {
 			itemId: id,
+			status:1
 		}
 		$.ajax({
 			type: 'get',
@@ -472,6 +473,9 @@
 			url: domainName + '/api-summary/skill/list',
 			async: false,
 			success: function (data) {
+				if (data.length==0){
+					alert("dsadasd");
+				}
 				$("#itemId").val(data[0].itemId);
 				$(data).each(function () {
 					for (var key in data[0]) {

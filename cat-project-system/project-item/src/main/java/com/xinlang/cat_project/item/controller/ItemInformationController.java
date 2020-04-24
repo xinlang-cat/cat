@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +66,8 @@ public class ItemInformationController {
     @PostMapping
     public ResponseEntity<ItemInformation> saveItemInformation(@RequestBody ItemInformationVO informationVO) throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         System.err.println(informationVO);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         //获取当前用户ID,并SET编辑人
         Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         ItemInformation information = informationVO.getInformation();
@@ -104,9 +106,15 @@ public class ItemInformationController {
         information.setEdit_date(new Date());
         if (!information.getPeriod().equals("")) {
             Date date = null;
-            date = simpleDateFormat.parse(information.getPeriod().substring(0, 7));
+            int year = Integer.parseInt(information.getPeriod().substring(0, 4));
+            int month = Integer.parseInt(information.getPeriod().substring(5, 7));
+            cal.set( year, month, 1 );
+            date = simpleDateFormat.parse(year+"-"+month+"-"+cal.getMaximum(Calendar.DAY_OF_MONTH));
             information.setStart_date(date);
-            date = simpleDateFormat.parse(information.getPeriod().substring(10));
+            year = Integer.parseInt(information.getPeriod().substring(10, 14));
+            month = Integer.parseInt(information.getPeriod().substring(15));
+            cal.set( year, month, 1 );
+            date = simpleDateFormat.parse(year+"-"+month+"-"+cal.getMaximum(Calendar.DAY_OF_MONTH));
             information.setEnd_date(date);
         }
         itemInformationService.save(information);
@@ -115,9 +123,15 @@ public class ItemInformationController {
         for (ItemIndicators indicator : indicators) {
             indicator.setItem_id(information.getId());
             Date date = null;
-            date = simpleDateFormat.parse(indicator.getPeriod().substring(0, 7));
+            int year = Integer.parseInt(information.getPeriod().substring(0, 4));
+            int month = Integer.parseInt(information.getPeriod().substring(5, 7));
+            cal.set( year, month, 1 );
+            date = simpleDateFormat.parse(year+"-"+month+"-"+cal.getMaximum(Calendar.DAY_OF_MONTH));
             indicator.setStart_date(date);
-            date = simpleDateFormat.parse(indicator.getPeriod().substring(10));
+            year = Integer.parseInt(information.getPeriod().substring(10, 14));
+            month = Integer.parseInt(information.getPeriod().substring(15));
+            cal.set( year, month, 1 );
+            date = simpleDateFormat.parse(year+"-"+month+"-"+cal.getMaximum(Calendar.DAY_OF_MONTH));
             indicator.setEnd_date(date);
         }
         itemIndicatorsService.saveIndicators(indicators);

@@ -10,4 +10,6 @@ public interface IItemPersonnelService extends IBaseService<ItemPersonnel> {
     void savePersonnels(List<ItemPersonnel> itemPersonnels);
 
     void deleteByAttribute(ItemPersonnel itemPersonnel);
+
+    List<Integer> findItemIdsByuserId(Integer userId);
 }

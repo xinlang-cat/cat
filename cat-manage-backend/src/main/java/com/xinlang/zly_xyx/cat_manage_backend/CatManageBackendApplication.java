@@ -14,7 +14,6 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableDiscoveryClient
 public class CatManageBackendApplication {
     public static void main(String[] args) {
-        SpringApplication.run(CatManageBackendApplication.class,args);
-
+        SpringApplication.run(CatManageBackendApplication.class, args);
     }
 }

@@ -49,23 +49,23 @@
             <div class="form-group">
                 <label class="col-md-1 control-label">相关信息</label>
                 <div class="col-md-11">
-                    <button class="layui-btn layui-btn-sm" onclick="itemInfo();">
-                        <i class="layui-icon">&#xe62d;</i> 项目信息
+                    <button class="layui-btn layui-btn-sm" onclick="showTarget()">
+                        <i class="layui-icon">&#xe615;</i>查看项目指标
                     </button>
-                    <button class="layui-btn layui-btn-sm" onclick="stageSummary();">
-                        <i class="layui-icon">&#xe62d;</i> 阶段总结
+                    <button class="layui-btn layui-btn-sm" onclick="showStage()">
+                        <i class="layui-icon">&#xe615;</i>查看阶段总结
                     </button>
-                    <button class="layui-btn layui-btn-sm" onclick="fundUse();">
-                        <i class="layui-icon">&#xe62d;</i> 经费使用
+                    <button class="layui-btn layui-btn-sm" onclick="showFund()">
+                        <i class="layui-icon">&#xe615;</i>查看经费使用
                     </button>
-                    <button class="layui-btn layui-btn-sm" onclick="itemEndSummary();">
-                        <i class="layui-icon">&#xe62d;</i> 结题总结
+                    <button class="layui-btn layui-btn-sm" onclick="showWork()">
+                        <i class="layui-icon">&#xe615;</i>查看工作总结
                     </button>
-                    <button class="layui-btn layui-btn-sm" onclick="checkTable();">
-                        <i class="layui-icon">&#xe62d;</i> 查定申请
+                    <button class="layui-btn layui-btn-sm" onclick="showSkill()">
+                        <i class="layui-icon">&#xe615;</i>查看技术总结
                     </button>
-                    <button class="layui-btn layui-btn-sm" onclick="itemChange();">
-                        <i class="layui-icon">&#xe62d;</i> 项目变更
+                    <button class="layui-btn layui-btn-sm" onclick="showAudit()">
+                        <i class="layui-icon">&#xe615;</i>查看查定报告
                     </button>
                 </div>
             </div>
@@ -186,7 +186,8 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    //location.href = "userList.html";
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
                 });
             }
         });
@@ -234,7 +235,79 @@
         $('#content').append(str);
         form.render();
     });
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
 
+    function showAudit() {
+        layer.open({
+            title: "查定报告",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../auditApply/checkedApplyList.html?item_id=' + itemId]
+
+        });
+    }
+
+    function showSkill() {
+        layer.open({
+            title: "技术总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/generateSkillReport.html?itemId=' + itemId]
+        });
+    }
+
+    function showWork() {
+        layer.open({
+            title: "工作总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/generateWorkReport.html?itemId=' + itemId]
+
+        });
+    }
+
+    function showTarget() {
+        layer.open({
+            title: "项目指标",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../indicator/readIndicatorList.html?itemId=' + itemId]
+
+        });
+    }
+
+    function showStage() {
+        layer.open({
+            title: "阶段总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/stage-summary/stageSummaryList.html?item_id=' + itemId]
+
+        });
+    }
+
+    function showFund() {
+        layer.open({
+            title: "经费使用",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + itemId]
+
+        });
+    }
 
 </script>
 </body>

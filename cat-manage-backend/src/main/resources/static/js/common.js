@@ -1,6 +1,5 @@
 //form序列化为json
-$.fn.serializeObject = function()
-{
+$.fn.serializeObject = function() {
     var o = {};
     var a = this.serializeArray();
     $.each(a, function() {
@@ -50,7 +49,7 @@ $(function () {
             }
         }
     });
-})
+});
 
 $("#provinceCode").change(function () {
     var provinceCode = $("#provinceCode").val();
@@ -70,7 +69,7 @@ $("#provinceCode").change(function () {
             }
         }
     });
-})
+});
 
 $("#cityCode").change(function () {
     var cityCode = $("#cityCode").val();
@@ -90,7 +89,7 @@ $("#cityCode").change(function () {
             }
         }
     });
-})
+});
 
 $("#areaCode").change(function () {
     var areaCode = $("#areaCode").val();
@@ -110,4 +109,4 @@ $("#areaCode").change(function () {
             }
         }
     });
-})
+});

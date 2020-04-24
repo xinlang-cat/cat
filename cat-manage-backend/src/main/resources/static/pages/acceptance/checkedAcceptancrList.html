@@ -16,9 +16,8 @@
                     <td>
                         <form class="form-inline" onsubmit="return false">
                             <div class="form-group">
-                                <input type="hidden" name="acceptance_company" id="acceptance_company">
-                                <input type="hidden" name="entrusting_company" id="entrusting_company">
-                                <input type="hidden" name="management_company" id="management_company">
+                                <input type="hidden" name="item_ids" id="item_ids">
+
 
                                 状态：
                                 <select class="form-control input-sm" id="status">
@@ -30,7 +29,7 @@
                                     <option value="5">监理终审</option>
                                     <option value="6">已结题</option>
                                 </select>
-                                <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i
+                                <button id="searchBt" class="layui-btn layui-btn-sm"><i
                                         class="layui-icon">&#xe615;</i>搜索
                                 </button>
                             </div>
@@ -86,7 +85,7 @@
         var util = layui.util;
 
         function init() {
-            userType();
+            getItemId();
             example =
                 $('#dt-table').DataTable({
                     "searching": false,
@@ -102,9 +101,7 @@
                         "url": domainName + "/api-summary/check-table/page/vice",
                         "data": function (d) {
                             d.status = $("#status").val();
-                            d.acceptance_company = $("#acceptance_company").val();
-                            d.entrusting_company = $("#entrusting_company").val();
-                            d.management_company = $("#management_company").val();
+                            d.item_ids = $("#item_ids").val();
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -227,25 +224,11 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var id = row['itemId'];
-                                /**
-                                 * 甲方类型为1
-                                 * 监理类型为2
-                                 * 专家类型为3
-                                 * 验收类型为4
-                                 * 管理员类型为5
-                                 * @type {string}
-                                 */
-                                var detailsHref = "show_acceptance.html?item_id=" + id + "&userType=" + 2;
-                                var details = "";
-                                var btn = $("<a  href=" + detailsHref + " class=\"layui-btn layui-btn-xs\"> 详情</a>");
-                                details = btn.prop("outerHTML");
-                                /*return details;*/
-
+                                var status = row['status'];
 
                                 var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收申请表</i></button>");
-                                btn.attr("onclick", 'check(' + id + ')');
-                                /*btn.attr("onclick", location.href='show_acceptance.html?id='+id+'&userType='+userType);
-*/
+                                btn.attr("onclick", 'check(' + id + ','+status+')');
+
                                 setMenu = btn.prop("outerHTML");
                                 return setMenu;
                             }
@@ -258,6 +241,18 @@
 
         init();
     });
+    //获取当前用户的ID
+    function getItemId() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/getItemId',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+               $("#item_ids").val(data);
+            }
+        });
+    }
 
     function userType() {
         $.ajax({
@@ -287,8 +282,26 @@
     var h = $(window).height() -15;
     var w = $(window).width() -30;
 
-    function check(id) {
-        window.location.href = "check_acceptance.html?item_id=" + id;
+    function check(id,status) {
+
+        if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
+            //监理初审
+             window.location.href = "check_acceptance.html?item_id=" + id;
+
+        } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
+            //验收初审
+            window.location.href = "check_acceptance_a.html?item_id=" + id;
+        } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
+
+            //验收终审
+            window.location.href = "check_acceptance_b.html?item_id=" + id;
+        } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
+            //监理终审
+            window.location.href = "check_acceptance_c.html?item_id=" + id;
+        } else {
+            window.location.href = "check_acceptance_d.html?item_id=" + id;
+        }
+
     }
 
     function read(id) {

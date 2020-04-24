@@ -660,25 +660,7 @@
             </table>
         </div>
 
-        <div class="module" id="checkHtml">
-            <table class="layui-table">
-                <colgroup>
-                    <col width="3%">
-                    <col width="97%">
-                </colgroup>
-                <tbody id="userinfo11">
-                <tr class="td-text">
-                    <td rowspan="6" class="table-info">项目负责人承诺及单位意见</td>
-                </tr>
-                <tr class="principalCheckStage">
 
-                </tr>
-                <tr class="deptCheckStage">
-
-                </tr>
-                </tbody>
-            </table>
-        </div>
 
         <div class="module">
             <table class="layui-table">
@@ -711,7 +693,6 @@
         <div class="form-actions" style="margin-bottom: 50px;">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary" type="button" onclick=" history.back(-1);">返回</button>
                     <button class="btn btn-primary" type="button" onclick="save();">
                         <i class="fa fa-save"></i> 保存
                     </button>
@@ -767,7 +748,7 @@
                 var str = '';
                 str += '<tr id="' + id + '" class="stageAffixFile"><input type="hidden" name="fileName" value="' + res['name'] + '" ><input type="hidden" name="fileId" value="' + id + '" ><td>' + res.name + '</td><td>';
                 str += '<textarea placeholder="文件说明" class="layui-textarea form-control"lay-verify="required" name="fileRemark"></textarea></td>';
-                str += '<td><button class="layui-btn layui-btn-xs" onclick="deleteFile(' + id + ')"><i class="layui-icon">&#xe705;</i>删除</button>';
+                str += '<td><button class="layui-btn layui-btn-xs" type="button" onclick="deleteFile(\'' + id + '\')"><i class="layui-icon">&#xe705;</i>删除</button>';
                 str += '<a class="layui-btn layui-btn-xs" href="' + url + '"><input type="hidden" name="fileUrl" value="' + url + '" ><i class="layui-icon">&#xe601;</i>下载</a></td></tr>';
                 $("#file_table").append(str);
             }
@@ -918,6 +899,7 @@
         formData.stageTechnologyPactRegisterCatalogues = stageTechnologyPactRegisterCatalogues;
         formData.stageTargets = stageTargets;
         formData.itemId = itemId;
+        if (Array.isArray( formData.causes))
         formData.cause = (formData.causes).join(',');
         formData.createUserId = userId;
         $.ajax({

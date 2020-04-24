@@ -1,13 +1,17 @@
 package com.xinlang.zly_xyx.cat_inform.controller;
 
+import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_inform.bean.Notice;
 import com.xinlang.zly_xyx.cat_inform.service.INoticeService;
+import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,6 +25,9 @@ public class NoticeController {
     @ApiOperation(value = "添加公告")
     public Notice save(@RequestBody Notice notice) {
         notice.setCreateTime(new Date());
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        notice.setCreateUserId(appUser.getId().intValue());
+        notice.setCreateUserNickName(appUser.getNickname());
         noticeService.save(notice);
         return notice;
     }
@@ -36,8 +43,15 @@ public class NoticeController {
     @GetMapping("/notice/list")
     @LogAnnotation(module = "根据机构编码查询公告")
     @ApiOperation(value = "根据机构编码查询公告")
-    public Notice findByPageName(@RequestParam Map<String, Object> params) {
-        return noticeService.findListByParams(params, Notice.class).get(0);
+    public List<Notice> findByPageName(@RequestParam Map<String, Object> params) {
+        return noticeService.findListByParams(params, Notice.class);
+    }
+
+    @GetMapping("/notice/page")
+    @LogAnnotation(module = "根据机构编码查询公告")
+    @ApiOperation(value = "根据机构编码查询公告")
+    public Page<Notice> findPage(@RequestParam Map<String, Object> params) {
+        return noticeService.findPageByParams(params, Notice.class);
     }
 
     @DeleteMapping("/notice/{id}")

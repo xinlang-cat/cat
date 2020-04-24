@@ -22,10 +22,7 @@
 </header>
 <section class="grid-holder">
     <div class="grid-list-layout">
-        <nav class="navigation">
-            <li> <a href="pages/projectDetails/createProject.html"><span>新增</span></a></li>
-            <li ><a href="../summary/summaryList.html?item_id=1&item_name=test">结题总结</a></li>
-        </nav>
+
         <div class="grid-list-holder">
           <span class="grid-layout active">
           <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -137,6 +134,7 @@
     var deptCode;//当前用户的公司代码r
     getCompanryCode();
     initData();
+
     function initData() {
         $.ajax({
             type: 'get',
@@ -146,25 +144,49 @@
             success: function (data) {
                 var str = '';
                 getUser();
-                $(data).each(function(){
+                var params = {
+                    userId: userId
+                };
+                $(data).each(function () {
+                    var itemId = this.id;
                     str += '<div class="masonry__item">\n' +
                         '            <figure>\n' +
                         '                <figcaption class="content">\n' +
-                        '                    <h2 style="max-width: 400px;">'+this.name+'</h2>\n' +
+                        '                    <h2 style="max-width: 400px;">' + this.name + '</h2>\n' +
                         '                    <p class="date" style="max-width: 400px;">' +
-                        '                        <span style="margin-right: 10px;">开始时间：'+this.start_date.substring(0, 10)+'</span>' +
-                        '                        <span>结束时间：'+this.end_date.substring(0, 10)+'</span></p>\n' +
+                        '                        <span style="margin-right: 10px;">开始时间：' + this.start_date.substring(0, 10) + '</span>' +
+                        '                        <span>结束时间：' + this.end_date.substring(0, 10) + '</span></p>\n' +
                         '                        <ul class="tags">\n' +
-                        '                        <li><a href="../item/projectInfo.html?id='+this.id+'">项目信息</a></li>\n' +
-                        '                        <li><a href="../indicator/indicatorList.html?itemId='+this.id+'&userId='+userId+'">项目指标</a></li>\n' +
-                        '                        <li><a href="pages/stage-summary/stageSummaryList.html?item_id='+ this.id +'&user_id='+userId+'">阶段总结</a></li>\n'+
-                        '                        <li><a href="pages/fundUse/fundBudget.html?id='+this.id+'">经费使用</a></li>\n' +
-                        '                        <li><a href="../summary/addSummary.html?itemId='+this.id+'">结题总结</a></li>\n' +
-                        '                        <li><a href="../acceptance/acceptance.html?item_id='+this.id+'">结题申请</a></li>\n' +
-                        '                        <li><a href="../auditApply/applyList.html?item_id='+this.id+'&userId='+userId+'">查定申请</a></li>\n' +
-                        '                        <li><a href="../modifyApply/modifyList.html?item_id='+this.id+'&userId='+userId+'">变更申请</a></li>\n' +
-                        '                        <li><a href="pages/projectDetails/terminationApply.html?itemId='+this.id+'&userId='+userId+'">终止申请</a></li>\n' +
-                        '                        <li><a href="../expert-evaluate/expertEvaluateList.html?itemId='+this.id+'&userId='+userId+'">专家评审</a></li>\n' +
+                        '                        <li><a href="../item/projectInfo.html?id=' + this.id + '">项目信息</a></li>\n' +
+                        '                        <li><a href="../indicator/indicatorList.html?itemId=' + this.id + '&userId=' + userId + '">项目指标</a></li>\n' +
+                        '                        <li><a href="pages/stage-summary/stageSummaryList.html?item_id=' + this.id + '&user_id=' + userId + '">阶段总结</a></li>\n' +
+                        '                        <li><a href="pages/fundUse/fundBudget.html?id=' + this.id + '">经费使用</a></li>\n' +
+                        '                        <li><a href="../summary/addSummary.html?itemId=' + this.id + '">结题总结</a></li>\n' +
+                        '                        <li><a href="../acceptance/acceptance.html?item_id=' + this.id + '">结题申请</a></li>\n' +
+                        '                        <li><a href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '">查定申请</a></li>\n' +
+                        '                        <li><a href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '">变更申请</a></li>\n';
+
+                    $.ajax({
+                        type: 'get',
+                        url: domainName + '/api-summary/expert-evaluate/list',
+                        contentType: "application/json; charset=utf-8",
+                        data: params,
+                        async: false,
+                        success: function (data) {
+                            if (data.length < 1) {
+                                str += '                        <li><a href="../expert-evaluate/addExpertEvaluate.html?itemId=' + itemId + '&userId=' + userId + '">开始评审</a></li>\n';
+                            }
+                            for (var i = data.length - 1; i >= 0; i--) {
+                                if (data[i].isPass == 1 || data[i].isPass == -1) {
+                                    str += '                        <li><a href="../expert-evaluate/detailExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">我的评审</a></li>\n';
+                                }
+                                if (data[i].isPass == 0) {
+                                    str += '                        <li><a href="../expert-evaluate/updateExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId +'">继续评审</a></li>\n';
+                                }
+                            }
+                        }
+                    });
+                    str += '                        <li><a href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n' +
                         '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
                         '                    </ul>\n' +
                         '                </figcaption>\n' +
@@ -175,6 +197,7 @@
             }
         });
     }
+
     /*function initData() {
         $.ajax({
             type: 'get',
@@ -215,8 +238,11 @@
             }
         });
     }*/
-    function submit(id,status) {
-        if(status==3){layer.msg("申请已提交过了！");return}
+    function submit(id, status) {
+        if (status == 3) {
+            layer.msg("申请已提交过了！");
+            return
+        }
         status++
         layer.confirm('确定要提交吗？', {
             btn: ['确定', '取消']
@@ -224,7 +250,7 @@
             $.ajax({
                 type: 'put',
                 url: domainName + '/project-item/item',
-                data: '{"id":'+id+',"status":'+status+'}',
+                data: '{"id":' + id + ',"status":' + status + '}',
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     window.location.reload();
@@ -234,20 +260,21 @@
             layer.close(1);
         });
     }
-    function check(id,status,boolean) {
-        if(boolean==1){
+
+    function check(id, status, boolean) {
+        if (boolean == 1) {
             status++
-        }else {
+        } else {
             status--
         }
-        if(status!=4){
+        if (status != 4) {
             layer.confirm('确定要提交吗？', {
                 btn: ['确定', '取消']
             }, function () {
                 $.ajax({
                     type: 'put',
                     url: domainName + '/project-item/item',
-                    data: '{"id":'+id+',"status":'+status+'}',
+                    data: '{"id":' + id + ',"status":' + status + '}',
                     contentType: "application/json; charset=utf-8",
                     success: function (data) {
                         window.location.reload();
@@ -256,23 +283,24 @@
                 });
                 layer.close(1);
             });
-        }else {
+        } else {
             layer.open({
-                title:"匹配专家",
+                title: "匹配专家",
                 type: 2,
                 area: ['800px', '400px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['pages/matchExpert.html?id='+id]
+                content: ['pages/matchExpert.html?id=' + id]
             });
         }
     }
+
     //获取当前用户的公司代码
     function getCompanryCode() {
         getUser();
         $.ajax({
             type: 'get',
-            url: domainName + '/api-c/company-anon/'+userId,
+            url: domainName + '/api-c/company-anon/' + userId,
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
@@ -280,6 +308,7 @@
             }
         });
     }
+
     //获取当前用户的ID
     function getUser() {
         $.ajax({
