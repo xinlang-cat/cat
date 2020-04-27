@@ -40,6 +40,8 @@ public class ItemInformation implements Serializable {
     private String city_code;
     private String area_code;
     private String street_code;
+    private String lng;                 //纬度
+    private String lat;                 //经度
 
     @Transient
     private String period;
