@@ -680,6 +680,7 @@
                 data: JSON.stringify(formdata),
                 success: function (data) {
                         $.toptip('操作成功', 'success');
+                    history.back(-1);
                 }
             });
         } else {
@@ -692,6 +693,7 @@
                     var msg = "保存成功";
                     layer.msg(msg, {shift: -1, time: 1000}, function () {
                         $.toptip('操作成功', 'success');
+                        history.back(-1);
                     });
                 }
             });
