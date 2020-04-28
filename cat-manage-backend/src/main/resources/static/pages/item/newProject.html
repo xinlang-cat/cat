@@ -14,7 +14,8 @@
         .layui-textarea {
             min-height: 60px;
         }
-        .layui-input-inline{
+
+        .layui-input-inline {
             margin-left: 75px;
         }
     </style>
@@ -2169,20 +2170,20 @@
             }
         });
         /*监听地点选择*/
-        form.on('select(province)', function(data){
+        form.on('select(province)', function (data) {
             $("#city option").remove();
             $("#area option").remove();
             $("#street option").remove();
             city(data.value);
             form.render('select');
         });
-        form.on('select(city)', function(data){
+        form.on('select(city)', function (data) {
             $("#area option").remove();
             $("#street option").remove();
             area(data.value);
             form.render('select');
         });
-        form.on('select(area)', function(data){
+        form.on('select(area)', function (data) {
             $("#street option").remove();
             street(data.value);
             form.render('select');
@@ -2280,6 +2281,14 @@
             fundSource: fundSource,
             contactWays: contactWay
         };
+        var address = '';
+        address += $("#province").find("option:selected").text();
+        address += $("#city").find("option:selected").text();
+        address += $("#area").find("option:selected").text();
+        address += $("#street").find("option:selected").text();
+        var map = setLatLng(address);
+        data.information['lat'] = map['lat'];
+        data.information['lng'] = map['lng'];
         $.ajax({
             type: 'post',
             url: domainName + '/project-item/item/information',
@@ -2292,6 +2301,20 @@
                 });
             }
         });
+    }
+
+    function setLatLng(address) {
+        var data = null;
+        $.ajax({
+            url: domainName + "/map//baiDuMap/lng_lat/" + address,
+            type: "get",
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+                data = res;
+            }
+        });
+        return data;
     }
 
     /*处理人员数据*/
@@ -2369,16 +2392,16 @@
 
     function province() {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/province/all',
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/province/all',
+            async: false,
+            success: function (data) {
                 var select = $("#province");
-                for(var i=0; i<data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     var d = data[i];
                     var code = d.provinceCode;
                     var name = d.provinceName;
-                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                    select.append("<option value='" + code + "'>" + name + "</option>");
                 }
             }
         });
@@ -2386,17 +2409,17 @@
 
     function city(provinceCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/city/all/'+provinceCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/city/all/' + provinceCode,
+            async: false,
+            success: function (data) {
                 var select = $("#city");
                 select.append("<option value=''>请选择市</option>");
-                for(var i=0; i<data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     var d = data[i];
                     var code = d.cityCode;
                     var name = d.cityName;
-                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                    select.append("<option value='" + code + "'>" + name + "</option>");
                 }
             }
         });
@@ -2404,34 +2427,35 @@
 
     function area(cityCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/area/all/'+cityCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/area/all/' + cityCode,
+            async: false,
+            success: function (data) {
                 var select = $("#area");
                 select.append("<option value=''>请选择县/区</option>");
-                for(var i=0; i<data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     var d = data[i];
                     var code = d.areaCode;
                     var name = d.areaName;
-                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                    select.append("<option value='" + code + "'>" + name + "</option>");
                 }
             }
         });
     }
+
     function street(areaCode) {
         $.ajax({
-            type : 'get',
-            url : domainName + '/map/street/all/'+areaCode,
-            async : false,
-            success : function(data) {
+            type: 'get',
+            url: domainName + '/map/street/all/' + areaCode,
+            async: false,
+            success: function (data) {
                 var select = $("#street");
                 select.append("<option value=''>请选择街道/镇</option>");
-                for(var i=0; i<data.length; i++){
+                for (var i = 0; i < data.length; i++) {
                     var d = data[i];
                     var code = d.streetCode;
                     var name = d.streetName;
-                    select.append("<option value='"+ code +"'>" +name+"</option>");
+                    select.append("<option value='" + code + "'>" + name + "</option>");
                 }
             }
         });
