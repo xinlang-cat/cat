@@ -70,23 +70,11 @@
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['detailExpertEvaluate.html?expertEvaluateId=' + id]
+            content: ['seeExpertEvaluate.html?expertEvaluateId=' + id+'&itemId='+itemId]
         });
     }
 
-    function toUpdate(id) {
-        layer.open({
-            title: "修改",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['updateExpertEvaluate.html?expertEvaluateId=' + id],
-            end: function () {
-                myExpertEvaluate();
-            }
-        });
-    }
+
 
     $("#my").click(function () {
         $(this).hide();

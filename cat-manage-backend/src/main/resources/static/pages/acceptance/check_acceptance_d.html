@@ -748,7 +748,17 @@
 
         });
     }
+    function getExpert() {
+        layer.open({
+            title: "专家审核意见",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../expert-evaluate/chechExpertEvaluateList.html?itemId=' + item_id]
 
+        });
+    };
     function showFund() {
         layer.open({
             title: "经费使用",

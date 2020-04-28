@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <title>查看项目验收报告</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../list-layout/css/projectInfo.css">
+</head>
+<style>
+    .col-md-11 {
+        width: 91.66666667%;
+    }
+</style>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal layui-form" onsubmit="return false" style="padding-bottom: 30px">
+        <fieldset>
+            <div class="form-group" style="margin-top: 40px">
+                <label class="col-md-1 control-label">项目名称</label>
+                <div class="col-md-11">
+                    <p class="form-control itemName" style="border: none"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">相关信息</label>
+                <div class="col-md-11">
+                    <button class="layui-btn layui-btn-sm" onclick="showTarget()">
+                        <i class="layui-icon">&#xe615;</i>查看项目指标
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showStage()">
+                        <i class="layui-icon">&#xe615;</i>查看阶段总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showFund()">
+                        <i class="layui-icon">&#xe615;</i>查看经费使用
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showWork()">
+                        <i class="layui-icon">&#xe615;</i>查看工作总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showSkill()">
+                        <i class="layui-icon">&#xe615;</i>查看技术总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showAudit()">
+                        <i class="layui-icon">&#xe615;</i>查看查定报告
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">考核指标</label>
+                <div class="col-md-11">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th style="width:6%;">指标类型</th>
+                            <th style="width:54%;">指标内容</th>
+                            <th style="width:13%">起止时间</th>
+                            <th style="width:5%;">进度[%]</th>
+                            <th style="width:8%;">实施日志</th>
+                        </tr>
+                        </thead>
+                        <tbody id="content">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">综合意见建议</label>
+                <div class="col-md-11">
+                    <span class="evaluateContent" style="border: none"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">评审结果</label>
+                <div class="col-md-11">
+                    <input type="radio" name="isPass" value="1" title="通过">
+                    <input type="radio" name="isPass" value="0" title="待定">
+                    <input type="radio" name="isPass" value="-1" title="不通过">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 control-label">评审人</label>
+                <div class="col-md-11">
+                    <p class="form-control userName" style="border: none"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 control-label">评审日期</label>
+                <div class="col-md-11">
+                    <p class="form-control createTime" style="border: none"></p>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/expert-evaluate.js"></script>
+<script type="text/javascript">
+
+    var form;
+    layui.use(['form'], function () {
+        form = layui.form;
+    });
+    var itemId = getUrlParam("itemId");
+    var userId = getUrlParam("userId");
+    var id = getUrlParam("expertEvaluateId");
+
+    //初始化
+    $.get(domainName + '/api-summary/expert-evaluate/list', {id: id}, function (res) {
+        for (var key in res[0]) {
+            if (key == 'createTime') {
+                $("." + key).html(formatDate4(res[0][key]));
+            } else {
+                $("." + key).html(res[0][key]);
+            }
+            setRadio($('input[name=isPass]'), res[0].isPass);
+        }
+        $.get(domainName + "/project-item/item/indicators/list", {item_id: res[0].itemId}, function (data) {
+            var str = '';
+            $.each(data, function (i, item) {
+                var type = '';
+                var content = item['content'];
+                var startEndTime = formatDate4(item['start_date']) + '---' + formatDate4(item['end_date']);
+                if (item['count'] > 0) {
+
+                } else {
+                    if (item['type'] == 'TECHNICAL_INDICATORS') {
+                        type = '技术指标';
+                    }
+                    if (item['type'] == 'OTHER_INDICATORS') {
+                        type = '其他指标';
+                    }
+                    if (item['type'] == 'ECONOMIC_INDICATORS') {
+                        type = '经济指标';
+                    }
+                    if (item['type'] == 'INDICATORS_OF_TALENT_TEAM_CONS') {
+                        type = '人才队伍建设指标';
+                    }
+                    var affiliate = null;
+                    $.each(res[0].list, function (i, item1) {
+                        if (item1.targetId == item.id) {
+                            affiliate = item1;
+                        }
+                    });
+
+                    var plan = item['plan'] == null ? '0%' : item['plan'];
+                    str += '<tr ><td style="vertical-align: middle;" rowspan="2">' + type + '</td><td>' + content + '</td><td style="vertical-align: middle;">' + startEndTime + '</td>';
+                    str += '<td style="vertical-align: middle;">' + plan + '</td><td style="vertical-align: middle;">';
+                    if (item['count'] <= 0) {
+                        str += '<button class="layui-btn layui-btn-xs" onclick="location.href=\'../work-log/workLogList.html?itemId=';
+                        str += res[0].itemId + '&targetId=' + item['id'] + '&userId=' + res[0].userId + '\'" ><i class="layui-icon">日志详情</i></button>';
+                    }
+                    str += '</td></tr><tr class="target">';
+                    str += '<td colspan="2">' + affiliate['content'] + '</td>';
+                    str += '<td colspan="2">' + affiliate['checked'] + '</td></tr>';
+                }
+
+            });
+            $('#content').append(str);
+            form.render("select");
+        });
+    });
+
+    //设置单选框
+    function setRadio(inputs, data) {
+        for (var i = 0; i < inputs.length; i++) {
+            if ($(inputs[i]).val() == data) {
+                $(inputs[i]).prop('checked', true);
+            } else {
+                $(inputs[i]).prop('disabled', true);
+            }
+        }
+    }
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
+
+    function showAudit() {
+        layer.open({
+            title: "查定报告",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../auditApply/checkedApplyList.html?item_id=' + itemId]
+
+        });
+    }
+
+    function showSkill() {
+        layer.open({
+            title: "技术总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/generateSkillReport.html?itemId=' + itemId]
+        });
+    }
+
+    function showWork() {
+        layer.open({
+            title: "工作总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/generateWorkReport.html?itemId=' + itemId]
+
+        });
+    }
+
+    function showTarget() {
+        layer.open({
+            title: "项目指标",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../indicator/readIndicatorList.html?itemId=' + itemId]
+
+        });
+    }
+
+    function showStage() {
+        layer.open({
+            title: "阶段总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/stage-summary/stageSummaryList.html?item_id=' + itemId]
+
+        });
+    }
+
+    function showFund() {
+        layer.open({
+            title: "经费使用",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + itemId]
+
+        });
+    }
+
+
+</script>
+</body>
+</html>
