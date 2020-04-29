@@ -25,5 +25,7 @@ public class Message implements Serializable {
     private Date createTime;
     @Transient
     private Set<Integer> userIds;//接收人
+    @Transient
+    private Integer isRead;
 
 }

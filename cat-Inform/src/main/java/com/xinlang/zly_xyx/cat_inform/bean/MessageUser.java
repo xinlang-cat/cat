@@ -17,7 +17,7 @@ public class MessageUser implements Serializable {
     private Integer id;
     private Integer userId;
     private Integer messageId;
-    private Integer isRead = 0;
+    private Integer isRead;
     private Date readTime;
 
 }
