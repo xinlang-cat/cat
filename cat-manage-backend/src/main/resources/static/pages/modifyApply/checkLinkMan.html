@@ -556,6 +556,7 @@
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 <script type="application/javascript" src="js/updateProjectVice.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
+<script type="text/javascript" src='../../js/sendMessage.js'></script>
 
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
@@ -770,6 +771,34 @@
             data: JSON.stringify(modifyApply),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    var userIds = [];
+                    if (status==2){
+                        var userId = getPARTY_B(item_id);
+                        userIds.push(userId);
+                        var content = "您有一条变更申请审核通过";
+                        var title = "您有一条变更申请审核通过";
+                    }else if (status==3){
+                        var userId = getPARTY_B(item_id);
+                        userIds.push(userId);
+                        var content = "您有一条变更申请审核未通过";
+                        var title = "您有一条变更申请审核未通过";
+                    }else if (status==4){
+                        var userId = getPARTY_A(item_id);
+                        userIds.push(userId);
+                        var content = "您有一条变更申请审核通过";
+                        var title = "您有一条变更申请审核通过";
+                    }else if (status==5){
+                        var userId = getPARTY_B(item_id);
+                        userIds.push(userId);
+                        var content = "您有一条变更申请审核通过";
+                        var title = "您有一条变更申请审核通过";
+                    }else if (status==6){
+                        var userId = getPARTY_B(item_id);
+                        userIds.push(userId);
+                        var content = "您有一条变更申请审核未通过";
+                        var title = "您有一条变更申请审核未通过";
+                    }
+                    sendMeaasge(content,title,userIds);
                     parent.location.reload();
                 });
             }
