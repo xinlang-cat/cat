@@ -549,7 +549,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src='../../js/common.js'></script>
 <script type="text/javascript" src='../list-layout/js/serializeJson.js'></script>
-
+<script type="text/javascript" src='../../js/sendMessage.js'></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='../list-layout/js/saveData.js'></script>
 <script type="text/javascript" src="../list-layout/js/acceptance.js"></script>
@@ -593,7 +593,7 @@
             return;
         }
         if (!tableId) {
-            alert("add1");
+
             formdata.status = nowStatus;
             $.ajax({
                 type: 'post',
@@ -603,27 +603,28 @@
                 async: false,
                 success: function (data) {
                     if (nowStatus == 1) {
-                        alert("add2");
                         changeStatus(item_id);
                     }
-
-
                 }
             });
         } else {
-
             if (nowStatus == 0) {
                 //保存，不改变状态
                 formdata.status = nowStatus;
-                alert("post1");
+
             } else if (nowStatus == 1) {
                 if (formdata.status == 0) {
                     formdata.status = nowStatus;
-                    alert("post2");
+
                     changeStatus(item_id);
                 } else if (formdata.status < 0) {
-                    alert("post3");
                     formdata.status = 0 - formdata.status;
+                    var userIds = [];
+                    var userId = getPARTY_B(item_id);
+                    userIds.push(userId);
+                    var content = "您有一条验收审核待处理";
+                    var title = "您有一条验收审核待处理";
+                    sendMeaasge(content,title,userIds);
                 }
 
             }
@@ -636,7 +637,7 @@
                 success: function (data) {
                     var msg = "保存成功";
                     layer.msg(msg, {shift: -1, time: 1000}, function () {
-                        /*location.reload();*/
+                        location.reload();
                     });
                 }
             });
@@ -645,7 +646,6 @@
     }
 
     function changeStatus(item_id) {
-        alert("change1");
         var item = {"id": item_id, "status": 3};
         $.ajax({
             type: 'put',
@@ -655,48 +655,12 @@
             data: JSON.stringify(item),
             success: function (data) {
                 layer.msg("提交成功", {shift: -1, time: 1000}, function () {
-                    var createUserId;
-                    var createUserName;
+                   var userIds = [];
+                    var userId = getPARTY_B(item_id);
+                    userIds.push(userId);
                     var content = "您有一条验收审核待处理";
                     var title = "您有一条验收审核待处理";
-                    var createTime = new Date();
-                    var userIds = [];
-                    userIds.push(1);
-                    //获取用户信息
-
-                    $.ajax({
-                        type: 'get',
-                        url: domainName + '/api-u/users/current',
-                        async: false,
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            createUserId = data.id;
-                            createUserName = data.username;
-
-                        }
-                    });
-
-                    //发送消息给监理
-
-                    var message = {
-                        "createUserId": createUserId,
-                        "createUserName": createUserName,
-                        "content": content,
-                        "title": title,
-                        "createTime": createTime,
-                        "userIds": userIds
-                    };
-                    console.log(message);
-                    $.ajax({
-                        type: 'post',
-                        url: domainName + '/api-n/message',
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(message),
-                        success: function (data) {
-                            alert("ojbk");
-                        }
-                    });
-                    /*location.reload();*/
+                    sendMeaasge(content,title,userIds);
                 });
             }
         });
