@@ -30,7 +30,7 @@ public class MessageController {
         message.setCreateTime(date);
         messageService.save(message);
         MessageUser messageUser = new MessageUser();
-        message.getUserIds().forEach(item->{
+        message.getUserIds().forEach(item -> {
             messageUser.setIsRead(0);
             messageUser.setMessageId(message.getId());
             messageUser.setUserId(item);
@@ -62,43 +62,59 @@ public class MessageController {
         messageUsers.forEach(item -> {
             set.add(item.getMessageId());
         });
-        return messageService.findByIds(set);
+        List<Message> data = new ArrayList<>();
+        if (set.size() > 0) {
+            data = messageService.findByIds(set);
+        }
+        data.forEach(item -> {
+            messageUsers.forEach(messageUser -> {
+                if (item.getId() == messageUser.getMessageId()) {
+                    item.setIsRead(messageUser.getIsRead());
+                }
+            });
+        });
+        return data;
     }
 
     @GetMapping("/layui/my")
     @LogAnnotation(module = "查询通知列表")
     @ApiOperation(value = "查询通知列表,参数为空0查询未读，参数为1查询已读，没有参数查询全部")
-    public Map<String,Object> findMymMessage(@RequestParam Map<String,Object> params) {
+    public Map<String, Object> findMymMessage(@RequestParam Map<String, Object> params) {
         AppUser appUser = AppUserUtil.getLoginAppUser();
         params.put("userId", appUser.getId().intValue());
-        Integer count =  messageUserService.findListByParams(params, MessageUser.class).size();
+        Integer count = messageUserService.findListByParams(params, MessageUser.class).size();
         List<MessageUser> messageUsers = messageUserService.findPageByParams(params, MessageUser.class).getData();
         Set<Integer> set = new HashSet<>();
         messageUsers.forEach(item -> {
             set.add(item.getMessageId());
         });
-        List<Message> data = messageService.findByIds(set);
-        data.forEach(item->{
-            messageUsers.forEach(messageUser->{
-                if(item.getId() == messageUser.getMessageId()){
+        List<Message> data = new ArrayList<>();
+        if (set.size() > 0) {
+            data = messageService.findByIds(set);
+        }
+        data.forEach(item -> {
+            messageUsers.forEach(messageUser -> {
+                if (item.getId() == messageUser.getMessageId()) {
                     item.setIsRead(messageUser.getIsRead());
                 }
             });
         });
-        params.put("data",data);
-        params.put("code",0);
-        params.put("count",count);
+        params.put("data", data);
+        params.put("code", 0);
+        params.put("count", count);
         return params;
     }
 
-    @GetMapping("/setIsRead")
+    @PutMapping("/setIsRead")
     @LogAnnotation(module = "设置已读")
     @ApiOperation(value = "设置已读")
-    public void setIsRead(@RequestParam Integer id) {
-       MessageUser messageUser = new MessageUser();
-       messageUser.setIsRead(1);
-       messageUser.setReadTime(new Date());
-       messageUser.setId(id);
-       messageUserService.update(messageUser);
+    public void setIsRead(@RequestBody Set<Integer> ids) {
+        MessageUser messageUser = new MessageUser();
+        ids.forEach(item -> {
+            messageUser.setIsRead(1);
+            messageUser.setReadTime(new Date());
+            messageUser.setId(item);
+            messageUserService.update(messageUser);
+        });
     }
 }
