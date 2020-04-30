@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../weui/css/weuix.css"/>
+
+    <script src="../weui/js/zepto.min.js"></script>
+    <script src="../weui/js/zepto.weui.js"></script>
+</head>
+<body ontouchstart>
+<div class="page">
+    <div class="page__hd">
+    </div>
+    <div class="page__bd">
+        <div class="weui-news">
+            <ul class="weui-news-list">
+                <li class="weui-news-item">
+                    <div class="weui-news-inners">
+                        <div class="weui-news-title"><span id="title"></span></div>
+                        <div class="weui-news-text">
+                            <p class="weui-news-p" style="display: initial;" id="content"></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../js/constant.js"></script>
+<script type="text/javascript" src='../../../js/common.js'></script>
+<script src="../weui/lib/fastclick.js"></script>
+<script src="../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/my/permission.js"></script>
+<script>
+    var id = getUrlParam("id");
+    getNyNotice(id);
+    setIsRead(id);
+    function getNyNotice(id) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-n/message/list',
+            contentType: "application/json; charset=utf-8",
+            data: 'id='+id,
+            async: false,
+            success: function (data) {
+                $('#title').text(data[0].title);
+                $('#content').text(data[0].content);
+            }
+        });
+    }
+    function setIsRead(id) {
+        $.ajax({
+            type: 'put',
+            url: domainName + '/api-n/message/setIsRead',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify([id]),
+            async: false,
+            success: function (data) {
+            }
+        });
+    }
+</script>
+</html>

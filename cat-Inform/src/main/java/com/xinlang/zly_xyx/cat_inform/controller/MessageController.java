@@ -50,7 +50,7 @@ public class MessageController {
     @GetMapping("/my")
     @LogAnnotation(module = "查询通知列表")
     @ApiOperation(value = "查询通知列表,参数为空0查询未读，参数为1查询已读，没有参数查询全部")
-    public List<Message> findMymMessage(@RequestParam Integer isRead) {
+    public List<Message> findMymMessage(@RequestParam(required = false) Integer isRead) {
         Map<String, Object> params = new HashMap<>();
         if (isRead != null) {
             params.put("isRead", isRead);
