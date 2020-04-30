@@ -50,7 +50,7 @@
     var nickname = getUrlParam("nickname");
     var headimgurl = getUrlParam("headimgurl");
     $("#headimgurl").attr("src", headimgurl);
-
+    var toUrl = domainName + getUrlParam("toUrl");
     function loginAndBinding(obj) {
         $(obj).attr("disabled", true);
 
@@ -75,7 +75,7 @@
                         url: domainName + '/api-u/wechat/binding-user?openid=' + openid + "&tempCode=" + tempCode + "&access_token=" + data.access_token,
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                            window.location.href = "views/index.html";
+                            window.location.href = toUrl;
                         }
                     });
                 },
