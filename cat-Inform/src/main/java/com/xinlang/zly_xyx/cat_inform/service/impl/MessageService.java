@@ -2,7 +2,7 @@ package com.xinlang.zly_xyx.cat_inform.service.impl;
 
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import com.xinlang.zly_xyx.cat_inform.Mapper.MessageMapper;
-import com.xinlang.zly_xyx.cat_inform.bean.Message;
+import com.xinlang.zly_xyx.message.Message;
 import com.xinlang.zly_xyx.cat_inform.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

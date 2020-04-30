@@ -1,4 +1,4 @@
-package com.xinlang.zly_xyx.cat_inform.bean;
+package com.xinlang.zly_xyx.message;
 
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
@@ -27,5 +27,14 @@ public class Message implements Serializable {
     private Set<Integer> userIds;//接收人
     @Transient
     private Integer isRead;
+
+    public  Message (String createUserName,String content,String title,Set<Integer> userIds){
+        this.createUserName = createUserName;
+        this.content = content;
+        this.title = title;
+        this.createTime = new Date();
+        this.userIds = userIds;
+        this.type = "系统通知";
+    }
 
 }

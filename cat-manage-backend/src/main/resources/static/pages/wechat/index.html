@@ -21,26 +21,22 @@
         showUserInfo(access_token);
     } else {
         var openid = getUrlParam("openid");
-        var toUrl = domainName + "/api-b/pages/wechat/index.html";
-        if (openid == null || openid == "") {// 跳去微信授权
+        var toUrl = domainName + "/api-b/pages/wechat/views/app.html";
+        if (openid == null || openid == "") {
             window.location.href = domainName + "/api-u/wechat/app1?toUrl=" + encodeURIComponent(toUrl);
         } else {
             var hasUser = getUrlParam("hasUser");
             var tempCode = getUrlParam("tempCode");
             var nickname = getUrlParam("nickname");
             var headimgurl = getUrlParam("headimgurl");
-
             if (hasUser == "1") { // 微信已绑定用户，自动登录
                 $.ajax({
                     type: 'post',
                     url: domainName + '/sys/login-wechat?openid=' + openid + '&tempCode=' + tempCode,
-                    // timeout: 5000, //超时时间设置，单位毫秒
                     data: $("#login-form").serialize(),
                     success: function (data) {
-                        //将access_token和refresh_token写入本地
                         localStorage.setItem("access_token", data.access_token);
                         localStorage.setItem("refresh_token", data.refresh_token);
-
                         showUserInfo(data.access_token);
                     }, error: function (xhr, textStatus, errorThrown) {
                         if (xhr.status == 401) {
@@ -62,12 +58,6 @@
             type: 'get',
             url: domainName + '/api-u/users/current?access_token=' + access_token,
             success: function (data) {
-                $("#hello").text("微信登陆成功，欢迎：" + data.nickname);
-                var url = data.headImgUrl;
-                if (url == null || url == "") {
-                    url = headimgurl;
-                }
-                $("#headimgurl").attr("src", url);
                 location.href = 'views/app.html';
             },
             error: function (xhr, textStatus, errorThrown) {
