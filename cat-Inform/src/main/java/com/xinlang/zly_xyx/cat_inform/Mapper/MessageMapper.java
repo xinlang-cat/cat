@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.cat_inform.Mapper;
 
-import com.xinlang.zly_xyx.cat_inform.bean.Message;
+import com.xinlang.zly_xyx.message.Message;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

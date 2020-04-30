@@ -696,6 +696,9 @@
                     <button class="btn btn-primary" type="button" onclick="save();">
                         <i class="fa fa-save"></i> 保存
                     </button>
+                    <button class="btn btn-primary" type="button" onclick="test();">
+                        <i class="fa fa-save"></i> 测试
+                    </button>
                 </div>
             </div>
         </div>
@@ -922,7 +925,15 @@
         })
     }
 
-
+    function test() {
+        $.ajax({
+            type: 'post',
+            url: domainName + '/api-summary/expert-evaluate/1',
+            contentType: "application/json; charset=utf-8",
+            success: function (res) {
+            }
+        })
+    }
     //处理List类型数据
     function setObjectProperty(attribute) {
         var target = $(attribute);
