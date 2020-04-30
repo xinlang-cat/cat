@@ -16,6 +16,7 @@
                     <tr>
                         <td>
                             <form class="form-inline" onsubmit="return false">
+                                <input type="hidden" id="item_ids" name="item_ids">
                                 <div class="form-group">
                                     <!--项目名称(支持模糊搜索)：
                                     <input id="item_name" type="text" class="form-control" placeholder="项目名">-->
@@ -28,7 +29,7 @@
                                         <option value=4>查定不合格</option>
                                         <option value=5>查定申请未通过</option>
                                     </select>
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i
+                                    <button id="searchBt" class="layui-btn layui-btn-sm"><i
                                             class="layui-icon">&#xe615;</i>搜索
                                     </button>
                                 </div>
@@ -81,8 +82,8 @@
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
-        getCompanryCode();
 
+        getItemId();
         function init() {
             example =
                 $('#dt-table').DataTable({
@@ -98,10 +99,8 @@
                     "ajax": {
                         "url": domainName + "/project-item/item/target/applyList/page",
                         "data": function (d) {
-                            d.item_name = $('#item_name').val();
                             d.status = $('#status').val();
-                            d.check_unit = unit;
-                            d.manage_dept = manage_dept;
+                            d.item_ids = $("#item_ids").val();
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -232,7 +231,17 @@
             }
         });
     }
-
+    function getItemId() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/getItemId',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#item_ids").val(data);
+            }
+        });
+    }
 
     function getCompanryCode() {
 

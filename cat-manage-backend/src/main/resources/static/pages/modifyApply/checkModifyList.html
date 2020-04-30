@@ -16,18 +16,34 @@
                     <tr>
                         <td>
                             <form class="form-inline" onsubmit="return false">
+                                <input type="hidden" id="item_ids" name="item_ids">
                                 <div class="form-group">
                                    <!-- 项目名称(支持模糊搜索)：
                                     <input id="item_name" type="text" class="form-control" placeholder="项目名">-->
                                     更改内容：
-                                    状态：
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
-                                        <option value=1>待审核</option>
-                                        <option value=2>审核未通过</option>
-                                        <option value=3>更改成功</option>
+                                        <option value=1>监理审核中</option>
+                                        <option value=2>监理审核通过</option>
+                                        <option value=3>监理审核未通过</option>
+                                        <option value=4>甲方审核中</option>
+                                        <option value=5>甲方审核通过</option>
+                                        <option value=6>甲方审核未通过</option>
                                     </select>
-                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i class="layui-icon">&#xe615;</i>搜索</button>
+                                    状态：
+                                    <select class="form-control input-sm" id="type">
+                                        <option value="">全部</option>
+                                        <option value=1>项目名称</option>
+                                        <option value=2>承担单位（单位）</option>
+                                        <option value=3>研究内容重大调整改变</option>
+                                        <option value=4>实施期限变更</option>
+                                        <option value=5>研究内容一般调整变更（不涉及合同考核指标）</option>
+                                        <option value=6>参与单位变更/负责人变更</option>
+                                        <option value=7>经费调整变更</option>
+                                        <option value=8>指标/人员/分工变更</option>
+
+                                    </select>
+                                    <button id="searchBt" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe615;</i>搜索</button>
                                 </div>
                             </form>
                         </td>
@@ -79,7 +95,7 @@
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
-        getCompanryCode();
+        getItemId();
         function init() {
             example =
                 $('#dt-table').DataTable({
@@ -96,9 +112,8 @@
                         "url": domainName + "/project-item/item/basic/modifyApply/page",
                         "data":function(d){
                             d.status = $('#status').val();
-                            d.item_name = $('#item_name').val();
-                            d.check_unit = check_unit;
-                            d.manage_unit = manage_dept;
+                            d.type = $('#type').val();
+                            d.item_ids = $("#item_ids").val();
                         },
                         "type": "get",
                         "dataSrc": function (json) {
@@ -263,6 +278,17 @@
             content: ['addAuditApply.html?item_id='+itemId+'&userId='+userId],
             end : function() {
 
+            }
+        });
+    }
+    function getItemId() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/getItemId',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $("#item_ids").val(data);
             }
         });
     }

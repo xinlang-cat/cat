@@ -623,10 +623,23 @@
     userType();
     getdata(item_id);
     getbasic(item_id);
-
+    var match = false;
+    var ids = new Array();
     $.matchExpert({
         elem: '#test',
-        itemId: item_id//itemId
+        itemId: item_id,
+        defaultSave: true,//保存到默认数据库
+        defaultSave: false,//自定义保存
+        defaultSaveFun: function (arr) {
+            if (arr.length == 0) {
+                layer.msg("未选择专家！");
+            } else {
+                ids = arr;
+                match = true;
+            }
+            console.log(arr);
+
+        }
     });
     $(function () {
         $.ajax({
@@ -877,6 +890,27 @@
 
                 }
 
+            }else if (formdata.status == 2){
+                if (match){
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-user/item/list',
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(ids),
+                        success: function (res) {
+                            var content = "您有一条验收审核待处理";
+                            var title = "您有一条验收审核待处理";
+                            sendMeaasge(content,title,ids);
+                            $.toptip('匹配专家成功', 'success');
+
+                        },
+                        error: function (res) {
+                            $.toptip('匹配专家失败', 'error');
+                            return;
+                        }
+                    });
+                }
             }
             formdata.status = 1 + parseInt(formdata.status);
         } else if (applicantExtension == "否") {
