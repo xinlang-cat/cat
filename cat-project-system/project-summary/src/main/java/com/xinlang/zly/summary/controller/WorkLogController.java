@@ -3,10 +3,9 @@ package com.xinlang.zly.summary.controller;
 import com.xinlang.bean.projectInfo.ItemIndicators;
 import com.xinlang.zly.summary.bean.WorkLog;
 import com.xinlang.zly.summary.bean.WorkLogAffiliate;
-import com.xinlang.zly.summary.fegin.ConsumeIndicators;
+import com.xinlang.zly.summary.fegin.ConsumeItem;
 import com.xinlang.zly.summary.fegin.ConsumeProjectUser;
 import com.xinlang.zly.summary.service.IWorkLogAffiliateService;
-import com.xinlang.zly.summary.service.IWorkLogService;
 import com.xinlang.zly.summary.service.IWorkLogService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
@@ -37,7 +36,7 @@ public class WorkLogController {
     @Autowired
     private ConsumeProjectUser consumeProjectUser;
     @Autowired
-    private ConsumeIndicators consumeIndicators;
+    private ConsumeItem consumeIndicators;
 
     @PostMapping
     @LogAnnotation(module = "添加工作日志")
