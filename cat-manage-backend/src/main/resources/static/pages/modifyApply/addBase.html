@@ -281,7 +281,8 @@
 
     });
     var h = $(window).height() - 50;
-    var w = $(window).width() - 30;;
+    var w = $(window).width() - 30;
+    ;
 
     //移除一张图片
     function deleteImg(obj) {
@@ -523,7 +524,7 @@
             arr.push(dayObj[i].getAttribute('value'));
         }
         if (files == 1) {
-            modifyApply.accessory=$("input[name='accessory']").val();
+            modifyApply.accessory = $("input[name='accessory']").val();
         } else {
             modifyApply.accessory = arr.join(',');
 
@@ -535,7 +536,7 @@
         }
 
         if (files == 1) {
-            modifyApply.accessory=$("input[name='accessory']").val();
+            modifyApply.accessory = $("input[name='accessory']").val();
         } else {
             modifyApply.accessory = arr.join(',');
 
@@ -559,6 +560,11 @@
                 });
             }
         });
+    }
+
+    function close() {
+       layer.close();
+
     }
 
 

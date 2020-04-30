@@ -585,7 +585,7 @@
 <script type="text/javascript" src="../list-layout/js/acceptance.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/matchExpert.js"></script>
-
+<script type="text/javascript" src='../../js/sendMessage.js'></script>
 <script type="text/javascript">
 
     var item_id = getUrlParam("item_id");
@@ -748,7 +748,17 @@
 
         });
     }
+    function getExpert() {
+        layer.open({
+            title: "专家审核意见",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../expert-evaluate/chechExpertEvaluateList.html?itemId=' + item_id]
 
+        });
+    };
     function showFund() {
         layer.open({
             title: "经费使用",

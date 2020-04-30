@@ -936,8 +936,9 @@
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 
 <script>
+    var form, layer, element, laydate, $;
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery'], function () {
-        var form = layui.form,
+       form = layui.form,
             layer = layui.layer,
             element = layui.element,
             laydate = layui.laydate,
@@ -1002,6 +1003,7 @@
             url : domainName + '/api-summary/work/list',
             async : false,
             success : function(data) {
+
                 $(data).each(function () {
                     for (var key in data[0]) {
                         $("textarea[name=" + key + "]").val(data[0][key]);

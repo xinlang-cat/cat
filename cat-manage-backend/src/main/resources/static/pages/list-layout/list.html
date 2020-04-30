@@ -121,7 +121,7 @@
 <script src="assets/js/ScrollToPlugin.min.js"></script>
 <script src="assets/js/masonry.pkgd.js"></script>
 <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/jq.js"></script>
@@ -130,6 +130,7 @@
     layui.use(['layer'], function () {
         var layer = layui.layer;
     });
+    var pers = checkPermission();
     var userId;//当前用户ID
     var deptCode;//当前用户的公司代码r
     getCompanryCode();
@@ -165,29 +166,30 @@
                         '                        <li><a href="../acceptance/acceptance.html?item_id=' + this.id + '">结题申请</a></li>\n' +
                         '                        <li><a href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '">查定申请</a></li>\n' +
                         '                        <li><a href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '">变更申请</a></li>\n';
-
-                    $.ajax({
-                        type: 'get',
-                        url: domainName + '/api-summary/expert-evaluate/list',
-                        contentType: "application/json; charset=utf-8",
-                        data: params,
-                        async: false,
-                        success: function (data) {
-                            if (data.length < 1) {
-                                str += '                        <li><a href="../expert-evaluate/addExpertEvaluate.html?itemId=' + itemId + '&userId=' + userId + '">开始评审</a></li>\n';
-                            }
-                            for (var i = data.length - 1; i >= 0; i--) {
-                                if (data[i].isPass == 1 || data[i].isPass == -1) {
-                                    str += '                        <li><a href="../expert-evaluate/detailExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">我的评审</a></li>\n';
+                    if ($.inArray('EXPERT:html', pers) != -1) {
+                        $.ajax({
+                            type: 'get',
+                            url: domainName + '/api-summary/expert-evaluate/list',
+                            contentType: "application/json; charset=utf-8",
+                            data: params,
+                            async: false,
+                            success: function (data) {
+                                if (data.length < 1) {
+                                    str += '                        <li><a href="../expert-evaluate/addExpertEvaluate.html?itemId=' + itemId + '&userId=' + userId + '">开始评审</a></li>\n';
                                 }
-                                if (data[i].isPass == 0) {
-                                    str += '                        <li><a href="../expert-evaluate/updateExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId +'">继续评审</a></li>\n';
+                                for (var i = data.length - 1; i >= 0; i--) {
+                                    if (data[i].isPass == 1 || data[i].isPass == -1) {
+                                        str += '                        <li><a href="../expert-evaluate/detailExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">我的评审</a></li>\n';
+                                    }
+                                    if (data[i].isPass == 0) {
+                                        str += '                        <li><a href="../expert-evaluate/updateExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">继续评审</a></li>\n';
+                                    }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
                     str += '                        <li><a href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n' +
-                        '                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +
+                        '                        <li><a href="#!" class="more active" data-click-state="0">+</a></li>\n' +
                         '                    </ul>\n' +
                         '                </figcaption>\n' +
                         '            </figure>\n' +

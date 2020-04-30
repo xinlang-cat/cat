@@ -598,7 +598,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='js/auditApply.js'></script>
-
+<script type="text/javascript" src='../../js/sendMessage.js'></script>
 <script type="text/javascript">
     var layedit, index;
     var id = getUrlParam("id");
@@ -725,7 +725,7 @@
             layer.msg("请选择是否通过");
             return;
         }
-
+        var status = $("#status").val();
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -742,7 +742,6 @@
             arr.push(dayObj[i].getAttribute('value'));
         }
 
-
         if (files == 1) {
             formdata.accessory=$("input[name='accessory']").val();
         } else {
@@ -758,6 +757,7 @@
             success: function (data) {
                 var msg = "成功";
                 layer.msg(msg, {shift: -1, time: 1000}, function () {
+
                     parent.location.reload();
                 });
             }

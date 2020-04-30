@@ -42,8 +42,8 @@ public class WechatController {
      *
      * @return
      */
-    @GetMapping(value = "/{app}/back", params = {"code", "state"})
-    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state) {
+    @GetMapping(value = "/{app}/back", params = {"code", "state", "toUrl"})
+    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state, String toUrl) {
         if (StringUtils.isBlank(code)) {
             throw new IllegalArgumentException("code不能为空");
         }
@@ -52,14 +52,9 @@ public class WechatController {
             throw new IllegalArgumentException("state不能为空");
         }
 
-
-        String toUrl = "http://192.168.5.48/api-b/pages/wechat/index.html";
-
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
-
         toUrl = wechatService.getToUrl(toUrl, wechatUserInfo);
-
-        return new RedirectView(toUrl);
+        return new RedirectView("http://192.168.5.64/api-b/pages/wechat/index.html?toUrl=" + toUrl);
     }
 
     /**
