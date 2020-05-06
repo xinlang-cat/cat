@@ -345,13 +345,18 @@
 					data: JSON.stringify(formdata),
 
 					success: function(data) {
-						var msg = "成功";
-						layer.msg(msg, {
-							shift: -1,
-							time: 1000
-						}, function() {
-							history.back(-1);
-						});
+						var userIds = [];
+						var userId = getPARTY_B(item_id);
+						userIds.push(userId);
+						if (status == 3) {
+							var content = "您有一条指标查定已通过";
+							var title = "您有一条指标查定已通过";
+						} else if (status == 4) {
+							var content = "您有一条指标查定未通过";
+							var title = "您有一条指标查定未通过";
+						}
+						sendMeaasge(content,title,userIds);
+
 					}
 				});
 			}

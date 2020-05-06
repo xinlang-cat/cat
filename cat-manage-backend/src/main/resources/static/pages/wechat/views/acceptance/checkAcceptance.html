@@ -609,6 +609,7 @@
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/matchExpert.js"></script>
+<script src="../../../../js/sendMessage.js.js"></script>
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 
 <script>
@@ -622,10 +623,23 @@
     userType();
     getdata(item_id);
     getbasic(item_id);
-
+    var match = false;
+    var ids = new Array();
     $.matchExpert({
         elem: '#test',
-        itemId: item_id//itemId
+        itemId: item_id,
+        defaultSave: true,//保存到默认数据库
+        defaultSave: false,//自定义保存
+        defaultSaveFun: function (arr) {
+            if (arr.length == 0) {
+                layer.msg("未选择专家！");
+            } else {
+                ids = arr;
+                match = true;
+            }
+            console.log(arr);
+
+        }
     });
     $(function () {
         $.ajax({
@@ -694,7 +708,6 @@
 
 
     });
-
 
 
     function userType() {
@@ -842,6 +855,7 @@
     }
 
     function add(obj) {
+        var status;
         $(obj).attr("disabled", true);
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
@@ -850,18 +864,14 @@
 
 
             if (formdata.status == 1) {
-                alert(formdata.acceptance_company);
-                alert(formdata.acceptance_user);
                 if (formdata.acceptance_company == "" || formdata.acceptance_company == undefined) {
                     $.toptip('请指定验收方', 'error');
                     return;
                 } else if (formdata.acceptance_user == "" || formdata.acceptance_user == undefined) {
                     $.toptip('请指定验收人员', 'error');
                     return;
-                }else {
-
-                    var data={"item_id":item_id,"user_id":formdata.acceptance_user,"user_type":"PARTY_D"};
-
+                } else {
+                    var data = {"item_id": item_id, "user_id": formdata.acceptance_user, "user_type": "PARTY_D"};
 
                     $.ajax({
                         type: 'post',
@@ -880,23 +890,62 @@
 
                 }
 
+            }else if (formdata.status == 2){
+                if (match){
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-user/item/list',
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(ids),
+                        success: function (res) {
+                            var content = "您有一条验收审核待处理";
+                            var title = "您有一条验收审核待处理";
+                            sendMeaasge(content,title,ids);
+                            $.toptip('匹配专家成功', 'success');
+
+                        },
+                        error: function (res) {
+                            $.toptip('匹配专家失败', 'error');
+                            return;
+                        }
+                    });
+                }
             }
             formdata.status = 1 + parseInt(formdata.status);
-        } else if (applicantExtension == "否"){
+        } else if (applicantExtension == "否") {
             formdata.status = 0 - formdata.status;
-        }else {
+        } else {
             $.toptip('请选择审核结果', 'error');
             return;
         }
         ;
-
+        status = formdata.status;
         $.ajax({
             type: 'put',
             url: domainName + '/api-summary/check-table',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-
+                var userIds = [];
+                if (status==2){
+                    userIds.push(formdata.acceptance_user);
+                    var content = "您有一条验收审核待处理";
+                    var title = "您有一条验收审核待处理";
+                }else if (status==5){
+                    userIds.push(getPARTY_B(item_id));
+                    var content = "您有一条验收审核待处理";
+                    var title = "您有一条验收审核待处理";
+                }else if (status==6){
+                    userIds.push(getPARTY_B(item_id));
+                    content = "您的项目验收申请已通过，项目已结题";
+                    title = "您的项目验收申请已通过，项目已结题";
+                }else if (status<0){
+                    userIds.push(getPARTY_B(item_id));
+                    content = "您的项目验收申请未通过";
+                    title = "您的项目验收申请未通过";
+                }
+                sendMeaasge(content,title,userIds);
                 $.toptip('操作成功', 'success');
                 history.back(-1);
             }

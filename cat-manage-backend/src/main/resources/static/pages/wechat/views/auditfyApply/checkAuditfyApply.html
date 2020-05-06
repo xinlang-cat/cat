@@ -233,11 +233,12 @@
                 var str = '<article class="weui-article">';
                 var count = 1;
                 $(data).each(function () {
+                    var text = getsuperior(this.site);
                     str += ' <h2 class="title">'+count+'</h2>\n' +
                         '   <section>\n' +
                         '      <h3>'+getType(this.type)+'</h3>\n' +
                         '      	 <p>'+this.content+'</p>\n' +
-                        '      	<p>广西壮族自治区南宁市西乡塘区振华路</p>\n' +
+                        '      	<p>指标地址：' + text + '</p>\n' +
                         '   </section>' ;
                     count++;
 
