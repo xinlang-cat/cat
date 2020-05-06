@@ -62,8 +62,8 @@ public class WechatService implements IWechatService {
         log.info("授权页面:{},{}",app,toUrl);
         WechatInfo wechatInfo = getWechatInfo(app);
         String domain = wechatConfig.getDomain();
-        StringBuilder redirectUri = new StringBuilder(domain+"/wechat/"+app+"/back");
-        if(StringUtils.isBlank(toUrl)){
+        StringBuilder redirectUri = new StringBuilder(domain+"/api-u/wechat/"+app+"/back");
+        if(!StringUtils.isBlank(toUrl)){
             toUrl = URLEncoder.encode(toUrl,"UTF-8");
             redirectUri.append("?toUrl=").append(toUrl);
         }
@@ -111,11 +111,11 @@ public class WechatService implements IWechatService {
         UserCredential userCredential = new UserCredential(openid,CredentialType.WECHAT_OPENID.name(),appUser.getId());
         userCredentialsMapper.save(userCredential);
         log.info("保存微信登录凭证:{}",userCredential);
-        /*if(appUser.getHeadImgUrl()==null||"".equals(appUser.getHeadImgUrl())){
+        if(appUser.getHeadImgUrl()==null||"".equals(appUser.getHeadImgUrl())){
             appUser.setHeadImgUrl(wechatUserInfo.getHeadimgurl());
             appUser.setUpdateTime(new Date());;
             appUserMapper.update(appUser);
-        }*/
+        }
         wechatUserInfo.setUserId(appUser.getId());
         wechatUserInfo.setUpdateTime(new Date());
         wechatMapper.update(wechatUserInfo);

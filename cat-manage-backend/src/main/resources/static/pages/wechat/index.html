@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
     var access_token = localStorage.getItem("access_token");
-    var toUrl = domainName + getUrlParam("toUrl");
+    var toUrl = getUrlParam("toUrl");
     if (access_token != null && access_token.trim().length != 0) {
         showUserInfo(access_token);
     } else {
@@ -40,7 +40,7 @@
                         showUserInfo(data.access_token);
                     }, error: function (xhr, textStatus, errorThrown) {
                         if (xhr.status == 401) {
-                            location.href = toUrl;
+                            location.href = domainName + toUrl;
                         }
 
                     }
@@ -58,7 +58,7 @@
             type: 'get',
             url: domainName + '/api-u/users/current?access_token=' + access_token,
             success: function (data) {
-                location.href = toUrl;
+                location.href = domainName + toUrl;
             },
             error: function (xhr, textStatus, errorThrown) {
                 if (xhr.status == 401) {
