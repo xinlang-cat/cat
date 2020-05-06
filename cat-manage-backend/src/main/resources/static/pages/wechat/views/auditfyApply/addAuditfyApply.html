@@ -96,6 +96,7 @@
 <script src="../../../../js/common.js"></script>
 <script src="../../js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
+<script src="../../../../js/sendMessage.js.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -179,6 +180,12 @@
              contentType: "application/json; charset=utf-8",
              data: JSON.stringify(formdata),
              success: function (data) {
+                 var userIds = [];
+                 var userId = getPARTY_C(item_id);
+                 userIds.push(userId);
+                 var content = "您有一条指标查定待处理";
+                 var title = "您有一条指标查定待处理";
+                 sendMeaasge(content,title,userIds);
                  $.toptip('操作成功', 'success');
                  history.back(-1);
 

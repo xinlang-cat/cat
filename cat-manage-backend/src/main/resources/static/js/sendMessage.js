@@ -66,3 +66,20 @@ function getPARTY_B(id) {
 
     return id;
 }
+
+function getPARTY_A(id) {
+
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/personnel/list',
+        data: "item_id=" + id + "&user_type=PARTY_A",
+        async: false,
+        success: function (data) {
+            $(data).each(function () {
+                id = this.user_id;
+            })
+        }
+    })
+
+    return id;
+}

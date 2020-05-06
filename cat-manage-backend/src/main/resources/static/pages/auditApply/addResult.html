@@ -277,7 +277,8 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"
+                                  readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -604,11 +605,11 @@
     var id = getUrlParam("id");
     $("#id").val(id);
     var h = $(window).height() - 15;
-    layui.use(['layedit','upload', 'laydate'], function(){
+    layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
         laydate = layui.laydate;
         upload = layui.upload;
-        index = layedit.build('demo',{tool:[], height:h});
+        index = layedit.build('demo', {tool: [], height: h});
         lay('.date').each(function () {
             laydate.render({
                 elem: this
@@ -630,6 +631,7 @@
         });
     });
     initData();
+
     //移除一张图片
     function deleteImg(obj) {
         $(obj).parent('div').remove();
@@ -649,8 +651,10 @@
         $("#accessory_files").append(str);
         $(".close-a").hide();
     }
-    var h = $(window).height()-50;
-    var w = $(window).width()-100;
+
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 100;
+
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "' />";
         layer.open({
@@ -721,7 +725,7 @@
 
 
     function pass() {
-        if ($("#status").val()=='') {
+        if ($("#status").val() == '') {
             layer.msg("请选择是否通过");
             return;
         }
@@ -743,7 +747,7 @@
         }
 
         if (files == 1) {
-            formdata.accessory=$("input[name='accessory']").val();
+            formdata.accessory = $("input[name='accessory']").val();
         } else {
             formdata.accessory = arr.join(',');
 
@@ -755,11 +759,22 @@
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function () {
 
-                    parent.location.reload();
-                });
+
+                var userIds = [];
+                var userId = getPARTY_B(item_id);
+                userIds.push(userId);
+                if (status == 3) {
+                    var content = "您有一条指标查定已通过";
+                    var title = "您有一条指标查定已通过";
+                } else if (status == 4) {
+                    var content = "您有一条指标查定未通过";
+                    var title = "您有一条指标查定未通过";
+                }
+                sendMeaasge(content, title, userIds);
+                $.toptip('操作成功', 'success');
+                history.back(-1);
+
             }
         });
     }

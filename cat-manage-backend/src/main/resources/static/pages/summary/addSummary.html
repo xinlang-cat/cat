@@ -500,7 +500,7 @@
             success: function (data) {
                 var msg = "保存成功";
                 layer.msg(msg, {shift: -1, time: 1000}, function () {
-                    setTimeout('window.location.reload()', 1000);
+                    location.reload();
                 });
             }
         });

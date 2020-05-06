@@ -527,27 +527,11 @@
             modifyApply.accessory = $("input[name='accessory']").val();
         } else {
             modifyApply.accessory = arr.join(',');
-
-        }
-        var arr = [];
-        var dayObj = $('input[name="accessory"]');
-        for (var i = 0; i < dayObj.length; i++) {
-            arr.push(dayObj[i].getAttribute('value'));
-        }
-
-        if (files == 1) {
-            modifyApply.accessory = $("input[name='accessory']").val();
-        } else {
-            modifyApply.accessory = arr.join(',');
-
         }
         var data = {
             information: information,
             modifyApply: modifyApply
-
         };
-        console.log(JSON.stringify(data));
-
         $.ajax({
             type: 'post',
             url: domainName + '/project-item/item/basic/modifyApply/base',
@@ -556,16 +540,18 @@
             data: JSON.stringify(data),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    var userIds = [];
+                    var userId = getPARTY_C(item_id);
+                    userIds.push(userId);
+                    var content = "您有一条变更申请待处理";
+                    var title = "您有一条变更申请待处理";
+                    sendMeaasge(content,title,userIds);
                     parent.location.reload();
                 });
             }
         });
     }
 
-    function close() {
-       layer.close();
-
-    }
 
 
 </script>
