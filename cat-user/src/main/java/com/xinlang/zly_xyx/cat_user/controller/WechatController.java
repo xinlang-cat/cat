@@ -3,6 +3,7 @@ package com.xinlang.zly_xyx.cat_user.controller;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_user.service.IWechatService;
 import com.xinlang.zly_xyx.user.AppUser;
+import com.xinlang.zly_xyx.user.LoginAppUser;
 import com.xinlang.zly_xyx.user.WechatUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -42,19 +43,19 @@ public class WechatController {
      *
      * @return
      */
-    @GetMapping(value = "/{app}/back", params = {"code", "state", "toUrl"})
-    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state, String toUrl) {
+    @GetMapping(value = "/{app}/back", params = {"code", "state"})
+    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state, @RequestParam String toUrl) {
         if (StringUtils.isBlank(code)) {
             throw new IllegalArgumentException("code不能为空");
         }
-
         if (StringUtils.isBlank(state)) {
             throw new IllegalArgumentException("state不能为空");
         }
-
+        String url = wechatConfig.getDomain() + wechatConfig.getInfos().get(app).getIndexPageUrl();
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
-        toUrl = wechatService.getToUrl(toUrl, wechatUserInfo);
-        return new RedirectView("http://192.168.5.64/api-b/pages/wechat/index.html?toUrl=" + toUrl);
+        url = wechatService.getToUrl(url + "?toUrl=" + toUrl, wechatUserInfo);
+        System.out.println(url);
+        return new RedirectView(url);
     }
 
     /**
@@ -69,7 +70,6 @@ public class WechatController {
         if (appUser == null) {
             throw new IllegalArgumentException("非法请求");
         }
-
         log.info("绑定微信和用户：{},{},{}", appUser, openid, tempCode);
         wechatService.bindingUser(appUser, tempCode, openid);
     }

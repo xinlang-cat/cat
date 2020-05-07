@@ -20,4 +20,5 @@ public class WechatInfo implements Serializable {
     private static final long serialVersionUID = -5833632736189955094L;
     private String appid;
     private String secret;
+    private String indexPageUrl;
 }

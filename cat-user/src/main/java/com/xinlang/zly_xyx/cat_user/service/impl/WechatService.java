@@ -62,8 +62,8 @@ public class WechatService implements IWechatService {
         log.info("授权页面:{},{}",app,toUrl);
         WechatInfo wechatInfo = getWechatInfo(app);
         String domain = wechatConfig.getDomain();
-        StringBuilder redirectUri = new StringBuilder(domain+"/wechat/"+app+"/back");
-        if(StringUtils.isBlank(toUrl)){
+        StringBuilder redirectUri = new StringBuilder(domain+"/api-u/wechat/"+app+"/back");
+        if(!StringUtils.isBlank(toUrl)){
             toUrl = URLEncoder.encode(toUrl,"UTF-8");
             redirectUri.append("?toUrl=").append(toUrl);
         }
@@ -88,19 +88,27 @@ public class WechatService implements IWechatService {
     }
 
     @Override
-    public String getToUrl(String toUrl, WechatUserInfo wechatUserInfo) {
+    public String getToUrl(String toUrl, WechatUserInfo wechatUserInfo){
         StringBuilder stringBuilder = new StringBuilder(toUrl);
         if(!toUrl.contains("?")){
             stringBuilder.append("?");
         }
+
         if(wechatUserInfo.getUserId() != null){
             stringBuilder.append("&hasUser=1");
         }
         stringBuilder.append("&openid=").append(wechatUserInfo.getOpenid());
         String tempCode = cacheWechatUserInfo(wechatUserInfo);
         stringBuilder.append("&tempCode=").append(tempCode);
-        stringBuilder.append("&nickname=").append(wechatUserInfo.getNickname());
         stringBuilder.append("&headimgurl=").append(wechatUserInfo.getHeadimgurl());
+        String aa = "";
+        try {
+            aa = URLEncoder.encode(wechatUserInfo.getNickname(),"UTF-8");
+        }catch (Exception e){
+            System.out.println("出错了");
+        }
+        stringBuilder.append("&nickname=").append(aa);
+
         return stringBuilder.toString();
     }
 
@@ -111,11 +119,11 @@ public class WechatService implements IWechatService {
         UserCredential userCredential = new UserCredential(openid,CredentialType.WECHAT_OPENID.name(),appUser.getId());
         userCredentialsMapper.save(userCredential);
         log.info("保存微信登录凭证:{}",userCredential);
-        /*if(appUser.getHeadImgUrl()==null||"".equals(appUser.getHeadImgUrl())){
-            appUser.setHeadImgUrl(wechatUserInfo.getHeadimgurl());
-            appUser.setUpdateTime(new Date());;
-            appUserMapper.update(appUser);
-        }*/
+//        if(appUser.getHeadImgUrl()==null||"".equals(appUser.getHeadImgUrl())){
+//            appUser.setHeadImgUrl(wechatUserInfo.getHeadimgurl());
+//            appUser.setUpdateTime(new Date());
+//            appUserMapper.update(appUser);
+//        }
         wechatUserInfo.setUserId(appUser.getId());
         wechatUserInfo.setUpdateTime(new Date());
         wechatMapper.update(wechatUserInfo);
