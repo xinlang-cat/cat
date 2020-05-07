@@ -821,6 +821,12 @@
             data: JSON.stringify(data),
             success: function (data) {
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    var userIds = [];
+                    var userId = getPARTY_C(item_id);
+                    userIds.push(userId);
+                    var content = "您有一条变更申请待处理";
+                    var title = "您有一条变更申请待处理";
+                    sendMeaasge(content,title,userIds);
                     parent.location.reload();
                 });
             }

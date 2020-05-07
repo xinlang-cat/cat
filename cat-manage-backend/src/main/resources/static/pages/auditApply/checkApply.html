@@ -333,8 +333,11 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="border: 0px;">
     <form class="form-horizontal" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
 
-            <div class="layui-btn-group btn-group" style="text-align: center;display: none" >
 
+            <div class="layui-btn-group btn-group" style="text-align: center;display: none" >
+                <!--<button data-method="offset" type="button" data-type="auto"
+                        class="layui-btn layui-btn-normal" id="test">匹配专家
+                </button>-->
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
                         onclick="pass();">
                     申请通过
@@ -358,10 +361,10 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='js/auditApply.js'></script>
-
+<script type="text/javascript" src="../../js/matchExpert.js"></script>
 <script type="text/javascript">
     var layedit, index;
-
+    var arr = new Array();
     var id = getUrlParam("id");
     var userType ;
     var h = $(window).height() - 15;
@@ -369,8 +372,25 @@
         layedit = layui.layedit;
         laydate = layui.laydate;
         index = layedit.build('demo', {tool: [], height: h});
+
     });
     initData();
+    $.matchExpert({
+        elem: '#test',
+        itemId: item_id,
+        defaultSave: true,//保存到默认数据库
+        defaultSave: false,//自定义保存
+        defaultSaveFun: function (arr) {
+            if (arr.length == 0) {
+                layer.msg("未选择专家！");
+            } else {
+                arr = arr;
+                match = true;
+            }
+            console.log(arr);
+
+        }
+    });
 
     function initData() {
         var data = {

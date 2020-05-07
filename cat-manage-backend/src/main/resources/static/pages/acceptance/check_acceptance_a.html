@@ -525,13 +525,13 @@
 
                 <tr id="check_b">
                     <td class="td-text">验收方初审意见:</td>
-                    <td colspan="7" id="opinion2"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
+                    <td colspan="6" id="opinion2"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
                                                              lay-verify="required"
                                                              id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
 
                     </td>
                     <td>
-                        <button data-method="offset" type="button" style="display: none;" data-type="auto"
+                        <button data-method="offset" type="button" data-type="auto"
                                 class="layui-btn layui-btn-normal" id="test">匹配专家
                         </button>
                     </td>
@@ -583,7 +583,7 @@
     var item_id = getUrlParam("item_id");
     var match = false;
     var status;
-    var arr = new Array();
+    var ids = new Array();
     $("#item_id").val(item_id);
     var pers = checkPermission();
     var identity;
@@ -615,7 +615,7 @@
             if (arr.length == 0) {
                 layer.msg("未选择专家！");
             } else {
-                arr = arr;
+                ids = arr;
                 match = true;
             }
             console.log(arr);
@@ -656,11 +656,11 @@
                     url: domainName + '/project-user/item/list',
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(arr),
+                    data: JSON.stringify(ids),
                     success: function (res) {
                         var content = "您有一条验收审核待处理";
                         var title = "您有一条验收审核待处理";
-                        sendMeaasge(content,title,arr);
+                        sendMeaasge(content,title,ids);
                         layer.msg("匹配专家成功！");
                     },
                     error: function (res) {
@@ -743,10 +743,7 @@
         $("#suggestDate").attr('disabled', true);
 
 
-        $("#opinion2").attr("colSpan", 6);
-        //验收初审
 
-        document.getElementById('test').style.display = 'block';
 
 
         $("#burgLeaderOpinion").removeAttr("readonly");

@@ -43,23 +43,17 @@ public class WechatController {
      * @return
      */
     @GetMapping(value = "/{app}/back", params = {"code", "state"})
-    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state) {
+    public RedirectView wechatBack(HttpServletRequest request, @PathVariable String app, String code, String state, @RequestParam String toUrl) {
         if (StringUtils.isBlank(code)) {
             throw new IllegalArgumentException("code不能为空");
         }
-
         if (StringUtils.isBlank(state)) {
             throw new IllegalArgumentException("state不能为空");
         }
-
-
-        String toUrl = "http://192.168.5.48/api-b/pages/wechat/index.html";
-
+        String url = wechatConfig.getDomain() + wechatConfig.getInfos().get(app).getIndexPageUrl();
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
-
-        toUrl = wechatService.getToUrl(toUrl, wechatUserInfo);
-
-        return new RedirectView(toUrl);
+        url = wechatService.getToUrl(url, wechatUserInfo);
+        return new RedirectView(url + "?toUrl=" + toUrl);
     }
 
     /**
