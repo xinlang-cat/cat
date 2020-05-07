@@ -129,7 +129,7 @@ function queryIndicators(id) {
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text"  name="content" value="' + this.content + '" lay-verify="required">' +
+                        '<textarea name="content" placeholder="请输入" class="layui-textarea" lay-verify="required">' + this.content + '</textarea>' +
                         '</div>' +
                         '</td>' +
                         '</td>' +
