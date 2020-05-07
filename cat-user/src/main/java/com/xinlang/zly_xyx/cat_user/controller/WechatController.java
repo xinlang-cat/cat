@@ -3,6 +3,7 @@ package com.xinlang.zly_xyx.cat_user.controller;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_user.service.IWechatService;
 import com.xinlang.zly_xyx.user.AppUser;
+import com.xinlang.zly_xyx.user.LoginAppUser;
 import com.xinlang.zly_xyx.user.WechatUserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -52,8 +53,9 @@ public class WechatController {
         }
         String url = wechatConfig.getDomain() + wechatConfig.getInfos().get(app).getIndexPageUrl();
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
-        url = wechatService.getToUrl(url, wechatUserInfo);
-        return new RedirectView(url + "?toUrl=" + toUrl);
+        url = wechatService.getToUrl(url + "?toUrl=" + toUrl, wechatUserInfo);
+        System.out.println(url);
+        return new RedirectView(url);
     }
 
     /**
@@ -68,7 +70,6 @@ public class WechatController {
         if (appUser == null) {
             throw new IllegalArgumentException("非法请求");
         }
-
         log.info("绑定微信和用户：{},{},{}", appUser, openid, tempCode);
         wechatService.bindingUser(appUser, tempCode, openid);
     }
