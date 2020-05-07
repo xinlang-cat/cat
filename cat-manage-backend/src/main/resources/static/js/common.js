@@ -23,7 +23,6 @@ function getUrlParam(key) {
 		return "";
 	}
 	var params = url[1].split("&");
-	
 	for(var i=0; i<params.length; i++){
 		var param = params[i].split("=");
 		if(key == param[0]){

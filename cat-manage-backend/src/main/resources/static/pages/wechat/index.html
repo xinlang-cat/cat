@@ -18,6 +18,7 @@
 <script type="text/javascript">
     var access_token = localStorage.getItem("access_token");
     var toUrl = getUrlParam("toUrl");
+
     if (access_token != null && access_token.trim().length != 0) {
         showUserInfo(access_token);
     } else {
@@ -42,14 +43,12 @@
                         if (xhr.status == 401) {
                             location.href = domainName + toUrl;
                         }
-
                     }
                 });
             } else {// 未绑定，跳去登录页绑定
                 location.href = "login.html?openid=" + openid + "&tempCode=" + tempCode + "&nickname=" + nickname + "&headimgurl=" + headimgurl + "&toUrl=" + toUrl;
             }
         }
-
     }
 
     // 获取用户信息
