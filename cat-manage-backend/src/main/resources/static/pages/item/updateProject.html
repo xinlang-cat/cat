@@ -380,7 +380,7 @@
                             <tr style="background-color: #ffffff;">
                                 <th class="tdDorder" rowspan="1" colspan="8">
                                     <div class="field">
-                                        <span>主要研究、开发人员及责任分工</span>
+                                        <span>主要研究、开发人员及责任分工<span style="color: red">（注意：项目负责人除外）</span></span>
                                     </div>
                                 </th>
                                 <th class="tdDorder" rowspan="1" colspan="1" style="padding: 0 5px; text-align: right">
@@ -855,7 +855,7 @@
                             <tr style="background-color: #ffffff;">
                                 <th class="tdDorder" rowspan="1" colspan="4">
                                     <div class="field">
-                                        <span>甲方提供的科技经费用途预算</span>
+                                        <span>甲方提供的科技经费用途预算<span style="color: red">（金额必填无预算则填0）</span></span>
                                     </div>
                                 </th>
                             </tr>
@@ -1151,7 +1151,7 @@
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text" placeholder="请输入" name="content" lay-verify="required">' +
+                        '<textarea name="content" placeholder="请输入" class="layui-textarea" lay-verify="required"></textarea>' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -1526,6 +1526,13 @@
                             this.update({
                                 data: d
                             })
+                        });
+                        //项目负责人不可为成员，改为禁用
+                        $("#leader_2 option").each(function () {
+                            if($(this).val()==arr[0]){
+                                $(this).attr("disabled","");
+                                form.render();
+                            }
                         });
                     },
                     btn2: function (index, layero) {
