@@ -726,10 +726,16 @@
                 var signs = [];
                 for (var i = 0; i < data.length; i++) {
                     var d = data[i];
-                    signs.push(d.labelSign);
+                    var labelSign = d.labelSign;
+                    if (labelSign != "" && labelSign != null && labelSign != undefined) {
+                        signs.push(d.labelSign);
+                    }
+
                 }
                 $("#domainsVa").val(signs);
+
                 if (!jQuery.isEmptyObject(signs)) {
+                    alert("signs="+signs);
                     getNames(signs, $("#text4"));
                 }
             }
@@ -745,10 +751,15 @@
                 var signs = [];
                 for (var i = 0; i < data.length; i++) {
                     var d = data[i];
-                    signs.push(d.labelSign);
+                    var labelSign = d.labelSign;
+                    if (labelSign != "" && labelSign != null && labelSign != undefined) {
+                        signs.push(d.labelSign);
+                    }
                 }
                 $("#skillsVa").val(signs);
+
                 if (!jQuery.isEmptyObject(signs)) {
+                    alert("signs="+signs);
                     getNames(signs, $("#text5"));
                 }
             }
