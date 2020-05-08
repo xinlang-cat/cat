@@ -56,7 +56,7 @@ public class WorkLogController {
             if (item.getNowCount() != null && item.getNowCount() != 0) {
                 NumberFormat numberFormat = NumberFormat.getNumberInstance();
                 numberFormat.setMaximumFractionDigits(-1);
-                item.setPlan(numberFormat.format((float)item.getNowCount()/ (float)item.getOriginalCount()*100) + "%");
+                item.setPlan(numberFormat.format((float) item.getNowCount() / (float) item.getOriginalCount() * 100) + "%");
             }
             item.setWorkLogId(workLog.getId());
             item.setItemId(workLog.getItemId());
@@ -106,10 +106,10 @@ public class WorkLogController {
     @LogAnnotation(module = "查询最新一条工作日志")
     public WorkLog findLatelyByItemIdAndTargetId(@RequestParam Integer itemId, @RequestParam Integer targetId) {
         WorkLog workLog = workLogService.findLatelyByItemIdAndTargetId(itemId, targetId);
-        if (workLog != null) {
-            workLog.setWorkLogAffiliates(workLogAffiliateService.findLatelyByItemId(itemId));
-            return workLog;
+        if (workLog == null) {
+            workLog = new WorkLog();
         }
-        return null;
+        workLog.setWorkLogAffiliates(workLogAffiliateService.findLatelyByItemId(itemId));
+        return workLog;
     }
 }
