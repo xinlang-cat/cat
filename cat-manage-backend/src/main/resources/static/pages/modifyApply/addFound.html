@@ -606,7 +606,7 @@
 <script type="text/javascript" src='../item/js/updateProject.js'></script>
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 <script type="application/javascript" src="js/updateProjectVice.js"></script>
-
+<script type="text/javascript" src='../../js/sendMessage.js'></script>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
         var form = layui.form,
@@ -820,13 +820,14 @@
             async: false,
             data: JSON.stringify(data),
             success: function (data) {
+                var userIds = [];
+                var userId = getPARTY_C(id);
+                userIds.push(userId);
+                var content = "您有一条变更申请待处理";
+                var title = "您有一条变更申请待处理";
+                sendMeaasge(content,title,userIds);
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    var userIds = [];
-                    var userId = getPARTY_C(item_id);
-                    userIds.push(userId);
-                    var content = "您有一条变更申请待处理";
-                    var title = "您有一条变更申请待处理";
-                    sendMeaasge(content,title,userIds);
+
                     parent.location.reload();
                 });
             }
