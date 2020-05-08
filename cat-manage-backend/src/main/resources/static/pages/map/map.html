@@ -127,7 +127,7 @@
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showWork(' + obj[i]['id'] + ')">工作总结</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showTarget(' + obj[i]['id'] + ')">项目指标</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showFund(' + obj[i]['id'] + ')">经费使用</button>';
-                    var point = new BMap.Point(obj[i]['lat'], obj[i]['lng']);
+                    var point = new BMap.Point( obj[i]['lng'],obj[i]['lat']);
                     var marker = new BMap.Marker(point, {icon: greenIcon});
                     map.addOverlay(marker);
                     var opts = {

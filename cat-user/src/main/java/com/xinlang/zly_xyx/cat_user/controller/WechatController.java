@@ -24,7 +24,6 @@ public class WechatController {
     private IWechatService wechatService;
     @Autowired
     private WechatConfig wechatConfig;
-
     /**
      * 引导到授权
      *
@@ -54,6 +53,7 @@ public class WechatController {
         if (StringUtils.isBlank(state)) {
             throw new IllegalArgumentException("state不能为空");
         }
+
         String url = wechatConfig.getDomain() + wechatConfig.getInfos().get(app).getIndexPageUrl();
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
         url = wechatService.getToUrl(url + "?toUrl=" + toUrl, wechatUserInfo);

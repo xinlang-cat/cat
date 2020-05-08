@@ -16,7 +16,7 @@
                     <tr>
                         <td align="right">
                             <div class="layui-inline">
-                                <div class="layui-input-inline">
+                                <div class="layui-input-inline" permission="PARTY_B:principal:html,PARTY_B:member:html">
                                     <select name="modules" lay-verify="required" lay-search="" id="modules">
                                         <option value="">选择变更类型</option>
                                         <option value="1">项目名称</option>
@@ -29,7 +29,7 @@
                                         <option value="8">指标/人员/分工变更</option>
                                     </select>
                                 </div>
-                                <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt">
+                                <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt" permission="PARTY_B:principal:html,PARTY_B:member:html">
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
                                 <button class="layui-btn layui-btn-sm"

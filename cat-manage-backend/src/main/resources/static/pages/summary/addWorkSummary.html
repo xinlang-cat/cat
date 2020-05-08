@@ -946,11 +946,11 @@
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='../item/js/projectInfo.js'></script>
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
-
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 
 <script>
     var itemId = getUrlParam("itemId");
-
+    var pers = checkPermission();
     $("#itemId").val(itemId);
     layui.use(['layer'], function () {
         var layer = layui.layer;
@@ -1034,6 +1034,7 @@
                         $("textarea[name=" + key + "]").val(data[0][key]);
                     }
                 });
+
                 if(data.length>0){
                     if (data[0].status==0){
                         $("input").attr("style", "text-align: center;border: 0px;");
@@ -1043,7 +1044,12 @@
                         $("textarea").attr('readonly', true);
                         document.getElementById('add').style.display='none';
                     }
-
+                }
+                if ($.inArray('PARTY_B:principal:html', pers) == -1 && $.inArray('PARTY_B:member:html', pers) == -1) {
+                    $("input").attr('readonly', true);
+                    $("input").attr("style", "text-align: center;border: 0px;");
+                    $("textarea").attr('readonly', true);
+                    document.getElementById('add').style.display = 'none';
                 }
 
             }
