@@ -1,6 +1,7 @@
 package com.xinlang.zly_xyx.cat_user.controller;
 
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
+import com.xinlang.zly_xyx.cat_user.config.WechatConfig;
 import com.xinlang.zly_xyx.cat_user.service.IWechatService;
 import com.xinlang.zly_xyx.user.AppUser;
 import com.xinlang.zly_xyx.user.LoginAppUser;
@@ -21,7 +22,8 @@ public class WechatController {
 
     @Autowired
     private IWechatService wechatService;
-
+    @Autowired
+    private WechatConfig wechatConfig;
     /**
      * 引导到授权
      *
@@ -51,6 +53,7 @@ public class WechatController {
         if (StringUtils.isBlank(state)) {
             throw new IllegalArgumentException("state不能为空");
         }
+
         String url = wechatConfig.getDomain() + wechatConfig.getInfos().get(app).getIndexPageUrl();
         WechatUserInfo wechatUserInfo = wechatService.getWechatUserInfo(app, request, code, state);
         url = wechatService.getToUrl(url + "?toUrl=" + toUrl, wechatUserInfo);
