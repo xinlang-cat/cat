@@ -1,5 +1,6 @@
 
-
+var h = $(window).height() -15;
+var w = $(window).width() -30;
 layui.use(['element', 'layer', 'form'], function () {
     var element = layui.element;
     var layer = layui.layer;

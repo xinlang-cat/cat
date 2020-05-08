@@ -18,7 +18,7 @@
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
     <div style="position: absolute;right: 30px;top: 15px;">
-        <button type="button" class="layui-btn layui-btn-sm" onclick="toSkill();">工作总结
+        <button type="button" class="layui-btn layui-btn-sm" onclick="toSkill();">查看技术总结
         </button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">返回
         </button>
@@ -951,6 +951,7 @@
 <script>
     var itemId = getUrlParam("itemId");
     var pers = checkPermission();
+    var id;
     $("#itemId").val(itemId);
     layui.use(['layer'], function () {
         var layer = layui.layer;
@@ -1000,17 +1001,33 @@
         var formdata = $("#form").serializeObject();
         formdata.itemId=itemId;
         formdata.status = status;
-        $.ajax({
-            type: 'post',
-            url: domainName + '/api-summary/work',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
-            success: function (data) {
-                layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    location.reload();
-                });
-            }
-        });
+        if (!id){
+            $.ajax({
+                type: 'post',
+                url: domainName + '/api-summary/work',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    layer.msg("成功", {shift: -1, time: 1000}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        }else {
+            formdata.id = id;
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/work',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    layer.msg("成功", {shift: -1, time: 1000}, function () {
+                        location.reload();
+                    });
+                }
+            });
+        }
+
 
     }
     function toSkill() {
@@ -1036,6 +1053,7 @@
                 });
 
                 if(data.length>0){
+                    id = data[0].id;
                     if (data[0].status==0){
                         $("input").attr("style", "text-align: center;border: 0px;");
                     }else {

@@ -178,6 +178,7 @@
                     <div class="field">
                         <input type="hidden" name="id" id="id">
                         <input type="hidden" name="status" id="status">
+                        <input type="hidden" name="change_user" id="change_user">
                         <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
                     </div>
                 </td>
@@ -258,7 +259,7 @@
 <script type="application/javascript" src="../../layui/xm-select.js"></script>
 <script type="application/javascript" src="js/updateProjectVice.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
-
+<script type="text/javascript" src='../../js/sendMessage.js'></script>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'element', 'jquery', 'upload'], function () {
         var form = layui.form,
@@ -347,6 +348,7 @@
 
     //获取项目数据项目
     var pers = checkPermission();
+
     var id = getUrlParam("id");
     $('#id').val(id);
     var type = getUrlParam("type");
@@ -366,6 +368,7 @@
                 var d = data[0];
                 $("#id").text(d.id);
                 $("#content").text(d.content);
+                $("#change_user").val(d.user_id);
                 $("#check_unit_idea").text(d.check_unit_idea);
                 $("#manage_unit_idea").text(d.manage_unit_idea);
                 getStatus(d.status);
@@ -637,35 +640,35 @@
             async: false,
             data: JSON.stringify(modifyApply),
             success: function (data) {
+                var userIds = [];
+                if (status==2){
+                    var userId = $("#change_user").val();
+                    userIds.push(userId);
+                    var content = "您有一条变更申请审核通过";
+                    var title = "您有一条变更申请审核通过";
+                }else if (status==3){
+                    var userId = $("#change_user").val();
+                    userIds.push(userId);
+                    var content = "您有一条变更申请审核未通过";
+                    var title = "您有一条变更申请审核未通过";
+                }else if (status==4){
+                    var userId = getPARTY_A(item_id);
+                    userIds.push(userId);
+                    var content = "您有一条变更申请审核通过";
+                    var title = "您有一条变更申请审核通过";
+                }else if (status==5){
+                    var userId = $("#change_user").val();
+                    userIds.push(userId);
+                    var content = "您有一条变更申请审核通过";
+                    var title = "您有一条变更申请审核通过";
+                }else if (status==6){
+                    var userId = $("#change_user").val();
+                    userIds.push(userId);
+                    var content = "您有一条变更申请审核未通过";
+                    var title = "您有一条变更申请审核未通过";
+                }
+                sendMeaasge(content,title,userIds);
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                    var userIds = [];
-                    if (status==2){
-                        var userId = getPARTY_B(item_id);
-                        userIds.push(userId);
-                        var content = "您有一条变更申请审核通过";
-                        var title = "您有一条变更申请审核通过";
-                    }else if (status==3){
-                        var userId = getPARTY_B(item_id);
-                        userIds.push(userId);
-                        var content = "您有一条变更申请审核未通过";
-                        var title = "您有一条变更申请审核未通过";
-                    }else if (status==4){
-                        var userId = getPARTY_A(item_id);
-                        userIds.push(userId);
-                        var content = "您有一条变更申请审核通过";
-                        var title = "您有一条变更申请审核通过";
-                    }else if (status==5){
-                        var userId = getPARTY_B(item_id);
-                        userIds.push(userId);
-                        var content = "您有一条变更申请审核通过";
-                        var title = "您有一条变更申请审核通过";
-                    }else if (status==6){
-                        var userId = getPARTY_B(item_id);
-                        userIds.push(userId);
-                        var content = "您有一条变更申请审核未通过";
-                        var title = "您有一条变更申请审核未通过";
-                    }
-                    sendMeaasge(content,title,userIds);
                         parent.location.reload();
                 });
             }
