@@ -777,13 +777,13 @@
     });
 
     //初始化创建者信息
-    $.get(domainName + "/project-user/users", {id: userId}, function (res) {
-        $("#createUserName").val(res.data[0].name);
-        $(".createUserName").html(res.data[0].name);
-        $("#createUserEmail").val(res.data[0].email);
-        $(".createUserEmail").html(res.data[0].email);
-        $("#createUserPhone").val(res.data[0].phone);
-        $(".createUserPhone").html(res.data[0].phone);
+    $.get(domainName + "/project-user/user-anon/" + userId, function (res) {
+        $("#createUserName").val(res[0].name);
+        $(".createUserName").html(res[0].name);
+        $("#createUserEmail").val(res[0].email);
+        $(".createUserEmail").html(res[0].email);
+        $("#createUserPhone").val(res[0].phone);
+        $(".createUserPhone").html(res[0].phone);
     });
 
     //初始化指标
