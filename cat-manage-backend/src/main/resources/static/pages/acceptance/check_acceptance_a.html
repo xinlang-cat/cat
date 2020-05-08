@@ -618,7 +618,6 @@
                 ids = arr;
                 match = true;
             }
-            console.log(arr);
 
         }
     });
@@ -639,7 +638,7 @@
     }
 
     function add_ACC() {
-
+alert(ids);
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
 
@@ -651,6 +650,7 @@
                 layer.msg("请匹配专家对项目进行审核！");
                 return;
             } else {
+
                 $.ajax({
                     type: 'post',
                     url: domainName + '/project-user/item/list',
@@ -658,9 +658,14 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(ids),
                     success: function (res) {
+                        var userIds = [];
+                        for (var i =0;i<ids.length;i++){
+                            var userId = ids[i].userId;
+                            userIds.push(userId);
+                        }
                         var content = "您有一条验收审核待处理";
                         var title = "您有一条验收审核待处理";
-                        sendMeaasge(content,title,ids);
+                        sendMeaasge(content,title,userIds);
                         layer.msg("匹配专家成功！");
                     },
                     error: function (res) {

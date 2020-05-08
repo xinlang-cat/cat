@@ -474,7 +474,7 @@
                 data: JSON.stringify({id: id, status: 3}),
                 success: function (data) {
                     for (var i =0;i<ids.length;i++){
-                        var expert_id = ids[0].userId;
+                        var expert_id = ids[i].userId;
                         var result = {"item_id": item_id, "audit_apply_id": id,"expert_id":expert_id,"target_id":target_id,"end_date":end_date,"start_date":start_date,"content":content};
                         $.ajax({
                             type: 'post',
