@@ -197,7 +197,7 @@
                                 var btn = null;
                                 if ($.inArray('PARTY_C:html', pers)!=-1) {
                                     var status = row['status'] == 1 ? "申请详情" : "查定报告";
-                                    btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ')" >' + status + '<i class="layui-icon"></i></button>');
+                                    btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ','+row['item_id']+')" >' + status + '<i class="layui-icon"></i></button>');
                                 }else{
                                     btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',' + row['status'] + ')" >查看详情<i class="layui-icon"></i></button>');
                                 }
@@ -291,7 +291,7 @@
         }
 
     }
-    function check(id, status) {
+    function check(id, status,item_id) {
         if (status == 2) {
             layer.open({
                 title: "添加查定报告",
@@ -299,7 +299,7 @@
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['addResult.html?id=' + id],
+                content: ['addResult.html?id=' + id+'&item_id='+item_id],
                 end: function () {
 
                 }
@@ -312,7 +312,7 @@
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['checkResult.html?id=' + id],
+                content: ['checkResult.html?id=' + id+'&item_id='+item_id],
                 end: function () {
 
                 }
@@ -324,7 +324,7 @@
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['checkApply.html?id=' + id],
+                content: ['checkApply.html?id=' + id+'&item_id='+item_id],
                 end: function () {
 
                 }
