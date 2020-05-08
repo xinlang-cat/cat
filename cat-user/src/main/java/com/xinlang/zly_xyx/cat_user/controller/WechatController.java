@@ -1,6 +1,7 @@
 package com.xinlang.zly_xyx.cat_user.controller;
 
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
+import com.xinlang.zly_xyx.cat_user.config.WechatConfig;
 import com.xinlang.zly_xyx.cat_user.service.IWechatService;
 import com.xinlang.zly_xyx.user.AppUser;
 import com.xinlang.zly_xyx.user.LoginAppUser;
@@ -21,6 +22,8 @@ public class WechatController {
 
     @Autowired
     private IWechatService wechatService;
+    @Autowired
+    private WechatConfig wechatConfig;
 
     /**
      * 引导到授权
