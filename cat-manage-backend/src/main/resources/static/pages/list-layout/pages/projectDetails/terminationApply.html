@@ -68,7 +68,7 @@
 <!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
 <script type="text/javascript" src="../../js/jquery.media.js"></script>
 <script>
-    var accessorys = [];
+    var accessorys = '';
     layui.use('upload', function () {
         var $ = layui.jquery,
             upload = layui.upload;
@@ -82,11 +82,11 @@
                 var str = '<tr> <td>' + res.name + '</td>\n' +
                     '<td>\n' +
                     '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+res.url+'" target="_blank">打开</a>\n' +
-                    '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
+                    /*'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +*/
                     '</td>\n' +
                     '</tr>';
                 $('#filesList').append(str);
-                accessorys.push(res.id);
+                accessorys += ','+res.id;
             }
             , error: function () {
                 //请求异常回调
