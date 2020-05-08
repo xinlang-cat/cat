@@ -110,10 +110,12 @@ public class MessageController {
     @ApiOperation(value = "设置已读")
     public void setIsRead(@RequestBody Set<Integer> ids) {
         MessageUser messageUser = new MessageUser();
+        AppUser appUser = AppUserUtil.getLoginAppUser();
         ids.forEach(item -> {
             messageUser.setIsRead(1);
             messageUser.setReadTime(new Date());
-            messageUser.setId(item);
+            messageUser.setUserId(appUser.getId().intValue());
+            messageUser.setMessageId(item);
             messageUserService.update(messageUser);
         });
     }
