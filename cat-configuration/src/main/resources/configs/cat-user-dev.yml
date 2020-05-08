@@ -35,11 +35,12 @@ security:
       user-info-uri: http://xinlangxfpt.com/api-o/user-me
       prefer-token-info: false
 wechat:
-  domain: http://xinlangxfpt.com/api-u
+  domain: http://xinlangxfpt.com
   infos:
     app1:
       appid: wxc0db13c13e39ec9f
       secret: 7e79acd269998bd905f29d00d6dfdac7
+      index-page-url: /api-b/pages/wechat/index.html
     app2:
       appid: xxx
       secret: xxx
