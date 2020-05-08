@@ -134,11 +134,14 @@
                     $("#end_date").val(formatDate3(data[0].end_date));
                     $("#start_date2").val(formatDate3(data[0].start_date_true));
                     $("#end_date2").val(formatDate3(data[0].end_date_true));
-                    $.get(domainName+"/api-f/albums/list",{ids:data[0].accessory},function (data1) {
-                        $.each(data1,function (i,item) {
-                            addImgHtml(item)
-                        });
-                    })
+                    var accessory= data[0].accessory;
+                    if (accessory != "" && accessory != null && accessory != undefined) {
+                        $.get(domainName + "/api-f/albums/list", {ids:accessory}, function (data1) {
+                            $.each(data1, function (i, item) {
+                                addImgHtml(item)
+                            });
+                        })
+                    }
                 });
 
             }

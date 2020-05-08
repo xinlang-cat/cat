@@ -735,11 +735,14 @@
                 queryFundBudget(id);
 
                 queryFundSource(id);
-                $.get(domainName + "/api-f/albums/list", {ids: d.accessory}, function (data1) {
-                    $.each(data1, function (i, item) {
-                        addImgHtml(item)
-                    });
-                })
+                var accessory= d.accessory;
+                if (accessory != "" && accessory != null && accessory != undefined) {
+                    $.get(domainName + "/api-f/albums/list", {ids:accessory}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            addImgHtml(item)
+                        });
+                    })
+                }
 
             }
         })

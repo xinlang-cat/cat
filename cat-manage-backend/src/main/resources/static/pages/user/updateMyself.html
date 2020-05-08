@@ -647,16 +647,19 @@
     function updateSkills() {
         var userType = $("#userType").val();
         var signs = $("#skillsVa").val();
-        var result = signs.split(",");
-        $.ajax({
-            type: 'post',
-            url: domainName + '/project-user/toSkills?userType=' + userType,
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(result),
-            success: function (data) {
-                layer.msg("成功");
-            }
-        });
+        if (signs != "" && signs != null && signs != undefined) {
+            var result = signs.split(",");
+            $.ajax({
+                type: 'post',
+                url: domainName + '/project-user/toSkills?userType=' + userType,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(result),
+                success: function (data) {
+                    layer.msg("成功");
+                }
+            });
+        }
+
     }
 
     function delSkills() {
@@ -705,16 +708,20 @@
     function updateDomains() {
         var userType = $("#userType").val();
         var signs = $("#domainsVa").val();
-        var result = signs.split(",");
-        $.ajax({
-            type: 'post',
-            url: domainName + '/project-user/toDomains?userType=' + userType,
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(result),
-            success: function (data) {
-                layer.msg("成功");
-            }
-        });
+        if (signs != "" && signs != null && signs != undefined) {
+            var result = signs.split(",");
+            $.ajax({
+                type: 'post',
+                url: domainName + '/project-user/toDomains?userType=' + userType,
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(result),
+                success: function (data) {
+                    layer.msg("成功");
+                }
+            });
+        }
+
+
     }
 
     function getUserDomain(id) {
@@ -726,10 +733,16 @@
                 var signs = [];
                 for (var i = 0; i < data.length; i++) {
                     var d = data[i];
-                    signs.push(d.labelSign);
+                    var labelSign = d.labelSign;
+                    if (labelSign != "" && labelSign != null && labelSign != undefined) {
+                        signs.push(d.labelSign);
+                    }
+
                 }
                 $("#domainsVa").val(signs);
+
                 if (!jQuery.isEmptyObject(signs)) {
+
                     getNames(signs, $("#text4"));
                 }
             }
@@ -745,10 +758,15 @@
                 var signs = [];
                 for (var i = 0; i < data.length; i++) {
                     var d = data[i];
-                    signs.push(d.labelSign);
+                    var labelSign = d.labelSign;
+                    if (labelSign != "" && labelSign != null && labelSign != undefined) {
+                        signs.push(d.labelSign);
+                    }
                 }
                 $("#skillsVa").val(signs);
+
                 if (!jQuery.isEmptyObject(signs)) {
+
                     getNames(signs, $("#text5"));
                 }
             }
