@@ -327,13 +327,15 @@
 
 
             <div class="layui-btn-group btn-group" style="text-align: center;display: none" >
-                <!--<button data-method="offset" type="button" data-type="auto"
-                        class="layui-btn layui-btn-normal" id="test">匹配专家
-                </button>-->
+                <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
+                        id="test">
+                    匹配专家
+                </button>
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
                         onclick="pass();">
                     申请通过
                 </button>
+
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
                         onclick="unPass();">
                     申请未通过
@@ -358,25 +360,33 @@
     var layedit, index;
     var arr = new Array();
     var id = getUrlParam("id");
+    var item_id;
     var userType ;
-    var h = $(window).height() - 15;
-    layui.use(['layedit', 'upload', 'laydate'], function () {
-        layedit = layui.layedit;
+    var match = false;
+    var ids = new Array();
+    var target_id;
+    var start_date;
+    var end_date;
+    var content;
+    layui.use(['layedit', 'upload', 'laydate', 'form', 'layer'], function () {
+        layer = layui.layer;
         laydate = layui.laydate;
-        index = layedit.build('demo', {tool: [], height: h});
+        upload = layui.upload;
+        form = layui.form;
+        var $ = layui.$, slider = layui.slider;
+
 
     });
     initData();
     $.matchExpert({
         elem: '#test',
         itemId: item_id,
-        defaultSave: true,//保存到默认数据库
         defaultSave: false,//自定义保存
         defaultSaveFun: function (arr) {
             if (arr.length == 0) {
                 layer.msg("未选择专家！");
             } else {
-                arr = arr;
+                ids = arr;
                 match = true;
             }
             console.log(arr);
@@ -396,10 +406,15 @@
             success: function (data) {
                 $(data).each(function () {
                     status(data[0].status);
+                    item_id = data[0].item_id;
                     queryInformation(data[0].item_id);
                     queryContactWay(data[0].item_id);
                     $("#content").text(data[0].content);
+                    content = data[0].content;
                     $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
+                    end_date = data[0].end_date;
+                    start_date = data[0].start_date;
+                    target_id=data[0].target_id;
                     $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                         $.each(data1, function (i, item) {
                             var serial = $("#target").parents('thead').next().children().length + 1;
@@ -451,18 +466,38 @@
     }
 
     function pass() {
-        $.ajax({
-            type: 'put',
-            url: domainName + '/project-item/item/target/auditApply/update',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id, status: 2}),
-            success: function (data) {
-                var msg = "成功";
-                layer.msg(msg, {shift: -1, time: 1000}, function () {
-                    parent.location.reload();
-                });
-            }
-        });
+        if (match){
+            $.ajax({
+                type: 'put',
+                url: domainName + '/project-item/item/target/auditApply/update',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({id: id, status: 3}),
+                success: function (data) {
+                    for (var i =0;i<ids.length;i++){
+                        var expert_id = ids[0].userId;
+                        var result = {"item_id": item_id, "audit_apply_id": id,"expert_id":expert_id,"target_id":target_id,"end_date":end_date,"start_date":start_date,"content":content};
+                        $.ajax({
+                            type: 'post',
+                            url: domainName + '/project-item/item/target/auditApplyResult/one',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(result),
+                            success: function (data) {
+                            }
+                        });
+                    }
+                    var msg = "成功";
+                    layer.msg(msg, function () {
+                        //将专家与查定申请关联
+
+                        parent.location.reload();
+                    });
+                }
+            });
+        }else {
+            var msg = "请指定专家对指标进行查定！";
+            layer.msg(msg, {shift: -1, time: 1000});
+        }
+
     }
 
     function unPass() {
@@ -470,7 +505,7 @@
             type: 'put',
             url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({id: id, status: 5}),
+            data: JSON.stringify({id: id, status: 2}),
             success: function (data) {
                 var msg = "成功";
                 layer.msg(msg, {shift: -1, time: 1000}, function () {

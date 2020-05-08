@@ -579,21 +579,21 @@
         $.ajax({
             type : 'get',
             data:data,
-            url : domainName + '/project-item/item/target/applyList',
+            url : domainName + '/project-item/item/target/auditApplyResult',
             async : false,
             success : function(data) {
+
                 $(data).each(function () {
                     queryInformation(data[0].item_id);
                     queryContactWay(data[0].item_id);
                     $("#content").val(data[0].content);
                     $("#purpose").val(data[0].purpose);
-
                     $("#depand").val(data[0].depand);
                     $("#details").val(data[0].details);
                     $("#means").val(data[0].means);
                     $("#description").val(data[0].description);
 
-                    $("#result").text(data[0].status == 3 ? "查定合格" : "查定不合格");
+                    $("#result").text(data[0].status == 2 ? "查定合格" : "查定不合格");
 
                     $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
                     $("#periods").text(formatDate3(data[0].start_date_true) + " - " + formatDate3(data[0].end_date_true));
@@ -634,6 +634,7 @@
             }
         });
     }
+
     function addImgHtml(item) {
         var str = '';
         var val = item.name.substring(0, item.name.indexOf("."));

@@ -45,12 +45,12 @@
 <script type="text/javascript">
 
     var pers = checkPermission();
-    var itemId="";
-    itemId = getUrlParam("item_id");
+    var userId;//当前用户ID
     var example;
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
+        getUser();
 
         function init() {
             example =
@@ -58,22 +58,22 @@
                     "searching": false,
                     "processing": false,
                     "serverSide": true,
-                   /* "info": false,
-                    "paging": true, // 禁止分页*/
+                    /* "info": false,
+                     "paging": true, // 禁止分页*/
                     "ordering": false,
                     "language": {
                         "url": "../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url": domainName + "/project-item/item/target/applyList/page",
-                        "data":function(d){
-                            d.item_ids = itemId;
+                        "url": domainName + "/project-item/item/target/auditApplyResult/page",
+                        "data": function (d) {
+                            d.expert_id = userId;
                         },
                         "type": "get",
                         "dataSrc": function (json) {
                             console.log(json)
-                            json.recordsTotal=json.total;
-                            json.recordsFiltered=json.total;
+                            json.recordsTotal = json.total;
+                            json.recordsFiltered = json.total;
                             return json.data;
                         },
                         "error": function (xhr, textStatus, errorThrown) {
@@ -117,7 +117,8 @@
                             "defaultContent": "",
                             "render": function (data, type, row) {
                                 var start = formatDate3(data);
-                                return start;
+                                var end = formatDate3( row['start_date']);
+                                return start+"-"+end;
                             }
                         },
                         {
@@ -140,18 +141,12 @@
                                 var status = row['status'];
                                 $.ajaxSettings.async = false;
                                 if (status == 1) {
-                                    data = "待查定";
+                                    data = "待专家审核";
                                 } else if (status == 2) {
-                                    data = "查定中";
-                                } else if (status == 3) {
-                                    data = "查定合格";
-                                } else if (status == 4) {
-                                    data = "查定不合格";
-                                } else if (status == 5) {
-                                    data = "查定申请未通过";
+                                    data = "审核通过";
+                                }else  if (status == 3) {
+                                    data = "审核未通过";
                                 }
-
-
                                 $.ajaxSettings.async = true;
                                 return data;
                             }
@@ -160,16 +155,9 @@
                             "data": "id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-
-                                var btn = null;
-                                if ($.inArray('PARTY_C:html', pers)!=-1) {
-                                    var status = row['status'] == 4 ? "申请详情" : "查定报告";
-                                    btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ','+row['item_id']+')" >' + status + '<i class="layui-icon"></i></button>');
-                                }else{
-                                    btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',' + row['status'] + ')" >查看详情<i class="layui-icon"></i></button>');
-                                }
+                                var status = row['status'] == 1 ? "查定报告" : "查定详情";
+                                var btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ')" >' + status + '<i class="layui-icon"></i></button>');
                                 var showDetail = btn.prop("outerHTML");
-
                                 return showDetail;
                             }
                         },
@@ -177,10 +165,11 @@
                     ],
                 });
         }
+
         init();
     });
-    var h = $(window).height()-100;
-    var w = $(window).width()-200;
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
 
     function getCompanryCode() {
 
@@ -216,19 +205,7 @@
 
                 }
             });
-        } else if (status == 1||status==2) {
-            layer.open({
-                title: "查看查定申请",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['checkApply.html?id=' + id],
-                end: function () {
-
-                }
-            });
-        }else if (status==5){
+        } else if (status == 1 || status == 2) {
             layer.open({
                 title: "查看查定申请",
                 type: 2,
@@ -243,52 +220,37 @@
         }
 
     }
-    function check(id, status,item_id) {
-        if (status == 3 || status==4) {
-            layer.open({
-                title: "添加查定报告",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['addResultC.html?id=' + id+'&item_id='+item_id],
-                end: function () {
 
-                }
-            });
+    function check(id, status) {
 
-        } else if (status == 5 || status == 6) {
+        if (status == 1  ) {
+            if ($.inArray('EXPERT:html', pers)!=-1) {
+                layer.open({
+                    title: "添加查定报告",
+                    type: 2,
+                    area: [w + 'px', h + 'px'],
+                    maxmin: true,
+                    shadeClose: true,
+                    content: ['addResult.html?id=' + id],
+                    end: function () {
+
+                    }
+                });
+            }else {
+                layer.msg("专家尚未填写查定报告，请待专家填写完毕后查看！", {shift: -1, time: 1000}, function () {
+
+                });
+            }
+
+
+        } else if (status == 2 ) {
             layer.open({
                 title: "查看查定报告",
                 type: 2,
                 area: [w + 'px', h + 'px'],
                 maxmin: true,
                 shadeClose: true,
-                content: ['checkResultC.html?id=' + id+'&item_id='+item_id],
-                end: function () {
-
-                }
-            });
-        } else if (status == 1 || status ==2) {
-            layer.open({
-                title: "查看查定申请",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['checkApply.html?id=' + id+'&item_id='+item_id],
-                end: function () {
-
-                }
-            });
-        }else if (status==5){
-            layer.open({
-                title: "查看查定申请",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['checkApply.html?id=' + id],
+                content: ['checkResult.html?id=' + id],
                 end: function () {
 
                 }
@@ -312,10 +274,21 @@
 
     }
 
+    function getUser() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/users/current',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                userId = data.id;
+            }
+        });
+    }
+
     $("#searchBt").click(function () {
         example.ajax.reload();
     });
-
 
 
 </script>

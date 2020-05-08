@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
@@ -16,23 +15,13 @@
         }
     </style>
 </head>
-
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
     <div style="position: absolute;right: 30px;top: 15px;">
-        <button class="layui-btn layui-btn-sm" onclick="showBase()">
-            <i class="layui-icon">&#xe615;</i>查看项目信息
+        <button class="layui-btn layui-btn-sm" onclick="showExpert()">
+            <i class="layui-icon">&#xe615;</i>查看专家意见
         </button>
-        <button class="layui-btn layui-btn-sm" onclick="showTarget()">
-            <i class="layui-icon">&#xe615;</i>查看项目指标
-        </button>
-        <button class="layui-btn layui-btn-sm" onclick="showStage()">
-            <i class="layui-icon">&#xe615;</i>查看阶段总结
-        </button>
-        <button class="layui-btn layui-btn-sm" onclick="showFund()">
-            <i class="layui-icon">&#xe615;</i>查看经费使用
-        </button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
+
     </div>
 </div>
 <div class="layui-form" style="margin-top: 60px;">
@@ -63,7 +52,7 @@
             <td class="mainTd_1" rowspan="2" colspan="2" style=""></td>
             <td class="mainTd_1" rowspan="1" colspan="4" style="text-align: center;">
                 <div class="headline">
-                    <span>项目信息</span>
+                    <span>科技计划项目查定申请书</span>
                 </div>
             </td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -229,7 +218,24 @@
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
         </form>
-        <!--查定申请详情-->
+        </tbody>
+    </table>
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <!--基本信息-->
         <form id="form2">
             <tr style="height: 40px;">
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -287,28 +293,7 @@
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
         </form>
-        <!--主要研究、开发人员及责任分工-->
-        <tr style="height: 25px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="8" style="border-bottom: 1px solid #dadcde;"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-        <tr style="height: 25px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="8"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
-        <tr style="height: 40px;">
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_1" rowspan="1" colspan="6" style="background: #f6f6f6 !important;">
-                <div class="subheading">
-                    <span>丨 主要研究、开发人员及责任分工</span>
-                </div>
-            </td>
-            <td class="mainTd_1" rowspan="1" colspan="1"></td>
-            <td class="mainTd_0" rowspan="1" colspan="1"></td>
-        </tr>
+        <!--项目考核指标-->
         <tr style="height: 24px;">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="8"></td>
@@ -318,7 +303,7 @@
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="6">
-                <div class="personnel">
+                <div class="indicators">
                     <form>
                         <table class="layui-table">
                             <colgroup>
@@ -349,7 +334,27 @@
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
-        <!--项目考核指标-->
+
+        </tbody>
+    </table>
+    </table>
+
+
+    <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
+        <colgroup>
+            <col width="8%">
+            <col width="3%">
+            <col width="10%">
+            <col width="28%">
+            <col width="2%">
+            <col width="10%">
+            <col width="20">
+            <col width="8%">
+            <col width="3%">
+            <col width="8%">
+        </colgroup>
+        <tbody>
+        <!--基本信息-->
         <form id="form">
             <tr style="height: 40px;">
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -363,35 +368,6 @@
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
 
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>实际查定时间</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                    <div class="field">
-                        <input type="hidden" name="id" id="id">
-                        <input type="text" name="periods" id="periods" placeholder="请输入" class="form-control date"
-                               style="background-color: #ffffff;"
-                               readonly>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
 
             <tr style="height: 24px;">
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
@@ -426,98 +402,6 @@
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
                 <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <span>查定目的</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="purpose" name="purpose" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定依据</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="depand" name="depand" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定内容</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="details" name="details" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定方法</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="means" name="means" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
                         <span>查定结果</span>
                     </div>
                 </td>
@@ -525,8 +409,8 @@
                     <div class="field">
                         <select class="form-control input-sm" name="status" id="status">
                             <option value=''>请选择</option>
-                            <option value='2'>查定合格</option>
-                            <option value='3'>查定不合格</option>
+                            <option value='5'>查定合格</option>
+                            <option value='6'>查定不合格</option>
                         </select>
                     </div>
                 </td>
@@ -534,34 +418,6 @@
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <button type="button" class="layui-btn" id="upload_accessory">
-                            <i class="layui-icon">&#xe67c;</i>上传附件
-                        </button>
-                        <span style="color: #999;">只支持jpg格式的图片</span>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="5">
-                    <div class="field">
-                        <label class="col-md-1 control-label">附件:</label>
-                        <div class="col-md-11" id="accessory_files">
-
-                        </div>
-                    </div>
-                </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
@@ -590,10 +446,8 @@
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
         </form>
-
         </tbody>
     </table>
-    <button class="layui-btn" lay-submit lay-filter="submit" style="display: none">立即提交</button>
 </div>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
@@ -608,11 +462,8 @@
 <script type="text/javascript">
     var layedit, index;
     var id = getUrlParam("id");
-    var item_id;
     $("#id").val(id);
-    var edit_userid;
-    var audit_apply_id;
-    var h = $(window).height() - 15;
+
     layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
         laydate = layui.laydate;
@@ -625,112 +476,14 @@
                 , trigger: 'click'
             });
         });
-        upload.render({
-            elem: '#upload_accessory' //绑定元素
-            , accept: 'jpg'
-            , multiple: true
-            , url: domainName + '/zuul/api-f/albums'
-            , allDone: function (obj) { //当文件全部被提交后，才触发
-                layer.msg("上传成功");
-            }
-            , done: function (res, index, upload) {
-                addImgHtml(res);
-            }
-        });
+
     });
-    initData();
 
-    //移除一张图片
-    function deleteImg(obj) {
-        $(obj).parent('div').remove();
-    }
-
-    //插入一张图片
-    function addImgHtml(item) {
-        var str = '';
-        var val = item.name.substring(0, item.name.indexOf("."));
-        if (val.length > 10) {
-            val = val.substring(0, 8) + '...';
-        }
-        str = '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
-        str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
-        str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
-        str += '<p style="color: #aea9a9;">' + val + '</p></div>';
-        $("#accessory_files").append(str);
-        $(".close-a").hide();
-    }
 
     var h = $(window).height() - 50;
     var w = $(window).width() - 100;
 
-    function seeImg(url) {
-        var imgHtml = "<img src='" + url + "' />";
-        layer.open({
-            type: 1,
-            maxmin: true,
-            shadeClose: true,
-            area: [w + 'px', h + 'px'],
-            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
-            cancel: function () {
-                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
-            }
-        });
-    }
-
-    //显示隐藏图片删除按钮
-    function showOrHideCloseBut(obj) {
-        var eum = $(obj).children("a:eq(1)");
-        var flag = $(eum).is(":hidden");
-        if (flag) {
-            $(eum).show();
-        } else {
-            $(eum).hide();
-        }
-    }
-
-    function getApplyInfo(audit_apply_id) {
-        var data = {
-            id: audit_apply_id,
-        }
-        $.ajax({
-            type: 'get',
-            data: data,
-            url: domainName + '/project-item/item/target/applyList',
-            async: false,
-            success: function (data) {
-                queryInformation(data[0].item_id);
-                queryContactWay(data[0].item_id);
-                $("#content").text(data[0].content);
-                item_id = data[0].item_id;
-                console.log(data[0]);
-                audit_apply_id = data[0].audit_apply_id;
-                $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
-                $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
-                    $.each(data1, function (i, item) {
-                        var serial = $("#target").parents('thead').next().children().length + 1;
-                        var str = '';
-                        var text = getsuperior(item.site);
-                        str = '<tr>' +
-                            '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + item.type + '"></td>' +
-                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                            '<div class="field">' +
-                            '<span type="text"  name="content" lay-verify="required"> ' + item.content + ' </span>' +
-                            '</div>' +
-                            '</td>' +
-                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                            '<div class="field" style="position: relative;">' +
-                            '<span type="text" name="site">' + text + '</span>' +
-                            '</div>' +
-                            '</td>' +
-                            '</tr>';
-                        $("#target").parents('thead').next().append(str);
-                    });
-                })
-
-
-            }
-        });
-    }
+    initData();
 
     function initData() {
         var data = {
@@ -739,25 +492,60 @@
         $.ajax({
             type: 'get',
             data: data,
-            url: domainName + '/project-item/item/target/auditApplyResult',
+            url: domainName + '/project-item/item/target/applyList',
             async: false,
             success: function (data) {
-                audit_apply_id = data[0].audit_apply_id;
-                getApplyInfo(data[0].audit_apply_id);
+                $(data).each(function () {
+                    queryInformation(data[0].item_id);
+                    queryContactWay(data[0].item_id);
+                    $("#content").text(data[0].content);
+                    $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                        $.each(data1, function (i, item) {
+                            var serial = $("#target").parents('thead').next().children().length + 1;
+                            var str = '';
+                            var text = getsuperior(item.site);
+                            str = '<tr>' +
+                                '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + item.type + '"></td>' +
+                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                                '<div class="field">' +
+                                '<span type="text"  name="content" lay-verify="required"> ' + item.content + ' </span>' +
+                                '</div>' +
+                                '</td>' +
+                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                                '<div class="field" style="position: relative;">' +
+                                '<span type="text" name="site">' + text + '</span>' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
+                            $("#target").parents('thead').next().append(str);
+                        });
+                    })
 
+                });
 
             }
         });
-
     }
 
+    function showExpert() {
+        layer.open({
+            title: "专家意见",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['seeApplyResultList.html?id=' + id]
+
+        });
+    }
 
     function pass() {
         if ($("#status").val() == '') {
             layer.msg("请选择是否通过");
             return;
         }
-        var status = $("#status").val();
+
         $('#form').bootstrapValidator();
         var bootstrapValidator = $("#form").data('bootstrapValidator');
         bootstrapValidator.validate();
@@ -765,110 +553,33 @@
             return;
         }
         var formdata = $("#form").serializeObject();
-        var files = document.getElementsByName("accessory").length;
 
-
-        var arr = [];
-        var dayObj = $('input[name="accessory"]');
-        for (var i = 0; i < dayObj.length; i++) {
-            arr.push(dayObj[i].getAttribute('value'));
-        }
-
-        if (files == 1) {
-            formdata.accessory = $("input[name='accessory']").val();
-        } else {
-            formdata.accessory = arr.join(',');
-
-        }
+        formdata.id = id;
 
         $.ajax({
             type: 'put',
-            url: domainName + '/project-item/item/target/auditApplyResult/update',
+            url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-                if (data == 0) {
-                    //所有专家审核完毕
-
-                    //修改查定申请状态
-                    var item = {"id": audit_apply_id, "status": 4};
-
-                    $.ajax({
-                        type: 'put',
-                        url: domainName + '/project-item/item/target/auditApply/update',
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(item),
-                        success: function (data) {
-                            var userIds = [];
-                            var userId = getPARTY_C(item_id);
-                            userIds.push(userId);
-                            var content = "您有一条指标查定审核完毕";
-                            var title = "您有一条指标查定审核完毕";
-                            sendMeaasge(content, title, userIds);
-                            var msg = "成功";
-                            layer.msg(msg, {shift: -1, time: 1000}, function () {
-                                history.back(-1);
-                            });
-                        }
-                    });
-
-                } else {
-
-                }
-
-
+                var msg = "成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    var userIds = [];
+                    var userId = getPARTY_B(item_id);
+                    userIds.push(userId);
+                    if (status == 5) {
+                        var content = "您有一条指标查定已通过";
+                        var title = "您有一条指标查定已通过";
+                    } else if (status == 6) {
+                        var content = "您有一条指标查定未通过";
+                        var title = "您有一条指标查定未通过";
+                    }
+                    sendMeaasge(content, title, userIds);
+                    parent.location.reload();
+                });
             }
         });
     }
-
-    function showTarget() {
-        layer.open({
-            title: "项目指标",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['../indicator/readIndicatorList.html?itemId=' + item_id]
-
-        });
-    }
-
-    function showStage() {
-        layer.open({
-            title: "阶段总结",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['../list-layout/pages/stage-summary/checkStageSummaryList.html?itemId=' + item_id]
-
-        });
-    }
-
-    function showFund() {
-        layer.open({
-            title: "经费使用",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + item_id]
-
-        });
-    }
-
-    function showBase() {
-        layer.open({
-            title: "项目信息",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['../item/projectInfo.html?id=' + item_id]
-
-        });
-    }
-
 
 
 </script>

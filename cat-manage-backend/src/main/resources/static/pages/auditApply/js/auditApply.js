@@ -28,7 +28,7 @@ function queryContactWay(id) {
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/contactWay/list',
-        data: "item_id=" + id + "&status=2",
+        data: "item_id=" + id + "&type=2",
         async: false,
         contentType: "application/json; charset=utf-8",
         success: function (data) {

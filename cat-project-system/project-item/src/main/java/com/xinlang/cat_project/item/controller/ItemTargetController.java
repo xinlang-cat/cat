@@ -2,6 +2,7 @@ package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.bean.util.PageResult;
 import com.xinlang.cat_project.item.pojo.*;
+import com.xinlang.cat_project.item.service.IAuditApplyResultService;
 import com.xinlang.cat_project.item.service.IAuditApplyService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.log.LogAnnotation;
@@ -28,7 +29,8 @@ public class ItemTargetController {
 
     @Autowired
     private IAuditApplyService auditApplyService;
-
+    @Autowired
+    private IAuditApplyResultService auditApplyResultService;
 
     @ApiOperation(value = "添加指标查定")
     @LogAnnotation(module = "添加指标查定")
@@ -105,6 +107,63 @@ public class ItemTargetController {
         return ResponseEntity.ok(result);
 
 
+    }
+
+    @ApiOperation(value = "添加指标查定")
+    @LogAnnotation(module = "添加指标查定")
+    @PostMapping("/auditApplyResult/one")
+    public ResponseEntity<Void> saveAuditApplyResult(@RequestBody auditApplyResult auditApplyResult) throws ParseException {
+        System.err.println(auditApplyResult);
+
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
+        auditApplyResult.setEdit_userid(userId);
+        auditApplyResult.setEdit_date(new Date());
+        auditApplyResult.setStatus(1);
+        auditApplyResultService.save(auditApplyResult);
+        return  ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @LogAnnotation(module = "获取指标查定列表")
+    @GetMapping("/auditApplyResult/page")
+    public ResponseEntity<PageResult<auditApplyResult>> getAuditApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                                    @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                                                                    @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                                    @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                                    @RequestParam(required = false) Map<String, Object> params){
+        PageResult<auditApplyResult> result = auditApplyResultService.queryList(page,rows,sortBy,desc,params);
+        return ResponseEntity.ok(result);
+
+
+    }
+
+    @ApiOperation(value = "修改指标查定")
+    @LogAnnotation(module = "修改指标查定")
+    @PutMapping("/auditApplyResult/update")
+    public Integer updateAuditApplyResult(@RequestBody auditApplyResult auditApplyResult) throws ParseException {
+        if (auditApplyResult.getPeriods()!= null && !auditApplyResult.getPeriods().equals("")){
+            if (!auditApplyResult.getPeriods().equals("")) {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = null;
+                date = simpleDateFormat.parse(auditApplyResult.getPeriods().substring(0, 10));
+                auditApplyResult.setStart_date_true(date);
+                date = simpleDateFormat.parse(auditApplyResult.getPeriods().substring(12));
+                auditApplyResult.setEnd_date_true(date);
+            }
+        }
+
+        auditApplyResultService.update(auditApplyResult);
+        Integer unChecked =  auditApplyResultService.finUnChecked(auditApplyResult.getAudit_apply_id());
+        return unChecked;
+    }
+
+    @ApiOperation(value = "查询指标查定")
+    @LogAnnotation(module = "查询指标查定")
+    @Transactional
+    @GetMapping("/auditApplyResult")
+    public ResponseEntity<List<auditApplyResult>> getApplyResultById(@RequestParam Map<String, Object> params){
+        List<auditApplyResult> targets = auditApplyResultService.findListByParams(params,auditApplyResult.class);
+
+        return ResponseEntity.ok(targets);
     }
 
 }
