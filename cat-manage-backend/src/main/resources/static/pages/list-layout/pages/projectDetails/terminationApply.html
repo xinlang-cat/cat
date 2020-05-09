@@ -9,7 +9,7 @@
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
     <div style="position: absolute;right: 30px;top: 15px;">
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit();">提交</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit();" id="sub">提交</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
@@ -81,7 +81,7 @@
                 //上传完毕回调
                 var str = '<tr> <td>' + res.name + '</td>\n' +
                     '<td>\n' +
-                    '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+res.url+'" target="_blank">打开</a>\n' +
+                    '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+res.url+'" target="_blank">查看</a>\n' +
                     /*'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +*/
                     '</td>\n' +
                     '</tr>';
@@ -96,6 +96,7 @@
 
     var id = getUrlParam("itemId");
     getItem();
+    getTermination();
 
     function getItem() {
         $.ajax({
@@ -111,6 +112,33 @@
             }
         })
     }
+    function getTermination() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/termination/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if(data.length!=0){
+                    $('textarea[name=remark]').val(data[0].remark);
+                    $(data[0].accessorys.split(',')).each(function (i, d) {
+                        if (i != 0) {
+                            var str = '<tr> <td>' + analysisFile(d).name + '</td>\n' +
+                                '<td>\n' +
+                                '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+analysisFile(d).url+'" target="_blank">查看</a>\n' +
+                                '</td>\n' +
+                                '</tr>';
+                            $('#filesList').append(str);
+                        }
+                    })
+                    $('textarea').attr('readonly','readonly');
+                    $('#files').css('display','none');
+                    $('#sub').css('display','none');
+                }
+            }
+        })
+    }
 
     /*解析标签名称*/
     function analysisLablename(sign) {
@@ -121,6 +149,22 @@
             async: false,
             success: function (data) {
                 text = data[0].content;
+            }
+        });
+        return text;
+    }
+    /*解析文件*/
+    function analysisFile(id) {
+        if (id == '') {
+            return '';
+        }
+        var text = {};
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-f/files/' + id,
+            async: false,
+            success: function (data) {
+                text = data;
             }
         });
         return text;
@@ -143,8 +187,23 @@
             async: false,
             data: JSON.stringify(formdata),
             success: function (data) {
+                changeStatus();
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.reload();
                 });
+            }
+        });
+    }
+
+    function changeStatus() {
+        var item = {"id": id, "status": 5};
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/information',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(item),
+            success: function (data) {
             }
         });
     }
