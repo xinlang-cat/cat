@@ -77,8 +77,8 @@
     var pers = checkPermission();
     //百度地图API功能
     var map = new BMap.Map("allmap", {}); // 创建Map实例
-    var point = new BMap.Point(108.374316, 22.820475);
-    map.centerAndZoom(point, 11); // 初始化地图,设置中心点坐标和地图级别
+    var point = new BMap.Point(108.297233556,22.8064929356);
+    map.centerAndZoom(point, 6); // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
     var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
     map.addControl(top_left_control);
@@ -86,6 +86,7 @@
     $(function () {
         initDimensioning();
     });
+
     //自定义图标
     var cyanIcon = new BMap.Icon("img/cyan.png", new BMap.Size(19, 25));
     var blueIcon = new BMap.Icon("img/blue.png", new BMap.Size(19, 25));
@@ -94,6 +95,26 @@
     var redIcon = new BMap.Icon("img/red.png", new BMap.Size(19, 25));
     var violetIcon = new BMap.Icon("img/violet.png", new BMap.Size(19, 25));
     var yellowIcon = new BMap.Icon("img/yellow.png", new BMap.Size(19, 25));
+
+    function addMarker(point, content,opts) {
+        var marker = new BMap.Marker(point, {icon: greenIcon});
+        map.addOverlay(marker);
+        addClickHandler(content, marker,opts);
+    }
+
+
+    function addClickHandler(content, marker,opts) {
+        marker.addEventListener("click", function (e) {
+            openInfo(content, e,opts)
+        });
+    }
+
+    function openInfo(content, e,opts) {
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
+        map.openInfoWindow(infoWindow, point); //开启信息窗口
+    }
 
     //项目列表设置标注点
     function initDimensioning() {
@@ -120,33 +141,24 @@
                     content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目承担单位:</span><span>' + obj[i]['responsible_unit'] + '</span></div>';
                     content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目监理单位:</span><span>' + obj[i]['management_unit'] + '</span></div>';
                     content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + formatDate4(obj[i]['start_date']) + '---' + formatDate4(obj[i]['end_date']) + '</span></div>';
-                    content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + status +'</span></div>';
+                    content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + status + '</span></div>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showStage(' + obj[i]['id'] + ')">阶段总结</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showAudit(' + obj[i]['id'] + ')">查定报告</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showSkill(' + obj[i]['id'] + ')">技术总结</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showWork(' + obj[i]['id'] + ')">工作总结</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showTarget(' + obj[i]['id'] + ')">项目指标</button>';
                     content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showFund(' + obj[i]['id'] + ')">经费使用</button>';
-                    var point = new BMap.Point( obj[i]['lng'],obj[i]['lat']);
-                    var marker = new BMap.Marker(point, {icon: greenIcon});
-                    map.addOverlay(marker);
                     var opts = {
                         width: 500,
                         height: 200,
                         title: obj[i]['name'],
-                        enableMessage: false
+                        enableMessage: true
                     };
-                    marker.addEventListener("click", function (e) {
-                        var p = e.target;
-                        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-                        var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
-                        map.openInfoWindow(infoWindow, point); //开启信息窗口
-                    });
+                    addMarker(new BMap.Point(obj[i]['lng'], obj[i]['lat']), content,opts);
                 }
             }
         });
     }
-
 
     layui.use(['layer'], function () {
         var layer = layui.layer;
@@ -158,7 +170,7 @@
         layer.open({
             title: "查定报告",
             type: 2,
-            area: [w + 'px', window.screen.height - 310 + 'px'],
+            area: [w + 'px', window.screen.height - 370 + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../auditApply/checkedApplyList.html?item_id=' + itemId]
@@ -169,7 +181,7 @@
         layer.open({
             title: "技术总结",
             type: 2,
-            area: [w + 'px', window.screen.height - 310 + 'px'],
+            area: [w + 'px', window.screen.height - 370 + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../summary/generateSkillReport.html?itemId=' + itemId]
@@ -180,7 +192,7 @@
         layer.open({
             title: "工作总结",
             type: 2,
-            area: [w + 'px', window.screen.height - 310 + 'px'],
+            area: [w + 'px', window.screen.height - 370 + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../summary/generateWorkReport.html?itemId=' + itemId]
@@ -192,7 +204,7 @@
         layer.open({
             title: "项目指标",
             type: 2,
-            area: [w + 'px', window.screen.height - 310 + 'px'],
+            area: [w + 'px', window.screen.height - 370 + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../indicator/readIndicatorList.html?itemId=' + itemId]
@@ -204,7 +216,7 @@
         layer.open({
             title: "阶段总结",
             type: 2,
-            area: [w + 'px', window.screen.height - 310 + 'px'],
+            area: [w + 'px', window.screen.height - 370 + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../list-layout/pages/stage-summary/stageSummaryList.html?item_id=' + itemId]
@@ -216,7 +228,7 @@
         layer.open({
             title: "经费使用",
             type: 2,
-            area: [w + 'px', window.screen.height - 310 + 'px'],
+            area: [w + 'px', window.screen.height - 370 + 'px'],
             maxmin: true,
             shadeClose: true,
             content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + itemId]
