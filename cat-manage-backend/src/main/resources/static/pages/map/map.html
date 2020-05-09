@@ -43,10 +43,10 @@
         </div>
     </div>
 
-    <h3 style="margin-top: 20px;">类型分布</h3>
+    <h3 style="margin-top: 20px;">类型统计</h3>
     <canvas id="myChart" style="float: left;width: 100%;"></canvas>
     <div style="width: 100%;float: left;"></div>
-    <h3>状态分布</h3>
+    <h3>状态统计</h3>
     <canvas id="container" style="float: left;width: 100%;"></canvas>
     <div style="width: 100%;float: left;"></div>
     <!--<h3>时间分布</h3>
@@ -149,7 +149,7 @@
                         status = "已结题";
                     } else if (obj[i]['status'] == 5) {
                         status = "终止中";
-                    } else if (obj[i]['status'] == 12) {
+                    } else if (obj[i]['status'] == 6) {
                         status = "已终止";
                     }
                     var content = "";
@@ -284,7 +284,6 @@
                     signs.push(sign);
                     counts.push(0);
                 });
-
             }
         });
         var counts4 = getCountA(counts.length);
@@ -306,7 +305,7 @@
                         status = "已结题";
                     } else if (this.status == 5) {
                         status = "终止中";
-                    } else if (this.status == 12) {
+                    } else if (this.status == 6) {
                         status = "已终止";
                     }
                     countItem++;
@@ -333,8 +332,6 @@
 
 
                 });
-
-
             }
         });
 
@@ -363,18 +360,7 @@
 /*        for (var i = 0; i < 12; i++) {
             var res2 = {"year": dataArr[i], "sales": counts2[i]};
             data2.push(res2);
-        }*/
-
-
-            /*for (var a = 0; a < 12; i++) {
-                var res2 = {"类型": contents[0], "月份": dataArr[a],"月均降雨量":counts2[a]};
-                data2.push(res2);
-            }
-            for (var a = 0; a < 12; i++) {
-                var res2 = {"类型": contents[1], "月份": dataArr[a],"月均降雨量":counts3[a]};
-                data2.push(res2);
-            }*/
-
+        }
 
         // Step 1: 创建 Chart 对象
         const chart = new F2.Chart({
@@ -434,7 +420,7 @@
         chart1.guide().html({
             position: ['50%', '45%'],
             html: `<div style="width: 250px;height: 40px;text-align: center;">
-      <div style="font-size: 112px">项目总数</div>
+      <div style="font-size: 16px">项目总数</div>
       <div style="font-size: 24px">` + countItem + `</div>
     </div>`
         });
@@ -442,7 +428,7 @@
 
         //====================================================================================================
 
-/*        const chart2 = new F2.Chart({
+        const chart2 = new F2.Chart({
             id: 'container1',
             pixelRatio: window.devicePixelRatio
         });
