@@ -535,7 +535,7 @@
         <div class="form-actions" id="old">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary" onclick="history.back(-1);">返回</button>
+                    <button class="btn btn-primary" type="button" onclick="history.back(-1);">返回</button>
                 </div>
             </div>
         </div>
@@ -655,7 +655,7 @@
             success: function (data) {
                 layer.msg("提交成功", {shift: -1, time: 1000}, function () {
                    var userIds = [];
-                    var userId = getPARTY_B(item_id);
+                    var userId = getPARTY_C(item_id);
                     userIds.push(userId);
                     var content = "您有一条验收审核待处理";
                     var title = "您有一条验收审核待处理";

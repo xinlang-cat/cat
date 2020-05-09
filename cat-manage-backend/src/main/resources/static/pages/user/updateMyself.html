@@ -350,7 +350,7 @@
             </div>
             <input type="hidden" class="form-control" id="projectUserId">
             <input type="hidden" class="form-control" id="identity">
-            <input type="hidden" class="form-control" id="deptType" name="deptType">
+            <input type="hidden" class="form-control" id="deptType" name="deptType" >
             <input type="hidden" class="form-control" name="enable" value="true">
             <div class="form-actions">
                 <div class="row" align="center">
@@ -437,6 +437,8 @@
                             $('#' + key).val(date);
 
                         }
+                        $("#userType").attr("disabled","disabled");
+                        $("#deptCode").attr("disabled","disabled");
                         if (data[0].streetCode != "" && data[0].streetCode != null && data[0].streetCode != undefined) {
                             getAddress(data[0].provinceCode, data[0].cityCode, data[0].areaCode, data[0].streetCode);
                         }

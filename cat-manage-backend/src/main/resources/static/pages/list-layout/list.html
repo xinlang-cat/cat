@@ -150,13 +150,25 @@
                 };
                 $(data).each(function () {
                     var itemId = this.id;
+                    var status = '';
+                    if (this.status == 0) {
+                        status = "就绪";
+                    } else if (this.status == 1) {
+                        status = "进行中";
+                    } else if (this.status == 2) {
+                        status = "结题中";
+                    } else if (this.status == 3) {
+                        status = "已结题";
+                    } else {
+                        status = "废弃";
+                    }
                     str += '<div class="masonry__item">\n' +
                         '            <figure>\n' +
                         '                <figcaption class="content">\n' +
                         '                    <h2 style="max-width: 400px;">' + this.name + '</h2>\n' +
                         '                    <p class="date" style="max-width: 400px;">' +
-                        '                        <span style="margin-right: 10px;">开始时间：' + this.start_date.substring(0, 10) + '</span>' +
-                        '                        <span>结束时间：' + this.end_date.substring(0, 10) + '</span></p>\n' +
+                        '                        <span style="margin-right: 10px;">起止时间：' + this.start_date.substring(0, 10) + '---' + this.end_date.substring(0, 10) + '</span>' +
+                        '                        <span style="margin-right: 10px;">项目进度：' + status + '</span></p>\n' +
                         '                        <ul class="tags">\n' +
                         '                        <li><a href="../item/projectInfo.html?id=' + this.id + '">项目信息</a></li>\n' +
                         '                        <li><a href="../indicator/indicatorList.html?itemId=' + this.id + '&userId=' + userId + '">项目指标</a></li>\n' +

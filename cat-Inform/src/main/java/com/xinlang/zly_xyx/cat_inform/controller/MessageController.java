@@ -8,6 +8,7 @@ import com.xinlang.zly_xyx.cat_inform.service.IMessageUserService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,10 @@ public class MessageController {
         message.setCreateTime(date);
         messageService.save(message);
         MessageUser messageUser = new MessageUser();
+        if(StringUtils.isEmpty(message.getCreateUserName())){
+            message.setCreateUserName("系统消息");
+            message.setType("系统消息");
+        }
         message.getUserIds().forEach(item -> {
             messageUser.setIsRead(0);
             messageUser.setMessageId(message.getId());

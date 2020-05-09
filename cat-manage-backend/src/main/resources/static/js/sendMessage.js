@@ -1,4 +1,4 @@
-function sendMeaasge(content,title,userIds) {
+function sendMeaasge(content, title, userIds) {
     var createUserId;
     var createUserName;
     var createTime = new Date();
@@ -33,53 +33,49 @@ function sendMeaasge(content,title,userIds) {
         }
     });
 }
-function getPARTY_C(id) {
 
+function getPARTY_C(id) {
+    var userId='';
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/personnel/list',
         data: "item_id=" + id + "&user_type=PARTY_C",
         async: false,
         success: function (data) {
-            $(data).each(function () {
-                id = this.user_id;
-            })
+            userId = data[0].user_id;
         }
     })
+    return userId;
 
-    return id;
+
 }
 
 function getPARTY_B(id) {
-
+    var userId='';
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/personnel/list',
         data: "item_id=" + id + "&user_type=PARTY_B_PRINCIPAL",
         async: false,
         success: function (data) {
-            $(data).each(function () {
-                id = this.user_id;
-            })
+            userId = data[0].user_id;
         }
     })
 
-    return id;
+    return userId;
 }
 
 function getPARTY_A(id) {
-
+    var userId='';
     $.ajax({
         type: 'get',
         url: domainName + '/project-item/item/personnel/list',
         data: "item_id=" + id + "&user_type=PARTY_A",
         async: false,
         success: function (data) {
-            $(data).each(function () {
-                id = this.user_id;
-            })
+            userId = data[0].user_id;
         }
     })
 
-    return id;
+    return userId;
 }
