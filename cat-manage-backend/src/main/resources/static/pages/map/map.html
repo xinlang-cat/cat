@@ -32,21 +32,27 @@
 </head>
 <body>
 
-<div id="allmap" class="col-md-10"></div>
-<div id="data_manipulation" class="col-md-2">
+<div id="allmap" class="col-md-9"></div>
+<div id="data_manipulation" class="col-md-3">
     <div class="form-actions">
         <div class="row">
-            <div>
-                <div><img src="img/green.png">广西重点研发计划</div>
-                <!--                <button class="btn btn-primary" onclick="location.href='userList.html'">返回</button>-->
-                <!--                <button class="btn btn-primary" type="submit" onclick="add()">-->
-                <!--                    <i class="fa fa-save"></i> 保存-->
-                <!--                </button>-->
-
+            <div style="margin-left: 20px;">
+                <div style="font-size: 16px;font-weight: bold;"><img src="img/blue.png" style="margin-right: 25px;margin-bottom: 10px;"/>广西重点研发计划</div>
+                <div style="font-size: 16px;font-weight: bold;"><img src="img/green.png" style="margin-right: 25px;margin-bottom: 10px;"/>电子信息</div>
             </div>
         </div>
     </div>
+
+    <h3 style="margin-top: 20px;">类型分布</h3>
+    <canvas id="myChart" style="float: left;width: 100%;"></canvas>
+    <div style="width: 100%;float: left;"></div>
+    <h3>状态分布</h3>
+    <canvas id="container" style="float: left;width: 100%;"></canvas>
+    <div style="width: 100%;float: left;"></div>
+    <h3>时间分布</h3>
+    <canvas id="container1" style="float: left;width: 100%;"></canvas>
 </div>
+
 </body>
 
 <script src="../../js/constant.js"></script>
@@ -73,11 +79,12 @@
         src="http://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js"></script>
 <script type="text/javascript"
         src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
+<script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
 <script type="text/javascript">
     var pers = checkPermission();
     //百度地图API功能
     var map = new BMap.Map("allmap", {}); // 创建Map实例
-    var point = new BMap.Point(108.297233556,22.8064929356);
+    var point = new BMap.Point(108.297233556, 22.8064929356);
     map.centerAndZoom(point, 6); // 初始化地图,设置中心点坐标和地图级别
     map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
     var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
@@ -96,20 +103,20 @@
     var violetIcon = new BMap.Icon("img/violet.png", new BMap.Size(19, 25));
     var yellowIcon = new BMap.Icon("img/yellow.png", new BMap.Size(19, 25));
 
-    function addMarker(point, content,opts) {
-        var marker = new BMap.Marker(point, {icon: greenIcon});
+    function addMarker(point, content, opts, icon) {
+        var marker = new BMap.Marker(point, {icon: icon});
         map.addOverlay(marker);
-        addClickHandler(content, marker,opts);
+        addClickHandler(content, marker, opts);
     }
 
 
-    function addClickHandler(content, marker,opts) {
+    function addClickHandler(content, marker, opts) {
         marker.addEventListener("click", function (e) {
-            openInfo(content, e,opts)
+            openInfo(content, e, opts)
         });
     }
 
-    function openInfo(content, e,opts) {
+    function openInfo(content, e, opts) {
         var p = e.target;
         var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
         var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
@@ -127,15 +134,21 @@
                 for (var i = 0; i < obj.length; i++) {
                     var status = '';
                     if (obj[i]['status'] == 0) {
-                        status = "就绪";
+                        status = "起草中";
+                        continue;
                     } else if (obj[i]['status'] == 1) {
-                        status = "进行中";
+                        status = "起草中";
+                        continue;
                     } else if (obj[i]['status'] == 2) {
-                        status = "结题中";
+                        status = "进行中";
                     } else if (obj[i]['status'] == 3) {
+                        status = "结题中";
+                    } else if (obj[i]['status'] == 4) {
                         status = "已结题";
-                    } else {
-                        status = "废弃";
+                    } else if (obj[i]['status'] == 5) {
+                        status = "终止中";
+                    } else if (obj[i]['status'] == 6) {
+                        status = "已终止";
                     }
                     var content = "";
                     content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目承担单位:</span><span>' + obj[i]['responsible_unit'] + '</span></div>';
@@ -154,7 +167,14 @@
                         title: obj[i]['name'],
                         enableMessage: true
                     };
-                    addMarker(new BMap.Point(obj[i]['lng'], obj[i]['lat']), content,opts);
+                    var color = null;
+                    if(obj[i]['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM'){
+                        color = blueIcon;
+                    }
+                    if(obj[i]['type'] == 'ELECTRONIC_INFORMATION'){
+                        color = greenIcon;
+                    }
+                    addMarker(new BMap.Point(obj[i]['lng'], obj[i]['lat']), content, opts,color);
                 }
             }
         });
@@ -235,6 +255,214 @@
         });
     }
 
+    initData();
+
+
+    function initData() {
+        var contents = new Array();//项目类型
+        var signs = new Array();//项目类型标识
+        var counts = new Array();//项目类型数量
+        var statuss = new Array();//项目类型
+        var counts1 = new Array();//项目进度数量
+        var countItem = 0;
+        var dataArr = getMonths();
+        var counts2 = getCount2();
+
+        //生成月份数组
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + "PLAN_CATEGOR",
+            async: false,
+            success: function (data) {
+                $(data[0].child).each(function () {
+                    var content = this.content;
+                    contents.push(content);
+                    var sign = this.sign;
+                    signs.push(sign);
+                    counts.push(0);
+                });
+            }
+        });
+        $.ajax({
+            type: 'get',
+            url: domainName + "/project-item/item/information/list",
+            async: false,
+            success: function (data) {
+                $(data).each(function () {
+
+                    var status = "";
+                    if (this.status <= 1) {
+                        return true;
+                    } else if (this.status == 2) {
+                        status = "进行中";
+                    } else if (this.status == 3) {
+                        status = "结题中";
+                    } else if (this.status == 4) {
+                        status = "已结题";
+                    } else if (this.status == 5) {
+                        status = "终止中";
+                    } else if (this.status == 6) {
+                        status = "已终止";
+                    }
+                    countItem++;
+                    var b = statuss.indexOf(status);
+                    if (b == -1) {
+
+                        statuss.push(status);
+                        counts1.push(1);
+                    } else {
+                        counts1[b] = counts1[b] + 1;
+                    }
+                    var sign = this.type;
+                    var a = signs.indexOf(sign);
+                    counts[a] = counts[a] + 1;
+                    var start = formatDateY(this.start_date);
+                    var b = dataArr.indexOf(start);
+                    counts2[b] = counts2[b] + 1;
+                });
+            }
+        });
+
+        const data = [];
+        const data1 = [];
+        const data2 = [];
+        for (var i = 0; i < counts.length; i++) {
+            var res = {"genre": contents[i], "sold": counts[i]};
+            data.push(res);
+        }
+        for (var i = 0; i < statuss.length; i++) {
+            var math = counts1[i] / countItem * 1000;
+            math = Math.round(math);
+            var res1 = {"name": statuss[i], "percent": math/10, "a": "1"};
+            data1.push(res1);
+        }
+        for (var i = 0; i < 12; i++) {
+            var res2 = {"year": dataArr[i], "sales": counts2[i]};
+            data2.push(res2);
+        }
+
+        // Step 1: 创建 Chart 对象
+        const chart = new F2.Chart({
+            id: 'myChart',
+            pixelRatio: window.devicePixelRatio, // 指定分辨率
+        });
+
+        // Step 2: 载入数据源
+        chart.source(data);
+
+        // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+        chart
+            .interval()
+            .position('genre*sold')
+            .color('genre');
+
+        // Step 4: 渲染图表
+        chart.render();
+
+        //====================================================================================================
+
+        const map = {};
+        data1.forEach(function (obj) {
+            map[obj.name] = obj.percent + '%';
+        });
+
+        const chart1 = new F2.Chart({
+            id: 'container',
+            pixelRatio: window.devicePixelRatio,
+            padding: [20, 'auto']
+        });
+        chart1.source(data1, {
+            percent: {
+                formatter: function formatter(val) {
+                    return val + '%';
+                }
+            }
+        });
+        chart1.tooltip(false);
+        chart1.legend({
+            position: 'right',
+            itemFormatter: function itemFormatter(val) {
+                return val + '    ' + map[val];
+            }
+        });
+        chart1.coord('polar', {
+            transposed: true,
+            innerRadius: 0.7,
+            radius: 0.85
+        });
+        chart1.axis(false);
+        chart1.interval()
+            .position('a*percent')
+            .color('name', ['#FE5D4D', '#3BA4FF', '#737DDE'])
+            .adjust('stack');
+
+        chart1.guide().html({
+            position: ['50%', '45%'],
+            html: `<div style="width: 250px;height: 40px;text-align: center;">
+      <div style="font-size: 16px">项目总数</div>
+      <div style="font-size: 24px">` + countItem + `</div>
+    </div>`
+        });
+        chart1.render();
+
+        //====================================================================================================
+
+        const chart2 = new F2.Chart({
+            id: 'container1',
+            pixelRatio: window.devicePixelRatio
+        });
+
+        chart2.source(data2, {
+            sales: {
+                tickCount: 5
+            }
+        });
+        chart2.coord({
+            transposed: true
+        });
+        chart2.tooltip({
+            showItemMarker: false,
+            onShow: function onShow(ev) {
+                const items = ev.items;
+                items[0].name = null;
+                items[0].name = items[0].title;
+                items[0].value = '¥ ' + items[0].value;
+            }
+        });
+        chart2.interval().position('year*sales');
+        chart2.render();
+    }
+
+    function getMonths() {
+        var dataArr = [];
+        var data = new Date();
+        var year = data.getFullYear();
+        data.setMonth(data.getMonth() + 1, 1); //获取到当前月份,设置月份
+        for (var i = 0; i < 12; i++) {
+            data.setMonth(data.getMonth() - 1); //每次循环一次 月份值减1
+            var m = data.getMonth() + 1;
+            m = m < 10 ? "0" + m : m;
+            dataArr.push(data.getFullYear() + "-" + m);
+        }
+        return dataArr;
+    }
+
+    function getCount2() {
+        var dataCoun = [];
+
+        for (var i = 0; i < 12; i++) {
+
+            dataCoun.push(0);
+        }
+        return dataCoun;
+    }
+
+    function formatDateY(now) {
+        var now = new Date(now);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        return year + "-" + fixZero(month, 2);
+    }
 
 </script>
 </html>
