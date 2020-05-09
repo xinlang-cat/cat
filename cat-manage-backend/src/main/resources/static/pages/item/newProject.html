@@ -2281,6 +2281,10 @@
             layer.msg("请填写主要研究、开发人员!");
             return;
         }
+        if (scheduling.length == 1) {
+            layer.msg("请填写进度安排!");
+            return;
+        }
         var data = {
             information: information,
             indicators: indicator,
