@@ -30,7 +30,7 @@
             </div>
             <ul class="layui-nav" pc>
                 <li class="layui-nav-item" lay-unselect="">
-                    <a  href='javascript:;' lay-id="-999" data-url="pages/message/messageList.html">
+                    <a href='javascript:;' lay-id="-999" data-url="pages/message/messageList.html">
                         <i class="layui-icon layui-icon-notice"></i>
                         <span class="layui-badge-dot" id="messageIcon"></span>
                     </a>
@@ -88,7 +88,8 @@
             </ul>
             <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
                 <div class="layui-tab-item layui-show">
-                    <iframe src="pages/dashboard.html"></iframe>
+                    <iframe src="pages/map/map.html" permission="PARTY_A:html"></iframe>
+                    <iframe src="pages/dashboard.html" permission="PARTY_B:principal:html,PARTY_B:member:html,PARTY_C:html,PARTY_D:html,EXPERT:html"></iframe>
                 </div>
             </div>
         </div>
@@ -108,9 +109,11 @@
     <script src="js/libs/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="js/jq.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/my/permission.js"></script>
     <script type="text/javascript">
+        var pers = checkPermission();
         $.get(domainName + '/api-n/message/my', {isRead: 0}, function (res) {
-            if(res.length <1){
+            if (res.length < 1) {
                 $("#messageIcon").remove();
             }
         });

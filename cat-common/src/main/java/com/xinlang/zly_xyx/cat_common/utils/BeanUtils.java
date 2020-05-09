@@ -67,30 +67,21 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
         PropertyDescriptor[] propertyDescriptors = getPropertyDescriptors(valueType);
         for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
             String properName = propertyDescriptor.getName();
-            // 过滤class属性
+            Class<?> properType = propertyDescriptor.getPropertyType();
             if ("class".equals(properName)) {
                 continue;
             }
             if (beanMap.containsKey(properName)) {
                 Method writeMethod = propertyDescriptor.getWriteMethod();
-                String value = beanMap.get(properName).toString();
+                Object value = beanMap.get(properName);
                 if (null == writeMethod || StringUtils.isBlank(value.toString())) {
                     continue;
                 }
                 if (!writeMethod.isAccessible()) {
                     writeMethod.setAccessible(true);
                 }
-                String reg="^\\d+$";
-                if(StringUtils.isBlank(value)){
-                    continue;
-                }
                 try {
-                    if(value.matches(reg)){
-                        Integer v1 = Integer.valueOf(value);
-                        writeMethod.invoke(bean, v1);
-                    }else{
-                        writeMethod.invoke(bean, value);
-                    }
+                    writeMethod.invoke(bean, properType.cast(value));
                 } catch (Throwable throwable) {
                     throw new RuntimeException("Could not set property '" + properName + " ' to bean" + throwable);
                 }
