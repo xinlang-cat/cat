@@ -27,4 +27,5 @@ public class ItemFundDetail {
     private String accessory;
     private Integer status;
     private Integer edit_user_id;
+    private  String operator; //经办人
 }

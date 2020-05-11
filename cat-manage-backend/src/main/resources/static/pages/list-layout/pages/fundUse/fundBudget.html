@@ -15,6 +15,7 @@
         .layui-textarea {
             min-height: 60px;
         }
+        #remark,.remark{word-break:normal; width:auto%; display:block; white-space:pre-wrap;word-wrap : break-word ;overflow: hidden ;}
     </style>
 </head>
 <body>
@@ -331,6 +332,13 @@
                 '                </div>\n' +
                 '            </div>\n' +
                 '            <div class="form-group">\n' +
+                '                <label class="col-md-1 control-label">经办人:</label>\n' +
+                '                <div class="col-md-11">\n' +
+                '                    <input class="form-control" placeholder="经办人" type="text" name="operator"\n' +
+                '                           maxlength="50" data-bv-notempty="true" data-bv-notempty-message="经办人 不能为空">\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '            <div class="form-group">\n' +
                 '                <label class="col-md-1 control-label">开支内容:</label>\n' +
                 '                <div class="col-md-11">\n' +
                 '                    <textarea placeholder="请输入" class="layui-textarea" name="remark" data-bv-notempty="true"\n' +
@@ -419,7 +427,7 @@
             var content = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
                 '<div><div class="widget-body no-padding">\n' +
                 '<table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">\n' +
-                '<thead><tr></tr><tr><th width="20%">支出日期</th><th width="20%">支出金额</th><th width="30%">开支内容</th><th width="30%">操作</th></tr></thead><tbody id="content"></tbody>' +
+                '<thead><tr></tr><tr><th width="20%">支出日期</th><th width="20%">支出金额</th><th width="30%">经办人</th><th width="30%">操作</th></tr></thead><tbody id="content"></tbody>' +
                 '</table></div></div></div>';
             layer.open({
                 type: 1,
@@ -437,7 +445,7 @@
                         success: function (data) {
                             var str = '';
                             $(data).each(function () {
-                                str += '<tr><td>' + this.date.substring(0, 10) + '</td><td>' + this.money + '</td><td>' + this.remark + '</td>' +
+                                str += '<tr><td>' + this.date.substring(0, 10) + '</td><td>' + this.money + '</td><td>' + this.operator + '</td>' +
                                     '<td><button type="button" class="layui-btn layui-btn-sm" onclick="info(' + this.id + ');">详情</button></td></tr>';
                             })
                             $('#content').append(str);
@@ -486,7 +494,8 @@
                                 '                        <div class="layui-timeline-content layui-text">\n' +
                                 '                            <h3 class="layui-timeline-title">支出日期：' + this.date.substring(0, 10) + '</h3>\n' +
                                 '                            <h3 class="layui-timeline-title">支出金额：' + this.money + '万</h3>\n' +
-                                '                            <h3 class="layui-timeline-title"> 支出内容：' + this.remark + '</h3\n' +
+                                '                            <h3 class="layui-timeline-title">经办人：' + this.operator+ '</h3>\n' +
+                                '                            <h3 class="layui-timeline-title"> 支出内容：<span class="remark">' + this.remark + '</span></h3\n' +
                                 '                            <div class="main-content">\n' +
                                 '                                <div class="image-list">' + imgs + '</div>\n' +
                                 '                            </div>\n' +
@@ -542,6 +551,12 @@
             '                </div>\n' +
             '            </div>\n' +
             '            <div class="form-group">\n' +
+            '                <label class="col-md-1 control-label">经办人:</label>\n' +
+            '                <div class="col-md-11">\n' +
+            '                   <span id="operator"></span>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="form-group">\n' +
             '                <label class="col-md-1 control-label">开支内容:</label>\n' +
             '                <div class="col-md-11">\n' +
             '                   <span id="remark"></span>\n' +
@@ -586,6 +601,7 @@
                         var d = data[0];
                         $('#money').text(d.money);
                         $('#date').text(d.date.substring(0, 10));
+                        $('#operator').text(d.operator);
                         $('#remark').text(d.remark);
                         $(d.accessory.split(',')).each(function (i) {
                             if (i != 0) {
@@ -622,7 +638,7 @@
         var content = '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">' +
             '<div><div class="widget-body no-padding">\n' +
             '<table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">\n' +
-            '<thead><tr></tr><tr><th width="20%">支出日期</th><th width="20%">支出金额</th><th width="30%">开支内容</th><th width="30%">操作</th></tr></thead><tbody id="content"></tbody>' +
+            '<thead><tr></tr><tr><th width="20%">支出日期</th><th width="20%">支出金额</th><th width="30%">经办人</th><th width="30%">操作</th></tr></thead><tbody id="content"></tbody>' +
             '</table></div></div></div>';
         layer.open({
             type: 1,
@@ -640,7 +656,7 @@
                     success: function (data) {
                         var str = '';
                         $(data).each(function () {
-                            str += '<tr><td>' + this.date.substring(0, 10) + '</td><td>' + this.money + '</td><td>' + this.remark + '</td>' +
+                            str += '<tr><td>' + this.date.substring(0, 10) + '</td><td>' + this.money + '</td><td>' + this.operator + '</td>' +
                                 '<td><button type="button" class="layui-btn layui-btn-sm" onclick="del(' + this.id + ');">删除</button></td></tr>';
                         });
                         $('#content').append(str);
