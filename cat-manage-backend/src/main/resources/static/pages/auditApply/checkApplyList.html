@@ -24,10 +24,11 @@
                                     <select class="form-control input-sm" id="status">
                                         <option value="">全部</option>
                                         <option value=1>待查定</option>
-                                        <option value=2>查定中</option>
-                                        <option value=3>查定合格</option>
-                                        <option value=4>查定不合格</option>
-                                        <option value=5>查定申请未通过</option>
+                                        <option value=2>查定申请未通过</option>
+                                        <option value=3>查定中</option>
+                                        <option value=4>查定合格</option>
+                                        <option value=5>查定不合格</option>
+
                                     </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm"><i
                                             class="layui-icon">&#xe615;</i>搜索
@@ -178,12 +179,10 @@
                                 } else if (status == 2) {
                                     data = "查定申请未通过";
                                 } else if (status == 3) {
-                                    data = "专家查定中";
+                                    data = "查定中";
                                 } else if (status == 4) {
-                                    data = "专家查定完成";
-                                } else if (status == 5) {
                                     data = "查定合格";
-                                } else if (status==6){
+                                } else if (status==5){
                                     data = "查定不合格"
                                 }
 

@@ -32,7 +32,6 @@
         <button class="layui-btn layui-btn-sm" onclick="showFund()">
             <i class="layui-icon">&#xe615;</i>查看经费使用
         </button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
 <div class="layui-form" style="margin-top: 60px;">
@@ -380,9 +379,7 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                     <div class="field">
                         <input type="hidden" name="id" id="id">
-                        <input type="text" name="periods" id="periods" placeholder="请输入" class="form-control date"
-                               style="background-color: #ffffff;"
-                               readonly>
+                        <p name="periods" id="periods"></p>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -393,207 +390,11 @@
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
             </tr>
 
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定情况简述</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="description" name="description" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定目的</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="purpose" name="purpose" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定依据</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="depand" name="depand" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定内容</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="details" name="details" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定方法</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
-                    <div class="field">
-                        <textarea id="means" name="means" placeholder="请输入内容" class="layui-textarea"
-                        ></textarea>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <span>查定结果</span>
-                    </div>
-                </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
-                    <div class="field">
-                        <select class="form-control input-sm" name="status" id="status">
-                            <option value=''>请选择</option>
-                            <option value='2'>查定合格</option>
-                            <option value='3'>查定不合格</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1">
-                    <div class="field">
-                        <button type="button" class="layui-btn" id="upload_accessory">
-                            <i class="layui-icon">&#xe67c;</i>上传附件
-                        </button>
-                        <span style="color: #999;">只支持jpg格式的图片</span>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="5">
-                    <div class="field">
-                        <label class="col-md-1 control-label">附件:</label>
-                        <div class="col-md-11" id="accessory_files">
-
-                        </div>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-
-            <tr style="height: 24px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="8"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
-            <tr style="height: 40px;">
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-
-                <td class="mainTd_1" rowspan="1" colspan="6">
-                    <div class="form-actions">
-                        <div class="row" align="center">
-                            <div class="col-md-12">
-                                <button class="btn btn-primary" type="submit" onclick="pass()">
-                                    <i class="fa fa-save"></i> 确定
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_0" rowspan="1" colspan="1"></td>
-            </tr>
         </form>
 
         </tbody>
     </table>
-    <button class="layui-btn" lay-submit lay-filter="submit" style="display: none">立即提交</button>
+
 </div>
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
@@ -704,7 +505,8 @@
                 item_id = data[0].item_id;
                 console.log(data[0]);
                 audit_apply_id = data[0].audit_apply_id;
-                $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
+                $("#period").text(formatDate4(data[0].start_date) + " - " + formatDate4(data[0].end_date));
+                $("#periods").text(formatDate4(data[0].start_date_true) + " - " + formatDate4(data[0].end_date_true));
                 $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                     $.each(data1, function (i, item) {
                         var serial = $("#target").parents('thead').next().children().length + 1;
