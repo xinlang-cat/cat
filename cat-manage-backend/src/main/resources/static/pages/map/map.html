@@ -37,8 +37,12 @@
     <div class="form-actions">
         <div class="row">
             <div style="margin-left: 20px;">
-                <div style="font-size: 16px;font-weight: bold;"><img src="img/blue.png" style="margin-right: 25px;margin-bottom: 10px;"/>广西重点研发计划</div>
-                <div style="font-size: 16px;font-weight: bold;"><img src="img/green.png" style="margin-right: 25px;margin-bottom: 10px;"/>电子信息</div>
+                <div style="font-size: 16px;font-weight: bold;" onclick="getItemByType('EMPHASIS_RESEARCH_AND_DEVELOPM')"><img
+                        src="img/blue.png" style="margin-right: 25px;margin-bottom: 10px;margin-top: 10px;"/>广西重点研发计划
+                </div>
+                <div style="font-size: 16px;font-weight: bold;" onclick="getItemByType('ELECTRONIC_INFORMATION')"><img
+                        src="img/green.png" style="margin-right: 25px;margin-bottom: 10px;margin-top: 10px;"/>电子信息
+                </div>
             </div>
         </div>
     </div>
@@ -93,7 +97,7 @@
     map.addControl(top_left_control);
 
     $(function () {
-        initDimensioning();
+        initDimensioning(null);
     });
 
     //自定义图标
@@ -125,11 +129,21 @@
         map.openInfoWindow(infoWindow, point); //开启信息窗口
     }
 
+    function getItemByType(type) {
+        //清除所有标注
+        map.clearOverlays();
+        var params = {
+            type : type
+        };
+        initDimensioning(params);
+    }
+
     //项目列表设置标注点
-    function initDimensioning() {
+    function initDimensioning(params) {
         $.ajax({
             url: domainName + "/project-item/item/information/list",
             type: "get",
+            data: params,
             contentType: "application/json; charset=utf-8",
             async: false,
             success: function (obj) {
@@ -170,17 +184,18 @@
                         enableMessage: true
                     };
                     var color = null;
-                    if(obj[i]['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM'){
+                    if (obj[i]['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM') {
                         color = blueIcon;
                     }
-                    if(obj[i]['type'] == 'ELECTRONIC_INFORMATION'){
+                    if (obj[i]['type'] == 'ELECTRONIC_INFORMATION') {
                         color = greenIcon;
                     }
-                    addMarker(new BMap.Point(obj[i]['lng'], obj[i]['lat']), content, opts,color);
+                    addMarker(new BMap.Point(obj[i]['lng'], obj[i]['lat']), content, opts, color);
                 }
             }
         });
     }
+
 
     layui.use(['layer'], function () {
         var layer = layui.layer;
@@ -324,10 +339,10 @@
                     var start = formatDateY(this.start_date);
                     var b = dataArr.indexOf(start);
 
-                    counts4[a*6+b] = counts4[a*6+b] + 1;
-                    if (a==0){
+                    counts4[a * 6 + b] = counts4[a * 6 + b] + 1;
+                    if (a == 0) {
                         counts2[b] = counts2[b] + 1;
-                    }else if (a==1){
+                    } else if (a == 1) {
                         counts3[b] = counts3[b] + 1;
                     }
 
@@ -348,12 +363,12 @@
         for (var i = 0; i < statuss.length; i++) {
             var math = counts1[i] / countItem * 1000;
             math = Math.round(math);
-            var res1 = {"name": statuss[i], "percent": math/10, "a": "1"};
+            var res1 = {"name": statuss[i], "percent": math / 10, "a": "1"};
             data1.push(res1);
         }
         for (var i = 0; i < counts.length; i++) {
-            for (var a= 0;a< dataArr.length;a++){
-                var res2 = {"name": contents[i], "月份": dataArr[a],"月均降雨量":counts4[i*6+a]};
+            for (var a = 0; a < dataArr.length; a++) {
+                var res2 = {"name": contents[i], "月份": dataArr[a], "月均降雨量": counts4[i * 6 + a]};
 
                 data2.push(res2);
             }
@@ -451,7 +466,6 @@
                 chart2.render();*/
 
 
-
         const chart3 = new F2.Chart({
             id: 'container2',
             pixelRatio: window.devicePixelRatio
@@ -464,10 +478,10 @@
                 const tooltipItems = obj.items;
                 const legendItems = legend.items;
                 const map = {};
-                legendItems.forEach(function(item) {
+                legendItems.forEach(function (item) {
                     map[item.name] = _.clone(item);
                 });
-                tooltipItems.forEach(function(item) {
+                tooltipItems.forEach(function (item) {
                     const name = item.name;
                     const value = item.value;
                     if (map[name]) {
@@ -513,6 +527,7 @@
         }
         return dataCoun;
     }
+
     function getCountA(a) {
         var dataCoun = [];
         var dataCoun = [];
