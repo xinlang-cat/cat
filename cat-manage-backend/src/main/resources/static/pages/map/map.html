@@ -37,26 +37,46 @@
     <div class="form-actions">
         <div class="row">
             <div style="margin-left: 20px;">
-                <div style="font-size: 16px;font-weight: bold;" onclick="getItemByType('EMPHASIS_RESEARCH_AND_DEVELOPM')"><img
-                        src="img/blue.png" style="margin-right: 25px;margin-bottom: 10px;margin-top: 10px;"/>广西重点研发计划
+                <div style="font-size: 14px; width: 50%;float: left;"
+                     onclick="getItemByType('EMPHASIS_RESEARCH_AND_DEVELOPM')"><img
+                        src="img/blue.png" style="margin-right: 10px;height: 14px"/>广西重点研发计划
                 </div>
-                <div style="font-size: 16px;font-weight: bold;" onclick="getItemByType('ELECTRONIC_INFORMATION')"><img
-                        src="img/green.png" style="margin-right: 25px;margin-bottom: 10px;margin-top: 10px;"/>电子信息
+                <div style="font-size: 14px;width: 50%;float: left;" onclick="getItemByType('ELECTRONIC_INFORMATION')"><img
+                        src="img/green.png" style="margin-right: 10px;height: 14px"/>电子信息
                 </div>
             </div>
         </div>
     </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
 
-    <h3 style="margin-top: 20px;">类型统计</h3>
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
+        <select name="interest" lay-filter="aihao" style="float: left;">
+            <option value="0">全部</option>
+            <option value="0">广西重点研发计划</option>
+            <option value="0">电子信息</option>
+        </select>
+    </div>
     <canvas id="myChart" style="float: left;width: 100%;"></canvas>
-    <div style="width: 100%;float: left;"></div>
-    <h3>状态统计</h3>
-    <canvas id="container" style="float: left;width: 100%;"></canvas>
-    <div style="width: 100%;float: left;"></div>
-    <!--<h3>时间分布</h3>
-    <canvas id="container1" style="float: left;width: 100%;"></canvas>-->
-    <h3>新增统计</h3>
+
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">状态统计</span>
+        <select name="interest" lay-filter="aihao" style="float: left;">
+            <option value="0">全部</option>
+            <option value="0">进行中</option>
+            <option value="0">结题中</option>
+            <option value="1">已结题</option>
+            <option value="2">未结题</option>
+        </select>
+    </div>
+    <canvas id="container" style="float: left;"></canvas>
+
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">新增统计</span>
+        <input type="text" style="width: 17%;float: left" id="test1"><span style="float: left;">月及往后5个月</span>
+    </div>
     <canvas id="container2" style="float: left;width: 100%;"></canvas>
+
 </div>
 
 </body>
@@ -87,6 +107,14 @@
         src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
 <script type="text/javascript">
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#test1'
+            , type: 'month'
+        });
+    });
     var pers = checkPermission();
     //百度地图API功能
     var map = new BMap.Map("allmap", {}); // 创建Map实例
@@ -133,7 +161,7 @@
         //清除所有标注
         map.clearOverlays();
         var params = {
-            type : type
+            type: type
         };
         initDimensioning(params);
     }
@@ -274,6 +302,9 @@
 
     initData();
 
+    function test1() {
+        alert(1)
+    }
 
     function initData() {
         var contents = new Array();//项目类型
@@ -431,9 +462,9 @@
 
         chart1.guide().html({
             position: ['50%', '45%'],
-            html: `<div style="width: 250px;height: 40px;text-align: center;">
-      <div style="font-size: 16px">项目总数</div>
-      <div style="font-size: 24px">` + countItem + `</div>
+            html: `<div style="width: 200px;height: 30px;text-align: center;">
+      <div style="font-size: 14px">项目总数</div>
+      <div style="font-size: 20px">` + countItem + `</div>
     </div>`
         });
         chart1.render();
