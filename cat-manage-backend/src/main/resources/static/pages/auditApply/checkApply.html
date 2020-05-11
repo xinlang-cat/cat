@@ -316,7 +316,30 @@
             </td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
+
+        <tr style="height: 24px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="8"></td>
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
+        <tr style="height: 40px;">
+            <td class="mainTd_0" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1">
+                <div class="field">
+                    <span>指定查定时间</span>
+                </div>
+            </td>
+            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <div class="field">
+                    <input type="text" name="periods" id="periods" placeholder="请选择时间范围" class="form-control date" style="background-color: #ffffff;" data-bv-notempty="true"
+                           data-bv-notempty-message="时间范围 不能为空" readonly>
+                </div>
+            </td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+            <td class="mainTd_1" rowspan="1" colspan="1"></td>
+        </tr>
+
 
         </tbody>
     </table>
@@ -357,7 +380,7 @@
 <script type="text/javascript" src='js/auditApply.js'></script>
 <script type="text/javascript" src="../../js/matchExpert.js"></script>
 <script type="text/javascript">
-    var layedit, index;
+    var layedit, index,laydate,layer;
     var arr = new Array();
     var id = getUrlParam("id");
     var item_id;
@@ -374,7 +397,13 @@
         upload = layui.upload;
         form = layui.form;
         var $ = layui.$, slider = layui.slider;
-
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , range: true
+                , trigger: 'click'
+            });
+        });
 
     });
     initData();
@@ -467,15 +496,16 @@
 
     function pass() {
         if (match){
+            var periods = $("#periods").val();
             $.ajax({
                 type: 'put',
                 url: domainName + '/project-item/item/target/auditApply/update',
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({id: id, status: 3}),
+                data: JSON.stringify({id: id, status: 3,periods:periods}),
                 success: function (data) {
                     for (var i =0;i<ids.length;i++){
                         var expert_id = ids[i].userId;
-                        var result = {"item_id": item_id, "audit_apply_id": id,"expert_id":expert_id,"target_id":target_id,"end_date":end_date,"start_date":start_date,"content":content};
+                        var result = {"item_id": item_id, "audit_apply_id": id,"expert_id":expert_id,"target_id":target_id,"end_date":end_date,"start_date":start_date};
                         $.ajax({
                             type: 'post',
                             url: domainName + '/project-item/item/target/auditApplyResult/one',
