@@ -113,11 +113,6 @@ public class ItemTargetController {
     @LogAnnotation(module = "添加指标查定")
     @PostMapping("/auditApplyResult/one")
     public ResponseEntity<Void> saveAuditApplyResult(@RequestBody auditApplyResult auditApplyResult) throws ParseException {
-        System.err.println(auditApplyResult);
-
-        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
-        auditApplyResult.setEdit_userid(userId);
-        auditApplyResult.setEdit_date(new Date());
         auditApplyResult.setStatus(1);
         auditApplyResultService.save(auditApplyResult);
         return  ResponseEntity.status(HttpStatus.CREATED).build();
@@ -140,16 +135,6 @@ public class ItemTargetController {
     @LogAnnotation(module = "修改指标查定")
     @PutMapping("/auditApplyResult/update")
     public Integer updateAuditApplyResult(@RequestBody auditApplyResult auditApplyResult) throws ParseException {
-        if (auditApplyResult.getPeriods()!= null && !auditApplyResult.getPeriods().equals("")){
-            if (!auditApplyResult.getPeriods().equals("")) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = null;
-                date = simpleDateFormat.parse(auditApplyResult.getPeriods().substring(0, 10));
-                auditApplyResult.setStart_date_true(date);
-                date = simpleDateFormat.parse(auditApplyResult.getPeriods().substring(12));
-                auditApplyResult.setEnd_date_true(date);
-            }
-        }
 
         auditApplyResultService.update(auditApplyResult);
         Integer unChecked =  auditApplyResultService.finUnChecked(auditApplyResult.getAudit_apply_id());

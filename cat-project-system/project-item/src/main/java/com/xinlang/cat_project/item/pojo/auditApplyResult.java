@@ -31,49 +31,11 @@ public class auditApplyResult implements Serializable {
     private String item_id;
     private Integer audit_apply_id;
     private String target_id;
-    private String content;
-    private String accessory;
     /**
      * 审核专家id
      */
     private Integer expert_id;
-    private String description;
-    /**
-     * 查定目的
-     */
-    private String purpose;
-    /**
-     * 查定依据
-     */
-    private String depand;
-    /**
-     * 查定内容
-     */
-    private String details;
-    /**
-     * 查定方法
-     */
-    private String means;
-    /**
-     * 提交方法
-     * 1 pc
-     * 2 微信
-     */
-    private Integer post_type;
-    private Integer edit_userid;
+    private Integer status;
     private Date start_date;
     private Date end_date;
-    private Date start_date_true;
-    private Date end_date_true;
-    private Date edit_date;
-    private Date check_date;
-
-    private Integer status;
-
-
-    @Transient
-    private String periods;
-
-    @Transient
-    private String period;
 }
