@@ -298,40 +298,16 @@
         } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
             //监理终审
             window.location.href = "check_acceptance_c.html?item_id=" + id;
+        } else if (status <=-1 && $.inArray('PARTY_C:html', pers) != -1) {
+            //审核未通过，退回至监理方，监理退回给乙方
+            alert("退回");
+            window.location.href = "check_acceptance_e.html?item_id=" + id;
         } else {
             window.location.href = "check_acceptance_d.html?item_id=" + id;
         }
 
     }
 
-    function read(id) {
-        layer.open({
-            title: "查看查定申请",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['checkApply.html?id=' + id],
-            end: function () {
-
-            }
-        });
-    }
-
-
-    function checkResult(id) {
-        layer.open({
-            title: "添加",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['checkResult.html?id=' + id],
-            end: function () {
-
-            }
-        });
-    }
 
     $("#searchBt").click(function () {
         example.ajax.reload();

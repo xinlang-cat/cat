@@ -16,15 +16,7 @@
     </style>
 </head>
 <body>
-<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
-    <div style="position: absolute;right: 30px;top: 15px;">
-        <button type="button" class="layui-btn layui-btn-sm" onclick="toWork();">查看工作总结
-        </button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">返回
-        </button>
 
-    </div>
-</div>
 <div class="layui-form" style="margin-top: 60px;">
     <table class="layui-table" lay-skin="nob" style="border-collapse: separate;">
         <colgroup>
@@ -446,9 +438,6 @@
             <button class="btn btn-primary" type="submit" onclick="add_content(0)">
                 <i class="fa fa-save"></i> 保存
             </button>
-            <button class="btn btn-primary" type="submit" onclick="add_content(1)">
-                <i class="fa fa-save"></i> 提交
-            </button>
         </div>
     </div>
 </div>
@@ -482,6 +471,7 @@
         });
     });
     var itemId = getUrlParam("itemId");
+    var status = getUrlParam("status");
     $("#itemId").val(itemId);
     queryInformation(itemId);
 
@@ -553,7 +543,7 @@
 
                 if (data.length > 0) {
                     id = data[0].id;
-                    if (data[0].status==0){
+                    if (status == 0 ){
                         $("input").attr("style", "text-align: center;border: 0px;");
                     } else {
                         $("input").attr('readonly', true);

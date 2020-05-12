@@ -44,15 +44,7 @@
             font-weight: bolder;
         }
 
-        #old {
-            display: none;
 
-        }
-
-        #new {
-            display: none;
-
-        }
     </style>
 </head>
 
@@ -80,9 +72,6 @@
                     <button class="layui-btn layui-btn-sm" onclick="showAudit()">
                         <i class="layui-icon">&#xe615;</i>查看查定报告
                     </button>
-                    <button class="layui-btn layui-btn-sm" onclick="getExpert()" id="expert">
-                        <i class="layui-icon">&#xe615;</i>查看专家意见
-                    </button>
                 </td>
             </tr>
         </table>
@@ -108,9 +97,8 @@
                     <input type="hidden" id="item_id" name="item_id" value="">
                     <input type="hidden" id="status" name="status" value="">
                     <input type="hidden" id="id" name="id" value="">
-                    <input type="hidden" id="before_acceptance_company" name="before_acceptance_company" value="">
-                    <input type="hidden" id="entrusting_company" name="entrusting_company" value="">
-                    <input type="hidden" id="management_company" name="management_company" value="">
+
+
                     <td rowspan="3" class="table-info">基本信息</td>
                     <td class="td-text1">合同编号:</td>
                     <td>
@@ -182,7 +170,9 @@
                         <span id="type">企业</span>
                     </td>
                     <td class="td-text1">申请验收单位建议的验收日期:</td>
-                    <td><span id="suggestDate"></span></td>
+                    <td>
+                        <span id="suggestDate"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td class="td-text1">项目合同(或课件任务书)约定的项目实施开始时间:</td>
@@ -527,41 +517,20 @@
                 </tr>
 
 
-                <tr id="check_b">
-                    <td class="td-text">验收方初审意见:</td>
-                    <td colspan="7" id="opinion2"> <textarea placeholder="验收方初审意见" class="layui-textarea form-control"
-                                                             lay-verify="required"
-                                                             id="burgLeaderOpinion" name="burgLeaderOpinion"></textarea>
-
-                    </td>
-                </tr>
-                <tr id="check_c">
-
-                    <td class="td-text">验收方核验结果:</td>
-                    <td colspan="7"> <textarea placeholder="验收方核验结果，专家审核后填写" class="layui-textarea form-control"
-                                               lay-verify="required"
-                                               id="burgLeaderResult" name="burgLeaderResult"></textarea>
-
-                    </td>
-                </tr>
-
-                <tr id="check">
-                    <td class="td-text">是否通过审核:</td>
+                <tr>
+                    <td class="td-text">是否退回补充:</td>
                     <td colspan="7">
                         <input type="radio" name="applicantExtension" value="是" title="是">
                         <input type="radio" name="applicantExtension" value="否" title="否">
                     </td>
                 </tr>
-                <tr id="check_expect">
 
-                </tr>
                 </tbody>
             </table>
         </div>
-        <div class="form-actions">
+        <div class="form-actions" id="new">
             <div class="row" align="center">
                 <div class="col-md-12">
-
                     <button class="btn btn-primary" type="button" onclick="add_ACC();">
                         <i class="fa fa-save"></i> 提交
                     </button>
@@ -569,7 +538,6 @@
                 </div>
             </div>
         </div>
-
     </form>
 </div>
 </body>
@@ -594,7 +562,7 @@
     var arr = new Array();
     $("#item_id").val(item_id);
     var pers = checkPermission();
-    var identity;
+
     var index, layer, upload, form;
     layui.use(['layedit', 'upload', 'laydate', 'form', 'layer'], function () {
         layer = layui.layer;
@@ -610,74 +578,57 @@
             });
         });
 
-        form.on('select(unit)', function (data) {
-
-            var id = $(data.elem).attr('id');
-            $.ajax({
-                type: 'get',
-                url: domainName + '/project-user/users',
-                contentType: "application/json; charset=utf-8",
-                async: false,
-                data: 'deptName=' + data.value,
-                success: function (d) {
-                    var options = '<option value=""></option>';
-                    $(d.data).each(function () {
-                        options += '<option value="' + this.userId + '">' + this.name + '</option>';
-                    });
-
-                    $('#acceptance_user').empty();
-                    $('#acceptance_user').append(options);
-                }
-            });
-            form.render('select');
-        });
     });
 
 
 
-    function add_ACC() {
 
+
+
+    function add_ACC() {
+        var turn = false;
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
 
-            var applicantExtension = formdata.applicantExtension;
+        var applicantExtension = formdata.applicantExtension;
 
-            if (applicantExtension == "是") {
-                formdata.status = 1 + parseInt(formdata.status);
-            } else if (applicantExtension == "否") {
-                formdata.status = -4;
-            } else {
-                layer.msg("请选择审核结果！");
-                return;
+        if (applicantExtension == "是") {
+            //退回补充
+            formdata.status = 0 ;
+            turn = true;
+        } else if (applicantExtension == "否") {
+            formdata.status = 2;
+            turn =false;
+        } else {
+            layer.msg("请选择审核结果！");
+            return;
+        }
+        status = formdata.status;
+
+        $.ajax({
+            type: 'put',
+            url: domainName + '/api-summary/check-table',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var msg = "保存成功";
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    var userIds = [];
+                    if (turn){
+                        userIds.push(getPARTY_B(item_id));
+                        var content = "您的项目验收申请未通过，请补充材料后重新提交申请";
+                        var title = "您的项目验收申请未通过";
+                        sendMeaasge(content,title,userIds);
+                    }else {
+                        userIds.push(getPARTY_D(item_id));
+                        var content = "您有一条验收审核待处理";
+                        var title = "您有一条验收审核待处理";
+                        sendMeaasge(content,title,userIds);
+                    }
+                    history.back(-1);
+                });
             }
-            status = formdata.status;
-
-            $.ajax({
-                type: 'put',
-                url: domainName + '/api-summary/check-table',
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(formdata),
-                success: function (data) {
-                    var msg = "保存成功";
-                    layer.msg(msg, {shift: -1, time: 1000}, function () {
-                        if (status==5){
-                            var userIds = [];
-                            userIds.push(getPARTY_C(item_id));
-                            var content = "您有一条验收审核待处理";
-                            var title = "您有一条验收审核待处理";
-                            sendMeaasge(content,title,userIds);
-                        }else if (status==-4){
-                            var userIds = [];
-                            userIds.push(getPARTY_C(item_id));
-                            var content = "您的项目验收申请未通过";
-                            var title = "您的项目验收申请未通过";
-                            sendMeaasge(content,title,userIds);
-                        }
-
-                        history.back(-1);
-                    });
-                }
-            });
+        });
 
 
     }
@@ -685,13 +636,16 @@
     getdata(item_id);
 
     function getdata(item_id) {
+        $("input").attr('readonly', true);
+        $("input").attr("style", "text-align: center;border: 0px;");
+        $("textarea").attr('readonly', true);
+
         $.ajax({
             type: 'get',
             url: domainName + '/api-summary/check-table/list',
             data: "itemId=" + item_id,
             async: false,
             success: function (data) {
-
                 for (var key in data[0]) {
                     var date = data[0][key];
                     $('#' + key).val(date);
@@ -707,44 +661,15 @@
                 $("#burgFinanceOpinion").text(data[0].burgFinanceOpinion);
                 $("#manageDeptResult").text(data[0].manageDeptResult);
                 $("#burgLeaderResult").text(data[0].burgLeaderResult);
-                change(data[0].status);
+
             }
         })
     }
 
 
-    function initCompanySelect() {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-c/company/all',
-            async: false,
-            success: function (data) {
-                $(data).each(function () {
-                    if (this.identity == 'PARTY_D') {
-                        $("#acceptance_company").append("<option value='" + this.signName + "'>" + this.signName + "</option>");
-                    }
-                })
-            }
-        });
-    }
-
-    function change() {
-
-        $("input").attr('readonly', true);
-        $("input").attr("style", "text-align: center;border: 0px;");
-        $("textarea").attr('readonly', true);
-        $("#applicationDate").attr('disabled', true);
-        $("#suggestDate").attr('disabled', true);
-
-        //验收终审
-
-        $("#burgLeaderResult").removeAttr("readonly");
-
-
-    }
 
     getbasic(item_id);
-    /*getCompanyInfo(item_id);*/
+
 
     var advanced = 0;
     var middle = 0;
@@ -817,17 +742,6 @@
 
         });
     }
-    function getExpert() {
-        layer.open({
-            title: "专家审核意见",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['../expert-evaluate/chechExpertEvaluateList.html?itemId=' + item_id]
-
-        });
-    };
 
     function showFund() {
         layer.open({
