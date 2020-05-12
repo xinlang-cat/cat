@@ -78,8 +78,8 @@
                         <i class="layui-icon">&#xe615;</i>查看技术总结
                     </button>
                     <button class="layui-btn layui-btn-sm" onclick="showAudit()">
-                    <i class="layui-icon">&#xe615;</i>查看查定报告
-                </button>
+                        <i class="layui-icon">&#xe615;</i>查看查定报告
+                    </button>
                 </td>
             </tr>
         </table>
@@ -604,7 +604,6 @@
 
 
     });
-    userType();
 
     $.matchExpert({
         elem: '#test',
@@ -622,23 +621,8 @@
         }
     });
 
-    function userType() {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-c/company/now-user',
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                identity = data.identity;
-
-
-            }
-        });
-
-    }
 
     function add_ACC() {
-alert(ids);
         var formdata = $("#form").serializeObject();
         formdata.itemId = item_id;
 
@@ -650,38 +634,58 @@ alert(ids);
                 layer.msg("请匹配专家对项目进行审核！");
                 return;
             } else {
-
-                $.ajax({
-                    type: 'post',
-                    url: domainName + '/project-user/item/list',
-                    dataType: 'json',
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify(ids),
-                    success: function (res) {
-                        var userIds = [];
-                        for (var i =0;i<ids.length;i++){
-                            var userId = ids[i].userId;
-                            userIds.push(userId);
+                var user_id = getEXPERT(item_id);
+                if (user_id.length == 0) {
+                    //未匹配过专家，需要将专家数据写入
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-user/item/list',
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(ids),
+                        success: function (res) {
+                            var userIds = [];
+                            for (var i = 0; i < ids.length; i++) {
+                                var userId = ids[i].userId;
+                                userIds.push(userId);
+                            }
+                            var content = "您有一条验收审核待处理";
+                            var title = "您有一条验收审核待处理";
+                            sendMeaasge(content, title, userIds);
+                            layer.msg("匹配专家成功！");
+                        },
+                        error: function (res) {
+                            layer.msg("匹配专家失败！");
+                            return;
                         }
-                        var content = "您有一条验收审核待处理";
-                        var title = "您有一条验收审核待处理";
-                        sendMeaasge(content,title,userIds);
-                        layer.msg("匹配专家成功！");
-                    },
-                    error: function (res) {
-                        layer.msg("匹配专家失败！");
-                        return;
-                    }
-                });
+                    });
+                } else {
+                    //匹配过专家，需要发消息给专家
+                    var content = "您有一条验收审核待处理";
+                    var title = "您有一条验收审核待处理";
+                    sendMeaasge(content, title, user_id);
+
+                    //删除专家审核记录
+                    $.ajax({
+                        type: 'delete',
+                        url: domainName + '/api-summary/expert-evaluate/item-id/'+item_id,
+                        success: function (data) {
+
+                        }
+                    });
+
+
+                }
+
             }
             formdata.status = 1 + parseInt(formdata.status);
         } else if (applicantExtension == "否") {
             var userIds = [];
-            userIds.push(getPARTY_B(item_id));
+            userIds.push(getPARTY_C(item_id));
             var content = "您的项目验收申请未通过";
             var title = "您的项目验收申请未通过";
-            sendMeaasge(content,title,userIds);
-            formdata.status = 0 - formdata.status;
+            sendMeaasge(content, title, userIds);
+            formdata.status = -2;
         } else {
             layer.msg("请选择审核结果！");
             return;
@@ -713,27 +717,22 @@ alert(ids);
             data: "itemId=" + item_id,
             async: false,
             success: function (data) {
-
-
                 for (var key in data[0]) {
                     var date = data[0][key];
                     $('#' + key).val(date);
 
                 }
-                $(data).each(function () {
-                    $("#applicationDate").text(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").text(this.suggestDate.substring(0, 10));
-                    $("#cean").text(this.cean);
-                    $("#katalog").text(this.katalog);
-                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
-                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
-                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
-                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
-                    $("#manageDeptResult").text(this.manageDeptResult);
-                    $("#burgLeaderResult").text(this.burgLeaderResult);
-                    $("before_acceptance_company").val(this.acceptance_company);
-                    change(this.status);
-                })
+                $("#applicationDate").val(data[0].applicationDate.substring(0, 10));
+                $("#suggestDate").val(data[0].suggestDate.substring(0, 10));
+                $("#cean").text(data[0].cean);
+                $("#katalog").text(data[0].katalog);
+                $("#applicationDeptOpinion").text(data[0].applicationDeptOpinion);
+                $("#manageDeptOpinion").text(data[0].manageDeptOpinion);
+                $("#burgLeaderOpinion").text(data[0].burgLeaderOpinion);
+                $("#burgFinanceOpinion").text(data[0].burgFinanceOpinion);
+                $("#manageDeptResult").text(data[0].manageDeptResult);
+                $("#burgLeaderResult").text(data[0].burgLeaderResult);
+                change();
             }
         })
     }
@@ -746,14 +745,26 @@ alert(ids);
         $("textarea").attr('readonly', true);
         $("#applicationDate").attr('disabled', true);
         $("#suggestDate").attr('disabled', true);
-
-
-
-
-
         $("#burgLeaderOpinion").removeAttr("readonly");
-
-
+        //查看是否匹配过专家，如果匹配过，不再进行匹配
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/list',
+            data: "item_id=" + item_id + "&user_type=EXPERT",
+            async: false,
+            success: function (data) {
+                if (data.length != 0) {
+                    //匹配过专家
+                    match = true;
+                    //锁定匹配专家按钮，提醒用户专家已经匹配
+                    $("#test").attr("disabled", "disabled");
+                    $("#test").text('专家已指定，无需再次匹配');
+                } else {
+                    //未匹配过专家
+                    math = false;
+                }
+            }
+        })
     }
 
     getbasic(item_id);

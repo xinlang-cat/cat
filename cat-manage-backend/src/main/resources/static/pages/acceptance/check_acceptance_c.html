@@ -709,7 +709,7 @@
 
                 formdata.status = 1 + parseInt(formdata.status);
             } else if (applicantExtension == "否") {
-                formdata.status = 0 - formdata.status;
+                formdata.status = -5;
             } else {
                 layer.msg("请选择审核结果！");
                 return;
@@ -775,20 +775,17 @@
                     $('#' + key).val(date);
 
                 }
-                $(data).each(function () {
-                    $("#applicationDate").text(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").text(this.suggestDate.substring(0, 10));
-                    $("#cean").text(this.cean);
-                    $("#katalog").text(this.katalog);
-                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
-                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
-                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
-                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
-                    $("#manageDeptResult").text(this.manageDeptResult);
-                    $("#burgLeaderResult").text(this.burgLeaderResult);
-                    $("before_acceptance_company").val(this.acceptance_company);
-                    change();
-                })
+                $("#applicationDate").val(data[0].applicationDate.substring(0, 10));
+                $("#suggestDate").val(data[0].suggestDate.substring(0, 10));
+                $("#cean").text(data[0].cean);
+                $("#katalog").text(data[0].katalog);
+                $("#applicationDeptOpinion").text(data[0].applicationDeptOpinion);
+                $("#manageDeptOpinion").text(data[0].manageDeptOpinion);
+                $("#burgLeaderOpinion").text(data[0].burgLeaderOpinion);
+                $("#burgFinanceOpinion").text(data[0].burgFinanceOpinion);
+                $("#manageDeptResult").text(data[0].manageDeptResult);
+                $("#burgLeaderResult").text(data[0].burgLeaderResult);
+                change(data[0].status);
             }
         })
     }

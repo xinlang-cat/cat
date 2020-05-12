@@ -79,3 +79,34 @@ function getPARTY_A(id) {
 
     return userId;
 }
+
+function getPARTY_D(id) {
+    var userId='';
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/personnel/list',
+        data: "item_id=" + id + "&user_type=PARTY_D",
+        async: false,
+        success: function (data) {
+            userId = data[0].user_id;
+        }
+    })
+
+    return userId;
+}
+function getEXPERT(id) {
+    var userId=new Array();
+    $.ajax({
+        type: 'get',
+        url: domainName + '/project-item/item/personnel/list',
+        data: "item_id=" + id + "&user_type=EXPERT",
+        async: false,
+        success: function (data) {
+            $(data).each(function () {
+                userId.push(data[0].user_id);
+            });
+        }
+    })
+
+    return userId;
+}

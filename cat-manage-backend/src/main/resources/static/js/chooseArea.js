@@ -5,7 +5,6 @@ function getProvince(provinceCode) {
         url: domainName + '/map/province/one/' + provinceCode,
         async: false,
         success: function (data) {
-
             $("#province").val(data.provinceName);
         }
     });

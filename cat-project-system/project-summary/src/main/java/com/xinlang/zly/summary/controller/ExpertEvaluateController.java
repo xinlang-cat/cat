@@ -119,4 +119,10 @@ public class ExpertEvaluateController {
             expertEvaluateService.delete(id);
         });
     }
+    @DeleteMapping("/item-id/{itemId}")
+    @LogAnnotation(module = "删除专家评估报告")
+    @ApiOperation(value = "删除专家评估报告")
+    public void deleteByItemId(@PathVariable Integer itemId) {
+            expertEvaluateService.delByItemId(itemId);
+    }
 }

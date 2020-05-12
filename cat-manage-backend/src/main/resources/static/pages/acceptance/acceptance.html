@@ -58,6 +58,34 @@
 </head>
 
 <body>
+<div class="header">
+    <div align="left">
+        <table style="width: 100%">
+            <tr>
+                <td align="left" style="border: 0;text-align: left;">
+                    <button class="layui-btn layui-btn-sm" onclick="showTarget()">
+                        <i class="layui-icon">&#xe615;</i>查看项目指标
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showStage()">
+                        <i class="layui-icon">&#xe615;</i>查看阶段总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showFund()">
+                        <i class="layui-icon">&#xe615;</i>查看经费使用
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showWork()">
+                        <i class="layui-icon">&#xe615;</i>查看工作总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showSkill()">
+                        <i class="layui-icon">&#xe615;</i>查看技术总结
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showAudit()">
+                        <i class="layui-icon">&#xe615;</i>查看查定报告
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 <div class="content">
     <form class="layui-form" id="form">
         <div><h2 style="text-align: center;margin: 40px;">广西科技研究与技术开发计划项目验收申请表</h2></div>
@@ -557,6 +585,7 @@
 <script type="text/javascript">
 
     var item_id = getUrlParam("item_id");
+    var status;
     $("#item_id").val(item_id);
     var pers = checkPermission();
     var index, layer, upload, form;
@@ -623,11 +652,10 @@
                     userIds.push(userId);
                     var content = "您有一条验收审核待处理";
                     var title = "您有一条验收审核待处理";
-                    sendMeaasge(content,title,userIds);
+                    sendMeaasge(content, title, userIds);
                 }
 
             }
-            console.log(JSON.stringify(formdata));
             $.ajax({
                 type: 'put',
                 url: domainName + '/api-summary/check-table',
@@ -654,12 +682,12 @@
             data: JSON.stringify(item),
             success: function (data) {
                 layer.msg("提交成功", {shift: -1, time: 1000}, function () {
-                   var userIds = [];
+                    var userIds = [];
                     var userId = getPARTY_C(item_id);
                     userIds.push(userId);
                     var content = "您有一条验收审核待处理";
                     var title = "您有一条验收审核待处理";
-                    sendMeaasge(content,title,userIds);
+                    sendMeaasge(content, title, userIds);
                 });
             }
         });
@@ -685,21 +713,20 @@
                 for (var key in data[0]) {
                     var date = data[0][key];
                     $('#' + key).val(date);
-
                 }
-                $(data).each(function () {
-                    $("#applicationDate").val(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").val(this.suggestDate.substring(0, 10));
-                    $("#cean").text(this.cean);
-                    $("#katalog").text(this.katalog);
-                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
-                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
-                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
-                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
-                    $("#manageDeptResult").text(this.manageDeptResult);
-                    $("#burgLeaderResult").text(this.burgLeaderResult);
-                    change(this.status);
-                })
+
+                $("#applicationDate").val(data[0].applicationDate.substring(0, 10));
+                $("#suggestDate").val(data[0].suggestDate.substring(0, 10));
+                $("#cean").text(data[0].cean);
+                $("#katalog").text(data[0].katalog);
+                $("#applicationDeptOpinion").text(data[0].applicationDeptOpinion);
+                $("#manageDeptOpinion").text(data[0].manageDeptOpinion);
+                $("#burgLeaderOpinion").text(data[0].burgLeaderOpinion);
+                $("#burgFinanceOpinion").text(data[0].burgFinanceOpinion);
+                $("#manageDeptResult").text(data[0].manageDeptResult);
+                $("#burgLeaderResult").text(data[0].burgLeaderResult);
+                change(data[0].status);
+                status = data[0].status;
             }
         })
     }
@@ -713,7 +740,7 @@
             $("#suggestDate").attr('disabled', true);
             document.getElementById('old').style.display = 'block';
         }
-        if (status <= 0) {
+        if (status == 0) {
             document.getElementById('new').style.display = 'block';
             $("textarea").attr('readonly', true);
             $("#applicationDeptOpinion").removeAttr("readonly");
@@ -758,6 +785,80 @@
             }
         });
 
+    }
+
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
+
+    function showAudit() {
+        layer.open({
+            title: "查定报告",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../auditApply/checkedApplyList.html?item_id=' + item_id]
+
+        });
+    }
+
+    function showSkill() {
+        layer.open({
+            title: "技术总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/addSummary.html?itemId=' + item_id + '&status=' + status]
+        });
+    }
+
+    function showWork() {
+        layer.open({
+            title: "工作总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../summary/addWorkSummary.html?itemId=' + item_id + '&status=' + status]
+
+        });
+    }
+
+    function showTarget() {
+        layer.open({
+            title: "项目指标",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../indicator/readIndicatorList.html?itemId=' + item_id]
+
+        });
+    }
+
+    function showStage() {
+        layer.open({
+            title: "阶段总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/stage-summary/checkStageSummaryList.html?itemId=' + item_id]
+
+        });
+    }
+
+    function showFund() {
+        layer.open({
+            title: "经费使用",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + item_id]
+
+        });
     }
 
 </script>
