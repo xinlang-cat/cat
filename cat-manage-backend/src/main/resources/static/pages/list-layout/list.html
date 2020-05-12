@@ -153,14 +153,16 @@
                 $(data).each(function () {
                     var itemId = this.id;
                     var status = '';
-                    if (this.status == 0) {
-                        status = "就绪";
-                    } else if (this.status == 1) {
-                        status = "进行中";
-                    } else if (this.status == 2) {
-                        status = "结题中";
+                    if (this.status == 2) {
+                        status = "在研";
                     } else if (this.status == 3) {
-                        status = "已结题";
+                        status = "结题中";
+                    } else if (this.status == 4) {
+                        status = "以结题";
+                    } else if (this.status == 5) {
+                        status = "终止中";
+                    } else if (this.status == 6) {
+                        status = "以终止";
                     } else {
                         status = "废弃";
                     }
@@ -169,16 +171,16 @@
                         '                <figcaption class="content">\n' +
                         '                    <h2 style="max-width: 400px;">' + this.name + '</h2>\n' +
                         '                    <p class="date" style="max-width: 400px;">' +
-                        '                        <span style="margin-right: 10px;">起止时间：' + this.start_date.substring(0, 10) + '---' + this.end_date.substring(0, 10) + '</span>' +
-                        '                        <span style="margin-right: 10px;">项目进度：' + status + '</span></p>\n' +
+                        '                        <span style="margin-right: 10px;">起止时间：' + this.start_date.substring(0, 7) + '---' + this.end_date.substring(0, 7) + '</span>' +
+                        '                        <span style="margin-right: 10px;">项目状态：' + status + '</span></p>\n' +
                         '                        <ul class="tags">\n' +
-                        '                        <li><a href="../item/projectInfo.html?id=' + this.id + '">项目信息</a></li>\n' +
-                        '                        <li><a href="../indicator/indicatorList.html?itemId=' + this.id + '&userId=' + userId + '">工作日志</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html"><a href="pages/stage-summary/stageSummaryList.html?item_id=' + this.id + '&user_id=' + userId + '">阶段总结</a></li>\n' +
-                        '                        <li><a href="pages/fundUse/fundBudget.html?id=' + this.id + '">经费使用</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html"><a href="../acceptance/acceptance.html?item_id=' + this.id + '">结题申请</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html" ><a href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '">查定申请</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html"><a href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '">变更申请</a></li>\n';
+                        '                        <li><a class="active" href="../item/projectInfo.html?id=' + this.id + '">项目信息</a></li>\n' +
+                        '                        <li><a class="active" href="../indicator/indicatorList.html?itemId=' + this.id + '&userId=' + userId + '">工作日志</a></li>\n' +
+                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/stage-summary/stageSummaryList.html?item_id=' + this.id + '&user_id=' + userId + '">阶段总结</a></li>\n' +
+                        '                        <li><a class="active" href="pages/fundUse/fundBudget.html?id=' + this.id + '">经费使用</a></li>\n' +
+                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../acceptance/acceptance.html?item_id=' + this.id + '">结题申请</a></li>\n' +
+                        '                        <li no-permission="PARTY_B:member:html" ><a class="active" href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '">查定申请</a></li>\n' +
+                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '">变更申请</a></li>\n';
                     if ($.inArray('EXPERT:html', pers) != -1) {
                         $.ajax({
                             type: 'get',
@@ -188,21 +190,21 @@
                             async: false,
                             success: function (data) {
                                 if (data.length < 1) {
-                                    str += '                        <li><a href="../expert-evaluate/addExpertEvaluate.html?itemId=' + itemId + '&userId=' + userId + '">开始评审</a></li>\n';
+                                    str += '                        <li><a class="active" href="../expert-evaluate/addExpertEvaluate.html?itemId=' + itemId + '&userId=' + userId + '">开始评审</a></li>\n';
                                 }
                                 for (var i = data.length - 1; i >= 0; i--) {
                                     if (data[i].isPass == 1 || data[i].isPass == -1) {
-                                        str += '                        <li><a href="../expert-evaluate/detailExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">我的评审</a></li>\n';
+                                        str += '                        <li><a class="active" href="../expert-evaluate/detailExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">我的评审</a></li>\n';
                                     }
                                     if (data[i].isPass == 0) {
-                                        str += '                        <li><a href="../expert-evaluate/updateExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">继续评审</a></li>\n';
+                                        str += '                        <li><a class="active" href="../expert-evaluate/updateExpertEvaluate.html?expertEvaluateId=' + data[i].id + '&itemId=' + itemId + '&userId=' + userId + '">继续评审</a></li>\n';
                                     }
                                 }
                             }
                         });
                     }
-                    str += '                        <li no-permission="PARTY_B:member:html"><a href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n' +
-                        '                        <li><a href="#!" class="more active" data-click-state="0">+</a></li>\n' +
+                    str += '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n' +
+                        /*'                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +*/
                         '                    </ul>\n' +
                         '                </figcaption>\n' +
                         '            </figure>\n' +
