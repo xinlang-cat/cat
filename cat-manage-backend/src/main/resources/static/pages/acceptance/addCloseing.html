@@ -9,27 +9,6 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form class="form-horizontal layui-form" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
         <fieldset>
-            <div class="form-group" style="margin-top: 40px">
-                <label class="col-md-1 control-label">指标当前进度:</label>
-                <div class="col-md-10">
-                    <div id="slideTest6" class="demo-slider" style="margin-top: 15px;"></div>
-                </div>
-                <input id="plan" type="hidden" name="plan" value="">
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label"></label>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">描述:</label>
-                <div class="col-md-10">
-                    <textarea placeholder="描述。"
-                              class="layui-textarea form-control" lay-verify="required"
-                              id="content" name="content"></textarea>
-                </div>
-            </div>
-            <div id="targetSum">
-
-            </div>
             <div class="form-group">
                 <label class="col-md-1 control-label"></label>
                 <div class="col-md-10">
@@ -107,9 +86,8 @@
 <script type="text/javascript" src="../../js/sendMessage.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript">
-    var itemId = getUrlParam("item_id");
-    var userId = getUrlParam("userId");
-    var targetId = getUrlParam("targetId");
+    var id = getUrlParam("id");
+
     var index, layer, upload;
     layui.use(['layedit', 'upload', 'layer', 'slider'], function () {
         layer = layui.layer;
@@ -152,20 +130,6 @@
             }
         });
 
-        function getPARTY_B(id) {
-            $.ajax({
-                type: 'get',
-                url: domainName + '/project-item/item/personnel/list',
-                data: "item_id=" + id + "&user_type=PARTY_B_PRINCIPAL",
-                async: false,
-                success: function (data) {
-                    $(data).each(function () {
-                        id = this.user_id;
-                    })
-                }
-            });
-            return id;
-        }
 
 
         //插入视频
@@ -211,101 +175,59 @@
         }
 
 
-        $.get(domainName + "/api-summary/work-log/lately", {itemId: itemId, targetId: targetId}, function (res) {
-            var min = 0;
-            if (!jQuery.isEmptyObject(res.workLogAffiliates)) {
-                var str = '';
-                $.each(res.workLogAffiliates, function (i, item) {
-                    str += '<div class="form-group targetSum">\n' +
-                        '                    <label class="col-md-1 control-label">指标名:</label>\n' +
-                        '                    <div class="col-md-3">\n' +
-                        '                        <input class="form-control"  type="text" name="content" value="' + item.content + '" disabled>\n' +
-                        '                    </div>\n' +
-                        '                    <label class="col-md-1 control-label">计划数量:</label>\n' +
-                        '                    <div class="col-md-1">\n' +
-                        '                        <input class="form-control" type="text" name="originalCount" value="' + item.originalCount + '" disabled>\n' +
-                        '                    </div>\n' +
-                        '                    <label class="col-md-1 control-label">本次数量:</label>\n' +
-                        '                    <div class="col-md-1">\n' +
-                        '                        <input class="form-control" type="text" name="oldCount" onchange="setNowCount(this)" value="0" >\n' +
-                        '                    </div>\n' +
-                        '                    <label class="col-md-1 control-label">累计数量:</label>\n' +
-                        '                    <div class="col-md-1">\n' +
-                        '                        <input class="form-control" type="text" name="nowCount" lay-verify="number" data-initial-val="' + item.nowCount + '" value="' + item.nowCount + '" disabled>\n' +
-                        '                    </div>\n' +
-                        '                </div>';
-                });
-                $('#targetSum').append(str);
-            } else {
-                $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (data) {
-                    var str = '';
-                    $.each(data, function (i, item) {
-                        if (item['count'] > 0) {
-                            var content = '';
-                            $.ajaxSettings.async = false;
-                            $.get(domainName + "/api-label/label/tree/" + item['content'], function (result) {
-                                content = result[0]['content'];
-                            });
-                            $.ajaxSettings.async = true;
-                            str += '<div class="form-group targetSum">\n' +
-                                '                    <label class="col-md-1 control-label">指标名:</label>\n' +
-                                '                    <div class="col-md-3">\n' +
-                                '                        <input class="form-control"  type="text" name="content" value="' + content + '" disabled>\n' +
-                                '                    </div>\n' +
-                                '                    <label class="col-md-1 control-label">计划数量:</label>\n' +
-                                '                    <div class="col-md-1">\n' +
-                                '                        <input class="form-control" type="text" name="originalCount" value="' + item['count'] + '" disabled>\n' +
-                                '                    </div>\n' +
-                                '                    <label class="col-md-1 control-label">本次数量:</label>\n' +
-                                '                    <div class="col-md-1">\n' +
-                                '                        <input class="form-control" type="text" name="oldCount" value="0" onchange="setNowCount(this)">\n' +
-                                '                    </div>\n' +
-                                '                    <label class="col-md-1 control-label">累计数量:</label>\n' +
-                                '                    <div class="col-md-1">\n' +
-                                '                        <input class="form-control" type="text" lay-verify="number" data-initial-val="0" name="nowCount" value="0" disabled>\n' +
-                                '                    </div>\n' +
-                                '                </div>';
-                        }
-                    });
-                    $('#targetSum').append(str);
-                });
-            }
-            if (!jQuery.isEmptyObject(res.plan)) {
-                min = parseInt(res.plan);
-                $("#plan").val(res.plan)
-            }
-            var flag = min >= 100 ? true : false;
-            var value = min;
-            if (flag) {
-                min = 0;
-                value = 100;
-            }
-            slider.render({
-                elem: '#slideTest6'
-                , value: value
-                , min: min
-                , max: 100
-                , setTips: function (value) { //自定义提示文本
-                    return value + '%';
-                }
-                , input: true
-                , change: function (value) {
-                    $('#plan').val(value);
-                }
-                , disabled: flag
-            });
-        });
-
     });
-
-    function setNowCount(obj) {
-        var oldCount = $(obj).val();
-        var parentElem = $(obj).parents("div.targetSum");
-        var nowCountInput = $(parentElem).find("input[name=nowCount]");
-        var initialVal = $(nowCountInput).data("initial-val");
-        $(nowCountInput).val(parseInt(oldCount)+parseInt(initialVal));
+    var id = getUrlParam("id");
+    var url= domainName + '/api-summary/check-table/list';
+    $.get(url, {id: id}, function (data) {
+        if(!jQuery.isEmptyObject(data[0].accessory)){
+            $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
+                $.each(data1, function (i, item) {
+                    addImgHtml(item)
+                });
+            })
+        }
+    });
+    function addImgHtml(item) {
+        var str = '';
+        var val = item.name.substring(0, item.name.indexOf("."));
+        if (val.length > 10) {
+            val = val.substring(0, 8) + '...';
+        }
+        if (item.contentType.substring(1, 0) == 'i') {
+            str = '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<a href="#" onclick="seeImg(\'' + item.url + '\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
+            str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_imgs").append(str);
+        }
+        if (item.contentType.substring(1, 0) == 'v') {
+            str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;margin-left: 20px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<video controls style="width: 250px;height: 250px;" src="' + item.url + '">' + item.name + '</video>';
+            str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $('#accessory_videos').append(str);
+        }
+        if (item.contentType.substring(1, 0) == 'a') {
+            var str = '<tr id="' + item.id + '"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
+            str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile(' + item.id + ')"><i class="layui-icon">&#xe640;</i></button></td>';
+            str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
+            $('#accessory_files').append(str);
+        }
     }
 
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "'/>";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
 
     function deleteFile(id) {
         layer.confirm('确定要删除吗？', {
@@ -326,31 +248,25 @@
 
     function add(obj) {
         $(obj).attr("disabled", true);
-        var workLogAffiliates = setObjectProperty('.targetSum');
+
         var formdata = $("#form").serializeObject();
-        formdata.itemId = itemId;
-        formdata.targetId = targetId;
+        formdata.id = id;
+
         var accessory =formdata.accessory;
         if (Array.isArray(accessory)) {
             formdata.accessory = formdata.accessory.join(',');
         }
-        formdata.workLogAffiliates = workLogAffiliates;
+        console.log(JSON.stringify(formdata));
         $.ajax({
-            type: 'post',
-            url: domainName + '/api-summary/work-log',
+            type: 'put',
+            url: domainName + '/api-summary/check-table',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
-                var msg = "成功";
+                var msg = "保存成功";
                 layer.msg(msg, {shift: -1, time: 1000}, function () {
-                    $(obj).attr("disabled", false);
+                    location.reload();
                 });
-                var userIds = [];
-                var userId = getPARTY_B(itemId);
-                userIds.push(userId);
-                var content = "您有一条日志审核待处理";
-                var title = "您有一条日志审核待处理";
-                sendMeaasge(content,title,userIds);
             }
         });
     }
@@ -400,26 +316,6 @@
         }
     }
 
-    //处理List类型数据
-    function setObjectProperty(attribute) {
-        var target = $(attribute);
-        var arr = new Array();
-        for (var i = 0; i < target.length; i++) {
-            var obj = {};
-            var input = $(target[i]).find('input,textarea');
-            var falg = false;
-            for (var j = 0; j < input.length; j++) {
-                falg = true;
-                obj[$(input[j]).attr('name')] = $(input[j]).val();
-                $(input[j]).attr('disabled', true)
-            }
-            if (falg) {
-                arr.push(obj);
-            }
-            falg = false;
-        }
-        return arr;
-    }
 
 </script>
 </body>

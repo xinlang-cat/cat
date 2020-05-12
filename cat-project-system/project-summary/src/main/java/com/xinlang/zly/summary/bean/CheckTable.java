@@ -37,6 +37,7 @@ public class CheckTable implements Serializable {
     private String entrusting_company;//委托单位（甲方）
     private String management_company;//受委托管理单位（丙方）
     private Integer status;
+    private String accessory;//附件
     /**
      * 申请状态
      * 0-待提交

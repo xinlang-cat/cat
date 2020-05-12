@@ -83,6 +83,9 @@
                     <button class="layui-btn layui-btn-sm" onclick="getExpert()" id="expert">
                         <i class="layui-icon">&#xe615;</i>查看专家意见
                     </button>
+                    <button class="layui-btn layui-btn-sm" onclick="addCloseing()">
+                        <i class="layui-icon">&#xe608;</i>添加结题总结
+                    </button>
                 </td>
             </tr>
         </table>
@@ -589,6 +592,7 @@
 <script type="text/javascript">
 
     var item_id = getUrlParam("item_id");
+    var id;
     var match = false;
     var status;
     var arr = new Array();
@@ -708,6 +712,7 @@
                 $("#manageDeptResult").text(data[0].manageDeptResult);
                 $("#burgLeaderResult").text(data[0].burgLeaderResult);
                 change(data[0].status);
+                id = data[0].id;
             }
         })
     }
@@ -837,6 +842,18 @@
             maxmin: true,
             shadeClose: true,
             content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + item_id]
+
+        });
+    }
+
+    function addCloseing(){
+        layer.open({
+            title: "结题总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['addCloseing.html?id=' + id]
 
         });
     }
