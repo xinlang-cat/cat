@@ -72,6 +72,12 @@
                     <button class="layui-btn layui-btn-sm" onclick="showAudit()">
                         <i class="layui-icon">&#xe615;</i>查看查定报告
                     </button>
+                    <button class="layui-btn layui-btn-sm" onclick="getExpert()" id="expert">
+                        <i class="layui-icon">&#xe615;</i>查看专家意见
+                    </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showCloseing()" id="closing">
+                    <i class="layui-icon">&#xe615;</i>查看结题总结
+                </button>
                 </td>
             </tr>
         </table>
@@ -751,6 +757,28 @@
             maxmin: true,
             shadeClose: true,
             content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + item_id]
+
+        });
+    }
+    function getExpert() {
+        layer.open({
+            title: "专家审核意见",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../expert-evaluate/chechExpertEvaluateList.html?itemId=' + item_id]
+
+        });
+    };
+    function showCloseing(){
+        layer.open({
+            title: "结题总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkCloseing.html?id=' + id]
 
         });
     }
