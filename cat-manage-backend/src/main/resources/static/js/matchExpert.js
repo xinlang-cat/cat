@@ -1,6 +1,5 @@
-
-var h = $(window).height() -15;
-var w = $(window).width() -30;
+var h = $(window).height() - 15;
+var w = $(window).width() - 30;
 layui.use(['element', 'layer', 'form'], function () {
     var element = layui.element;
     var layer = layui.layer;
@@ -44,8 +43,10 @@ $.matchExpert = function (params) {
                 '<button class="btn btn-primary" type="submit" id="SAVE_INDUSTRY_TITLE"><i class="fa fa-save"></i> 保存</button></div></div></div></form>';
         }
     });
+
+    var index = null;
     $(params.elem).click(function () {
-        layer.open({
+        index = layer.open({
             title: "匹配专家",
             type: 1,
             area: [w + 'px', h + 'px'],
@@ -56,7 +57,7 @@ $.matchExpert = function (params) {
         layui.element.init();
     });
 
-    $('body').on('click','#SAVE_INDUSTRY_TITLE',function () {
+    $('body').on('click', '#SAVE_INDUSTRY_TITLE', function () {
         var arr = new Array();
         $.each($('div.layui-colla-item'), function (i, item) {
             var data = {
@@ -86,8 +87,10 @@ $.matchExpert = function (params) {
                     alert('操作失败');
                 }
             });
+            layer.close(index);
         } else {
             params.defaultSaveFun(arr);
+            layer.close(index);
         }
     });
 };

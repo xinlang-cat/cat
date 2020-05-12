@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <header style="height: 100%">
+                <div align="left">
+                    <table style="width: 100%">
+                        <tr>
+                            <td>
+                                <form class="form-inline" onsubmit="return false">
+                                    <div class="form-group">
+                                        文件名：
+                                        <input id="fileName" type="text" class="form-control" placeholder="文件名">
+                                    </div>
+                                    <button id="searchBt" class="layui-btn layui-btn-sm" permission="file:query"><i
+                                            class="layui-icon">&#xe615;</i>搜索
+                                    </button>
+                                </form>
+                            </td>
+                            <td align="right">
+                                <select class="input-sm" id="fileSource">
+                                    <option value="LOCAL">本地上传</option>
+                                    <option value="ALIYUN" disabled>阿里云上传</option>
+                                </select>
+                                <button type="button" class="layui-btn" id="test1">
+                                    <i class="layui-icon">&#xe67c;</i>上传文档、PDF
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </header>
+
+            <div>
+                <div class="widget-body no-padding">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <th>文件名</th>
+                            <th>上传人</th>
+                            <th>上传时间</th>
+                            <th>管理</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    var example;
+
+    layui.use(['layer', 'util', 'laydate'], function () {
+        var layer = layui.layer;
+        var util = layui.util;
+        var laydate = layui.laydate;
+
+        function init() {
+            example =
+                $('#dt-table').DataTable({
+                    "searching": false,
+                    "processing": false,
+                    "serverSide": true,
+                    "ordering": false,
+                    "language": {
+                        "url": "../../js/plugin/datatables/Chinese.lang"
+                    },
+                    "ajax": {
+                        "url": domainName + "/api-label/policy-file/page",
+                        "type": "get",
+                        "data": function (d) {
+                            d.fileName = $('#fileName').val();
+                            d.previous = '%';
+                            d.behind = '%';
+                        },
+                        "dataSrc": function (json) {
+                            json.recordsTotal = json.total;
+                            json.recordsFiltered = json.total;
+                            return json.data;
+                        },
+                        "error": function (xhr, textStatus, errorThrown) {
+                            var msg = xhr.responseText;
+                            console.log(msg);
+                            if (xhr.status == 400) {
+                                layer.msg(JSON.parse(msg).message);
+                            } else if (xhr.status == 401) {
+                                localStorage.removeItem("token");
+                                layer.msg("token过期，请重新登录", {shift: -1, time: 1000}, function () {
+                                    location.href = loginPage;
+                                });
+                            } else if (xhr.status == 403) {
+                                layer.msg('未授权');
+                            } else if (xhr.status == 500) {
+                                var info = JSON.parse(msg);
+                                var exception = info.exception;
+                                var message = info.message;
+                                layer.msg('系统错误：' + (exception ? exception : message));
+                            }
+                        }
+                    },
+                    "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                    "columns": [
+                        {"data": "fileName", "defaultContent": ""},
+                        {"data": "createUserName", "defaultContent": ""},
+                        {
+                            "data": "upDate",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                return util.toDateString(data);
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data + "\",\"" + row['fileId'] + "\")'><i class='layui-icon'>&#xe640;</i></button>");
+                                return btn.prop("outerHTML");
+                            }
+                        },
+                    ],
+                });
+        }
+
+        init();
+    });
+
+    function del(id, fileId) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/api-f/files/' + fileId,
+                success: function (data) {
+                }
+            });
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/api-label/policy-file/' + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("删除成功");
+                }
+            });
+            layer.close(1);
+        });
+    }
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+    var appUser = null;
+    var projectUser = null;
+    $.get(domainName + "/api-u/users/current", function (res) {
+        appUser = res;
+        $.get(domainName + "/project-user/user-anon/" + res['id'], function (data) {
+            projectUser = data[0];
+        })
+    });
+
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        upload.render({
+            elem: '#test1' //绑定元素
+            , accept: 'file' //允许上传的文件类型
+            , exts: 'doc|PDF|docx'
+            , url: domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val()
+            , done: function (res, index, upload) {
+                var params = {
+                    createUserName: projectUser['name'],
+                    createUserId: appUser['id'],
+                    fileId: res['id'],
+                    fileName: res['name'],
+                    fileUrl: res['url']
+                };
+                $.ajax({
+                    type: "post",
+                    url: domainName + "/api-label/policy-file",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(params),
+                    success: function (res) {
+                        layer.msg("上传成功");
+                        example.ajax.reload();
+                    }
+                });
+
+            }
+        });
+
+
+        $("#fileSource").change(function () {
+            var url = domainName + '/zuul/api-f/files?fileSource=' + $("#fileSource").val();
+            $("#test1").attr("lay-data", "{url: '" + url + "'}");
+        });
+    });
+
+</script>
+</html>
