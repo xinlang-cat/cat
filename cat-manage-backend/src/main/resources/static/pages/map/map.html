@@ -37,12 +37,12 @@
     <div class="form-actions">
         <div class="row">
             <div style="margin-left: 20px;">
-                <div style="font-size: 14px; width: 50%;float: left;"
-                     onclick="getItemByType('EMPHASIS_RESEARCH_AND_DEVELOPM')"><img
+                <div style="font-size: 14px; width: 50%;float: left;"><img
                         src="img/blue.png" style="margin-right: 10px;height: 14px"/>广西重点研发计划
                 </div>
-                <div style="font-size: 14px;width: 50%;float: left;" onclick="getItemByType('ELECTRONIC_INFORMATION')"><img
-                        src="img/green.png" style="margin-right: 10px;height: 14px"/>电子信息
+                <div style="font-size: 14px;width: 50%;float: left;">
+                    <img
+                            src="img/green.png" style="margin-right: 10px;height: 14px"/>电子信息
                 </div>
             </div>
         </div>
@@ -51,29 +51,29 @@
 
     <div style="width: 100%;">
         <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
-        <select name="interest" lay-filter="aihao" style="float: left;">
+        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byType()" id="type">
             <option value="0">全部</option>
-            <option value="0">广西重点研发计划</option>
-            <option value="0">电子信息</option>
+            <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
+            <option value="ELECTRONIC_INFORMATION">电子信息</option>
         </select>
     </div>
     <canvas id="myChart" style="float: left;width: 100%;"></canvas>
 
     <div style="width: 100%;">
         <span style="font-size: 18px;float: left;margin-right: 20px;">状态统计</span>
-        <select name="interest" lay-filter="aihao" style="float: left;">
+        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatus()" id="status">
             <option value="0">全部</option>
-            <option value="0">进行中</option>
-            <option value="0">结题中</option>
-            <option value="1">已结题</option>
-            <option value="2">未结题</option>
+            <option value="1">进行中</option>
+            <option value="2">结题中</option>
+            <option value="3">已结题</option>
+            <option value="4">未结题</option>
         </select>
     </div>
     <canvas id="container" style="float: left;"></canvas>
 
     <div style="width: 100%;">
         <span style="font-size: 18px;float: left;margin-right: 20px;">新增统计</span>
-        <input type="text" style="width: 17%;float: left" id="test1"><span style="float: left;">月及往后5个月</span>
+        <input type="text" style="width: 17%;float: left" id="test1"><span style="float: left;">月及往前5个月</span>
     </div>
     <canvas id="container2" style="float: left;width: 100%;"></canvas>
 
@@ -107,14 +107,145 @@
         src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
 <script type="text/javascript">
+    var counts4 = new Array();
+    var items = new Array(); //项目原始数据
+    var contents = new Array();//项目类型
+    var counts = new Array();//项目类型数量
+    var countItem = 0;
+    var dataArr = getMonths();
+    var statuss1 = ["进行中", "结题中", "已结题", "未结题"];
+    var statussMath = [0, 0, 0, 0];
+    var signs = new Array();//项目类型标识
+    var selectItem = new Array(); //筛选过后的项目
+    //获取当年年月
+    var myDate = new Date();
+    var tYear = myDate.getFullYear();
+    var tMonth = myDate.getMonth();
 
-    layui.use('laydate', function () {
-        var laydate = layui.laydate;
-        laydate.render({
-            elem: '#test1'
-            , type: 'month'
-        });
+    var m = tMonth + 1;
+    if (m.toString().length == 1) {
+        m = "0" + m;
+        //将10一下的月份前加0
+    }
+    var now = tYear + '-' + m;
+
+    const chart = new F2.Chart({
+        id: 'myChart',
+        pixelRatio: window.devicePixelRatio, // 指定分辨率
     });
+    const chart1 = new F2.Chart({
+        id: 'container',
+        pixelRatio: window.devicePixelRatio,
+        padding: [20, 'auto']
+    });
+    const chart3 = new F2.Chart({
+        id: 'container2',
+        pixelRatio: window.devicePixelRatio
+    });
+    layui.use('laydate', function () {
+
+        var laydate = layui.laydate;
+
+        laydate.render({
+            elem: '#test1' //指定元素
+            , type: 'month'
+            //日期时间被切换后的回调,年月日时间被切换时都会触发。
+            , change: function (value, date, endDate) {
+                console.log(value); //得到日期生成的值，如：2017-08-18
+                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+            }
+            //控件选择完毕后的回调,点击日期、清空、现在、确定均会触发。
+            , done: function (value, date, endDate) {
+                console.log(value); //得到日期生成的值，如：2017-08-18
+                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+                //清空筛选后的项目数组，再进行添加
+
+                $("#status").val(0);
+                $("#type").val(0);
+                map.clearOverlays();
+                var counts5 = getCountA(counts.length);
+                var dataArr1 = [];
+                if (value.length > 0) {
+                    var data = new Date(value);
+                    var year = data.getFullYear();
+                    data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
+                    for (var i = 0; i < 6; i++) {
+                        data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
+                        var m = data.getMonth() + 1;
+                        m = m < 10 ? "0" + m : m;
+                        dataArr1.push(data.getFullYear() + "-" + m);
+                    }
+                } else {
+                    dataArr1 = dataArr;
+                }
+                showTable3(items[0],counts5,dataArr1);
+
+
+            }
+        });
+
+    });
+    function showTable3(data,counts5,dataArr1) {
+        $(data).each(function () {
+            var sign = this.type;
+            var a = signs.indexOf(sign);
+            counts[a] = counts[a] + 1;
+            var start = formatDateY(this.start_date);
+            var b = dataArr1.indexOf(start);
+            if (b >= 0) {
+                counts5[a * 6 + b] = counts5[a * 6 + b] + 1;
+                selectItem.push(this);
+                inMap(this);
+            }
+        });
+        const data2 = [];
+        selectItem = [];
+        for (var i = 0; i < counts.length; i++) {
+            for (var a = 0; a < dataArr1.length; a++) {
+                var res2 = {"name": contents[i], "月份": dataArr1[a], "月均降雨量": counts5[i * 6 + a]};
+                data2.push(res2);
+            }
+        }
+        chart3.clear(); // 清理所有chart.source(data);
+        chart3.source(data2);
+        chart3.tooltip({
+            custom: true, // 自定义 tooltip 内容框
+            onChange: function onChange(obj) {
+                const legend = chart3.get('legendController').legends.top[0];
+                const tooltipItems = obj.items;
+                const legendItems = legend.items;
+                const map = {};
+                legendItems.forEach(function (item) {
+                    map[item.name] = _.clone(item);
+                });
+                tooltipItems.forEach(function (item) {
+                    const name = item.name;
+                    const value = item.value;
+                    if (map[name]) {
+                        map[name].value = value;
+                    }
+                });
+                legend.setItems(_.values(map));
+            },
+            onHide: function onHide() {
+                const legend = chart3.get('legendController').legends.top[0];
+                legend.setItems(chart.getLegendItems().country);
+            }
+        });
+
+        chart3.interval()
+            .position('月份*月均降雨量')
+            .color('name')
+            .adjust({
+                type: 'dodge',
+                marginRatio: 0.05 // 设置分组间柱子的间距
+            });
+        chart3.render();
+    }
+
+
     var pers = checkPermission();
     //百度地图API功能
     var map = new BMap.Map("allmap", {}); // 创建Map实例
@@ -155,73 +286,6 @@
         var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
         var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
         map.openInfoWindow(infoWindow, point); //开启信息窗口
-    }
-
-    function getItemByType(type) {
-        //清除所有标注
-        map.clearOverlays();
-        var params = {
-            type: type
-        };
-        initDimensioning(params);
-    }
-
-    //项目列表设置标注点
-    function initDimensioning(params) {
-        $.ajax({
-            url: domainName + "/project-item/item/information/list",
-            type: "get",
-            data: params,
-            contentType: "application/json; charset=utf-8",
-            async: false,
-            success: function (obj) {
-                for (var i = 0; i < obj.length; i++) {
-                    var status = '';
-                    if (obj[i]['status'] == 0) {
-                        status = "起草中";
-                        continue;
-                    } else if (obj[i]['status'] == 1) {
-                        status = "起草中";
-                        continue;
-                    } else if (obj[i]['status'] == 2) {
-                        status = "进行中";
-                    } else if (obj[i]['status'] == 3) {
-                        status = "结题中";
-                    } else if (obj[i]['status'] == 4) {
-                        status = "已结题";
-                    } else if (obj[i]['status'] == 5) {
-                        status = "终止中";
-                    } else if (obj[i]['status'] == 6) {
-                        status = "已终止";
-                    }
-                    var content = "";
-                    content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目承担单位:</span><span>' + obj[i]['responsible_unit'] + '</span></div>';
-                    content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目监理单位:</span><span>' + obj[i]['management_unit'] + '</span></div>';
-                    content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + formatDate4(obj[i]['start_date']) + '---' + formatDate4(obj[i]['end_date']) + '</span></div>';
-                    content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + status + '</span></div>';
-                    content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showStage(' + obj[i]['id'] + ')">阶段总结</button>';
-                    content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showAudit(' + obj[i]['id'] + ')">查定报告</button>';
-                    content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showSkill(' + obj[i]['id'] + ')">技术总结</button>';
-                    content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showWork(' + obj[i]['id'] + ')">工作总结</button>';
-                    content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showTarget(' + obj[i]['id'] + ')">项目指标</button>';
-                    content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showFund(' + obj[i]['id'] + ')">经费使用</button>';
-                    var opts = {
-                        width: 500,
-                        height: 200,
-                        title: obj[i]['name'],
-                        enableMessage: true
-                    };
-                    var color = null;
-                    if (obj[i]['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM') {
-                        color = blueIcon;
-                    }
-                    if (obj[i]['type'] == 'ELECTRONIC_INFORMATION') {
-                        color = greenIcon;
-                    }
-                    addMarker(new BMap.Point(obj[i]['lng'], obj[i]['lat']), content, opts, color);
-                }
-            }
-        });
     }
 
 
@@ -302,20 +366,8 @@
 
     initData();
 
-    function test1() {
-        alert(1)
-    }
 
     function initData() {
-        var contents = new Array();//项目类型
-        var signs = new Array();//项目类型标识
-        var counts = new Array();//项目类型数量
-        var statuss = new Array();//项目类型
-        var counts1 = new Array();//项目进度数量
-        var countItem = 0;
-        var dataArr = getMonths();
-        var counts2 = getCount2();
-        var counts3 = getCount2();
 
         //生成月份数组
         $.ajax({
@@ -333,51 +385,42 @@
 
             }
         });
-        var counts4 = getCountA(counts.length);
+        counts4 = getCountA(counts.length);
         $.ajax({
             type: 'get',
             url: domainName + "/project-item/item/information/list",
             async: false,
             success: function (data) {
+
                 $(data).each(function () {
 
-                    var status = "";
                     if (this.status <= 1) {
                         return true;
-                    } else if (this.status == 2) {
-                        status = "进行中";
-                    } else if (this.status == 3) {
-                        status = "结题中";
-                    } else if (this.status == 4) {
-                        status = "已结题";
-                    } else if (this.status == 5) {
-                        status = "终止中";
-                    } else if (this.status == 6) {
-                        status = "已终止";
-                    }
-                    countItem++;
-                    var b = statuss.indexOf(status);
-                    if (b == -1) {
+                    } else if (this.status == 2 && formatDateY(this.end_date) >= now) {
+                        //进行中，并且没到结题时间
+                        statussMath[0] = statussMath[0] + 1;
 
-                        statuss.push(status);
-                        counts1.push(1);
-                    } else {
-                        counts1[b] = counts1[b] + 1;
+                    } else if (this.status == 3 || this.status == 5) {
+                        statussMath[1] = statussMath[1] + 1;
+
+                    } else if (this.status == 4 || this.status == 6) {
+                        statussMath[2] = statussMath[2] + 1;
+
+                    } else if (this.status == 2 && formatDateY(this.end_date) < now) {
+                        statussMath[3] = statussMath[3] + 1;
+
                     }
+                    items.push(data);
+                    countItem++;//项目总数变化
+                    inMap(this);
                     var sign = this.type;
                     var a = signs.indexOf(sign);
-                    counts[a] = counts[a] + 1;
+                    counts[a] = counts[a] + 1;//将对应状态的项目数量改变
                     var start = formatDateY(this.start_date);
-                    var b = dataArr.indexOf(start);
-
-                    counts4[a * 6 + b] = counts4[a * 6 + b] + 1;
-                    if (a == 0) {
-                        counts2[b] = counts2[b] + 1;
-                    } else if (a == 1) {
-                        counts3[b] = counts3[b] + 1;
+                    var b = dataArr.indexOf(start);//获取项目开始时间对应的下标位置
+                    if (b >= 0) {
+                        counts4[a * 6 + b] = counts4[a * 6 + b] + 1;
                     }
-
-
                 });
 
 
@@ -391,10 +434,11 @@
             var res = {"genre": contents[i], "sold": counts[i]};
             data.push(res);
         }
-        for (var i = 0; i < statuss.length; i++) {
-            var math = counts1[i] / countItem * 1000;
+
+        for (var i = 0; i < statuss1.length; i++) {
+            var math = statussMath[i] / countItem * 1000;
             math = Math.round(math);
-            var res1 = {"name": statuss[i], "percent": math / 10, "a": "1"};
+            var res1 = {"name": statuss1[i], "percent": math / 10, "a": "1"};
             data1.push(res1);
         }
         for (var i = 0; i < counts.length; i++) {
@@ -406,10 +450,7 @@
         }
 
         // Step 1: 创建 Chart 对象
-        const chart = new F2.Chart({
-            id: 'myChart',
-            pixelRatio: window.devicePixelRatio, // 指定分辨率
-        });
+
 
         // Step 2: 载入数据源
         chart.source(data);
@@ -430,11 +471,7 @@
             map[obj.name] = obj.percent + '%';
         });
 
-        const chart1 = new F2.Chart({
-            id: 'container',
-            pixelRatio: window.devicePixelRatio,
-            padding: [20, 'auto']
-        });
+
         chart1.source(data1, {
             percent: {
                 formatter: function formatter(val) {
@@ -469,38 +506,7 @@
         });
         chart1.render();
 
-        //====================================================================================================
 
-        /*        const chart2 = new F2.Chart({
-                    id: 'container1',
-                    pixelRatio: window.devicePixelRatio
-                });
-
-                chart2.source(data2, {
-                    sales: {
-                        tickCount: 5
-                    }
-                });
-                chart2.coord({
-                    transposed: true
-                });
-                chart2.tooltip({
-                    showItemMarker: false,
-                    onShow: function onShow(ev) {
-                        const items = ev.items;
-                        items[0].name = null;
-                        items[0].name = items[0].title;
-                        items[0].value = '¥ ' + items[0].value;
-                    }
-                });
-                chart2.interval().position('year*sales');
-                chart2.render();*/
-
-
-        const chart3 = new F2.Chart({
-            id: 'container2',
-            pixelRatio: window.devicePixelRatio
-        });
         chart3.source(data2);
         chart3.tooltip({
             custom: true, // 自定义 tooltip 内容框
@@ -541,9 +547,9 @@
         var dataArr = [];
         var data = new Date();
         var year = data.getFullYear();
-        data.setMonth(data.getMonth() + 1, 1); //获取到当前月份,设置月份
+        data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
         for (var i = 0; i < 6; i++) {
-            data.setMonth(data.getMonth() - 1); //每次循环一次 月份值减1
+            data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
             var m = data.getMonth() + 1;
             m = m < 10 ? "0" + m : m;
             dataArr.push(data.getFullYear() + "-" + m);
@@ -576,6 +582,101 @@
         var year = now.getFullYear();
         var month = now.getMonth() + 1;
         return year + "-" + fixZero(month, 2);
+    }
+
+    function byType() {
+        $("#status").val(0);
+        $("#test1").val("");
+        map.clearOverlays();
+        var type = $("#type").val();
+        if (type == 0) {
+            $(items[0]).each(function () {
+                inMap(this);
+            });
+        }
+        $(items[0]).each(function () {
+            var sign = this.type;
+            if (type == sign) {
+                selectItem.push(this);
+                inMap(this);
+            }
+        });
+    }
+
+    function byStatus() {
+        $("#type").val(0);
+        $("#test1").val("");
+
+        map.clearOverlays();
+        var status = $("#status").val();
+        $(items[0]).each(function () {
+            if (status == 0) {
+                $(items[0]).each(function () {
+                    inMap(this);
+                });
+            } else if (status == 1) {
+                if (this.status == 2 && formatDateY(this.end_date) >= now) {
+                    selectItem.push(this);
+                    inMap(this);
+                }
+            } else if (status == 2) {
+                if (this.status == 3 || this.status == 5) {
+                    selectItem.push(this);
+                    inMap(this);
+                }
+            } else if (status == 3) {
+                if (this.status == 4 || this.status == 6) {
+                    selectItem.push(this);
+                    inMap(this);
+                }
+            } else if (status == 4) {
+                if (this.status == 2 && formatDateY(this.end_date) < now) {
+                    selectItem.push(this);
+                    inMap(this);
+                }
+            }
+        });
+
+    }
+
+    function inMap(data) {
+        var status = '';
+        if (data['status'] == 2) {
+            status = "进行中";
+        } else if (data['status'] == 3) {
+            status = "结题中";
+        } else if (data['status'] == 4) {
+            status = "已结题";
+        } else if (data['status'] == 5) {
+            status = "终止中";
+        } else if (data['status'] == 6) {
+            status = "已终止";
+        }
+        var content = "";
+        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目承担单位:</span><span>' + data['responsible_unit'] + '</span></div>';
+        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目监理单位:</span><span>' + data['management_unit'] + '</span></div>';
+        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + formatDate4(data['start_date']) + '---' + formatDate4(data['end_date']) + '</span></div>';
+        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + status + '</span></div>';
+        content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showStage(' + data['id'] + ')">阶段总结</button>';
+        content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showAudit(' + data['id'] + ')">查定报告</button>';
+        content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showSkill(' + data['id'] + ')">技术总结</button>';
+        content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showWork(' + data['id'] + ')">工作总结</button>';
+        content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showTarget(' + data['id'] + ')">项目指标</button>';
+        content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showFund(' + data['id'] + ')">经费使用</button>';
+        var opts = {
+            width: 500,
+            height: 200,
+            title: data['name'],
+            enableMessage: true
+        };
+        var color = null;
+        if (data['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM') {
+            color = blueIcon;
+        }
+        if (data['type'] == 'ELECTRONIC_INFORMATION') {
+            color = greenIcon;
+        }
+        addMarker(new BMap.Point(data['lng'], data['lat']), content, opts, color);
     }
 
 </script>

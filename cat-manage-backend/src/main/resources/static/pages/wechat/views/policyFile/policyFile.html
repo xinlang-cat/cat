@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>政策文件</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+</head>
+<body ontouchstart>
+<div class="weui-news">
+    <ul class="weui-news-list" id="content">
+
+    </ul>
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script>
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-label/policy-file/list',
+        contentType: "application/json; charset=utf-8",
+        async: false,
+        success: function (data) {
+            var str = '';
+            $(data).each(function () {
+                str += '<li class="weui-news-item">'+
+                    '            <div class="weui-news-inners js-notice" >\n' +
+                    '                <div class="weui-news-title" style="font-size: 16px;font-weight: bold">' + this.fileName + '</div>' +
+                    '                <div class="weui-news-info">\n' +
+                    '                    <div class="weui-news-infoitem" ><span style="font-size: 14px;">' + formatDate4(this.upDate) + '</span></div>\n' +
+                    '                    <div class="weui-btn-area" style="float: right;">\n' +
+                    '                       <a class="weui-btn weui-btn_mini weui-btn_primary" href="' + this.fileUrl + '">下载/预览</a>\n' +
+                    '                    </div>' +
+                    '                </div>\n' +
+                    '            </div>\n' +
+                    ' </li>';
+            });
+            $("#content").append(str);
+        }
+    });
+</script>
+</html>

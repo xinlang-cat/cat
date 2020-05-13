@@ -83,6 +83,9 @@
                     <button class="layui-btn layui-btn-sm" onclick="getExpert()" id="expert">
                         <i class="layui-icon">&#xe615;</i>查看专家意见
                     </button>
+                    <button class="layui-btn layui-btn-sm" onclick="showCloseing()" id="closing">
+                        <i class="layui-icon">&#xe615;</i>查看结题总结
+                    </button>
                 </td>
             </tr>
         </table>
@@ -600,7 +603,7 @@
 <script type="text/javascript" src="../../js/matchExpert.js"></script>
 <script type="text/javascript" src='../../js/sendMessage.js'></script>
 <script type="text/javascript">
-
+    var id;
     var item_id = getUrlParam("item_id");
     var match = false;
     var status;
@@ -625,7 +628,6 @@
 
 
     });
-
 
 
     function getExpert() {
@@ -722,36 +724,39 @@
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(formdata),
                 success: function (data) {
+                    //发送消息通知项目状态
+                    var userIds = [];
+                    userIds.push(getPARTY_B(item_id));
+                    var content;
+                    var title;
+                    if (status == 6) {
+                        content = "您的项目验收申请已通过，项目已结题";
+                        title = "您的项目验收申请已通过，项目已结题";
+                        //更改项目状态
+                        var item = {"id": item_id, "status": 4};
+                        $.ajax({
+                            type: 'put',
+                            url: domainName + '/project-item/item/information',
+                            contentType: "application/json; charset=utf-8",
+                            async: false,
+                            data: JSON.stringify(item),
+                            success: function (data) {
 
-                    var item = {"id": item_id, "status": 4};
-                    $.ajax({
-                        type: 'put',
-                        url: domainName + '/project-item/item/information',
-                        contentType: "application/json; charset=utf-8",
-                        async: false,
-                        data: JSON.stringify(item),
-                        success: function (data) {
-                            layer.msg("提交成功", {shift: -1, time: 1000}, function () {
-                                var userIds = [];
-                                userIds.push(getPARTY_B(item_id));
-                                var content;
-                                var title;
-                                if (status==6){
+                            }
+                        });
+                    } else if (status == -5) {
+                        content = "您的项目验收申请未通过";
+                        title = "您的项目验收申请未通过";
 
-                                    content = "您的项目验收申请已通过，项目已结题";
-                                   title = "您的项目验收申请已通过，项目已结题";
-                                    sendMeaasge(content,title,userIds);
-                                }else if (status==-5){
-                                   content = "您的项目验收申请未通过";
-                                   title = "您的项目验收申请未通过";
-                                }
-                                sendMeaasge(content,title,userIds);
-                                location.reload();
-                            });
-                        }
+                    }
+                    sendMeaasge(content, title, userIds);
+
+                    var msg = "成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        history.back(-1);
                     });
 
-                    history.back(-1);
+
 
                 }
             });
@@ -786,6 +791,7 @@
                 $("#manageDeptResult").text(data[0].manageDeptResult);
                 $("#burgLeaderResult").text(data[0].burgLeaderResult);
                 change(data[0].status);
+                id = data[0].id;
             }
         })
     }
@@ -885,6 +891,18 @@
             maxmin: true,
             shadeClose: true,
             content: ['../list-layout/pages/fundUse/readFundBudget.html?id=' + item_id]
+
+        });
+    }
+
+    function showCloseing() {
+        layer.open({
+            title: "结题总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['checkCloseing.html?id=' + id]
 
         });
     }

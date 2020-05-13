@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人信息</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../css/self.css">
+
+</head>
+<body ontouchstart>
+<div class="head-box">
+    <!--						<h3>我</h3>-->
+    <div class="head-icon-outer">
+        <div id="headImg" class="head-icon" style="background-image:url('../images/avatar3.jpg')"></div>
+    </div>
+    <!--						<h5>头像点击可以更换</h5>-->
+</div>
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" href="user/addUserInfo.html">
+        <div class="weui-cell__bd">
+            <p>个人信息</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="company/addCompany.html">
+        <div class="weui-cell__bd">
+            <p>公司资料</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="user/updatePassword.html">
+        <div class="weui-cell__bd">
+            <p>密码修改</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
+</div>
+</body>
+<script type="text/javascript" src="../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../weui/js/cookie.js"></script>
+<script>
+    $(function () {
+        if (cookie.get("index") > 0) {
+            $('.weui-tab').tab({
+                defaultIndex: cookie.get("index"),
+                activeClass: 'weui-bar__item_on',
+                onToggle: function (index) {
+                }
+            })
+        } else {
+            $('.weui-tab').tab({
+                defaultIndex: 1,
+                activeClass: 'weui-bar__item_on',
+                onToggle: function (index) {
+                }
+            })
+        }
+    })
+</script>
+<script>
+    $.ajax({
+        type: 'get',
+        url: domainName + '/api-u/users/current',
+        success: function (data) {
+            if (!jQuery.isEmptyObject(data.headImgUrl)) {
+                $('#headImg').attr("style", "background-image:url('" + data.headImgUrl + "')")
+            } else {
+                if (data.sex == 1) {
+                    $('#headImg').attr("style", "background-image:url('../images/avatar3.jpg')")
+                } else {
+                    $('#headImg').attr("style", "background-image:url('../images/avatar.jpg')")
+                }
+
+            }
+
+        }
+    });
+
+</script>
+</html>

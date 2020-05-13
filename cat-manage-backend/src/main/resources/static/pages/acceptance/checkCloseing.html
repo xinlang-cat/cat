@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal layui-form" onsubmit="return false" id="form" style="padding-bottom: 30px;margin-top: 20px">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-1 control-label">图片:</label>
+                <div class="col-md-10" id="accessory_imgs">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 control-label">视频:</label>
+                <div class="col-md-10" id="accessory_videos">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-1 control-label">文件:</label>
+                <div class="col-md-10">
+                    <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                        <thead>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <th>文件名</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="accessory_files">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/sendMessage.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript">
+    var id = getUrlParam("id");
+
+    var index, layer, upload;
+    layui.use(['layedit', 'upload', 'layer', 'slider'], function () {
+        layer = layui.layer;
+        upload = layui.upload;
+        var $ = layui.$, slider = layui.slider;
+        upload.render({
+            elem: '#upload_file' //绑定元素
+            , accept: 'file'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addfile(res);
+            }
+        });
+        upload.render({
+            elem: '#upload_video' //绑定元素
+            , accept: 'video'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addvideo(res);
+            }
+        });
+        upload.render({
+            elem: '#upload_img' //绑定元素
+            , accept: 'images'
+            , multiple: true
+            , url: domainName + '/zuul/api-f/files'
+            , allDone: function (obj) { //当文件全部被提交后，才触发
+                layer.msg("上传成功");
+            }
+            , done: function (res, index, upload) {
+                addimg(res, '#accessory_imgs');
+            }
+        });
+
+
+
+        //插入视频
+        function addvideo(item) {
+            var str = '';
+            var val = item.name.substring(0, item.name.indexOf("."));
+            if (val.length > 10) {
+                val = val.substring(0, 20) + '...';
+            }
+            str = '<div onmouseover="showOrHideCloseBut1(this)" onmouseout="showOrHideCloseBut1(this)" style="float: left;position: relative;text-align: center;height: 250px;margin-left: 20px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<video controls style="width: 250px;height: 250px;" src="' + item.url + '">' + item.name + '</video>';
+            str += '<a class="close-a1" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $('#accessory_videos').append(str);
+            $(".close-a1").hide();
+        }
+
+        //插入文件
+        function addfile(item) {
+            var val = item.name.substring(0, item.name.indexOf("."));
+            if (val.length > 10) {
+                val = val.substring(0, 8) + '...';
+            }
+            var str = '<tr id="' + item.id + '"><td><a href="' + item.url + '" >' + item.name + '</a></td>';
+            str += '<td><button class="layui-btn layui-btn-xs" title="删除" onclick="deleteFile(' + item.id + ')"><i class="layui-icon">&#xe640;</i></button></td>';
+            str += '<input type="hidden" name="accessory" value="' + item['id'] + '" ></tr>';
+            $('#accessory_files').append(str);
+        }
+
+        //插入一张图片
+        function addimg(item) {
+            var str = '';
+            var val = item.name.substring(0, item.name.indexOf("."));
+            if (val.length > 10) {
+                val = val.substring(0, 8) + '...';
+            }
+            str = '<div onmouseover="showOrHideCloseBut(this)" onmouseout="showOrHideCloseBut(this)" style="float: left;position: relative;text-align: center;height: 250px;"><input type="hidden" name="accessory" value="' + item['id'] + '" >';
+            str += '<a href="#" onclick="seeImg(\'' + item.url + '\')" ><img src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;"></a>';
+            str += '<a class="close-a" href="#" style="position: absolute;right: 5px;top: 15px" onclick="deleteImg(this)"><i class="layui-icon" style="color: white;background-color: #1AA094;opacity:0.8;">&#x1006;</i></a>';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_imgs").append(str);
+            $(".close-a").hide();
+        }
+
+
+    });
+    var id = getUrlParam("id");
+    var url= domainName + '/api-summary/check-table/list';
+    $.get(url, {id: id}, function (data) {
+        if(!jQuery.isEmptyObject(data[0].accessory)){
+            $.get(domainName + "/api-f/files/list", {ids: data[0].accessory}, function (data1) {
+                $.each(data1, function (i, item) {
+                    addImgHtml(item)
+                });
+            })
+        }
+    });
+    function addImgHtml(item) {
+        var str = '';
+        var val = item.name.substring(0, item.name.indexOf("."));
+        if (val.length > 10) {
+            val = val.substring(0, 8) + '...';
+        }
+        if (item.contentType.substring(1, 0) == 'i') {
+            str = '<div style="float: left;position: relative;text-align: center;height: 250px;">';
+            str += '<img onclick="seeImg(\'' + item.url + '\')" src="' + item.url + '" title="' + item.name + '" style="width: 150px;margin: 15px 5px 0 5px;">';
+            str += '<p style="color: #aea9a9;">' + val + '</p></div>';
+            $("#accessory_imgs").append(str);
+        }
+        if (item.contentType.substring(1, 0) == 'v') {
+            str = '<div style="float: left;position: relative;text-align: center;height: 230px;">';
+            str += '<video controls style="width: 250px;height: 230px;" src="' + item.url + '">' + item.name + '</video>';
+            str += '<p>' + val + '</p></div>';
+            $('#accessory_videos').append(str);
+        }
+        if (item.contentType.substring(1, 0) == 'a') {
+            str = '<tr id="' + item.id + '"><td>' + item.name + '</td>';
+            str += '<td>';
+            str += '<a class="layui-btn layui-btn-xs" href="' + item.url + '"><i class="layui-icon">&#xe601;</i>下载</a></td>';
+            str += '</tr>';
+            $('#accessory_files').append(str);
+        }
+    }
+
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "'/>";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    function deleteFile(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + '/api-f/files/' + id,
+                success: function (data) {
+                    layer.msg("删除成功");
+                }
+            });
+
+            $("#" + id).remove();
+            layer.close(1);
+        });
+    }
+
+    function add() {
+        var index=parent.layer.getFrameIndex(window.name);
+
+        parent.layer.close(index);
+    }
+
+    //移除一张图片
+    function deleteImg(obj) {
+        $(obj).parent('div').remove();
+    }
+
+
+    var h = $(window).height() - 50;
+    var w = $(window).width() - 30;;
+
+    function seeImg(url) {
+        var imgHtml = "<img src='" + url + "' />";
+        layer.open({
+            type: 1,
+            maxmin: true,
+            shadeClose: true,
+            area: [w + 'px', h + 'px'],
+            content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            cancel: function () {
+                //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            }
+        });
+    }
+
+    //显示隐藏图片删除按钮
+    function showOrHideCloseBut(obj) {
+        var eum = $(obj).children("a:eq(1)");
+        var flag = $(eum).is(":hidden");
+        if (flag) {
+            $(eum).show();
+        } else {
+            $(eum).hide();
+        }
+    }
+
+    //显示隐藏视频删除按钮
+    function showOrHideCloseBut1(obj) {
+        var eum = $(obj).children("a:eq(0)");
+        var flag = $(eum).is(":hidden");
+        if (flag) {
+            $(eum).show();
+        } else {
+            $(eum).hide();
+        }
+    }
+
+
+</script>
+</body>
+</html>
