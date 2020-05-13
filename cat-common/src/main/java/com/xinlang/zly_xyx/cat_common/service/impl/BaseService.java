@@ -37,6 +37,12 @@ public class BaseService<T> implements IBaseService<T> {
     public List<T> findListByParams(Map<String, Object> params,Class<T> beanClazz) {
         String previous = (String)params.get("previous");
         String behind = (String)params.get("behind");
+        if(previous == null){
+            previous = "";
+        }
+        if(behind == null){
+            behind = "";
+        }
         Example example = ExampleUtil.getLinkExample(params,beanClazz,previous,behind);
         return mapper.selectByExample(example);
     }
@@ -48,6 +54,12 @@ public class BaseService<T> implements IBaseService<T> {
         List<T> list = Collections.emptyList();
         int total = 0;
         if(!StringUtils.isEmpty(previous) || !StringUtils.isEmpty(behind) ){
+            if(previous == null){
+                previous = "";
+            }
+            if(behind == null){
+                behind = "";
+            }
             Example example = ExampleUtil.getLinkExample(params,beanClazz,previous,behind);
             total =  mapper.selectCountByExample(example);
             if(total>0){
