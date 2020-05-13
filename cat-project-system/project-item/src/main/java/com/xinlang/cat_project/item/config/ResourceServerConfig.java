@@ -23,7 +23,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling().authenticationEntryPoint((request,response,authException)->response.sendError(HttpServletResponse.SC_ACCEPTED))
-                .and().authorizeRequests().antMatchers(PermitAllUrl.permitAllUrl("/projectUser-anon/**","/item/personnel","/item/indicators","/item/personnel/list")).permitAll()
+                .and().authorizeRequests().antMatchers(PermitAllUrl.permitAllUrl("/projectUser-anon/**","/item/personnel","/item/indicators","/item/personnel/list",
+                                                                                    "/item/information","/item/information/list","/item/termination","/item/termination/list")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 }

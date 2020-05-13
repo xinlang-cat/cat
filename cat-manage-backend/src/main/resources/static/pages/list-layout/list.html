@@ -203,9 +203,15 @@
                             }
                         });
                     }
-                    str += '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n' +
+                    if ($.inArray('PARTY_B:principal:html', pers) != -1) {
+                        if(this.status>1){
+                            str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationCheck.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
+                        }else {
+                            str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
+                        }
+                    }
                         /*'                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +*/
-                        '                    </ul>\n' +
+                    str +='                    </ul>\n' +
                         '                </figcaption>\n' +
                         '            </figure>\n' +
                         '        </div>';
@@ -214,63 +220,6 @@
                 checkNoPermission();
             }
         });
-    }
-
-    function submit(id, status) {
-        if (status == 3) {
-            layer.msg("申请已提交过了！");
-            return
-        }
-        status++
-        layer.confirm('确定要提交吗？', {
-            btn: ['确定', '取消']
-        }, function () {
-            $.ajax({
-                type: 'put',
-                url: domainName + '/project-item/item',
-                data: '{"id":' + id + ',"status":' + status + '}',
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    window.location.reload();
-                    layer.msg("提交成功！");
-                }
-            });
-            layer.close(1);
-        });
-    }
-
-    function check(id, status, boolean) {
-        if (boolean == 1) {
-            status++
-        } else {
-            status--
-        }
-        if (status != 4) {
-            layer.confirm('确定要提交吗？', {
-                btn: ['确定', '取消']
-            }, function () {
-                $.ajax({
-                    type: 'put',
-                    url: domainName + '/project-item/item',
-                    data: '{"id":' + id + ',"status":' + status + '}',
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        window.location.reload();
-                        layer.msg("提交成功！");
-                    }
-                });
-                layer.close(1);
-            });
-        } else {
-            layer.open({
-                title: "匹配专家",
-                type: 2,
-                area: ['800px', '400px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['pages/matchExpert.html?id=' + id]
-            });
-        }
     }
 
     //获取当前用户的公司代码
