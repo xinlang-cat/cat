@@ -18,11 +18,9 @@ import javax.websocket.server.ServerEndpoint;
 import com.alibaba.fastjson.JSONObject;
 import com.xinlang.zly_xyx.cat_inform.config.HttpSessionConfigurator;
 import com.xinlang.zly_xyx.cat_inform.service.IChatMessageService;
-import com.xinlang.zly_xyx.cat_inform.service.impl.ChatMessageService;
 import com.xinlang.zly_xyx.user.AppUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * websocket服务
@@ -33,16 +31,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 @ServerEndpoint(value = "/websocket", configurator = HttpSessionConfigurator.class)
 public class ChatServer {
 
-
-    private IChatMessageService chatMessageService = new ChatMessageService();
-
+    private static IChatMessageService chatMessageService;
     private static int onlineCount = 0; // 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static CopyOnWriteArraySet<ChatServer> webSocketSet = new CopyOnWriteArraySet<>();
     private Session session; // 与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Long userId; // 用户id
-    //	private static List<Integer> list = new ArrayList<Integer>(); // 在线列表,记录用户名称
     private static Map<Long, Session> routetab = new HashMap<>(); // 用户id和websocket的session绑定的路由表
     private static Set<Long> users = new HashSet<>();//
+
+    public static void setApplicationContext(ApplicationContext applicationContext){
+        chatMessageService = applicationContext.getBean(IChatMessageService.class);
+    }
 
     /**
      * 连接建立成功调用的方法
@@ -156,7 +155,7 @@ public class ChatServer {
      *
      * @throws IOException
      */
-    public static final boolean sendMsgToUsers(Long userId, String context) throws IOException {
+    public static boolean sendMsgToUsers(Long userId, String context) throws IOException {
         Session session = routetab.get(userId);
         boolean flag = false;
         if (session != null) {
@@ -166,7 +165,6 @@ public class ChatServer {
         return flag;
     }
 
-    @SuppressWarnings("unused")
     private void sendMessage(String message) {
         try {
             session.getBasicRemote().sendText(message);

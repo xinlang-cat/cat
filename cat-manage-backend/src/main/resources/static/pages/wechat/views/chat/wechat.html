@@ -77,11 +77,16 @@
 <script src="../../../../js/constant.js"></script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
 <script src="../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript">
+    var openid = getUrlParam("openid");
+    var hasUser = getUrlParam("hasUser");
+    var tempCode = getUrlParam("tempCode");
+    var nickname = getUrlParam("nickname");
+    var headimgurl = getUrlParam("headimgurl");
     var tx = $("#tx").val();
-
     function view(status) {
         if (status == 1) {
             $(".img-more").show();
@@ -99,7 +104,7 @@
         } else {
             view();
         }
-    })
+    });
     $("#content").keyup(function () {
         var content = $("#content").val().trim();
         if (content == null || content == '') {
