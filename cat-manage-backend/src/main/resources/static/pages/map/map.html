@@ -35,7 +35,7 @@
 
 <div id="allmap" class="col-md-9"></div>
 <div id="data_manipulation" class="col-md-3">
-    <div class="form-actions">
+    <!--<div class="form-actions">
         <div class="row">
             <div style="margin-left: 20px;">
                 <div style="font-size: 14px; width: 50%;float: left;"><img
@@ -47,8 +47,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
+    </div>-->
+
     <div style="width: 100%;">
         <span style="font-size: 18px;float: left;margin-right: 20px;">列表展示：</span>
         <select name="interest" lay-filter="aihao" style="float: left;" onchange="wetherShow()" id="table">
@@ -56,6 +56,7 @@
             <option value="1"  selected>不展示</option>
         </select>
     </div>
+    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
     <canvas id="sdsdsada" style="float: left;width: 100%;height: 5px;"></canvas>
     <div style="width: 100%;">
         <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
@@ -130,7 +131,7 @@
     var myDate = new Date();
     var tYear = myDate.getFullYear();
     var tMonth = myDate.getMonth();
-    var show = true;
+    var show = false;
     var m = tMonth + 1;
     if (m.toString().length == 1) {
         m = "0" + m;
@@ -719,12 +720,12 @@
                     status = "已终止";
                 }
                 str += '<tr role="row" class="odd"><td>' + item.name + '</td><td>' + item.responsible_unit + '</td><td>' + item.management_unit + '</td><td> ' + formatDate4(item.start_date) + '至' + formatDate4(item.end_date) + '</td><td>' + status + '</td><td>' +
-                    '<button class="layui-btn layui-btn-xs" onclick="showStage(' + item.id + ')"><i class="layui-icon">阶段总结</i></button>' +
-                    '<button class="layui-btn layui-btn-xs" onclick="showAudit(' + item.id + ')"><i class="layui-icon">查定报告</i></button>' +
-                    '<button class="layui-btn layui-btn-xs" onclick="showSkill(' + item.id + ')"><i class="layui-icon">技术总结</i></button>' +
-                    '<button class="layui-btn layui-btn-xs" onclick="showWork(' + item.id + ')"><i class="layui-icon">工作总结</i></button>' +
-                    '<button class="layui-btn layui-btn-xs" onclick="showTarget(' + item.id + ')"><i class="layui-icon">项目指标</i></button>' +
-                    '<button class="layui-btn layui-btn-xs" onclick="showFund(' + item.id + ')"><i class="layui-icon">经费使用</i></button>' +
+                    '<button class="layui-btn layui-btn-xs" style="margin: 5px 10px 0 0;" onclick="showStage(' + item.id + ')"><i class="layui-icon">阶段总结</i></button>' +
+                    '<button class="layui-btn layui-btn-xs" style="margin: 5px 10px 0 0;" onclick="showAudit(' + item.id + ')"><i class="layui-icon">查定报告</i></button>' +
+                    '<button class="layui-btn layui-btn-xs" style="margin: 5px 10px 0 0;" onclick="showSkill(' + item.id + ')"><i class="layui-icon">技术总结</i></button>' +
+                    '<button class="layui-btn layui-btn-xs" style="margin: 5px 10px 0 0;" onclick="showWork(' + item.id + ')"><i class="layui-icon">工作总结</i></button>' +
+                    '<button class="layui-btn layui-btn-xs" style="margin: 5px 10px 0 0;" onclick="showTarget(' + item.id + ')"><i class="layui-icon">项目指标</i></button>' +
+                    '<button class="layui-btn layui-btn-xs" style="margin: 5px 10px 0 0;" onclick="showFund(' + item.id + ')"><i class="layui-icon">经费使用</i></button>' +
                     '</td></tr><tr role="row" class="even">';
             });
             str += '</tbody>\n' +

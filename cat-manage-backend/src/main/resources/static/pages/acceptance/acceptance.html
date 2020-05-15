@@ -58,38 +58,36 @@
 </head>
 
 <body>
-<div class="header">
-    <div align="left">
-        <table style="width: 100%">
-            <tr>
-                <td align="left" style="border: 0;text-align: left;">
-                    <button class="layui-btn layui-btn-sm" onclick="showTarget()">
-                        <i class="layui-icon">&#xe615;</i>查看项目指标
-                    </button>
-                    <button class="layui-btn layui-btn-sm" onclick="showStage()">
-                        <i class="layui-icon">&#xe615;</i>查看阶段总结
-                    </button>
-                    <button class="layui-btn layui-btn-sm" onclick="showFund()">
-                        <i class="layui-icon">&#xe615;</i>查看经费使用
-                    </button>
-                    <button class="layui-btn layui-btn-sm" onclick="showWork()">
-                        <i class="layui-icon">&#xe608;</i>添加工作总结
-                    </button>
-                    <button class="layui-btn layui-btn-sm" onclick="showSkill()">
-                        <i class="layui-icon">&#xe608;</i>添加技术总结
-                    </button>
-                    <button class="layui-btn layui-btn-sm" onclick="showAudit()">
-                        <i class="layui-icon">&#xe615;</i>查看查定报告
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-</div>
 <div class="content">
     <form class="layui-form" id="form">
         <div><h2 style="text-align: center;margin: 40px;">广西科技研究与技术开发计划项目验收申请表</h2></div>
-        <div class="module">
+        <div align="left" style="margin-left: 10px;">
+            <table style="width: 100%">
+                <tr>
+                    <td align="left" style="border: 0;text-align: left;">
+                        <button class="layui-btn layui-btn-sm" onclick="showTarget()">
+                            <i class="layui-icon">&#xe615;</i>查看项目指标
+                        </button>
+                        <button class="layui-btn layui-btn-sm" onclick="showStage()">
+                            <i class="layui-icon">&#xe615;</i>查看阶段总结
+                        </button>
+                        <button class="layui-btn layui-btn-sm" onclick="showFund()">
+                            <i class="layui-icon">&#xe615;</i>查看经费使用
+                        </button>
+                        <button class="layui-btn layui-btn-sm" onclick="showWork()">
+                            <i class="layui-icon">&#xe608;</i>添加工作总结
+                        </button>
+                        <button class="layui-btn layui-btn-sm" onclick="showSkill()">
+                            <i class="layui-icon">&#xe608;</i>添加技术总结
+                        </button>
+                        <button class="layui-btn layui-btn-sm" onclick="showAudit()">
+                            <i class="layui-icon">&#xe615;</i>查看查定报告
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="module" style="margin-top: 20px;">
             <table class="layui-table">
                 <colgroup>
                     <col width="3%">
@@ -258,7 +256,7 @@
                 <tr style="font-size: 14px;font-weight: bolder;">
                     <td rowspan="100" class="table-info">项目投入产出基本情况表</td>
                     <td style="text-align: right;font-size: 14px;font-weight: bolder; ">参加单位数(个)</td>
-                    <td><input id="the_company_number" name="the_company_number" style="text-align: center"></td>
+                    <td><input id="the_company_number" name="the_company_number" style="text-align: center" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td colspan="6"></td>
                 </tr>
                 <tr>
@@ -331,7 +329,7 @@
                     <td colspan="8"></td>
                 </tr>
                 <tr>
-                    <td rowspan="10" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目主要成果情况</td>
+                    <td rowspan="10" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目主要成果情况(请填写数字)</td>
                     <td class="td-text">引进技术(项)</td>
                     <td class="td-text">集成应用技术(项)</td>
                     <td class="td-text">工业新产品(种)</td>
@@ -341,17 +339,17 @@
                     <td class="td-text">新装置(新装备)(套)</td>
                 </tr>
                 <tr>
-                    <td><input id="the_imported_technology" style="text-align: center;" name="the_imported_technology">
+                    <td><input id="the_imported_technology" style="text-align: center;" name="the_imported_technology" type="text" onkeyup="clearNoNum(this)" autocomplete="off">
                     </td>
                     <td><input id="integrated_application_technology" style="text-align: center;"
-                               name="integrated_application_technology"></td>
-                    <td><input id="new_industrial_product" style="text-align: center;" name="new_industrial_product">
+                               name="integrated_application_technology" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="new_industrial_product" style="text-align: center;" name="new_industrial_product" type="text" onkeyup="clearNoNum(this)" autocomplete="off">
                     </td>
                     <td><input id="new_agricultural_variety" style="text-align: center;"
-                               name="new_agricultural_variety"></td>
-                    <td><input id="the_new_technology" style="text-align: center;" name="the_new_technology"></td>
-                    <td><input id="the_new_material" style="text-align: center;" name="the_new_material"></td>
-                    <td><input id="the_new_device" style="text-align: center;" name="the_new_device"></td>
+                               name="new_agricultural_variety" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_technology" style="text-align: center;" name="the_new_technology" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_material" style="text-align: center;" name="the_new_material" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_device" style="text-align: center;" name="the_new_device" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <td class="td-text">申请登记计算软件(套)</td>
@@ -364,15 +362,15 @@
                 </tr>
                 <tr>
                     <td><input id="register_computer_software" style="text-align: center;"
-                               name="register_computer_software"></td>
+                               name="register_computer_software" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="research_and_development_platform" style="text-align: center;"
-                               name="research_and_development_platform"></td>
+                               name="research_and_development_platform" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="science_information_platform" style="text-align: center;"
-                               name="science_information_platform"></td>
-                    <td><input id="pilot_studies" style="text-align: center;" name="pilot_studies"></td>
-                    <td><input id="pilot_line" style="text-align: center;" name="pilot_line"></td>
-                    <td><input id="the_production_line" style="text-align: center;" name="the_production_line"></td>
-                    <td><input id="experimental_base" style="text-align: center;" name="experimental_base"></td>
+                               name="science_information_platform" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="pilot_studies" style="text-align: center;" name="pilot_studies" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="pilot_line" style="text-align: center;" name="pilot_line" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_production_line" style="text-align: center;" name="the_production_line" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="experimental_base" style="text-align: center;" name="experimental_base" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <td class="td-text">专利申请(项)</td>
@@ -384,18 +382,18 @@
                     <td class="td-text">参与制定技术标准(个)</td>
                 </tr>
                 <tr>
-                    <td><input id="application_for_patent" style="text-align: center;" name="application_for_patent">
+                    <td><input id="application_for_patent" style="text-align: center;" name="application_for_patent" type="text" onkeyup="clearNoNum(this)" autocomplete="off">
                     </td>
                     <td><input id="application_for_invention_patent" style="text-align: center;"
-                               name="application_for_invention_patent"></td>
+                               name="application_for_invention_patent" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="application_for_utility_paten" style="text-align: center;"
-                               name="application_for_utility_paten"></td>
-                    <td><input id="authorized_patent" style="text-align: center;" name="authorized_patent"></td>
+                               name="application_for_utility_paten" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="authorized_patent" style="text-align: center;" name="authorized_patent" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="authorized_invention_patent" style="text-align: center;"
-                               name="authorized_invention_patent"></td>
+                               name="authorized_invention_patent" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="authorized_utility_patent" style="text-align: center;"
-                               name="authorized_utility_patent"></td>
-                    <td><input id="count_standard" style="text-align: center;" name="count_standard"></td>
+                               name="authorized_utility_patent" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="count_standard" style="text-align: center;" name="count_standard" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <td class="td-text">国家标准(个)</td>
@@ -407,15 +405,15 @@
                     <td class="td-text">国内发表(篇)</td>
                 </tr>
                 <tr>
-                    <td><input id="the_national_standard" style="text-align: center;" name="the_national_standard"></td>
+                    <td><input id="the_national_standard" style="text-align: center;" name="the_national_standard" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="the_international_standard" style="text-align: center;"
-                               name="the_international_standard"></td>
-                    <td><input id="the_industry_standard" style="text-align: center;" name="the_industry_standard"></td>
-                    <td><input id="local_standard" style="text-align: center;" name="local_standard"></td>
-                    <td><input id="the_enterprise_standard" style="text-align: center;" name="the_enterprise_standard">
+                               name="the_international_standard" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_industry_standard" style="text-align: center;" name="the_industry_standard" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="local_standard" style="text-align: center;" name="local_standard" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_enterprise_standard" style="text-align: center;" name="the_enterprise_standard" type="text" onkeyup="clearNoNum(this)" autocomplete="off">
                     </td>
-                    <td><input id="count_thesis" style="text-align: center;" name="count_thesis"></td>
-                    <td><input id="domestic_papers" style="text-align: center;" name="domestic_papers"></td>
+                    <td><input id="count_thesis" style="text-align: center;" name="count_thesis" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="domestic_papers" style="text-align: center;" name="domestic_papers" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <td class="td-text">国外发表(篇)</td>
@@ -427,12 +425,12 @@
                     <td rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td><input id="foreign_papers" style="text-align: center;" name="foreign_papers"></td>
-                    <td><input id="make_postdoctor" style="text-align: center;" name="make_postdoctor"></td>
-                    <td><input id="make_doctor" style="text-align: center;" name="make_doctor"></td>
-                    <td><input id="make_postgraduate" style="text-align: center;" name="make_postgraduate"></td>
-                    <td><input id="hold_training_courses" style="text-align: center;" name="hold_training_courses"></td>
-                    <td><input id="number_of_participants" style="text-align: center;" name="number_of_participants">
+                    <td><input id="foreign_papers" style="text-align: center;" name="foreign_papers" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="make_postdoctor" style="text-align: center;" name="make_postdoctor" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="make_doctor" style="text-align: center;" name="make_doctor" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="make_postgraduate" style="text-align: center;" name="make_postgraduate" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="hold_training_courses" style="text-align: center;" name="hold_training_courses" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="number_of_participants" style="text-align: center;" name="number_of_participants" type="text" onkeyup="clearNoNum(this)" autocomplete="off">
                     </td>
 
                 </tr>
@@ -440,7 +438,7 @@
                     <td colspan="8"></td>
                 </tr>
                 <tr>
-                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目成果应用情况</td>
+                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目成果应用情况(请填写数字)</td>
                     <td class="td-text">实际应用成果数(项)</td>
                     <td class="td-text">已商品化成果数(项)</td>
                     <td class="td-text">成果转让合同数(项)</td>
@@ -449,20 +447,20 @@
                 </tr>
                 <tr>
                     <td><input id="convert_the_number_of_applications" style="text-align: center;"
-                               name="convert_the_number_of_applications"></td>
+                               name="convert_the_number_of_applications" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="results_of_industrialization" style="text-align: center;"
-                               name="results_of_industrialization"></td>
+                               name="results_of_industrialization" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="achievement_transfer_contract" style="text-align: center;"
-                               name="achievement_transfer_contract"></td>
+                               name="achievement_transfer_contract" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                     <td><input id="total_amount_of_achievement_transfer_contract" style="text-align: center;"
-                               name="total_amount_of_achievement_transfer_contract"></td>
+                               name="total_amount_of_achievement_transfer_contract" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
 
                 </tr>
                 <tr>
                     <td colspan="8"></td>
                 </tr>
                 <tr>
-                    <td rowspan="3" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目实施期间累积获取的经济效益</td>
+                    <td rowspan="3" style="text-align: right;font-size: 14px;font-weight: bolder; ">项目实施期间累积获取的经济效益(请填写数字)</td>
                     <td class="td-text">效益分类</td>
                     <td class="td-text">新增销售收入(万元)</td>
                     <td class="td-text">新增产值(万元)</td>
@@ -472,24 +470,24 @@
                 </tr>
                 <tr>
                     <td class="td-text">直接经济效益</td>
-                    <td><input id="all_production_a" style="text-align: center;" name="all_production_a"></td>
-                    <td><input id="the_new_production_a" style="text-align: center;" name="the_new_production_a"></td>
-                    <td><input id="the_new_tax_a" style="text-align: center;" name="the_new_tax_a"></td>
-                    <td><input id="net_amount_a" style="text-align: center;" name="net_amount_a"></td>
+                    <td><input id="all_production_a" style="text-align: center;" name="all_production_a" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_production_a" style="text-align: center;" name="the_new_production_a" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_tax_a" style="text-align: center;" name="the_new_tax_a" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="net_amount_a" style="text-align: center;" name="net_amount_a" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
 
                 </tr>
                 <tr>
                     <td class="td-text">间接经济效益</td>
-                    <td><input id="all_production_b" style="text-align: center;" name="all_production_b"></td>
-                    <td><input id="the_new_production_b" style="text-align: center;" name="the_new_production_b"></td>
-                    <td><input id="the_new_tax_b" style="text-align: center;" name="the_new_tax_b"></td>
-                    <td><input id="net_amount_b" style="text-align: center;" name="net_amount_b"></td>
+                    <td><input id="all_production_b" style="text-align: center;" name="all_production_b" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_production_b" style="text-align: center;" name="the_new_production_b" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_tax_b" style="text-align: center;" name="the_new_tax_b" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="net_amount_b" style="text-align: center;" name="net_amount_b" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
                 </tr>
                 <tr>
                     <td colspan="8"></td>
                 </tr>
                 <tr>
-                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">预期项目完成后年增效益</td>
+                    <td rowspan="2" style="text-align: right;font-size: 14px;font-weight: bolder; ">预期项目完成后年增效益(请填写数字)</td>
                     <td class="td-text">年增销售收入(万元)</td>
                     <td class="td-text">年增产值(万元）</td>
                     <td class="td-text">年增利税(万元)</td>
@@ -497,11 +495,11 @@
                     <td rowspan="2" colspan="3"></td>
                 </tr>
                 <tr>
-                    <td><input id="all_production_year" style="text-align: center;" name="all_production_year"></td>
-                    <td><input id="the_new_production_year" style="text-align: center;" name="the_new_production_year">
+                    <td><input id="all_production_year" style="text-align: center;" name="all_production_year" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="the_new_production_year" style="text-align: center;" name="the_new_production_year" type="text" onkeyup="clearNoNum(this)" autocomplete="off">
                     </td>
-                    <td><input id="the_new_tax_year" style="text-align: center;" name="the_new_tax_year"></td>
-                    <td><input id="net_amount_year" style="text-align: center;" name="net_amount_year"></td>
+                    <td><input id="the_new_tax_year" style="text-align: center;" name="the_new_tax_year" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
+                    <td><input id="net_amount_year" style="text-align: center;" name="net_amount_year" type="text" onkeyup="clearNoNum(this)" autocomplete="off"></td>
 
                 </tr>
                 <tr>
@@ -862,6 +860,12 @@
 
         });
     }
-
+    function clearNoNum(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字而不是
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d{6}).*$/, '$1$2.$3'); //只能输入6个小数
+    }
 </script>
 </html>
