@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<body>
+<div>
+    <header style="height: 100%">
+        <div align="left">
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <form class="form-inline" onsubmit="return false">
+                            <div class="form-group">
+                                状态：
+                                <select class="form-control input-sm" id="status">
+                                    <option value="">全部</option>
+                                    <option value="1">监理初审</option>
+                                    <option value="2">验收初审</option>
+                                    <option value="3">专家审核中</option>
+                                    <option value="4">验收终审</option>
+                                    <option value="5">监理终审</option>
+                                    <option value="6">已终止</option>
+                                </select>
+                                <button id="searchBt" class="layui-btn layui-btn-sm"><i
+                                        class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                            </div>
+                        </form>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+    </header>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div>
+            <div class="widget-body no-padding">
+                <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th style="width:30%;">项目名称</th>
+                        <th style="width:30%;">项目类型</th>
+                        <th style="width:30%;">项目信息</th>
+                        <th style="width:10%;">状态</th>
+                        <th style="width:5%;">查看</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript">
+
+    var pers = checkPermission();
+
+    var status;
+    if ($.inArray('PARTY_C:html', pers) != -1) {
+        status = 1;
+    }else if ($.inArray('PARTY_D:html', pers) != -1) {
+        status = 2;
+    }
+
+    var example;
+    layui.use(['layer', 'util'], function () {
+        var layer = layui.layer;
+        var util = layui.util;
+
+        function init() {
+            example =
+                $('#dt-table').DataTable({
+                    "searching": false,
+                    "processing": false,
+                    "serverSide": true,
+                    /* "info": false,
+                     "paging": true, // 禁止分页*/
+                    "ordering": false,
+                    "language": {
+                        "url": "../../../../js/plugin/datatables/Chinese.lang"
+                    },
+                    "ajax": {
+                        "url": domainName + "/project-item/item/termination/page",
+                        "data": function (d) {
+                            d.status = status;
+                        },
+                        "type": "get",
+                        "dataSrc": function (json) {
+                            json.recordsTotal = json.total;
+                            json.recordsFiltered = json.total;
+                            return json.data;
+                        },
+                        "error": function (xhr, textStatus, errorThrown) {
+                            var msg = xhr.responseText;
+                            console.log(msg);
+                            if (xhr.status == 400) {
+                                layer.msg(JSON.parse(msg).message);
+                            } else if (xhr.status == 401) {
+                                localStorage.removeItem("token");
+                                layer.msg("token过期，请重新登录", {shift: -1, time: 1000}, function () {
+                                    location.href = loginPage;
+                                });
+                            } else if (xhr.status == 403) {
+                                layer.msg('未授权');
+                            } else if (xhr.status == 500) {
+                                var info = JSON.parse(msg);
+                                var exception = info.exception;
+                                var message = info.message;
+                                layer.msg('系统错误：' + (exception ? exception : message));
+                            }
+                        }
+                    },
+                    "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                    "columns": [
+                        {
+                            "data": "item_id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/information/list?id=" + row.item_id, function (res) {
+                                    data = res[0]['name'];
+                                });
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "item_id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                $.ajaxSettings.async = false;
+                                $.get(domainName + "/project-item/item/information/list?id=" + row.item_id, function (res) {
+                                    $.get(domainName + "/api-label/label/tree/" + res[0].type, function (res) {
+                                        data = res[0]['content'];
+                                    })
+                                });
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "item_id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                return '<a style="color:#01AAED" href="../../../item/projectInfo.html?id=' + row.item_id + '">合同信息</a>'
+                            }
+                        },
+                        {
+                            "data": "status",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                $.ajaxSettings.async = false;
+                                if (data == 1) {
+                                    data = "监理初审中";
+                                } else if (data == 2) {
+                                    data = "验收初审中";
+                                } else if (data == 3) {
+                                    data = "专家审核";
+                                } else if (data == 4) {
+                                    data = "验收终审";
+                                } else if (data == 5) {
+                                    data = "监理终审";
+                                } else if (data == 6) {
+                                    data = "终止审核通过";
+                                }else  if (data == -1) {
+                                    data = "监理初审未通过";
+                                } else if (data == -2) {
+                                    data = "验收初审未通过";
+                                } else if (data == -3) {
+                                    data = "专家审核未通过";
+                                } else if (data == -4) {
+                                    data = "验收终审未通过";
+                                } else if (data == -5) {
+                                    data = "监理终审未通过";
+                                } else if (data == -6) {
+                                    data = "终止审核未通过";
+                                }
+                                $.ajaxSettings.async = true;
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var id = row['itemId'];
+                                var status = row['status'];
+                                var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>终止申请表</i></button>");
+                                btn.attr("onclick", 'check(' + row.item_id + ','+status+')');
+
+                                setMenu = btn.prop("outerHTML");
+                                return setMenu;
+                            }
+                        },
+                    ],
+                });
+        }
+
+        init();
+    });
+
+    var h = $(window).height() -15;
+    var w = $(window).width() -30;
+
+    function check(id,status) {
+        window.location.href = "terminationCheck.html?itemId=" + id;
+    }
+
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+
+</script>
+</html>

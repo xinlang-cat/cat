@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xinlang.cat_project.item.mapper.ItemInformationMapper;
 import com.xinlang.cat_project.item.mapper.ItemPersonnelMapper;
-import com.xinlang.cat_project.item.pojo.ItemInformation;
+import com.xinlang.bean.projectInfo.ItemInformation;
 import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.bean.util.PageResult;
 import com.xinlang.cat_project.item.service.IItemInformationService;
