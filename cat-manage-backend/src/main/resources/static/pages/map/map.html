@@ -52,8 +52,8 @@
     <div style="width: 100%;">
         <span style="font-size: 18px;float: left;margin-right: 20px;">列表展示：</span>
         <select name="interest" lay-filter="aihao" style="float: left;" onchange="wetherShow()" id="table">
-            <option value="0" selected>展示</option>
-            <option value="1">不展示</option>
+            <option value="0">展示</option>
+            <option value="1"  selected>不展示</option>
         </select>
     </div>
     <canvas id="sdsdsada" style="float: left;width: 100%;height: 5px;"></canvas>
@@ -703,7 +703,7 @@
             var str = '';
             str += '<table id="dt-table" class="table table-striped table-bordered table-hover dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="dt-table_info">\n' +
                 '    <thead>\n' +
-                '    <tr role="row"><th style="width: 286px;" class="sorting_disabled" rowspan="1" colspan="1">项目名称</th><th style="width: 151px;" class="sorting_disabled" rowspan="1" colspan="1">项目承担单位</th><th style="width: 151px;" class="sorting_disabled" rowspan="1" colspan="1">项目监理单位</th><th style="width: 286px;" class="sorting_disabled" rowspan="1" colspan="1">项目起止时间</th><th style="width: 236px;" class="sorting_disabled" rowspan="1" colspan="1">项目状态</th><th style="width: 483px;" class="sorting_disabled" rowspan="1" colspan="1">操作</th></tr>\n' +
+                '    <tr role="row"><th style="width: 286px;" class="sorting_disabled" rowspan="1" colspan="1">项目名称</th><th style="width: 251px;" class="sorting_disabled" rowspan="1" colspan="1">项目承担单位</th><th style="width: 151px;" class="sorting_disabled" rowspan="1" colspan="1">项目监理单位</th><th style="width: 286px;" class="sorting_disabled" rowspan="1" colspan="1">项目起止时间</th><th style="width: 136px;" class="sorting_disabled" rowspan="1" colspan="1">项目状态</th><th style="width: 483px;" class="sorting_disabled" rowspan="1" colspan="1">操作</th></tr>\n' +
                 '    </thead>\n' +
                 '    <tbody>';
             $.each(items, function (i, item) {
@@ -731,7 +731,7 @@
                 '</table>';
 
             var h1 = $(window).height() - 15;
-            var w1 = $(window).width() * 0.72;
+            var w1 = $(window).width() - 30;
             var data = JSON.stringify(items);
             console.log(data);
             index = layer.open({

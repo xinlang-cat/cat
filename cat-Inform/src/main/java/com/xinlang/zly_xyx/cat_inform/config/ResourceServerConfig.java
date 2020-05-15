@@ -21,7 +21,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().exceptionHandling().authenticationEntryPoint((request,response,authException)->response.sendError(HttpServletResponse.SC_ACCEPTED))
-                .and().authorizeRequests().antMatchers(PermitAllUrl.permitAllUrl("/inform-anon/**","/message")).permitAll()
+                .and().authorizeRequests().antMatchers(PermitAllUrl.permitAllUrl("/inform-anon/**","/message","/websocket")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 }
