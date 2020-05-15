@@ -1,4 +1,4 @@
-package com.xinlang.cat_project.item.pojo;
+package com.xinlang.bean.projectInfo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +22,9 @@ public class ItemTermination {
     private String remark;
     private String accessorys;
     private Integer status;
+    private String manage_dept_opinion;
+    private String burg_leader_opinion;
+    private String burg_finance_opinion;
+    private String manage_dept_result;
+    private String acceptance_company; //验收单位名
 }

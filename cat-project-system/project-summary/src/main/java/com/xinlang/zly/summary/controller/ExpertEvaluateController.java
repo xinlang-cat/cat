@@ -1,6 +1,8 @@
 package com.xinlang.zly.summary.controller;
 
+import com.xinlang.bean.projectInfo.ItemInformation;
 import com.xinlang.bean.projectInfo.ItemPersonnel;
+import com.xinlang.bean.projectInfo.ItemTermination;
 import com.xinlang.bean.project_user.ProjectUserItem;
 import com.xinlang.bean.project_user.ProjectUserType;
 import com.xinlang.zly.summary.bean.CheckTable;
@@ -57,11 +59,22 @@ public class ExpertEvaluateController {
             expertEvaluateAffiliateService.save(item);
         });
         if (expertEvaluates.size() == projectUserItems.size()) {
-            List<CheckTable> checkTables = checkTableService.findListByParams(map, CheckTable.class);
-            CheckTable checkTable = new CheckTable();
-            checkTable.setId(checkTables.get(0).getId());
-            checkTable.setStatus(4);
-            checkTableService.update(checkTable);
+            List<ItemInformation> items = consumeItem.getItemById(map).getBody();
+
+            if(items.get(0).getStatus()==3){//结题
+                List<CheckTable> checkTables = checkTableService.findListByParams(map, CheckTable.class);
+                CheckTable checkTable = new CheckTable();
+                checkTable.setId(checkTables.get(0).getId());
+                checkTable.setStatus(4);
+                checkTableService.update(checkTable);
+            }else {//终止
+                List<ItemTermination> terminations = consumeItem.findListByParams(map).getBody();
+                ItemTermination termination = new ItemTermination();
+                termination.setId(terminations.get(0).getId());
+                termination.setStatus(4);
+                consumeItem.update(termination);
+            }
+
             map.put("item_id", expertEvaluate.getItemId());
             map.put("user_type", ProjectUserType.PARTY_D.name());
             List<ItemPersonnel> personnels = consumeItem.getPersonnels(map).getBody();

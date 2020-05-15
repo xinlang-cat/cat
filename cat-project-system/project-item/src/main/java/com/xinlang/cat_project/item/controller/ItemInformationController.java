@@ -1,6 +1,7 @@
 package com.xinlang.cat_project.item.controller;
 
 import com.xinlang.bean.projectInfo.ItemIndicators;
+import com.xinlang.bean.projectInfo.ItemInformation;
 import com.xinlang.bean.projectInfo.ItemPersonnel;
 import com.xinlang.bean.project_user.ProjectUserType;
 import com.xinlang.bean.util.PageResult;

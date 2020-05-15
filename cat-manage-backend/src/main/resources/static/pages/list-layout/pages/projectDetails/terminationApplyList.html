@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
 </head>
 <body>
 <div>
@@ -16,9 +16,6 @@
                     <td>
                         <form class="form-inline" onsubmit="return false">
                             <div class="form-group">
-                                <input type="hidden" name="item_ids" id="item_ids">
-
-
                                 状态：
                                 <select class="form-control input-sm" id="status">
                                     <option value="">全部</option>
@@ -27,7 +24,7 @@
                                     <option value="3">专家审核中</option>
                                     <option value="4">验收终审</option>
                                     <option value="5">监理终审</option>
-                                    <option value="6">已结题</option>
+                                    <option value="6">已终止</option>
                                 </select>
                                 <button id="searchBt" class="layui-btn layui-btn-sm"><i
                                         class="layui-icon">&#xe615;</i>搜索
@@ -48,13 +45,9 @@
                     <tr>
                         <th style="width:30%;">项目名称</th>
                         <th style="width:30%;">项目类型</th>
-                        <th style="width:15%">提交时间</th>
-                        <th style="width:10%;">提交人</th>
+                        <th style="width:30%;">项目信息</th>
                         <th style="width:10%;">状态</th>
-
                         <th style="width:5%;">查看</th>
-                        <!--<th style="width:5%;">修改</th>
-                        <th style="width:5%;">查定结果</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -67,17 +60,24 @@
 </body>
 
 
-<script src="../../js/constant.js"></script>
-<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="../../layui/layui.js"></script>
-<script type="text/javascript" src="../../js/my/permission.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
 <script type="text/javascript">
 
     var pers = checkPermission();
+
+    var status;
+    if ($.inArray('PARTY_C:html', pers) != -1) {
+        status = 1;
+    }else if ($.inArray('PARTY_D:html', pers) != -1) {
+        status = 2;
+    }
 
     var example;
     layui.use(['layer', 'util'], function () {
@@ -85,7 +85,6 @@
         var util = layui.util;
 
         function init() {
-            getItemId();
             example =
                 $('#dt-table').DataTable({
                     "searching": false,
@@ -95,17 +94,15 @@
                      "paging": true, // 禁止分页*/
                     "ordering": false,
                     "language": {
-                        "url": "../../js/plugin/datatables/Chinese.lang"
+                        "url": "../../../../js/plugin/datatables/Chinese.lang"
                     },
                     "ajax": {
-                        "url": domainName + "/api-summary/check-table/page/vice",
+                        "url": domainName + "/project-item/item/termination/page",
                         "data": function (d) {
-                            d.status = $("#status").val();
-                            d.item_ids = $("#item_ids").val();
+                            d.status = status;
                         },
                         "type": "get",
                         "dataSrc": function (json) {
-                            console.log(json)
                             json.recordsTotal = json.total;
                             json.recordsFiltered = json.total;
                             return json.data;
@@ -136,13 +133,10 @@
                             "data": "item_id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var item_id = row['itemId'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/information/list?id=" + item_id, function (res) {
+                                $.get(domainName + "/project-item/item/information/list?id=" + row.item_id, function (res) {
                                     data = res[0]['name'];
-                                })
-
-                                $.ajaxSettings.async = true;
+                                });
                                 return data;
                             }
                         },
@@ -150,39 +144,20 @@
                             "data": "item_id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var item_id = row['itemId'];
                                 $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-item/item/information/list?id=" + item_id, function (res) {
-                                    var category = res[0]['type'];
-                                    $.get(domainName + "/api-label/label/tree/" + category, function (res) {
+                                $.get(domainName + "/project-item/item/information/list?id=" + row.item_id, function (res) {
+                                    $.get(domainName + "/api-label/label/tree/" + res[0].type, function (res) {
                                         data = res[0]['content'];
-
                                     })
-                                })
-
-                                $.ajaxSettings.async = true;
+                                });
                                 return data;
                             }
                         },
                         {
-                            "data": "applicationDate",
+                            "data": "item_id",
                             "defaultContent": "",
                             "render": function (data, type, row) {
-                                var start = formatDate3(data);
-                                return start;
-                            }
-                        },
-                        {
-                            "data": "userName",
-                            "defaultContent": "",
-                            "render": function (data, type, row) {
-                                $.ajaxSettings.async = false;
-                                $.get(domainName + "/project-user/user-anon/" + row['createUserId'], function (res) {
-                                    data = res[0]['name'];
-                                })
-
-                                $.ajaxSettings.async = true;
-                                return data;
+                                return '<a style="color:#01AAED" href="../../../item/projectInfo.html?id=' + row.item_id + '">合同信息</a>'
                             }
                         },
                         {
@@ -201,7 +176,7 @@
                                 } else if (data == 5) {
                                     data = "监理终审";
                                 } else if (data == 6) {
-                                    data = "结题审核通过";
+                                    data = "终止审核通过";
                                 }else  if (data == -1) {
                                     data = "监理初审未通过";
                                 } else if (data == -2) {
@@ -213,7 +188,7 @@
                                 } else if (data == -5) {
                                     data = "监理终审未通过";
                                 } else if (data == -6) {
-                                    data = "结题审核通过未通过";
+                                    data = "终止审核未通过";
                                 }
                                 $.ajaxSettings.async = true;
                                 return data;
@@ -225,80 +200,25 @@
                             "render": function (data, type, row) {
                                 var id = row['itemId'];
                                 var status = row['status'];
-
-                                var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>验收申请表</i></button>");
-                                btn.attr("onclick", 'check(' + id + ','+status+')');
+                                var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>终止申请表</i></button>");
+                                btn.attr("onclick", 'check(' + row.item_id + ','+status+')');
 
                                 setMenu = btn.prop("outerHTML");
                                 return setMenu;
                             }
                         },
-
-
                     ],
                 });
         }
 
         init();
     });
-    //获取当前用户的ID
-    function getItemId() {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/personnel/getItemId',
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-               $("#item_ids").val(data);
-            }
-        });
-    }
-
-    function userType() {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-c/company/now-user',
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                identity = data.identity;
-                if ($.inArray('PARTY_A:html', pers) != -1) {
-                    //甲方
-                    $("#entrusting_company").val(data.signName);
-                } else if ($.inArray('PARTY_D:html', pers) != -1) {
-                    //验收方
-                    $("#acceptance_company").val(data.signName);
-                } else if ($.inArray('PARTY_C:html', pers) != -1) {
-                    //监理方
-                    $("#management_company").val(data.signName);
-                }
-            }
-        });
-    }
 
     var h = $(window).height() -15;
     var w = $(window).width() -30;
 
     function check(id,status) {
-        if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
-            //监理初审
-             window.location.href = "check_acceptance.html?item_id=" + id;
-        } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
-            //验收初审
-            window.location.href = "check_acceptance_a.html?item_id=" + id;
-        } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
-            //验收终审
-            window.location.href = "check_acceptance_b.html?item_id=" + id;
-        } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
-            //监理终审
-            window.location.href = "check_acceptance_c.html?item_id=" + id;
-        } else if (status <=-1 && $.inArray('PARTY_C:html', pers) != -1) {
-            //审核未通过，退回至监理方，监理退回给乙方
-            window.location.href = "check_acceptance_e.html?item_id=" + id;
-        } else {
-            window.location.href = "check_acceptance_d.html?item_id=" + id;
-        }
-
+        window.location.href = "terminationCheck.html?itemId=" + id;
     }
 
 
