@@ -203,6 +203,7 @@
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/serializeJson.js"></script>
 <script type="text/javascript" src='../../js/initSelectData.js'></script>
+<script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/pictureViewer.js"></script>
@@ -394,8 +395,18 @@
                             //请求异常回调
                         }
                     })
+                    $('input[name=money]').keyup(function(){
+                        var tmptxt=$(this).val().replace(/\D|^0/g,'');
+                        $(this).val(tmptxt);
+                    });
                 },
                 yes: function (index, layero) {
+                    $('#form').bootstrapValidator();
+                    var bootstrapValidator = $("#form").data('bootstrapValidator');
+                    bootstrapValidator.validate();
+                    if(!bootstrapValidator.isValid()){
+                        return;
+                    }
                     var formdata = $("#form").serializeObject();
                     formdata.item_id = id;
                     formdata.edit_user_id = currentUser.id;

@@ -2277,11 +2277,11 @@
         var fundBudget = $('.fundBudget').find('form').serializeArrayObj();
         var fundSource = $('.fundSource').find('form').serializeObject();
         var contactWay = $('.contactWay').find('form').serializeArrayObj();
-        if (personnel.length == 1) {
+        if (personnel.length < 1) {
             layer.msg("请填写主要研究、开发人员!");
             return;
         }
-        if (scheduling.length == 1) {
+        if (scheduling.length < 1) {
             layer.msg("请填写进度安排!");
             return;
         }
