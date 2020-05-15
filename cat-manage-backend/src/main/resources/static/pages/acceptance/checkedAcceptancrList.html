@@ -272,27 +272,21 @@
                     //监理方
                     $("#management_company").val(data.signName);
                 }
-
-
             }
         });
-
     }
 
     var h = $(window).height() -15;
     var w = $(window).width() -30;
 
     function check(id,status) {
-
         if (status == 1 && $.inArray('PARTY_C:html', pers) != -1) {
             //监理初审
              window.location.href = "check_acceptance.html?item_id=" + id;
-
         } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
             //验收初审
             window.location.href = "check_acceptance_a.html?item_id=" + id;
         } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
-
             //验收终审
             window.location.href = "check_acceptance_b.html?item_id=" + id;
         } else if (status == 5 && $.inArray('PARTY_C:html', pers) != -1) {
@@ -300,7 +294,6 @@
             window.location.href = "check_acceptance_c.html?item_id=" + id;
         } else if (status <=-1 && $.inArray('PARTY_C:html', pers) != -1) {
             //审核未通过，退回至监理方，监理退回给乙方
-            alert("退回");
             window.location.href = "check_acceptance_e.html?item_id=" + id;
         } else {
             window.location.href = "check_acceptance_d.html?item_id=" + id;

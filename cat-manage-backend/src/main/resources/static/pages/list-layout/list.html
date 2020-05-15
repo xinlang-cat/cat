@@ -158,11 +158,11 @@
                     } else if (this.status == 3) {
                         status = "结题中";
                     } else if (this.status == 4) {
-                        status = "以结题";
+                        status = "已结题";
                     } else if (this.status == 5) {
                         status = "终止中";
                     } else if (this.status == 6) {
-                        status = "以终止";
+                        status = "已终止";
                     } else {
                         status = "废弃";
                     }
@@ -179,14 +179,17 @@
                         '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/stage-summary/stageSummaryList.html?item_id=' + this.id + '&user_id=' + userId + '&itemStatus=' + this.status +'">阶段总结</a></li>\n' +
                         '                        <li><a class="active" href="pages/fundUse/fundBudget.html?id=' + this.id + '&itemStatus=' + this.status +'">经费使用</a></li>\n' +
                         '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../acceptance/acceptance.html?item_id=' + this.id + '&itemStatus=' + this.status +'">结题申请</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html" ><a class="active" href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + this.status +'">查定申请</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + this.status +'">变更申请</a></li>\n';
+                        '                        <li no-permission="PARTY_B:member:html" ><a class="active" href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + this.status +'&itemStatus=' + this.status +'">查定申请</a></li>\n' +
+                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + this.status +'&itemStatus=' + this.status +'">变更申请</a></li>\n';
                     if ($.inArray('EXPERT:html', pers) != -1) {
+                        var params1 = {
+                            userId: userId,itemId:itemId
+                        };
                         $.ajax({
                             type: 'get',
                             url: domainName + '/api-summary/expert-evaluate/list',
                             contentType: "application/json; charset=utf-8",
-                            data: params,
+                            data: params1,
                             async: false,
                             success: function (data) {
                                 if (data.length < 1) {
