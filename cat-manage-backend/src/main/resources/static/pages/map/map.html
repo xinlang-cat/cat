@@ -266,7 +266,7 @@
 
         chart3.interval()
             .position('月份*月均降雨量')
-            .color('name')
+            .color('name',['#1890ff', '#2fc25b', '#ffa500','#ff030b','#884898','#e1cf00','#00b634'])
             .adjust({
                 type: 'dodge',
                 marginRatio: 0.05 // 设置分组间柱子的间距
@@ -293,6 +293,7 @@
     var violetIcon = new BMap.Icon("img/violet.png", new BMap.Size(19, 25));
     var yellowIcon = new BMap.Icon("img/yellow.png", new BMap.Size(19, 25));
 
+    var diagrams = [blueIcon,greenIcon,orangeIcon,redIcon,violetIcon,yellowIcon,cyanIcon];
     function addMarker(point, content, opts, icon) {
         var marker = new BMap.Marker(point, {icon: icon});
         map.addOverlay(marker);
@@ -483,7 +484,7 @@
         chart
             .interval()
             .position('genre*sold')
-            .color('genre');
+            .color('genre', ['#1890ff', '#2fc25b', '#ffa500','#ff030b','#884898','#e1cf00','#00b634']);
 
         // Step 4: 渲染图表
         chart.render();
@@ -518,7 +519,7 @@
         chart1.axis(false);
         chart1.interval()
             .position('a*percent')
-            .color('name', ['#FE5D4D', '#3BA4FF', '#737DDE'])
+            .color('name', ['#fedc4a', '#3BA4FF', '#737DDE','#FE5D4D'])
             .adjust('stack');
 
         chart1.guide().html({
@@ -559,7 +560,7 @@
 
         chart3.interval()
             .position('月份*月均降雨量')
-            .color('name')
+            .color('name',['#1890ff', '#2fc25b', '#ffa500','#ff030b','#884898','#e1cf00','#00b634'])
             .adjust({
                 type: 'dodge',
                 marginRatio: 0.05 // 设置分组间柱子的间距
@@ -778,13 +779,15 @@
             title: data['name'],
             enableMessage: true
         };
-        var color = null;
-        if (data['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM') {
+        /* color = null;*/
+        /*if (data['type'] == 'EMPHASIS_RESEARCH_AND_DEVELOPM') {
             color = blueIcon;
         }
         if (data['type'] == 'ELECTRONIC_INFORMATION') {
             color = greenIcon;
-        }
+        }*/
+        var aa = signs.indexOf(data['type']);
+        var color= diagrams[aa];
         addMarker(new BMap.Point(data['lng'], data['lat']), content, opts, color);
     }
 

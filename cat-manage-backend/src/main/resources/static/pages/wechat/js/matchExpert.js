@@ -200,10 +200,13 @@ $(document).on('click', '.INDUSTRY_TITLE', function (e) {
     }
 });
 var itemId = null;
-
+var defaultSave = true;
+var param = null;
 $.matchExpert = function (params) {
+    param = params;
     var elem = params.elem;
     itemId = params.itemId;
+    defaultSave = params.defaultSave;
     var elemClass = $(elem).attr('class');
     $(elem).attr('class', elemClass + ' open-popup');
     $(elem).data('target', '#INDUSTRY_GROUP');
@@ -226,22 +229,28 @@ function saveExpertAndItem() {
             data.push(itemUser);
         }
     });
-    console.log(data)
-    $.ajax({
-        type: 'post',
-        url: domainName + '/project-user/item/list',
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(data),
-        success: function (res) {
-            $.toast('操作成功');
-            $.closePopup();
-        },
-        error: function (res) {
-            $.toast('操作失败', 'forbidden');
+    console.log(data);
+    if (defaultSave) {
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/item/list',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            success: function (res) {
+                $.toast('操作成功');
+                $.closePopup();
+            },
+            error: function (res) {
+                $.toast('操作失败', 'forbidden');
 
-        }
-    });
+            }
+        });
+    }else {
+        param.defaultSaveFun(data);
+        $.closePopup();
+    }
+
 }
 
 
