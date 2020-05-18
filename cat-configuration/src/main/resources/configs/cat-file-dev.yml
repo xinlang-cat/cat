@@ -60,7 +60,6 @@ album:
     path: F:/localFile
     prefix: /statics
     urlPrefix: http://xinlangxfpt.com/api-f${album.local.prefix}
-
     mini: #缩略图宽
       width:  108
       height: 144

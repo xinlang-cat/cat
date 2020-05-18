@@ -1,307 +1,308 @@
 <!DOCTYPE html>
 <html lang="en-us" id="extr-page">
 <head>
-<meta charset="UTF-8">
-	<link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
 </head>
 <body>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<form class="form-horizontal" onsubmit="return false" id="form">
-		<fieldset>
-			<div class="form-group">
-				<label class="col-md-1 control-label">姓名</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="姓名" type="text" name="name" 
-						data-bv-notempty="true"
-						data-bv-notempty-message="姓名 不能为空">
-				</div>
-				<label class="col-md-1 control-label">出生时间</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate">
-				</div>
-				<label class="col-md-1 control-label">民族</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="民族" type="text" name="nation" >
-				</div>
-			</div>
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-1 control-label">姓名</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="姓名" type="text" name="name"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="姓名 不能为空">
+                </div>
+                <label class="col-md-1 control-label">出生时间</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="出生时间" name="birthDate" id="birthDate">
+                </div>
+                <label class="col-md-1 control-label">民族</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="民族" type="text" name="nation">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">身份选择</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="userType" id="userType">
-						<option value="">全部</option>
-						<option value="PARTY_A">甲方</option>
-						<option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>
-						<option value="PARTY_B_PRINCIPAL">乙方项目成员</option>
-						<option value="PARTY_C">监理</option>
-						<option value="PARTY_D">验收</option>
-						<option value="EXPERT">专家</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">证件类型</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="idType" id="idType">
-						<option value="身份证">身份证</option>
-						<option value="护照">护照</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">证件号码</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="证件号码" type="text" name="idCard" >
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">身份选择</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="userType" id="userType">
+                        <option value="">全部</option>
+                        <option value="PARTY_A">甲方</option>
+                        <option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>
+                        <option value="PARTY_B_PRINCIPAL">乙方项目成员</option>
+                        <option value="PARTY_C">监理</option>
+                        <option value="PARTY_D">验收</option>
+                        <option value="EXPERT">专家</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">证件类型</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="idType" id="idType">
+                        <option value="身份证">身份证</option>
+                        <option value="护照">护照</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">证件号码</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="证件号码" type="text" name="idCard">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">单位/公司代码</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode" >
-				</div>
-				<label class="col-md-1 control-label">单位/公司名称</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="单位/公司名称" type="text" name="deptName" >
-				</div>
-				<label class="col-md-1 control-label">性别</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="sex" id="sex">
-						<option value="1">男</option>
-						<option value="0">女</option>
-					</select>
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">单位/公司代码</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="单位/公司代码" type="text" name="deptCode">
+                </div>
+                <label class="col-md-1 control-label">单位/公司名称</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="单位/公司名称" type="text" name="deptName">
+                </div>
+                <label class="col-md-1 control-label">性别</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="sex" id="sex">
+                        <option value="1">男</option>
+                        <option value="0">女</option>
+                    </select>
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">单位/公司级别</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="单位/公司级别" type="text" name="deptType" >
-				</div>
-				<label class="col-md-1 control-label">职称</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle" >
-				</div>
-				<label class="col-md-1 control-label">政治面貌</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="politics" id="politics">
-						<option value="1">共产党员</option>
-						<option value="0">共青团员</option>
-						<option value="0">群众</option>
-					</select>
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">单位/公司级别</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="单位/公司级别" type="text" name="deptType">
+                </div>
+                <label class="col-md-1 control-label">职称</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="单位/公司级别" type="text" name="academicTitle">
+                </div>
+                <label class="col-md-1 control-label">政治面貌</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="politics" id="politics">
+                        <option value="1">共产党员</option>
+                        <option value="0">共青团员</option>
+                        <option value="0">群众</option>
+                    </select>
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">职务</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="职务" type="text" name="job" >
-				</div>
-				<label class="col-md-1 control-label">职称级别</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="职称级别" type="text" name="academicTitleRank">
-				</div>
-				<label class="col-md-1 control-label">毕业院校</label>
-				<div class="col-md-1">
-					<input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom">
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">职务</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="职务" type="text" name="job">
+                </div>
+                <label class="col-md-1 control-label">职称级别</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="职称级别" type="text" name="academicTitleRank">
+                </div>
+                <label class="col-md-1 control-label">毕业院校</label>
+                <div class="col-md-1">
+                    <input class="form-control" placeholder="毕业院校" type="text" name="graduatedFrom">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">学位</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="degree" id="degree">
-						<option value="1">学士</option>
-						<option value="0">硕士</option>
-						<option value="0">博士</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">学历</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="academicDiplomas" id="academicDiplomas">
-						<option value="1">初中</option>
-						<option value="0">高中</option>
-						<option value="0">中专</option>
-						<option value="0">大专</option>
-						<option value="0">本科</option>
-						<option value="0">研究生</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">学位获得时间</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear">
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">学位</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="degree" id="degree">
+                        <option value="1">学士</option>
+                        <option value="0">硕士</option>
+                        <option value="0">博士</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">学历</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="academicDiplomas" id="academicDiplomas">
+                        <option value="1">初中</option>
+                        <option value="0">高中</option>
+                        <option value="0">中专</option>
+                        <option value="0">大专</option>
+                        <option value="0">本科</option>
+                        <option value="0">研究生</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">学位获得时间</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="学位获得时间" name="lastYear" id="lastYear">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">学位授予国家/地区</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="学位授予国家/地区" name="degreeState">
-				</div>
-				<label class="col-md-1 control-label">学位授予学校</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="学位授予学校" name="degreeSchool">
-				</div>
-				<label class="col-md-1 control-label">邮箱</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="邮箱" name="email">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-1 control-label">所学专业</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="major" id="major">
-						<option value="1">计算机</option>
-						<option value="0">地理地质</option>
-						<option value="0">软件工程</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">手机号码</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="手机号码" name="phone">
-				</div>
-				<label class="col-md-1 control-label">办公电话</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="办公电话" name="telephone">
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">学位授予国家/地区</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="学位授予国家/地区" name="degreeState">
+                </div>
+                <label class="col-md-1 control-label">学位授予学校</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="学位授予学校" name="degreeSchool">
+                </div>
+                <label class="col-md-1 control-label">邮箱</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="邮箱" name="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">所学专业</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="major" id="major">
+                        <option value="1">计算机</option>
+                        <option value="0">地理地质</option>
+                        <option value="0">软件工程</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">手机号码</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="手机号码" name="phone">
+                </div>
+                <label class="col-md-1 control-label">办公电话</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="办公电话" name="telephone">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">现从事专业</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="nowMajor" id="nowMajor">
-						<option value="1">计算机</option>
-						<option value="1">地理地质</option>
-						<option value="1">软件工程</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">主要研究领域</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="mainDomain" id="mainDomain">
-						<option value="1">计算机</option>
-						<option value="0">地理地质</option>
-						<option value="0">软件工程</option>
-					</select>
-				</div>
-				<label class="col-md-1 control-label">传真</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="传真" name="fax">
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">现从事专业</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="nowMajor" id="nowMajor">
+                        <option value="1">计算机</option>
+                        <option value="1">地理地质</option>
+                        <option value="1">软件工程</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">主要研究领域</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="mainDomain" id="mainDomain">
+                        <option value="1">计算机</option>
+                        <option value="0">地理地质</option>
+                        <option value="0">软件工程</option>
+                    </select>
+                </div>
+                <label class="col-md-1 control-label">传真</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="传真" name="fax">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">邮政编码</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="邮政编码" name="postcode">
-				</div>
-				<label class="col-md-1 control-label">承担的科技项目</label>
-				<div class="col-md-1">
-					<input type="text" class="form-control" placeholder="承担的科技项目" name="projects">
-				</div>
-			</div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">邮政编码</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="邮政编码" name="postcode">
+                </div>
+                <label class="col-md-1 control-label">承担的科技项目</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" placeholder="承担的科技项目" name="projects">
+                </div>
+            </div>
 
-			<div class="form-group">
-				<label class="col-md-1 control-label">所在地域</label>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="provinceCode" id="provinceCode">
-					</select>
-				</div>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="cityCode" id="cityCode">
-					</select>
-				</div>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="areaCode" id="areaCode">
-					</select>
-				</div>
-				<div class="col-md-1">
-					<select class="form-control input-sm" name="streetCode" id="streetCode">
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-1 control-label">通讯地址</label>
-				<div class="col-md-11">
-					<input class="form-control" placeholder="通讯地址" type="text" name="address" >
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-1 control-label">工作成就案例</label>
-				<div class="col-md-11">
+            <div class="form-group">
+                <label class="col-md-1 control-label">所在地域</label>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="provinceCode" id="provinceCode">
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="cityCode" id="cityCode">
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="areaCode" id="areaCode">
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <select class="form-control input-sm" name="streetCode" id="streetCode">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">通讯地址</label>
+                <div class="col-md-11">
+                    <input class="form-control" placeholder="通讯地址" type="text" name="address">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">工作成就案例</label>
+                <div class="col-md-11">
 					<textarea class="layui-textarea" id="accomplishment" style="display: none">
 					</textarea>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-md-1 control-label">获得的科技成果/奖励/荣誉</label>
-				<div class="col-md-11">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-1 control-label">获得的科技成果/奖励/荣誉</label>
+                <div class="col-md-11">
 					<textarea class="layui-textarea" id="achievement" style="display: none">
 					</textarea>
-				</div>
-			</div>
+                </div>
+            </div>
 
-			<input type="hidden" class="form-control" name="enable" value="true">
-			<div class="form-actions">
-				<div class="row" align="center">
-					<div class="col-md-12">
-					    <button class="btn btn-primary" onclick="location.href='projectUserList.html'">返回</button>
-						<button class="btn btn-primary" type="submit" onclick="add()">
-							<i class="fa fa-save"></i>
-						</button>
-					</div>
-				</div>
-			</div>
+            <input type="hidden" class="form-control" name="enable" value="true">
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="location.href='projectUserList.html'">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-		</fieldset>
-	</form>
+        </fieldset>
+    </form>
 </div>
 
-	<script src="../../js/constant.js"></script>
-	<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="../../js/jq.js"></script>
-	<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
-	<script type="text/javascript" src="../../js/common.js"></script>
-	<script type="text/javascript" src="../../layui/layui.js"></script>
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/address-select.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript">
-	var layedit ,index1,index2;
-	layui.use(['layer','util', 'laydate'], function(){
-		var laydate = layui.laydate;
-		laydate.render({
-			elem: '#birthDate'
-		});
-	})
-	layui.use(['layedit','upload'], function(){
-		layedit = layui.layedit;
-		layedit.set({
-			uploadImage: {
-				url: domainName + '/zuul/api-f/files/layui?access_token='+localStorage.getItem("access_token"),
-				type: 'post'
-			}
-		});
-		index1 = layedit.build('accomplishment');
-		index2 = layedit.build('achievement');
-	});
-	
-	function add() {
-		$('#form').bootstrapValidator();
-		var bootstrapValidator = $("#form").data('bootstrapValidator');
-		bootstrapValidator.validate();
-	    if(!bootstrapValidator.isValid()){
-		   return;
-	    }
-	    var formdata = $("#form").serializeObject();
-			formdata.accomplishment = layedit.getContent(index1);
-			formdata.achievement = layedit.getContent(index2);
-		$.ajax({
-			type : 'post',
-			url : domainName + '/project-user/user',
-			contentType: "application/json; charset=utf-8",  
-			data : JSON.stringify(formdata),
-			success : function(data) {
-				layer.msg("成功", {shift: -1, time: 1000}, function(){
+    var layedit, index1, index2;
+    layui.use(['layer', 'util', 'laydate'], function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#birthDate'
+        });
+    })
+    layui.use(['layedit', 'upload'], function () {
+        layedit = layui.layedit;
+        layedit.set({
+            uploadImage: {
+                url: domainName + '/zuul/api-f/files/layui?access_token=' + localStorage.getItem("access_token"),
+                type: 'post'
+            }
+        });
+        index1 = layedit.build('accomplishment');
+        index2 = layedit.build('achievement');
+    });
+
+    function add() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        formdata.accomplishment = layedit.getContent(index1);
+        formdata.achievement = layedit.getContent(index2);
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-user/user',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
                     location.href = "projectUserList.html";
                 });
-			}
-		});
-	}
-		
+            }
+        });
+    }
+
 </script>
 </body>
 </html>
