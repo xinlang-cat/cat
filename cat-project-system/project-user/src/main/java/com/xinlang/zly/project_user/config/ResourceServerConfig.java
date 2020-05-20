@@ -25,7 +25,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.csrf().disable().exceptionHandling()
                 .authenticationEntryPoint((request,response,authException)->response.sendError(HttpServletResponse.SC_ACCEPTED))
                 .and().authorizeRequests()
-                .antMatchers(PermitAllUrl.permitAllUrl("/user-anon/**","/domain-anon/**","/skill-anon/**","/item-anon/**","/item/expert")).permitAll()
+                .antMatchers(PermitAllUrl.permitAllUrl("/user-anon/**","/domain-anon/**","/skill-anon/**","/item-anon/**","/item/expert","/customer-service-staff/all")).permitAll()
                 .anyRequest().authenticated().and().httpBasic();
     }
 }

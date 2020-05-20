@@ -98,5 +98,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         loginAppUser.setPassword(passwordEncoder.encode(tempCode));
         log.info("微信登录:{}，{}",loginAppUser,openid);
     }
-
 }

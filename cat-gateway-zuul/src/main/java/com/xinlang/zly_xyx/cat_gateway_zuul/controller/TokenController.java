@@ -109,6 +109,29 @@ public class TokenController {
         return tokenInfo;
     }
 
+    /**
+     * 微信游客登录
+     *
+     * @return
+     */
+    @PostMapping("/sys/login-wechat-tourist ")
+    public Map<String, Object> smsLoginTourist (String openid, String tempCode) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(OAuth2Utils.GRANT_TYPE, "password");
+        parameters.put(OAuth2Utils.CLIENT_ID, SystemClientInfo.CLIENT_ID);
+        parameters.put("client_secret", SystemClientInfo.CLIENT_SECRET);
+        parameters.put(OAuth2Utils.SCOPE, SystemClientInfo.CLIENT_SCOPE);
+        // 为了支持多类型登录，这里在username后拼装上登录类型，同时为了服务端校验，我们也拼上tempCode
+        parameters.put("username", openid + "|" + CredentialType.WECHAT_OPENID.name() + "|" + tempCode);
+        // 微信登录无需密码，但security底层有密码校验，我们这里将手机号作为密码，认证中心采用同样规则即可
+        parameters.put("password", tempCode);
+
+        Map<String, Object> tokenInfo = oauth2Client.postAccessToken(parameters);
+        saveLoginLog(openid, "微信登陆");
+
+        return tokenInfo;
+    }
+
     @Autowired
     private LogClient logClient;
 

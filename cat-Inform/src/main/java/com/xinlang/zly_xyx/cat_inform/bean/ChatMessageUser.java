@@ -13,9 +13,10 @@ public class ChatMessageUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Long userId;//接受者id
+	private Integer userId;//接受者id
 	private Integer messageId;//消息id
-	private Long senderId;//发送者id
+	private Integer sendId;//发送者id
 	private String send;//是否已发送给接收者
 	private String isRead;//是否已读
+	private Integer sendType;//1群发，0私聊，2客服的
 }

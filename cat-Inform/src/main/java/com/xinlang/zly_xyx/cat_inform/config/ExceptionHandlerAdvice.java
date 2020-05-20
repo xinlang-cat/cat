@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.io.EOFException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +22,14 @@ public class ExceptionHandlerAdvice {
         Map<String,Object> map = new HashMap<>();
         map.put("code",HttpStatus.BAD_REQUEST.value());
         map.put("message",e.getMessage());
+        return map;
+    }
+
+    @ExceptionHandler({EOFException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String,Object> badEOFException(EOFException e){
+        Map<String,Object> map = new HashMap<>();
+        map.put("message","这是正常的，一个客户端断开了连接！！");
         return map;
     }
 }

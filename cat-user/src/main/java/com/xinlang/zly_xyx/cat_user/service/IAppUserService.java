@@ -5,6 +5,7 @@ import com.xinlang.zly_xyx.user.AppUser;
 import com.xinlang.zly_xyx.user.LoginAppUser;
 import com.xinlang.zly_xyx.user.SysRole;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,6 +28,8 @@ public interface IAppUserService {
     void updatePassword(Long id,String oldPassword,String newPassword);
 
     Page<AppUser> findUsers(Map<String,Object> params);
+
+    List<AppUser> findAll();
 
     Set<SysRole>  findRoleByUserId(Long userId);
 

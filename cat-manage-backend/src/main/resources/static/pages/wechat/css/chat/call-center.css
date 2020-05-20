@@ -140,11 +140,11 @@ input {
     margin:10px 20px 0 0;
 }
 .img-left{
-	border-radius: 20px; 
+	border-radius: 5px;
 	vertical-align: top;
 }
 .img-right{
-	border-radius: 20px; 
+	border-radius: 5px;
 	vertical-align: top;
 	float: right;
 }
