@@ -14,81 +14,214 @@
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
 
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 18%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
 </head>
 <body ontouchstart>
+<header class='demos-header'>
+    <h1 class="demos-title">技术总结起草</h1>
+</header>
+<h3>项目基本信息</h3>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>合同编号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="contract_no"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目类别</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="type"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目名称</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="name"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>委托单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="entrusting_party"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>承担单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="responsible_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>管理单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="management_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>下达文号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="document_number"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>实施期限</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="period"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目地点</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="site"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>总体目标</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="overall_objective"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>主要研究内容</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="research_contents"></span>
+        </div>
+    </div>
+</div>
 
 
-<a class="weui-cell weui-cell_access" href="javascript:;">
-    <div class="weui-cell__hd">
-        <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-    </div>
-    <div class="weui-cell__bd weui-cell_primary">
-        <p class="weui-max-title">技术总结</p>
-    </div>
-</a>
+<h3>技术总结</h3>
 
 <form id="form">
 
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-label">项目背景:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目背景:</div>
         </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" name="projectContent" id="projectContent" rows="5"></textarea>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" name="projectContent" id="projectContent" rows="5"></textarea>
+            </div>
         </div>
     </div>
 
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-title">技术路线:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>技术路线:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" name="skillRoute" id="skillRoute" rows="5"></textarea>
+            </div>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" name="skillRoute" id="skillRoute" rows="5"></textarea>
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>技术创新点:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" name="skillInnovate" id="skillInnovate" rows="5"></textarea>
+            </div>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-title">技术创新点:</label>
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目技术指标完成情况:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" name="skillIndicator" id="skillIndicator" rows="5"></textarea>
+            </div>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" name="skillInnovate" id="skillInnovate" rows="5"></textarea>
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目技术评价:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" name="skillEvaluate" id="skillEvaluate" rows="5"></textarea>
+            </div>
         </div>
     </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-title">项目技术指标完成情况:</label>
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目实施对企业的影响:</div>
         </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" name="skillIndicator" id="skillIndicator" rows="5"></textarea>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-title">项目技术评价:</label>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" name="skillEvaluate" id="skillEvaluate" rows="5"></textarea>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-title">项目实施对企业的影响:</label>
-        </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" name="projectEffect" id="projectEffect" rows="5"></textarea>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" name="projectEffect" id="projectEffect" rows="5"></textarea>
+            </div>
         </div>
     </div>
 
@@ -107,36 +240,15 @@
 <script src="../../../../js/common.js"></script>
 <script src="../../js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
+<script src="../../js/getItemInfo.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
-    var itemId = getUrlParam("item_id");
-    queryInformation(itemId);
-    function queryInformation(id) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/project-item/item/information/list',
-            data: "id=" + id,
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                var d = data[0];
-                $('input[name=contract_no]').val(d.contract_no);
-                $('input[name=type]').val(analysisLablename(d.type));
-                $('input[name=name]').val(d.name);
-                $('input[name=entrusting_party]').val(d.entrusting_party);
-                $('input[name=responsible_unit]').val(d.responsible_unit);
-                $('input[name=management_unit]').val(d.management_unit);
-                $('input[name=document_number]').val(d.document_number);
-                $('textarea[name=overall_objective]').val(d.overall_objective);
-                $('textarea[name=research_contents]').val(d.research_contents);
-                $('input[name=period]').val(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
-                $('input[name=status]').val(d.status);
-            }
-        })
-    }
+    var itemId = getUrlParam("itemId");
+    var id= 0;
     initData();
+
     function initData() {
         var data = {
             itemId: itemId,
@@ -152,14 +264,15 @@
                         $("textarea[name=" + key + "]").val(data[0][key]);
                     }
                 });
-                if(data.length>0){
-                    if (data[0].status==0){
+                if (data.length > 0) {
+                    if (data[0].status == 0) {
+                        id = data[0].id;
                         $("input").attr("style", "text-align: center;border: 0px;");
-                    }else {
+                    } else {
                         $("input").attr('readonly', true);
                         $("input").attr("style", "text-align: center;border: 0px;");
                         $("textarea").attr('readonly', true);
-                        document.getElementById('showTooltips').style.display='none';
+                        document.getElementById('showTooltips').style.display = 'none';
                     }
 
                 }
@@ -167,22 +280,41 @@
             }
         });
     }
+
     function add(status) {
         var formdata = $("#form").serializeObject();
         formdata.itemId = itemId;
         formdata.status = status;
-        $.ajax({
-            type: 'post',
-            url: domainName + '/api-summary/skill',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(formdata),
-            success: function (data) {
-                $.toptip('操作成功', 'success');
-                history.back(-1);
+        if (id==0){
+            $.ajax({
+                type: 'post',
+                url: domainName + '/api-summary/skill',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    $.toptip('操作成功', 'success');
+                    history.back(-1);
 
-            }
-        });
+                }
+            });
+        }else {
+            formdata.id = id;
+            $.ajax({
+                type: 'put',
+                url: domainName + '/api-summary/skill',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(formdata),
+                success: function (data) {
+                    $.toptip('操作成功', 'success');
+                    history.back(-1);
+                }
+            });
+        }
+
     }
+    queryInformation(itemId);
+
+
 </script>
 <script>
     $(".swiper-container").swiper({

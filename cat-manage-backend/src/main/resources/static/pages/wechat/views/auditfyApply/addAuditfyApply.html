@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>指标查定</title>
+    <title>指标查定起草</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -14,69 +14,198 @@
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
 
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 18%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
 </head>
 <body ontouchstart>
+<header class='demos-header'>
+    <h1 class="demos-title">指标查定起草</h1>
+</header>
+<h3>项目基本信息</h3>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>合同编号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="contract_no"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目类别</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="type"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目名称</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="name"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>委托单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="entrusting_party"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>承担单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="responsible_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>管理单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="management_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>下达文号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="document_number"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>实施期限</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="period"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目地点</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="site"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>总体目标</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="overall_objective"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>主要研究内容</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="research_contents"></span>
+        </div>
+    </div>
+</div>
 
 <form id="form">
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd">
-            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
+    <h3>所需查定指标</h3>
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>选择查定指标</div>
         </div>
-        <div class="weui-cell__bd weui-cell_primary">
-            <p class="weui-max-title">所需查定指标</p>
-        </div>
-    </a>
+        <div class="weui-flex__item">
+            <div class="content">
+                <div class="weui-cells weui-cells_checkbox" id="chooseTargrt">
 
 
-    <div class="weui-line"></div>
-    <div class="weui-cells__title">选择查定指标</div>
-    <div class="weui-cells weui-cells_checkbox" id="chooseTargrt">
-
-
-    </div>
-
-    <div class="weui-line"></div>
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd">
-            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-        </div>
-        <div class="weui-cell__bd weui-cell_primary">
-            <p class="weui-max-title">查定申请详情</p>
-        </div>
-    </a>
-
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">建议开始时间:</label>
-            <input type="hidden" id="target_id" name="target_id">
-            <input id="check_unit" name="check_unit" type="hidden">
-            <input id="manage_unit" name="manage_unit" type="hidden">
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date" name="start_date">
+                </div>
+            </div>
         </div>
     </div>
     <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">预计结束时间:</label>
+    <h3>查定申请详情</h3>
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>建议开始时间:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date" name="end_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input type="hidden" id="target_id" name="target_id">
+                <input id="check_unit" name="check_unit" type="hidden">
+                <input id="manage_unit" name="manage_unit" type="hidden">
+                <input class="weui-input date" type="text" value="" placeholder="点击此处选择查定时间" id="start_date"
+                       name="start_date">
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>预计结束时间:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input date" type="text" value="" placeholder="点击此处选择查定时间" id="end_date" name="end_date" style="border: 1px;">
+            </div>
         </div>
     </div>
 
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <label class="weui-label">申请详情:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>申请详情:</div>
         </div>
-    </div>
-    <div class="weui-cell">
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" rows="5" id="content" name="content"></textarea>
+        <div class="weui-flex__item">
+            <div class="content">
+                <textarea class="weui-textarea" rows="5" id="content" name="content"></textarea>
+            </div>
         </div>
     </div>
 </form>
@@ -97,11 +226,13 @@
 <script src="../../js/jquery-weui.min.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script src="../../../../js/sendMessage.js"></script>
+<script src="../../js/getItemInfo.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
     var itemId = getUrlParam("itemId");
+    queryInformation(itemId);
     function getItemName(id) {
 
         $.get(domainName + "/project-item/item/information/list?id=" + id, function (res) {
@@ -174,23 +305,23 @@
         formdata.item_id = itemId;
         formdata.post_type = 2;
         formdata.target_id = $("#target_id").val();
-         $.ajax({
-             type: 'post',
-             url: domainName + '/project-item/item/target/auditApply/one',
-             contentType: "application/json; charset=utf-8",
-             data: JSON.stringify(formdata),
-             success: function (data) {
-                 var userIds = [];
-                 var userId = getPARTY_C(itemId);
-                 userIds.push(userId);
-                 var content = "您有一条指标查定待处理";
-                 var title = "您有一条指标查定待处理";
-                 sendMeaasge(content,title,userIds);
-                 $.toptip('操作成功', 'success');
-                 history.back(-1);
+        $.ajax({
+            type: 'post',
+            url: domainName + '/project-item/item/target/auditApply/one',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                var userIds = [];
+                var userId = getPARTY_C(itemId);
+                userIds.push(userId);
+                var content = "您有一条指标查定待处理";
+                var title = "您有一条指标查定待处理";
+                sendMeaasge(content, title, userIds);
+                $.toptip('操作成功', 'success');
+                history.back(-1);
 
             }
-         });
+        });
     }
 
     function getName(sign) {
