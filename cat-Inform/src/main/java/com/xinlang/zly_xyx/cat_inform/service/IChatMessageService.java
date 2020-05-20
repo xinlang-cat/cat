@@ -20,6 +20,6 @@ public interface IChatMessageService extends IBaseService<ChatMessage> {
 	 *
 	 * @throws IOException
 	 */
-	List<ChatMessage> getMsgByUser(Long userId);
+	List<ChatMessage> getMsgByUserId(Integer userId);
 	List<ChatMessage> getMsgByUsers(Long userId, Long thisUserId);
 }

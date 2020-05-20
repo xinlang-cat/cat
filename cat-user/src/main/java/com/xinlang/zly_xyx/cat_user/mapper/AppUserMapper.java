@@ -32,6 +32,9 @@ public interface AppUserMapper {
     @Select("select * from app_user t where t.id = #{id}")
     AppUser findById(Long id);
 
+    @Select("select id,nickname,headImgUrl from app_user")
+    List<AppUser> findAll();
+
     int count(Map<String, Object> params);
 
     List<AppUser> findData(Map<String, Object> params);

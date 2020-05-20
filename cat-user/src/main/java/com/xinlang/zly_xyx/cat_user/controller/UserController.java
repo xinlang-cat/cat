@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,6 +54,16 @@ public class UserController {
     @GetMapping("/users")
     public Page<AppUser> findUsers(@RequestParam Map<String, Object> params) {
         return appUserService.findUsers(params);
+    }
+
+    /**
+     * 用户查询
+     *
+     */
+    @PreAuthorize("hasAuthority('back:user:query')")
+    @GetMapping("/all")
+    public List<AppUser> findAll() {
+        return appUserService.findAll();
     }
 
     @PreAuthorize("hasAuthority('back:user:query')")

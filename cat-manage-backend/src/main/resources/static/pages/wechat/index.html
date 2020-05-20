@@ -18,15 +18,11 @@
 <script type="text/javascript">
     var access_token = localStorage.getItem("access_token");
     var toUrl = getUrlParam("toUrl");
-    var isChat = false;
-    if(toUrl.indexOf("/pages/wechat/views/chat/") != -1){
-        isChat = true;
-    }
-    debugger;
+    var openid = getUrlParam("openid");
     if (access_token != null && access_token.trim().length != 0) {
         showUserInfo(access_token);
     } else {
-        var openid = getUrlParam("openid");
+
         if (openid == null || openid == "") {
             window.location.href = domainName + "/api-u/wechat/app1?toUrl=" + encodeURIComponent(toUrl);
         } else {
@@ -34,9 +30,7 @@
             var tempCode = getUrlParam("tempCode");
             var nickname = getUrlParam("nickname");
             var headimgurl = getUrlParam("headimgurl");
-            if(isChat){
-                location.href =  domainName + toUrl + "?openid=" + openid + "&tempCode=" + tempCode + "&nickname=" + nickname + "&headimgurl=" + headimgurl;
-            }else if (hasUser == "1") { // 微信已绑定用户，自动登录
+            if (hasUser == "1") { // 微信已绑定用户，自动登录
                 $.ajax({
                     type: 'post',
                     url: domainName + '/sys/login-wechat?openid=' + openid + '&tempCode=' + tempCode,
