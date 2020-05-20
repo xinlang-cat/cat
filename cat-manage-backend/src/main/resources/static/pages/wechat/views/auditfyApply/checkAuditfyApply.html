@@ -132,8 +132,29 @@
                     </div>
                 </label>
             </div>
-
             <div class="weui-line"></div>
+            <div class="weui-btn-area">
+            <a style="margin:40px 30px;" id="test">匹配专家</a>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">指定查定开始时间:</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true" name="start_date">
+                </div>
+            </div>
+            <div class="weui-line"></div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">指定查定结束时间:</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true" name="end_date">
+                </div>
+            </div>
             <div class="weui-btn-area">
                 <button onclick="postResult()" type="button" class="weui-btn weui-btn_primary">提交</button>
             </div>
@@ -144,26 +165,59 @@
 
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
-<script src="../../weui/js/jquery-weui.js"></script>
+
 <script src="../../weui/js/swiper.js"></script>
 <script src="../../../../js/constant.js"></script>
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/chooseArea.js"></script>
 <script type="text/javascript" src="auditApply.js"></script>
+
+
+
+
+<script src="../../js/jquery-weui.min.js"></script>
+
+<script src="../../../../js/sendMessage.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
     });
+    //延期批复截止时间
+    $(".date").calendar({
+        title: "延期批复截止时间",
+        onChange: function (p, values, displayValues) {
+            console.log(values, displayValues);
+        }
+    });
 </script>
+<script type="text/javascript" src="../../js/matchExpert.js"></script>
 <script>
+    var match = false;
+    var item_id;
+    var target_id;
     var id = getUrlParam("id");
+    var ids = new Array();
     $(".swiper-container").swiper({
         loop: true,
         autoplay: 3000
     });
     initData();
+    $.matchExpert({
+        elem: '#test',
+        itemId: item_id,
+        defaultSave: false,//自定义保存
+        defaultSaveFun: function (arr) {
+            if (arr.length == 0) {
+                layer.msg("未选择专家！");
+            } else {
+                ids = arr;
+                match = true;
+            }
+            console.log(arr);
 
+        }
+    });
     function initData() {
         var data = {
             id: id,
@@ -181,6 +235,8 @@
                     $("#start_date").val(formatDate4(data[0].start_date));
                     $("#end_date").val(formatDate4(data[0].end_date));
                     status(data[0].status);
+                    item_id=data[0].item_id;
+                    target_id=data[0].target_id;
                     $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                         var str = '<article class="weui-article">';
                         var count = 1;
@@ -262,12 +318,35 @@
     function postResult() {
         var formdata = $("#form").serializeObject();
         formdata.id = id;
+        if (formdata.status==2){
+            //匹配了专家，将专家与项目关联，并发送信息
+            if (match){
+                for (var i =0;i<ids.length;i++){
+                    var expert_id = ids[i].userId;
+                    var result = {"item_id": item_id, "audit_apply_id": id,"expert_id":expert_id,"target_id":target_id,"end_date":formdata.end_date_true,"start_date":formdata.start_date_true};
+                    $.ajax({
+                        type: 'post',
+                        url: domainName + '/project-item/item/target/auditApplyResult/one',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(result),
+                        success: function (data) {
+                        }
+                    });
+                }
+            }else {
+                $.toptip('请指定专家', 'error');
+                return;
+            }
+        }else if (formdata.status==5){
+
+        }
         $.ajax({
             type: 'put',
             url: domainName + '/project-item/item/target/auditApply/update',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(formdata),
             success: function (data) {
+                //匹配专家
                 $.toptip('操作成功', 'success');
                 history.back(-1);
             }

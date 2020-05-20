@@ -561,11 +561,20 @@
     });
     var item_id = getUrlParam("itemId");
     $("#item_id").val(item_id);
+
+    var chooseD = false;
+    var chooseE = false;
+    var user_id = getEXPERT(item_id);
+    if (user_id.length == 0) {
+        chooseE = true;
+    }
+    var user_id2 = getPARTY_D(item_id);
+    if (user_id2.length == 0) {
+        chooseD = true;
+    }
+    /* getCompanyInfo(item_id);*/
     getdata(item_id);
     getbasic(item_id);
-
-    /* getCompanyInfo(item_id);*/
-
     function getbasic(id) {
         $.ajax({
             type: 'get',
@@ -638,19 +647,19 @@
                     var date = data[0][key];
                     $('#' + key).val(date);
                 }
-                $(data).each(function () {
-                    $("#applicationDate").val(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").val(this.suggestDate.substring(0, 10));
-                    $("#cean").text(this.cean);
-                    $("#katalog").text(this.katalog);
-                    $("#applicationDeptOpinion").text(this.applicationDeptOpinion);
-                    $("#manageDeptOpinion").text(this.manageDeptOpinion);
-                    $("#burgLeaderOpinion").text(this.burgLeaderOpinion);
-                    $("#burgFinanceOpinion").text(this.burgFinanceOpinion);
-                    $("#manageDeptResult").text(this.manageDeptResult);
-                    $("#burgLeaderResult").text(this.burgLeaderResult);
-                    change(this.status);
-                })
+
+                $("#applicationDate").val(data[0].applicationDate.substring(0, 10));
+                $("#suggestDate").val(data[0].suggestDate.substring(0, 10));
+                $("#cean").text(data[0].cean);
+                $("#katalog").text(data[0].katalog);
+                $("#applicationDeptOpinion").text(data[0].applicationDeptOpinion);
+                $("#manageDeptOpinion").text(data[0].manageDeptOpinion);
+                $("#burgLeaderOpinion").text(data[0].burgLeaderOpinion);
+                $("#burgFinanceOpinion").text(data[0].burgFinanceOpinion);
+                $("#manageDeptResult").text(data[0].manageDeptResult);
+                $("#burgLeaderResult").text(data[0].burgLeaderResult);
+                change(data[0].status);
+
             }
         })
     }
