@@ -1,158 +1,248 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="ctxPath" value="${pageContext.request.contextPath}" />
 <html>
 <head>
     <title>chat UI</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="author" content="https://blog.csdn.net/q475254344">
-    <link href="${ctxPath }/static/css/chat/call-center.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-        crossorigin="anonymous">
-    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="author" content="https://blog.csdn.net/q475254344">
+    <link href="../../css/chat/call-center.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all" />
 </head>
 <script>
-    document.getElementsByTagName('body').height=window.innerHeight;
+    document.getElementsByTagName('body').height = window.innerHeight;
 </script>
 <body class="box">
-    <div class="container">
-        <div class="chatbox">
-            <div class="chatleft">
-                <div class="top">
-                    <!-- <input type="text" placeholder="search" style="width: 140px; height: 36px; margin-left: 25px;">
-                    <button class="searchbtn"></style><i class="fas fa-search"></i></button> -->
-                </div>
-                <div class="center">
-                    <ul id="user-list">
-						
-					</ul>
-                </div>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatleft">
+            <div class="top">
+                <!-- <input type="text" placeholder="search" style="width: 140px; height: 36px; margin-left: 25px;">
+                <button class="searchbtn"></style><i class="fas fa-search"></i></button> -->
             </div>
-            <div class="chatright">
-                <div class="top">
-                    <img style="border-radius: 20px; vertical-align: middle;" src="http://placehold.it/40x40">
-                    <span style="margin-left: 20px;" id="username">Barack Obama</span>
-                </div>
-                <div class="center">
-                    <ul id="ul-content">
-                       
-                    </ul>
-                </div>
-                <div class="footer">
-                    <textarea maxlength="800" id="content" name="content" rows="5" cols="40" style="width: 100%; resize: none; border: none; " placeholder="一月又一月..."></textarea>
-                    <button class="sendbtn"  data-sendType="0">发送</button>
-                    <button class="sendbtn"  data-sendType="1">群发</button>
-                </div>
+            <div class="center">
+                <ul id="user-list">
+
+                </ul>
             </div>
         </div>
-        <input type="hidden" id="reception_userid" name="reception_userid"> 
-    </div>
-    <script type="text/javascript">
-   
-	        $(function(){
-	        	$(".chatright").hide();
-	        	$.get("${ctxPath}/demo/getUser.do",function(res){
-	        		var str='';
-	        		for(var i in res.data){
-	        			str = str + '<li id="'+res.data[i].id+'" onclick="sendToUser('+res.data[i].id+')">';
-	        			str = str + '<img style="border-radius: 20px; vertical-align: middle;" src="http://placehold.it/40x40">';
-	        			str = str + '<span style="margin-left: 10px; " id="span_'+res.data[i].id+'">' + res.data[i].name + '</span>';
-	        			str = str + '</li>';
-	        		}
-	        		$("#user-list").append(str);
-	        	})
-	        })
-	        function sendToUser(id){
-	        	$(".chatright").show();
-	        	$("#reception_userid").val(id);
-	    		$("#username").html($("#span_"+id).html());
-	    		$.get("${ctxPath}/callCenter/getMsgs.do?userid="+id,function(res){
-	        		var data = res.data;
-	        		$("#ul-content").empty();
-	        		appendHtml(data);
-	        	})
-	        }
-        
-	        $(function() {
-				var tx = $("#tx").val();
-				var websocket;
-				if ('WebSocket' in window) {
-					console.log("此浏览器支持websocket");
-					websocket = new WebSocket(
-							"ws://xinlangxfpt.mynatapp.cc/websocket");
-				} else if ('MozWebSocket' in window) {
-					alert("此浏览器只支持MozWebSocket");
-				} else {
-					alert("此浏览器只支持SockJS");
-				}
-				websocket.onopen = function(evnt) {
-					alert("链接成功！");
-				};
-				websocket.onmessage = function(evnt) {
-					if(evnt.data != null){
-						var arr = JSON.parse(evnt.data);
-						appendHtml(arr);
-					}
-				};
-				websocket.onerror = function(evnt) {
-					websocket.close();
-				};
-				websocket.onclose = function(evnt) {
-					websocket.close();
-				}
-				$('.sendbtn').bind('click', function() {
-					var type = $(this).attr("data-sendType");
-					send(type);
-				});
+        <div class="chatright">
+            <div class="top">
+                <img style="border-radius: 20px; vertical-align: middle;width: 40px;height: 40px;" id="top-headImg"
+                     src="">
+                <span style="margin-left: 20px;" id="username">Barack Obama</span>
+            </div>
+            <div class="center">
+                <ul id="ul-content">
 
-				function send(type) {
-					var content = document.getElementById('content').value;
-					if(content == null || content == '')return;
-					if (websocket != null) {
-						if(type == 0){
-							var message = {
-									context : content,
-									reception_userid : $("#reception_userid").val(),
-									to : 0
-								}
-								websocket.send(JSON.stringify(message));
-						}
-						if(type == 1){
-							var message = {
-									context : content,
-									to : 1
-								}
-								websocket.send(JSON.stringify(message));
-						}
-						$('#content').val('');
-					} else {
-						alert('无法访问网络！');
-					}
-				}
-			});
-	        
-	        function appendHtml(arr){
-				for(var i= arr.length-1;i>=0;i--){
-					var str = '';
-					$("#803").removeAttr("id");
-					if(arr[i].create_userid == 803){
-	    				str = str + '<li class="msgright">';
-	    				str = str + '<img class="img-right"  src="http://placehold.it/40x40">';
-	    				str = str + '<p class="msgcard-right" id="803">'+arr[i].context+'</p>';
-	    				str = str + '</li>';
-	    			}else{
-	    				str = str + '<li class="msgleft">';
-	    				str = str + '<img class="img-left"  src="http://placehold.it/40x40">';
-	    				str = str + '<p class="msgcard-left" id="803">'+arr[i].context+'</p>';
-	    				str = str + '</li>';
-	    			}
-	    			$("#ul-content").append(str);
-	    			$('html,body,div').animate({scrollTop:$('#803').offset().top},0)
-				}
-	        }
-        </script>
+                </ul>
+            </div>
+            <div class="footer">
+                <textarea maxlength="800" id="content" name="content" rows="5" cols="40"
+                          style="width: 100%; resize: none; border: none; " placeholder="一月又一月..."></textarea>
+                <button class="sendbtn" data-sendType="">发送</button>
+                <!--                <button class="sendbtn" data-sendType="1">群发</button>-->
+            </div>
+
+        </div>
+    </div>
+    <input type="hidden" id="reception_userid" name="reception_userid">
+</div>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript">
+    $.ajaxSettings.async = false;
+    var allUser, onlineUserIds, thisUser, userIds = new Array(), allCustomerServiceStaffId,onReadMessage;
+    $.get(domainName + "/api-u/users/current", function (res) {
+        thisUser = res;
+    });
+
+    $(function () {
+        $(".chatright").hide();
+        $.get(domainName + "/api-u/all", function (data) {
+            allUser = data;
+        });
+        $.get(domainName + "/api-n/chat/online-user-id", function (res) {
+            onlineUserIds = res;
+        });
+
+        $.get(domainName + "/api-n/chat/all-customer-service-staff-id", function (res) {
+            allCustomerServiceStaffId = res;
+        });
+        $.get(domainName + "/api-n/chat/no-read", function (res) {
+            onReadMessage = res;
+        });
+        var headUsers = new Array();
+        var footerUsers = new Array();
+        $.each(allUser,function (i,item) {
+            var flag= true;
+            $.each(onReadMessage,function (j,orm) {
+                if(item.id == orm.sendId){
+                    headUsers.push(item);
+                    flag = false;
+                }
+            });
+            if(flag){
+                footerUsers.push(item);
+            }
+        });
+        var str1 = '';
+        $.each(headUsers, function (i, item) {
+            if($.inArray(parseInt(item.id), allCustomerServiceStaffId)< 0 ){
+                str1 = str1 + '<li id="' + item.id + '" onclick="sendToUser(this)" data-head-img="' + item.headImgUrl + '">';
+                if ($.inArray(parseInt(item.id), onlineUserIds) >= 0) {
+                    str1 = str1 + '<span style="font-size: 40px;color: #00B83F; ">.</span>';
+                } else {
+                    str1 = str1 + '<span style="font-size: 40px;color: white; ">.</span>';
+                }
+                if (jQuery.isEmptyObject(item.headImgUrl)) {
+                    str1 = str1 + '<img style="border-radius: 20px; vertical-align: middle;" src="http://placehold.it/40x40">';
+                } else {
+                    str1 = str1 + '<img style="border-radius: 20px; vertical-align: middle; width: 40px;height: 40px;" src="' + item.headImgUrl + '">';
+                }
+                str1 = str1 + '<span class="layui-badge-dot" style="position: relative;left: 55px;top: 15px;float: left"></span>';
+                str1 = str1 + '<span style="margin-left: 10px; " id="span_' + item.id + '">' + item.nickname + '</span>';
+                str1 = str1 + '</li>';
+                userIds.push(item.id);
+            }
+        });
+        $("#user-list").append(str1);
+
+        var str = '';
+        $.each(footerUsers, function (i, item) {
+            if($.inArray(parseInt(item.id), allCustomerServiceStaffId)< 0 ){
+                str = str + '<li id="' + item.id + '" onclick="sendToUser(this)" data-head-img="' + item.headImgUrl + '">';
+                if ($.inArray(parseInt(item.id), onlineUserIds) >= 0) {
+                    str = str + '<span style="font-size: 40px;color: #00B83F; ">.</span>';
+                } else {
+                    str = str + '<span style="font-size: 40px;color: white; ">.</span>';
+                }
+                if (jQuery.isEmptyObject(item.headImgUrl)) {
+                    str = str + '<img style="border-radius: 20px; vertical-align: middle;" src="http://placehold.it/40x40">';
+                } else {
+                    str = str + '<img style="border-radius: 20px; vertical-align: middle; width: 40px;height: 40px;" src="' + item.headImgUrl + '">';
+                }
+                str = str + '<span style="margin-left: 10px; " id="span_' + item.id + '">' + item.nickname + '</span>';
+                str = str + '</li>';
+                userIds.push(item.id);
+            }
+        });
+        $("#user-list").append(str);
+    });
+
+    var thisToUserId;
+
+    function sendToUser(obj) {
+        var id = $(obj).attr("id");
+        thisToUserId = id;
+        $(".chatright").show();
+        $("#reception_userid").val(id);
+        $("#username").html($("#span_" + id).html());
+        var headImg = $(obj).data("headImg");
+        if (jQuery.isEmptyObject(headImg)) {
+            headImg = "http://placehold.it/40x40";
+        }
+        var span = $(obj).find("span.layui-badge-dot");
+        $(span).remove();
+        $("#top-headImg").attr("src", headImg);
+        $.get(domainName + "/api-n/chat/" + id, function (res) {
+            $("#ul-content").empty();
+            appendHtml(res);
+        });
+        $.ajax({
+            url:domainName + "/api-n/chat/set-send-read/" + id,
+            contentType: "application/json; charset=utf-8",
+            type: "put",
+            success:function (res) {
+
+            }
+        });
+    }
+
+    $(function () {
+        var websocket;
+        if ('WebSocket' in window) {
+            console.log("此浏览器支持websocket");
+            websocket = new WebSocket("ws://121.31.63.92:8841/websocket?userId=" + thisUser.id);
+        } else if ('MozWebSocket' in window) {
+            alert("此浏览器只支持MozWebSocket");
+        } else {
+            alert("此浏览器只支持SockJS");
+        }
+        websocket.onopen = function (evnt) {
+            //alert("连接成功")
+        };
+        websocket.onmessage = function (evnt) {
+            if (evnt.data != null) {
+                var arr = JSON.parse(evnt.data);
+                if(arr[0].createUserId == thisToUserId || arr[0].createUserId == thisUser.id){
+                    appendHtml(arr);
+                }else {
+                    var li= $("#" + arr[0].createUserId).clone();
+                    $("#" + arr[0].createUserId).remove();
+                    $("#user-list").prepend(li);
+                   var span =  $("#" + arr[0].createUserId).find("span.layui-badge-dot");
+                   if(jQuery.isEmptyObject(span[0])){
+                       $("#" + arr[0].createUserId).append('<span class="layui-badge-dot" style="position: relative;left: 55px;top: 15px;float: left"></span>');
+                   }
+                }
+            }
+        };
+        websocket.onerror = function (evnt) {
+            websocket.close();
+        };
+        websocket.onclose = function (evnt) {
+            websocket.close();
+        };
+        $('.sendbtn').bind('click', function () {
+            send();
+        });
+
+        function send() {
+            var content = document.getElementById('content').value;
+            if (content == null) return;
+            if (websocket != null) {
+                var message = {
+                    context: document.getElementById('content').value,
+                    receptionUserIds: [thisUser.id, parseInt($("#reception_userid").val())],
+                    createUserId: thisUser.id,
+                    createUserName: thisUser.nickname,
+                    headImgUrl: thisUser.headImgUrl,
+                    sendType: 2,
+                    type: 0
+                };
+                websocket.send(JSON.stringify(message));
+                $('#content').val('');
+            } else {
+                alert('无法访问网络！');
+            }
+        }
+    });
+
+    function appendHtml(arr) {
+        for (var i = arr.length - 1; i >= 0; i--) {
+            var str = '';
+            var headImg = $("#top-headImg").attr("src");
+            $("#803").removeAttr("id");
+            if (arr[i].createUserId != thisToUserId) {
+                str = str + '<li class="msgright">';
+                str = str + '<img class="img-right" style="width: 40px;height: 40px;" src="' + thisUser.headImgUrl + '">';
+                str = str + '<p class="msgcard-right" id="803">' + arr[i].context + '</p>';
+                str = str + '</li>';
+            } else {
+                str = str + '<li class="msgleft">';
+                str = str + '<img class="img-left" style="width: 40px;height: 40px;"  src="' + headImg + '">';
+                str = str + '<p class="msgcard-left" id="803">' + arr[i].context + '</p>';
+                str = str + '</li>';
+            }
+            $("#ul-content").append(str);
+            document.getElementById('803').scrollIntoView();
+        }
+    }
+</script>
 </body>
 </html>

@@ -609,7 +609,7 @@
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/matchExpert.js"></script>
-<script src="../../../../js/sendMessage.js.js"></script>
+<script src="../../../../js/sendMessage.js"></script>
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 
 <script>
@@ -621,10 +621,21 @@
     var item_id = getUrlParam("itemId");
     $("#item_id").val(item_id);
     userType();
+
+    var match = false;
+
+    var EXPERT_id = new Array();
+
+    var PARTY_D_id = 0;
+    EXPERT_id = getEXPERT(item_id);
+
+    PARTY_D_id = getPARTY_D(item_id);
+    if (EXPERT_id.length > 0) {
+        match = true;
+    }
+    var ids = new Array();
     getdata(item_id);
     getbasic(item_id);
-    var match = false;
-    var ids = new Array();
     $.matchExpert({
         elem: '#test',
         itemId: item_id,
@@ -641,33 +652,7 @@
 
         }
     });
-    $(function () {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-c/company/all',
-            contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                var str = '';
-                $(data).each(function () {
-                    var identity = this.identity;
-                    var signName = this.signName;
-                    if (identity == 'PARTY_D') {
-                        str += '<label class="weui-cell weui-check__label " style="float: left;">\n' +
-                            '<div class="weui-cell__hd">\n' +
-                            '<input type="radio" class="weui-check" name="acceptance_company" value="' + signName + '">\n' +
-                            '<i class="weui-icon-checked"></i>\n' +
-                            '</div>\n' +
-                            '<div class="weui-cell__bd">\n' +
-                            '<p>' + signName + '</p>\n' +
-                            '</div>\n' +
-                            '</label>';
-                    }
 
-                });
-                $("#chooseTargrt").append(str);
-            }
-        });
-    });
     $("#chooseTargrt").on("click", function () {
         $('#chooseTargrt2').empty();
         var val = $('input[name="acceptance_company"]:checked').val();
@@ -797,11 +782,11 @@
                     var date = data[0][key];
                     $('#' + key).text(date);
                 }
-                $(data).each(function () {
-                    $("#applicationDate").text(this.applicationDate.substring(0, 10));
-                    $("#suggestDate").text(this.suggestDate.substring(0, 10));
-                    change(this.status);
-                })
+
+                $("#applicationDate").text(data[0].applicationDate.substring(0, 10));
+                $("#suggestDate").text(data[0].suggestDate.substring(0, 10));
+                change(data[0].status);
+
             }
         })
     }
@@ -827,7 +812,38 @@
             document.getElementById('chooseTargrt').style.display = 'block';
             document.getElementById('chooseTargrt2').style.display = 'block';
             $("#manageDeptOpinion").removeAttr("readonly");
-            $("#acceptance_company").removeAttr("readonly");
+            //指定过监理
+            if (PARTY_D_id != 0) {
+                $("#chooseTargrt").append("监理公司已指定");
+                $("#chooseTargrt2").append("监理人员已指定");
+            } else {
+                $.ajax({
+                    type: 'get',
+                    url: domainName + '/api-c/company/all',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var str = '';
+                        $(data).each(function () {
+                            var identity = this.identity;
+                            var signName = this.signName;
+                            if (identity == 'PARTY_D') {
+                                str += '<label class="weui-cell weui-check__label " style="float: left;">\n' +
+                                    '<div class="weui-cell__hd">\n' +
+                                    '<input type="radio" class="weui-check" name="acceptance_company" value="' + signName + '">\n' +
+                                    '<i class="weui-icon-checked"></i>\n' +
+                                    '</div>\n' +
+                                    '<div class="weui-cell__bd">\n' +
+                                    '<p>' + signName + '</p>\n' +
+                                    '</div>\n' +
+                                    '</label>';
+                            }
+
+                        });
+                        $("#chooseTargrt").append(str);
+                    }
+                });
+            }
+
         } else if (status == 2 && $.inArray('PARTY_D:html', pers) != -1) {
             a = 2;
             //验收初审
@@ -835,6 +851,9 @@
             document.getElementById('check_c').style.display = 'none';
             document.getElementById('check_d').style.display = 'none';
             $("#burgLeaderOpinion").removeAttr("readonly");
+            if (EXPERT_id.length>0){
+                document.getElementById('test').style.display = 'none';
+            }
         } else if (status == 4 && $.inArray('PARTY_D:html', pers) != -1) {
             a = 3;
             //验收终审
@@ -864,57 +883,92 @@
 
 
             if (formdata.status == 1) {
-                if (formdata.acceptance_company == "" || formdata.acceptance_company == undefined) {
-                    $.toptip('请指定验收方', 'error');
-                    return;
-                } else if (formdata.acceptance_user == "" || formdata.acceptance_user == undefined) {
-                    $.toptip('请指定验收人员', 'error');
-                    return;
-                } else {
-                    var data = {"item_id": item_id, "user_id": formdata.acceptance_user, "user_type": "PARTY_D"};
+                if (PARTY_D_id == 0) {
+                    if (formdata.acceptance_company == "" || formdata.acceptance_company == undefined) {
+                        $.toptip('请指定验收方', 'error');
+                        return;
+                    } else if (formdata.acceptance_user == "" || formdata.acceptance_user == undefined) {
+                        $.toptip('请指定验收人员', 'error');
+                        return;
+                    } else {
+                        var data = {"item_id": item_id, "user_id": formdata.acceptance_user, "user_type": "PARTY_D"};
 
-                    $.ajax({
-                        type: 'post',
-                        url: domainName + '/project-item/item/personnel',
-                        dataType: 'json',
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(data),
-                        success: function (res) {
-                            $.toptip('录入验收方成功', 'success');
-                        },
-                        error: function (res) {
-                            $.toptip('录入验收方失败', 'error');
-                            return;
-                        }
-                    });
+                        $.ajax({
+                            type: 'post',
+                            url: domainName + '/project-item/item/personnel',
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(data),
+                            success: function (res) {
+                                $.toptip('录入验收方成功', 'success');
+                            },
+                            error: function (res) {
+                                $.toptip('录入验收方失败', 'error');
+                                return;
+                            }
+                        });
 
+                    }
+                } else if (PARTY_D_id != 0) {
+                    //验收已指定
+                    var userIds = [];
+                    userIds.push(PARTY_D_id);
+                    var content = "您有一条验收审核待处理";
+                    var title = "您有一条验收审核待处理";
+                    sendMeaasge(content, title, userIds);
                 }
 
-            }else if (formdata.status == 2){
-                if (match){
-                    $.ajax({
-                        type: 'post',
-                        url: domainName + '/project-user/item/list',
-                        dataType: 'json',
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(ids),
-                        success: function (res) {
-                            var content = "您有一条验收审核待处理";
-                            var title = "您有一条验收审核待处理";
-                            sendMeaasge(content,title,ids);
-                            $.toptip('匹配专家成功', 'success');
+            } else if (formdata.status == 2) {
+                if (match) {
+                    if (EXPERT_id.length>0){
+                        var content = "您有一条验收审核待处理";
+                        var title = "您有一条验收审核待处理";
+                        sendMeaasge(content, title, EXPERT_id);
+                    }else {
+                        $.ajax({
+                            type: 'post',
+                            url: domainName + '/project-user/item/list',
+                            dataType: 'json',
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(ids),
+                            success: function (res) {
+                                var userIds = [];
+                                for (var i = 0; i < ids.length; i++) {
+                                    var userId = ids[i].userId;
+                                    userIds.push(userId);
+                                }
+                                var content = "您有一条验收审核待处理";
+                                var title = "您有一条验收审核待处理";
+                                sendMeaasge(content, title, userIds);
+                                $.toptip('匹配专家成功', 'success');
 
-                        },
-                        error: function (res) {
-                            $.toptip('匹配专家失败', 'error');
-                            return;
-                        }
-                    });
+                            },
+                            error: function (res) {
+                                $.toptip('匹配专家失败', 'error');
+                                return;
+                            }
+                        });
+                    }
+
                 }
+            }else if (formdata.status<0){
+                //被驳回状态，监理确定打回补充
+                formdata.status=-1
             }
             formdata.status = 1 + parseInt(formdata.status);
         } else if (applicantExtension == "否") {
-            formdata.status = 0 - formdata.status;
+            //监理方驳回，直接到乙方
+            if (formdata.status == 1 || formdata.status == 5) {
+                formdata.status = 0;
+            } else if (formdata.status<0){
+                //如果是被驳回状态，监理不打回，再次提交
+                formdata.status=2;
+            }else {
+                //驳回
+                formdata.status = 0-parseInt(formdata.status);
+
+            }
+
         } else {
             $.toptip('请选择审核结果', 'error');
             return;
@@ -928,24 +982,28 @@
             data: JSON.stringify(formdata),
             success: function (data) {
                 var userIds = [];
-                if (status==2){
+                if (status == 2) {
                     userIds.push(formdata.acceptance_user);
                     var content = "您有一条验收审核待处理";
                     var title = "您有一条验收审核待处理";
-                }else if (status==5){
+                } else if (status == 5) {
                     userIds.push(getPARTY_B(item_id));
                     var content = "您有一条验收审核待处理";
                     var title = "您有一条验收审核待处理";
-                }else if (status==6){
+                } else if (status == 6) {
                     userIds.push(getPARTY_B(item_id));
                     content = "您的项目验收申请已通过，项目已结题";
                     title = "您的项目验收申请已通过，项目已结题";
-                }else if (status<0){
+                } else if (status == 0) {
                     userIds.push(getPARTY_B(item_id));
-                    content = "您的项目验收申请未通过";
-                    title = "您的项目验收申请未通过";
+                    content = "您的项目验收申请未通过，请补充资料后再次提交";
+                    title = "您的项目验收申请未通过，请补充资料后再次提交";
+                } else if (status == -1) {
+                    userIds.push(getPARTY_C(item_id));
+                    content = "您有一条被驳回的项目验收审核，请尽快处理";
+                    title = "您有一条被驳回的项目验收审核，请尽快处理";
                 }
-                sendMeaasge(content,title,userIds);
+                sendMeaasge(content, title, userIds);
                 $.toptip('操作成功', 'success');
                 history.back(-1);
             }

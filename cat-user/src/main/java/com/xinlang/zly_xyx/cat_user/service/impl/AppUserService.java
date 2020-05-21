@@ -187,6 +187,11 @@ public class AppUserService implements IAppUserService {
     }
 
     @Override
+    public List<AppUser> findAll() {
+        return appUserMapper.findAll();
+    }
+
+    @Override
     public Set<SysRole> findRoleByUserId(Long userId) {
         return userRoleMapper.findRolesByUserId(userId);
     }

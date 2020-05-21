@@ -15,16 +15,9 @@ import javax.websocket.server.ServerEndpointConfig;
  * TODO   :
  */
 @Configuration
-public class HttpSessionConfigurator extends ServerEndpointConfig.Configurator  {
+public class HttpExchangeSessionConfigurator extends ServerEndpointConfig.Configurator  {
 	@Bean
     public ServerEndpointExporter serverEndpointExporter() {
         return new ServerEndpointExporter();
     }
-
-    @Override
-    public void modifyHandshake(ServerEndpointConfig config, HandshakeRequest request, HandshakeResponse response){
-        config.getUserProperties().put("userId",request.getParameterMap().get("userId").get(0));
-        super.modifyHandshake(config, request, response);
-    }
-
 }

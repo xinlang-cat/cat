@@ -1,12 +1,10 @@
 package com.xinlang.zly_xyx.cat_inform.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import javax.annotation.PostConstruct;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -17,12 +15,12 @@ import javax.websocket.server.ServerEndpoint;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xinlang.zly_xyx.cat_inform.config.HttpSessionConfigurator;
+import com.xinlang.zly_xyx.cat_inform.fegin.ConsumeProjectUser;
 import com.xinlang.zly_xyx.cat_inform.service.IChatMessageService;
-import com.xinlang.zly_xyx.cat_inform.service.impl.ChatMessageService;
 import com.xinlang.zly_xyx.user.AppUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.xinlang.zly_xyx.user.CustomerServiceStaff;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * websocket服务
@@ -33,16 +31,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 @ServerEndpoint(value = "/websocket", configurator = HttpSessionConfigurator.class)
 public class ChatServer {
 
-
-    private IChatMessageService chatMessageService = new ChatMessageService();
-
-    private static int onlineCount = 0; // 静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
+    private static IChatMessageService chatMessageService;
     private static CopyOnWriteArraySet<ChatServer> webSocketSet = new CopyOnWriteArraySet<>();
     private Session session; // 与某个客户端的连接会话，需要通过它来给客户端发送数据
-    private Long userId; // 用户id
-    //	private static List<Integer> list = new ArrayList<Integer>(); // 在线列表,记录用户名称
-    private static Map<Long, Session> routetab = new HashMap<>(); // 用户id和websocket的session绑定的路由表
-    private static Set<Long> users = new HashSet<>();//
+    private static Map<Integer, Session> routetab = new HashMap<>(); // 用户id和websocket的session绑定的路由表
+    private static Set<Integer> users = new HashSet<>();//
+    private Integer userId;
+    private static List<CustomerServiceStaff> customerServiceStaffs;
+    public static void setApplicationContext(ApplicationContext applicationContext){
+        chatMessageService = applicationContext.getBean(IChatMessageService.class);
+    }
+
 
     /**
      * 连接建立成功调用的方法
@@ -53,10 +52,9 @@ public class ChatServer {
     public void onOpen(Session session, EndpointConfig config) {
         this.session = session;
         webSocketSet.add(this); // 加入set中
-        addOnlineCount(); // 在线数加1;
-        Long userId = Long.valueOf(config.getUserProperties().get("userId").toString());
+        Integer userId = Integer.valueOf(config.getUserProperties().get("userId").toString());
+        this.userId = userId;
         users.add(userId);
-        this.userId = userId; // 获取当前用户
         routetab.put(userId, session);
     }
 
@@ -66,7 +64,6 @@ public class ChatServer {
     @OnClose
     public void onClose() {
         webSocketSet.remove(this); // 从set中删除
-        subOnlineCount(); // 在线数减1
         users.remove(userId);
         routetab.remove(userId);
     }
@@ -104,7 +101,6 @@ public class ChatServer {
                 chat.session.getBasicRemote().sendText(message);
             } catch (IOException e) {
                 e.printStackTrace();
-                continue;
             }
         }
     }
@@ -139,24 +135,12 @@ public class ChatServer {
         return member.toString();
     }
 
-    public int getOnlineCount() {
-        return onlineCount;
-    }
-
-    public void addOnlineCount() {
-        ChatServer.onlineCount++;
-    }
-
-    public void subOnlineCount() {
-        ChatServer.onlineCount--;
-    }
-
     /**
      * 发到指定用户
      *
      * @throws IOException
      */
-    public static final boolean sendMsgToUsers(Long userId, String context) throws IOException {
+    public static boolean sendMsgToUsers(Integer userId, String context) throws IOException {
         Session session = routetab.get(userId);
         boolean flag = false;
         if (session != null) {
@@ -166,7 +150,6 @@ public class ChatServer {
         return flag;
     }
 
-    @SuppressWarnings("unused")
     private void sendMessage(String message) {
         try {
             session.getBasicRemote().sendText(message);
@@ -175,7 +158,7 @@ public class ChatServer {
         }
     }
 
-    public static Set<Long> getList() {
+    public static Set<Integer> getList() {
         return users;
     }
 }

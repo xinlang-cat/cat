@@ -13,174 +13,309 @@
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
 
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 18%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
 </head>
 <body ontouchstart>
+<header class='demos-header'>
+    <h1 class="demos-title">指标查定起草</h1>
+</header>
+<h3>项目基本信息</h3>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>合同编号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="contract_no"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目类别</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="type"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目名称</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="name"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>委托单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="entrusting_party"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>承担单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="responsible_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>管理单位</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="management_unit"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>下达文号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="document_number"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>实施期限</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="period"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目地点</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="site"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>总体目标</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="overall_objective"></span>
+        </div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>主要研究内容</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content">
+            <span id="research_contents"></span>
+        </div>
+    </div>
+</div>
 
 <div style="z-index: 999999">
 
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd">
-            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-        </div>
-        <div class="weui-cell__bd weui-cell_primary">
-            <p class="weui-max-title">指标详情</p>
-        </div>
-    </a>
+    <h3>指标详情</h3>
 
     <div class="weui-panel" id="list">
 
 
     </div>
 
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd">
-            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-        </div>
-        <div class="weui-cell__bd weui-cell_primary">
-            <p class="weui-max-title">查定申请详情</p>
-        </div>
-    </a>
+    <h3>查定申请详情</h3>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">项目名称:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目名称:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">提交人:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" id="userName" name="userName" placeholder="" readonly>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
+            </div>
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">建议查定时间:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>提交人:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="start_date" readonly name="start_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" id="userName" name="userName" placeholder="" readonly>
+            </div>
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">预计结束时间:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>建议查定时间:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="end_date" readonly name="end_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="start_date" readonly name="start_date">
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>预计结束时间:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="end_date" readonly name="end_date">
+            </div>
         </div>
     </div>
 
 
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">申请内容:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>申请内容:</div>
         </div>
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" rows="5" id="content" name="content" readonly></textarea>
+        <div class="weui-flex__item">
+            <div class="content">
+                                <textarea class="weui-textarea" rows="5" id="content" name="content"
+                                          readonly></textarea>
+            </div>
         </div>
     </div>
 
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd">
-            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-        </div>
-        <div class="weui-cell__bd weui-cell_primary">
-            <p class="weui-max-title">查定结果</p>
-        </div>
-    </a>
+    <h3>查定结果</h3>
     <form id="form">
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">实际查定时间:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>实际查定时间:</div>
             </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true" name="start_date_true">
-            </div>
-        </div>
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">实际结束时间:</label>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true" name="end_date_true">
+            <div class="weui-flex__item">
+                <div class="content">
+                    <input class="weui-input date" type="text" value="" placeholder="点击此处选择查定时间"
+                           id="start_date_true" name="start_date_true">
+                </div>
             </div>
         </div>
-
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定情况简述:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>实际结束时间:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="description" name="description"></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <input class="weui-input date" type="text" value=""
+                           placeholder="点击此处选择查定时间" id="end_date_true" name="end_date_true">
+                </div>
             </div>
         </div>
 
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定目的:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定情况简述:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="purpose" name="purpose"></textarea>
-            </div>
-        </div>
-
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定依据:</label>
-            </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="depand" name="depand"></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <textarea class="weui-textarea" rows="5" id="description" name="description"></textarea>
+                </div>
             </div>
         </div>
 
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定内容:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定目的:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="details" name="details"></textarea>
-            </div>
-        </div>
-
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定方法:</label>
-            </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="means" name="means"></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <textarea class="weui-textarea" rows="5" id="purpose" name="purpose"></textarea>
+                </div>
             </div>
         </div>
 
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定依据</div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <textarea class="weui-textarea" rows="5" id="depand" name="depand"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定内容:</div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <textarea class="weui-textarea" rows="5" id="details" name="details"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定方法:</div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <textarea class="weui-textarea" rows="5" id="means" name="means"></textarea>
+                </div>
+            </div>
+        </div>
         <div class="weui-line"></div>
         <div class="weui-cell">
             <div class="weui-cell__bd">
                 <div class="weui-uploader">
                     <div class="weui-uploader__hd">
-                        <p class="weui-uploader__title" style="font-weight: bold">图片上传</p>
+                        <p class="weui-uploader__title"
+                           style="font-weight: bold">图片上传</p>
                         <div class="weui-uploader__info">0/6</div>
                     </div>
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files">
                         </ul>
                         <div class="weui-uploader__input-box">
-                            <input class="weui-uploader__input" type="file" accept="image/*"
-                                   multiple="" onchange="uploader(this)" data-sum="6">
+                            <input class="weui-uploader__input"
+                                   type="file" accept="image/*"
+                                   multiple=""
+                                   onchange="uploader(this)"
+                                   data-sum="6">
                         </div>
                     </div>
                 </div>
@@ -190,18 +325,22 @@
         <div class="weui-cells__title">查定结果</div>
 
         <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label " style="float: left;">
+            <label class="weui-cell weui-check__label "
+                   style="float: left;">
                 <div class="weui-cell__hd">
-                    <input type="radio" class="weui-check" name="status" value="3">
+                    <input type="radio" class="weui-check"
+                           name="status" value="3">
                     <i class="weui-icon-checked"></i>
                 </div>
                 <div class="weui-cell__bd">
                     <p>合格</p>
                 </div>
             </label>
-            <label class="weui-cell weui-check__label" style="float: left;">
+            <label class="weui-cell weui-check__label"
+                   style="float: left;">
                 <div class="weui-cell__hd">
-                    <input type="radio" name="status" class="weui-check" value="4">
+                    <input type="radio" name="status"
+                           class="weui-check" value="4">
                     <i class="weui-icon-checked"></i>
                 </div>
                 <div class="weui-cell__bd">
@@ -209,10 +348,13 @@
                 </div>
             </label>
         </div>
-        <input type="hidden" name="accessory" id="accessory" value="">
+        <input type="hidden" name="accessory" id="accessory"
+               value="">
         <div class="weui-line"></div>
         <div class="weui-btn-area">
-            <button onclick="postResult()" type="button" class="weui-btn weui-btn_primary">提交</button>
+            <button onclick="postResult()" type="button"
+                    class="weui-btn weui-btn_primary">提交
+            </button>
         </div>
 
     </form>
@@ -232,7 +374,7 @@
 <script type="text/javascript" src="auditApply.js"></script>
 <script src="../../js/jquery-weui.min.js"></script>
 
-
+<script src="../../js/getItemInfo.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -306,32 +448,32 @@
             url: domainName + '/project-item/item/target/applyList',
             async: false,
             success: function (data) {
-                $(data).each(function () {
-                    $("#userName").val(getUserName(data[0].edit_userid));
-                    $("#itemName").val(getItemName(data[0].item_id));
-                    $("#content").val(data[0].content);
-                    $("#start_date").val(formatDate4(data[0].start_date));
-                    $("#end_date").val(formatDate4(data[0].end_date));
-                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
-                        var str = '<article class="weui-article">';
-                        var count = 1;
-                        $.each(data1, function (i, item) {
-                            var text = getsuperior(item.site);
-                            str += ' <h2 class="title">查定指标' + count + '</h2>\n' +
-                                '   <section>\n' +
-                                '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
-                                '      	 <p>指标内容：' + item.content + '</p>\n' +
-                                '      	<p>指标地址：' + text + '</p>\n' +
-                                '   </section>\n' +
-                                '<div class="weui-line"></div>';
-                            count++;
 
-                        });
-                        str += '</article>';
-                        $("#list").append(str);
-                    })
+                $("#userName").val(getUserName(data[0].edit_userid));
+                $("#itemName").val(getItemName(data[0].item_id));
+                queryInformation(data[0].item_id);
+                $("#content").val(data[0].content);
+                $("#start_date").val(formatDate4(data[0].start_date));
+                $("#end_date").val(formatDate4(data[0].end_date));
+                $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                    var str = '<article class="weui-article">';
+                    var count = 1;
+                    $.each(data1, function (i, item) {
+                        var text = getsuperior(item.site);
+                        str += ' <h2 class="title">查定指标' + count + '</h2>\n' +
+                            '   <section>\n' +
+                            '      <h3>指标类型：' + getType(item.type) + '</h3>\n' +
+                            '      	 <p>指标内容：' + item.content + '</p>\n' +
+                            '      	<p>指标地址：' + text + '</p>\n' +
+                            '   </section>\n' +
+                            '<div class="weui-line"></div>';
+                        count++;
 
-                });
+                    });
+                    str += '</article>';
+                    $("#list").append(str);
+                })
+
 
             }
         });

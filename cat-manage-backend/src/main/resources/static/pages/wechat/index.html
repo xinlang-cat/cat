@@ -18,11 +18,11 @@
 <script type="text/javascript">
     var access_token = localStorage.getItem("access_token");
     var toUrl = getUrlParam("toUrl");
-
+    var openid = getUrlParam("openid");
     if (access_token != null && access_token.trim().length != 0) {
         showUserInfo(access_token);
     } else {
-        var openid = getUrlParam("openid");
+
         if (openid == null || openid == "") {
             window.location.href = domainName + "/api-u/wechat/app1?toUrl=" + encodeURIComponent(toUrl);
         } else {
