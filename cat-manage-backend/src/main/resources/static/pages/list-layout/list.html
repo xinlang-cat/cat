@@ -207,8 +207,8 @@
                         });
                     }
                     if ($.inArray('PARTY_B:principal:html', pers) != -1) {
-                        if(this.status>1){
-                            str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationCheck.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
+                        if(this.status>=5){
+                            str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApplyed.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
                         }else {
                             str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
                         }

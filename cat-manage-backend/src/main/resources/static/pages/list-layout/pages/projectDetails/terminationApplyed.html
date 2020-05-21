@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>终止申请</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+</head>
+<body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <div style="position: absolute;right: 30px;top: 15px;">
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);" name="sub">提交</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);" name="sub">保存</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
+    </div>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 60px;">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-2 control-label">项目名称</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" id="itemName" readonly>
+                </div>
+                <label class="col-md-1 control-label">计划类别</label>
+                <div class="col-md-3">
+                    <input class="form-control" type="text" id="itemType" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">原因描述</label>
+                <div class="col-md-7">
+                    <input class="form-control" type="hidden" name="id">
+                    <input class="form-control" type="hidden" name="status">
+                    <textarea class="layui-textarea" name="remark" style="border-color: #ccc;"
+                                      data-bv-notempty="true"
+                                      data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    <button type="button" class="layui-btn layui-btn-normal" id="files">选择多文件</button>
+                </label>
+                <div class="col-md-7">
+                    <div class="layui-upload-list">
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th>文件名</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody id="filesList">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="display: none" id="PARTY_C_A">
+                <label class="col-md-2 control-label">受委托管理单位意见</label>
+                <div class="col-md-7">
+                    <textarea class="layui-textarea" name="manage_dept_opinion" readonly style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group" style="display: none" id="PARTY_D_A">
+                <label class="col-md-2 control-label">验收方初审意见</label>
+                <div class="col-md-7">
+                    <textarea class="layui-textarea" name="burg_leader_opinion" readonly style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group" style="display: none" id="PARTY_D_B">
+                <label class="col-md-2 control-label">验收方核验结果</label>
+                <div class="col-md-7">
+                    <textarea class="layui-textarea" name="burg_finance_opinion" readonly style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+            <div class="form-group" style="display: none" id="PARTY_C_B">
+                <label class="col-md-2 control-label">受委托管理单位核验结果:</label>
+                <div class="col-md-7">
+                    <textarea class="layui-textarea" name="manage_dept_result" readonly style="border-color: #ccc;"
+                              data-bv-notempty="true"
+                              data-bv-notempty-message=" 内容不能为空"></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../../../layui/layui.js"></script>
+<script type="text/javascript" src='../../../../js/sendMessage.js'></script>
+<script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+
+<!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+<script type="text/javascript" src="../../js/jquery.media.js"></script>
+<script>
+    var currentUser = currentUser();
+
+    var accessorys = '';
+    layui.use(['upload','form'], function () {
+        var $ = layui.jquery,
+            upload = layui.upload,
+            form = layui.form;
+        //文件上传
+        var uploadInst = upload.render({
+            elem: '#files' //绑定元素
+            , accept: 'file'
+            , url: domainName + '/zuul/api-f/files' //上传接口
+            , done: function (res) {
+                //上传完毕回调
+                var str = '<tr> <td>' + res.name + '</td>\n' +
+                    '<td>\n' +
+                    '<input type="hidden" name="filId" value="'+res.id+'">' +
+                    '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+res.url+'" target="_blank">查看</a>\n' +
+                    '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
+                    '</td>\n' +
+                    '</tr>';
+                $('#filesList').append(str);
+                accessorys += ','+res.id;
+            }
+            , error: function () {
+                //请求异常回调
+            }
+        });
+        $(document).on('click', '.demo-delete', function () {
+            $(this).closest('tr').remove();
+            $('input[name=filId]').each(function () {
+                accessorys = '';
+                accessorys += ','+$(this).val();
+            })
+        });
+    });
+
+    var id = getUrlParam("itemId");
+    getItem();
+    getTermination();
+
+    function getItem() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/information/list',
+            data: "id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var d = data[0];
+                $('#itemType').val(analysisLablename(d.type));
+                $('#itemName').val(d.name);
+            }
+        })
+    }
+    function getTermination() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/termination/list',
+            data: "item_id=" + id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if(data.length!=0){
+                    $('input[name=id]').val(data[0].id);
+                    $('textarea[name=remark]').val(data[0].remark);
+                    $('input[name=status]').val(data[0].status);
+                    $('textarea[name=manage_dept_opinion]').val(data[0].manage_dept_opinion);
+                    $('textarea[name=burg_leader_opinion]').val(data[0].burg_leader_opinion);
+                    $('textarea[name=burg_finance_opinion]').val(data[0].burg_finance_opinion);
+                    $('textarea[name=manage_dept_result]').val(data[0].manage_dept_result);
+                    accessorys = data[0].accessorys;
+                    $(data[0].accessorys.split(',')).each(function (i, d) {
+                        if (i != 0) {
+                            var str = '<tr> <td>' + analysisFile(d).name + '</td>\n' +
+                                '<td>\n' +
+                                '<input type="hidden" name="filId" value="'+d+'">' +
+                                '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+analysisFile(d).url+'" target="_blank">查看</a>\n' +
+                                '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
+                                '</td>\n' +
+                                '</tr>';
+                            $('#filesList').append(str);
+                        }
+                    });
+                    if(data[0].status>=1){
+                        $('button[name=sub]').css('display','none');
+                        $('textarea').attr('readonly','readonly');
+                        $('#files').css('display','none');
+                        $('.demo-delete').css('display','none');
+                        $('#sub').css('display','none');
+                    }
+                    if(data[0].status>=-2||data[0].status>=2){
+                        $('#PARTY_C_A').css('display', '');
+                    }else if(data[0].status>=-3||data[0].status>=3){
+                        $('#PARTY_C_A').css('display', '');
+                        $('#PARTY_D_A').css('display', '');
+                    }else if(data[0].status>=-5||data[0].status>=5){
+                        $('#PARTY_C_A').css('display', '');
+                        $('#PARTY_D_A').css('display', '');
+                        $('#PARTY_D_B_A').css('display', '');
+                    }else if(data[0].status>=-6||data[0].status>=6){
+                        $('#PARTY_C_A').css('display', '');
+                        $('#PARTY_D_A').css('display', '');
+                        $('#PARTY_D_B_A').css('display', '');
+                        $('#PARTY_C_B').css('display', '');
+                    }
+                }
+            }
+        })
+    }
+
+    /*解析标签名称*/
+    function analysisLablename(sign) {
+        var text = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                text = data[0].content;
+            }
+        });
+        return text;
+    }
+    /*解析文件*/
+    function analysisFile(id) {
+        if (id == '') {
+            return '';
+        }
+        var text = {};
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-f/files/' + id,
+            async: false,
+            success: function (data) {
+                text = data;
+            }
+        });
+        return text;
+    }
+
+    function submit(status) {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata = $("#form").serializeObject();
+        console.log(formdata);
+        formdata.item_id = id;
+        formdata.accessorys = accessorys;
+
+        formdata.status = status;
+        formdata.manage_dept_opinion = '';
+        formdata.burg_leader_opinion = '';
+        formdata.burg_finance_opinion = '';
+        formdata.manage_dept_result = '';
+        var type = 'post';
+        if($('input[name=status]').val()!=''){
+            type = 'put';
+        }
+        $.ajax({
+            type: type,
+            url: domainName + '/project-item/item/termination',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                if(status==1){
+                    changeStatus(5);
+                }
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.reload();
+                });
+            }
+        });
+    }
+
+    function changeStatus(status) {
+        var item = {"id": id, "status": status};
+        $.ajax({
+            type: 'put',
+            url: domainName + '/project-item/item/information',
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            data: JSON.stringify(item),
+            success: function (data) {
+                var userIds = [];
+                var userId = getPARTY_C(id);
+                userIds.push(userId);
+                var content = "您有一条终止审核待处理";
+                var title = "您有一条终止审核待处理";
+                sendMeaasge(content,title,userIds);
+            }
+        });
+    }
+
+    $('#handout_wrap_inner').media({
+        width: '80%',
+        height: '80%',
+        autoplay: true,
+    });
+</script>
+</html>

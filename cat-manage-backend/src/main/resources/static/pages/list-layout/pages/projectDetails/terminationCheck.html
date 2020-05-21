@@ -37,7 +37,7 @@
     </table>
     <div style="position: absolute;right: 30px;top: 15px;">
         <button type="button" class="layui-btn layui-btn-sm" onclick="pass();" id="test" name="pass" style="display: none">通过</button>
-        <!--<button type="button" class="layui-btn layui-btn-sm" onclick="no_pass();" name="no_pass" style="display: none">驳回</button>-->
+        <button type="button" class="layui-btn layui-btn-sm" onclick="no_pass();" name="no_pass" style="display: none">退回修改</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
@@ -84,8 +84,6 @@
             <div class="form-group" style="display: none" id="PARTY_C_A">
                 <label class="col-md-2 control-label">受委托管理单位意见</label>
                 <div class="col-md-7">
-                    <input class="form-control" type="hidden" name="id">
-                    <input class="form-control" type="hidden" name="status">
                     <textarea class="layui-textarea" name="manage_dept_opinion" readonly style="border-color: #ccc;"
                               data-bv-notempty="true"
                               data-bv-notempty-message=" 内容不能为空"></textarea>
@@ -94,8 +92,6 @@
             <div class="form-group" style="display: none" id="PARTY_D_A">
                 <label class="col-md-2 control-label">验收方初审意见</label>
                 <div class="col-md-7">
-                    <input class="form-control" type="hidden" name="id">
-                    <input class="form-control" type="hidden" name="status">
                     <textarea class="layui-textarea" name="burg_leader_opinion" readonly style="border-color: #ccc;"
                               data-bv-notempty="true"
                               data-bv-notempty-message=" 内容不能为空"></textarea>
@@ -104,8 +100,6 @@
             <div class="form-group" style="display: none" id="PARTY_D_B">
                 <label class="col-md-2 control-label">验收方核验结果</label>
                 <div class="col-md-7">
-                    <input class="form-control" type="hidden" name="id">
-                    <input class="form-control" type="hidden" name="status">
                     <textarea class="layui-textarea" name="burg_finance_opinion" readonly style="border-color: #ccc;"
                               data-bv-notempty="true"
                               data-bv-notempty-message=" 内容不能为空"></textarea>
@@ -114,8 +108,6 @@
             <div class="form-group" style="display: none" id="PARTY_C_B">
                 <label class="col-md-2 control-label">受委托管理单位核验结果:</label>
                 <div class="col-md-7">
-                    <input class="form-control" type="hidden" name="id">
-                    <input class="form-control" type="hidden" name="status">
                     <textarea class="layui-textarea" name="manage_dept_result" readonly style="border-color: #ccc;"
                               data-bv-notempty="true"
                               data-bv-notempty-message=" 内容不能为空"></textarea>
@@ -211,7 +203,6 @@
                     $('textarea[name=burg_leader_opinion]').val(data[0].burg_leader_opinion);
                     $('textarea[name=burg_finance_opinion]').val(data[0].burg_finance_opinion);
                     $('textarea[name=manage_dept_result]').val(data[0].manage_dept_result);
-                    $('textarea[name=burg_finance_opinion]').val(data[0].burg_finance_opinion);
                     accessorys = data[0].accessorys;
                     $(data[0].accessorys.split(',')).each(function (i, d) {
                         if (i != 0) {
@@ -323,7 +314,24 @@
     function no_pass() {
         var formdata = {};
         formdata.id = $('input[name=id]').val();
-        formdata.status = 0;
+        if ($('input[name=status]').val() == 1) {
+            formdata.status = -2;
+            formdata.manage_dept_opinion = $('textarea[name=manage_dept_opinion]').val();
+        }else if($('input[name=status]').val() == 2){
+            formdata.status = -3;
+            formdata.burg_leader_opinion = $('textarea[name=burg_leader_opinion]').val();
+        }else if($('input[name=status]').val() == 4){
+            formdata.status = -5;
+            formdata.burg_finance_opinion = $('textarea[name=burg_finance_opinion]').val();
+        }else if($('input[name=status]').val() == 5){
+            formdata.status = -6;
+            formdata.manage_dept_result = $('textarea[name=manage_dept_result]').val();
+        }else {
+            /*layer.msg("已退回哦，请勿重复操作！", {shift: -1, time: 1000}, function () {
+
+            });*/
+            return;
+        }
         updateTermination(formdata);
     }
 
