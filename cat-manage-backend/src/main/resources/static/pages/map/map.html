@@ -62,8 +62,6 @@
         <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
         <select name="interest" lay-filter="aihao" style="float: left;" onchange="byType()" id="type">
             <option value="0">全部</option>
-            <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
-            <option value="ELECTRONIC_INFORMATION">电子信息</option>
         </select>
     </div>
     <canvas id="myChart" style="float: left;width: 100%;"></canvas>
@@ -116,7 +114,9 @@
 <script type="text/javascript"
         src="http://api.map.baidu.com/library/MarkerClusterer/1.2/src/MarkerClusterer_min.js"></script>
 <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
+
 <script type="text/javascript">
+
     var counts4 = new Array();
     var items = new Array(); //项目原始数据
     var contents = new Array();//项目类型
@@ -140,6 +140,7 @@
     }
     var now = tYear + '-' + m;
 
+
     const chart = new F2.Chart({
         id: 'myChart',
         pixelRatio: window.devicePixelRatio, // 指定分辨率
@@ -153,6 +154,22 @@
         id: 'container2',
         pixelRatio: window.devicePixelRatio
     });
+    initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
+
+
+    function initSelectData(sign, node) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                var ds = data[0].child;
+                $(ds).each(function () {
+                    node.append('<option value=' + this.sign + '>' + this.content + '</option>');
+                });
+            }
+        })
+    }
     var form, layer, layedit;
 
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -202,7 +219,7 @@
                 } else {
                     dataArr1 = dataArr;
                 }
-                showTable3(items[0], counts5, dataArr1);
+                showTable3(items, counts5, dataArr1);
 
 
             }
@@ -435,7 +452,7 @@
                     } else if (this.status == 2 && formatDate4(this.end_date) < today) {
                         statussMath[3] = statussMath[3] + 1;
                     }
-                    items.push(data);
+                    items.push(this);
                     countItem++;//项目总数变化
                     inMap(this);
                     var sign = this.type;
@@ -625,11 +642,11 @@
         map.clearOverlays();
         var type = $("#type").val();
         if (type == 0) {
-            $(items[0]).each(function () {
+            $(items).each(function () {
                 inMap(this);
             });
         }
-        $(items[0]).each(function () {
+        $(items).each(function () {
             var sign = this.type;
             if (type == sign) {
                 selectItem.push(this);
@@ -637,8 +654,8 @@
             }
         });
         if (type == 0) {
-            if (items[0].length > 0) {
-                showTable(items[0]);
+            if (items.length > 0) {
+                showTable(items);
             }
         } else {
             if (selectItem.length > 0) {
@@ -654,9 +671,9 @@
 
         map.clearOverlays();
         var status = $("#status").val();
-        $(items[0]).each(function () {
+        $(items).each(function () {
             if (status == 0) {
-                $(items[0]).each(function () {
+                $(items).each(function () {
                     inMap(this);
 
                 });
@@ -686,8 +703,8 @@
             }
         });
         if (status == 0) {
-            if (items[0].length > 0) {
-                showTable(items[0]);
+            if (items.length > 0) {
+                showTable(items);
             }
         } else {
             if (selectItem.length > 0) {
