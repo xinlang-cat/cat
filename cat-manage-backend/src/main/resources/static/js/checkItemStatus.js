@@ -1,8 +1,9 @@
-import "./constant"
+/*import "./constant"*/
+
 var itemStatus = getUrlParam("itemStatus");
 //检查项目状态并设置按钮
 $('[check-item-button]').each(function (i,item) {
-    if(itemStatus == 4){
+    if(itemStatus != 0){
         $(item).remove();
     }
 });

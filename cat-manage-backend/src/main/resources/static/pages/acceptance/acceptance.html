@@ -634,6 +634,10 @@
                     if (nowStatus == 1) {
                         changeStatus(item_id);
                     }
+                    var msg = "保存成功";
+                    layer.msg(msg, {shift: -1, time: 1000}, function () {
+                        location.reload();
+                    });
                 }
             });
         } else {
