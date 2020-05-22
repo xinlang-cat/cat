@@ -33,11 +33,9 @@ public class ChatServer {
 
     private static IChatMessageService chatMessageService;
     private static CopyOnWriteArraySet<ChatServer> webSocketSet = new CopyOnWriteArraySet<>();
-    private Session session; // 与某个客户端的连接会话，需要通过它来给客户端发送数据
     private static Map<Integer, Session> routetab = new HashMap<>(); // 用户id和websocket的session绑定的路由表
     private static Set<Integer> users = new HashSet<>();//
     private Integer userId;
-    private static List<CustomerServiceStaff> customerServiceStaffs;
     public static void setApplicationContext(ApplicationContext applicationContext){
         chatMessageService = applicationContext.getBean(IChatMessageService.class);
     }
@@ -50,7 +48,6 @@ public class ChatServer {
      */
     @OnOpen
     public void onOpen(Session session, EndpointConfig config) {
-        this.session = session;
         webSocketSet.add(this); // 加入set中
         Integer userId = Integer.valueOf(config.getUserProperties().get("userId").toString());
         this.userId = userId;
@@ -90,50 +87,6 @@ public class ChatServer {
         error.printStackTrace();
     }
 
-    /**
-     * 广播消息
-     *
-     * @param message 客户端发送过来的消息
-     */
-    public void broadcast(String message) {
-        for (ChatServer chat : webSocketSet) {
-            try {
-                chat.session.getBasicRemote().sendText(message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 对特定用户发送消息
-     *
-     * @param message 客户端发送过来的消息
-     * @param session 会话
-     */
-    public void singleSend(String message, Session session) {
-        try {
-            session.getBasicRemote().sendText(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 组装返回给前台的消息
-     *
-     * @param message 交互信息
-     * @param type    信息类型
-     * @param list    在线列表
-     * @return
-     */
-    public String getMessage(String message, String type, Map<Integer, AppUser> list) {
-        JSONObject member = new JSONObject();
-        member.put("message", message);
-        member.put("type", type);
-        member.put("list", list);
-        return member.toString();
-    }
 
     /**
      * 发到指定用户
@@ -150,13 +103,7 @@ public class ChatServer {
         return flag;
     }
 
-    private void sendMessage(String message) {
-        try {
-            session.getBasicRemote().sendText(message);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public static Set<Integer> getList() {
         return users;

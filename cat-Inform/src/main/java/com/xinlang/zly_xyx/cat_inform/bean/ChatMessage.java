@@ -15,7 +15,7 @@ public class ChatMessage implements Serializable {
 	@Id
 	@KeySql(useGeneratedKeys = true)
 	private Integer id;
-	private Integer type;//0普通消息，1链接
+	private Integer type;//0普通消息，1链接,2上线通知
 	private Integer createUserId;//发送者id
 	private String createUserName;//发送者姓名
 	private String context;//消息内容
