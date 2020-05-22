@@ -4,14 +4,11 @@ import javax.annotation.Resource;
 
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.cat_inform.bean.ChatMessage;
+import com.xinlang.zly_xyx.cat_inform.bean.ChatMessageUser;
 import com.xinlang.zly_xyx.cat_inform.fegin.ConsumeProjectUser;
 import com.xinlang.zly_xyx.cat_inform.service.IChatMessageService;
 import com.xinlang.zly_xyx.user.CustomerServiceStaff;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -33,11 +30,11 @@ public class ChatController {
 	public CustomerServiceStaff getOneCustomerServiceStaff() {
 		List<CustomerServiceStaff> customerServiceStaffs = consumeProjectUser.findCustomerServiceStaffs();
 		int index = 0;
-		Set<Integer> routetab = ChatServer.getList();
+		Set<Integer> users = ChatServer.getList();
 		//在线的
 		List<CustomerServiceStaff> data = new ArrayList<>();
 		for(CustomerServiceStaff c : customerServiceStaffs){
-			if(routetab.contains(c.getUserId())){
+			if(users.contains(c.getUserId())){
 				data.add(c);
 				index++;
 			}
@@ -68,5 +65,28 @@ public class ChatController {
 		return set;
 	}
 
+	@GetMapping("/no-read")
+	public List<ChatMessageUser> getNoReadMsg() {
+		return  chatMessageService.getOnRead(AppUserUtil.getLoginAppUser().getId().intValue());
+	}
+
+	@PutMapping("/set-send-read/{sendId}")
+	public void updateReadSend(@PathVariable Integer sendId) {
+		chatMessageService.updateReadSend(sendId);
+	}
+
+	@GetMapping("/all-customer-service-staff")
+	public List<CustomerServiceStaff> allOneCustomerServiceStaff() {
+		List<CustomerServiceStaff> customerServiceStaffs = consumeProjectUser.findCustomerServiceStaffs();
+		Set<Integer> users = ChatServer.getList();
+		//在线的
+		List<CustomerServiceStaff> data = new ArrayList<>();
+		for(CustomerServiceStaff c : customerServiceStaffs){
+			if(users.contains(c.getUserId())){
+				data.add(c);
+			}
+		}
+		return data;
+	}
 
 }

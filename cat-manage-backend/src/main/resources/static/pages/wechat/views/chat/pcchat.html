@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
           crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all" />
 </head>
 <script>
     document.getElementsByTagName('body').height = window.innerHeight;
@@ -42,6 +43,7 @@
                 <button class="sendbtn" data-sendType="">发送</button>
                 <!--                <button class="sendbtn" data-sendType="1">群发</button>-->
             </div>
+
         </div>
     </div>
     <input type="hidden" id="reception_userid" name="reception_userid">
@@ -54,7 +56,7 @@
 <script type="text/javascript" src="../../../../layui/layui.js"></script>
 <script type="text/javascript">
     $.ajaxSettings.async = false;
-    var allUser, onlineUserIds, thisUser, userIds = new Array(), allCustomerServiceStaffId;
+    var allUser, onlineUserIds, thisUser, userIds = new Array(), allCustomerServiceStaffId,onReadMessage;
     $.get(domainName + "/api-u/users/current", function (res) {
         thisUser = res;
     });
@@ -71,8 +73,47 @@
         $.get(domainName + "/api-n/chat/all-customer-service-staff-id", function (res) {
             allCustomerServiceStaffId = res;
         });
+        $.get(domainName + "/api-n/chat/no-read", function (res) {
+            onReadMessage = res;
+        });
+        var headUsers = new Array();
+        var footerUsers = new Array();
+        $.each(allUser,function (i,item) {
+            var flag= true;
+            $.each(onReadMessage,function (j,orm) {
+                if(item.id == orm.sendId){
+                    headUsers.push(item);
+                    flag = false;
+                }
+            });
+            if(flag){
+                footerUsers.push(item);
+            }
+        });
+        var str1 = '';
+        $.each(headUsers, function (i, item) {
+            if($.inArray(parseInt(item.id), allCustomerServiceStaffId)< 0 ){
+                str1 = str1 + '<li id="' + item.id + '" onclick="sendToUser(this)" data-head-img="' + item.headImgUrl + '">';
+                if ($.inArray(parseInt(item.id), onlineUserIds) >= 0) {
+                    str1 = str1 + '<span style="font-size: 40px;color: #00B83F; ">.</span>';
+                } else {
+                    str1 = str1 + '<span style="font-size: 40px;color: white; ">.</span>';
+                }
+                if (jQuery.isEmptyObject(item.headImgUrl)) {
+                    str1 = str1 + '<img style="border-radius: 20px; vertical-align: middle;" src="http://placehold.it/40x40">';
+                } else {
+                    str1 = str1 + '<img style="border-radius: 20px; vertical-align: middle; width: 40px;height: 40px;" src="' + item.headImgUrl + '">';
+                }
+                str1 = str1 + '<span class="layui-badge-dot" style="position: relative;left: 55px;top: 15px;float: left"></span>';
+                str1 = str1 + '<span style="margin-left: 10px; " id="span_' + item.id + '">' + item.nickname + '</span>';
+                str1 = str1 + '</li>';
+                userIds.push(item.id);
+            }
+        });
+        $("#user-list").append(str1);
+
         var str = '';
-        $.each(allUser, function (i, item) {
+        $.each(footerUsers, function (i, item) {
             if($.inArray(parseInt(item.id), allCustomerServiceStaffId)< 0 ){
                 str = str + '<li id="' + item.id + '" onclick="sendToUser(this)" data-head-img="' + item.headImgUrl + '">';
                 if ($.inArray(parseInt(item.id), onlineUserIds) >= 0) {
@@ -105,11 +146,21 @@
         if (jQuery.isEmptyObject(headImg)) {
             headImg = "http://placehold.it/40x40";
         }
+        var span = $(obj).find("span.layui-badge-dot");
+        $(span).remove();
         $("#top-headImg").attr("src", headImg);
         $.get(domainName + "/api-n/chat/" + id, function (res) {
             $("#ul-content").empty();
             appendHtml(res);
-        })
+        });
+        $.ajax({
+            url:domainName + "/api-n/chat/set-send-read/" + id,
+            contentType: "application/json; charset=utf-8",
+            type: "put",
+            success:function (res) {
+
+            }
+        });
     }
 
     $(function () {
@@ -128,7 +179,17 @@
         websocket.onmessage = function (evnt) {
             if (evnt.data != null) {
                 var arr = JSON.parse(evnt.data);
-                appendHtml(arr);
+                if(arr[0].createUserId == thisToUserId || arr[0].createUserId == thisUser.id){
+                    appendHtml(arr);
+                }else {
+                    var li= $("#" + arr[0].createUserId).clone();
+                    $("#" + arr[0].createUserId).remove();
+                    $("#user-list").prepend(li);
+                   var span =  $("#" + arr[0].createUserId).find("span.layui-badge-dot");
+                   if(jQuery.isEmptyObject(span[0])){
+                       $("#" + arr[0].createUserId).append('<span class="layui-badge-dot" style="position: relative;left: 55px;top: 15px;float: left"></span>');
+                   }
+                }
             }
         };
         websocket.onerror = function (evnt) {

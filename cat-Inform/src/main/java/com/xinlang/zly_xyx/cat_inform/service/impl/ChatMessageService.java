@@ -83,7 +83,18 @@ public class ChatMessageService extends BaseService<ChatMessage> implements ICha
     }
 
     @Override
-    public List<ChatMessage> getMsgByUsers(Long userId, Long thisUserId) {
-        return null;//chatMessageMapper.getMsgByUsers(userId, thisUserId, 0, 8);
+    public List<ChatMessageUser> getOnRead(Integer userId) {
+        return chatMessageUserMapper.getOnRead(userId);
     }
+
+    @Override
+    public void updateReadSend(Integer sendId) {
+        chatMessageUserMapper.updateReadSend(sendId);
+    }
+
+    @Override
+    public void updateReadSend1(Integer userId) {
+        chatMessageUserMapper.updateReadSend1(userId);
+    }
+
 }

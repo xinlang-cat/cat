@@ -20,5 +20,5 @@ ${AnsiColor.BRIGHT_YELLOW}
                                             '=---='
 
                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                                  我佛慈悲    iii    永无BUG
-                                      Powered by 鑫朗
+                                              iii
+                                         Powered by 鑫朗
