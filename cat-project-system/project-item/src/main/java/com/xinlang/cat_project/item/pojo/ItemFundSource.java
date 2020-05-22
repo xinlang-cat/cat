@@ -8,13 +8,15 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Data
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "item_fund_source")
-public class ItemFundSource {
+public class ItemFundSource implements Serializable {
+    private static final long serialVersionUID = 1565283757749242122L;
     @Id
     @KeySql(useGeneratedKeys = true)
     private Integer id;
