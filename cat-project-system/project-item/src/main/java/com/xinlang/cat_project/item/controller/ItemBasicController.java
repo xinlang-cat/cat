@@ -75,14 +75,15 @@ public class ItemBasicController {
 
     @LogAnnotation(module = "获取变更申请列表")
     @GetMapping("/modifyApply/page")
-    public ResponseEntity<PageResult<modifyApply>> getModifyApplyAll(@RequestParam(value = "draw", defaultValue = "1") Integer draw,
+    public ResponseEntity<PageResult<modifyApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                                      @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                                                                      @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params) {
 
-
-        PageResult<modifyApply> result = modifyApplyService.queryList(draw, rows, sortBy, desc, params);
+        Integer start = Integer.parseInt((String) params.get("start"));
+        page = start == 0 ? 1 : start / rows+1;
+        PageResult<modifyApply> result = modifyApplyService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
     }
 
