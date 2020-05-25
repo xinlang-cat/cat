@@ -91,8 +91,8 @@
                     "searching": false,
                     "processing": false,
                     "serverSide": true,
-                    /* "info": false,
-                     "paging": true, // 禁止分页*/
+                     "info": false,
+                     "paging": true, // 禁止分页
                     "ordering": false,
                     "language": {
                         "url": "../../js/plugin/datatables/Chinese.lang"
@@ -185,8 +185,6 @@
                                 } else if (status==5){
                                     data = "查定不合格"
                                 }
-
-
                                 $.ajaxSettings.async = true;
                                 return data;
                             }
@@ -198,7 +196,7 @@
 
                                 var btn = null;
                                 if ($.inArray('PARTY_C:html', pers)!=-1) {
-                                    var status = row['status'] == 4 ? "申请详情" : "查定报告";
+                                    var status = row['status'] == 4 || row['status'] == 5? "查定报告" :row['status'] == 3? "添加查定报告" :"申请详情";
                                     btn = $('<button class="layui-btn layui-btn-xs" onclick="check(' + row['id'] + ',' + row['status'] + ','+row['item_id']+')" >' + status + '<i class="layui-icon"></i></button>');
                                 }else{
                                     btn = $('<button class="layui-btn layui-btn-xs" onclick="read(' + row['id'] + ',' + row['status'] + ')" >查看详情<i class="layui-icon"></i></button>');
