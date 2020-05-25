@@ -77,7 +77,7 @@ public class CheckTableController {
     @GetMapping("/page/vice")
     @LogAnnotation(module = "查询结题申请表分页")
     @ApiOperation(value = "查询结题申请表分页")
-    public ResponseEntity<PageResult<CheckTable>> findPageByParamsVice(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResponseEntity<PageResult<CheckTable>> findPageByParamsVice(@RequestParam(value = "draw", defaultValue = "1") Integer draw,
                                                                        @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                                                                        @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                        @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
@@ -86,7 +86,7 @@ public class CheckTableController {
 
 
 
-        PageResult<CheckTable> result = checkTableService.queryList(page, rows, sortBy, desc, params);
+        PageResult<CheckTable> result = checkTableService.queryList(draw, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
 
     }

@@ -98,12 +98,12 @@ public class ItemTargetController {
 
     @LogAnnotation(module = "获取指标查定列表")
     @GetMapping("/applyList/page")
-    public ResponseEntity<PageResult<auditApply>> getModifyApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResponseEntity<PageResult<auditApply>> getModifyApplyAll(@RequestParam(value = "draw", defaultValue = "1") Integer draw,
                                                                     @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                     @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                     @RequestParam(required = false) Map<String, Object> params){
-        PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
+        PageResult<auditApply> result = auditApplyService.queryList(draw,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
 
 
@@ -120,12 +120,12 @@ public class ItemTargetController {
 
     @LogAnnotation(module = "获取指标查定列表")
     @GetMapping("/auditApplyResult/page")
-    public ResponseEntity<PageResult<auditApplyResult>> getAuditApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResponseEntity<PageResult<auditApplyResult>> getAuditApplyAll(@RequestParam(value = "draw", defaultValue = "1") Integer draw,
                                                                     @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                     @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                     @RequestParam(required = false) Map<String, Object> params){
-        PageResult<auditApplyResult> result = auditApplyResultService.queryList(page,rows,sortBy,desc,params);
+        PageResult<auditApplyResult> result = auditApplyResultService.queryList(draw,rows,sortBy,desc,params);
         return ResponseEntity.ok(result);
 
 
