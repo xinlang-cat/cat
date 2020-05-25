@@ -23,14 +23,18 @@ public class ItemTerminationController {
     @GetMapping("/page")
     @LogAnnotation(module = "查询结题申请表分页")
     @ApiOperation(value = "查询结题申请表分页")
-    public ResponseEntity<PageResult<ItemTermination>> findPageByParamsVice(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                                                            @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+    public ResponseEntity<PageResult<ItemTermination>> findPageByParamsVice(@RequestParam(value = "start", defaultValue = "1") Integer page,
+                                                                            @RequestParam(value = "length", defaultValue = "10") Integer rows,
                                                                             @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                             @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                             @RequestParam(required = false) Map<String, Object> params){
 
-
-
+        if (page==0){
+            page++;
+        }else {
+            page/=10;
+            page++;
+        }
 
         PageResult<ItemTermination> result = itemTerminationService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
