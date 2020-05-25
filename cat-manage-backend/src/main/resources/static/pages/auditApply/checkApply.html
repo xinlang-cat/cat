@@ -322,7 +322,7 @@
             <td class="mainTd_1" rowspan="1" colspan="8"></td>
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
         </tr>
-        <tr style="height: 40px;">
+        <tr style="height: 40px;" id="chooseTime">
             <td class="mainTd_0" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="1"></td>
             <td class="mainTd_1" rowspan="1" colspan="1">
@@ -487,6 +487,8 @@
                 if (identity=="PARTY_C" && status == 1){
                     var obj = document.getElementsByClassName("btn-group");
                     obj[0].style.display = "block";
+                }else if (status!=3&& status != 4&& identity!="PARTY_C" ) {
+                    document.getElementById('chooseTime').style.display = 'none';
                 }
 
             }

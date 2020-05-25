@@ -134,6 +134,7 @@ layui.use(['layer','util', 'laydate'], function(){
             			return json.data;
             		},
         			"error":function(xhr, textStatus, errorThrown){
+						debugger
         				var msg = xhr.responseText;
         				console.log(msg);
         				if (xhr.status == 400) {
