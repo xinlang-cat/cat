@@ -2,15 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>使用手册</title>
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
 </head>
 <body>
-    <a id="doc" href="../../../../doc/UG.docx"></a>
+    <a id="doc" class="weui-btn weui-btn_mini weui-btn_primary"  href="doc/UG.docx">下载/预览</a>
 </body>
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src='../../../../js/common.js'></script>
 <script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript">
-
-    $("#doc").click();
+    $(function () {
+        $("#doc").click();
+    });
 </script>
 </html>

@@ -439,7 +439,10 @@
 
                         }
                         $("#userType").attr("disabled","disabled");
-                        $("#deptCode").attr("disabled","disabled");
+                        if(!jQuery.isEmptyObject(data[0].deptCode) ){
+                            $("#deptCode").attr("disabled","disabled");
+                        }
+
                         if (data[0].streetCode != "" && data[0].streetCode != null && data[0].streetCode != undefined) {
                             getAddress(data[0].provinceCode, data[0].cityCode, data[0].areaCode, data[0].streetCode);
                         }

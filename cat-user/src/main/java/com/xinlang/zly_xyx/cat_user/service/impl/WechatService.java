@@ -1,6 +1,7 @@
 package com.xinlang.zly_xyx.cat_user.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.vdurmont.emoji.EmojiParser;
 import com.xinlang.zly_xyx.cat_user.config.WechatConfig;
 import com.xinlang.zly_xyx.cat_user.mapper.AppUserMapper;
 import com.xinlang.zly_xyx.cat_user.mapper.UserCredentialsMapper;
@@ -221,6 +222,7 @@ public class WechatService implements IWechatService {
         wechatUserInfo.setApp(app);
         wechatUserInfo.setCreateTime(new Date());
         wechatUserInfo.setUpdateTime(wechatUserInfo.getCreateTime());
+        wechatUserInfo.setNickname(EmojiParser.removeAllEmojis(wechatUserInfo.getNickname()));
         wechatMapper.save(wechatUserInfo);
         log.info("保存微信用户个人信息:{}",wechatUserInfo);
         return wechatUserInfo;
@@ -253,6 +255,7 @@ public class WechatService implements IWechatService {
     private void updateWechatUserInfo(WechatAccess wechatAccess,WechatUserInfo wechatUserInfo){
         taskExecutor.execute(()->{
             WechatUserInfo wui = getWechatUserInfo(wechatAccess);
+            wui.setNickname(EmojiParser.removeAllEmojis(wui.getNickname()));
             BeanUtils.copyProperties(wui,wechatUserInfo,new String[]{"id","userId"});
             wechatUserInfo.setUpdateTime(new Date());
             wechatMapper.update(wechatUserInfo);
