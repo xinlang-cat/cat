@@ -22,11 +22,14 @@
     <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_C">
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(2);" permission="PARTY_C:html">通过</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(3);" permission="PARTY_C:html">未通过</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(4);" permission="PARTY_C:html">提交至甲方审核</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(4);" permission="PARTY_C:html">提交至甲方审核
+        </button>
     </div>
     <div style="position: absolute;right: 30px;top: 15px;" id="PARTY_A">
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(5);" permission="PARTY_A:html">甲方审核通过</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(6);" permission="PARTY_A:html">甲方审核未通过</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(5);" permission="PARTY_A:html">甲方审核通过
+        </button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="submit(6);" permission="PARTY_A:html">甲方审核未通过
+        </button>
     </div>
 </div>
 <div class="layui-form" style="margin-top: 60px;">
@@ -179,7 +182,8 @@
                         <input type="hidden" name="id" id="id">
                         <input type="hidden" name="status" id="status">
                         <input type="hidden" name="change_user" id="change_user">
-                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"
+                                  readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -215,7 +219,8 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="check_unit_idea" id="check_unit_idea" placeholder="请输入内容" class="layui-textarea" ></textarea>
+                        <textarea name="check_unit_idea" id="check_unit_idea" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -236,7 +241,8 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="manage_unit_idea" id="manage_unit_idea" placeholder="请输入内容" class="layui-textarea" ></textarea>
+                        <textarea name="manage_unit_idea" id="manage_unit_idea" placeholder="请输入内容"
+                                  class="layui-textarea"></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -291,9 +297,6 @@
         });
 
 
-
-
-
         //监听提交
         form.on('submit(submit)', function (data) {
             //layer.msg(JSON.stringify(data.field));
@@ -303,8 +306,8 @@
 
     });
     var h = $(window).height() - 50;
-    var w = $(window).width() - 30;;
-
+    var w = $(window).width() - 30;
+    ;
 
 
     function seeImg(url) {
@@ -320,7 +323,6 @@
             }
         });
     }
-
 
 
     /*初始化数据*/
@@ -348,7 +350,7 @@
 
     //获取项目数据项目
     var pers = checkPermission();
-
+    var item_id;
     var id = getUrlParam("id");
     $('#id').val(id);
     var type = getUrlParam("type");
@@ -357,7 +359,8 @@
     show();
     //获取更改申请
     getApply(id);
-    function getApply(id){
+
+    function getApply(id) {
         $.ajax({
             type: 'get',
             url: domainName + '/project-item/item/basic/modifyApply/list',
@@ -372,13 +375,14 @@
                 $("#check_unit_idea").text(d.check_unit_idea);
                 $("#manage_unit_idea").text(d.manage_unit_idea);
                 getStatus(d.status);
+                item_id = d.item_id;
                 //获取原来数据
                 old(d.item_id);
                 //获取修改数据
                 newMess(d.id);
-                var accessory= d.accessory;
+                var accessory = d.accessory;
                 if (accessory != "" && accessory != null && accessory != undefined) {
-                    $.get(domainName + "/api-f/albums/list", {ids:accessory}, function (data1) {
+                    $.get(domainName + "/api-f/albums/list", {ids: accessory}, function (data1) {
                         $.each(data1, function (i, item) {
                             addImgHtml(item)
                         });
@@ -389,27 +393,29 @@
             }
         })
     }
-    function getStatus(status){
+
+    function getStatus(status) {
         $("textarea").attr('readonly', true);
         //监理审核，隐藏甲方按钮
-        if (status==1){
-            document.getElementById('PARTY_A').style.display='none';
-            if ($.inArray('PARTY_A:html', pers)!=-1) {
+        if (status == 1) {
+            document.getElementById('PARTY_A').style.display = 'none';
+            if ($.inArray('PARTY_A:html', pers) != -1) {
                 $("#check_unit_idea").removeAttr("readonly");
             }
 
-        }else if (status==4){
+        } else if (status == 4) {
             //甲方审核，隐藏监理按钮
-            document.getElementById('PARTY_C').style.display='none';
-            if ($.inArray('PARTY_A:html', pers)!=-1) {
+            document.getElementById('PARTY_C').style.display = 'none';
+            if ($.inArray('PARTY_A:html', pers) != -1) {
                 $("#manage_unit_idea").removeAttr("readonly");
             }
 
-        }else {
-            document.getElementById('PARTY_C').style.display='none';
-            document.getElementById('PARTY_A').style.display='none';
+        } else {
+            document.getElementById('PARTY_C').style.display = 'none';
+            document.getElementById('PARTY_A').style.display = 'none';
         }
     }
+
     function addImgHtml(item) {
         var str = '';
         var val = item.name.substring(0, item.name.indexOf("."));
@@ -421,8 +427,10 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
+
     var h = $(window).height() - 15;
     var w = $(window).width() - 30;
+
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({
@@ -437,6 +445,7 @@
             }
         });
     }
+
     function old(id) {
         $.ajax({
             type: 'get',
@@ -456,6 +465,7 @@
 
 
     }
+
     function newMess(id) {
         $.ajax({
             type: 'get',
@@ -470,7 +480,7 @@
                 $("#check_unit2").text(d.management_unit);
                 $("#research_contents2").text(d.research_contents);
 
-                if (!d.start_date && typeof(d.start_date)!="undefined" && d.start_date!=null){
+                if (!d.start_date && typeof (d.start_date) != "undefined" && d.start_date != null) {
                     $('#period2').text(d.start_date.substring(0, 7) + ' - ' + d.end_date.substring(0, 7));
                 }
 
@@ -479,7 +489,6 @@
 
 
     }
-
 
 
     function show() {
@@ -625,8 +634,6 @@
     }
 
 
-
-
     function submit(status) {
         var modifyApply = $('#form').serializeObject();
         modifyApply.status = status;
@@ -641,35 +648,35 @@
             data: JSON.stringify(modifyApply),
             success: function (data) {
                 var userIds = [];
-                if (status==2){
+                if (status == 2) {
                     var userId = $("#change_user").val();
                     userIds.push(userId);
                     var content = "您有一条变更申请审核通过";
                     var title = "您有一条变更申请审核通过";
-                }else if (status==3){
+                } else if (status == 3) {
                     var userId = $("#change_user").val();
                     userIds.push(userId);
                     var content = "您有一条变更申请审核未通过";
                     var title = "您有一条变更申请审核未通过";
-                }else if (status==4){
+                } else if (status == 4) {
                     var userId = getPARTY_A(item_id);
                     userIds.push(userId);
                     var content = "您有一条变更申请审核通过";
                     var title = "您有一条变更申请审核通过";
-                }else if (status==5){
+                } else if (status == 5) {
                     var userId = $("#change_user").val();
                     userIds.push(userId);
                     var content = "您有一条变更申请审核通过";
                     var title = "您有一条变更申请审核通过";
-                }else if (status==6){
+                } else if (status == 6) {
                     var userId = $("#change_user").val();
                     userIds.push(userId);
                     var content = "您有一条变更申请审核未通过";
                     var title = "您有一条变更申请审核未通过";
                 }
-                sendMeaasge(content,title,userIds);
+                sendMeaasge(content, title, userIds);
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
-                        parent.location.reload();
+                    parent.location.reload();
                 });
             }
         });

@@ -47,22 +47,14 @@
                 var str = '';
                 $(data).each(function () {
                     var status = this.status;
-                    if (status == 1) {
-                        //待查定，跳转查定页面
+                    if (status == 1 || status ==2 || status==5) {
+                        //待查定/待查定/查定申请未通过，查看查定申请详情
                         str += '<div class="weui-panel__bd">\n' +
                             '   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n';
-                    } else if (status == 2) {
-                        //查定中，跳转添加查定报告
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="auditfyApplyResult.html?id=' + this.id + '">\n';
                     } else if (status == 3 || status == 4) {
                         ///查定合格，跳转查看查定报告
                         str += '<div class="weui-panel__bd">\n' +
                             '   <a class="weui-cell weui-cell_access" href="seeAuditfyApplyResult.html?id=' + this.id + '">\n';
-                    } else if (status == 5) {
-                        //查定申请未通过
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n';
                     }
                     str += '       <div class="weui-media-box weui-media-box_text">\n' +
                         '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +

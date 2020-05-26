@@ -80,8 +80,9 @@
             success: function (data) {
                 var str = '';
                 $(data).each(function () {
+                    var itemStatus = getCheckTableStatus(this.id);
                     str += '<div class="weui-panel__bd">\n' +
-                        '   <a class="weui-cell weui-cell_access" href="workbench.html?itemId=' + this.id + '&userId='+ userId +'">\n' +
+                        '   <a class="weui-cell weui-cell_access" href="workbench.html?itemId=' + this.id + '&userId='+ userId + '&itemStatus='+itemStatus+'">\n' +
                         '      <div class="weui-media-box weui-media-box_text">\n' +
                         '      	<h4 class="weui-media-box__title">' + this.name + '</h4>\n' +
                         '      	<p class="weui-media-box__desc" >' + getType(this.type) + '</p>\n' +
@@ -101,7 +102,41 @@
             }
         });
     });
+    function getCheckTableStatus(item_id) {
+        var status = 0;
+        var status1 = 0;
+        var result = 0;
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-summary/check-table/list',
+            data: "itemId=" + item_id,
+            async: false,
+            success: function (data) {
+                if (data.length != 0) {
+                    status = data[0].status;
+                }
+            }
+        })
 
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/termination/list',
+            data: "item_id=" + item_id,
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                if (data.length != 0) {
+                    status1 = data[0].status;
+                }
+            }
+        })
+        if (status == 0 && status1 == 0) {
+            result = 0;
+        } else {
+            result = 1;
+        }
+        return result;
+    }
     function getUser() {
         $.ajax({
             type: 'get',

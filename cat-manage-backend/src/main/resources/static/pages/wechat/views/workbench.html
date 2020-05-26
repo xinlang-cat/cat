@@ -184,7 +184,7 @@
                                 经费支出
                             </p>
                         </a>
-                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='fundDetails/fundCheck.html'" permission="PARTY_B:principal:html,PARTY_B:member:html">
+                        <a href="javascript:;" class="grid" onclick="javascript:top.location.href='fundDetails/fundCheck.html'" permission="PARTY_B:principal:html,PARTY_B:member:html" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhehetongshu f26"></i>
                             </div>
@@ -262,7 +262,7 @@
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="#" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
-                           onclick="javascript:top.location.href='stageSummary/addStageSummary.html'">
+                           onclick="javascript:top.location.href='stageSummary/addStageSummary.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhihangbaogaoqicao f26"></i>
                             </div>
@@ -271,7 +271,7 @@
                             </p>
                         </a>
                         <a href="#" class="grid" permission="html:dept:check:stage,html:principal:check:stage"
-                           onclick="javascript:top.location.href='stageSummary/checkStageSummary.html'">
+                           onclick="javascript:top.location.href='stageSummary/checkStageSummary.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhezhihangbaogao f26"></i>
                             </div>
@@ -310,7 +310,7 @@
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="#" class="grid addExpertEvaluate" permission="EXPERT:html"
-                           onclick="javascript:top.location.href='expert-evaluate/addExpertEvaluate.html'">
+                           onclick="javascript:top.location.href='expert-evaluate/addExpertEvaluate.html'" >
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--xiangmuzhihangqingkuanggenzong f26"></i>
                             </div>
@@ -439,7 +439,7 @@
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="javascript:;" class="grid"
-                           onclick="javascript:top.location.href='termination/terminationApply.html'">
+                           onclick="javascript:top.location.href='termination/terminationApply.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--zhongzhishenqingqicao1 f26"></i>
                             </div>
@@ -476,7 +476,7 @@
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="#" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
-                           onclick="javascript:top.location.href='auditfyApply/addAuditfyApply.html'">
+                           onclick="javascript:top.location.href='auditfyApply/addAuditfyApply.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--chadingshenqingqicao f26"></i>
                             </div>
@@ -484,8 +484,8 @@
                                 查定申请起草
                             </p>
                         </a>
-                        <a href="#" class="grid"
-                           onclick="javascript:top.location.href='auditfyApply/checkAuditfyApplyList.html'">
+                        <a href="#" class="grid" permission="PARTY_C:html"
+                           onclick="javascript:top.location.href='auditfyApply/checkAuditfyApplyList.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--shenhechadingshenqingshu f26"></i>
                             </div>
@@ -493,13 +493,23 @@
                                 审核查定申请书
                             </p>
                         </a>
-                        <a href="#" class="grid"
-                           onclick="javascript:top.location.href='auditfyApply/reportAuditfyApplyList.html'">
+                        <a href="#" class="grid" permission="PARTY_C:html"
+                           onclick="javascript:top.location.href='auditfyApply/reportAuditfyApplyList.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon&#45;&#45;suoyouchadingshenqingshu f26"></i>
                             </div>
                             <p class="weui-grid__label">
                                 查定报告起草
+                            </p>
+                        </a>
+                        <a href="#" class="grid"
+                           onclick="javascript:top.location.href='auditfyApply/allAuditfyApplyList.html'">
+
+                            <div class="weui-grid__icon">
+                                <i class="iconfont icon&#45;&#45;suoyouchadingshenqingshu f26"></i>
+                            </div>
+                            <p class="weui-grid__label">
+                                查定详情
                             </p>
                         </a>
                        <!-- <a href="#" class="grid"
@@ -525,7 +535,7 @@
                 <div class="weui-cells page-category-content">
                     <div class="weui-grids grids-small">
                         <a href="javascript:;" class="grid" permission="PARTY_B:principal:html,PARTY_B:member:html"
-                           onclick="javascript:top.location.href='acceptance/acceptance.html'">
+                           onclick="javascript:top.location.href='acceptance/acceptance.html'" check-item-button>
                             <div class="weui-grid__icon">
                                 <i class="iconfont icon--Yanshoushenqingqicao f26"></i>
                             </div>
@@ -568,6 +578,7 @@
 <script src="../weui/js/jquery-weui.js"></script>
 <script type="text/javascript" src="../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../js/my/permission.js"></script>
+<script type="text/javascript" src="../../../js/checkItemStatus.js"></script>
 <script>
     checkPermission();
     $(function () {
@@ -575,11 +586,12 @@
     });
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
+    var itemStatus = getUrlParam("itemStatus");
     var as = $("a.grid");
     $.each(as, function (i, item) {
         var oldHref = $(item).attr('onclick');
         if (oldHref != null && oldHref != undefined && oldHref != '') {
-            var newHref = oldHref.replace(".html", '.html?itemId=' + itemId + '&userId=' + userId);
+            var newHref = oldHref.replace(".html", '.html?itemId=' + itemId + '&userId=' + userId+'&itemStatus='+itemStatus);
             $(item).attr('onclick', newHref);
         }
     });

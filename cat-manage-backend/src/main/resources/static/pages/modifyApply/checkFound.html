@@ -710,6 +710,7 @@
     var id = getUrlParam("id");
     var pers = checkPermission();
     $('#id').val(id);
+    var item_id;
     var type = getUrlParam("type");
     $('#type').val(type);
     //获取更改申请
@@ -731,7 +732,7 @@
                 //获取原来数据
                 queryFundBudget1(d.item_id);
                 queryFundSource1(d.item_id);
-
+                item_id = d.item_id;
 
                 //获取修改数据
                 queryFundBudget(id);

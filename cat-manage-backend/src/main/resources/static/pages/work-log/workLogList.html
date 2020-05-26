@@ -71,6 +71,7 @@
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
     var targetId = getUrlParam("targetId");
+    var itemStatus = getUrlParam("itemStatus");
 
     allWorkLog();
 
@@ -141,7 +142,10 @@
 
     //我的
     function myWorkLog() {
-        $("#saveBt").show();
+        if (itemStatus==0){
+            $("#saveBt").show();
+        }
+
         var params = {
             itemId: itemId,
             targetId: targetId,
