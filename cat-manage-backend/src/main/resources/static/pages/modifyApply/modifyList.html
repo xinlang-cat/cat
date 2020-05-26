@@ -29,7 +29,8 @@
                                         <option value="8">指标/人员/分工变更</option>
                                     </select>
                                 </div>
-                                <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt" permission="PARTY_B:principal:html,PARTY_B:member:html">
+                                <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt"
+                                        permission="PARTY_B:principal:html,PARTY_B:member:html" check-item-button>
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
                                 <button class="layui-btn layui-btn-sm"
@@ -75,6 +76,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/checkItemStatus.js"></script>
 <script type="text/javascript">
 
 
@@ -82,6 +84,7 @@
     var itemId = getUrlParam("item_id");
     var userId = getUrlParam("userId");
     var example;
+
     layui.use(['layer', 'util'], function () {
         var layer = layui.layer;
         var util = layui.util;
@@ -300,7 +303,7 @@
 
                 }
             });
-        }else {
+        } else {
             layer.msg("请选择变更类型！");
         }
 

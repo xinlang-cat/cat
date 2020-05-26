@@ -59,7 +59,7 @@
     var pers = checkPermission();
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
-
+    var itemStatus = getUrlParam("itemStatus");
     $.get(domainName + "/project-item/item/indicators/list", {item_id: itemId}, function (res) {
         var str = '';
         $.each(res, function (i, item) {
@@ -85,7 +85,7 @@
                 str += '<tr><td>' + type + '</td><td>' + content + '</td><td>' + startEndTime + '</td>';
                 str += '<td>' + plan +'</td><td>';
                 if (item['count'] <= 0) {
-                    str += '<button class="layui-btn layui-btn-xs" onclick="location.href=\'../work-log/workLogList.html?itemId=' + itemId + '&targetId=' + item['id'] + '&userId=' + userId + '\'" ><i class="layui-icon">日志详情</i></button>';
+                    str += '<button class="layui-btn layui-btn-xs" onclick="location.href=\'../work-log/workLogList.html?itemId=' + itemId + '&targetId=' + item['id'] + '&userId=' + userId + '&itemStatus='+itemStatus+'\'" ><i class="layui-icon">日志详情</i></button>';
                 }
                 str += '</td></tr>';
             }

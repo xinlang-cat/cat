@@ -83,7 +83,10 @@
 <script src="../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script>
+    var pers = checkPermission();
+
     var id = getUrlParam("itemId");
     queryFundBudget(id);
 
@@ -127,9 +130,11 @@
                                 '        </div>\n' +
                                 '    </div>\n' +
                                 '    <div class="weui-form-preview__ft">\n' +
-                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="expendDetail.html?id=' + this.id + '">明细</a>\n' +
-                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="newExpend.html?itemId=' + id + '&budgetId='+this.id+'">录入</a>\n' +
-                                '    </div>\n' +
+                                '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="expendDetail.html?id=' + this.id + '">明细</a>';
+                            if ($.inArray('PARTY_B:principal:html', pers) != -1) {
+                                str +='<a class="weui-form-preview__btn weui-form-preview__btn_primary" href="newExpend.html?itemId=' + id + '&budgetId='+this.id+'">录入</a>';
+                            }
+                            str +='    </div>\n' +
                                 '</div>\n' +
                                 '<br>';
                         }

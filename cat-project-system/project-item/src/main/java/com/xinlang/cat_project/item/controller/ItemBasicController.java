@@ -81,7 +81,8 @@ public class ItemBasicController {
                                                                      @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                      @RequestParam(required = false) Map<String, Object> params) {
 
-
+        Integer start = Integer.parseInt((String) params.get("start"));
+        page = start == 0 ? 1 : start / rows+1;
         PageResult<modifyApply> result = modifyApplyService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
     }

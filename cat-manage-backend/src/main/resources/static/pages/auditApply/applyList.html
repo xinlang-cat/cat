@@ -15,7 +15,7 @@
                 <table style="width: 100%">
                     <tr>
                         <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt" permission="PARTY_B:principal:html,PARTY_B:member:html">
+                            <button class="layui-btn layui-btn-sm" onclick="add()" id="saveBt" permission="PARTY_B:principal:html,PARTY_B:member:html" check-item-button>
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
                             <button class="layui-btn layui-btn-sm" onclick="location.href='../list-layout/list.html'">
@@ -56,6 +56,7 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/checkItemStatus.js"></script>
 <script type="text/javascript">
 
     var pers = checkPermission();

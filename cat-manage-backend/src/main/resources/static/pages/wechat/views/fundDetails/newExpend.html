@@ -31,6 +31,12 @@
             </div>
         </div>
         <div class="weui-cell">
+            <div class="weui-cell__hd"><label class="weui-label -bold">经办人</label></div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" placeholder="请输入" type="text" name="operator">
+            </div>
+        </div>
+        <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label -bold">支出内容</label></div>
             <div class="weui-cell__bd">
                 <input class="weui-input" placeholder="请输入" type="text" name="remark">
@@ -54,9 +60,9 @@
         <div class="weui-gallery" style="display: none">
             <span class="weui-gallery__img"></span>
             <div class="weui-gallery__opr">
-				<a href="javascript:" class="weui-gallery__del">
-					<i class="weui-icon-delete weui-icon_gallery-delete"></i>
-				</a>
+                <a href="javascript:" class="weui-gallery__del">
+                    <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                </a>
             </div>
         </div>
     </form>
@@ -81,33 +87,33 @@
         var $galleryImg = $(".weui-gallery__img");//相册图片地址
         var $gallery = $(".weui-gallery");
         $uploaderInput.on("change", function (e) {
-			var formData = new FormData();
-			formData.append("file", e.currentTarget.files[0]);
-			$.ajax({
-				type: "post",
-				url: domainName + '/zuul/api-f/files',
-				data: formData,
-				processData: false,
-				contentType: false,
-				success: function (res) {
-					$uploaderFiles.append($(tmpl.replace('#url#', res.url)));
-				},
-			});
+            var formData = new FormData();
+            formData.append("file", e.currentTarget.files[0]);
+            $.ajax({
+                type: "post",
+                url: domainName + '/zuul/api-f/files',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    $uploaderFiles.append($(tmpl.replace('#url#', res.url)));
+                },
+            });
         });
-		var index;
+        var index;
         $uploaderFiles.on("click", "li", function () {
-			index = $(this).index();
+            index = $(this).index();
             $galleryImg.attr("style", this.getAttribute("style"));
             $gallery.fadeIn(100);
         });
         $gallery.on("click", function () {
             $gallery.fadeOut(100);
         });
-		$(".weui-gallery__del").click(function() {
-			$uploaderFiles.find("li").eq(index).remove();
-			var num = $('.weui-uploader__file').length;
-			$('#uploadCount').text(num);
-		});
+        $(".weui-gallery__del").click(function () {
+            $uploaderFiles.find("li").eq(index).remove();
+            var num = $('.weui-uploader__file').length;
+            $('#uploadCount').text(num);
+        });
     });
     $("#date").calendar({
         dateFormat: 'yyyy-mm-dd'
@@ -117,11 +123,32 @@
         budgetId = getUrlParam("budgetId")
 
     function submit() {
-    	var accessory = '';
-		var lis = $("#uploaderFiles").find('li');
-		$(lis).each(function () {
-			accessory += ','+$(this).css("backgroundImage").replace('url("','').replace('")','');
-		});
+        var money = $('input[name=money]').val();
+        var date = $('input[name=date]').val();
+        var operator = $('input[name=operator]').val();
+        var remark = $('input[name=remark]').val();
+        if (money == '') {
+            $.toptip('请输入支出金额');
+            return;
+        }
+        if (date == '') {
+            $.toptip('请输入支出日期');
+            return;
+        }
+        if (operator == '') {
+            $.toptip('请输入经办人');
+            return;
+        }
+        if (remark == '') {
+            $.toptip('请输入支出内容');
+            return;
+        }
+
+        var accessory = '';
+        var lis = $("#uploaderFiles").find('li');
+        $(lis).each(function () {
+            accessory += ',' + $(this).css("backgroundImage").replace('url("', '').replace('")', '');
+        });
 
         var formdata = $("#form").serializeObject();
         formdata.item_id = itemId;

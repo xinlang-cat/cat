@@ -146,10 +146,21 @@
     }
 
     function getStatus(status) {
-        if (status == 3) {
-            return "在研";
+        var now ="";
+        if (status == 2) {
+            now = "在研";
+        } else if (status == 3) {
+            now = "结题中";
+        } else if (status == 4) {
+            now = "已结题";
+        } else if (status == 5) {
+            now = "终止中";
+        } else if (status == 6) {
+            now = "已终止";
+        } else {
+            now = "废弃";
         }
-        return "草稿";
+        return now;
     }
 </script>
 

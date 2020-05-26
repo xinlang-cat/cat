@@ -37,7 +37,7 @@ public class ItemTargetController {
     @PostMapping("/auditApply/one")
     public ResponseEntity<Void> saveAuditApply(@RequestBody auditApply auditApply) throws ParseException {
         System.err.println(auditApply);
-        if ( null!=auditApply.getPeriod()&&!auditApply.getPeriod().isEmpty() && !auditApply.getPeriod().equals("")) {
+        if (null != auditApply.getPeriod() && !auditApply.getPeriod().isEmpty() && !auditApply.getPeriod().equals("")) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = null;
             date = simpleDateFormat.parse(auditApply.getPeriod().substring(0, 10));
@@ -51,15 +51,15 @@ public class ItemTargetController {
         auditApply.setEdit_date(new Date());
         auditApply.setStatus(1);
         auditApplyService.save(auditApply);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ApiOperation(value = "查询指标查定")
     @LogAnnotation(module = "查询指标查定")
     @Transactional
     @GetMapping("/applyList")
-    public ResponseEntity<List<auditApply>> getApplyById(@RequestParam Map<String, Object> params){
-        List<auditApply> targets = auditApplyService.findListByParams(params,auditApply.class);
+    public ResponseEntity<List<auditApply>> getApplyById(@RequestParam Map<String, Object> params) {
+        List<auditApply> targets = auditApplyService.findListByParams(params, auditApply.class);
 
         return ResponseEntity.ok(targets);
     }
@@ -68,7 +68,7 @@ public class ItemTargetController {
     @LogAnnotation(module = "修改指标查定")
     @PutMapping("/auditApply/update")
     public ResponseEntity<Void> updateAuditApply(@RequestBody auditApply auditApply) throws ParseException {
-        if (auditApply.getPeriods()!= null && !auditApply.getPeriods().equals("")){
+        if (auditApply.getPeriods() != null && !auditApply.getPeriods().equals("")) {
             if (!auditApply.getPeriods().equals("")) {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date date = null;
@@ -80,7 +80,7 @@ public class ItemTargetController {
         }
 
 
-        Integer userId =AppUserUtil.getLoginAppUser().getId().intValue();
+        Integer userId = AppUserUtil.getLoginAppUser().getId().intValue();
         auditApply.setCheck_userid(userId);
         auditApplyService.update(auditApply);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -90,8 +90,8 @@ public class ItemTargetController {
     @LogAnnotation(module = "查询指标查定")
     @Transactional
     @GetMapping("/applyList/list")
-    public ResponseEntity<List<auditApply>> getApplyCheck(@RequestParam Map<String, Object> params){
-        List<auditApply> targets = auditApplyService.findApplyList(params,auditApply.class);
+    public ResponseEntity<List<auditApply>> getApplyCheck(@RequestParam Map<String, Object> params) {
+        List<auditApply> targets = auditApplyService.findApplyList(params, auditApply.class);
         System.out.println(targets);
         return ResponseEntity.ok(targets);
     }
@@ -102,8 +102,10 @@ public class ItemTargetController {
                                                                     @RequestParam(value = "rows", defaultValue = "10") Integer rows,
                                                                     @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                     @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
-                                                                    @RequestParam(required = false) Map<String, Object> params){
-        PageResult<auditApply> result = auditApplyService.queryList(page,rows,sortBy,desc,params);
+                                                                    @RequestParam(required = false) Map<String, Object> params) {
+        Integer start = Integer.parseInt((String) params.get("start"));
+        page = start == 0 ? 1 : start / rows+1;
+        PageResult<auditApply> result = auditApplyService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
 
 
@@ -115,17 +117,17 @@ public class ItemTargetController {
     public ResponseEntity<Void> saveAuditApplyResult(@RequestBody auditApplyResult auditApplyResult) throws ParseException {
         auditApplyResult.setStatus(1);
         auditApplyResultService.save(auditApplyResult);
-        return  ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @LogAnnotation(module = "获取指标查定列表")
     @GetMapping("/auditApplyResult/page")
-    public ResponseEntity<PageResult<auditApplyResult>> getAuditApplyAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                                                    @RequestParam(value = "rows", defaultValue = "10") Integer rows,
-                                                                    @RequestParam(value = "sortBy", required = false) String sortBy,
-                                                                    @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
-                                                                    @RequestParam(required = false) Map<String, Object> params){
-        PageResult<auditApplyResult> result = auditApplyResultService.queryList(page,rows,sortBy,desc,params);
+    public ResponseEntity<PageResult<auditApplyResult>> getAuditApplyAll(@RequestParam(value = "draw", defaultValue = "1") Integer draw,
+                                                                         @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+                                                                         @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                                         @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                                         @RequestParam(required = false) Map<String, Object> params) {
+        PageResult<auditApplyResult> result = auditApplyResultService.queryList(draw, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
 
 
@@ -137,7 +139,7 @@ public class ItemTargetController {
     public Integer updateAuditApplyResult(@RequestBody auditApplyResult auditApplyResult) throws ParseException {
 
         auditApplyResultService.update(auditApplyResult);
-        Integer unChecked =  auditApplyResultService.finUnChecked(auditApplyResult.getAudit_apply_id());
+        Integer unChecked = auditApplyResultService.finUnChecked(auditApplyResult.getAudit_apply_id());
         return unChecked;
     }
 
@@ -145,8 +147,8 @@ public class ItemTargetController {
     @LogAnnotation(module = "查询指标查定")
     @Transactional
     @GetMapping("/auditApplyResult")
-    public ResponseEntity<List<auditApplyResult>> getApplyResultById(@RequestParam Map<String, Object> params){
-        List<auditApplyResult> targets = auditApplyResultService.findListByParams(params,auditApplyResult.class);
+    public ResponseEntity<List<auditApplyResult>> getApplyResultById(@RequestParam Map<String, Object> params) {
+        List<auditApplyResult> targets = auditApplyResultService.findListByParams(params, auditApplyResult.class);
 
         return ResponseEntity.ok(targets);
     }

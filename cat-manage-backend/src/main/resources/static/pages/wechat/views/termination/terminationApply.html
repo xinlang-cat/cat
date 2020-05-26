@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>终止申请</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="../../weui/css/weui.css"/>
+    <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+    <link rel="stylesheet" href="../../weui/css/demos.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 15%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+<body ontouchstart class="page-bg">
+<header class='demos-header'>
+    <h1 class="demos-title">终止申请</h1>
+</header>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>合同编号</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content" id="contract_no"></div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目类别</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content" id="type"></div>
+    </div>
+</div>
+<div class="weui-flex bg-white">
+    <div class="field">
+        <div>项目名称</div>
+    </div>
+    <div class="weui-flex__item">
+        <div class="content" id="name">警方重点人员时空分析与预测关键技术研究示范</div>
+    </div>
+</div>
+<div class="page">
+    <form id="form">
+        <div class="weui-form" style="padding: 0;">
+            <div class="weui-form__control-area" style="margin: 0;">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells__title" style="padding: 0 16px;">原因描述</div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell " style="padding: 16px;">
+                            <div class="weui-cell__bd">
+								<input class="form-control" type="hidden" name="id">
+								<input class="form-control" type="hidden" name="status">
+                                <textarea class="weui-textarea" placeholder="请描述项目终止原因" rows="3" name="remark"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page__bd">
+                <div class="weui-gallery" id="gallery">
+                    <span class="weui-gallery__img" id="galleryImg"></span>
+                    <div class="weui-gallery__opr">
+                        <a href="javascript:" class="weui-gallery__del">
+                            <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell  weui-cell_uploader">
+                        <div class="weui-cell__bd">
+                            <div class="weui-uploader">
+                                <div class="weui-uploader__hd">
+                                    <p class="weui-uploader__title">文件上传</p>
+                                </div>
+                                <div class="weui-uploader__bd">
+                                    <ul class="weui-uploader__files" id="uploaderFiles">
+                                    </ul>
+                                    <div class="weui-uploader__input-box" id="up_sub">
+                                        <input id="uploaderInput" class="weui-uploader__input" type="file"
+                                               accept="file/*" multiple/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-form__opr-area">
+                <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" onclick="submit();">确定</a>
+            </div>
+        </div>
+	</form>
+</div>
+
+<br>
+<br>
+<div class="weui-footer weui-footer_fixed-bottom">
+
+</div>
+</body>
+<script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
+<script src="../../weui/lib/fastclick.js"></script>
+<script src="../../weui/js/jquery-weui.js"></script>
+<script src="../../../../js/constant.js"></script>
+<script type="text/javascript" src="../../../../js/jq.js"></script>
+<script type="text/javascript" src="../../../../js/common.js"></script>
+<script type="text/javascript" src="../../../../js/my/permission.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var $uploaderInput = $("#uploaderInput"),
+            $uploaderFiles = $("#uploaderFiles")
+        ;
+
+        $uploaderInput.on("change", function (e) {
+			var formData = new FormData();
+			formData.append("file", e.currentTarget.files[0]);
+			$.ajax({
+				type: "post",
+				url: domainName + '/zuul/api-f/files',
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function (res) {
+                    var li = '<li class="weui-uploader__file" style="background-image:url(file.png);margin-bottom: 20px;">' +
+                        '<span style="display: none">'+res.id+'</span>' +
+                        '<p style="position: relative;bottom: -70px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">'+res.name+'</p></li>';
+
+					$uploaderFiles.append(li);
+				},
+			});
+           /* var src, url = window.URL || window.webkitURL || window.mozURL, files = e.target.files;
+            for (var i = 0, len = files.length; i < len; ++i) {
+                var file = files[i];
+
+                if (url) {
+                    src = url.createObjectURL(file);
+                } else {
+                    src = e.target.result;
+                }
+
+                $uploaderFiles.append($(tmpl.replace('#url#', src)));
+            }*/
+        });
+        /* $uploaderFiles.on("click", "li", function(){
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function(){
+            $gallery.fadeOut(100);
+        }); */
+
+    });
+
+	var id = getUrlParam("itemId");
+	getItem();
+	getTermination();
+
+	function getItem() {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/information/list',
+			data: "id=" + ,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				var d = data[0];
+				$('#contract_no').text(d.contract_no);
+				$('#type').text(analysisLablename(d.type));
+				$('#name').text(d.name);
+			}
+		})
+	}
+	function getTermination() {
+		$.ajax({
+			type: 'get',
+			url: domainName + '/project-item/item/termination/list',
+			data: "item_id=" + id,
+			async: false,
+			contentType: "application/json; charset=utf-8",
+			success: function (data) {
+				if(data.length!=0){
+					$('input[name=id]').val(data[0].id);
+					$('textarea[name=remark]').val(data[0].remark);
+					$('input[name=status]').val(data[0].status);
+					accessorys = data[0].accessorys;
+					$(data[0].accessorys.split(',')).each(function (i, d) {
+						if (i != 0) {
+							var li = '<li class="weui-uploader__file" style="background-image:url(file.png);margin-bottom: 20px;">' +
+                                '<span style="display: none">'+analysisFile(d).id+'</span>' +
+                                '<p style="position: relative;bottom: -70px;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 1;overflow: hidden;">'+analysisFile(d).name+'</p></li>';
+							$('#uploaderFiles').append(li);
+						}
+					});
+					if(data[0].status>=1){
+						$('#showTooltips').css('display','none');
+						$('#up_sub').css('display','none');
+						$('textarea').attr('readonly','readonly');
+					}
+				}
+			}
+		})
+	}
+	/*解析标签名称*/
+	function analysisLablename(sign) {
+		var text = '';
+		$.ajax({
+			type: 'get',
+			url: domainName + '/api-label/label/tree/' + sign,
+			async: false,
+			success: function (data) {
+				text = data[0].content;
+			}
+		});
+		return text;
+	}
+	/*解析文件*/
+	function analysisFile(id) {
+		if (id == '') {
+			return '';
+		}
+		var text = {};
+		$.ajax({
+			type: 'get',
+			url: domainName + '/api-f/files/' + id,
+			async: false,
+			success: function (data) {
+				text = data;
+			}
+		});
+		return text;
+	}
+	function submit() {
+		var accessory = '';
+		var lis = $("#uploaderFiles").find('li');
+		$(lis).each(function () {
+			accessory += ','+$(this).find('span').text();
+		});
+
+		var formdata = $("#form").serializeObject();
+		formdata.item_id = id;
+		formdata.accessorys = accessory;
+		formdata.status = 1;
+
+		$.ajax({
+			type: 'post',
+			url: domainName + '/project-item/item/termination',
+			contentType: "application/json; charset=utf-8",
+			async: false,
+			data: JSON.stringify(formdata),
+			success: function (data) {
+				if(status==1){
+					changeStatus(5);
+				}
+				$.toast();
+				location.reload();
+			}
+		});
+	}
+	function changeStatus(status) {
+		var item = {"id": id, "status": status};
+		$.ajax({
+			type: 'put',
+			url: domainName + '/project-item/item/information',
+			contentType: "application/json; charset=utf-8",
+			async: false,
+			data: JSON.stringify(item),
+			success: function (data) {
+				var userIds = [];
+				var userId = getPARTY_C(id);
+				userIds.push(userId);
+				var content = "您有一条终止审核待处理";
+				var title = "您有一条终止审核待处理";
+				sendMeaasge(content,title,userIds);
+			}
+		});
+	}
+</script>
+</html>

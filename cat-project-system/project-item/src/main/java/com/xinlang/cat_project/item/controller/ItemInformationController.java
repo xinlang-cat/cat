@@ -239,12 +239,18 @@ public class ItemInformationController {
      */
     @LogAnnotation(module = "获取项目列表")
     @GetMapping("/page")
-    public ResponseEntity<PageResult<ItemInformation>> getItemAll(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                                                                  @RequestParam(value = "rows", defaultValue = "10") Integer rows,
+    public ResponseEntity<PageResult<ItemInformation>> getItemAll(@RequestParam(value = "start", defaultValue = "1") Integer page,
+                                                                  @RequestParam(value = "length", defaultValue = "10") Integer rows,
                                                                   @RequestParam(value = "sortBy", required = false) String sortBy,
                                                                   @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
                                                                   @RequestParam(required = false) Map<String, Object> params) {
 
+        if (page==0){
+            page++;
+        }else {
+            page/=10;
+            page++;
+        }
         PageResult<ItemInformation> result = itemInformationService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
     }

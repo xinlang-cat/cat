@@ -86,6 +86,8 @@ public class CheckTableController {
 
 
 
+        Integer start = Integer.parseInt((String) params.get("start"));
+        page = start == 0 ? 1 : start / rows+1;
         PageResult<CheckTable> result = checkTableService.queryList(page, rows, sortBy, desc, params);
         return ResponseEntity.ok(result);
 
