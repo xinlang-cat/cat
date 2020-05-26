@@ -52,14 +52,13 @@
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
                     <p class="weui-uploader__title" style="font-weight: bold">图片上传</p>
-                    <div class="weui-uploader__info">0/6</div>
                 </div>
                 <div class="weui-uploader__bd">
-                    <ul class="weui-uploader__files">
+                    <ul class="weui-uploader__files" id="images">
                     </ul>
                     <div class="weui-uploader__input-box">
                         <input class="weui-uploader__input" type="file" accept="image/*"
-                               multiple="" onchange="uploader(this)" data-sum="6">
+                               multiple="" id="uploadImg"  data-sum="6">
                     </div>
                 </div>
             </div>
@@ -71,14 +70,13 @@
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
                     <p class="weui-uploader__title" style="font-weight: bold">视频上传</p>
-                    <div class="weui-uploader__info">0/6</div>
                 </div>
                 <div class="weui-uploader__bd">
-                    <ul class="weui-uploader__files">
+                    <ul class="weui-uploader__files" id="videos">
                     </ul>
                     <div class="weui-uploader__input-box">
                         <input class="weui-uploader__input" type="file" accept="video/mp4"
-                               multiple="" onchange="uploader(this)" data-sum="6">
+                               multiple="" id="video" onchange="uploader(this)"  data-sum="6">
                     </div>
                 </div>
             </div>
@@ -90,7 +88,6 @@
             <div class="weui-uploader">
                 <div class="weui-uploader__hd">
                     <p class="weui-uploader__title" style="font-weight: bold">文件上传</p>
-                    <div class="weui-uploader__info">0/6</div>
                 </div>
                 <div class="weui-uploader__bd">
                     <ul class="weui-uploader__files">
@@ -104,6 +101,25 @@
         </div>
     </div>
 
+    <div class="weui-gallery img-gallery" style="display: none">
+        <span class="weui-gallery__img img-span"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="weui-gallery video-gallery" style="display: none">
+        <video class="weui-gallery__img  video-span" controls></video>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
+
+
     <input type="hidden" name="accessory" id="accessory">
     <input type="hidden" name="plan" id="plan" value="">
     <div class="weui-line"></div>
@@ -111,6 +127,7 @@
         <a class="weui-btn weui-btn_primary" href="javascript:" onclick="save(this)">提交</a>
     </div>
 </form>
+
 
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
@@ -122,8 +139,63 @@
 <script>
     $(function () {
         FastClick.attach(document.body);
+        var $uploaderInput = $("#uploadImg"); //上传按钮+
+        var $uploaderFiles = $("#images");    //图片列表
+        var $galleryImg = $(".img-span");//相册图片地址
+        var $gallery = $(".img-gallery");
+        $uploaderInput.on("change", function (e) {
+            var formData = new FormData();
+            formData.append("file", e.currentTarget.files[0]);
+            $.ajax({
+                type: "post",
+                url: domainName + '/zuul/api-f/files',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    $uploaderFiles.append('<li class="weui-uploader__file" data-id="'+res.id+'" style="background-image:url('+res.url+')"></li>');
+                    var div = $(e).parents('div[class=weui-uploader__bd]');
+                    var sum = $(e).attr('data-sum');
+                    var li = $(div).find('li[class=weui-uploader__file]');
+                    if (li.length >= sum) {
+                        $($(e).parents('div[class=weui-uploader__input-box]')).remove();
+                    }
+                    var accessory = $('#accessory').val();
+                    if (jQuery.isEmptyObject(accessory)) {
+                        $('#accessory').val(res.id);
+                    } else {
+                        $('#accessory').val(accessory + ',' + res.id);
+                    }
+                },
+            });
+        });
+        var index;
+        $uploaderFiles.on("click", "li", function () {
+            index = $(this).index();
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function () {
+            $gallery.fadeOut(100);
+        });
+        $(".weui-gallery__del").click(function () {
+            var li = $uploaderFiles.find("li").eq(index);
+            var fileId = $(li).data("id");
+            li.remove();
+            var accessory = $('#accessory').val();
+           var newVal = '';
+            if(accessory.indexOf(fileId + ",") != -1){
+                newVal = accessory.replace(fileId+",","")
+                $('#accessory').val(accessory);
+            }
+            if(accessory.indexOf("," + fileId) != -1){
+                newVal =accessory.replace("," + fileId,"");
+            }
+            $('#accessory').val(newVal);
+            var num = $('.weui-uploader__file').length;
+            $('#uploadCount').text(num);
+        });
     });
-
 
     function uploader(obj) {
         if ($(obj).val() == "") {
@@ -154,7 +226,7 @@
                     $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + res.name + '</li>');
                 }
                 if (type.substring(0, 5) == 'video') {
-                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);b">' +
                         '<video class="weui-uploader__file" controls  src="' + res.url + '">' + res.name + '</video></li>');
                 }
                 var sum = $(obj).attr('data-sum');
