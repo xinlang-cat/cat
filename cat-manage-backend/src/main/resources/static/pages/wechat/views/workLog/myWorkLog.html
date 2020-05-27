@@ -77,14 +77,13 @@
                     <div class="weui-uploader">
                         <div class="weui-uploader__hd">
                             <p class="weui-uploader__title" style="font-weight: bold">图片</p>
-                            <div class="weui-uploader__info">0/6</div>
                         </div>
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files" id="image">
                             </ul>
                             <div class="weui-uploader__input-box">
                                 <input class="weui-uploader__input" type="file"
-                                       accept="image/*" multiple="" onchange="uploader(this)" data-sum="6">
+                                       accept="image/*" multiple="" id="uploadImg" data-sum="6">
                             </div>
                         </div>
                     </div>
@@ -96,12 +95,10 @@
                     <div class="weui-uploader">
                         <div class="weui-uploader__hd">
                             <p class="weui-uploader__title" style="font-weight: bold">视频</p>
-                            <div class="weui-uploader__info">0/6</div>
                         </div>
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files" id="vedio">
                             </ul>
-
                             <div class="weui-uploader__input-box">
                                 <input class="weui-uploader__input" type="file"
                                        accept="vedio/*" multiple="" onchange="uploader(this)" data-sum="6">
@@ -116,7 +113,6 @@
                     <div class="weui-uploader">
                         <div class="weui-uploader__hd">
                             <p class="weui-uploader__title" style="font-weight: bold">文件</p>
-                            <div class="weui-uploader__info">0/6</div>
                         </div>
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files" id="files">
@@ -142,6 +138,14 @@
             <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary">保存修改</a>
         </div>
     </div>
+    <div class="weui-gallery img-gallery" style="display: none">
+        <span class="weui-gallery__img img-span"></span>
+        <div class="weui-gallery__opr">
+            <a href="javascript:" class="weui-gallery__del">
+                <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+            </a>
+        </div>
+    </div>
 </form>
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
@@ -152,7 +156,67 @@
 <script>
     $(function () {
         FastClick.attach(document.body);
+        var $uploaderInput = $("#uploadImg"); //上传按钮+
+        var $uploaderFiles = $("#image");    //图片列表
+        var $galleryImg = $(".img-span");//相册图片地址
+        var $gallery = $(".img-gallery");
+        $uploaderInput.on("change", function (e) {
+            var formData = new FormData();
+            formData.append("file", e.currentTarget.files[0]);
+            $.ajax({
+                type: "post",
+                url: domainName + '/zuul/api-f/files',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    $uploaderFiles.append('<li class="weui-uploader__file"  data-id="'+res.id+'" style="background-image:url('+res.url+');"></li>');
+                    var div = $(e).parents('div[class=weui-uploader__bd]');
+                    var sum = $(e).attr('data-sum');
+                    var li = $(div).find('li[class=weui-uploader__file]');
+                    if (li.length >= sum) {
+                        $($(e).parents('div[class=weui-uploader__input-box]')).remove();
+                    }
+                    var accessory = $('#accessory').val();
+                    if (jQuery.isEmptyObject(accessory)) {
+                        $('#accessory').val(res.id);
+                    } else {
+                        $('#accessory').val(accessory + ',' + res.id);
+                    }
+                },
+            });
+        });
+        var index;
+        $uploaderFiles.on("click", "li", function () {
+            index = $(this).index();
+            $galleryImg.attr("style", this.getAttribute("style"));
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function () {
+            $gallery.fadeOut(100);
+        });
+        $(".weui-gallery__del").click(function () {
+            var li = $uploaderFiles.find("li").eq(index);
+            var fileId = $(li).data("id");
+            li.remove();
+            setAccessory(fileId);
+            var num = $('.weui-uploader__file').length;
+            $('#uploadCount').text(num);
+        });
     });
+
+    function setAccessory(fileId) {
+        var accessory = $('#accessory').val();
+        var newVal = '';
+        if(accessory.indexOf(fileId + ",") != -1){
+            newVal = accessory.replace(fileId+",","")
+            $('#accessory').val(accessory);
+        }
+        if(accessory.indexOf("," + fileId) != -1){
+            newVal =accessory.replace("," + fileId,"");
+        }
+        $('#accessory').val(newVal);
+    }
 
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
@@ -211,11 +275,18 @@
                     $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(' + res.url + ')"></li>');
                 }
                 if (type.substring(0, 11) == 'application') {
-                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + res.name + '</li>');
+                    var fileName = res.name;
+                    if(fileName.length > 16){
+                        fileName = fileName.substr(0,16);
+                    }
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="width: 100%;height: 30px;"><a href="#" style="width: 75%;float: left;">' + fileName +
+                        '</a><a class="weui-btn weui-btn_mini weui-btn_primary" ' +
+                        ' style="width: 25%;float: right;" data-file-id="'+res.id+'" onclick="delFile(this)" href="javascript:;">删除</a></li>');
                 }
                 if (type.substring(0, 5) == 'video') {
-                    $(div).find('ul').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
-                        '<video class="weui-uploader__file" controls  src="' + res.url + '">' + res.name + '</video></li>');
+                    $(div).find('ul').append('<li class="weui-uploader__file" style="width: 100%;height: 142px;">' +
+                        '<div class="icon_sp_area" style="float: right;" onclick="delFile(this)"><i class="weui-icon-cancel"></i></div>' +
+                        '<video class="weui-uploader__file" style="width: 100%;height: 120px;" controls src="' + res.url + '">' + res.name + '</video></li>');;
                 }
                 var sum = $(obj).attr('data-sum');
                 var li = $(div).find('li[class=weui-uploader__file]');
@@ -307,23 +378,37 @@
                             $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
                         }
                         if (type.substring(0, 11) == 'application') {
-                            $('#files').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png);">' + item.name + '</li>');
+                            var fileName = item.name;
+                            if(fileName.length > 16){
+                                fileName = fileName.substr(0,16);
+                            }
+                            $('#files').find('ul').append('<li class="weui-uploader__file" style="width: 100%;height: 30px;"><a href="#" style="width: 75%;float: left;">' + fileName +
+                                '</a><a class="weui-btn weui-btn_mini weui-btn_primary" ' +
+                                ' style="width: 25%;float: right;" data-file-id="'+item.id+'" onclick="delFile(this)" href="javascript:;">删除</a></li>');
                         }
                         if (type.substring(0, 5) == 'video') {
-                            $('#vedio').append('<li class="weui-uploader__file" style="background-image:url(../../images/pic_160.png)">' +
-                                '<video class="weui-uploader__file" controls  src="' + item.url + '"></video></li>');
+                            $('#vedio').append('<li class="weui-uploader__file" style="width: 100%;height: 142px;">' +
+                            '<div class="icon_sp_area" style="float: right;" onclick="delFile(this)"><i class="weui-icon-cancel"></i></div>' +
+                            '<video class="weui-uploader__file" style="width: 100%;height: 120px;" controls src="' + item.url + '"></video></li>');
+
                         }
                     });
                 });
             }
             if (data[0].status == 1) {
-
                 $.each($('input,textarea'), function (i, item) {
                     $(item).attr('disabled', true);
                 });
             }
         });
 
+    }
+
+    function delFile(obj) {
+        var fileId = $(obj).data("fileId");
+        var li = $(obj).parents("li");
+        li.remove();
+        setAccessory(fileId);
     }
 
     function update(id) {

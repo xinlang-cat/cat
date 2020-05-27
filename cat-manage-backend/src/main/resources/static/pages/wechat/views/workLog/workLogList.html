@@ -75,7 +75,6 @@
                 <div class="weui-uploader">
                     <div class="weui-uploader__hd">
                         <p class="weui-uploader__title" style="font-weight: bold">图片</p>
-                        <div class="weui-uploader__info">0/6</div>
                     </div>
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files" id="image">
@@ -90,7 +89,6 @@
                 <div class="weui-uploader">
                     <div class="weui-uploader__hd">
                         <p class="weui-uploader__title" style="font-weight: bold">视频</p>
-                        <div class="weui-uploader__info">0/6</div>
                     </div>
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files" id="vedio">
@@ -105,7 +103,6 @@
                 <div class="weui-uploader">
                     <div class="weui-uploader__hd">
                         <p class="weui-uploader__title" style="font-weight: bold">文件</p>
-                        <div class="weui-uploader__info">0/6</div>
                     </div>
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files" id="files">
@@ -116,6 +113,9 @@
         </div>
         <a href="javascript:;" style="margin:40px 30px;" class="weui-btn weui-btn_primary close-popup">关闭</a>
     </div>
+</div>
+<div class="weui-gallery img-gallery" style="display: none">
+    <span class="weui-gallery__img img-span"></span>
 </div>
 
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
@@ -128,8 +128,18 @@
 <script>
     $(function () {
         FastClick.attach(document.body);
+        var $uploaderFiles = $("#image"); //图片列表
+        var $galleryImg = $(".weui-gallery__img"); //相册图片地址
+        var $gallery = $(".weui-gallery");
+        $uploaderFiles.on("click", "li", function () {
+            $galleryImg.attr("style", this.getAttribute("style"));
+            console.log(this);
+            $gallery.fadeIn(100);
+        });
+        $gallery.on("click", function () {
+            $gallery.fadeOut(100);
+        });
     });
-
 
     var itemId = getUrlParam("itemId");
     var userId = getUrlParam("userId");
