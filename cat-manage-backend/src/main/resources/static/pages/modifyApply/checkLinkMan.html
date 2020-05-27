@@ -634,7 +634,7 @@
     $('#id').val(id);
     var type = getUrlParam("type");
     $('#type').val(type);
-
+    var item_id;
     //获取更改申请
     getApply(id);
 
@@ -655,6 +655,7 @@
                 //获取原来数据
                 queryContactWays(d.item_id);
                 old(d.item_id);
+                item_id = d.item_id;
                 //获取修改数据
                 newMess(d.id);
                 queryContactWay(id);

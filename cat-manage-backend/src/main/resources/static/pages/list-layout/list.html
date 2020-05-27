@@ -179,7 +179,7 @@
                         '                        <li><a class="active" href="../indicator/indicatorList.html?itemId=' + this.id + '&userId=' + userId + '&itemStatus=' + tableStatus + '">工作日志</a></li>\n' +
                         '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/stage-summary/stageSummaryList.html?item_id=' + this.id + '&user_id=' + userId + '&itemStatus=' + tableStatus + '">阶段总结</a></li>\n' +
                         '                        <li><a class="active" href="pages/fundUse/fundBudget.html?id=' + this.id + '&itemStatus=' + tableStatus + '">经费使用</a></li>\n' +
-                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../acceptance/acceptance.html?item_id=' + this.id + '&itemStatus=' + tableStatus + '">结题申请</a></li>\n' +
+
                         '                        <li no-permission="PARTY_B:member:html" ><a class="active" href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + tableStatus + '">查定申请</a></li>\n' +
                         '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + tableStatus + '">变更申请</a></li>\n';
                     if ($.inArray('EXPERT:html', pers) != -1) {
@@ -210,9 +210,12 @@
                     if ($.inArray('PARTY_B:principal:html', pers) != -1) {
                         if(this.status>=5){
                             str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApplyed.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
-                        }else {
+                        }else if (this.status<3){
                             str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
                         }
+                    }
+                    if(this.status<5){
+                        str += ' <li no-permission="PARTY_B:member:html"><a class="active" href="../acceptance/acceptance.html?item_id=' + this.id + '&itemStatus=' + tableStatus + '">结题申请</a></li>\n';
                     }
                         /*'                        <li><a href="#!" class="more" data-click-state="1">+</a></li>\n' +*/
                     str +='                    </ul>\n' +

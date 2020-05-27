@@ -80,10 +80,11 @@
             success: function (data) {
                 var str = '';
                 $(data).each(function () {
+                    var itemStatus = getCheckTableStatus(this.id);
                     str += '<div class="weui-panel__bd">\n' +
-                        '   <a class="weui-cell weui-cell_access" href="workbench.html?itemId=' + this.id + '&userId='+ userId +'">\n' +
+                        '   <a class="weui-cell weui-cell_access" href="workbench.html?itemId=' + this.id + '&userId='+ userId + '&itemStatus='+itemStatus+'">\n' +
                         '      <div class="weui-media-box weui-media-box_text">\n' +
-                        '      	<h4 class="weui-media-box__title">' + this.name + '</h4>\n' +
+                        '      	<h4 class="weui-media-box__title" style="width: 85%;">' + this.name + '</h4>\n' +
                         '      	<p class="weui-media-box__desc" >' + getType(this.type) + '</p>\n' +
                         '      	<ul class="weui-media-box__info">\n' +
                         '       	<li class="weui-media-box__info__meta">' + getUserName(this.edit_user_id) + '</li>\n' +

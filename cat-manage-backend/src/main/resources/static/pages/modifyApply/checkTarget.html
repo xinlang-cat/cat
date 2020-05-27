@@ -1289,7 +1289,7 @@
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
     getMyCompany($('#responsible_unit'));//当前用户单位
     initCompanySelect();//单位选择
-
+    var item_id;
     //获取项目数据项目
     var pers = checkPermission();
     var id = getUrlParam("id");
@@ -1312,7 +1312,7 @@
                 $("#change_user").val(d.user_id);
                 getStatus(d.status);
                 //获取原来数据
-
+                item_id = d.item_id;
                 queryPersonnel1(d.item_id);
                 queryIndicators1(d.item_id);
 
