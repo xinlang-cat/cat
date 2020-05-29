@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../../layui/css/layui.css" media="all"/>
+        <link rel="stylesheet" href="../weui/css/weui.css" />
+    <link rel="stylesheet" href="../weui/css/weuix.css" />
+    <link rel="stylesheet" href="../weui/css/example.css" />
 
 </head>
 
@@ -81,22 +84,25 @@
                 var str = '';
                 $(data).each(function () {
                     var itemStatus = getCheckTableStatus(this.id);
-                    str += '<div class="weui-panel__bd">\n' +
-                        '   <a class="weui-cell weui-cell_access" href="workbench.html?itemId=' + this.id + '&userId='+ userId + '&itemStatus='+itemStatus+'">\n' +
-                        '      <div class="weui-media-box weui-media-box_text">\n' +
-                        '      	<h4 class="weui-media-box__title" style="width: 85%;">' + this.name + '</h4>\n' +
-                        '      	<p class="weui-media-box__desc" >' + getType(this.type) + '</p>\n' +
-                        '      	<ul class="weui-media-box__info">\n' +
-                        '       	<li class="weui-media-box__info__meta">' + getUserName(this.edit_user_id) + '</li>\n' +
-                        '       	<li class="weui-media-box__info__meta">' + getTime(this.start_date) + '-' + getTime(this.end_date) +
-                        '</li>\n' +
-                        '        	<li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) +
-                        '</li>\n' +
-                        '        </ul>\n' +
-                        '      </div>\n' +
-                        '       <span class="weui-cell__ft"></span>\n' +
-                        '     </a>\n' +
-                        '</div>';
+                    str +='<div class="weui-panel">\n' +
+                        '    <div class="weui-panel__bd">\n' +
+                        '    <a href="workbench.html?itemId=' + this.id + '&userId='+ userId + '&itemStatus='+itemStatus+'">\n' +
+                        '    <div class="weui-media-box weui-media-box_text">\n' +
+                        '    <h4 class="weui-media-box__title">' + this.name + '</h4>\n' +
+                        '    <p class="weui-media-box__desc">\n' +
+                        '    ' +   getType(this.type)+ '\n' +
+                        '    </p>\n' +
+                        '    <ul class="weui-media-box__info">\n' +
+                        '    <li class="weui-media-box__info__meta">' +getUserName(this.edit_user_id) + '</li>\n' +
+                        '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getTime(this.start_date) + '-' + getTime(this.end_date)+'</li>\n' +
+                        '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status)+' </li>\n' +
+                        '    </ul>\n' +
+                        '    </div>\n' +
+                        '    </a>\n' +
+                        '    </div>\n' +
+                        '    </div>';
+
+
                 });
                 $("#list").append(str);
             }
@@ -202,3 +208,78 @@
 
 </body>
 </html>
+
+<!--
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <title>项目列表</title>
+    <link rel="stylesheet" href="../weui/css/weui.css" />
+    <link rel="stylesheet" href="../weui/css/weuix.css" />
+    <link rel="stylesheet" href="../weui/css/example.css" />
+</head>
+<body ontouchstart>
+<div class="weui-toptips weui-toptips_warn js_tooltips">错误提示</div>
+<div class="container" id="container"></div>
+&lt;!&ndash; 内容模板 &ndash;&gt;
+<script type="text/html" id="tpl_home">
+    <div class="page">
+        &lt;!&ndash; 项目列表 &ndash;&gt;
+        <div class="weui-cells__title">我的项目</div>
+        <div class="" style="margin: auto 8px;" id="content">
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#content').html($('#item').html());
+</script>
+</script>
+<script type="text/html" id="item">
+    <div class="weui-panel">
+    <div class="weui-panel__bd">
+    <a href="./operation.html">
+    <div class="weui-media-box weui-media-box_text">
+    <h4 class="weui-media-box__title">[name]</h4>
+    <p class="weui-media-box__desc">
+    [content]
+    </p>
+    <ul class="weui-media-box__info">
+    <li class="weui-media-box__info__meta">[type]</li>
+    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">在研</li>
+    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">PDF</li>
+    </ul>
+    </div>
+    </a>
+    </div>
+    </div>
+</script>
+
+&lt;!&ndash; 页脚 &ndash;&gt;
+<script type="text/template" id="footerTmpl">
+    <div class="page__ft">
+        <a href="javascript:home()"><img src="../images/icon_footer_link.png" /></a>
+    </div>
+</script>
+
+<script src="../weui/js/zepto.min.js"></script>
+<script src="../weui/js/example.js"></script>
+
+&lt;!&ndash; 加载数据 &ndash;&gt;
+<script type="text/javascript">
+
+    var str1 = '';
+    var str2 = $('#item').html();
+    for (var i = 0; i < 4; i++) {
+        var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); //i g m是指分别用于指定区分大小写的匹配、全局匹配和多行匹配。
+        var source = str2.replace(reg, function (node, key) { return { 'name': '警方重点人员时空分析与预测关键技术研发示范',
+            'content': '研发人-物-案时空关联挖掘模型，设计区域犯罪吸引力算法，进行重点人员的时空迁移预测，并基于以上关键技术，面向城市警务实战需求，围绕找重点人员轨迹时空分析与挖掘功能，开展疑犯时空大数据分析与挖掘平台的设计与应用。',
+            'type': '广西重点研发计划'}[key]; });
+        str1 += source;
+    }
+    $('#item').html(str1)
+</script>
+</body>
+</html>
+-->
