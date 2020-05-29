@@ -71,8 +71,9 @@ public class ChatController {
 	}
 
 	@PutMapping("/set-send-read/{sendId}")
-	public void updateReadSend(@PathVariable Integer sendId) {
+	public Integer updateReadSend(@PathVariable Integer sendId) {
 		chatMessageService.updateReadSend(sendId);
+		return sendId;
 	}
 
 	@GetMapping("/all-customer-service-staff")
