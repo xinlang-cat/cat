@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
  * 2019/7/19
  */
 @Slf4j
-public abstract class AbstractFileService  implements IFileService {
+public abstract class  AbstractFileService  implements IFileService {
 
     protected abstract FileMapper getFileMapper();
 
