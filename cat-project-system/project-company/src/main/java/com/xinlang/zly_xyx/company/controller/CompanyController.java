@@ -3,8 +3,11 @@ package com.xinlang.zly_xyx.company.controller;
 import com.xinlang.bean.company.Company;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.common.Page;
+import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
+import com.xinlang.zly_xyx.company.service.ICompanyUserService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class CompanyController {
 
     @Autowired
     private ICompanyService companyService;
+    @Autowired
+    private ICompanyUserService companyUserService;
+
 
 
     @PostMapping("/company")
@@ -32,6 +38,12 @@ public class CompanyController {
         company.setCreateTime(new Date());
         company.setEnabled(true);
         companyService.save(company);
+        AppUser appUser = AppUserUtil.getLoginAppUser();
+        CompanyUser companyUser = new CompanyUser();
+        companyUser.setDeptCode(company.getDeptCode());
+        companyUser.setUserId(appUser.getId().intValue());
+        companyUser.setName(appUser.getNickname());
+        companyUserService.save(companyUser);
         return company;
     }
 
