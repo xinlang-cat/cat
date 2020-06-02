@@ -59,10 +59,10 @@
         </div>
     </div>-->
 
-    <div style="width: 100%;">
-        <h3 style="text-align: center">项目统计图表</h3>
-        <span style="font-size: 18px;float: left;margin-right: 20px;">列表展示</span>
-        <select name="interest" lay-filter="aihao" style="float: left;" onchange="wetherShow()" id="table">
+    <div style="width: 100%;margin-top: 20px;">
+        <h2 style="text-align: center;">项目统计图表</h2>
+        <span style="font-size: 18px;float: left;margin-right: 20px;margin-top: 20px;">列表展示</span>
+        <select name="interest" lay-filter="aihao" style="float: left;margin-top: 20px;" onchange="wetherShow()" id="table">
             <option value="0">展示</option>
             <option value="1" selected>不展示</option>
         </select>
@@ -825,14 +825,15 @@
         document.getElementById('allmap').className = 'col-md-9';
         document.getElementById('hide').style.display = 'none';
         document.getElementById('show').style.display = 'block';
+        document.getElementById('data_manipulation').style.display = 'block';
     }
 
     function showTB() {
-
         //隐藏右侧图表，显示展示按钮
         document.getElementById('allmap').className = 'col-md-12';
         document.getElementById('show').style.display = 'none';
         document.getElementById('hide').style.display = 'block';
+        document.getElementById('data_manipulation').style.display = 'none';
     }
 </script>
 </html>
