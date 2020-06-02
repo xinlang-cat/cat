@@ -9,6 +9,7 @@ import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,8 @@ public class AlbumController {
     private AlbumServiceFactory albumServiceFactory;
     @Autowired
     private AlbumMapper albumMapper;
+    @Value("${album.local.urlPrefix}")
+    private String urlPrefix;
 
 
 
@@ -76,18 +79,35 @@ public class AlbumController {
         if (total > 0) {
             PageUtil.pageParamConver(params, true);
             list = albumMapper.findData(params);
+            list.forEach(item->{
+                item.setUrl(setFileUrl(item));
+            });
         }
         return new Page<>(total, list);
     }
 
     @GetMapping("/{id}")
     public Album findById(@PathVariable String id) {
-        return albumMapper.getById(id);
+        Album album = albumMapper.getById(id);
+        album.setUrl(setFileUrl(album));
+        return album;
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "根据ids查询相册")
     public List<Album> findByIds(@RequestParam("ids") Set<String> ids) {
-        return albumMapper.getByIds(new ArrayList<>(ids));
+        List<Album> list = albumMapper.getByIds(new ArrayList<>(ids));
+        if(list.size()>0){
+            list.forEach(item->{
+                item.setUrl(setFileUrl(item));
+            });
+        }
+        return list;
+    }
+
+    private String setFileUrl(Album item){
+        String url = item.getUrl();
+        String[] arr = url.split("/statics/");
+        return urlPrefix + "/" + arr[1];
     }
 }

@@ -77,10 +77,10 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
                 if (null == writeMethod || StringUtils.isBlank(value.toString())) {
                     continue;
                 }
-                String reg="^\\d+$";
+                /*String reg="^\\d+$";
                 if(value.toString().matches(reg)){
                     value = Integer.valueOf(value.toString());
-                }
+                }*/
                 if (!writeMethod.isAccessible()) {
                     writeMethod.setAccessible(true);
                 }

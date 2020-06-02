@@ -10,10 +10,12 @@ import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -27,6 +29,8 @@ public class FileController {
     private FileServiceFactory fileServiceFactory;
     @Autowired
     private FileMapper fileMapper;
+    @Value("${file.local.urlPrefix}")
+    private String urlPrefix;
 
 
     /**
@@ -106,6 +110,11 @@ public class FileController {
         if (total > 0) {
             PageUtil.pageParamConver(params, true);
             list = fileMapper.findData(params);
+            if(list.size()>0){
+                list.forEach(item->{
+                    item.setUrl(setFileUrl(item));
+                });
+            }
         }
         return new Page<>(total, list);
     }
@@ -119,12 +128,26 @@ public class FileController {
     @PreAuthorize("hasAuthority('file:query')")
     @GetMapping("/{id}")
     public File findById(@PathVariable String id) {
-        return fileMapper.getById(id);
+        File file = fileMapper.getById(id);
+        file.setUrl(setFileUrl(file));
+        return file;
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "根据ids查询文件")
     public List<File> findByIds(@RequestParam("ids") Set<String> ids) {
-        return fileMapper.getByIds(new ArrayList<>(ids));
+        List<File> list = fileMapper.getByIds(new ArrayList<>(ids));
+        if(list.size()>0){
+            list.forEach(item->{
+                item.setUrl(setFileUrl(item));
+            });
+        }
+        return list;
+    }
+
+    private String setFileUrl(File item){
+        String url = item.getUrl();
+        String[] arr = url.split("/statics/");
+        return urlPrefix + "/" + arr[1];
     }
 }
