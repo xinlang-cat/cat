@@ -32,28 +32,39 @@
     </style>
 </head>
 <body>
+<div style="position: fixed;top: 0;width: 100%;height: 60px;z-index: 1;opacity: 100%;">
+    <div style="position: absolute;right: 2px;top: 15px;">
+        <button class="layui-btn" type="button" id="hide" onclick="hideTB111()" style="display: none;"><i class="layui-icon" ></i>统计图表</button>
+    </div>
+    <div style="position: absolute;right: 25%;top: 15px;">
+        <button class="layui-btn" type="button"  id="show" onclick="showTB()"><i
+                class="layui-icon"></i>全屏地图</button>
+    </div>
+</div>
+
 
 <div id="allmap" class="col-md-9"></div>
 <div id="data_manipulation" class="col-md-3">
     <!--<div class="form-actions">
         <div class="row">
             <div style="margin-left: 20px;">
-                <div style="font-size: 14px; width: 50%;float: left;"><img
-                        src="img/blue.png" style="margin-right: 10px;height: 14px"/>广西重点研发计划
+                <div style="font-size: 18px; width: 50%;float: left;"><img
+                        src="img/blue.png" style="margin-right: 10px;height: 18px"/>广西重点研发计划
                 </div>
-                <div style="font-size: 14px;width: 50%;float: left;">
+                <div style="font-size: 18px;width: 50%;float: left;">
                     <img
-                            src="img/green.png" style="margin-right: 10px;height: 14px"/>电子信息
+                            src="img/green.png" style="margin-right: 10px;height: 18px"/>电子信息
                 </div>
             </div>
         </div>
     </div>-->
 
     <div style="width: 100%;">
+        <h3 style="text-align: center">项目统计图表</h3>
         <span style="font-size: 18px;float: left;margin-right: 20px;">列表展示</span>
         <select name="interest" lay-filter="aihao" style="float: left;" onchange="wetherShow()" id="table">
             <option value="0">展示</option>
-            <option value="1"  selected>不展示</option>
+            <option value="1" selected>不展示</option>
         </select>
     </div>
     <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
@@ -170,6 +181,7 @@
             }
         })
     }
+
     var form, layer, layedit;
 
     layui.use(['form', 'layedit', 'laydate'], function () {
@@ -283,7 +295,7 @@
 
         chart3.interval()
             .position('月份*月均降雨量')
-            .color('name',['#1890ff', '#2fc25b', '#ffa500','#ff030b','#884898','#e1cf00','#00b634'])
+            .color('name', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634'])
             .adjust({
                 type: 'dodge',
                 marginRatio: 0.05 // 设置分组间柱子的间距
@@ -310,7 +322,8 @@
     var violetIcon = new BMap.Icon("img/violet.png", new BMap.Size(19, 25));
     var yellowIcon = new BMap.Icon("img/yellow.png", new BMap.Size(19, 25));
 
-    var diagrams = [blueIcon,greenIcon,orangeIcon,redIcon,violetIcon,yellowIcon,cyanIcon];
+    var diagrams = [blueIcon, greenIcon, orangeIcon, redIcon, violetIcon, yellowIcon, cyanIcon];
+
     function addMarker(point, content, opts, icon) {
         var marker = new BMap.Marker(point, {icon: icon});
         map.addOverlay(marker);
@@ -501,7 +514,7 @@
         chart
             .interval()
             .position('genre*sold')
-            .color('genre', ['#1890ff', '#2fc25b', '#ffa500','#ff030b','#884898','#e1cf00','#00b634']);
+            .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
 
         // Step 4: 渲染图表
         chart.render();
@@ -536,13 +549,13 @@
         chart1.axis(false);
         chart1.interval()
             .position('a*percent')
-            .color('name', ['#fedc4a', '#3BA4FF', '#737DDE','#FE5D4D'])
+            .color('name', ['#fedc4a', '#3BA4FF', '#737DDE', '#FE5D4D'])
             .adjust('stack');
 
         chart1.guide().html({
             position: ['50%', '45%'],
             html: `<div style="width: 200px;height: 30px;text-align: center;">
-      <div style="font-size: 14px">项目总数</div>
+      <div style="font-size: 18px">项目总数</div>
       <div style="font-size: 20px">` + countItem + `</div>
     </div>`
         });
@@ -577,7 +590,7 @@
 
         chart3.interval()
             .position('月份*月均降雨量')
-            .color('name',['#1890ff', '#2fc25b', '#ffa500','#ff030b','#884898','#e1cf00','#00b634'])
+            .color('name', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634'])
             .adjust({
                 type: 'dodge',
                 marginRatio: 0.05 // 设置分组间柱子的间距
@@ -628,9 +641,9 @@
 
     function wetherShow() {
         var table = $("#table").val();
-        if (table==0){
-            show= true;
-        }else {
+        if (table == 0) {
+            show = true;
+        } else {
             show = false;
         }
     }
@@ -717,7 +730,7 @@
 
 
     function showTable(items) {
-        if (show){
+        if (show) {
             var status = '';
             var str = '';
             str += '<table id="dt-table" class="table table-striped table-bordered table-hover dataTable no-footer" style="width: 100%;" role="grid" aria-describedby="dt-table_info">\n' +
@@ -780,10 +793,10 @@
             status = "已终止";
         }
         var content = "";
-        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目承担单位:</span><span>' + data['responsible_unit'] + '</span></div>';
-        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目监理单位:</span><span>' + data['management_unit'] + '</span></div>';
-        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + formatDate4(data['start_date']) + '---' + formatDate4(data['end_date']) + '</span></div>';
-        content += '<div><span style="font-size: 14px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + status + '</span></div>';
+        content += '<div><span style="font-size: 18px;font-weight: bold;margin-right: 15px;">项目承担单位:</span><span>' + data['responsible_unit'] + '</span></div>';
+        content += '<div><span style="font-size: 18px;font-weight: bold;margin-right: 15px;">项目监理单位:</span><span>' + data['management_unit'] + '</span></div>';
+        content += '<div><span style="font-size: 18px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + formatDate4(data['start_date']) + '---' + formatDate4(data['end_date']) + '</span></div>';
+        content += '<div><span style="font-size: 18px;font-weight: bold;margin-right: 15px;">项目起止时间:</span><span>' + status + '</span></div>';
         content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showStage(' + data['id'] + ')">阶段总结</button>';
         content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showAudit(' + data['id'] + ')">查定报告</button>';
         content += '<button class="btn btn-primary" style="margin: 10px 20px 0 0;" onclick="showSkill(' + data['id'] + ')">技术总结</button>';
@@ -804,9 +817,22 @@
             color = greenIcon;
         }*/
         var aa = signs.indexOf(data['type']);
-        var color= diagrams[aa];
+        var color = diagrams[aa];
         addMarker(new BMap.Point(data['lng'], data['lat']), content, opts, color);
     }
 
+    function hideTB111() {
+        document.getElementById('allmap').className = 'col-md-9';
+        document.getElementById('hide').style.display = 'none';
+        document.getElementById('show').style.display = 'block';
+    }
+
+    function showTB() {
+
+        //隐藏右侧图表，显示展示按钮
+        document.getElementById('allmap').className = 'col-md-12';
+        document.getElementById('show').style.display = 'none';
+        document.getElementById('hide').style.display = 'block';
+    }
 </script>
 </html>
