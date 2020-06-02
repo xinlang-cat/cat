@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>使用手册</title>
+    <meta charset="utf-8">
+    <title>政策文件</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <link rel="stylesheet" href="../../weui/css/weui.css"/>
     <link rel="stylesheet" href="../../weui/css/weuix.css"/>
+
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
 </head>
-<body>
-    <a id="doc" class="weui-btn weui-btn_mini weui-btn_primary"  href="doc/UG.docx">下载/预览</a>
+<body ontouchstart>
+<div class="weui-news">
+    <ul class="weui-news-list" id="content">
+        <li class="weui-news-item">
+                        <div class="weui-news-inners js-notice" >
+                                <div class="weui-news-title" style="font-size: 16px;font-weight: bold">PC使用手册</div>
+                                <div class="weui-news-info">
+                                        <div class="weui-btn-area" style="float: right;">
+                                               <a class="weui-btn weui-btn_mini weui-btn_primary" href="doc/UG.docx">下载/预览</a>
+                                            </div>
+                                    </div>
+                           </div>
+             </li>
+    </ul>
+</div>
 </body>
 <script type="text/javascript" src="../../../../js/libs/jquery-3.3.1.min.js"></script>
 <script src="../../../../js/constant.js"></script>
@@ -15,9 +32,4 @@
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
-<script type="text/javascript">
-    $(function () {
-        $("#doc").click();
-    });
-</script>
 </html>
