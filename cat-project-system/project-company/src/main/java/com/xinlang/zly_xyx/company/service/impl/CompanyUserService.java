@@ -1,10 +1,12 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
+import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
 import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
 import com.xinlang.zly_xyx.company.bean.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;
 import com.xinlang.zly_xyx.company.service.ICompanyUserService;
 import com.xinlang.zly_xyx.user.AppUser;
+import org.elasticsearch.common.recycler.Recycler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class CompanyUserService implements ICompanyUserService {
+public class CompanyUserService extends BaseService<CompanyUser> implements ICompanyUserService {
 
     @Autowired
     private CompanyUserMapper companyUserMapper;

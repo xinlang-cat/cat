@@ -10,7 +10,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Example;
 
+import java.sql.ClientInfoStatus;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张龙毅 18777811286@163.com
@@ -25,6 +28,12 @@ public class CompanyUserController {
     @ApiOperation(value = "添加公司用户关系,全参")
     @LogAnnotation(module = "添加公司用户关系")
     public CompanyUser save(@RequestBody CompanyUser companyUser) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",companyUser.getUserId());
+        List<CompanyUser> list  = companyUserService.findListByParams(map,CompanyUser.class);
+        if(list.size()>0){
+            return list.get(0);
+        }
        companyUserService.save(companyUser);
        return companyUser;
     }
