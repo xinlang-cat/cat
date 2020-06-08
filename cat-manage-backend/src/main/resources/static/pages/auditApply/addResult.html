@@ -507,7 +507,8 @@
                 audit_apply_id = data[0].audit_apply_id;
                 $("#period").text(formatDate4(data[0].start_date) + " - " + formatDate4(data[0].end_date));
                 $("#periods").text(formatDate4(data[0].start_date_true) + " - " + formatDate4(data[0].end_date_true));
-                $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                var ids = data[0].target_id.split(",");
+               $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                     $.each(data1, function (i, item) {
                         var serial = $("#target").parents('thead').next().children().length + 1;
                         var str = '';

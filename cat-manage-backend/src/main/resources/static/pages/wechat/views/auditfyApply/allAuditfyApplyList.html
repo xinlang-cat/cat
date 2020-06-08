@@ -34,6 +34,7 @@
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script>
+    var itemId = getUrlParam("itemId");
     $(function () {
         FastClick.attach(document.body);
     });
@@ -42,7 +43,9 @@
             type: 'get',
             url: domainName + "/project-item/item/target/applyList",
             contentType: "application/json; charset=utf-8",
-            data: {},
+            data: {
+                item_id: itemId
+            },
             success: function (data) {
                 var str = '';
                 $(data).each(function () {

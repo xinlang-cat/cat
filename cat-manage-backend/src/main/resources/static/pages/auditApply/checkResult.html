@@ -261,7 +261,8 @@
                 </td>
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
-                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea" readonly></textarea>
+                        <textarea name="content" id="content" placeholder="请输入内容" class="layui-textarea"
+                                  readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -559,75 +560,76 @@
 <script type="text/javascript" src='js/auditApply.js'></script>
 
 
-
 <script type="text/javascript">
     var layedit, index;
 
     var id = getUrlParam("id");
     var h = $(window).height() - 15;
-    layui.use(['layedit','upload', 'laydate'], function(){
+    layui.use(['layedit', 'upload', 'laydate'], function () {
         layedit = layui.layedit;
         laydate = layui.laydate;
-        index = layedit.build('demo',{tool:[], height:h});
+        index = layedit.build('demo', {tool: [], height: h});
     });
     initData();
 
-    function initData(){
+    function initData() {
         var data = {
-            id:id,
+            id: id,
         }
         $.ajax({
-            type : 'get',
-            data:data,
-            url : domainName + '/project-item/item/target/auditApplyResult',
-            async : false,
-            success : function(data) {
+            type: 'get',
+            data: data,
+            url: domainName + '/project-item/item/target/applyList',
+            async: false,
+            success: function (data) {
 
-                $(data).each(function () {
-                    queryInformation(data[0].item_id);
-                    queryContactWay(data[0].item_id);
-                    $("#content").val(data[0].content);
-                    $("#purpose").val(data[0].purpose);
-                    $("#depand").val(data[0].depand);
-                    $("#details").val(data[0].details);
-                    $("#means").val(data[0].means);
-                    $("#description").val(data[0].description);
+                queryInformation(data[0].item_id);
+                queryContactWay(data[0].item_id);
+                $("#content").val(data[0].content);
+                $("#purpose").val(data[0].purpose);
+                $("#depand").val(data[0].depand);
+                $("#details").val(data[0].details);
+                $("#means").val(data[0].means);
+                $("#description").val(data[0].description);
 
-                    $("#result").text(data[0].status == 2 ? "查定合格" : "查定不合格");
+                $("#result").text(data[0].status == 2 ? "查定合格" : "查定不合格");
 
-                    $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
-                    $("#periods").text(formatDate3(data[0].start_date_true) + " - " + formatDate3(data[0].end_date_true));
+                $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
+                $("#periods").text(formatDate3(data[0].start_date_true) + " - " + formatDate3(data[0].end_date_true));
 
-                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
-                        $.each(data1, function (i, item) {
-                            var serial = $("#target").parents('thead').next().children().length + 1;
-                            var str = '';
-                            var text = getsuperior(item.site);
-                            str = '<tr>' +
-                                '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + item.type + '"></td>' +
-                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                                '<div class="field">' +
-                                '<span type="text"  name="content" lay-verify="required"> ' + item.content + ' </span>' +
-                                '</div>' +
-                                '</td>' +
-                                '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
-                                '<div class="field" style="position: relative;">' +
-                                '<span type="text" name="site">' + text + '</span>' +
-                                '</div>' +
-                                '</td>' +
-                                '</tr>';
-                            $("#target").parents('thead').next().append(str);
-                        });
-                        $("input").attr('readonly', true);
-                        $("input").attr("style", "text-align: center;border: 0px;");
-                        $("textarea").attr('readonly', true);
-                    })
+                $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                    $.each(data1, function (i, item) {
+                        var serial = $("#target").parents('thead').next().children().length + 1;
+                        var str = '';
+                        var text = getsuperior(item.site);
+                        str = '<tr>' +
+                            '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + item.type + '"></td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<span type="text"  name="content" lay-verify="required"> ' + item.content + ' </span>' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field" style="position: relative;">' +
+                            '<span type="text" name="site">' + text + '</span>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+                        $("#target").parents('thead').next().append(str);
+                    });
+                    $("input").attr('readonly', true);
+                    $("input").attr("style", "text-align: center;border: 0px;");
+                    $("textarea").attr('readonly', true);
 
-                    $.get(domainName + "/api-f/albums/list", {ids: data[0].accessory}, function (data1) {
-                        $.each(data1, function (i, item) {
-                            addImgHtml(item)
-                        });
-                    })
+
+                    var accessory = data[0].accessory;
+                    if (accessory != "" && accessory != null && accessory != undefined) {
+                        $.get(domainName + "/api-f/albums/list", {ids: accessory}, function (data1) {
+                            $.each(data1, function (i, item) {
+                                addImgHtml(item)
+                            });
+                        })
+                    }
 
                 });
 
@@ -646,8 +648,10 @@
         str += '<p style="color: #aea9a9;">' + val + '</p></div>';
         $("#accessory_files").append(str);
     }
+
     var h = $(window).height() - 15;
     var w = $(window).width() - 30;
+
     function seeImg(url) {
         var imgHtml = "<img src='" + url + "'/>";
         layer.open({
@@ -662,8 +666,6 @@
             }
         });
     }
-
-
 
 
 </script>

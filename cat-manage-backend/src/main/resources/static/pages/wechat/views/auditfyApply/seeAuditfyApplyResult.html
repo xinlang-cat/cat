@@ -253,6 +253,7 @@
                     $("#details").text(data[0].details);
                     $("#means").text(data[0].means);
                     $("#description").text(data[0].description);
+                    var ids = data[0].target_id.split(",");
                     $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                         var str = '<article class="weui-article">';
                         var count = 1;

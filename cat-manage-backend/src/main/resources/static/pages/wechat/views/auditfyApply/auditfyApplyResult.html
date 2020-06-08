@@ -455,6 +455,7 @@
                 $("#content").val(data[0].content);
                 $("#start_date").val(formatDate4(data[0].start_date));
                 $("#end_date").val(formatDate4(data[0].end_date));
+                var ids = data[0].target_id.split(",");
                 $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                     var str = '<article class="weui-article">';
                     var count = 1;

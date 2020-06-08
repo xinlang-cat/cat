@@ -514,6 +514,7 @@
                     $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
                     $("#periods").text(formatDate3(data[0].start_date_true) + " - " + formatDate3(data[0].end_date_true));
 
+                    var ids = data[0].target_id.split(",");
                     $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                         $.each(data1, function (i, item) {
                             var serial = $("#target").parents('thead').next().children().length + 1;

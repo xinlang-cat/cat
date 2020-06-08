@@ -302,7 +302,7 @@
             </div>
         </li>
         <li>
-            <div class="weui-flex js-category">
+            <div class="weui-flex js-category" permission="EXPERT:html">
                 <div class="weui-flex__item">专家审核</div>
                 <i class="icon icon-74"></i>
             </div>
@@ -512,15 +512,6 @@
                                 查定详情
                             </p>
                         </a>
-                       <!-- <a href="#" class="grid"
-                           onclick="javascript:top.location.href='auditfyApply/auditfyApplyList.html'">
-                            <div class="weui-grid__icon">
-                                <i class="iconfont icon&#45;&#45;suoyouchadingshenqingshu f26"></i>
-                            </div>
-                            <p class="weui-grid__label">
-                                所有查定申请查询
-                            </p>
-                        </a>-->
                     </div>
                 </div>
             </div>
@@ -580,7 +571,7 @@
 <script type="text/javascript" src="../../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../../js/checkItemStatus.js"></script>
 <script>
-    checkPermission();
+    var pers = checkPermission();
     $(function () {
         FastClick.attach(document.body);
     });

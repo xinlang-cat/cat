@@ -88,7 +88,10 @@ function getPARTY_D(id) {
         data: "item_id=" + id + "&user_type=PARTY_D",
         async: false,
         success: function (data) {
-            userId = data[0].user_id;
+            if (data.length!=0){
+                userId = data[0].user_id;
+            }
+
         }
     })
 

@@ -146,6 +146,7 @@
                     status(data[0].status);
                     item_id = data[0].item_id;
                     target_id = data[0].target_id;
+                    var ids = data[0].target_id.split(",");
                     $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                         var str = '<article class="weui-article">';
                         var count = 1;

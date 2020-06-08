@@ -501,7 +501,7 @@
                     queryContactWay(data[0].item_id);
                     $("#content").text(data[0].content);
                     $("#period").text(formatDate4(data[0].start_date) + " - " + formatDate4(data[0].end_date));
-                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
+                    $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id.split(",")}, function (data1) {
                         $.each(data1, function (i, item) {
                             var serial = $("#target").parents('thead').next().children().length + 1;
                             var str = '';

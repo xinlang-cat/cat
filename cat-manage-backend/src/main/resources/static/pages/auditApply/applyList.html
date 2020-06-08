@@ -154,13 +154,13 @@
                                 if (status == 1) {
                                     data = "待查定";
                                 } else if (status == 2) {
-                                    data = "查定中";
-                                } else if (status == 3) {
-                                    data = "查定合格";
-                                } else if (status == 4) {
-                                    data = "查定不合格";
-                                } else if (status == 5) {
                                     data = "查定申请未通过";
+                                } else if (status == 3) {
+                                    data = "查定中";
+                                } else if (status == 4) {
+                                    data = "查定合格";
+                                } else if (status==5){
+                                    data = "查定不合格"
                                 }
 
 
@@ -203,7 +203,7 @@
     }
 
     function read(id, userType,status) {
-        if (status==3||status==4){
+        if (status==4||status==5){
             layer.open({
                 title: "查看查定申请",
                 type: 2,
@@ -231,33 +231,6 @@
 
     }
 
-    function report(id) {
-        layer.open({
-            title: "添加",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['addResult.html?id=' + id + '&userId=' + userId],
-            end: function () {
-
-            }
-        });
-    }
-
-    function checkResult(id) {
-        layer.open({
-            title: "添加",
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            maxmin: true,
-            shadeClose: true,
-            content: ['checkResult.html?id=' + id],
-            end: function () {
-
-            }
-        });
-    }
 
 
 </script>

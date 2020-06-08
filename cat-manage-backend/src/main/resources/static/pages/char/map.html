@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../layui/css/layui.css" media="all"/>
+
+
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+
+        #allmap {
+
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+            float: left;
+        }
+
+        #data_manipulation {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+
+<div style="width: 100%;">
+    <h2 style="text-align: center;">项目统计图表</h2>
+</div>
+<div class="layui-card">
+    <div class="layui-card-header">类型统计</div>
+    <div class="layui-card-body">
+        <canvas id="myChart" style="width: 500px;height: 500px;"></canvas>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-header">状态统计</div>
+    <div class="layui-card-body">
+        <canvas id="container" style="width: 500px;height: 500px;"></canvas>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-header">新增统计</div>
+    <div class="layui-card-body">
+        <canvas id="container2" style="width: 500px;height: 500px;"></canvas>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-header">城市</div>
+    <div class="layui-card-body">
+        <canvas id="city" style="width: 500px;height: 500px;"></canvas>
+    </div>
+</div>
+<!--<div style="margin: 5px 10px 0 0;width: 30%">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
+    <canvas style="float: left;width: 100%;height: 5px;"></canvas>
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
+        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byType()" id="type">
+            <option value="0">全部</option>
+        </select>
+    </div>
+    <canvas id="myChart" style="float: left;width: 100%;"></canvas>
+
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">状态统计</span>
+        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatus()" id="status">
+            <option value="0">全部</option>
+            <option value="1">进行中</option>
+            <option value="2">结题中</option>
+            <option value="3">已结题</option>
+            <option value="4">未结题</option>
+        </select>
+    </div>
+    <canvas id="container" style="float: left;"></canvas>
+
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">新增统计</span>
+        <input type="text" style="width: 17%;float: left" id="test1"><span style="float: left;">月及往前5个月</span>
+    </div>
+    <canvas id="container2" style="float: left;width: 100%;"></canvas>
+
+</div>
+
+<div style="margin: 5px 10px 0 0;">
+    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
+    <canvas style="float: left;width: 100%;height: 5px;"></canvas>
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
+        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatusCity()">
+            <option value="0">全部</option>
+            <option value="1">进行中</option>
+            <option value="2">结题中</option>
+            <option value="3">已结题</option>
+            <option value="4">未结题</option>
+        </select>
+    </div>
+    <canvas id="city" style="float: left;width: 100%;"></canvas>
+
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">状态统计</span>
+        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatus()">
+            <option value="0">全部</option>
+            <option value="1">进行中</option>
+            <option value="2">结题中</option>
+            <option value="3">已结题</option>
+            <option value="4">未结题</option>
+        </select>
+    </div>
+    <canvas style="float: left;"></canvas>
+
+    <div style="width: 100%;">
+        <span style="font-size: 18px;float: left;margin-right: 20px;">新增统计</span>
+        <input type="text" style="width: 17%;float: left"><span style="float: left;">月及往前5个月</span>
+    </div>
+    <canvas style="float: left;width: 100%;"></canvas>-->
+
+</div>
+
+</body>
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../layui/layui.all.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
+
+<script type="text/javascript">
+    var citys = new Array();
+    var cityNames = new Array();
+    var byCity = new Array();
+    getCity(450000);
+    var counts4 = new Array();
+    var items = new Array(); //项目原始数据
+    var contents = new Array();//项目类型
+    var counts = new Array();//项目类型数量
+    var countItem = 0;
+    var dataArr = getMonths();
+    var statuss1 = ["进行中", "结题中", "已结题", "未结题"];
+    var statussMath = [0, 0, 0, 0];
+    var signs = new Array();//项目类型标识
+    var selectItem = new Array(); //筛选过后的项目
+    //获取当年年月
+    var myDate = new Date();
+    var tYear = myDate.getFullYear();
+    var tMonth = myDate.getMonth();
+    var today = formatDate4(myDate);
+    var show = false;
+
+    var m = tMonth + 1;
+    if (m.toString().length == 1) {
+        m = "0" + m;
+        //将10一下的月份前加0
+    }
+    var now = tYear + '-' + m;
+
+
+    const chart = new F2.Chart({
+        id: 'myChart',
+        pixelRatio: window.devicePixelRatio, // 指定分辨率
+
+    });
+    const chart1 = new F2.Chart({
+        id: 'container',
+        pixelRatio: window.devicePixelRatio,
+        padding: [20, 'auto']
+    });
+    const chart3 = new F2.Chart({
+        id: 'container2',
+        pixelRatio: window.devicePixelRatio
+    });
+    const chart4 = new F2.Chart({
+        id: 'city',
+        pixelRatio: window.devicePixelRatio
+    });
+    initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
+
+
+    function initSelectData(sign, node) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                var ds = data[0].child;
+                $(ds).each(function () {
+                    node.append('<option value=' + this.sign + '>' + this.content + '</option>');
+                });
+            }
+        })
+    }
+
+    var form, layer, layedit;
+
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+        var laydate = layui.laydate;
+
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        laydate.render({
+            elem: '#test1' //指定元素
+            , type: 'month'
+            //日期时间被切换后的回调,年月日时间被切换时都会触发。
+            , change: function (value, date, endDate) {
+                console.log(value); //得到日期生成的值，如：2017-08-18
+                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+            }
+            //控件选择完毕后的回调,点击日期、清空、现在、确定均会触发。
+            , done: function (value, date, endDate) {
+                console.log(value); //得到日期生成的值，如：2017-08-18
+                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+                //清空筛选后的项目数组，再进行添加
+                var counts5 = getCountA(counts.length);
+                var dataArr1 = [];
+                if (value.length > 0) {
+                    var data = new Date(value);
+                    var year = data.getFullYear();
+                    data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
+                    for (var i = 0; i < 6; i++) {
+                        data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
+                        var m = data.getMonth() + 1;
+                        m = m < 10 ? "0" + m : m;
+                        dataArr1.push(data.getFullYear() + "-" + m);
+                    }
+                } else {
+                    dataArr1 = dataArr;
+                }
+                showTable3(items, counts5, dataArr1);
+
+
+            }
+        });
+
+    });
+
+    function showTable3(data, counts5, dataArr1) {
+        selectItem = [];
+        $(data).each(function () {
+            var sign = this.type;
+            var a = signs.indexOf(sign);
+            counts[a] = counts[a] + 1;
+            var start = formatDateY(this.start_date);
+            var b = dataArr1.indexOf(start);
+            if (b >= 0) {
+                counts5[a * 6 + b] = counts5[a * 6 + b] + 1;
+                selectItem.push(this);
+            }
+        });
+
+        if (selectItem.length > 0) {
+            showTable(selectItem);
+        }
+
+        const data2 = [];
+
+        for (var i = 0; i < counts.length; i++) {
+            for (var a = 0; a < dataArr1.length; a++) {
+                var res2 = {"name": contents[i], "月份": dataArr1[a], "月均降雨量": counts5[i * 6 + a]};
+                data2.push(res2);
+            }
+        }
+        chart3.clear(); // 清理所有chart.source(data);
+        chart3.source(data2);
+        chart3.tooltip({
+            custom: true, // 自定义 tooltip 内容框
+            onChange: function onChange(obj) {
+                const legend = chart3.get('legendController').legends.top[0];
+                const tooltipItems = obj.items;
+                const legendItems = legend.items;
+                const map = {};
+                legendItems.forEach(function (item) {
+                    map[item.name] = _.clone(item);
+                });
+                tooltipItems.forEach(function (item) {
+                    const name = item.name;
+                    const value = item.value;
+                    if (map[name]) {
+                        map[name].value = value;
+                    }
+                });
+                legend.setItems(_.values(map));
+            },
+            onHide: function onHide() {
+                const legend = chart3.get('legendController').legends.top[0];
+                legend.setItems(chart.getLegendItems().country);
+            }
+        });
+
+        chart3.interval()
+            .position('月份*月均降雨量')
+            .color('name', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634'])
+            .adjust({
+                type: 'dodge',
+                marginRatio: 0.05 // 设置分组间柱子的间距
+            });
+        chart3.render();
+    }
+
+
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    var w = $(window).width() - 30;
+
+
+    initData();
+
+
+    function initData() {
+
+        //生成月份数组
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + "PLAN_CATEGOR",
+            async: false,
+            success: function (data) {
+                $(data[0].child).each(function () {
+                    var content = this.content;
+                    contents.push(content);
+                    var sign = this.sign;
+                    signs.push(sign);
+                    counts.push(0);
+                });
+
+            }
+        });
+        counts4 = getCountA(counts.length);
+        $.ajax({
+            type: 'get',
+            url: domainName + "/project-item/item/information/list",
+            async: false,
+            success: function (data) {
+
+                $(data).each(function () {
+
+                    if (this.status <= 1) {
+                        return true;
+                    } else if (this.status == 2 && formatDate4(this.end_date) >= today) {
+                        //进行中，并且没到结题时间
+                        statussMath[0] = statussMath[0] + 1;
+
+                    } else if (this.status == 3 || this.status == 5) {
+                        statussMath[1] = statussMath[1] + 1;
+
+                    } else if (this.status == 4 || this.status == 6) {
+                        statussMath[2] = statussMath[2] + 1;
+
+                    } else if (this.status == 2 && formatDate4(this.end_date) < today) {
+                        statussMath[3] = statussMath[3] + 1;
+                    }
+                    items.push(this);
+                    countItem++;//项目总数变化
+                    var sign = this.type;
+                    var a = signs.indexOf(sign);
+                    counts[a] = counts[a] + 1;//将对应状态的项目数量改变
+                    var start = formatDateY(this.start_date);
+                    var b = dataArr.indexOf(start);//获取项目开始时间对应的下标位置
+                    if (b >= 0) {
+                        counts4[a * 6 + b] = counts4[a * 6 + b] + 1;
+                    }
+                });
+
+                showCityChar(items);
+            }
+        });
+
+        const data = [];
+        const data1 = [];
+        const data2 = [];
+        for (var i = 0; i < counts.length; i++) {
+            var res = {"genre": contents[i], "sold": counts[i]};
+            data.push(res);
+        }
+
+        for (var i = 0; i < statuss1.length; i++) {
+            var math = statussMath[i] / countItem * 1000;
+            math = Math.round(math);
+            var res1 = {"name": statuss1[i], "percent": math / 10, "a": "1"};
+            data1.push(res1);
+        }
+        for (var i = 0; i < counts.length; i++) {
+            for (var a = 0; a < dataArr.length; a++) {
+                var res2 = {"name": contents[i], "月份": dataArr[a], "月均降雨量": counts4[i * 6 + a]};
+
+                data2.push(res2);
+            }
+        }
+
+        // Step 1: 创建 Chart 对象
+
+
+        // Step 2: 载入数据源
+        chart.source(data);
+
+        // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+        chart
+            .interval()
+            .position('genre*sold')
+            .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
+
+        // Step 4: 渲染图表
+        chart.render();
+
+        //====================================================================================================
+
+        const map = {};
+        data1.forEach(function (obj) {
+            map[obj.name] = obj.percent + '%';
+        });
+
+
+        chart1.source(data1, {
+            percent: {
+                formatter: function formatter(val) {
+                    return val + '%';
+                }
+            }
+        });
+        chart1.tooltip(false);
+        chart1.legend({
+            position: 'right',
+            itemFormatter: function itemFormatter(val) {
+                return val + '    ' + map[val];
+            }
+        });
+        chart1.coord('polar', {
+            transposed: true,
+            innerRadius: 0.7,
+            radius: 0.85
+        });
+        chart1.axis(false);
+        chart1.interval()
+            .position('a*percent')
+            .color('name', ['#fedc4a', '#3BA4FF', '#737DDE', '#FE5D4D'])
+            .adjust('stack');
+
+        chart1.guide().html({
+            position: ['50%', '45%'],
+            html: `<div style="width: 200px;height: 30px;text-align: center;">
+      <div style="font-size: 18px">项目总数</div>
+      <div style="font-size: 20px">` + countItem + `</div>
+    </div>`
+        });
+        chart1.render();
+
+
+        chart3.source(data2);
+        chart3.tooltip({
+            custom: true, // 自定义 tooltip 内容框
+            onChange: function onChange(obj) {
+                const legend = chart3.get('legendController').legends.top[0];
+                const tooltipItems = obj.items;
+                const legendItems = legend.items;
+                const map = {};
+                legendItems.forEach(function (item) {
+                    map[item.name] = _.clone(item);
+                });
+                tooltipItems.forEach(function (item) {
+                    const name = item.name;
+                    const value = item.value;
+                    if (map[name]) {
+                        map[name].value = value;
+                    }
+                });
+                legend.setItems(_.values(map));
+            },
+            onHide: function onHide() {
+                const legend = chart3.get('legendController').legends.top[0];
+                legend.setItems(chart.getLegendItems().country);
+            }
+        });
+
+        chart3.interval()
+            .position('月份*月均降雨量')
+            .color('name', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634'])
+            .adjust({
+                type: 'dodge',
+                marginRatio: 0.05 // 设置分组间柱子的间距
+            });
+        chart3.render();
+    }
+
+    function getMonths() {
+        var dataArr = [];
+        var data = new Date();
+        var year = data.getFullYear();
+        data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
+        for (var i = 0; i < 6; i++) {
+            data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
+            var m = data.getMonth() + 1;
+            m = m < 10 ? "0" + m : m;
+            dataArr.push(data.getFullYear() + "-" + m);
+        }
+        return dataArr;
+    }
+
+    function getCount2() {
+        var dataCoun = [];
+        for (var i = 0; i < 6; i++) {
+            dataCoun.push(0);
+        }
+        return dataCoun;
+    }
+
+    function getCountA(a) {
+        var dataCoun = [];
+        var dataCoun = [];
+        for (var b = 0; b < a; b++) {
+            for (var i = 0; i < 6; i++) {
+                dataCoun.push(0);
+            }
+        }
+
+        return dataCoun;
+    }
+
+    function formatDateY(now) {
+        var now = new Date(now);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        return year + "-" + fixZero(month, 2);
+    }
+
+
+    function byType() {
+        selectItem = [];
+        var type = $("#type").val();
+        if (type == 0) {
+            $(items).each(function () {
+
+            });
+        }
+        $(items).each(function () {
+            var sign = this.type;
+            if (type == sign) {
+                selectItem.push(this);
+
+            }
+        });
+
+    }
+
+    function byStatus() {
+        selectItem = [];
+        var status = $("#status").val();
+        $(items).each(function () {
+            if (status == 0) {
+                $(items).each(function () {
+
+
+                });
+            } else if (status == 1) {
+                if (this.status == 2 && formatDate4(this.end_date) >= today) {
+                    selectItem.push(this);
+
+
+                }
+            } else if (status == 2) {
+                if (this.status == 3 || this.status == 5) {
+                    selectItem.push(this);
+
+
+                }
+            } else if (status == 3) {
+                if (this.status == 4 || this.status == 6) {
+                    selectItem.push(this);
+
+
+                }
+            } else if (status == 4) {
+                if (this.status == 2 && formatDate4(this.end_date) < today) {
+                    selectItem.push(this);
+
+                }
+            }
+        });
+
+    }
+
+    function getCity(provinceCode) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/map/city/all/' + provinceCode,
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    byCity.push(0);
+                    var d = data[i];
+                    cityNames.push(d.cityName);
+                    citys.push(d.cityCode);
+                }
+            }
+        });
+    }
+
+    function showCityChar(items) {
+
+        $(items).each(function () {
+            var city_code = this.city_code;
+            //项目所在城市在城市数组中的位置
+            var a = citys.indexOf(city_code);
+            byCity[a] = byCity[a] + 1;
+        });
+
+        /*        const dataC = [];
+                for (var i = 0; i < cityNames.length; i++) {
+                    var res = {"genre": cityNames[i], "sold": byCity[i]};
+                    dataC.push(res);
+                }
+                // Step 2: 载入数据源
+                chart4.source(dataC);
+
+                // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+                chart4
+                    .interval()
+                    .position('genre*sold')
+                    .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
+
+                // Step 4: 渲染图表
+                chart4.render();*/
+
+        const dataC1 = [];
+        for (var i = 0; i < cityNames.length; i++) {
+            var res = {"year": cityNames[i], "sales": byCity[i]};
+            dataC1.push(res);
+        }
+
+        chart4.source(dataC1, {
+            sales: {
+                tickCount: 5
+            }
+        });
+        chart4.tooltip({
+            showItemMarker: true,
+            onShow: function onShow(ev) {
+                const items = ev.items;
+                items[0].name = null;
+                items[0].name = items[0].title;
+                items[0].value = items[0].value + '个 ';
+            }
+        });
+        chart4.interval().position('year*sales');
+        chart4.render();
+
+
+    }
+
+</script>
+</html>
