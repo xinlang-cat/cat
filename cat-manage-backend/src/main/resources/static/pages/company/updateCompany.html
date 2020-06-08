@@ -184,21 +184,24 @@
 		url : domainName + '/api-c/company/now-user',
 		async : false,
 		success : function(data) {
-
-			$("#provinceCode").click();
-			province();
-			$("#provinceCode").val(data.provinceCode);
-			city(data.provinceCode);
-			$("#cityCode").val(data.cityCode);
-			area(data.cityCode);
-			$("#areaCode").val(data.areaCode);
-			street(data.areaCode);
-			$("#streetCode").val(data.streetCode);
-			for(var key in data){
-				$("input[name="+key+"]").val(data[key]);
+			if(jQuery.isEmptyObject(data)){
+				location.href = domainName + '/api-b/pages/company/addCompany.html'
+			}else {
+				$("#provinceCode").click();
+				province();
+				$("#provinceCode").val(data.provinceCode);
+				city(data.provinceCode);
+				$("#cityCode").val(data.cityCode);
+				area(data.cityCode);
+				$("#areaCode").val(data.areaCode);
+				street(data.areaCode);
+				$("#streetCode").val(data.streetCode);
+				for(var key in data){
+					$("input[name="+key+"]").val(data[key]);
+				}
+				$("#mini_img").attr("src",data.charter);
+				$("#max_img").attr("href",data.charter);
 			}
-			$("#mini_img").attr("src",data.charter);
-			$("#max_img").attr("href",data.charter);
 		}
 	});
 	layui.use('layer', function(){

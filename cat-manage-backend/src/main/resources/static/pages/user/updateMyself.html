@@ -529,6 +529,19 @@
         });
     }
 
+    $.ajax({
+        type : 'get',
+        url : domainName + '/api-c/company/now-user',
+        async : false,
+        success : function(data) {
+            if(!jQuery.isEmptyObject(data)){
+                $("#deptCode").val(data.deptCode);
+                $("#deptName").val(data.signName);
+                $("#deptType").val(data.type);
+                $("#deptType1").val(data.type);
+            }
+        }
+    });
     $("#deptCode").blur(function () {
         var deptCode = $.trim($(this).val());
         $.ajax({
