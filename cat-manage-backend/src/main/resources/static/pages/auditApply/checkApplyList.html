@@ -264,7 +264,7 @@
 
     function read(id, status) {
 
-        if (status == 3 || status == 4) {
+        if (status == 4 || status == 5) {
             layer.open({
                 title: "查看查定报告",
                 type: 2,
@@ -276,19 +276,7 @@
 
                 }
             });
-        } else if (status == 1||status==2) {
-            layer.open({
-                title: "查看查定申请",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['checkApply.html?id=' + id],
-                end: function () {
-
-                }
-            });
-        }else if (status==5){
+        } else if (status == 1||status==2||status==3) {
             layer.open({
                 title: "查看查定申请",
                 type: 2,
@@ -304,7 +292,7 @@
 
     }
     function check(id, status,item_id) {
-        if (status == 3 || status==4) {
+        if (status == 3 ) {
             layer.open({
                 title: "添加查定报告",
                 type: 2,
@@ -317,7 +305,7 @@
                 }
             });
 
-        } else if (status == 5 || status == 6) {
+        } else if (status == 5 || status == 4) {
             layer.open({
                 title: "查看查定报告",
                 type: 2,
@@ -337,18 +325,6 @@
                 maxmin: true,
                 shadeClose: true,
                 content: ['checkApply.html?id=' + id+'&item_id='+item_id],
-                end: function () {
-
-                }
-            });
-        }else if (status==5){
-            layer.open({
-                title: "查看查定申请",
-                type: 2,
-                area: [w + 'px', h + 'px'],
-                maxmin: true,
-                shadeClose: true,
-                content: ['checkApply.html?id=' + id],
                 end: function () {
 
                 }
