@@ -1,6 +1,6 @@
 package com.xinlang.zly_xyx.company.mapper;
 
-import com.xinlang.zly_xyx.company.bean.CompanyUser;
+import com.xinlang.bean.company.CompanyUser;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 

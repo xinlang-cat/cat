@@ -48,7 +48,7 @@ mybatis:
 security:
   oauth2:
     resource:
-      user-info-uri: http://xinlangxfpt.com/api-o/user-me
+      user-info-uri: http://192.168.1.156/api-o/user-me
       prefer-token-info: false
 aliyun:
   accessKeyId: xxx

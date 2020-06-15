@@ -1,12 +1,9 @@
 package com.xinlang.zly_xyx.company.service.impl;
 
 import com.xinlang.zly_xyx.cat_common.service.impl.BaseService;
-import com.xinlang.zly_xyx.cat_common.utils.AppUserUtil;
-import com.xinlang.zly_xyx.company.bean.CompanyUser;
+import com.xinlang.bean.company.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;
 import com.xinlang.zly_xyx.company.service.ICompanyUserService;
-import com.xinlang.zly_xyx.user.AppUser;
-import org.elasticsearch.common.recycler.Recycler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +29,7 @@ public class CompanyUserService extends BaseService<CompanyUser> implements ICom
         if(companyUserMapper.selectByExample(example) == null){
             throw new IllegalArgumentException("该用户已绑定其他组织!");
         }
-        AppUser appUser = AppUserUtil.getLoginAppUser();
-        companyUser.setUserId(appUser.getId().intValue());
-       companyUserMapper.insertSelective(companyUser);
+        companyUserMapper.insertSelective(companyUser);
     }
 
     @Override

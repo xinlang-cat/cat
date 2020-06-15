@@ -1,17 +1,21 @@
 package com.xinlang.zly.project_user.controller;
 
+import com.xinlang.bean.company.CompanyUser;
 import com.xinlang.bean.project_user.ProjectUser;
 import com.xinlang.bean.project_user.ProjectUserDomain;
 import com.xinlang.bean.project_user.ProjectUserSkill;
 import com.xinlang.bean.project_user.ProjectUserType;
 import com.xinlang.zly.project_user.fegin.ConsumeCatUser;
+import com.xinlang.zly.project_user.fegin.ConsumeCompanyUser;
 import com.xinlang.zly.project_user.mapper.ProjectUserDomainMapper;
 import com.xinlang.zly.project_user.mapper.ProjectUserSkillMapper;
 import com.xinlang.zly.project_user.service.IProjectUserDomainService;
 import com.xinlang.zly.project_user.service.IProjectUserSkillService;
 import com.xinlang.zly_xyx.common.Page;
 import com.xinlang.zly_xyx.log.LogAnnotation;
+import com.xinlang.zly_xyx.user.AppUser;
 import com.xinlang.zly_xyx.user.SysRole;
+import com.xinlang.zly_xyx.user.constants.UserType;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +23,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.xinlang.zly.project_user.service.IProjectUserService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +43,8 @@ public class ProjectUserController {
     private IProjectUserDomainService projectUserDomainService;
     @Autowired
     private ConsumeCatUser consumeCatUser;
+    @Autowired
+    private ConsumeCompanyUser consumeCompanyUser;
 
     @ApiOperation(value = "添加用户信息,全参不包含id")
     @LogAnnotation(module = "添加用户信息")
@@ -64,6 +71,48 @@ public class ProjectUserController {
             consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
         }
         return projectUser;
+    }
+
+    @ApiOperation(value = "添加用户信息,全参不包含id")
+    @LogAnnotation(module = "添加用户信息")
+    @PostMapping("/user-anon/save")
+    public void saveAnon(@RequestBody AppUser appUser,@RequestParam String userType,@RequestParam String deptCode,@RequestParam String deptName){
+        Date date = new Date();
+        appUser.setCreateTime(date);
+        appUser.setType(UserType.BACKEND.name());
+        appUser.setEnabled(true);
+        appUser = consumeCatUser.register(appUser);
+        CompanyUser companyUser = new CompanyUser();
+        companyUser.setUserId(appUser.getId().intValue());
+        companyUser.setDeptCode(deptCode);
+        companyUser.setName(appUser.getNickname());
+        consumeCompanyUser.save(companyUser);
+        ProjectUser projectUser = new ProjectUser();
+        projectUser.setDeptCode(deptCode);
+        projectUser.setDeptName(deptName);
+        projectUser.setUserId(appUser.getId().intValue());
+        projectUser.setUserType(userType);
+        projectUser.setCreateTime(date);
+        projectUserService.save(projectUser);
+        Long userId = projectUser.getUserId().longValue();
+        if(ProjectUserType.EXPERT.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
+        if(ProjectUserType.PARTY_A.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
+        if(ProjectUserType.PARTY_B_MEMBER.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode("PARTY_B:MEMBER").getId());
+        }
+        if(ProjectUserType.PARTY_B_PRINCIPAL.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode("PARTY_B:PRINCIPAL").getId());
+        }
+        if(ProjectUserType.PARTY_C.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
+        if(ProjectUserType.PARTY_D.name().equals(projectUser.getUserType())){
+            consumeCatUser.setDefaultRoleToUser(userId,consumeCatUser.findByCode(projectUser.getUserType()).getId());
+        }
     }
 
     @ApiOperation(value = "修改用户信息，id必填")

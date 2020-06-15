@@ -1,16 +1,12 @@
 package com.xinlang.zly_xyx.company.controller;
 
-import com.xinlang.zly_xyx.company.bean.CompanyUser;
+import com.xinlang.bean.company.CompanyUser;
 import com.xinlang.zly_xyx.company.service.impl.CompanyUserService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.entity.Example;
 
-import java.sql.ClientInfoStatus;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

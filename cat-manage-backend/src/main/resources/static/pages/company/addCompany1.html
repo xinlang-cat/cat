@@ -10,6 +10,11 @@
     <form class="form-horizontal" onsubmit="return false" id="form">
         <fieldset>
             <div class="form-group">
+                <label class="col-md-1 control-label"></label>
+                <div class="col-md-11">
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-1 control-label">公司名称</label>
                 <div class="col-md-11">
                     <input class="form-control" placeholder="公司名称" type="text" name="signName" maxlength="50"
@@ -71,23 +76,7 @@
                     <input class="form-control" placeholder="注册资金（万元）" type="text" name="registeredCapital" maxlength="11">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">营业执照</label>
-                <div class="col-md-11">
-                    <button type="button" class="layui-btn" id="charter_file">
-                        <i class="layui-icon">&#xe67c;</i>上传营业执照
-                    </button>
-                    <input id="charter" type="hidden" name="charter" value="" data-bv-notempty="true"
-                           data-bv-notempty-message="营业执照 不能为空">
-                    <span style="color: #999;">只支持jpg格式并且不大于1M</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label"></label>
-                <div class="col-md-11">
-                    <a  id="max_img" target='_blank' href=''>  <img src="" id="mini_img" style="width: 150px"></a>
-                </div>
-            </div>
+
             <div class="form-group">
                 <label class="col-md-1 control-label">信用代码</label>
                 <div class="col-md-11">
@@ -100,7 +89,10 @@
                 <label class="col-md-1 control-label">公司/机构角色</label>
                 <div class="col-md-11">
                     <select class="form-control input-sm" name="identity" id="identity">
-                        <option value="EXPERT" selected>专家</option>
+                        <option value="PARTY_B">乙方</option>
+                        <option value="PARTY_C">监理</option>
+                        <option value="PARTY_D">验收</option>
+                        <option value="EXPERT">专家</option>
                     </select>
                 </div>
             </div>
@@ -116,39 +108,12 @@
                     </select>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-1 control-label">所在地域</label>
-                <div class="col-md-1">
-                    <select class="form-control input-sm" name="provinceCode" id="provinceCode">
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <select class="form-control input-sm" name="cityCode" id="cityCode">
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <select class="form-control input-sm" name="areaCode" id="areaCode">
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <select class="form-control input-sm" name="streetCode" id="streetCode">
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-1 control-label">详细地址</label>
-                <div class="col-md-11">
-                    <input class="form-control" placeholder="详细地址" type="text" name="address" maxlength="50">
-                </div>
-            </div>
-
             <div class="form-actions">
                 <div class="row" align="center">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
+                        <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回登陆</button>
                         <button class="btn btn-primary" type="submit" onclick="add()">
-                            <i class="fa fa-save"></i> 保存
+                            <i class="fa fa-save"></i>注册
                         </button>
                     </div>
                 </div>
@@ -160,7 +125,6 @@
 
 <script src="../../js/constant.js"></script>
 <script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../../js/jq.js"></script>
 <script type="text/javascript" src="../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../js/address-select.js"></script>
@@ -184,28 +148,12 @@
             contentType: "application/json; charset=utf-8",
             data : JSON.stringify(formdata),
             success : function(data) {
-                layer.msg("成功", {shift: -1, time: 1000}, function(){
-                    $.go(-1);
+                layer.msg("注册成功，请登陆系统上传营业执照及完善其他信息", {shift: -1, time: 2000}, function(){
+                    location.href = "/api-b/login.html";
                 });
             }
         });
     }
-    layui.use('upload', function(){
-        var upload = layui.upload;
-        upload.render({
-            elem: '#charter_file' //绑定元素
-            ,size:1000
-            ,accept: 'jpg' //允许上传的文件类型
-            ,url: domainName + '/zuul/api-f/files'
-            ,done: function(res, index, upload){
-                layer.msg("上传成功");
-                $("#mini_img").attr("src",res.url)
-                $("#max_img").attr("href",res.url)
-                $("#charter").val(res.url)
-            }
-        });
-    });
-
 </script>
 </body>
 </html>
