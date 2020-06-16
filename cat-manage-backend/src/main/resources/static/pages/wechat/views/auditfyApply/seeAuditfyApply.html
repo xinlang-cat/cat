@@ -14,10 +14,35 @@
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 18%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
 
 </head>
 <body ontouchstart>
-
+<header class='demos-header'>
+    <h1 class="demos-title">指标详情</h1>
+</header>
 <div style="z-index: 999999">
 
     <a class="weui-cell weui-cell_access" href="javascript:;">
@@ -33,12 +58,14 @@
 
     </div>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">查定结果:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>查定结果:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" id="result" name="result" type="text" value="">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" id="result" name="result" type="text" value="">
+            </div>
         </div>
     </div>
 
@@ -51,50 +78,56 @@
         </div>
     </a>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">项目名称:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目名称:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">提交人:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="userName" name="userName" placeholder="" readonly>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
+            </div>
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">建议开始时间:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>提交人:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="userName" name="userName" placeholder="" readonly>
+            </div>
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">预计结束时间:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>建议开始时间:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" id="end_date" readonly name="end_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>预计结束时间:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input date" type="text" value="" id="end_date" readonly name="end_date">
+            </div>
         </div>
     </div>
 
 
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">申请内容:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>申请内容:</div>
         </div>
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" rows="5" id="content" name="content" readonly></textarea>
+        <div class="weui-flex__item">
+            <div class="content">
+                <span  id="content" name="content" ></span>
+            </div>
         </div>
     </div>
 
@@ -119,10 +152,7 @@
 </script>
 <script>
     var id = getUrlParam("id");
-    $(".swiper-container").swiper({
-        loop: true,
-        autoplay: 3000
-    });
+
     initData();
 
 
@@ -139,13 +169,13 @@
                 $(data).each(function () {
                     $("#userName").val(getUserName(data[0].edit_userid));
                     $("#itemName").val(getItemName(data[0].item_id));
-                    queryInformation(data[0].item_id);
-                    $("#content").val(data[0].content);
-                    $("#start_date").val(formatDate4(data[0].start_date));
-                    $("#end_date").val(formatDate4(data[0].end_date));
+                    $("#start_date").val(formatDate3(data[0].start_date));
+                    $("#end_date").val(formatDate3(data[0].end_date));
                     status(data[0].status);
-                    item_id = data[0].item_id;
-                    target_id = data[0].target_id;
+
+                    $("#content").text(data[0].content);
+
+
                     var ids = data[0].target_id.split(",");
                     $.get(domainName + "/project-item/item/indicators/ids", {ids: data[0].target_id}, function (data1) {
                         var str = '<article class="weui-article">';
@@ -167,20 +197,14 @@
                     })
 
 
-            });
+                });
 
-    }
-    });
+            }
+        });
     }
 
-    function file(accessory) {
-        $.get(domainName + "/api-f/files/list", {ids: accessory}, function (data1) {
-            $.each(data1, function (i, item) {
-                $('#image').append('<li class="weui-uploader__file" style="background-image:url(' + item.url + ')"></li>');
 
-            });
-        })
-    }
+
     function getUserName(user_id) {
         $.ajaxSettings.async = false;
         var data = '';
@@ -190,6 +214,7 @@
         $.ajaxSettings.async = true;
         return data;
     }
+
     function getType(type) {
         var text = '';
         $.ajax({
@@ -202,6 +227,7 @@
         });
         return text;
     }
+
     function status(status) {
         if (status != 1) {
             var con = '';

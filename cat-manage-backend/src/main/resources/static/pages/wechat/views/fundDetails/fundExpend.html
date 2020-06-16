@@ -132,7 +132,7 @@
                                 '    </div>\n' +
                                 '    <div class="weui-form-preview__ft">\n' +
                                 '        <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="expendDetail.html?id=' + this.id + '">明细</a>';
-                            if ($.inArray('PARTY_B:principal:html', pers) != -1) {
+                            if ($.inArray('PARTY_B:principal:html', pers) != -1 && itemStatus==0) {
                                 str +='<a class="weui-form-preview__btn weui-form-preview__btn_primary" href="newExpend.html?itemId=' + id + '&budgetId='+this.id+'">录入</a>';
                             }
                             str +='    </div>\n' +
