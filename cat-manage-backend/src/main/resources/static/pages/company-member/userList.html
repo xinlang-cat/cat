@@ -165,14 +165,6 @@ layui.use(['layer','util'], function(){
                             	btn.attr("onclick", 'resetPassword(' +id+')');
                             	resetPassword = btn.prop("outerHTML");
                             }
-                            
-                            //分配角色
-                            var setRoles = "";
-                            if($.inArray("back:user:role:set", pers) >= 0){
-                            	var btn = $("<button class='layui-btn layui-btn-xs'><i class='layui-icon'>分配角色</i></button>");
-                            	btn.attr("onclick", 'setRoles(' +id+')');
-                            	setRoles = btn.prop("outerHTML");
-                            }
                             return edit + resetPassword + setRoles;
                       	}
                     }
