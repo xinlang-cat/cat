@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="../../weui/lib/weui.min.css">
     <link rel="stylesheet" href="../../weui/css/jquery-weui.css">
     <link rel="stylesheet" href="../../weui/css/demos.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../weui/css/weui.css" />
+    <link rel="stylesheet" href="../../weui/css/weuix.css" />
+    <link rel="stylesheet" href="../../weui/css/example.css" />
+
 </head>
 
 <body ontouchstart>
@@ -58,59 +65,68 @@
                 var str = '';
                 if (status == 2) {
                     $(data).each(function () {
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="auditfyApplyResult.html?id=' + this.id + '">\n' +
-                            '       <div class="weui-media-box weui-media-box_text">\n' +
-                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-                            '           <p class="weui-media-box__desc" ></p>\n' +
-                            '           <ul class="weui-media-box__info">\n' +
-                            '               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
-                            '               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
-                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-                            '           </ul>\n' +
-                            '      </div>\n' +
-                            '       <span class="weui-cell__ft"></span>\n' +
-                            '     </a>\n' +
-                            '</div>';
+                        str +='<div class="weui-panel">\n' +
+                            '    <div class="weui-panel__bd">\n' +
+                            '    <a href="auditfyApplyResult.html?id=' + this.id + '">\n' +
+                            '    <div class="weui-media-box weui-media-box_text">\n' +
+                            '    <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '    <p class="weui-media-box__desc">\n' +
+                            '    </p>\n' +
+                            '    <ul class="weui-media-box__info">\n' +
+                            '    <li class="weui-media-box__info__meta">' +getUserName(this.edit_userid) + '</li>\n' +
+                            '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getTime(this.start_date) + '</li>\n' +
+                            '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status)+' </li>\n' +
+                            '    </ul>\n' +
+                            '    </div>\n' +
+                            '    </a>\n' +
+                            '    </div>\n' +
+                            '    </div>';
+
 
                     });
                 } else if (status == 3 || status == 4) {
                     $(data).each(function () {
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="seeAuditfyApplyResult.html?id=' + this.id + '">\n' +
-                            '       <div class="weui-media-box weui-media-box_text">\n' +
-                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-                            '           <p class="weui-media-box__desc" ></p>\n' +
-                            '           <ul class="weui-media-box__info">\n' +
-                            '               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
-                            '               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
-                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-                            '           </ul>\n' +
-                            '      </div>\n' +
-                            '       <span class="weui-cell__ft"></span>\n' +
-                            '     </a>\n' +
-                            '</div>';
+                        str +='<div class="weui-panel">\n' +
+                            '    <div class="weui-panel__bd">\n' +
+                            '    <a href="seeAuditfyApplyResult.html?id=' + this.id + '">\n' +
+                            '    <div class="weui-media-box weui-media-box_text">\n' +
+                            '    <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '    <p class="weui-media-box__desc">\n' +
+                            '    </p>\n' +
+                            '    <ul class="weui-media-box__info">\n' +
+                            '    <li class="weui-media-box__info__meta">' +getUserName(this.edit_userid) + '</li>\n' +
+                            '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getTime(this.start_date) + '</li>\n' +
+                            '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status)+' </li>\n' +
+                            '    </ul>\n' +
+                            '    </div>\n' +
+                            '    </a>\n' +
+                            '    </div>\n' +
+                            '    </div>';
+
 
                     });
                 } else if (status == 1 || status == 5) {
                     $(data).each(function () {
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n' +
-                            '       <div class="weui-media-box weui-media-box_text">\n' +
-                            '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-                            '           <p class="weui-media-box__desc" ></p>\n' +
-                            '           <ul class="weui-media-box__info">\n' +
-                            '               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
-                            '               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
-                            '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-                            '           </ul>\n' +
-                            '      </div>\n' +
-                            '       <span class="weui-cell__ft"></span>\n' +
-                            '     </a>\n' +
-                            '</div>';
+                        str +='<div class="weui-panel">\n' +
+                            '    <div class="weui-panel__bd">\n' +
+                            '    <a href="checkAuditfyApply.html?id=' + this.id + '">\n' +
+                            '    <div class="weui-media-box weui-media-box_text">\n' +
+                            '    <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                            '    <p class="weui-media-box__desc">\n' +
+                            '    </p>\n' +
+                            '    <ul class="weui-media-box__info">\n' +
+                            '    <li class="weui-media-box__info__meta">' +getUserName(this.edit_userid) + '</li>\n' +
+                            '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getTime(this.start_date) + '</li>\n' +
+                            '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status)+' </li>\n' +
+                            '    </ul>\n' +
+                            '    </div>\n' +
+                            '    </a>\n' +
+                            '    </div>\n' +
+                            '    </div>';
 
                     });
                 }
+
                 if (!str){
                     $.toptip('没有待初审的查定申请', 'error');
                 }

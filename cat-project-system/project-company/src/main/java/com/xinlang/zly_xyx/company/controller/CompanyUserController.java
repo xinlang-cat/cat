@@ -1,16 +1,12 @@
 package com.xinlang.zly_xyx.company.controller;
 
-import com.xinlang.zly_xyx.company.bean.CompanyUser;
+import com.xinlang.bean.company.CompanyUser;
 import com.xinlang.zly_xyx.company.service.impl.CompanyUserService;
 import com.xinlang.zly_xyx.log.LogAnnotation;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.entity.Example;
 
-import java.sql.ClientInfoStatus;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,6 +54,23 @@ public class CompanyUserController {
     @ApiOperation(value = "根据公司代码查询list")
     public List<CompanyUser> findByDeptCode(@PathVariable String deptCode) {
         return companyUserService.findByDeptCode(deptCode);
+    }
+
+    @GetMapping("/user/dept1/{deptCode}")
+    @LogAnnotation(module = "根据公司代码查询list")
+    @ApiOperation(value = "根据公司代码查询list")
+    public String findUserIdsByDeptCode(@PathVariable String deptCode) {
+        List<CompanyUser> list = companyUserService.findByDeptCode(deptCode);
+        String result = "";
+        for(int i=0;i<list.size();i++){
+            Integer userId = list.get(i).getUserId();
+            if(i == 0){
+                result += userId;
+            }else {
+                result += "," + userId;
+            }
+        }
+        return result;
     }
 
     @DeleteMapping("/user/{userId}")

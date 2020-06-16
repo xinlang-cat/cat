@@ -263,6 +263,14 @@ public class ItemInformationController {
         return ResponseEntity.ok(information);
     }
 
+    @ApiOperation(value = "查询项目信息")
+    @LogAnnotation(module = "查询项目信息")
+    @GetMapping("listYear")
+    public ResponseEntity<List<ItemInformation>> getItemByYear(@RequestParam Map<String, Object> params) {
+        List<ItemInformation> information = itemInformationService.findListByYear(params, ItemInformation.class);
+        return ResponseEntity.ok(information);
+    }
+
     @ApiOperation(value = "查询当前用户相关的项目")
     @LogAnnotation(module = "查询当前用户相关的项目")
     @GetMapping("/my")

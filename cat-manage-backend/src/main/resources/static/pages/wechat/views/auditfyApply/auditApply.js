@@ -62,17 +62,19 @@ function getTime(apply_time) {
 }
 function getStatus(status) {
     var con = '';
+
     if (status == 1) {
         con = "待查定";
     } else if (status == 2) {
-        con = "查定中";
-    } else if (status == 3) {
-        con = "查定合格";
-    } else if (status == 4) {
-        con = "查定不合格";
-    } else if (status == 5) {
         con = "查定申请未通过";
+    } else if (status == 3) {
+        con = "查定中";
+    } else if (status == 4) {
+        con = "查定合格";
+    } else if (status==5){
+        con = "查定不合格"
     }
+
     return con;
 }
 function getTargetType(id) {

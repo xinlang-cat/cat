@@ -18,7 +18,7 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">公司名称</label>
 				<div class="col-md-11">
-					<input class="form-control" placeholder="公司名称" type="text" name="signName" maxlength="50"
+					<input class="form-control" placeholder="公司名称" type="text" name="signName" maxlength="50" disabled
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="公司名称 不能为空">
 				</div>
@@ -42,7 +42,7 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">法人姓名</label>
 				<div class="col-md-11">
-					<input class="form-control" placeholder="法人姓名" type="text" name="legalPerson" maxlength="50"
+					<input class="form-control" placeholder="法人姓名" type="text" name="legalPerson" maxlength="50" disabled
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="法人姓名 不能为空">
 				</div>
@@ -50,7 +50,7 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">法人身份证</label>
 				<div class="col-md-11">
-					<input class="form-control" placeholder="法人身份证" type="text" name="legalPersonCard" maxlength="18"
+					<input class="form-control" placeholder="法人身份证" type="text" name="legalPersonCard" maxlength="18" disabled
 						   data-bv-notempty="true"
 						   data-bv-notempty-message="法人身份证 不能为空">
 				</div>
@@ -98,15 +98,14 @@
 				<label class="col-md-1 control-label">信用代码</label>
 				<div class="col-md-11">
 					<input class="form-control" placeholder="信用代码" type="text" name="deptCode" maxlength="18"
-						   data-bv-notempty="true"
+						   data-bv-notempty="true" disabled
 						   data-bv-notempty-message="信用代码 不能为空">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-1 control-label">公司/机构角色</label>
 				<div class="col-md-11">
-					<select class="form-control input-sm" name="identity" id="identity">
-						<option value="PARTY_A">甲方</option>
+					<select class="form-control input-sm" name="identity" id="identity" disabled>
 						<option value="PARTY_B">乙方</option>
 						<option value="PARTY_C">监理</option>
 						<option value="PARTY_D">验收</option>
@@ -118,7 +117,7 @@
 			<div class="form-group">
 				<label class="col-md-1 control-label">公司/机构类型</label>
 				<div class="col-md-11">
-					<select class="form-control input-sm" name="type" id="type">
+					<select class="form-control input-sm" name="type" id="type" disabled>
 						<option value="ACADEMY">大专院校</option>
 						<option value="FIRM">企业</option>
 						<option value="UNIT">事业单位</option>
@@ -178,12 +177,34 @@
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../js/address-select.js"></script>
 <script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
+	var appUser = null;
+	$.ajax({
+		type: 'get',
+		url: domainName + '/api-u/users/current',
+		async: false,
+		success: function (data) {
+			appUser = data;
+		}
+	});
+
+	var pers = checkPermission();
 	$.ajax({
 		type : 'get',
 		url : domainName + '/api-c/company/now-user',
 		async : false,
 		success : function(data) {
+			if($.inArray('EXPERT:html',pers))
+			if(appUser.username != data.signName){
+				var doms = $("input,select");
+				$.each(doms,function (i,item) {
+					$(item).attr("disabled",true);
+					$("button[type=submit]").remove();
+					$("#charter_file").remove();
+				})
+			}
+
 			if(jQuery.isEmptyObject(data)){
 				location.href = domainName + '/api-b/pages/company/addCompany.html'
 			}else {
@@ -196,6 +217,7 @@
 				$("#areaCode").val(data.areaCode);
 				street(data.areaCode);
 				$("#streetCode").val(data.streetCode);
+				$("#identity").val(data.identity);
 				for(var key in data){
 					$("input[name="+key+"]").val(data[key]);
 				}
@@ -204,6 +226,8 @@
 			}
 		}
 	});
+
+
 	layui.use('layer', function(){
 		var layer = layui.layer;
 	});

@@ -35,97 +35,41 @@
 
 
 <div style="width: 100%;">
-    <h2 style="text-align: center;">项目统计图表</h2>
+    <h2 style="text-align: center;">年度项目统计图表</h2>
 </div>
-<div class="layui-card">
-    <div class="layui-card-header">类型统计</div>
-    <div class="layui-card-body">
-        <canvas id="myChart" style="width: 500px;height: 500px;"></canvas>
-    </div>
+<div class="layui-input-inline" style="width: 30%;">
+    <input type="text" class="layui-input" id="test2" placeholder="yyyy">
 </div>
-<div class="layui-card">
-    <div class="layui-card-header">状态统计</div>
-    <div class="layui-card-body">
-        <canvas id="container" style="width: 500px;height: 500px;"></canvas>
+<div style="margin: 5px 10px 0 0;width: 28%;float: left;height: 100%;">
+    <div class="layui-card" style="width: 100%;height: 28%;">
+        <div class="layui-card-header">类型统计</div>
+        <div class="layui-card-body">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
-</div>
-<div class="layui-card">
-    <div class="layui-card-header">新增统计</div>
-    <div class="layui-card-body">
-        <canvas id="container2" style="width: 500px;height: 500px;"></canvas>
+    <div class="layui-card" style="width: 100%;height: 28%;">
+        <div class="layui-card-header">状态统计</div>
+        <div class="layui-card-body">
+            <canvas id="container"></canvas>
+        </div>
     </div>
-</div>
-<div class="layui-card">
-    <div class="layui-card-header">城市</div>
-    <div class="layui-card-body">
-        <canvas id="city" style="width: 500px;height: 500px;"></canvas>
-    </div>
-</div>
-<!--<div style="margin: 5px 10px 0 0;width: 30%">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
-    <canvas style="float: left;width: 100%;height: 5px;"></canvas>
-    <div style="width: 100%;">
-        <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
-        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byType()" id="type">
-            <option value="0">全部</option>
-        </select>
-    </div>
-    <canvas id="myChart" style="float: left;width: 100%;"></canvas>
-
-    <div style="width: 100%;">
-        <span style="font-size: 18px;float: left;margin-right: 20px;">状态统计</span>
-        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatus()" id="status">
-            <option value="0">全部</option>
-            <option value="1">进行中</option>
-            <option value="2">结题中</option>
-            <option value="3">已结题</option>
-            <option value="4">未结题</option>
-        </select>
-    </div>
-    <canvas id="container" style="float: left;"></canvas>
-
-    <div style="width: 100%;">
-        <span style="font-size: 18px;float: left;margin-right: 20px;">新增统计</span>
-        <input type="text" style="width: 17%;float: left" id="test1"><span style="float: left;">月及往前5个月</span>
-    </div>
-    <canvas id="container2" style="float: left;width: 100%;"></canvas>
 
 </div>
-
-<div style="margin: 5px 10px 0 0;">
-    <fieldset class="layui-elem-field layui-field-title" style="margin-bottom: 10px;"></fieldset>
-    <canvas style="float: left;width: 100%;height: 5px;"></canvas>
-    <div style="width: 100%;">
-        <span style="font-size: 18px;float: left;margin-right: 20px;">类型统计</span>
-        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatusCity()">
-            <option value="0">全部</option>
-            <option value="1">进行中</option>
-            <option value="2">结题中</option>
-            <option value="3">已结题</option>
-            <option value="4">未结题</option>
-        </select>
+<div style="margin: 5px 10px 0 0;width: 35%;float: left;height: 100%;">
+    <div class="layui-card" style="width: 100%;height: 40%;">
+        <div class="layui-card-header">城市</div>
+        <div class="layui-card-body" style="height: 80%;">
+            <canvas id="city" style="height: 100%;width: 100%;"></canvas>
+        </div>
     </div>
-    <canvas id="city" style="float: left;width: 100%;"></canvas>
-
-    <div style="width: 100%;">
-        <span style="font-size: 18px;float: left;margin-right: 20px;">状态统计</span>
-        <select name="interest" lay-filter="aihao" style="float: left;" onchange="byStatus()">
-            <option value="0">全部</option>
-            <option value="1">进行中</option>
-            <option value="2">结题中</option>
-            <option value="3">已结题</option>
-            <option value="4">未结题</option>
-        </select>
+    <div class="layui-card" style="width: 100%;height: 40%;">
+        <div class="layui-card-header">新增统计</div>
+        <div class="layui-card-body" style="height: 80%;">
+            <canvas id="container2" style="height: 100%;width: 100%;"></canvas>
+        </div>
     </div>
-    <canvas style="float: left;"></canvas>
-
-    <div style="width: 100%;">
-        <span style="font-size: 18px;float: left;margin-right: 20px;">新增统计</span>
-        <input type="text" style="width: 17%;float: left"><span style="float: left;">月及往前5个月</span>
-    </div>
-    <canvas style="float: left;width: 100%;"></canvas>-->
-
 </div>
+
 
 </body>
 
@@ -219,7 +163,10 @@
             });
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
         });
-
+        laydate.render({
+            elem: '#test2'
+            , type: 'year'
+        });
         laydate.render({
             elem: '#test1' //指定元素
             , type: 'month'
@@ -411,20 +358,38 @@
                 data2.push(res2);
             }
         }
+        /*
+                // Step 1: 创建 Chart 对象
 
-        // Step 1: 创建 Chart 对象
+
+                // Step 2: 载入数据源
+                chart.source(data);
+
+                // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
+                chart
+                    .interval()
+                    .position('genre*sold')
+                    .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
+
+                // Step 4: 渲染图表
+                chart.render();*/
 
 
-        // Step 2: 载入数据源
-        chart.source(data);
-
-        // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
-        chart
-            .interval()
-            .position('genre*sold')
-            .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
-
-        // Step 4: 渲染图表
+        chart.source(data, {
+            sales: {
+                tickCount: 5
+            }
+        });
+        chart.tooltip({
+            showItemMarker: true,
+            onShow: function onShow(ev) {
+                const items = ev.items;
+                items[0].name = null;
+                items[0].name = items[0].title;
+                items[0].value = items[0].value + '个 ';
+            }
+        });
+        chart.interval().position('genre*sold').color(['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
         chart.render();
 
         //====================================================================================================
@@ -511,7 +476,7 @@
         var data = new Date();
         var year = data.getFullYear();
         data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 12; i++) {
             data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
             var m = data.getMonth() + 1;
             m = m < 10 ? "0" + m : m;
@@ -526,6 +491,22 @@
             dataCoun.push(0);
         }
         return dataCoun;
+    }
+
+    function getCity(provinceCode) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/map/city/all/' + provinceCode,
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    byCity.push(0);
+                    var d = data[i];
+                    cityNames.push(d.cityName);
+                    citys.push(d.cityCode);
+                }
+            }
+        });
     }
 
     function getCountA(a) {
@@ -548,77 +529,6 @@
     }
 
 
-    function byType() {
-        selectItem = [];
-        var type = $("#type").val();
-        if (type == 0) {
-            $(items).each(function () {
-
-            });
-        }
-        $(items).each(function () {
-            var sign = this.type;
-            if (type == sign) {
-                selectItem.push(this);
-
-            }
-        });
-
-    }
-
-    function byStatus() {
-        selectItem = [];
-        var status = $("#status").val();
-        $(items).each(function () {
-            if (status == 0) {
-                $(items).each(function () {
-
-
-                });
-            } else if (status == 1) {
-                if (this.status == 2 && formatDate4(this.end_date) >= today) {
-                    selectItem.push(this);
-
-
-                }
-            } else if (status == 2) {
-                if (this.status == 3 || this.status == 5) {
-                    selectItem.push(this);
-
-
-                }
-            } else if (status == 3) {
-                if (this.status == 4 || this.status == 6) {
-                    selectItem.push(this);
-
-
-                }
-            } else if (status == 4) {
-                if (this.status == 2 && formatDate4(this.end_date) < today) {
-                    selectItem.push(this);
-
-                }
-            }
-        });
-
-    }
-
-    function getCity(provinceCode) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/map/city/all/' + provinceCode,
-            async: false,
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    byCity.push(0);
-                    var d = data[i];
-                    cityNames.push(d.cityName);
-                    citys.push(d.cityCode);
-                }
-            }
-        });
-    }
-
     function showCityChar(items) {
 
         $(items).each(function () {
@@ -627,23 +537,6 @@
             var a = citys.indexOf(city_code);
             byCity[a] = byCity[a] + 1;
         });
-
-        /*        const dataC = [];
-                for (var i = 0; i < cityNames.length; i++) {
-                    var res = {"genre": cityNames[i], "sold": byCity[i]};
-                    dataC.push(res);
-                }
-                // Step 2: 载入数据源
-                chart4.source(dataC);
-
-                // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
-                chart4
-                    .interval()
-                    .position('genre*sold')
-                    .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
-
-                // Step 4: 渲染图表
-                chart4.render();*/
 
         const dataC1 = [];
         for (var i = 0; i < cityNames.length; i++) {

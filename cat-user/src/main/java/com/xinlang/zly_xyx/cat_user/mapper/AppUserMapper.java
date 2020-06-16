@@ -36,6 +36,8 @@ public interface AppUserMapper {
     List<AppUser> findAll();
 
     int count(Map<String, Object> params);
+    int count1(Map<String, Object> params);
 
     List<AppUser> findData(Map<String, Object> params);
+    List<AppUser> findData1(Map<String, Object> params);
 }

@@ -60,19 +60,19 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-md-1 control-label">身份类型</label>
-                <div class="col-md-11">
-                    <select class="form-control input-sm" id="userType" name="userType">
-                        <option value="PARTY_A">甲方</option>
-                        <option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>
-                        <option value="PARTY_B_MEMBER">乙方项目成员</option>
-                        <option value="PARTY_C">监理</option>
-                        <option value="PARTY_D">验收</option>
-                        <option value="EXPERT">专家</option>
-                    </select>
-                </div>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label class="col-md-1 control-label">身份类型</label>-->
+<!--                <div class="col-md-11">-->
+<!--                    <select class="form-control input-sm" id="userType" name="userType">-->
+<!--                        <option value="PARTY_A">甲方</option>-->
+<!--                        <option value="PARTY_B_PRINCIPAL">乙方项目负责人</option>-->
+<!--                        <option value="PARTY_B_MEMBER">乙方项目成员</option>-->
+<!--                        <option value="PARTY_C">监理</option>-->
+<!--                        <option value="PARTY_D">验收</option>-->
+<!--                        <option value="EXPERT">专家</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="form-group">
                 <label class="col-md-1 control-label">证件类型</label>
@@ -523,6 +523,7 @@
                     updateDomains();
                     refresh_token(); //刷新当前登录用户缓存
                     deleteCurrentTab();
+                    location.reload(true);
 
                 });
             }
