@@ -80,7 +80,7 @@
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
-                var str = '';
+                var str = '<h3>暂时没有被驳回的经费。</h3>'
                 $(data).each(function () {
                     if (this.status == 0) {
                         var li = '';
@@ -89,6 +89,7 @@
                                 li += '<li class="weui-uploader__file" style="background-image:url(' + d + ')"></li>'
                             }
                         });
+                        str = '';
                         str += '<div class="weui-form-preview">\n' +
                             '    <div class="weui-form-preview__bd">\n' +
                             '        <div class="weui-form-preview__item">\n' +

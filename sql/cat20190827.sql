@@ -332,7 +332,7 @@ CREATE TABLE `t_log` (
 -- ----------------------------
 INSERT INTO `t_log` VALUES ('1', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-07-30 10:45:19');
 INSERT INTO `t_log` VALUES ('2', 'admin', '文件上传', null, null, '1', '2019-07-30 10:50:48');
-INSERT INTO `t_log` VALUES ('3', 'admin', '修改个人信息', '{\"appUser\":{\"headImgUrl\":\"http://192.168.1.156/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif\"}}', null, '1', '2019-07-30 10:50:48');
+INSERT INTO `t_log` VALUES ('3', 'admin', '修改个人信息', '{\"appUser\":{\"headImgUrl\":\"http://192.168.5.48/api-f/statics/2019/07/30/6e16e2156e8f4c3f17ea43f7008890bd.gif\"}}', null, '1', '2019-07-30 10:50:48');
 INSERT INTO `t_log` VALUES ('4', 'admin', '文件上传', null, null, '1', '2019-07-30 10:59:52');
 INSERT INTO `t_log` VALUES ('5', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-07-30 16:44:29');
 INSERT INTO `t_log` VALUES ('6', 'admin', '登陆', null, '用户名密码登陆', '1', '2019-07-30 16:50:46');
