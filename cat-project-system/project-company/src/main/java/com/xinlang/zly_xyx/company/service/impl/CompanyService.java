@@ -5,7 +5,7 @@ import com.xinlang.zly_xyx.cat_common.utils.BeanUtils;
 import com.xinlang.zly_xyx.cat_common.utils.ExampleUtil;
 import com.xinlang.zly_xyx.cat_common.utils.RowBoundsUtil;
 import com.xinlang.zly_xyx.common.Page;
-import com.xinlang.zly_xyx.company.bean.CompanyUser;
+import com.xinlang.bean.company.CompanyUser;
 import com.xinlang.zly_xyx.company.mapper.CompanyMapper;
 import com.xinlang.zly_xyx.company.mapper.CompanyUserMapper;
 import com.xinlang.zly_xyx.company.service.ICompanyService;
@@ -39,7 +39,7 @@ public class CompanyService implements ICompanyService {
     @Override
     public void update(Company company) {
         Example example = new Example(Company.class);
-        example.createCriteria().andEqualTo("deptCode",company.getDeptCode());
+        example.createCriteria().andEqualTo("id",company.getId());
         companyMapper.updateByExampleSelective(company,example);
     }
 

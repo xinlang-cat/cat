@@ -2129,14 +2129,27 @@
                     var UId = $(this).val();
                     if (UId != '') {
                         var name = $(this).next().val();
-                        var data = {name: name, value: UId,};
+                        var data = {name: name, value: UId};
                         d.push(data)
                     }
-                })
+                });
                 $(xmSelect.get()).each(function () {// 给指标的实施人员选择赋值
                     this.update({
                         data: d
                     })
+                });
+                //禁用
+                $("#leader_2 option").each(function () {
+                    $(this).removeAttr("disabled");
+                });
+                console.log(d)
+                $("#leader_2 option").each(function () {
+                    var _this = $(this)
+                    $(d).each(function () {
+                        if(_this.val()==this.value){
+                            _this.attr("disabled","");
+                        }
+                    });
                 });
             }
             //重新渲染

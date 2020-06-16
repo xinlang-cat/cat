@@ -192,6 +192,19 @@ public class AppUserService implements IAppUserService {
     }
 
     @Override
+    public Page<AppUser> findByIds(Map<String, Object> params) {
+
+        int total = appUserMapper.count1(params);
+        @SuppressWarnings("如果为空返回空的List")
+        List<AppUser> appUsers = Collections.emptyList();
+        if(total >0){
+            PageUtil.pageParamConver(params,true);
+            appUsers = appUserMapper.findData1(params);
+        }
+        return new Page<>(total,appUsers);
+    }
+
+    @Override
     public Set<SysRole> findRoleByUserId(Long userId) {
         return userRoleMapper.findRolesByUserId(userId);
     }

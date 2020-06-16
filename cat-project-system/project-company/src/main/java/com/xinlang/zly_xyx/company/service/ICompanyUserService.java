@@ -1,7 +1,7 @@
 package com.xinlang.zly_xyx.company.service;
 
 import com.xinlang.zly_xyx.cat_common.service.IBaseService;
-import com.xinlang.zly_xyx.company.bean.CompanyUser;
+import com.xinlang.bean.company.CompanyUser;
 
 import java.util.List;
 

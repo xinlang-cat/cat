@@ -30,6 +30,7 @@ public interface IAppUserService {
     Page<AppUser> findUsers(Map<String,Object> params);
 
     List<AppUser> findAll();
+    Page<AppUser> findByIds(Map<String, Object> params);
 
     Set<SysRole>  findRoleByUserId(Long userId);
 

@@ -66,6 +66,11 @@ public class UserController {
         return appUserService.findAll();
     }
 
+    @GetMapping("/ids")
+    public Page<AppUser> findByIds(@RequestParam Map<String, Object> params) {
+        return appUserService.findByIds(params);
+    }
+
     @PreAuthorize("hasAuthority('back:user:query')")
     @GetMapping("/users/{id}")
     public AppUser findUserById(@PathVariable Long id) {
