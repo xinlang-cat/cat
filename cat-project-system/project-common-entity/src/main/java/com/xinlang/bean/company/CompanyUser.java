@@ -3,6 +3,7 @@ package com.xinlang.bean.company;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class CompanyUser implements Serializable {
     private Integer id;
     private Integer userId;//用户id
     private String name;//用户姓名
+    @Column(name = "dept_code")
     private String deptCode;//公司代码
     /**
      * 暂时不用

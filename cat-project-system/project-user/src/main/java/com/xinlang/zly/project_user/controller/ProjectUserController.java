@@ -76,22 +76,31 @@ public class ProjectUserController {
     @ApiOperation(value = "添加用户信息,全参不包含id")
     @LogAnnotation(module = "添加用户信息")
     @PostMapping("/user-anon/save")
-    public void saveAnon(@RequestBody AppUser appUser,@RequestParam String userType,@RequestParam String deptCode,@RequestParam String deptName){
+    public void saveAnon(@RequestBody Map<String,Object> params){
         Date date = new Date();
+        AppUser appUser = new AppUser();
+        appUser.setPassword(params.get("password").toString());
+        appUser.setUsername(params.get("phone").toString());
+        appUser.setNickname(params.get("username").toString());
+        appUser.setSex(Integer.valueOf(params.get("sex").toString()));
+        appUser.setPhone(params.get("phone").toString());
         appUser.setCreateTime(date);
         appUser.setType(UserType.BACKEND.name());
         appUser.setEnabled(true);
         appUser = consumeCatUser.register(appUser);
         CompanyUser companyUser = new CompanyUser();
         companyUser.setUserId(appUser.getId().intValue());
-        companyUser.setDeptCode(deptCode);
+        companyUser.setDeptCode(params.get("deptCode").toString());
         companyUser.setName(appUser.getNickname());
         consumeCompanyUser.save(companyUser);
         ProjectUser projectUser = new ProjectUser();
-        projectUser.setDeptCode(deptCode);
-        projectUser.setDeptName(deptName);
+        projectUser.setName(appUser.getNickname());
+        projectUser.setPhone(appUser.getPhone());
+        projectUser.setDeptCode(params.get("deptCode").toString());
+        projectUser.setDeptName(params.get("deptName").toString());
         projectUser.setUserId(appUser.getId().intValue());
-        projectUser.setUserType(userType);
+        projectUser.setUserType(params.get("userType").toString());
+        projectUser.setSex(params.get("sex").toString());
         projectUser.setCreateTime(date);
         projectUserService.save(projectUser);
         Long userId = projectUser.getUserId().longValue();

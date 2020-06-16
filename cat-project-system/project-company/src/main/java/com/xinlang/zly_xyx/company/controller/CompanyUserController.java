@@ -56,6 +56,23 @@ public class CompanyUserController {
         return companyUserService.findByDeptCode(deptCode);
     }
 
+    @GetMapping("/user/dept1/{deptCode}")
+    @LogAnnotation(module = "根据公司代码查询list")
+    @ApiOperation(value = "根据公司代码查询list")
+    public String findUserIdsByDeptCode(@PathVariable String deptCode) {
+        List<CompanyUser> list = companyUserService.findByDeptCode(deptCode);
+        String result = "";
+        for(int i=0;i<list.size();i++){
+            Integer userId = list.get(i).getUserId();
+            if(i == 0){
+                result += userId;
+            }else {
+                result += "," + userId;
+            }
+        }
+        return result;
+    }
+
     @DeleteMapping("/user/{userId}")
     @ApiOperation(value = "根据系统用户表id删除")
     @LogAnnotation(module = "根据系统用户表id删除")

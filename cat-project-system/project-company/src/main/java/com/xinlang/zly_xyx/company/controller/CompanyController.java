@@ -58,7 +58,8 @@ public class CompanyController {
             appUser.setPassword(company.getLegalPersonPhone());
             appUser.setType(UserType.BACKEND.name());
             appUser = consumeCatUser.register(appUser);
-            consumeCatUser.setDefaultRoleToUser(appUser.getId(),consumeCatUser.findByCode(company.getType() + ":DEPT").getId());
+            Long roleId = consumeCatUser.findByCode(company.getIdentity() + ":DEPT").getId();
+            consumeCatUser.setDefaultRoleToUser(appUser.getId(),roleId);
         }
         CompanyUser companyUser =  companyUserService.findByUserId(appUser.getId().intValue());
         if(companyUser == null){

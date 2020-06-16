@@ -44,7 +44,7 @@ public class CompanyUserService extends BaseService<CompanyUser> implements ICom
         Example example = new Example(CompanyUser.class);
         example.createCriteria().andEqualTo("userId",userId);
         List<CompanyUser> list = companyUserMapper.selectByExample(example);
-        return list == null?null:list.get(0);
+        return list.size() == -0?null:list.get(0);
     }
 
     @Override

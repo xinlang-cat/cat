@@ -60,4 +60,25 @@
 		order by t.id desc
 		limit #{start}, #{length}
 	</select>
+
+
+	<sql id="where1">
+		<where>
+			<if test="ids != null and ids != ''">
+				 t.id in (${ids})
+			</if>
+		</where>
+	</sql>
+
+	<select id="count1" resultType="int">
+		select count(*) from app_user t
+		<include refid="where1" />
+	</select>
+
+	<select id="findData1" resultType="AppUser">
+		select * from app_user t
+		<include refid="where1" />
+		order by t.id desc
+		limit #{start}, #{length}
+	</select>
 </mapper>
