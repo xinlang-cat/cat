@@ -88,4 +88,12 @@ public class ItemInformationService extends BaseService<ItemInformation> impleme
         }
         return list;
     }
+
+    @Override
+    public List<ItemInformation> findListByYear(Map<String, Object> params, Class<ItemInformation> itemInformationClass) {
+        Example example = new Example(ItemInformation.class);
+        example.createCriteria().andEqualTo( "YEAR(create_date)",params.get("year"));
+        List<ItemInformation> list = itemInformationMapper.selectByExample(example);
+        return list;
+    }
 }

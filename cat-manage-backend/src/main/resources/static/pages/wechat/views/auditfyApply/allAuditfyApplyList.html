@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="../../../../layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="../../weui/css/weui.css" />
+    <link rel="stylesheet" href="../../weui/css/weuix.css" />
+    <link rel="stylesheet" href="../../weui/css/example.css" />
 
 </head>
 
@@ -29,7 +32,7 @@
 <script src="../../weui/lib/jquery-2.1.4.js"></script>
 <script src="../../weui/lib/fastclick.js"></script>
 <script src="../../weui/js/jquery-weui.js"></script>
-<script src="../../weui/js/swiper.js"></script>
+<script src="../../weui/js/swipe.js"></script>
 <script src="../../../../js/constant.js"></script>
 <script src="../../../../js/common.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
@@ -52,25 +55,27 @@
                     var status = this.status;
                     if (status == 1 || status ==2 || status==5) {
                         //待查定/待查定/查定申请未通过，查看查定申请详情
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="checkAuditfyApply.html?id=' + this.id + '">\n';
+                        str +='<div class="weui-panel">\n' +
+                        '    <div class="weui-panel__bd">\n' +
+                        '    <a href="seeAuditfyApply.html?id=' + this.id + '">\n';
                     } else if (status == 3 || status == 4) {
                         ///查定合格，跳转查看查定报告
-                        str += '<div class="weui-panel__bd">\n' +
-                            '   <a class="weui-cell weui-cell_access" href="seeAuditfyApplyResult.html?id=' + this.id + '">\n';
+                        str +='<div class="weui-panel">\n' +
+                            '    <div class="weui-panel__bd">\n' +
+                            '    <a href="seeAuditfyApplyResult.html?id=' + this.id + '">\n';
                     }
-                    str += '       <div class="weui-media-box weui-media-box_text">\n' +
-                        '           <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
-                        '           <p class="weui-media-box__desc" ></p>\n' +
-                        '           <ul class="weui-media-box__info">\n' +
-                        '               <li class="weui-media-box__info__meta">' + getUserName(this.edit_userid) + '</li>\n' +
-                        '               <li class="weui-media-box__info__meta">' + getTime(this.start_date) + '</li>\n' +
-                        '               <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status) + '</li>\n' +
-                        '           </ul>\n' +
-                        '      </div>\n' +
-                        '       <span class="weui-cell__ft"></span>\n' +
-                        '     </a>\n' +
-                        '</div>';
+                    str += '    <div class="weui-media-box weui-media-box_text">\n' +
+                    '    <h4 class="weui-media-box__title">' + getItemName(this.item_id) + '</h4>\n' +
+                    '    <p class="weui-media-box__desc"></p>\n' +
+                    '    <ul class="weui-media-box__info">\n' +
+                    '    <li class="weui-media-box__info__meta">' +getUserName(this.edit_userid) + '</li>\n' +
+                    '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getTime(this.start_date) + '</li>\n' +
+                    '    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">' + getStatus(this.status)+' </li>\n' +
+                    '    </ul>\n' +
+                    '    </div>\n' +
+                    '    </a>\n' +
+                    '    </div>\n' +
+                    '    </div>';
 
                 });
 
@@ -112,13 +117,13 @@
         if (status == 1) {
             con = "待查定";
         } else if (status == 2) {
-            con = "查定中";
-        } else if (status == 3) {
-            con = "查定合格";
-        } else if (status == 4) {
-            con = "查定不合格";
-        } else if (status == 5) {
             con = "查定申请未通过";
+        } else if (status == 3) {
+            con = "查定中";
+        } else if (status == 4) {
+            con = "查定合格";
+        } else if (status==5){
+            con = "查定不合格"
         }
         return con;
     }

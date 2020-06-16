@@ -14,10 +14,35 @@
     <link rel="stylesheet" href="../../weui/css/demos.css">
     <link rel="stylesheet" href="../../css/stageSummary.css">
     <link rel="stylesheet" type="text/css" media="screen" href="../../../../layui/css/layui.css">
+    <script src="../../weui/js/zepto.min.js"></script>
+    <script src="../../weui/js/zepto.weui.js"></script>
+
+    <style>
+        .field {
+            margin-top: 10px;
+            padding: 0 15px;
+            color: #999999;
+            font-size: 14px;
+            text-align: right;
+            line-height: 1.5em;
+            width: 18%;
+        }
+
+        .content {
+            margin-top: 10px;
+            padding-right: 15px;
+            color: #666666;
+            font-size: 14px;
+            text-align: left;
+            line-height: 1.5em;
+        }
+    </style>
 
 </head>
 <body ontouchstart>
-
+<header class='demos-header'>
+    <h1 class="demos-title">指标详情</h1>
+</header>
 <div style="z-index: 999999">
 
     <a class="weui-cell weui-cell_access" href="javascript:;">
@@ -33,12 +58,14 @@
 
     </div>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">查定结果:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>查定结果:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" id="result" name="result" type="text" value="">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" id="result" name="result" type="text" value="">
+            </div>
         </div>
     </div>
 
@@ -51,129 +78,133 @@
         </div>
     </a>
 
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">项目名称:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>项目名称:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
-        </div>
-    </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">提交人:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input" type="text" value="" id="userName" name="userName" placeholder="" readonly>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="itemName" name="itemName" placeholder="" readonly>
+            </div>
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">建议开始时间:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>提交人:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input" type="text" value="" id="userName" name="userName" placeholder="" readonly>
+            </div>
         </div>
     </div>
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">预计结束时间:</label>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>建议开始时间:</div>
         </div>
-        <div class="weui-cell__bd">
-            <input class="weui-input date" type="text" value="" id="end_date" readonly name="end_date">
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input date" type="text" value="" id="start_date" readonly name="start_date">
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>预计结束时间:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <input class="weui-input date" type="text" value="" id="end_date" readonly name="end_date">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="weui-flex bg-white">
+        <div class="field">
+            <div>申请内容:</div>
+        </div>
+        <div class="weui-flex__item">
+            <div class="content">
+                <span  id="content" name="content" ></span>
+            </div>
         </div>
     </div>
 
 
-    <div class="weui-line"></div>
-    <div class="weui-cell">
-        <div class="weui-cell__hd">
-            <label class="weui-label">申请内容:</label>
-        </div>
-        <div class="weui-cell__bd">
-            <textarea class="weui-textarea" rows="5" id="content" name="content" readonly></textarea>
-        </div>
-    </div>
-
-    <a class="weui-cell weui-cell_access" href="javascript:;">
-        <div class="weui-cell__hd">
-            <img src="../../images/green.png" alt="" style="height:20px;margin-right:5px;display:block">
-        </div>
-        <div class="weui-cell__bd weui-cell_primary">
-            <p class="weui-max-title">查定结果</p>
-        </div>
-    </a>
+    <h3>查定结果</h3>
     <form id="form">
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">实际查定时间:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>实际查定时间:</div>
             </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true"
-                       name="start_date_true" readonly>
-            </div>
-        </div>
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">实际技术时间:</label>
-            </div>
-            <div class="weui-cell__bd">
-                <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true"
-                       name="end_date_true" readonly>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <input class="weui-input date" type="text" value="" placeholder="查定时间" id="start_date_true">
+                </div>
             </div>
         </div>
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定情况简述:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>实际技术时间:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="description" name="description" readonly></textarea>
-            </div>
-        </div>
-
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定目的:</label>
-            </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="purpose" name="purpose" readonly></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <input class="weui-input date" type="text" value="" placeholder="查定时间" id="end_date_true"
+                           name="end_date_true" readonly>
+                </div>
             </div>
         </div>
-
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定依据:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定情况简述:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="depand" name="depand" readonly></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <span  id="description" name="description" ></span>
+                </div>
             </div>
         </div>
-
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定内容:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定目的:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="details" name="details" readonly></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <span  id="purpose" name="purpose" ></span>
+                </div>
+            </div>
+        </div>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定依据:</div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <span  id="depand" name="depand" ></span>
+                </div>
             </div>
         </div>
 
-        <div class="weui-line"></div>
-        <div class="weui-cell">
-            <div class="weui-cell__hd">
-                <label class="weui-label">查定方法:</label>
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定内容:</div>
             </div>
-            <div class="weui-cell__bd">
-                <textarea class="weui-textarea" rows="5" id="means" name="means" readonly></textarea>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <span  id="details" name="details" ></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-flex bg-white">
+            <div class="field">
+                <div>查定方法:</div>
+            </div>
+            <div class="weui-flex__item">
+                <div class="content">
+                    <span  id="means" name="means" ></span>
+                </div>
             </div>
         </div>
 
@@ -219,10 +250,7 @@
 </script>
 <script>
     var id = getUrlParam("id");
-    $(".swiper-container").swiper({
-        loop: true,
-        autoplay: 3000
-    });
+
     initData();
 
 
@@ -274,10 +302,10 @@
                     })
 
 
-            });
+                });
 
-    }
-    });
+            }
+        });
     }
 
     function file(accessory) {
@@ -288,6 +316,7 @@
             });
         })
     }
+
     function getUserName(user_id) {
         $.ajaxSettings.async = false;
         var data = '';
@@ -297,6 +326,7 @@
         $.ajaxSettings.async = true;
         return data;
     }
+
     function getType(type) {
         var text = '';
         $.ajax({
@@ -309,20 +339,22 @@
         });
         return text;
     }
+
     function status(status) {
-        if (status != 1) {
-            var con = '';
-            if (status == 2) {
-                con = "查定中";
-            } else if (status == 3) {
-                con = "查定合格";
-            } else if (status == 4) {
-                con = "查定不合格";
-            } else if (status == 5) {
-                con = "查定申请未通过";
-            }
-            $("#result").val(con);
+        var con = '';
+        if (status == 1) {
+            con = "待查定";
+        } else if (status == 2) {
+            con = "查定申请未通过";
+        } else if (status == 3) {
+            con = "查定中";
+        } else if (status == 4) {
+            con = "查定合格";
+        } else if (status==5){
+            con = "查定不合格"
         }
+        $("#result").val(con);
+
     }
 
     function getTargetName(id) {

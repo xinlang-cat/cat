@@ -1,4 +1,4 @@
-/*import "./constant"*/
+import "./constant"
 
 var itemStatus = getUrlParam("itemStatus");
 //检查项目状态并设置按钮
