@@ -1163,6 +1163,7 @@
 <script type="text/javascript" src='../../../../js/common.js'></script>
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/stageSummaryFundOnOff.js"></script>
+<script src="../../js/uploadFileHint.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -1184,6 +1185,7 @@
             return false;
         }
         var formData = new FormData();
+        $.closePopup();
         formData.append("file", $(obj)[0].files[0]);
         $.ajax({
             type: "post",
@@ -1192,6 +1194,7 @@
             processData: false,
             contentType: false,
             success: function (res) {
+                $.closePopup();
                 var str = '<div class="stageAffixFile" id="' + res['id'] + '">\n' +
                     '        <div class="weui-imaginary-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
@@ -1221,6 +1224,7 @@
                 $('div.stageAffixFile:last').after(str);
             },
             error: function (xhr, textStatus, errorThrown) {
+                $.closePopup();
                 $.toast('上传失败', 'forbidden');
             }
         });

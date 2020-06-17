@@ -153,6 +153,8 @@
 <script src="../../../../js/constant.js"></script>
 <script type="text/javascript" src="../../../../js/jq.js"></script>
 <script type="text/javascript" src="../../../../js/common.js"></script>
+<script src="../../js/uploadFileHint.js"></script>
+
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -161,6 +163,7 @@
         var $galleryImg = $(".img-span");//相册图片地址
         var $gallery = $(".img-gallery");
         $uploaderInput.on("change", function (e) {
+            $("#upload-file-hint").popup();
             var formData = new FormData();
             formData.append("file", e.currentTarget.files[0]);
             $.ajax({
@@ -170,6 +173,7 @@
                 processData: false,
                 contentType: false,
                 success: function (res) {
+                    $.closePopup();
                     $uploaderFiles.append('<li class="weui-uploader__file"  data-id="'+res.id+'" style="background-image:url('+res.url+');"></li>');
                     var div = $(e).parents('div[class=weui-uploader__bd]');
                     var sum = $(e).attr('data-sum');
@@ -184,6 +188,9 @@
                         $('#accessory').val(accessory + ',' + res.id);
                     }
                 },
+                error:function (res) {
+                    $.closePopup();
+                }
             });
         });
         var index;
@@ -250,6 +257,7 @@
     });
 
     function uploader(obj) {
+        $("#upload-file-hint").popup();
         if ($(obj).val() == "") {
             $.toast("请选择上传的目标文件!", "forbidden");
             return false;
@@ -269,6 +277,7 @@
             processData: false,
             contentType: false,
             success: function (res) {
+                $.closePopup();
                 $.toast('上传成功');
                 var type = res.contentType;
                 if (res.isImg) {
@@ -301,6 +310,7 @@
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
+                $.closePopup();
                 $.toast('上传失败', 'forbidden');
             }
         });
