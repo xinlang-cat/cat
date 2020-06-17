@@ -13,4 +13,6 @@ public interface IItemInformationService extends IBaseService<ItemInformation> {
     List<ItemInformation> queryMyItem();
 
     List<ItemInformation> findListByYear(Map<String, Object> params, Class<ItemInformation> itemInformationClass);
+
+    PageResult<ItemInformation> queryListCom(Integer page, Integer rows, String sortBy, Boolean desc, Map<String, Object> params);
 }

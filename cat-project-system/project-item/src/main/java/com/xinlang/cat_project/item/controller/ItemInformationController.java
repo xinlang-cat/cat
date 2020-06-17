@@ -304,4 +304,31 @@ public class ItemInformationController {
         List<ItemInformationVice> information = itemInformationViceService.findListByParams(params,ItemInformationVice.class);
         return ResponseEntity.ok(information);
     }
+
+    /**
+     * 查询项目，分页查询
+     * @param page 当前页
+     * @param rows 每页大小
+     * @param sortBy 排序字段 (预留，暂时没用到)
+     * @param desc 是否为降序 (预留，暂时没用到)
+     * @param params 参数
+     * @return
+     */
+    @LogAnnotation(module = "获取项目列表")
+    @GetMapping("/comPage")
+    public ResponseEntity<PageResult<ItemInformation>> getComPage(@RequestParam(value = "start", defaultValue = "1") Integer page,
+                                                                  @RequestParam(value = "length", defaultValue = "10") Integer rows,
+                                                                  @RequestParam(value = "sortBy", required = false) String sortBy,
+                                                                  @RequestParam(value = "desc", defaultValue = "false") Boolean desc,
+                                                                  @RequestParam(required = false) Map<String, Object> params) {
+
+        if (page==0){
+            page++;
+        }else {
+            page/=10;
+            page++;
+        }
+        PageResult<ItemInformation> result = itemInformationService.queryListCom(page, rows, sortBy, desc, params);
+        return ResponseEntity.ok(result);
+    }
 }

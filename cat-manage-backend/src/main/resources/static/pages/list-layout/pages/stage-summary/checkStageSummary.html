@@ -553,7 +553,7 @@
     <div class="form-actions" style="margin-bottom: 50px;">
         <div class="row" align="center">
             <div class="col-md-12">
-                <button class="btn btn-primary" type="button" onclick="update()">提交审核意见</button>
+                <button class="btn btn-primary" type="button" id="submit" onclick="update()">提交审核意见</button>
             </div>
         </div>
     </div>
@@ -745,6 +745,7 @@ j
     });
 
     function update() {
+        $("#submit").attr("disabled","disabled");
         var formData = $("#form").serializeObject();
         formData.id = stageId;
         formData.enable = formData.principalCheckEnable;
@@ -756,6 +757,11 @@ j
             data: JSON.stringify(formData),
             success: function (res) {
                 layer.msg("成功");
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
+            },
+            error:function (res) {
+                $("#submit").attr("disabled",false);
             }
         })
     }
