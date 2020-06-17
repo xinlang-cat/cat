@@ -693,11 +693,8 @@
         <div class="form-actions" style="margin-bottom: 50px;">
             <div class="row" align="center">
                 <div class="col-md-12">
-                    <button class="btn btn-primary" type="button" onclick="save();">
+                    <button class="btn btn-primary" type="button" id="submit" onclick="save();">
                         <i class="fa fa-save"></i> 保存
-                    </button>
-                    <button class="btn btn-primary" type="button" onclick="test();">
-                        <i class="fa fa-save"></i> 测试
                     </button>
                 </div>
             </div>
@@ -883,6 +880,7 @@
     });
 
     function save() {
+        $("#submit").attr("disabled","disabled");
         //处理附表数据
         var stagePatents = setObjectProperty('.stagePatentCatalogue');
         var stageAffixFiles = setObjectProperty('.stageAffixFile');
@@ -913,27 +911,18 @@
             data: JSON.stringify(formData),
             success: function (res) {
                 alert("成功");
-                $("#form").find("input,textarea").each(function () {
-                    $(this).attr('disabled', false);
-                });
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
             },
             error: function (res) {
                 $("#form").find("input,textarea").each(function () {
                     $(this).attr('disabled', false);
                 });
+                $("#submit").attr("disabled",false);
             }
         })
     }
 
-    function test() {
-        $.ajax({
-            type: 'post',
-            url: domainName + '/api-summary/expert-evaluate/1',
-            contentType: "application/json; charset=utf-8",
-            success: function (res) {
-            }
-        })
-    }
     //处理List类型数据
     function setObjectProperty(attribute) {
         var target = $(attribute);

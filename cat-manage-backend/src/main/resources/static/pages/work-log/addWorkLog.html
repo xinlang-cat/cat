@@ -351,6 +351,11 @@
                 var content = "您有一条日志审核待处理";
                 var title = "您有一条日志审核待处理";
                 sendMeaasge(content,title,userIds);
+                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                parent.layer.close(index);
+            },
+            error:function (rees) {
+                $(obj).attr("disabled", false);
             }
         });
     }
