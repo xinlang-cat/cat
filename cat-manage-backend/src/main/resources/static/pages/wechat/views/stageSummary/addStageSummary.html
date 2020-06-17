@@ -1611,6 +1611,7 @@
 <script type="text/javascript" src='../../../../js/common.js'></script>
 <script type="text/javascript" src="../../../../js/my/permission.js"></script>
 <script type="text/javascript" src="../../js/stageSummaryFundOnOff.js"></script>
+<script src="../../js/uploadFileHint.js"></script>
 <script>
     $(function () {
         FastClick.attach(document.body);
@@ -1623,6 +1624,7 @@
     });
 
     function uploader(obj) {
+
         if ($(obj).val() == "") {
             $.toast("请选择上传的目标文件!", "forbidden");
             return false;
@@ -1632,6 +1634,7 @@
             $.toast("上传文件不能大于100M!", "forbidden");
             return false;
         }
+        $("#upload-file-hint").popup();
         var formData = new FormData();
         formData.append("file", $(obj)[0].files[0]);
         $.ajax({
@@ -1641,6 +1644,7 @@
             processData: false,
             contentType: false,
             success: function (res) {
+                $.closePopup();
                 var str = '<div class="stageAffixFile" id="' + res['id'] + '">\n' +
                     '        <div class="weui-imaginary-line"></div>\n' +
                     '        <div class="weui-cell">\n' +
@@ -1670,6 +1674,7 @@
                 $('div.stageAffixFile:last').after(str);
             },
             error: function (xhr, textStatus, errorThrown) {
+                $.closePopup();
                 $.toast('上传失败', 'forbidden');
             }
         });
