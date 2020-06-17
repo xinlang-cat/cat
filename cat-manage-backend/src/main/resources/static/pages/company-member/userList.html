@@ -155,9 +155,6 @@ layui.use(['layer','util'], function(){
                     	"defaultContent": "",
                     	"render": function (data, type, row) {
                     		var id = row['id'];
-                    		var href = "updateUser.html?id=" + id;
-                            var edit = buttonEdit(href, "back:user:update", pers);
-                            
                             //重置密码
                             var resetPassword = "";
                             if($.inArray("back:user:password", pers) >= 0){
@@ -165,7 +162,7 @@ layui.use(['layer','util'], function(){
                             	btn.attr("onclick", 'resetPassword(' +id+')');
                             	resetPassword = btn.prop("outerHTML");
                             }
-                            return edit + resetPassword + setRoles;
+                            return resetPassword;
                       	}
                     }
                 ]
