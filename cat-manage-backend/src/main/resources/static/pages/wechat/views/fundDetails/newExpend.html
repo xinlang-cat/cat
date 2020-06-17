@@ -39,7 +39,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label -bold">支出内容</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" placeholder="请输入" type="text" name="remark">
+                <textarea class="weui-textarea" placeholder="请输入" rows="3" name="remark"></textarea>
             </div>
         </div>
         <div class="page-bd-15">
@@ -120,7 +120,7 @@
     });
 
     var itemId = getUrlParam("itemId"),
-        budgetId = getUrlParam("budgetId")
+        budgetId = getUrlParam("budgetId");
 
     function submit() {
         var money = $('input[name=money]').val();
