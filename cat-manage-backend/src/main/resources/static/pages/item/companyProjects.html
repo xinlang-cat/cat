@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+<div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <!-- <header style="height: 100%">
+             <div align="left">
+                 <table style="width: 100%">
+                     <tr>
+                         <td>
+                             <form class="form-inline" onsubmit="return false">
+                                 <div class="form-group">
+                                     项目名称：
+                                     <input id="name" type="text" class="form-control" placeholder="项目名">
+                                     类型：
+                                     <select class="form-control input-sm" id="type">
+                                         <option value="">全部</option>
+                                         <option value="EMPHASIS_RESEARCH_AND_DEVELOPM">广西重点研发计划</option>
+                                     </select>
+                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="back:user:query"><i
+                                             class="layui-icon">&#xe615;</i>搜索
+                                     </button>
+                                 </div>
+                             </form>
+                         </td>
+                         <td align="right">
+                             <button class="layui-btn layui-btn-sm" onclick="location.href='newProject.html'">
+                                 <i class="layui-icon">&#xe608;</i> 添加
+                             </button>
+                         </td>
+                     </tr>
+                 </table>
+             </div>
+         </header>-->
+
+        <div>
+            <div class="widget-body no-padding">
+                <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <th width="30%">项目名称</th>
+                        <th width="20%">项目类型</th>
+                        <th width="10%">项目负责人</th>
+                        <th width="20%">起止时间</th>
+                        <th width="10%">状态</th>
+                        <th width="10%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="../../js/constant.js"></script>
+<script type="text/javascript" src="../../js/libs/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../js/plugin/datatables/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
+
+<script type="text/javascript">
+    var pers = checkPermission();
+    var items;
+    var example;
+    var entrusting_party;
+    var responsible_unit;
+    var management_unit;
+    getCompanryCode();
+
+
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        lay('.date').each(function () {
+            laydate.render({
+                elem: this
+                , showBottom: false
+                , trigger: 'click'
+            });
+        });
+
+        function init() {
+            example =
+                $('#dt-table').DataTable({
+                    "searching": false,
+                    "processing": false,
+                    "serverSide": true,
+                    "ordering": false,
+                    "language": {
+                        "url": "../../js/plugin/datatables/Chinese.lang"
+                    },
+                    "ajax": {
+                        "url": domainName + "/project-item/item/information/comPage",
+                        "type": "get",
+                        "data": function (d) {
+                            /* d.name = $('#name').val();
+                             d.type = $('#type').val();*/
+                            d.entrusting_party = entrusting_party;
+                            d.responsible_unit = responsible_unit;
+                            d.management_unit = management_unit;
+                            d.items = items;
+                        },
+                        "dataSrc": function (json) {
+                            console.log(json)
+                            json.recordsTotal = json.total;
+                            json.recordsFiltered = json.total;
+                            return json.data;
+                        },
+                        "error": function (xhr, textStatus, errorThrown) {
+                            var msg = xhr.responseText;
+                            console.log(msg);
+                            if (xhr.status == 400) {
+                                layer.msg(JSON.parse(msg).message);
+                            } else if (xhr.status == 401) {
+                                localStorage.removeItem("token");
+                                layer.msg("token过期，请重新登录", {shift: -1, time: 1000}, function () {
+                                    location.href = loginPage;
+                                });
+                            } else if (xhr.status == 403) {
+                                layer.msg('未授权');
+                            } else if (xhr.status == 500) {
+                                var info = JSON.parse(msg);
+                                var exception = info.exception;
+                                var message = info.message;
+                                layer.msg('系统错误：' + (exception ? exception : message));
+                            }
+                        }
+                    },
+                    "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
+                    "columns": [
+                        {"data": "name", "defaultContent": ""},
+
+                        {
+                            "data": "type",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var text = '';
+                                $.ajax({
+                                    type: 'get',
+                                    url: domainName + '/api-label/label/tree/' + data,
+                                    async: false,
+                                    success: function (data) {
+                                        text = data[0].content;
+                                    }
+                                });
+                                return text;
+                            }
+                        },
+                        {
+                            "data": "id",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var name = '';
+                                var user_id = '';
+                                $.ajax({
+                                    type: 'get',
+                                    url: domainName + '/project-item/item/personnel/list',
+                                    data: "item_id=" + data + "&user_type=PARTY_B_PRINCIPAL",
+                                    async: false,
+                                    success: function (data1) {
+                                        user_id = data1[0].user_id;
+                                        if (data1[0].name == null || data1[0].name == '' || data1[0].name == undefined) {
+                                            $.ajax({
+                                                type: 'get',
+                                                url: domainName + "/api-c/user/" + user_id,
+                                                async: false,
+                                                success: function (data2) {
+                                                    name = data2.name;
+                                                }
+                                            });
+                                        }else {
+                                            name = data1[0].name;
+                                        }
+                                    }
+                                })
+                                return name;
+
+                            }
+                        },
+                        {
+                            "data": "start_date",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                return data.substring(0, 7) + '---' + row['end_date'].substring(0, 7);
+                            }
+                        },
+                        {
+                            "data": "status",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                if (data == 0) {
+                                    return "草稿";
+                                } else if (data == 1) {
+                                    return "待审核";
+                                } else if (data == 2) {
+                                    return "在研";
+                                } else if (data == 3) {
+                                    return "结题中";
+                                } else if (data == 4) {
+                                    return "已结题";
+                                } else if (data == 5) {
+                                    return "终止中";
+                                } else if (data == 6) {
+                                    return "已终止";
+                                } else {
+                                    return "废弃";
+                                }
+                            }
+                        },
+                        {
+                            "data": "",
+                            "defaultContent": "",
+                            "render": function (data, type, row) {
+                                var id = row['id'];
+                                var href = "projectInfo.html?id=" + id;
+                                var check = buttonBasic(href, "查看", "", pers);
+                                return check;
+                            }
+                        },
+                    ],
+                });
+        }
+
+        init();
+    });
+    var h = $(window).height() - 100;
+    var w = $(window).width() - 200;
+
+    function del(id) {
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function () {
+            $.ajax({
+                type: 'delete',
+                url: domainName + "/project-item/item/information/" + id,
+                success: function (data) {
+                    example.ajax.reload();
+                    layer.msg("删除成功");
+                }
+            });
+
+            layer.close(1);
+        });
+    }
+
+    $("#searchBt").click(function () {
+        example.ajax.reload();
+    });
+
+    function getCompanryCode() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-c/company/now-user',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                identity = data.identity;
+                if (identity == "PARTY_A") {
+                    entrusting_party = data.signName;
+                } else if (identity == "PARTY_B") {
+                    responsible_unit = data.signName;
+                } else if (identity == "PARTY_C") {
+                    management_unit = data.signName;
+                } else if (identity == "PARTY_D") {
+                    getItemIds(data.signName);
+                }
+            }
+        });
+
+    }
+
+    function getItemIds(identity) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-summary/check-table/list',
+            data: "acceptance_company=" + identity,
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (i == 0) {
+                        items = data[i].itemId;
+                    } else {
+                        items = items + "," + data[i].itemId;
+                    }
+                }
+
+            }
+        })
+    }
+</script>
+</html>
