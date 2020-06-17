@@ -56,6 +56,7 @@ public class CompanyController {
             appUser.setUsername(company.getSignName());
             appUser.setNickname(company.getSignName());
             appUser.setPassword(company.getLegalPersonPhone());
+            appUser.setPhone(company.getLegalPersonPhone());
             appUser.setType(UserType.BACKEND.name());
             appUser = consumeCatUser.register(appUser);
             Long roleId = consumeCatUser.findByCode(company.getIdentity() + ":DEPT").getId();
