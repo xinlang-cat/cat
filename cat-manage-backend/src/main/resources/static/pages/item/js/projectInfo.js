@@ -129,23 +129,23 @@ function queryIndicators(id) {
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<textarea name="content" placeholder="请输入" class="layui-textarea" lay-verify="required">' + this.content + '</textarea>' +
+                        '<span>' + this.content + '</span>\n' +
                         '</div>' +
                         '</td>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input class="date" type="text" placeholder="请输入" name="period" value="'+this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7)+'" lay-verify="required">' +
+                        '<span>' + this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7) + '</span>\n' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field" style="position: relative;">' +
-                        '<input type="text" name="site" value="'+text+'">'+
+                        '<span>' + text + '</span>\n' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text" placeholder="请输入" name="" value="'+userNames+'" lay-verify="required">' +
+                        '<span>' + userNames + '</span>\n' +
                         '</div>' +
                         '</td>' +
                         '</tr>';
@@ -154,12 +154,12 @@ function queryIndicators(id) {
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + this.type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text"  name="content" value="' + analysisLablename(this.content) + '">' +
+                        '<span>' + analysisLablename(this.content) + '</span>\n' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text"  name="count" value="' + this.count + '" lay-verify="required">' +
+                        '<span>' + this.count + '</span>\n' +
                         '</div>' +
                         '</td>' +
                         ' </tr>';
@@ -185,12 +185,12 @@ function queryScheduling(id) {
                     '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                     ' <div class="field">' +
-                    ' <input type="text"  name="annual" value="' + this.annual + '" lay-verify="required">' +
+                    '<span>' + this.annual + '</span>\n' +
                     ' </div>' +
                     ' </td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                     ' <div class="field">' +
-                    '   <textarea name="objectives" placeholder="请输入内容" class="layui-textarea">' + this.objectives + '</textarea>' +
+                    '<span>' + this.objectives + '</span>\n' +
                     '  </div>' +
                     ' </td>' +
                     '  </tr>';
@@ -215,38 +215,37 @@ function queryPersonnel(id) {
                     '                            <td class="mainTd_1 tdDorder">'+serial+'</td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="hidden"  name="user_id" value="' + this.user_id + '">\n' +
-                    '                                    <input type="text"  name="name" value="' + this.name + '">\n' +
+                    '                                <span>' + this.name + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text"  name="sex" value="' + this.sex + '">\n' +
+                    '                                <span>' + this.sex + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text"  name="age" value="' + this.age + '">\n' +
+                    '                                <span>' + this.age + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text"  name="professional_title" value="' + this.professional_title + '">\n' +
+                    '                                <span>' + this.professional_title + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text"  name="specialty" value="' + this.specialty + '">\n' +
+                    '                                <span>' + this.specialty + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text"  name="organization" value="' + this.organization + '">\n' +
+                    '                                <span>' + this.organization + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text"  name="responsibilities" value="' + this.responsibilities + '">\n' +
+                    '                                <span>' + this.responsibilities + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                        </tr>';
@@ -269,23 +268,22 @@ function queryFundBudget(id) {
                 var str = '<tr>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="subject" value="' + this.subject + '" readonly>\n' +
+                    '                                       <span>' + this.subject + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="money" value="' + this.money + '">\n' +
+                    '                                       <span>' + this.money + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="content" value="' + this.content + '">\n' +
+                    '                                       <span>' + this.content + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="remark" value="' + this.remark + '">\n' +
-                    '                                        <input type="hidden" name="type" value="">\n' +
+                    '                                       <span>' + this.remark + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>';
@@ -304,16 +302,16 @@ function queryFundSource(id) {
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             var d = data[0];
-            $('.fundSource').find('input[name=responsible_unit]').val(d.responsible_unit);
-            $('.fundSource').find('input[name=state_science_and_technology_department]').val(d.state_science_and_technology_department);
-            $('.fundSource').find('input[name=state_other_department]').val(d.state_other_department);
-            $('.fundSource').find('input[name=area_department]').val(d.area_department);
-            $('.fundSource').find('input[name=city_department]').val(d.city_department);
-            $('.fundSource').find('input[name=county_department]').val(d.county_department);
-            $('.fundSource').find('input[name=own_fund]').val(d.own_fund);
-            $('.fundSource').find('input[name=bank_loan]').val(d.bank_loan);
-            $('.fundSource').find('input[name=offshore_fund]').val(d.offshore_fund);
-            $('.fundSource').find('input[name=other_fund]').val(d.other_fund);
+            $('.fundSource').find('.responsible_unit').text(d.responsible_unit);
+            $('.fundSource').find('.state_science_and_technology_department').text(d.state_science_and_technology_department);
+            $('.fundSource').find('.state_other_department').text(d.state_other_department);
+            $('.fundSource').find('.area_department').text(d.area_department);
+            $('.fundSource').find('.city_department').text(d.city_department);
+            $('.fundSource').find('.county_department').text(d.county_department);
+            $('.fundSource').find('.own_fund').text(d.own_fund);
+            $('.fundSource').find('.bank_loan').text(d.bank_loan);
+            $('.fundSource').find('.offshore_fund').text(d.offshore_fund);
+            $('.fundSource').find('.other_fund').text(d.other_fund);
         }
     })
 }
@@ -338,12 +336,11 @@ function queryContactWay(id) {
                 var str = '<tr>\n' +
                     '                                <td class="tdDorder mainTd_1" rowspan="4">\n' +
                     '                                    <span>' + text + '</span>\n' +
-                    '                                    <input type="hidden" name="type" value="' + this.type + '">\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder"><span>负责人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="leader" value="' + getUserName(this.leader) + '">\n' +
+                    '                                       <span>' + getUserName(this.leader) + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -351,7 +348,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="leader_phone" value="' + this.leader_phone + '">\n' +
+                    '                                       <span>' + this.leader_phone + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -359,7 +356,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="linkman" value="' + this.linkman + '">\n' +
+                    '                                       <span>' + this.linkman + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -367,7 +364,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="linkman_phone" value="' + this.linkman_phone + '">\n' +
+                    '                                       <span>' + this.linkman_phone + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -375,7 +372,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>传真</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="fax" value="' + this.fax + '">\n' +
+                    '                                       <span>' + this.fax + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -383,7 +380,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="postcode" value="' + this.postcode + '">\n' +
+                    '                                       <span>' + this.postcode + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -391,7 +388,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>地址</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="site" value="' + this.site + '">\n' +
+                    '                                       <span>' + this.site + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -399,7 +396,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text"  name="e_mail" value="' + this.e_mail + '">\n' +
+                    '                                       <span>' + this.e_mail + '</span>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>';

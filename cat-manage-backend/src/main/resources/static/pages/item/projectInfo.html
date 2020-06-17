@@ -15,7 +15,7 @@
             min-height: 60px;
         }
         .layui-input-inline{
-            margin-left: 75px;
+            margin-left: 0;
         }
     </style>
 </head>
@@ -104,11 +104,11 @@
                         <span>合同编号</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
                         <input type="hidden" name="id" id="item_id">
                         <input type="hidden" name="status" id="status">
-                        <input type="text" name="contract_no" >
+                        <input class="layui-input" type="text" name="contract_no" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -117,9 +117,9 @@
                         <span>项目类别</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="type" >
+                        <input class="layui-input" type="text" name="type" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -138,9 +138,9 @@
                         <span>项目名称</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="name" >
+                        <input class="layui-input" type="text" name="name" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -149,9 +149,9 @@
                         <span>委托单位（甲方）</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="entrusting_party" >
+                        <input class="layui-input" type="text" name="entrusting_party" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -170,9 +170,9 @@
                         <span>项目承担单位（乙方）</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="responsible_unit"  id="responsible_unit" readonly>
+                        <input class="layui-input" type="text" name="responsible_unit"  id="responsible_unit" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -181,9 +181,9 @@
                         <span>受委托管理单位（丙方）</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="management_unit" >
+                        <input class="layui-input" type="text" name="management_unit" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -202,9 +202,9 @@
                         <span>下达文号</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="document_number" >
+                        <input class="layui-input" type="text" name="document_number" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -213,9 +213,9 @@
                         <span>实施期限</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="period" >
+                        <input class="layui-input" class="layui-input" type="text" name="period" >
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -229,9 +229,13 @@
             <tr style="height: 40px;">
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="6">
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目地址</span>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="5">
                     <div class="layui-form-item" style="margin-bottom: 0;">
-                        <label class="layui-form-label" style="padding: 9px 0;text-align: left;">项目地址</label>
                         <div class="layui-input-inline">
                             <input type="text" name="province" class="layui-input">
                         </div>
@@ -284,7 +288,7 @@
                         <span>项目总体目标</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <td class="mainTd_1" rowspan="1" colspan="5">
                     <div class="field">
                         <textarea name="overall_objective"  class="layui-textarea"></textarea>
                     </div>
@@ -305,7 +309,7 @@
                         <span>主要研究开发内容</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <td class="mainTd_1" rowspan="1" colspan="5">
                     <div class="field">
                         <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"></textarea>
                     </div>
@@ -779,53 +783,52 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="responsible_unit">
+                                        <span class="responsible_unit"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"
-                                               name="state_science_and_technology_department">
+                                        <span class="state_science_and_technology_department"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="state_other_department">
+                                        <span class="state_other_department"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="area_department">
+                                        <span class="area_department"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="city_department">
+                                        <span class="city_department"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="county_department">
+                                        <span class="county_department"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="own_fund">
+                                        <span class="own_fund"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="bank_loan">
+                                        <span class="bank_loan"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="offshore_fund">
+                                        <span class="offshore_fund"></span>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text"  name="other_fund">
+                                        <span class="other_fund"></span>
                                     </div>
                                 </td>
                             </tr>

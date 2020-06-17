@@ -75,7 +75,7 @@ function queryIndicators(id) {
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input class="date" type="text" placeholder="请输入" name="period" value="' + this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7) + '" lay-verify="required">' +
+                        '<input class="layui-input date" type="text" placeholder="请输入" name="period" value="' + this.start_date.substring(0, 7) + ' - ' + this.end_date.substring(0, 7) + '" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -153,7 +153,7 @@ function queryIndicators(id) {
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text" placeholder="请输入" name="count" value="' + this.count + '" lay-verify="required">' +
+                        '<input class="layui-input" type="text" placeholder="请输入" name="count" value="' + this.count + '" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
                         ' </tr>';
@@ -182,7 +182,7 @@ function queryScheduling(id) {
                     '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                     ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="annual" value="' + this.annual + '" lay-verify="required">' +
+                    ' <input class="layui-input" type="text" placeholder="请输入" name="annual" value="' + this.annual + '" lay-verify="required">' +
                     ' </div>' +
                     ' </td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -216,37 +216,37 @@ function queryPersonnel(id) {
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
                     '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + this.user_id + '">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="name" value="' + this.name + '" readonly>\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="name" value="' + this.name + '" readonly>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="sex" value="' + this.sex + '" readonly>\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="sex" value="' + this.sex + '" readonly>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="age" value="' + this.age + '" readonly>\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="age" value="' + this.age + '" readonly>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + this.professional_title + '" lay-verify="required">\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="professional_title" value="' + this.professional_title + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="specialty" value="' + this.specialty + '" lay-verify="required">\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="specialty" value="' + this.specialty + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="organization" value="' + this.organization + '" lay-verify="required">\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="organization" value="' + this.organization + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
-                    '                                    <input type="text" placeholder="请输入" name="responsibilities" value="' + this.responsibilities + '" lay-verify="required">\n' +
+                    '                                    <input class="layui-input" type="text" placeholder="请输入" name="responsibilities" value="' + this.responsibilities + '" lay-verify="required">\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
                     '                        </tr>';
@@ -269,22 +269,23 @@ function queryFundBudget(id) {
                 var str = '<tr>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="subject" value="' + this.subject + '" readonly>\n' +
+                    '                                    <span>' + this.subject + '</span>\n' +
+                    '                                        <input type="hidden" placeholder="请输入" name="subject" value="' + this.subject + '" readonly>\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="money" value="' + this.money + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="money" value="' + this.money + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="content" value="' + this.content + '">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="content" value="' + this.content + '">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="remark" value="' + this.remark + '">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="remark" value="' + this.remark + '">\n' +
                     '                                        <input type="hidden" name="type" value="' + this.type + '">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
@@ -357,7 +358,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="leader_phone" value="' + this.leader_phone + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="leader_phone" value="' + this.leader_phone + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -365,7 +366,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>联系人</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="linkman" value="' + this.linkman + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman" value="' + this.linkman + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -373,7 +374,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="linkman_phone" value="' + this.linkman_phone + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman_phone" value="' + this.linkman_phone + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -381,7 +382,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>传真</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="fax" value="' + this.fax + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="fax" value="' + this.fax + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -389,7 +390,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="postcode" value="' + this.postcode + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="postcode" value="' + this.postcode + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>\n' +
@@ -397,7 +398,7 @@ function queryContactWay(id) {
                     '                                <td class="mainTd_1 tdDorder"><span>地址</span></td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="site" value="' + this.site + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="site" value="' + this.site + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
@@ -405,7 +406,7 @@ function queryContactWay(id) {
                     '                                </td>\n' +
                     '                                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                    <div class="field">\n' +
-                    '                                        <input type="text" placeholder="请输入" name="e_mail" value="' + this.e_mail + '" lay-verify="required">\n' +
+                    '                                        <input class="layui-input" type="text" placeholder="请输入" name="e_mail" value="' + this.e_mail + '" lay-verify="required">\n' +
                     '                                    </div>\n' +
                     '                                </td>\n' +
                     '                            </tr>';
