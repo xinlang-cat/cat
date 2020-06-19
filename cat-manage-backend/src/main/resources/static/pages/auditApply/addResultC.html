@@ -1189,7 +1189,9 @@
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='js/auditApply.js'></script>
 <script type="text/javascript" src='../../js/sendMessage.js'></script>
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 <script type="text/javascript">
+    var pers = checkPermission();
     var layedit, index;
     var id = getUrlParam("id");
     $("#id").val(id);
@@ -1272,6 +1274,24 @@
     function initData() {
         var data = {
             id: id,
+        };
+        if($.isArray("PARTY_C:html",pers)){
+            var data1 = {
+                audit_apply_id: id,
+            };
+            $.get(domainName + "/project-item/item/target/auditApplyResult",data1,function (res) {
+                var ids = '';
+                for(var i = 0;i < res.length; i++){
+                    if(i == 0){
+                        ids += res[i].expert_id;
+                    }else {
+                        ids += "," + res[i].expert_id;
+                    }
+                }
+                $.get(domainName + "/api-u/ids/list",{ids : ids},function (users) {
+                    console.log(users)
+                })
+            });
         }
         $.ajax({
             type: 'get',

@@ -68,6 +68,7 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
         for (PropertyDescriptor propertyDescriptor : propertyDescriptors) {
             String properName = propertyDescriptor.getName();
             Class<?> properType = propertyDescriptor.getPropertyType();
+
             if ("class".equals(properName)) {
                 continue;
             }
@@ -77,13 +78,13 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
                 if (null == writeMethod || StringUtils.isBlank(value.toString())) {
                     continue;
                 }
-                /*String reg="^\\d+$";
-                if(value.toString().matches(reg)){
+                if(Integer.class.equals(properType)){
                     value = Integer.valueOf(value.toString());
-                }*/
+                }
                 if (!writeMethod.isAccessible()) {
                     writeMethod.setAccessible(true);
                 }
+                properType.cast(value);
                 try {
                     writeMethod.invoke(bean, properType.cast(value));
                 } catch (Throwable throwable) {

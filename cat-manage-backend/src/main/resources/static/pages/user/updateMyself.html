@@ -361,10 +361,12 @@
                     </div>
                 </div>
             </div>
+            <input style="display: none" class="form-control" id="userType" name="userType">
         </fieldset>
     </form>
     <input style="display: none" class="form-control" id="domainsVa" name="domainsVa">
     <input style="display: none" class="form-control" id="skillsVa" name="signs">
+
 </div>
 
 <script src="../../js/constant.js"></script>
@@ -422,6 +424,7 @@
                     element.empty();
                     var str = '';
                     if (jQuery.isEmptyObject(data[0])) {
+                        $("#userType").val("EXPERT");
                         str = '<button class="btn btn-primary" type="submit" onclick="update(0)"><i class="fa fa-save"></i> 保存</button>';
                     } else {
                         str = '<button class="btn btn-primary" type="submit" onclick="update(1)"><i class="fa fa-save"></i> 保存</button>';
@@ -438,7 +441,7 @@
                             $('#' + key).val(date);
 
                         }
-                        $("#userType").attr("disabled","disabled");
+                        $("#userType").val(data[0].userType);
                         if(!jQuery.isEmptyObject(data[0].deptCode) ){
                             $("#deptCode").attr("disabled","disabled");
                         }
@@ -497,6 +500,7 @@
                     });
                 } else {
                     formdata.id = null;
+                    formdata.userType = $("#userType").val();
                     $.ajax({
                         type: 'post',
                         url: domainName + '/project-user/user',
@@ -524,7 +528,6 @@
                     refresh_token(); //刷新当前登录用户缓存
                     deleteCurrentTab();
                     location.reload(true);
-
                 });
             }
         });

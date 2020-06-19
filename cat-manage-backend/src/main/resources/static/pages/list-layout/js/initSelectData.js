@@ -21,6 +21,7 @@ function getMyCompany(node) {
         async: false,
         success: function (data) {
             node.val(data.signName);
+            $('.fundSource').find('input[name=responsible_unit]').val(data.signName);
             $.ajax({
                 type: 'get',
                 url: domainName + '/project-user/users',

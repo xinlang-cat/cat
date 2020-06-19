@@ -9,6 +9,7 @@
     <style>
         .layui-table td {
             position: initial;
+            padding: 0 15px;
         }
 
         .layui-textarea {
@@ -16,7 +17,7 @@
         }
 
         .layui-input-inline {
-            margin-left: 75px;
+            margin-left: 0;
         }
     </style>
 </head>
@@ -105,9 +106,9 @@
                         <span>合同编号</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="contract_no" placeholder="请输入" lay-verify="required">
+                        <input class="layui-input" type="text" name="contract_no" placeholder="请输入" lay-verify="required">
                         <input type="hidden" name="status" id="ItemStatus">
                     </div>
                 </td>
@@ -117,7 +118,7 @@
                         <span>项目类别</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
                         <!--<input type="text" name="type" placeholder="请输入">-->
                         <select name="type" id="type" lay-verify="required">
@@ -141,9 +142,9 @@
                         <span>项目名称</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="name" placeholder="请输入" lay-verify="required">
+                        <input class="layui-input" type="text" name="name" placeholder="请输入" lay-verify="required">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -152,7 +153,7 @@
                         <span>委托单位（甲方）</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
                         <!--<input type="text" name="entrusting_party" placeholder="请输入">-->
                         <select name="entrusting_party" id="entrusting_party" lay-filter="unit" lay-verify="required">
@@ -176,9 +177,9 @@
                         <span>项目承担单位（乙方）</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="responsible_unit" placeholder="请输入" id="responsible_unit" readonly>
+                        <input class="layui-input" type="text" name="responsible_unit" placeholder="请输入" id="responsible_unit" readonly>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -187,7 +188,7 @@
                         <span>受委托管理单位（丙方）</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
                         <!--<input type="text" name="management_unit" placeholder="请输入">-->
                         <select name="management_unit" id="management_unit" lay-filter="unit" lay-verify="required">
@@ -211,9 +212,9 @@
                         <span>下达文号</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
+                <td class="mainTd_1" rowspan="1" colspan="1">
                     <div class="field">
-                        <input type="text" name="document_number" placeholder="请输入" lay-verify="required">
+                        <input class="layui-input" type="text" name="document_number" placeholder="请输入" lay-verify="required">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -222,9 +223,9 @@
                         <span>实施期限</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="2">
+                <td class="mainTd_1" rowspan="1" colspan="2">
                     <div class="field">
-                        <input type="text" name="period" placeholder="请输入" class="date" lay-verify="required">
+                        <input class="layui-input date" type="text" name="period" placeholder="请输入" lay-verify="required">
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -238,26 +239,30 @@
             <tr style="height: 40px;">
                 <td class="mainTd_0" rowspan="1" colspan="1"></td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
-                <td class="mainTd_1" rowspan="1" colspan="6">
+                <td class="mainTd_1" rowspan="1" colspan="1">
+                    <div class="field">
+                        <span>项目地址</span>
+                    </div>
+                </td>
+                <td class="mainTd_1" rowspan="1" colspan="5">
                     <div class="layui-form-item" style="margin-bottom: 0;">
-                        <label class="layui-form-label" style="padding: 9px 0;text-align: left;">项目地址</label>
                         <div class="layui-input-inline">
-                            <select name="province_code" lay-filter="province" id="province">
+                            <select name="province_code" lay-filter="province" id="province" lay-verify="required">
                                 <option value="">请选择省</option>
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select name="city_code" lay-filter="city" id="city">
+                            <select name="city_code" lay-filter="city" id="city" lay-verify="required">
                                 <option value="">请选择市</option>
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select name="area_code" lay-filter="area" id="area">
+                            <select name="area_code" lay-filter="area" id="area" lay-verify="required">
                                 <option value="">请选择县/区</option>
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select name="street_code" lay-filter="street" id="street">
+                            <select name="street_code" lay-filter="street" id="street" lay-verify="required">
                                 <option value="">请选择街道</option>
                             </select>
                         </div>
@@ -301,7 +306,7 @@
                         <span>项目总体目标</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <td class="mainTd_1" rowspan="1" colspan="5">
                     <div class="field">
                         <textarea name="overall_objective" placeholder="请输入" class="layui-textarea"
                                   lay-verify="required"></textarea>
@@ -323,7 +328,7 @@
                         <span>主要研究开发内容</span>
                     </div>
                 </td>
-                <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
+                <td class="mainTd_1" rowspan="1" colspan="5">
                     <div class="field">
                         <textarea name="research_contents" placeholder="请输入内容" class="layui-textarea"
                                   lay-verify="required"></textarea>
@@ -926,22 +931,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="设备费" readonly>
+                                        <span>设备费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="设备费" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -949,22 +955,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="材料费" readonly>
+                                        <span>材料费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="材料费" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -972,22 +979,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="测试化验加工费" readonly>
+                                        <span>测试化验加工费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="测试化验加工费" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -995,22 +1003,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="燃料动力费" readonly>
+                                        <span>燃料动力费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="燃料动力费" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1018,23 +1027,24 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="差旅/会议/国际合作与交流费"
+                                        <span>差旅/会议/国际合作与交流费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="差旅/会议/国际合作与交流费"
                                                readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1042,23 +1052,24 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="出版/文献/信息传播/知识产权事务费"
+                                        <span>出版/文献/信息传播/知识产权事务费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="出版/文献/信息传播/知识产权事务费"
                                                readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1066,22 +1077,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="劳务费" readonly>
+                                        <span>劳务费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="劳务费" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1089,22 +1101,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="专家咨询费" readonly>
+                                        <span>专家咨询费</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="专家咨询费" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1112,22 +1125,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="其他支出" readonly>
+                                        <span>其他支出</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="其他支出" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1135,22 +1149,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="绩效支出" readonly>
+                                        <span>绩效支出</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="绩效支出" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1158,22 +1173,23 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="subject" value="其他费用" readonly>
+                                        <span>其他费用</span>
+                                        <input class="layui-input" type="hidden" placeholder="请输入" name="subject" value="其他费用" readonly>
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="money" lay-verify="required|number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="money" lay-verify="required|number">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="content">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="content">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="remark">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="remark">
                                         <input type="hidden" name="type" value="first_party_provide">
                                     </div>
                                 </td>
@@ -1230,53 +1246,53 @@
                             <tr>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="responsible_unit">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="responsible_unit" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入"
-                                               name="state_science_and_technology_department" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入"
+                                               name="state_science_and_technology_department" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="state_other_department" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="state_other_department" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="area_department" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="area_department" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="city_department" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="city_department" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="county_department" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="county_department" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="own_fund" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="own_fund" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="bank_loan" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="bank_loan" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="offshore_fund" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="offshore_fund" lay-verify="number" value="0">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="other_fund" lay-verify="number">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="other_fund" lay-verify="number" value="0">
                                     </div>
                                 </td>
                             </tr>
@@ -1360,7 +1376,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="leader_phone" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="leader_phone" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1368,7 +1384,7 @@
                                 <td class="mainTd_1 tdDorder"><span>联系人</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="linkman" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1376,7 +1392,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="linkman_phone" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman_phone" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1384,7 +1400,7 @@
                                 <td class="mainTd_1 tdDorder"><span>传真</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="fax" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="fax" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1392,7 +1408,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="postcode" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="postcode" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1400,7 +1416,7 @@
                                 <td class="mainTd_1 tdDorder"><span>地址</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="site" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="site" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1408,7 +1424,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="e_mail" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="e_mail" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1431,7 +1447,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="leader_phone" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="leader_phone" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1439,7 +1455,7 @@
                                 <td class="mainTd_1 tdDorder"><span>联系人</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="linkman" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1447,7 +1463,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="linkman_phone" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman_phone" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1455,7 +1471,7 @@
                                 <td class="mainTd_1 tdDorder"><span>传真</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="fax" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="fax" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1463,7 +1479,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="postcode" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="postcode" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1471,7 +1487,7 @@
                                 <td class="mainTd_1 tdDorder"><span>地址</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="site" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="site" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1479,7 +1495,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="e_mail" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="e_mail" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1502,7 +1518,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="leader_phone" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="leader_phone" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1510,7 +1526,7 @@
                                 <td class="mainTd_1 tdDorder"><span>联系人</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="linkman" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1518,7 +1534,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="linkman_phone" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="linkman_phone" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1526,7 +1542,7 @@
                                 <td class="mainTd_1 tdDorder"><span>传真</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="fax" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="fax" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1534,7 +1550,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="postcode" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="postcode" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1542,7 +1558,7 @@
                                 <td class="mainTd_1 tdDorder"><span>地址</span></td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="site" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="site" lay-verify="required">
                                     </div>
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
@@ -1550,7 +1566,7 @@
                                 </td>
                                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">
                                     <div class="field">
-                                        <input type="text" placeholder="请输入" name="e_mail" lay-verify="required">
+                                        <input class="layui-input" type="text" placeholder="请输入" name="e_mail" lay-verify="required">
                                     </div>
                                 </td>
                             </tr>
@@ -1666,7 +1682,7 @@
                 if (type != 'QUANTITY_INDICATORS') {
                     str = '<tr>' +
                         '<td class="tdDorder mainTd_1">' +
-                        '<input type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
+                        '<input class="layui-input" type="checkbox" title="" lay-skin="primary" lay-filter="c_one">' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder">' + serial + '<input type="hidden" name="type" value="' + type + '"></td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -1676,7 +1692,7 @@
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input class="date" type="text" placeholder="请输入" name="period" lay-verify="required">' +
+                        '<input class="layui-input date" type="text" placeholder="请输入" name="period" lay-verify="required">' +
                         '</div>' +
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -1724,7 +1740,7 @@
                         '</td>' +
                         '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                         '<div class="field">' +
-                        '<input type="text" placeholder="请输入" name="count" lay-verify="required|number">' +
+                        '<input class="layui-input" type="text" placeholder="请输入" name="count" lay-verify="required|number">' +
                         '</div>' +
                         '</td>' +
                         ' </tr>';
@@ -1737,7 +1753,7 @@
                     '<td class="mainTd_1 tdDorder">' + serial + '</td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
                     ' <div class="field">' +
-                    ' <input type="text" placeholder="请输入" name="annual" lay-verify="required">' +
+                    ' <input class="layui-input" type="text" placeholder="请输入" name="annual" lay-verify="required">' +
                     ' </div>' +
                     ' </td>' +
                     '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
@@ -1997,38 +2013,38 @@
                             '                            <td class="mainTd_1 tdDorder">' + serial + '</td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">' +
-                            '                                    <input type="hidden" placeholder="请输入" name="user_id" value="' + arr[0] + '">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="name" value="' + arr[1] + '" readonly>\n' +
+                            '                                    <input class="layui-input" type="hidden" placeholder="请输入" name="user_id" value="' + arr[0] + '">\n' +
+                            '                                    <input class="layui-input" type="text" placeholder="请输入" name="name" value="' + arr[1] + '" readonly>\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="sex" value="' + arr[2] + '" readonly>\n' +
+                            '                                    <input class="layui-input" type="text" placeholder="请输入" name="sex" value="' + arr[2] + '" readonly>\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="age" value="' + arr[3] + '" readonly>\n' +
+                            '                                    <input class="layui-input" type="text" placeholder="请输入" name="age" value="' + arr[3] + '" readonly>\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '" lay-verify="required">\n' +
+                            '                                    <input class="layui-input" type="text" placeholder="请输入" name="professional_title" value="' + arr[6] + '" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '" lay-verify="required">\n' +
+                            '                                    <input class="layui-input" type="text" placeholder="请输入" name="specialty" value="' + arr[7] + '" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">\n' +
-                            '                                    <input type="text" placeholder="请输入" name="organization" value="' + arr[8] + '" lay-verify="required">\n' +
+                            '                                    <input class="layui-input" type="text" placeholder="请输入" name="organization" value="' + arr[8] + '" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                             '                                <div class="field">' +
-                            '                                   <input type="text" placeholder="请输入" name="responsibilities" lay-verify="required">\n' +
+                            '                                   <input class="layui-input" type="text" placeholder="请输入" name="responsibilities" lay-verify="required">\n' +
                             '                                </div>\n' +
                             '                            </td>\n' +
                             '                        </tr>';
@@ -2041,7 +2057,7 @@
                             var UId = $(this).val();
                             if (UId != '') {
                                 var name = $(this).next().val();
-                                var data = {name: name, value: UId,};
+                                var data = {name: name, value: UId   };
                                 d.push(data)
                             }
                         });
@@ -2081,7 +2097,7 @@
                 var UId = $(this).val();
                 if (UId != '') {
                     var name = $(this).next().val();
-                    var data = {name: name, value: UId,};
+                    var data = {name: name, value: UId};
                     d.push(data)
                 }
             });
