@@ -94,8 +94,6 @@
         laydate.render({
             elem: '#test2'
             , type: 'year'
-            , value: year
-            , isInitValue: true
         });
     });
 
@@ -128,12 +126,13 @@
     initData();
 
     function initData() {
-        var year = $("#test2").val();
+        $("#test2").val(year);
+        var now = $("#test2").val();
         $.ajax({
             type: 'get',
             url: domainName + "/project-item/item/information/list",
             async: false,
-            data: 'year=' + year,
+            data: 'year=' + now,
             success: function (data) {
                 data.each(function () {
                     items.push(this);

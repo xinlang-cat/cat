@@ -355,12 +355,12 @@
                     匹配专家
                 </button>
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="pass();">
+                        onclick="pass(this);">
                     申请通过
                 </button>
 
                 <button type="button" class="layui-btn layui-btn-sm" style="border-radius: 2px;"
-                        onclick="unPass();">
+                        onclick="unPass(this);">
                     申请未通过
                 </button>
 
@@ -497,8 +497,9 @@
 
     }
 
-    function pass() {
+    function pass(obj) {
         if (match){
+            $(obj).attr("disabled", true);
             var periods = $("#periods").val();
             $.ajax({
                 type: 'put',
@@ -521,7 +522,6 @@
                     var msg = "成功";
                     layer.msg(msg, function () {
                         //将专家与查定申请关联
-
                         parent.location.reload();
                     });
                 }
