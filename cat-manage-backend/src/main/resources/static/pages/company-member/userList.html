@@ -34,10 +34,9 @@
                                 <tr>
                                 </tr>                       
                                 <tr>
-                                    <th>username</th>
-                                    <th>昵称</th>
+                                    <th>账户</th>
+                                    <th>姓名</th>
                                     <th>手机号</th>
-                                    <th>类型</th>
 									<th>状态</th>
 									<th>操作</th>
                                 </tr>
@@ -130,16 +129,6 @@ layui.use(['layer','util'], function(){
                 	{ "data": "username", "defaultContent": ""},
                     { "data": "nickname", "defaultContent": ""},
                     { "data": "phone", "defaultContent": ""},
-                    { 
-                    	"data": "type",
-                    	"defaultContent": "",
-                    	"render": function (data, type, row) {
-                    		if(data =="BACKEND"){
-                    			return "后端管理用户";
-                    		}
-                    		return "前端app用户";
-                    	}
-                    },
                     { 
                     	"data": "enabled",
                     	"defaultContent": "",
