@@ -646,7 +646,7 @@
                 $("#means").val(data[0].means);
                 $("#description").val(data[0].description);
 
-                $("#result").text(data[0].status == 2 ? "查定合格" : "查定不合格");
+                $("#result").text(data[0].status == 4 ? "查定合格" : "查定不合格");
 
                 $("#period").text(formatDate3(data[0].start_date) + " - " + formatDate3(data[0].end_date));
                 $("#periods").text(formatDate3(data[0].start_date_true) + " - " + formatDate3(data[0].end_date_true));
