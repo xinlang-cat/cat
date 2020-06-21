@@ -22,7 +22,6 @@ function checkPermission() {
 			});
 		}
 	});
-	
 	return pers;
 }
 
@@ -50,7 +49,6 @@ function checkNoPermission() {
 			});
 		}
 	});
-
 	return pers;
 }
 
