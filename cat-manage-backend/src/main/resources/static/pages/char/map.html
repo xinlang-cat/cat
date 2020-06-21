@@ -73,6 +73,8 @@
 
 <script type="text/javascript">
     //获取当年年月
+    var byCity = new Array();
+    var cityNames = new Array();
     var myDate = new Date();
     var Year = myDate.getFullYear();
     var today = formatDate4(myDate);
@@ -87,8 +89,8 @@
 
     var form, layer, layedit;
     //加载layui模块
-
-
+    var citys = new Array();
+    getCity(450000);
     layui.use(['form', 'layedit', 'laydate'], function () {
         form = layui.form
             , layer = layui.layer
@@ -142,10 +144,11 @@
                 });
                 //图表加载数据
                 typeChar(items);
-                /*
-                 statusChar(items);
-                 addChar(items);*/
-                /*cityChar(items);*/
+                4
+
+                statusChar(items);
+                addChar(items);
+                cityChar(items);
             }
         });
     }
@@ -153,13 +156,15 @@
     function typeChar(items) {
         initSelectData('PLAN_CATEGOR');//计划类别
         var typeCount = new Array();
-        addArray(typeCount, itemTypeSign.length);
-        console.log(typeCount);
+        for (var i = 0; i < itemTypeSign.length; i++) {
+            typeCount.push(0);
+        }
+        /*var typeCount= addArray( itemTypeSign.length);*/
+
         $(items).each(function () {
             var type = this.type;
             var index = itemTypeSign.indexOf(type);//获取该类型再数组中的下标
-            console.log(index);
-            console.log(typeCount);
+
             typeCount[index] = typeCount[index] + 1;//
         });
 
@@ -168,8 +173,7 @@
             var res = {"genre": itemType[i], "sold": typeCount[i]};
             data.push(res);
         }
-        console.log(data);
-        console.log(typeCount);
+
         chart.source(data, {
             sales: {
                 tickCount: 5
@@ -192,7 +196,9 @@
     function statusChar(items) {
         var statuss = ["进行中", "结题中", "已结题", "未结题"];//状态数组，用于保存项目的状态信息
         var statusCount = new Array();//状态数量数组，用于当前状态下项目的数量
-        addArray(statusCount, 4);
+        for (var i = 0; i < 4; i++) {
+            statusCount.push(0);
+        }
         $(items).each(function () {
             if (this.status == 2 && formatDate4(this.end_date) >= today) {
                 //进行中，并且没到结题时间
@@ -262,7 +268,7 @@
         var months = new Array();
         getMonth(months);
         var addCount = new Array();
-        for (var i=0;i<months.length * itemTypeSign.length;i++){
+        for (var i = 0; i < months.length * itemTypeSign.length; i++) {
             addCount.push(0);
         }
 
@@ -277,6 +283,7 @@
 
             }
         });
+
         const data = [];
         for (var i = 0; i < itemTypeSign.length; i++) {
             for (var a = 0; a < months.length; a++) {
@@ -285,7 +292,7 @@
             }
         }
 
-        chart3.clear(); // 清理所有chart.source(data);
+
         chart3.source(data);
         chart3.tooltip({
             custom: true, // 自定义 tooltip 内容框
@@ -325,8 +332,34 @@
     function cityChar(items) {
 
         $(items).each(function () {
-
+            var city_code = this.city_code;
+            //项目所在城市在城市数组中的位置
+            var a = citys.indexOf(city_code);
+            byCity[a] = byCity[a] + 1;
         });
+
+        const dataC1 = [];
+        for (var i = 0; i < cityNames.length; i++) {
+            var res = {"year": cityNames[i], "sales": byCity[i]};
+            dataC1.push(res);
+        }
+
+        chart4.source(dataC1, {
+            sales: {
+                tickCount: 5
+            }
+        });
+        chart4.tooltip({
+            showItemMarker: true,
+            onShow: function onShow(ev) {
+                const items = ev.items;
+                items[0].name = null;
+                items[0].name = items[0].title;
+                items[0].value = items[0].value + '个 ';
+            }
+        });
+        chart4.interval().position('year*sales');
+        chart4.render();
     }
 
     function formatDateY(now) {
@@ -364,9 +397,27 @@
 
     //根据length的长度，给数组aray相应的长度，默认值为0
     function addArray(array, length) {
+        var list = new Array();
         $(length).each(function () {
-            array.push(0);
+            list.push(0);
         })
+        return list;
+    }
+
+    function getCity(provinceCode) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/map/city/all/' + provinceCode,
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    byCity.push(0);
+                    var d = data[i];
+                    cityNames.push(d.cityName);
+                    citys.push(d.cityCode);
+                }
+            }
+        });
     }
 </script>
 </html>

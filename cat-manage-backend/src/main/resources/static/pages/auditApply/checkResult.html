@@ -288,6 +288,23 @@
                                 <col width="30%">
                             </colgroup>
                             <thead>
+                            <tr style="background-color: #ffffff;" permission="PARTY_C:html">
+                                <th class="tdDorder border-right-none" rowspan="1" colspan="3">
+                                    <div class="field">
+                                        <span id="expert">专家姓名</span>
+                                    </div>
+                                </th>
+                            </tr>
+
+                            <tr class="stageTarget" permission="PARTY_C:html">
+                                <th class="tdDorder">序号</th>
+                                <th class="tdDorder">专家姓名</th>
+                                <th class="tdDorder">联系电话</th>
+                            </tr>
+                            <tr permission="PARTY_C:html">
+                                <td colspan="3"></td>
+                            </tr>
+                            <thead>
                             <tr style="background-color: #ffffff;">
                                 <th class="tdDorder border-right-none" rowspan="1" colspan="3">
                                     <div class="field">
@@ -558,11 +575,11 @@
 <script type="text/javascript" src="../../layui/layui.js"></script>
 <script type="text/javascript" src='../list-layout/js/initSelectData.js'></script>
 <script type="text/javascript" src='js/auditApply.js'></script>
-
+<script type="text/javascript" src="../../js/my/permission.js"></script>
 
 <script type="text/javascript">
     var layedit, index;
-
+    var pers = checkPermission();
     var id = getUrlParam("id");
     var h = $(window).height() - 15;
     layui.use(['layedit', 'upload', 'laydate'], function () {
@@ -575,6 +592,43 @@
     function initData() {
         var data = {
             id: id,
+        }
+        if($.isArray("PARTY_C:html",pers)>-1){
+            var data1 = {
+                audit_apply_id: id,
+            };
+            $.get(domainName + "/project-item/item/target/auditApplyResult",data1,function (res) {
+                var ids = '';
+                for(var i = 0;i < res.length; i++){
+                    if(i == 0){
+                        ids += res[i].expert_id;
+                    }else {
+                        ids += "," + res[i].expert_id;
+                    }
+                }
+                $.get(domainName + "/api-u/ids/list",{ids : ids},function (users) {
+                    var STR = '';
+                    var a=0;
+                    for (var i = 0; i < users.length; i++) {
+                        a=i+1;
+                        STR = '<tr>' +
+                            '<td class="mainTd_1 tdDorder">' + a + '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field">' +
+                            '<span type="text"  name="content" lay-verify="required"> ' + users[i].nickname + ' </span>' +
+                            '</div>' +
+                            '</td>' +
+                            '<td class="mainTd_1 tdDorder" rowspan="1" colspan="1">' +
+                            '<div class="field" style="position: relative;">' +
+                            '<span type="text" name="site">' + users[i].phone+ '</span>' +
+                            '</div>' +
+                            '</td>' +
+                            '</tr>';
+                    }
+                    $("tr.stageTarget:last").after(STR);
+                    console.log(users)
+                })
+            });
         }
         $.ajax({
             type: 'get',
