@@ -31,7 +31,7 @@ public interface AppUserMapper {
 
     @Select("select id,nickname,headImgUrl from app_user")
     List<AppUser> findAll();
-    @Select("<script>select id,nickname,headImgUrl from app_user where id in  " +
+    @Select("<script>select * from app_user where id in  " +
             "<foreach item='item' index='index' collection='ids' open='(' separator=',' close=')'> #{item} </foreach></script>")
     List<AppUser> findListByIds(@Param("ids") List<Integer> ids);
     int count(Map<String, Object> params);
