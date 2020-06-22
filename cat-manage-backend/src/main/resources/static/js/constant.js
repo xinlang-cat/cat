@@ -1,5 +1,5 @@
 
-var domainName = "http://192.168.1.156";
+var domainName = "http://cltxl.com";
 var loginPage = "/api-b/login.html";
 
 function   formatDate(now)   {

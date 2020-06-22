@@ -22,8 +22,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: pig
-    password: pig
+    username: guest
+    password: guest
     virtual-host: /
   mvc:
     servlet:
