@@ -205,6 +205,19 @@ public class AppUserService implements IAppUserService {
     }
 
     @Override
+    public List<AppUser> findListByIds(String ids) {
+        String[] arr = ids.split(",");
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0;i<arr.length;i++){
+            list.add(Integer.valueOf(arr[i]));
+        }
+        if(list.size()<=0){
+            return null;
+        }
+        return appUserMapper.findListByIds(list);
+    }
+
+    @Override
     public Set<SysRole> findRoleByUserId(Long userId) {
         return userRoleMapper.findRolesByUserId(userId);
     }

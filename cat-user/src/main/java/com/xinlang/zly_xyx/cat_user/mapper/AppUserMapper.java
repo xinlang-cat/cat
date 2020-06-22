@@ -1,10 +1,7 @@
 package com.xinlang.zly_xyx.cat_user.mapper;
 
 import com.xinlang.zly_xyx.user.AppUser;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -34,7 +31,9 @@ public interface AppUserMapper {
 
     @Select("select id,nickname,headImgUrl from app_user")
     List<AppUser> findAll();
-
+    @Select("<script>select * from app_user where id in  " +
+            "<foreach item='item' index='index' collection='ids' open='(' separator=',' close=')'> #{item} </foreach></script>")
+    List<AppUser> findListByIds(@Param("ids") List<Integer> ids);
     int count(Map<String, Object> params);
     int count1(Map<String, Object> params);
 

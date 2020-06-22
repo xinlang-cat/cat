@@ -220,7 +220,7 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
                         <textarea name="check_unit_idea" id="check_unit_idea" placeholder="请输入内容"
-                                  class="layui-textarea"></textarea>
+                                  class="layui-textarea" readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -242,7 +242,7 @@
                 <td class="mainTd_1 tdDorder" rowspan="1" colspan="5">
                     <div class="field">
                         <textarea name="manage_unit_idea" id="manage_unit_idea" placeholder="请输入内容"
-                                  class="layui-textarea"></textarea>
+                                  class="layui-textarea" readonly></textarea>
                     </div>
                 </td>
                 <td class="mainTd_1" rowspan="1" colspan="1"></td>
@@ -399,13 +399,15 @@
         //监理审核，隐藏甲方按钮
         if (status == 1) {
             document.getElementById('PARTY_A').style.display = 'none';
-            if ($.inArray('PARTY_A:html', pers) != -1) {
+            if ($.inArray('PARTY_C:html', pers) != -1) {
                 $("#check_unit_idea").removeAttr("readonly");
+
             }
 
         } else if (status == 4) {
             //甲方审核，隐藏监理按钮
             document.getElementById('PARTY_C').style.display = 'none';
+
             if ($.inArray('PARTY_A:html', pers) != -1) {
                 $("#manage_unit_idea").removeAttr("readonly");
             }
@@ -450,7 +452,7 @@
         $.ajax({
             type: 'get',
             url: domainName + '/project-item/item/information/list',
-            data: "apply_id=" + id,
+            data: "id=" + id,
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {

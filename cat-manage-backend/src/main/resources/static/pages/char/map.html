@@ -16,19 +16,6 @@
             margin: 0;
             font-family: "微软雅黑";
         }
-
-        #allmap {
-
-            height: 100%;
-            overflow: hidden;
-            margin: 0;
-            font-family: "微软雅黑";
-            float: left;
-        }
-
-        #data_manipulation {
-            float: right;
-        }
     </style>
 </head>
 <body>
@@ -85,295 +72,107 @@
 <script src="https://gw.alipayobjects.com/os/antv/assets/f2/3.4.2/f2.min.js"></script>
 
 <script type="text/javascript">
-    var citys = new Array();
-    var cityNames = new Array();
-    var byCity = new Array();
-    getCity(450000);
-    var counts4 = new Array();
-    var items = new Array(); //项目原始数据
-    var contents = new Array();//项目类型
-    var counts = new Array();//项目类型数量
-    var countItem = 0;
-    var dataArr = getMonths();
-    var statuss1 = ["进行中", "结题中", "已结题", "未结题"];
-    var statussMath = [0, 0, 0, 0];
-    var signs = new Array();//项目类型标识
-    var selectItem = new Array(); //筛选过后的项目
     //获取当年年月
+    var byCity = new Array();
+    var cityNames = new Array();
     var myDate = new Date();
-    var tYear = myDate.getFullYear();
-    var tMonth = myDate.getMonth();
+    var Year = myDate.getFullYear();
     var today = formatDate4(myDate);
-    var show = false;
+    //新建项目数组，用于保存项目
+    var items = new Array();
 
-    var m = tMonth + 1;
-    if (m.toString().length == 1) {
-        m = "0" + m;
-        //将10一下的月份前加0
-    }
-    var now = tYear + '-' + m;
+    //新建项目类型数组，用于保存项目类型
+    var itemType = new Array();
 
-
-    const chart = new F2.Chart({
-        id: 'myChart',
-        pixelRatio: window.devicePixelRatio, // 指定分辨率
-
-    });
-    const chart1 = new F2.Chart({
-        id: 'container',
-        pixelRatio: window.devicePixelRatio,
-        padding: [20, 'auto']
-    });
-    const chart3 = new F2.Chart({
-        id: 'container2',
-        pixelRatio: window.devicePixelRatio
-    });
-    const chart4 = new F2.Chart({
-        id: 'city',
-        pixelRatio: window.devicePixelRatio
-    });
-    initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
-
-
-    function initSelectData(sign, node) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-label/label/tree/' + sign,
-            async: false,
-            success: function (data) {
-                var ds = data[0].child;
-                $(ds).each(function () {
-                    node.append('<option value=' + this.sign + '>' + this.content + '</option>');
-                });
-            }
-        })
-    }
+    //新建项目类型标识数组，用于保存项目类型标识
+    var itemTypeSign = new Array();
 
     var form, layer, layedit;
-
+    //加载layui模块
+    var citys = new Array();
+    getCity(450000);
     layui.use(['form', 'layedit', 'laydate'], function () {
         form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
         var laydate = layui.laydate;
 
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
         laydate.render({
             elem: '#test2'
             , type: 'year'
         });
-        laydate.render({
-            elem: '#test1' //指定元素
-            , type: 'month'
-            //日期时间被切换后的回调,年月日时间被切换时都会触发。
-            , change: function (value, date, endDate) {
-                console.log(value); //得到日期生成的值，如：2017-08-18
-                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
-            }
-            //控件选择完毕后的回调,点击日期、清空、现在、确定均会触发。
-            , done: function (value, date, endDate) {
-                console.log(value); //得到日期生成的值，如：2017-08-18
-                console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
-                console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
-                //清空筛选后的项目数组，再进行添加
-                var counts5 = getCountA(counts.length);
-                var dataArr1 = [];
-                if (value.length > 0) {
-                    var data = new Date(value);
-                    var year = data.getFullYear();
-                    data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
-                    for (var i = 0; i < 6; i++) {
-                        data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
-                        var m = data.getMonth() + 1;
-                        m = m < 10 ? "0" + m : m;
-                        dataArr1.push(data.getFullYear() + "-" + m);
-                    }
-                } else {
-                    dataArr1 = dataArr;
-                }
-                showTable3(items, counts5, dataArr1);
-
-
-            }
-        });
-
     });
 
-    function showTable3(data, counts5, dataArr1) {
-        selectItem = [];
-        $(data).each(function () {
-            var sign = this.type;
-            var a = signs.indexOf(sign);
-            counts[a] = counts[a] + 1;
-            var start = formatDateY(this.start_date);
-            var b = dataArr1.indexOf(start);
-            if (b >= 0) {
-                counts5[a * 6 + b] = counts5[a * 6 + b] + 1;
-                selectItem.push(this);
-            }
-        });
+    //加载图表
 
-        if (selectItem.length > 0) {
-            showTable(selectItem);
-        }
+    //类型统计图表
+    const chart = new F2.Chart({
+        id: 'myChart',
+        pixelRatio: window.devicePixelRatio, // 指定分辨率
 
-        const data2 = [];
-
-        for (var i = 0; i < counts.length; i++) {
-            for (var a = 0; a < dataArr1.length; a++) {
-                var res2 = {"name": contents[i], "月份": dataArr1[a], "月均降雨量": counts5[i * 6 + a]};
-                data2.push(res2);
-            }
-        }
-        chart3.clear(); // 清理所有chart.source(data);
-        chart3.source(data2);
-        chart3.tooltip({
-            custom: true, // 自定义 tooltip 内容框
-            onChange: function onChange(obj) {
-                const legend = chart3.get('legendController').legends.top[0];
-                const tooltipItems = obj.items;
-                const legendItems = legend.items;
-                const map = {};
-                legendItems.forEach(function (item) {
-                    map[item.name] = _.clone(item);
-                });
-                tooltipItems.forEach(function (item) {
-                    const name = item.name;
-                    const value = item.value;
-                    if (map[name]) {
-                        map[name].value = value;
-                    }
-                });
-                legend.setItems(_.values(map));
-            },
-            onHide: function onHide() {
-                const legend = chart3.get('legendController').legends.top[0];
-                legend.setItems(chart.getLegendItems().country);
-            }
-        });
-
-        chart3.interval()
-            .position('月份*月均降雨量')
-            .color('name', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634'])
-            .adjust({
-                type: 'dodge',
-                marginRatio: 0.05 // 设置分组间柱子的间距
-            });
-        chart3.render();
-    }
-
-
-    layui.use(['layer'], function () {
-        var layer = layui.layer;
+    });
+    //状态统计图表
+    const chart1 = new F2.Chart({
+        id: 'container',
+        pixelRatio: window.devicePixelRatio,
+        padding: [20, 'auto']
+    });
+    //新增统计图表
+    const chart3 = new F2.Chart({
+        id: 'container2',
+        pixelRatio: window.devicePixelRatio
+    });
+    //城市统计图表
+    const chart4 = new F2.Chart({
+        id: 'city',
+        pixelRatio: window.devicePixelRatio
     });
 
-    var w = $(window).width() - 30;
-
-
+    //获取项目
     initData();
 
-
     function initData() {
-
-        //生成月份数组
-        $.ajax({
-            type: 'get',
-            url: domainName + '/api-label/label/tree/' + "PLAN_CATEGOR",
-            async: false,
-            success: function (data) {
-                $(data[0].child).each(function () {
-                    var content = this.content;
-                    contents.push(content);
-                    var sign = this.sign;
-                    signs.push(sign);
-                    counts.push(0);
-                });
-
-            }
-        });
-        counts4 = getCountA(counts.length);
+        $("#test2").val(Year);
         $.ajax({
             type: 'get',
             url: domainName + "/project-item/item/information/list",
             async: false,
+            data: 'year=' + Year,
             success: function (data) {
-
                 $(data).each(function () {
-
-                    if (this.status <= 1) {
-                        return true;
-                    } else if (this.status == 2 && formatDate4(this.end_date) >= today) {
-                        //进行中，并且没到结题时间
-                        statussMath[0] = statussMath[0] + 1;
-
-                    } else if (this.status == 3 || this.status == 5) {
-                        statussMath[1] = statussMath[1] + 1;
-
-                    } else if (this.status == 4 || this.status == 6) {
-                        statussMath[2] = statussMath[2] + 1;
-
-                    } else if (this.status == 2 && formatDate4(this.end_date) < today) {
-                        statussMath[3] = statussMath[3] + 1;
-                    }
                     items.push(this);
-                    countItem++;//项目总数变化
-                    var sign = this.type;
-                    var a = signs.indexOf(sign);
-                    counts[a] = counts[a] + 1;//将对应状态的项目数量改变
-                    var start = formatDateY(this.start_date);
-                    var b = dataArr.indexOf(start);//获取项目开始时间对应的下标位置
-                    if (b >= 0) {
-                        counts4[a * 6 + b] = counts4[a * 6 + b] + 1;
-                    }
                 });
+                //图表加载数据
+                typeChar(items);
+                4
 
-                showCityChar(items);
+                statusChar(items);
+                addChar(items);
+                cityChar(items);
             }
+        });
+    }
+
+    function typeChar(items) {
+        initSelectData('PLAN_CATEGOR');//计划类别
+        var typeCount = new Array();
+        for (var i = 0; i < itemTypeSign.length; i++) {
+            typeCount.push(0);
+        }
+        /*var typeCount= addArray( itemTypeSign.length);*/
+
+        $(items).each(function () {
+            var type = this.type;
+            var index = itemTypeSign.indexOf(type);//获取该类型再数组中的下标
+
+            typeCount[index] = typeCount[index] + 1;//
         });
 
         const data = [];
-        const data1 = [];
-        const data2 = [];
-        for (var i = 0; i < counts.length; i++) {
-            var res = {"genre": contents[i], "sold": counts[i]};
+        for (var i = 0; i < itemType.length; i++) {
+            var res = {"genre": itemType[i], "sold": typeCount[i]};
             data.push(res);
         }
-
-        for (var i = 0; i < statuss1.length; i++) {
-            var math = statussMath[i] / countItem * 1000;
-            math = Math.round(math);
-            var res1 = {"name": statuss1[i], "percent": math / 10, "a": "1"};
-            data1.push(res1);
-        }
-        for (var i = 0; i < counts.length; i++) {
-            for (var a = 0; a < dataArr.length; a++) {
-                var res2 = {"name": contents[i], "月份": dataArr[a], "月均降雨量": counts4[i * 6 + a]};
-
-                data2.push(res2);
-            }
-        }
-        /*
-                // Step 1: 创建 Chart 对象
-
-
-                // Step 2: 载入数据源
-                chart.source(data);
-
-                // Step 3：创建图形语法，绘制柱状图，由 genre 和 sold 两个属性决定图形位置，genre 映射至 x 轴，sold 映射至 y 轴
-                chart
-                    .interval()
-                    .position('genre*sold')
-                    .color('genre', ['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
-
-                // Step 4: 渲染图表
-                chart.render();*/
-
 
         chart.source(data, {
             sales: {
@@ -392,15 +191,44 @@
         chart.interval().position('genre*sold').color(['#1890ff', '#2fc25b', '#ffa500', '#ff030b', '#884898', '#e1cf00', '#00b634']);
         chart.render();
 
-        //====================================================================================================
+    }
+
+    function statusChar(items) {
+        var statuss = ["进行中", "结题中", "已结题", "未结题"];//状态数组，用于保存项目的状态信息
+        var statusCount = new Array();//状态数量数组，用于当前状态下项目的数量
+        for (var i = 0; i < 4; i++) {
+            statusCount.push(0);
+        }
+        $(items).each(function () {
+            if (this.status == 2 && formatDate4(this.end_date) >= today) {
+                //进行中，并且没到结题时间
+                statusCount[0] = statusCount[0] + 1;
+
+            } else if (this.status == 3 || this.status == 5) {
+                statusCount[1] = statusCount[1] + 1;
+
+            } else if (this.status == 4 || this.status == 6) {
+                statusCount[2] = statusCount[2] + 1;
+
+            } else if (this.status == 2 && formatDate4(this.end_date) < today) {
+                statusCount[3] = statusCount[3] + 1;
+            }
+        });
+        const data = [];
+        for (var i = 0; i < statusCount.length; i++) {
+            var math = statusCount[i] / items.length * 1000;
+            math = Math.round(math);
+            var res = {"name": statuss[i], "percent": math / 10, "a": "1"};
+            data.push(res);
+        }
 
         const map = {};
-        data1.forEach(function (obj) {
+        data.forEach(function (obj) {
             map[obj.name] = obj.percent + '%';
         });
 
 
-        chart1.source(data1, {
+        chart1.source(data, {
             percent: {
                 formatter: function formatter(val) {
                     return val + '%';
@@ -429,13 +257,43 @@
             position: ['50%', '45%'],
             html: `<div style="width: 200px;height: 30px;text-align: center;">
       <div style="font-size: 18px">项目总数</div>
-      <div style="font-size: 20px">` + countItem + `</div>
+      <div style="font-size: 20px">` + items.length + `</div>
     </div>`
         });
         chart1.render();
+    }
+
+    function addChar(items) {
+        //获取本年的所有月份数组
+        var months = new Array();
+        getMonth(months);
+        var addCount = new Array();
+        for (var i = 0; i < months.length * itemTypeSign.length; i++) {
+            addCount.push(0);
+        }
+
+        $(items).each(function () {
+            var sign = this.type;
+            var a = itemTypeSign.indexOf(sign);
+
+            var start = formatDateY(this.start_date);
+            var b = months.indexOf(start);
+            if (b >= 0) {
+                addCount[a * 12 + b] = addCount[a * 12 + b] + 1;
+
+            }
+        });
+
+        const data = [];
+        for (var i = 0; i < itemTypeSign.length; i++) {
+            for (var a = 0; a < months.length; a++) {
+                var res = {"name": itemType[i], "月份": months[a], "月均降雨量": addCount[i * 6 + a]};
+                data.push(res);
+            }
+        }
 
 
-        chart3.source(data2);
+        chart3.source(data);
         chart3.tooltip({
             custom: true, // 自定义 tooltip 内容框
             onChange: function onChange(obj) {
@@ -471,65 +329,7 @@
         chart3.render();
     }
 
-    function getMonths() {
-        var dataArr = [];
-        var data = new Date();
-        var year = data.getFullYear();
-        data.setMonth(data.getMonth() - 6, 1); //获取到当前月份,设置月份
-        for (var i = 0; i < 12; i++) {
-            data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
-            var m = data.getMonth() + 1;
-            m = m < 10 ? "0" + m : m;
-            dataArr.push(data.getFullYear() + "-" + m);
-        }
-        return dataArr;
-    }
-
-    function getCount2() {
-        var dataCoun = [];
-        for (var i = 0; i < 6; i++) {
-            dataCoun.push(0);
-        }
-        return dataCoun;
-    }
-
-    function getCity(provinceCode) {
-        $.ajax({
-            type: 'get',
-            url: domainName + '/map/city/all/' + provinceCode,
-            async: false,
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    byCity.push(0);
-                    var d = data[i];
-                    cityNames.push(d.cityName);
-                    citys.push(d.cityCode);
-                }
-            }
-        });
-    }
-
-    function getCountA(a) {
-        var dataCoun = [];
-        var dataCoun = [];
-        for (var b = 0; b < a; b++) {
-            for (var i = 0; i < 6; i++) {
-                dataCoun.push(0);
-            }
-        }
-
-        return dataCoun;
-    }
-
-    function formatDateY(now) {
-        var now = new Date(now);
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        return year + "-" + fixZero(month, 2);
-    }
-
-
-    function showCityChar(items) {
+    function cityChar(items) {
 
         $(items).each(function () {
             var city_code = this.city_code;
@@ -560,9 +360,64 @@
         });
         chart4.interval().position('year*sales');
         chart4.render();
-
-
     }
 
+    function formatDateY(now) {
+        var now = new Date(now);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        return year + "-" + fixZero(month, 2);
+    }
+
+    function getMonth(months) {
+        var data = new Date();
+        data.setMonth(1, 1); //获取到当前月份,设置月份
+        for (var i = 0; i < 12; i++) {
+            data.setMonth(data.getMonth() + 1); //每次循环一次 月份值减1
+            var m = data.getMonth() + 1;
+            m = m < 10 ? "0" + m : m;
+            months.push(data.getFullYear() + "-" + m);
+        }
+    }
+
+    function initSelectData(sign) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + sign,
+            async: false,
+            success: function (data) {
+                var ds = data[0].child;
+                $(ds).each(function () {
+                    itemType.push(this.content);
+                    itemTypeSign.push(this.sign)
+                });
+            }
+        })
+    }
+
+    //根据length的长度，给数组aray相应的长度，默认值为0
+    function addArray(array, length) {
+        var list = new Array();
+        $(length).each(function () {
+            list.push(0);
+        })
+        return list;
+    }
+
+    function getCity(provinceCode) {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/map/city/all/' + provinceCode,
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    byCity.push(0);
+                    var d = data[i];
+                    cityNames.push(d.cityName);
+                    citys.push(d.cityCode);
+                }
+            }
+        });
+    }
 </script>
 </html>
