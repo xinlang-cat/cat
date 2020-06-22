@@ -72,7 +72,7 @@
                         <i class="layui-icon">&#xe615;</i>查看经费使用
                     </button>
                     <button class="layui-btn layui-btn-sm" onclick="showWork()">
-                        <i class="layui-icon">&#xe615;</i>查看工作总结
+                        <i class="layui-icon" >&#xe615;</i>查看工作总结
                     </button>
                     <button class="layui-btn layui-btn-sm" onclick="showSkill()">
                         <i class="layui-icon">&#xe615;</i>查看技术总结
@@ -533,6 +533,10 @@
                         <button data-method="offset" type="button" data-type="auto"
                                 class="layui-btn layui-btn-normal" id="test">匹配专家
                         </button>
+                        <button data-method="offset" type="button" data-type="auto"
+                                class="layui-btn layui-btn-normal" id="see" onclick="seeEx()" style="display: none">
+                            专家已指定，点击查看
+                        </button>
                     </td>
                 </tr>
 
@@ -668,7 +672,7 @@
                     //删除专家审核记录
                     $.ajax({
                         type: 'delete',
-                        url: domainName + '/api-summary/expert-evaluate/item-id/'+item_id,
+                        url: domainName + '/api-summary/expert-evaluate/item-id/' + item_id,
                         success: function (data) {
 
                         }
@@ -758,7 +762,8 @@
                     match = true;
                     //锁定匹配专家按钮，提醒用户专家已经匹配
                     $("#test").attr("disabled", "disabled");
-                    $("#test").text('专家已指定，无需再次匹配');
+                    document.getElementById('see').style.display = 'block';
+                    document.getElementById('test').style.display = 'none';
                 } else {
                     //未匹配过专家
                     math = false;
@@ -782,6 +787,48 @@
 
     var h = $(window).height() - 15;
     var w = $(window).width() - 30;
+
+    function seeEx() {
+        var ids = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/project-item/item/personnel/list',
+            data: "item_id=" + item_id + "&user_type=EXPERT",
+            async: false,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if (i == 0) {
+                        ids += data[i].user_id;
+                    } else {
+                        ids += "," + data[i].user_id;
+                    }
+                }
+            }
+        })
+        var str = '';
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-u/ids/list',
+            data: "ids=" + ids,
+            async: false,
+            success: function (users) {
+                for (var i = 0; i < users.length; i++) {
+                    str += '<div style="padding: 20px 100px;">' + users[i].nickname + '--' + users[i].phone + '</div>';
+                }
+            }
+        })
+
+
+        layer.open({
+            title: "专家信息",
+            type: 1,
+            area: [w * 0.5 + 'px', h * 0.5 + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: str,
+        });
+        layui.element.init();
+    }
 
     function showAudit() {
         layer.open({
@@ -837,7 +884,7 @@
             area: [w + 'px', h + 'px'],
             maxmin: true,
             shadeClose: true,
-            content: ['../list-layout/pages/stage-summary/checkStageSummaryList.html?itemId=' + item_id]
+            content: ['../list-layout/pages/stage-summary/checkStageSummaryList.html?item_id=' + item_id]
 
         });
     }

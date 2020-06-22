@@ -138,12 +138,16 @@
                                     async: false,
                                     success: function (data) {
                                        var status = data[0].status;
-                                        if (status == 3) {
-                                            now = "待专家审核";
+                                        if (status == 1) {
+                                            now = "待查定";
+                                        } else if (status == 2) {
+                                            now = "查定申请未通过";
+                                        } else if (status == 3) {
+                                            now = "查定中";
                                         } else if (status == 4) {
-                                            now = "审核通过";
-                                        } else if (status == 5) {
-                                            now = "审核未通过";
+                                            now = "查定合格";
+                                        } else if (status==5){
+                                            now = "查定不合格"
                                         }
                                     }
                                 });
