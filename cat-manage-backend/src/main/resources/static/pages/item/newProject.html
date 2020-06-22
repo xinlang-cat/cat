@@ -2310,6 +2310,14 @@
             layer.msg("请填写主要研究、开发人员!");
             return;
         }
+        if (!indicator[0].type) {
+            layer.msg("请填写项目考核指标!");
+            return;
+        }
+        if (!achievement[0].type) {
+            layer.msg("请填写项目预估效益及成果!");
+            return;
+        }
         if (!scheduling[0].annual) {
             layer.msg("请填写进度安排!");
             return;
@@ -2407,6 +2415,7 @@
 
     //添加用户信息
     function addUserInfo(userInfo) {
+        userInfo.userType = "PARTY_B_MEMBER";
         $.ajax({
             type: 'post',
             url: domainName + '/project-user/user',

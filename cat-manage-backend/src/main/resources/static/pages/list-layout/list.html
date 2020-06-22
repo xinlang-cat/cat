@@ -179,7 +179,7 @@
                         '                        <li><a class="active" href="../indicator/indicatorList.html?itemId=' + this.id + '&userId=' + userId + '&itemStatus=' + tableStatus + '">工作日志</a></li>\n' +
                         '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/stage-summary/stageSummaryList.html?item_id=' + this.id + '&user_id=' + userId + '&itemStatus=' + tableStatus + '">阶段总结</a></li>\n' +
                         '                        <li><a class="active" href="pages/fundUse/fundBudget.html?id=' + this.id + '&itemStatus=' + tableStatus + '">经费使用</a></li>\n' +
-
+                        '                        <li no-permission="PARTY_B:member:html"><a class="active" href="pages/fundArrival/fundArrivalList.html?id=' + this.id + '&itemStatus=' + tableStatus + '">经费拨付</a></li>\n' +
                         '                        <li no-permission="PARTY_B:member:html" ><a class="active" href="../auditApply/applyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + tableStatus + '">查定申请</a></li>\n' +
                         '                        <li no-permission="PARTY_B:member:html"><a class="active" href="../modifyApply/modifyList.html?item_id=' + this.id + '&userId=' + userId + '&itemStatus=' + tableStatus + '">变更申请</a></li>\n';
                     if ($.inArray('EXPERT:html', pers) != -1) {

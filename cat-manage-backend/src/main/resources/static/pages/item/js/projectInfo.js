@@ -120,7 +120,7 @@ function queryIndicators(id) {
                         var UId = $(d).val();
                         $(userIds).each(function () {
                             if (UId == this) {
-                                var name = $(d).next().val();
+                                var name = $(d).next().text();
                                 userNames.push(name)
                             }
                         });
@@ -215,6 +215,7 @@ function queryPersonnel(id) {
                     '                            <td class="mainTd_1 tdDorder">'+serial+'</td>\n' +
                     '                            <td class="mainTd_1 tdDorder" rowspan="1" colspan="1">\n' +
                     '                                <div class="field">\n' +
+                    '                                <input type="hidden"  name="user_id" value="' + this.user_id + '">\n' +
                     '                                <span>' + this.name + '</span>\n' +
                     '                                </div>\n' +
                     '                            </td>\n' +
