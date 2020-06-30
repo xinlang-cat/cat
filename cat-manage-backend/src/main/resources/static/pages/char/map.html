@@ -135,7 +135,7 @@
         $("#test2").val(Year);
         $.ajax({
             type: 'get',
-            url: domainName + "/project-item/item/information/list",
+            url: domainName + "/project-item/item/information/listYear",
             async: false,
             data: 'year=' + Year,
             success: function (data) {

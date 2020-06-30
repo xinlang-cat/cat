@@ -17,10 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Year;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -82,7 +82,7 @@ public class ItemInformationService extends BaseService<ItemInformation> impleme
             //遍历项目ID查询项目
             for (ItemPersonnel p : personnels) {
                 ItemInformation itemInformation = itemInformationMapper.selectByPrimaryKey(p.getItem_id());
-                if (itemInformation != null&&itemInformation.getStatus()>1) {
+                if (itemInformation != null && itemInformation.getStatus() > 1) {
                     list.add(itemInformation);
                 }
             }
@@ -91,9 +91,16 @@ public class ItemInformationService extends BaseService<ItemInformation> impleme
     }
 
     @Override
-    public List<ItemInformation> findListByYear(Map<String, Object> params, Class<ItemInformation> itemInformationClass) {
+    public List<ItemInformation> findListByYear(Map<String, Object> params, Class<ItemInformation> itemInformationClass) throws ParseException {
         Example example = new Example(ItemInformation.class);
-        example.createCriteria().andEqualTo( "YEAR(create_date)",params.get("year"));
+        Example.Criteria criteria = example.createCriteria();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = params.get("year") + "-0-0 00:00:00";
+        String str1 = Integer.parseInt((String) params.get("year") )+ 1 + "-0-0 00:00:00";
+        Date start = sdf.parse(str);
+        Date end = sdf.parse(str1);
+        criteria.andBetween("start_date", start, end);
         List<ItemInformation> list = itemInformationMapper.selectByExample(example);
         return list;
     }
@@ -104,25 +111,25 @@ public class ItemInformationService extends BaseService<ItemInformation> impleme
         PageHelper.startPage(page, rows);
         // 过滤
         Example example = new Example(ItemInformation.class);
-        System.err.println("entrusting_party="+params.get("entrusting_party"));
-        System.err.println("responsible_unit="+params.get("responsible_unit"));
-        System.err.println("management_unit="+params.get("management_unit"));
-        System.err.println("items="+params.get("items"));
-        if (params.get("entrusting_party") != null ) {
-            System.err.println("entrusting_party="+params.get("entrusting_party"));
-            example.createCriteria().andEqualTo( "entrusting_party",params.get("entrusting_party"));
+        System.err.println("entrusting_party=" + params.get("entrusting_party"));
+        System.err.println("responsible_unit=" + params.get("responsible_unit"));
+        System.err.println("management_unit=" + params.get("management_unit"));
+        System.err.println("items=" + params.get("items"));
+        if (params.get("entrusting_party") != null) {
+            System.err.println("entrusting_party=" + params.get("entrusting_party"));
+            example.createCriteria().andEqualTo("entrusting_party", params.get("entrusting_party"));
         } else if (params.get("responsible_unit") != null) {
-            System.err.println("responsible_unit="+params.get("responsible_unit"));
-            example.createCriteria().andEqualTo( "responsible_unit",params.get("responsible_unit"));
+            System.err.println("responsible_unit=" + params.get("responsible_unit"));
+            example.createCriteria().andEqualTo("responsible_unit", params.get("responsible_unit"));
         } else if (params.get("management_unit") != null) {
-            System.err.println("management_unit="+params.get("management_unit"));
-            example.createCriteria().andEqualTo( "management_unit",params.get("management_unit"));
-        } else if(params.get("items") != null){
+            System.err.println("management_unit=" + params.get("management_unit"));
+            example.createCriteria().andEqualTo("management_unit", params.get("management_unit"));
+        } else if (params.get("items") != null) {
             String items = (String) params.get("items");
             String[] itemIds = items.split(",");
-            example.createCriteria().andIn( "id", Arrays.asList(itemIds));
-        }else {
-            example.createCriteria().andEqualTo( "id",0);
+            example.createCriteria().andIn("id", Arrays.asList(itemIds));
+        } else {
+            example.createCriteria().andEqualTo("id", 0);
         }
         if (StringUtils.isNotBlank(sortBy)) {
             // 排序
