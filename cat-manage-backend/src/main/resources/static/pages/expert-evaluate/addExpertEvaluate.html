@@ -91,8 +91,8 @@
             <div class="form-group">
                 <label class="col-md-1 control-label">综合意见建议</label>
                 <div class="col-md-11">
-						<textarea class="layui-textarea" id="evaluateContent" name="evaluateContent" rows="15">
-						</textarea>
+						<textarea class="layui-textarea" id="evaluateContent" placeholder="请填写综合意见建议" name="evaluateContent" rows="15"></textarea>
+
                 </div>
             </div>
             <div class="form-group">
@@ -268,7 +268,6 @@
             maxmin: true,
             shadeClose: true,
             content: ['../summary/generateWorkReport.html?itemId=' + itemId]
-
         });
     }
 
@@ -280,7 +279,6 @@
             maxmin: true,
             shadeClose: true,
             content: ['../indicator/readIndicatorList.html?itemId=' + itemId]
-
         });
     }
 
@@ -292,7 +290,6 @@
             maxmin: true,
             shadeClose: true,
             content: ['../list-layout/pages/stage-summary/stageSummaryList.html?item_id=' + itemId]
-
         });
     }
 
@@ -307,6 +304,7 @@
 
         });
     }
+
     function showLog(itemId ,id,userId) {
         layer.open({
             title: "日志详情",
