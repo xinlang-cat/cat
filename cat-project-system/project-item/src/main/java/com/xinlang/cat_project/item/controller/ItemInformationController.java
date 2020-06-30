@@ -266,7 +266,7 @@ public class ItemInformationController {
     @ApiOperation(value = "查询项目信息")
     @LogAnnotation(module = "查询项目信息")
     @GetMapping("listYear")
-    public ResponseEntity<List<ItemInformation>> getItemByYear(@RequestParam Map<String, Object> params) {
+    public ResponseEntity<List<ItemInformation>> getItemByYear(@RequestParam Map<String, Object> params) throws ParseException {
         List<ItemInformation> information = itemInformationService.findListByYear(params, ItemInformation.class);
         return ResponseEntity.ok(information);
     }

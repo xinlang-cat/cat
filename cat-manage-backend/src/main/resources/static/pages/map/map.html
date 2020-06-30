@@ -70,7 +70,7 @@
 
 
 
-
+    var signs = new Array();//项目类型标识
     initSelectData('PLAN_CATEGOR', $('#type'));//计划类别
 
 
@@ -223,6 +223,18 @@
 
 
     function initData() {
+        $.ajax({
+            type: 'get',
+            url: domainName + '/api-label/label/tree/' + "PLAN_CATEGOR",
+            async: false,
+            success: function (data) {
+                $(data[0].child).each(function () {
+                    var sign = this.sign;
+                    signs.push(sign);
+                });
+
+            }
+        });
         $.ajax({
             type: 'get',
             url: domainName + "/project-item/item/information/list",
