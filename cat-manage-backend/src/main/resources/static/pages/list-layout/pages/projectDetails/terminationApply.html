@@ -8,6 +8,18 @@
 </head>
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <table style="width: 100%">
+        <tr>
+            <td align="left" style="border: 0;text-align: left; position: absolute;left: 30px;top: 15px;">
+                <button class="layui-btn layui-btn-sm" onclick="showWork()">
+                    <i class="layui-icon">&#xe615;</i>查看工作总结
+                </button>
+                <button class="layui-btn layui-btn-sm" onclick="showSkill()">
+                    <i class="layui-icon">&#xe615;</i>查看技术总结
+                </button>
+            </td>
+        </tr>
+    </table>
     <div style="position: absolute;right: 30px;top: 15px;">
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);" name="sub">提交</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);" name="sub">保存</button>
@@ -75,10 +87,13 @@
     var currentUser = currentUser();
 
     var accessorys = '';
-    layui.use(['upload','form'], function () {
+
+    var layer;
+    layui.use(['upload','form','layer'], function () {
         var $ = layui.jquery,
             upload = layui.upload,
             form = layui.form;
+        layer = layui.layer;
         //文件上传
         var uploadInst = upload.render({
             elem: '#files' //绑定元素
@@ -89,7 +104,7 @@
                 var str = '<tr> <td>' + res.name + '</td>\n' +
                     '<td>\n' +
                     '<input type="hidden" name="filId" value="'+res.id+'">' +
-                    '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+res.url+'" target="_blank">查看</a>\n' +
+                    '<a class="layui-btn layui-btn-xs demo-reload" href="'+res.url+'" target="_blank">查看</a>\n' +
                     '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
                     '</td>\n' +
                     '</tr>';
@@ -109,7 +124,7 @@
         });
     });
 
-    var id = getUrlParam("itemId");
+    var itemId = getUrlParam("itemId");
     getItem();
     getTermination();
 
@@ -117,7 +132,7 @@
         $.ajax({
             type: 'get',
             url: domainName + '/project-item/item/information/list',
-            data: "id=" + id,
+            data: "id=" + itemId,
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
@@ -131,7 +146,7 @@
         $.ajax({
             type: 'get',
             url: domainName + '/project-item/item/termination/list',
-            data: "item_id=" + id,
+            data: "item_id=" + itemId,
             async: false,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
@@ -145,7 +160,7 @@
                             var str = '<tr> <td>' + analysisFile(d).name + '</td>\n' +
                                 '<td>\n' +
                                 '<input type="hidden" name="filId" value="'+d+'">' +
-                                '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+analysisFile(d).url+'" target="_blank">查看</a>\n' +
+                                '<a class="layui-btn layui-btn-xs demo-reload" href="'+analysisFile(d).url+'" target="_blank">查看</a>\n' +
                                 '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
                                 '</td>\n' +
                                 '</tr>';
@@ -201,8 +216,40 @@
         if (!bootstrapValidator.isValid()) {
             return;
         }
+        if (status == 1) {
+            var skill = false;
+            var work = false;
+            var data = {itemId: itemId};
+            $.ajax({
+                type: 'get',
+                data: data,
+                url: domainName + '/api-summary/skill/list',
+                async: false,
+                success: function (data) {
+                    if (data.length > 0) {
+                        skill = true;
+                    }
+                }
+            });
+            $.ajax({
+                type: 'get',
+                data: data,
+                url: domainName + '/api-summary/work/list',
+                async: false,
+                success: function (data) {
+                    if (data.length > 0) {
+                        work = true;
+                    }
+                }
+            });
+            if (!work || !skill) {
+                var msg = "请填写技术总结或工作总结！";
+                layer.msg(msg, {shift: -1, time: 1000});
+                return;
+            }
+        }
         var formdata = $("#form").serializeObject();
-        formdata.item_id = id;
+        formdata.item_id = itemId;
         formdata.accessorys = accessorys;
         formdata.status = status;
 
@@ -228,7 +275,7 @@
     }
 
     function changeStatus(status) {
-        var item = {"id": id, "status": status};
+        var item = {"id": itemId, "status": status};
         $.ajax({
             type: 'put',
             url: domainName + '/project-item/item/information',
@@ -237,7 +284,7 @@
             data: JSON.stringify(item),
             success: function (data) {
                 var userIds = [];
-                var userId = getPARTY_C(id);
+                var userId = getPARTY_C(itemId);
                 userIds.push(userId);
                 var content = "您有一条终止审核待处理";
                 var title = "您有一条终止审核待处理";
@@ -251,5 +298,31 @@
         height: '80%',
         autoplay: true,
     });
+
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
+
+    function showSkill() {
+        layer.open({
+            title: "技术总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../../../summary/addSummary.html?itemId=' + itemId + '&status=' + status]
+        });
+    }
+
+    function showWork() {
+        layer.open({
+            title: "工作总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../../../summary/addWorkSummary.html?itemId=' + itemId + '&status=' + status]
+
+        });
+    }
 </script>
 </html>

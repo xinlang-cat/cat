@@ -207,13 +207,13 @@
                             }
                         });
                     }
-                    if ($.inArray('PARTY_B:principal:html', pers) != -1) {
+                    /*if ($.inArray('PARTY_B:principal:html', pers) != -1) {
                         if(this.status>=5){
                             str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApplyed.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
                         }else if (this.status<3){
                             str += '<li no-permission="PARTY_B:member:html"><a class="active" href="pages/projectDetails/terminationApply.html?itemId=' + this.id + '&userId=' + userId + '">终止申请</a></li>\n';
                         }
-                    }
+                    }*/
                     if(this.status<5 && $.inArray('PARTY_B:principal:html', pers) != -1){
                         str += ' <li><a class="active" href="../acceptance/acceptance.html?item_id=' + this.id + '&itemStatus=' + tableStatus + '">结题申请</a></li>\n';
                     }

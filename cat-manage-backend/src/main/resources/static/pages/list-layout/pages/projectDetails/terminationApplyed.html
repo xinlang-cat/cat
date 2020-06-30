@@ -8,6 +8,18 @@
 </head>
 <body>
 <div style="position: fixed;top: 0;width: 100%;height: 60px;background-color: white;z-index: 1;">
+    <table style="width: 100%">
+        <tr>
+            <td align="left" style="border: 0;text-align: left; position: absolute;left: 30px;top: 15px;">
+                <button class="layui-btn layui-btn-sm" onclick="showWork()">
+                    <i class="layui-icon">&#xe615;</i>查看工作总结
+                </button>
+                <button class="layui-btn layui-btn-sm" onclick="showSkill()">
+                    <i class="layui-icon">&#xe615;</i>查看技术总结
+                </button>
+            </td>
+        </tr>
+    </table>
     <div style="position: absolute;right: 30px;top: 15px;">
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(1);" name="sub">提交</button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="submit(0);" name="sub">保存</button>
@@ -107,10 +119,12 @@
     var currentUser = currentUser();
 
     var accessorys = '';
-    layui.use(['upload','form'], function () {
+    var layer;
+    layui.use(['upload','form','layer'], function () {
         var $ = layui.jquery,
             upload = layui.upload,
             form = layui.form;
+        layer = layui.layer;
         //文件上传
         var uploadInst = upload.render({
             elem: '#files' //绑定元素
@@ -121,7 +135,7 @@
                 var str = '<tr> <td>' + res.name + '</td>\n' +
                     '<td>\n' +
                     '<input type="hidden" name="filId" value="'+res.id+'">' +
-                    '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+res.url+'" target="_blank">查看</a>\n' +
+                    '<a class="layui-btn layui-btn-xs demo-reload" href="'+res.url+'" target="_blank">查看</a>\n' +
                     '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
                     '</td>\n' +
                     '</tr>';
@@ -181,7 +195,7 @@
                             var str = '<tr> <td>' + analysisFile(d).name + '</td>\n' +
                                 '<td>\n' +
                                 '<input type="hidden" name="filId" value="'+d+'">' +
-                                '<a class="layui-btn layui-btn-xs demo-reload" id="handout_wrap_inner" href="'+analysisFile(d).url+'" target="_blank">查看</a>\n' +
+                                '<a class="layui-btn layui-btn-xs demo-reload" href="'+analysisFile(d).url+'" target="_blank">查看</a>\n' +
                                 '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>\n' +
                                 '</td>\n' +
                                 '</tr>';
@@ -193,21 +207,21 @@
                         $('textarea').attr('readonly','readonly');
                         $('#files').css('display','none');
                         $('.demo-delete').css('display','none');
-                        $('#sub').css('display','none');
                     }
-                    if(data[0].status>=-2||data[0].status>=2){
+
+                    if(data[0].status==2||data[0].status==-2){
                         $('#PARTY_C_A').css('display', '');
-                    }else if(data[0].status>=-3||data[0].status>=3){
-                        $('#PARTY_C_A').css('display', '');
-                        $('#PARTY_D_A').css('display', '');
-                    }else if(data[0].status>=-5||data[0].status>=5){
+                    }else if(data[0].status==4||data[0].status==-3){
                         $('#PARTY_C_A').css('display', '');
                         $('#PARTY_D_A').css('display', '');
-                        $('#PARTY_D_B_A').css('display', '');
-                    }else if(data[0].status>=-6||data[0].status>=6){
+                    }else if(data[0].status==5||data[0].status==-4){
                         $('#PARTY_C_A').css('display', '');
                         $('#PARTY_D_A').css('display', '');
-                        $('#PARTY_D_B_A').css('display', '');
+                        $('#PARTY_D_B').css('display', '');
+                    }else if(data[0].status==6||data[0].status==-5){
+                        $('#PARTY_C_A').css('display', '');
+                        $('#PARTY_D_A').css('display', '');
+                        $('#PARTY_D_B').css('display', '');
                         $('#PARTY_C_B').css('display', '');
                     }
                 }
@@ -307,5 +321,31 @@
         height: '80%',
         autoplay: true,
     });
+
+    var h = $(window).height() - 15;
+    var w = $(window).width() - 30;
+
+    function showSkill() {
+        layer.open({
+            title: "技术总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../../../summary/addSummary.html?itemId=' + id + '&status=' + status]
+        });
+    }
+
+    function showWork() {
+        layer.open({
+            title: "工作总结",
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            maxmin: true,
+            shadeClose: true,
+            content: ['../../../summary/addWorkSummary.html?itemId=' + id + '&status=' + status]
+
+        });
+    }
 </script>
 </html>

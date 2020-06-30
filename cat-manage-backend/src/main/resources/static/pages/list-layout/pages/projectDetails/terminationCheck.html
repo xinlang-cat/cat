@@ -36,8 +36,12 @@
         </tr>
     </table>
     <div style="position: absolute;right: 30px;top: 15px;">
-        <button type="button" class="layui-btn layui-btn-sm" onclick="pass();" id="test" name="pass" style="display: none">通过</button>
-        <button type="button" class="layui-btn layui-btn-sm" onclick="no_pass();" name="no_pass" style="display: none">退回修改</button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="pass();" id="test" name="pass"
+                style="display: none">提交
+        </button>
+        <button type="button" class="layui-btn layui-btn-sm" onclick="no_pass();" name="no_pass" style="display: none">
+            退回修改
+        </button>
         <button type="button" class="layui-btn layui-btn-sm" onclick="history.back(-1);">返回</button>
     </div>
 </div>
@@ -130,8 +134,6 @@
 <script type="text/javascript" src='../../../../js/sendMessage.js'></script>
 <script type="text/javascript" src="../../../../js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
 
-<!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
-<script type="text/javascript" src="../../js/jquery.media.js"></script>
 <script>
     var pers = checkPermission();
     var currentUser = currentUser();
@@ -215,24 +217,31 @@
                             $('#filesList').append(str);
                         }
                     });
-                    //是否可见
-                    if ($.inArray('PARTY_C:html', pers) != -1) {
+                    //按钮是否可见
+                    if ($.inArray('PARTY_C:html', pers) != -1 && data[0].status == 1) { // 监理初审
                         $('button[name=pass]').css('display', '');
                         $('button[name=no_pass]').css('display', '');
+                    }if ($.inArray('PARTY_C:html', pers) != -1 && data[0].status == 5) { // 监理终审
+                        $('button[name=pass]').css('display', '');
+                    } else if ($.inArray('PARTY_D:html', pers) != -1 && data[0].status == 2) { // 验收初审
+                        $('button[name=pass]').css('display', '');
+                        $('button[name=no_pass]').css('display', '');
+                    }else if ($.inArray('PARTY_D:html', pers) != -1 && data[0].status == 4) { // 验收终审
+                        $('button[name=pass]').css('display', '');
+                    }
 
+                    //文本框是否可见
+                    if ($.inArray('PARTY_C:html', pers) != -1) { // 监理初审
                         $('#PARTY_C_A').css('display', '');
-                        if(data[0].status == 5||data[0].status == 6){
+                        if (data[0].status == 5 || data[0].status == 6) {
                             $('#PARTY_C_B').css('display', '');
                             $('#PARTY_D_A').css('display', '');
                             $('#PARTY_D_B').css('display', '');
                         }
-                    } else if ($.inArray('PARTY_D:html', pers) != -1) {
-                        $('button[name=pass]').css('display', '');
-                        $('button[name=no_pass]').css('display', '');
-
+                    } else if ($.inArray('PARTY_D:html', pers) != -1) { // 验收初审
                         $('#PARTY_C_A').css('display', '');
                         $('#PARTY_D_A').css('display', '');
-                        if(data[0].status == 4 || data[0].status == 5){
+                        if (data[0].status == 4 || data[0].status == 5) {
                             $('#PARTY_D_B').css('display', '');
                             $('#expert').css('display', '');
                         }
@@ -243,11 +252,11 @@
                         $('textarea[name=manage_dept_opinion]').removeAttr("readonly");
                     } else if (data[0].status == 2) {
                         $('textarea[name=burg_leader_opinion]').removeAttr("readonly");
-                    }else if(data[0].status == 4){
+                    } else if (data[0].status == 4) {
                         $('textarea[name=burg_finance_opinion]').removeAttr("readonly");
-                    }else if(data[0].status == 5){
+                    } else if (data[0].status == 5) {
                         $('textarea[name=manage_dept_result]').removeAttr("readonly");
-                    }else if(data[0].status == 6){
+                    } else if (data[0].status == 6) {
                         $('#PARTY_C_A').css('display', '');
                         $('#PARTY_D_A').css('display', '');
                         $('#PARTY_C_B').css('display', '');
@@ -295,38 +304,52 @@
         if ($('input[name=status]').val() == 1) {
             formdata.status = 2;
             formdata.manage_dept_opinion = $('textarea[name=manage_dept_opinion]').val();
-            assignAcceptance(formdata);
-        }else if($('input[name=status]').val() == 2){
             //formdata.status = 3;
+            $.ajax({
+                type: 'get',
+                url: domainName + '/project-item/item/personnel/list',
+                data: "item_id=" + id + "&user_type=PARTY_D",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data.length != 0) {
+                        updateTermination(formdata);
+                    } else {
+                        assignAcceptance(formdata);
+                    }
+                }
+            });
+        } else if ($('input[name=status]').val() == 2) {
+            //updateTermination(formdata);
             //formdata.burg_leader_opinion = $('textarea[name=burg_leader_opinion]').val();
             $('#selectExpert').trigger("click");
-            //updateTermination(formdata);
-        }else if($('input[name=status]').val() == 4){
+        } else if ($('input[name=status]').val() == 4) {
             formdata.status = 5;
             formdata.burg_finance_opinion = $('textarea[name=burg_finance_opinion]').val();
             updateTermination(formdata);
-        }else if($('input[name=status]').val() == 5){
+        } else if ($('input[name=status]').val() == 5) {
             formdata.status = 6;
             formdata.manage_dept_result = $('textarea[name=manage_dept_result]').val();
             updateTermination(formdata);
         }
     }
+
     function no_pass() {
         var formdata = {};
         formdata.id = $('input[name=id]').val();
         if ($('input[name=status]').val() == 1) {
             formdata.status = -2;
             formdata.manage_dept_opinion = $('textarea[name=manage_dept_opinion]').val();
-        }else if($('input[name=status]').val() == 2){
+        } else if ($('input[name=status]').val() == 2) {
             formdata.status = -3;
             formdata.burg_leader_opinion = $('textarea[name=burg_leader_opinion]').val();
-        }else if($('input[name=status]').val() == 4){
+        } else if ($('input[name=status]').val() == 4) {
             formdata.status = -5;
             formdata.burg_finance_opinion = $('textarea[name=burg_finance_opinion]').val();
-        }else if($('input[name=status]').val() == 5){
+        } else if ($('input[name=status]').val() == 5) {
             formdata.status = -6;
             formdata.manage_dept_result = $('textarea[name=manage_dept_result]').val();
-        }else {
+        } else {
             /*layer.msg("已退回哦，请勿重复操作！", {shift: -1, time: 1000}, function () {
 
             });*/
@@ -362,7 +385,7 @@
             async: false,
             data: JSON.stringify(formdata),
             success: function (data) {
-                if(formdata.status==6){
+                if (formdata.status == 6) {
                     changeStatus(6);
                 }
                 layer.msg("成功", {shift: -1, time: 1000}, function () {
@@ -426,7 +449,7 @@
                     contentType: "application/json; charset=utf-8",
                     data: JSON.stringify(data),
                     success: function (res) {
-                        formdata.acceptance_company=$('#acceptance_company').val();
+                        formdata.acceptance_company = $('#acceptance_company').val();
                         updateTermination(formdata);
                     }
                 });
@@ -437,10 +460,11 @@
             }
         });
     }
+
     $.matchExpert({
         elem: '#selectExpert',
         itemId: id,
-       /* defaultSave: true,//保存到默认数据库*/
+        /* defaultSave: true,//保存到默认数据库*/
         defaultSave: false,//自定义保存
         defaultSaveFun: function (arr) {
             console.log(arr)
@@ -557,6 +581,7 @@
 
         });
     }
+
     function getExpert() {
         layer.open({
             title: "专家审核意见",
@@ -569,4 +594,6 @@
         });
     };
 </script>
+<!--<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>-->
+<script type="text/javascript" src="../../js/jquery.media.js"></script>
 </html>
