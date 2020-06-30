@@ -59,8 +59,9 @@ public class ExpertEvaluateController {
             expertEvaluateAffiliateService.save(item);
         });
         if (expertEvaluates.size() == projectUserItems.size()) {
-            List<ItemInformation> items = consumeItem.getItemById(map).getBody();
-
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("id", expertEvaluate.getItemId());
+            List<ItemInformation> items = consumeItem.getItemById(map1).getBody();
             if(items.get(0).getStatus()==3){//结题
                 List<CheckTable> checkTables = checkTableService.findListByParams(map, CheckTable.class);
                 CheckTable checkTable = new CheckTable();

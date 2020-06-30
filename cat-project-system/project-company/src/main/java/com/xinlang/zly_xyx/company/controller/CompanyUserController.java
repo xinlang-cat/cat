@@ -35,11 +35,21 @@ public class CompanyUserController {
     }
 
     @PutMapping("/user")
-    @ApiOperation(value = "修改公司用户关系,id必填")
+    @ApiOperation(value = "修改公司用户关系")
     @LogAnnotation(module = "修改公司用户关系")
     public CompanyUser update(@RequestBody CompanyUser companyUser) {
-       companyUserService.update(companyUser);
-       return companyUser;
+        if(companyUser.getUserId() == null || companyUser.getDeptCode() == null){
+            throw new IllegalArgumentException("必要参数不能为空");
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",companyUser.getUserId());
+        List<CompanyUser> list  = companyUserService.findListByParams(map,CompanyUser.class);
+        if(list.size()==0){
+            companyUserService.save(companyUser);
+        }else {
+            companyUserService.update(companyUser);
+        }
+        return companyUser;
     }
 
     @GetMapping("/user/{userId}")

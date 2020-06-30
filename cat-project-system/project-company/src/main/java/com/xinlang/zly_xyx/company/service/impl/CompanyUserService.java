@@ -35,7 +35,7 @@ public class CompanyUserService extends BaseService<CompanyUser> implements ICom
     @Override
     public void update(CompanyUser companyUser) {
         Example example = new Example(CompanyUser.class);
-        example.createCriteria().andEqualTo("id",companyUser.getId());
+        example.createCriteria().andEqualTo("userId",companyUser.getUserId());
         companyUserMapper.updateByExampleSelective(companyUser,example);
     }
 

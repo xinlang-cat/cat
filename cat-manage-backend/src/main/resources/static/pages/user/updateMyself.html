@@ -480,6 +480,7 @@
                 formdata.userId = $("#id").val();
                 formdata.birthDate = Date.parse(new Date(formdata.birthDate));
                 formdata.lastYear = Date.parse(new Date(formdata.lastYear));
+                formdata.deptCode = $("#deptCode").val();
                 if (status == 1) {
                     formdata.id = $("#projectUserId").val();
                     $.ajax({
