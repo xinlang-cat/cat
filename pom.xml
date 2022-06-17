@@ -39,7 +39,7 @@
         <spring.cloud>Finchley.RELEASE</spring.cloud>
         <mybatis>1.3.2</mybatis>
         <jwt>0.9.0</jwt>
-        <fastjson>1.2.47</fastjson>
+        <fastjson>1.2.83</fastjson>
         <commons-collection4>4.1</commons-collection4>
         <monitor>2.0.2</monitor>
         <swagger>2.8.0</swagger>
